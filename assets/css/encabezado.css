@@ -1,0 +1,22 @@
+.div-encabezado{
+  margin-top: 5px;
+}
+.div-ubicacion{
+  height: auto;
+ text-align: center;
+ margin-top: 5px;
+}
+.div-ubicacion #spanUbicacion{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+.div-person{
+  height: auto;
+  text-align: center;
+}
+#spanPerson{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
+  font-style: italic;
+}

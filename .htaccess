@@ -1,0 +1,26 @@
+#https://help.clouding.io/hc/es/articles/360010959499-C%C3%B3mo-redirigir-http-a-https-con-htaccess-rewrite
+#htaccess es un archivo de configuracion del servidor apache. #https://help.clouding.io/hc/es/articles/360010920739-Redirigir-un-archivo-a-otro-con-htaccess-rewrite #https://www.youtube.com/watch?v=vtdvyam12_A&list=PLPl81lqbj-4IGS74m9lv1zLOWJzsLjWC_&index=17&ab_channel=Bluuweb
+
+#Options +FollowSymLinks – es una directiva de Apache, requisito previo para mod_rewrite.
+#RewriteEngine On – habilita mod_rewrite.
+#RewriteCond %{HTTP_HOST} – sirve para indicar que direcciones URL queremos que vayan, y que no vayan, a través de la regla especificada
+#RewriteRule ?? expresion UrlDestino [configuracion]
+#RewriteRule ^([a-zA-Z0-9]*)$ datos.php?variable=$1 -->> localhost/phpapi/backend/cualquiera funciona
+#ENTREGA barras consecutivas
+#RewriteRule ^([a-zA-Z0-9\/]*)$ datos.php?variable=$1 
+
+Options +FollowSymLinks
+RewriteEngine On
+RewriteRule ^([a-zA-Z0-9\/\-\_]*)$ datos.php?urlUser=$1 
+
+
+
+
+
+
+# tratando de que mande a page404 si manda mal la url
+#RewriteRule ^rg$ Google_search.pdf [NC,L]
+#1. Como acepto '.'
+#2. COmo redirecciono lo que no matchee ??
+#3. Rewrite enything else
+#RewriteRule  ^([a-zA-Z0-9\/]*)$ page404.php  [L]
