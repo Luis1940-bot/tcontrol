@@ -1,3 +1,11 @@
 body{
   background: #393838;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+#logo_factum{
+  max-width: 100%;
 }

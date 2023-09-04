@@ -1,0 +1,20 @@
+.spinner {
+  width: 100%;
+  height: 4px; /* Altura de la barra de progreso */
+  background-color: #007BFF; /* Color de la barra de progreso */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Asegura que esté en la parte superior */
+  animation: spinner 2s linear infinite; /* Animación del spinner */
+  visibility: hidden;
+}
+
+@keyframes spinner {
+  0% {
+    left: -100%; /* Inicio de la animación */
+  }
+  100% {
+    left: 100%; /* Fin de la animación */
+  }
+}

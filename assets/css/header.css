@@ -96,3 +96,75 @@ body{
   margin-left: 5px;
   margin-top: 0px;
 }
+
+@media only screen and (min-width: 600px) and (orientation: landscape) {
+  #logo_factum{
+    margin-left: 50px;
+  }
+  .div-McCain{
+  height: 40px;
+}
+#logo_mccain{
+  height: 35px;
+}
+}
+
+@media (min-width: 800px) {
+  #logo_factum{
+    margin-left: 70px;
+  }
+  .div-header{
+    height: 35px;
+  }
+  .div-McCain{
+    height: 60px;
+  }
+  #logo_factum{
+    height: 25px;
+  }
+  #logo_mccain{
+    height: 55px;
+  }
+  #person{
+    margin-left: 40px;
+    height: 30px;
+  }
+  #hamburguesa{
+    margin-left: 10px;
+    margin-top: 1px;
+    height: 30px;
+  }
+  .custom-button{
+    font-size: 16px;
+  }
+}
+
+@media only screen and  (min-width: 820px) and (orientation: landscape) {
+  #logo_factum{
+    margin-left: 140px;
+  }
+  #person{
+    margin-left: 40px;
+    height: 30px;
+  }
+  #hamburguesa{
+    margin-left: 10px;
+    margin-top: 1px;
+    height: 30px;
+  }
+  .div-header{
+    height: 35px;
+  }
+  .div-McCain{
+    height: 60px;
+  }
+  #logo_factum{
+    height: 25px;
+  }
+  #logo_mccain{
+    height: 55px;
+  }
+  .custom-button{
+    font-size: 16px;
+  }
+}
