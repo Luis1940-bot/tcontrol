@@ -15,7 +15,7 @@ header('Content-Type: text/html;charset=utf-8');
 </head>
 <body>
   <div class='div-footer'>
-    <footer><a href='https://www.factumconsultora.com' id='footer'>by Factum Consultora</a></footer>
+    <footer><a href='https://www.factumconsultora.com' id='footer' target="_blank">by Factum Consultora</a></footer>
   </div>
 </body>
 </html>

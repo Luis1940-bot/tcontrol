@@ -1,0 +1,7 @@
+{
+  "planta": "McCain Balcarce-BsAs-Argentina",
+  "apps": {
+    "name": ["Especialidades", "FFL1", "FFL2", "Puré", "BOS - Reglas de Oro", "SGD"],
+    "ruta": ["bcl20210108/rec-spl", "bcl20210108/rec-fritasL1", "bcl20210108/rec-fritasL2", "bcl20210108/rec-bos", "bcl20210108/menu.php"]
+  }
+}

@@ -16,7 +16,7 @@ header('Content-Type: text/html;charset=utf-8');
 <body>
   <div class='div-encabezado'>
     <div class='div-ubicacion'>
-      <span id='spanUbicacion'>McCain Balcarce - BsAs Argentina</span>
+      <span id='spanUbicacion'>.</span>
     </div>
     <div class='div-person'>
       <span id='spanPerson'>Luis Gimenez</span>

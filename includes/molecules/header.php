@@ -18,6 +18,9 @@ header('Content-Type: text/html;charset=utf-8');
     <div class='headerMenu'>
       <div class='div-menu'><img id='hamburguesa'  src='./../../assets/img/hamburguesa.png' alt='Menu'></div>
     </div>
+    <div class='headerVersion'>
+      <span class="version">V1.0</span>
+    </div>
     <div class='headerFactum'>
       <div class='logoFactum'>
         <a href='https://www.factumconsultora.com'>

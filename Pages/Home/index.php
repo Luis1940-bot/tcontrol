@@ -16,9 +16,11 @@ if (!isset($_SESSION['controls_mc_1000']['email'] )) {
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='/Pages/Home/home.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
   <title>Factum</title>
 </head>
 <body>
+  <div class="spinner"></div>
   <header>
     <?php
       include('./../../includes/molecules/header.php');
@@ -26,12 +28,15 @@ if (!isset($_SESSION['controls_mc_1000']['email'] )) {
     ?>
   </header>
   <main>
+    <div class="div-buttons">
 
+    </div>
   </main>
   <footer>
     <?php
       include('./../../includes/molecules/footer.php');
     ?>
   </footer>
+<script type='module' src='../../Pages/Home/home.js'></script>
 </body>
 </html>

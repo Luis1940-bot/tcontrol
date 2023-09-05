@@ -1,6 +1,6 @@
 .spinner {
   width: 100%;
-  height: 4px; /* Altura de la barra de progreso */
+  height: 2px; /* Altura de la barra de progreso */
   background-color: #007BFF; /* Color de la barra de progreso */
   position: fixed;
   top: 0;
