@@ -43,8 +43,20 @@ main{
   cursor: pointer;
 }
 
-@media only screen and (min-width: 600px) and (orientation: landscape) {
+@media only screen and (min-width: 800px) and (orientation: landscape) {
   body{
     min-height: 95vh;
+  }
+  main{
+    height: 200px;
+  }
+  .div-buttons{
+    margin-top: 5px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .button-selector{
+    width: 300px;
   }
 }
