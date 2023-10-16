@@ -29,7 +29,7 @@ main{
 }
 .button-selector {
   margin-bottom: 10px; 
-  width: 50%;
+  width: 75%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
   height: 30px;
@@ -45,7 +45,7 @@ main{
 
 @media only screen and (min-width: 800px) and (orientation: landscape) {
   body{
-    min-height: 95vh;
+    min-height: 50vh;
   }
   main{
     height: 200px;
@@ -58,5 +58,11 @@ main{
 @media screen and (min-width: 800px) {
   .button-selector{
     width: 300px;
+  }
+    body{
+    min-height: 90vh;
+  }
+  main{
+    height: 800px;
   }
 }

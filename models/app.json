@@ -2,6 +2,74 @@
   "planta": "McCain Balcarce-BsAs-Argentina",
   "apps": {
     "name": ["Especialidades", "FFL1", "FFL2", "Puré", "BOS - Reglas de Oro", "SGD"],
-    "ruta": ["bcl20210108/rec-spl", "bcl20210108/rec-fritasL1", "bcl20210108/rec-fritasL2", "bcl20210108/rec-bos", "bcl20210108/menu.php"]
+    "type": ["btn", "btn", "btn", "btn", "btn", "btn"],
+    "ruta": ["", "", "", "", "", ""]
+  },
+  "Especialidades": {
+    "name": ["TONELADAS", "ROVE", "DWT"],
+    "type": ["ctrl", "ctrl", "btn"],
+    "ruta": [
+      "Control/index.php?control_N=268&control_T=TONELADAS%20ESPECIALIDADES&nr=0", 
+      "Rove/index.php?rove=especialidades", 
+      ""
+    ]
+  },
+    "DWT": {
+    "name": ["DWT PLANEADO", "DWT NO PLANEADO"],
+    "type": ["btn", "btn"],
+    "ruta": ["", ""]
+  },
+    "DWT PLANEADO": {
+    "name": ["DWT CHANGE OVER", "DWT DEFROST", "DWT ESTRATEGIA LR"],
+    "type": ["ctrl", "ctrl", "ctrl"],
+    "ruta": [
+      "Control/index.php?control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0", 
+      "Control/index.php?control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0", 
+      "Control/index.php?control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0"
+    ]
+  },
+    "DWT NO PLANEADO": {
+    "name": ["DWT PRODUCCIÓN", "DWT MANTENIMIENTO", "DWT AGRO", "DWT CORRELACIÓN RAW vs LÍNEA", "DWT OTROS"],
+    "type": ["btn", "ctrl", "ctrl", "ctrl", "ctrl"],
+    "ruta": [
+      "", 
+      "Control/index.php?control_N=281&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20MANTENIMIENTO%20MECÁNICO&nr=0", 
+      "Control/index.php?control_N=269&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20AGRO&nr=0", 
+      "Control/index.php?control_N=270&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20CORRELACIÓN %20RAW%20VS%20LÍNEA&nr=0", 
+      "Control/index.php?control_N=160&control_T=DWT%20ESPECIALIDAD%20NO%20PLANIFICADO%20OTROS&nr=0"
+    ]
+  },
+    "DWT PRODUCCIÓN": {
+    "name": [
+      "DWT FALLA OPERATIVA-LIMPIEZA-MANEJO LR", 
+      "DWT PROD CORTE", 
+      "DWT PROD COOLER", 
+      "DWT PROD BLANCHER", 
+      "DWT PROD PROCESO", 
+      "DWT PROD TOTEROOM", 
+      "DWT PROD GRADING", 
+      "DWT PROD EMPAQUE", 
+      "DWT PROD PALETIZADO", 
+      "DWT PROD COLDSTORE", 
+      "DWT PROD DRY RECEIVING", 
+      "DWT PROD WET RECEIVING", 
+      "DWT PROD WASTE RECEIVING"
+      ],
+    "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+    "ruta": [
+      "Control/index.php?control_N=142&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÃ“N&nr=0", 
+      "Control/index.php?control_N=275&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0", 
+      "Control/index.php?control_N=146&control_T=DWT%20ESPECIALIDADES%20NO%20PLANIFICADO%20PRODUCCIÓN%20COOLER&nr=0", 
+      "Control/index.php?control_N=145&control_T=DWT%20ESPECIALIDADES%20NO%20PLANIFICADO%20PRODUCCIÓN%20BLANCHER&nr=0", 
+      "Control/index.php?control_N=276&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
+      "Control/index.php?control_N=277&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
+      "Control/index.php?control_N=278&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
+      "Control/index.php?control_N=279&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
+      "Control/index.php?control_N=280&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
+      "Control/index.php?control_N=225&control_T=DWT%20NO%20PLANEADO%20PRODUCCIÓN%20COLDSTORE&nr=0",
+      "Control/index.php?control_N=272&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
+      "Control/index.php?control_N=273&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
+      "Control/index.php?control_N=274&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0"
+    ]
   }
 }

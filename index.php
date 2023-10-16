@@ -1,8 +1,9 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
 session_start();
-$_SESSION['controls_mc_1000']['email'] = 'luisglogista@gmail.com';
-if (isset($_SESSION['controls_mc_1000']['email'] )) {
+$_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
+$_SESSION['factum_validation']['plant'] = '1';
+if (isset($_SESSION['factum_validation']['email'] )) {
    
 }else{
   header('Location: /404.php');
