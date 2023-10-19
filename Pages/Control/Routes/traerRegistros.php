@@ -1,12 +1,12 @@
 <?php
   header('Content-Type: text/html;charset=utf-8');
   session_start();
-  // if (!isset($_SESSION['factum_validation']['email'] )) {
-  //     unset($_SESSION['factum_validation']['email'] ); 
-  // }
+  if (!isset($_SESSION['factum_validation']['email'] )) {
+      unset($_SESSION['factum_validation']['email'] ); 
+  }
 
-        $variable='NuevoControl,141';//$_GET['q'];
-        //$new=$_GET['new'];   
+        $variable=$_GET['q'];
+        $new=$_GET['new'];   
         $sql='';
         ;
         

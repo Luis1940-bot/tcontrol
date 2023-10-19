@@ -22,10 +22,6 @@ header{
   background: #ffffff;
   height: 140px;
 }
-main{
-  /* max-height: auto; */
-  
-}
 
 #doc{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -69,6 +65,68 @@ tbody tr td{
   font-style: normal;
   font-weight: 500;
 }
+table tbody tr td input,
+
+table tbody tr td textarea,
+table tbody tr td button{
+  font-size: 9px;
+  width: 90%;
+  border: 1px solid #000;
+}
+table tbody tr td div{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+table tbody tr td div input{
+  font-size: 9px;
+  width: 50%;
+  height: 100%;
+  margin-left: 10px;
+  border: 1px solid #000;
+}
+
+table tbody tr td div button{
+  font-size: 7px;
+  width: 20%;
+  height: 14px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+button{
+  height: 70%;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  font-size: 7px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+select {
+  border: 1px solid #000;
+  /* padding: 0.5rem; */
+  background-color: transparent;
+  color: #000;
+  font-size: 7px;
+  height: 100%;
+  cursor: pointer;
+  width: 95%;
+}
+select option {
+  background-color: #fff;
+  color: #000;
+  padding: 0.5rem;
+  font-size: 10px;
+  border: none;
+}
+select:focus {
+  outline: none;
+  border: 1px solid #000;
+}
+
+
 footer{
   height: 20px;
   margin-top: 5px;

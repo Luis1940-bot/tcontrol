@@ -2,6 +2,8 @@
 import traerRegistros from './Modules/traerRegistros.js';
 // eslint-disable-next-line import/extensions
 import tablaVacia from './Modules/armadoDeTabla.js';
+// eslint-disable-next-line import/extensions
+import arrayGlobal from './Modules/variables.js';
 
 let controlN = '';
 let controlT = '';
@@ -26,18 +28,26 @@ function configuracionLoad() {
   document.getElementById('wichC').style.display = 'inline';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const spinner = document.querySelector('.spinner');
   spinner.style.visibility = 'visible';
-  configuracionLoad();
-  traerRegistros(`NuevoControl,${controlN}`)
-    .then((data) => {
-      tablaVacia(data, encabezados);
-    })
-    .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.warn(error);
-    });
 
-  spinner.style.visibility = 'hidden';
+  try {
+    configuracionLoad();
+
+    const empresaData = await traerRegistros('empresa');
+    arrayGlobal.arrayEmpresa = [...empresaData];
+
+    const selectoresData = await traerRegistros(`Selectores,${controlN}`);
+    arrayGlobal.arraySelect = [...selectoresData];
+
+    const nuevoControlData = await traerRegistros(`NuevoControl,${controlN}`);
+    tablaVacia(nuevoControlData, encabezados);
+
+    spinner.style.visibility = 'hidden';
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(error);
+    spinner.style.visibility = 'hidden';
+  }
 });
