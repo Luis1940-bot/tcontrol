@@ -1,4 +1,6 @@
 export default function traerRegistros(sql) {
+  // eslint-disable-next-line no-console
+  console.time('miTemporizador');
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`;
     const ruta = `../../../Pages/Control/Routes/traerRegistros.php?q=${sql}${rax}`;
@@ -11,10 +13,12 @@ export default function traerRegistros(sql) {
     })
       .then((res) => res.json())
       .then((data) => {
-        resolve(data); // Resuelve la promesa con los datos obtenidos
+        resolve(data);
+        // eslint-disable-next-line no-console
+        console.timeEnd('miTemporizador');
       })
       .catch((error) => {
-        reject(error); // Rechaza la promesa en caso de error
+        reject(error);
       });
   });
 }

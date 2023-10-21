@@ -1,0 +1,78 @@
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+#searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos para el botón de cierre del modal */
+#closeModalButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#closeModalButton:hover {
+    color: red;
+}
+
+.modal-content thead tr th{
+  padding-left: 10px;
+}
+.modal-content tbody {
+  max-height: 600px;
+  display: block;
+  overflow-y: auto;
+}
+.modal-content tbody td{
+  cursor: pointer;
+}
+.modal-content tbody td:hover{
+  background: #cecece;
+}
+.modal-content table{
+  width: 100%;
+}
+.modal-content tbody tr td{
+  padding-left: 10px;
+}
+.modal-content table tbody{
+  max-height: 400px;
+}

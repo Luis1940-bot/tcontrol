@@ -1,40 +1,53 @@
+// eslint-disable-next-line import/extensions, import/named
+import {
+  consultaCN, consultaQuery, eventSelect,
+// eslint-disable-next-line import/extensions
+} from './accionButton.js';
+// eslint-disable-next-line import/extensions
+import buttonImage from './imagenes.js';
+
 class ElementGenerator {
-  static generateInputDate(date, width) {
+  static generateInputDate(date, width, valorPorDefecto) {
     const inputDate = document.createElement('input');
     inputDate.setAttribute('type', 'date');
     date ? inputDate.value = date : null;
     width ? inputDate.style.width = width : null;
+    valorPorDefecto !== '' && valorPorDefecto !== ' ' && valorPorDefecto !== null && valorPorDefecto !== undefined ? inputDate.value = valorPorDefecto : null;
     return inputDate;
   }
 
-  static generateInputHora(hora, width) {
+  static generateInputHora(hora, width, valorPorDefecto) {
     const inputHora = document.createElement('input');
     inputHora.setAttribute('type', 'time');
     hora ? inputHora.value = hora : null;
     width ? inputHora.style.width = width : null;
+    valorPorDefecto !== '' && valorPorDefecto !== ' ' && valorPorDefecto !== null && valorPorDefecto !== undefined ? inputHora.value = valorPorDefecto : null;
+
     return inputHora;
   }
 
-  static generateInputText(width) {
+  static generateInputText(width, valorPorDefecto) {
     const inputText = document.createElement('input');
     inputText.setAttribute('type', 'text');
     width ? inputText.style.width = width : null;
+    valorPorDefecto !== '' && valorPorDefecto !== ' ' && valorPorDefecto !== null && valorPorDefecto !== undefined ? inputText.value = valorPorDefecto : null;
     return inputText;
   }
 
   static generateInputCheckBox(checked) {
     const inputCheckBox = document.createElement('input');
     inputCheckBox.setAttribute('type', 'checkbox');
-    inputCheckBox.setAttribute('checked', checked);
+    inputCheckBox.checked = checked;
     return inputCheckBox;
   }
 
-  static generateInputNumber(width) {
+  static generateInputNumber(width, valorPorDefecto) {
     const inputNumber = document.createElement('input');
     inputNumber.setAttribute('type', 'text');
     inputNumber.setAttribute('inputmode', 'decimal');
     inputNumber.setAttribute('pattern', '^[0-9]*[.]?[0-9]*$');
     width ? inputNumber.style.width = width : null;
+    valorPorDefecto !== '' && valorPorDefecto !== ' ' && valorPorDefecto !== null && valorPorDefecto !== undefined ? inputNumber.value = valorPorDefecto : null;
     inputNumber.addEventListener('input', function handleInput() {
       this.value = this.value.replace(/[^\d.]/g, '');
     });
@@ -44,18 +57,47 @@ class ElementGenerator {
     return inputNumber;
   }
 
-  static generateTextArea() {
+  static generateInputNumberQuery(valorQuery, elementoHTML) {
+    const elementoCopia = elementoHTML.cloneNode(true);
+    const newValue = valorQuery !== '' && valorQuery !== ' ' && valorQuery !== null && valorQuery !== undefined ? valorQuery : '';
+    elementoCopia.value = newValue;
+    elementoHTML.parentNode.replaceChild(elementoCopia, elementoHTML);
+  }
+
+  static generateInputTextQuery(valorQuery, elementoHTML) {
+    const elementoCopia = elementoHTML.cloneNode(true);
+    const newValue = valorQuery !== '' && valorQuery !== ' ' && valorQuery !== null && valorQuery !== undefined ? valorQuery : '';
+    elementoCopia.value = newValue;
+    elementoHTML.parentNode.replaceChild(elementoCopia, elementoHTML);
+  }
+
+  static generateInputTextAreaQuery(valorQuery, elementoHTML) {
+    const elementoCopia = elementoHTML.cloneNode(true);
+    const newValue = valorQuery !== '' && valorQuery !== ' ' && valorQuery !== null && valorQuery !== undefined ? valorQuery : '';
+    elementoCopia.value = newValue;
+    elementoHTML.parentNode.replaceChild(elementoCopia, elementoHTML);
+  }
+
+  static generateTextArea(valorPorDefecto) {
     const textArea = document.createElement('textarea');
+    valorPorDefecto ? textArea.value = valorPorDefecto : null;
+    valorPorDefecto !== '' && valorPorDefecto !== ' ' && valorPorDefecto !== null && valorPorDefecto !== undefined ? textArea.value = valorPorDefecto : null;
     return textArea;
   }
 
-  static generateSelectDinamic() {
+  static generateSelectDinamic(hijo, sqlHijo) {
     const selectDinamic = document.createElement('select');
+    selectDinamic.addEventListener('change', (event) => {
+      eventSelect(event, hijo, sqlHijo);
+    });
     return selectDinamic;
   }
 
   static generateSelect(array) {
     const select = document.createElement('select');
+    while (select.firstChild) {
+      select.removeChild(select.firstChild);
+    }
     if (array.length > 0) {
       const emptyOption = document.createElement('option');
       emptyOption.value = '';
@@ -72,12 +114,16 @@ class ElementGenerator {
   }
 
   static generateOptions(array, select) {
+    while (select.firstChild) {
+      select.removeChild(select.firstChild);
+    }
     if (array.length > 0) {
       const emptyOption = document.createElement('option');
       emptyOption.value = '';
       emptyOption.text = '';
       select.appendChild(emptyOption);
-      array.forEach(([value, text]) => {
+      array.forEach((subarray) => {
+        const [value, text] = subarray;
         const option = document.createElement('option');
         option.value = value;
         option.text = text;
@@ -91,22 +137,40 @@ class ElementGenerator {
     return img;
   }
 
-  static generateInputButton(text) {
+  static generateInputButton(text, name, consulta) {
     const div = document.createElement('div');
     const inputText = document.createElement('input');
     inputText.setAttribute('type', 'text');
     div.appendChild(inputText);
     const button = document.createElement('button');
     button.textContent = text;
+    button.setAttribute('name', name);
     button.style.background = '#97B7E8';
     div.appendChild(button);
+    button.addEventListener('click', (event) => {
+      consultaCN(event, consulta);
+    });
     return div;
   }
 
-  static generateButtonQuery(text) {
+  static generateButtonImage(text) {
     const button = document.createElement('button');
     button.textContent = text;
     button.style.background = '#97B7E8';
+    button.addEventListener('click', (event) => {
+      buttonImage(event);
+    });
+    return button;
+  }
+
+  static generateButtonQuery(text, name, consulta) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.setAttribute('name', name);
+    button.style.background = '#97B7E8';
+    button.addEventListener('click', (event) => {
+      consultaQuery(event, consulta);
+    });
     return button;
   }
 

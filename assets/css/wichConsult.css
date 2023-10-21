@@ -1,21 +1,27 @@
-.div-wichControl{
-  margin-top: 5px;
-
+.div-wichConsult{
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
-.div-wich{
-  height: auto;
- text-align: center;
+.div-wichCn{
+height: auto;
+ text-align: left;
  margin-top: 5px;
  width: auto;
- 
+ display: flex;
+ align-items: center;
 }
-.div-wich #wichC{
+.div-wichCn img {
+  width: 10px;
+  height: 10px;
+  margin-right: 5px; 
+}
+.div-wichCn #wichCn{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 10px;
   font-weight: 700;
 }
 
-#wichC{
+#wichCn{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 10px;
   font-style: normal;
@@ -31,12 +37,12 @@
 
 }
 @media screen and (min-width: 1280px) {
-.div-wich #wichC{
+.div-wichCn #wichCn{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px;
   font-weight: 700;
 }
-.div-wich img{
+.div-wichCn img{
   height: 15px;
   width: 15px;
 }

@@ -31,7 +31,6 @@ function configuracionLoad() {
 document.addEventListener('DOMContentLoaded', async () => {
   const spinner = document.querySelector('.spinner');
   spinner.style.visibility = 'visible';
-
   try {
     configuracionLoad();
 

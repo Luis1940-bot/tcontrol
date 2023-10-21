@@ -10,6 +10,8 @@ import traerRegistros from './traerRegistros.js';
 const widthScreen = window.innerWidth;
 let arrayWidthEncabezado;
 let selectDinamic;
+let elementHTML;
+let ID = 0;
 
 function estilosTheadCell(element, index) {
   const cell = document.createElement('th');
@@ -71,6 +73,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
     const orden = [0, 3, 4, 6, 7];
     let dato = element[orden[i]];
     const tipoDeDato = element[5];
+    const tipoDeObservacion = element[9];
     let alignCenter = 'left';
     let paddingLeft = '0px';
     let colSpan = 0;
@@ -80,9 +83,9 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
     let type = null;
     let colorText = '#000000';
     let requerido = '';
-
     if (i === 0) {
-      dato = index + 1;
+      ID += 1;
+      dato = ID;
       alignCenter = 'center';
     } else if (i === 1) {
       paddingLeft = '5px';
@@ -109,23 +112,27 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
 
     if (i === 2 && tipoDeDato === 'd') {
       dato = null;
+      const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
       const fecha = fechasGenerator.fecha_corta_yyyymmdd(new Date());
       const width = '';
-      const inputDate = ElementGenerator.generateInputDate(fecha, width);
+      const inputDate = ElementGenerator.generateInputDate(fecha, width, valorXDefecto);
       type = inputDate;
     } else if (i === 2 && tipoDeDato === 'h') {
       dato = null;
+      const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
       const hora = fechasGenerator.hora_actual(new Date());
       const width = '';
-      const inputHora = ElementGenerator.generateInputHora(hora, width);
+      const inputHora = ElementGenerator.generateInputHora(hora, width, valorXDefecto);
       type = inputHora;
     } else if (i === 2 && tipoDeDato === 'x') {
       dato = '';
       type = null;
     } else if (i === 2 && tipoDeDato === 't') {
       dato = null;
+      const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
       const width = '';
-      const inputText = ElementGenerator.generateInputText(width);
+      const inputText = ElementGenerator.generateInputText(width, valorXDefecto);
+      elementHTML = inputText;
       type = inputText;
     } else if (i === 2 && tipoDeDato === 'b') {
       dato = null;
@@ -135,18 +142,24 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       type = inputCheckBox;
     } else if (i === 2 && tipoDeDato === 'n') {
       dato = null;
+      const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
       const width = '';
-      const inputNumber = ElementGenerator.generateInputNumber(width);
+      const inputNumber = ElementGenerator.generateInputNumber(width, valorXDefecto);
+      elementHTML = inputNumber;
       type = inputNumber;
     } else if (i === 2 && tipoDeDato === 'tx') {
       dato = null;
-      const textArea = ElementGenerator.generateTextArea();
+      const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
+      const textArea = ElementGenerator.generateTextArea(valorXDefecto);
+      elementHTML = textArea;
       type = textArea;
       const indexMas = index + 1;
       indexMas === cantidadDeRegistros ? (colSpan = 1, alignCenter = 'left', paddingLeft = '3px') : null;
     } else if (i === 2 && tipoDeDato === 'sd') {
       dato = null;
-      selectDinamic = ElementGenerator.generateSelectDinamic();
+      const hijo = element[24];
+      const sqlHijo = element[25];
+      selectDinamic = ElementGenerator.generateSelectDinamic(hijo, sqlHijo);
       type = selectDinamic;
     } else if (i === 2 && tipoDeDato === 's') {
       dato = null;
@@ -156,25 +169,35 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
     } else if (i === 2 && tipoDeDato === 'img') {
       dato = null;
       const text = 'SEL';
-      const img = ElementGenerator.generateButtonQuery(text);
+      const img = ElementGenerator.generateButtonImage(text);
       type = img;
     } else if (i === 2 && tipoDeDato === 'cn') {
       dato = null;
       let text = element[orden[1]].toUpperCase();
+      const consulta = element[23] || '';
       const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.2;
       const wordLenght = text.length * 7;
       const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
       text = `${text.substring(0, caracteres)}.`;
-      const inputButton = ElementGenerator.generateInputButton(text);
+      const inputButton = ElementGenerator.generateInputButton(
+        text,
+        element[orden[1]].toUpperCase(),
+        consulta,
+      );
       type = inputButton;
     } else if (i === 2 && tipoDeDato === 'btnQwery') {
       dato = null;
       let text = element[orden[1]].toUpperCase();
+      const consulta = element[23] || '';
       const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.9;
       const wordLenght = text.length * 7;
       const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
       text = `${text.substring(0, caracteres)}...`;
-      const buttonQuery = ElementGenerator.generateButtonQuery(text);
+      const buttonQuery = ElementGenerator.generateButtonQuery(
+        text,
+        element[orden[1]].toUpperCase(),
+        consulta,
+      );
       type = buttonQuery;
     } else if (i === 2 && tipoDeDato === 'r') {
       dato = null;
@@ -188,6 +211,96 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
     if (i > 2 && tipoDeDato === 'tx') {
       const indexMas = index + 1;
       indexMas === cantidadDeRegistros ? colSpan = 2 : null;
+    }
+    if (i === 4 && tipoDeObservacion === 'd') {
+      const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
+      const fecha = fechasGenerator.fecha_corta_yyyymmdd(new Date());
+      const width = '';
+      const inputDate = ElementGenerator.generateInputDate(fecha, width, valorXDefecto);
+      type = inputDate;
+    } else if (i === 4 && tipoDeObservacion === 'h') {
+      dato = null;
+      const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
+      const hora = fechasGenerator.hora_actual(new Date());
+      const width = '';
+      const inputHora = ElementGenerator.generateInputHora(hora, width, valorXDefecto);
+      type = inputHora;
+    } else if (i === 4 && tipoDeObservacion === 'x') {
+      dato = '';
+      type = null;
+    } else if (i === 4 && tipoDeObservacion === 't') {
+      dato = null;
+      const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
+      const width = '';
+      const inputText = ElementGenerator.generateInputText(width, valorXDefecto);
+      elementHTML = inputText;
+      type = inputText;
+    } else if (i === 4 && tipoDeObservacion === 'b') {
+      dato = null;
+      let checked = false;
+      element[26] === '1' ? checked = true : checked = false;
+      const inputCheckBox = ElementGenerator.generateInputCheckBox(checked);
+      type = inputCheckBox;
+    } else if (i === 4 && tipoDeObservacion === 'n') {
+      dato = null;
+      const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
+      const width = '';
+      const inputNumber = ElementGenerator.generateInputNumber(width, valorXDefecto);
+      elementHTML = inputNumber;
+      type = inputNumber;
+    } else if (i === 4 && tipoDeObservacion === 'tx') {
+      dato = null;
+      const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
+      const textArea = ElementGenerator.generateTextArea(valorXDefecto);
+      elementHTML = textArea;
+      type = textArea;
+      const indexMas = index + 1;
+      indexMas === cantidadDeRegistros ? (colSpan = 1, alignCenter = 'left', paddingLeft = '3px') : null;
+    } else if (i === 4 && tipoDeObservacion === 'sd') {
+      dato = null;
+      selectDinamic = ElementGenerator.generateSelectDinamic();
+      type = selectDinamic;
+    } else if (i === 4 && tipoDeObservacion === 's') {
+      dato = null;
+      const arraySel = arrayGlobal.arraySelect.filter((ele) => ele[2] === element[15]);
+      const select = ElementGenerator.generateSelect(arraySel);
+      type = select;
+    } else if (i === 4 && tipoDeObservacion === 'cn') {
+      dato = null;
+      let text = element[orden[1]].toUpperCase();
+      const consulta = element[23] || '';
+      const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.2;
+      const wordLenght = text.length * 7;
+      const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
+      text = `${text.substring(0, caracteres)}.`;
+      const inputButton = ElementGenerator.generateInputButton(
+        text,
+        element[orden[1]].toUpperCase(),
+        consulta,
+      );
+      type = inputButton;
+    } else if (i === 4 && tipoDeObservacion === 'btnQwery') {
+      dato = null;
+      let text = element[orden[1]].toUpperCase();
+      const consulta = element[23] || '';
+      const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.9;
+      const wordLenght = text.length * 7;
+      const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
+      text = `${text.substring(0, caracteres)}...`;
+      const buttonQuery = ElementGenerator.generateButtonQuery(
+        text,
+        element[orden[1]].toUpperCase(),
+        consulta,
+      );
+      type = buttonQuery;
+    } else if (i === 4 && tipoDeObservacion === 'r') {
+      dato = null;
+      let checked = false;
+      let name = '0';
+      element[26] === '1' ? checked = true : checked = false;
+      element[15] !== '0' ? name = `Group2${element[15]}` : name = '0';
+      const radioButton = ElementGenerator.generateSelectedRadioButton(checked, name);
+      type = radioButton;
     }
     const cell = estilosCell(
       alignCenter,
@@ -215,6 +328,20 @@ async function traerRutina(sql, selDinamico) {
     console.log(error);
   }
 }
+async function traerValorPorDefecto(sql, tipo, html) {
+  try {
+    if (tipo === 'n') {
+      const arrayValor = await traerRegistros(`traer_LTYsql&sql=${encodeURIComponent(sql)}`);
+      ElementGenerator.generateInputNumberQuery(arrayValor, html);
+    } else if (tipo === 't' || tipo === 'tx') {
+      const arrayValor = await traerRegistros(`traer_LTYsql&sql=${encodeURIComponent(sql)}`);
+      ElementGenerator.generateInputTextQuery(arrayValor, html);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+  }
+}
 
 function completaTabla(arrayControl) {
   const tbody = document.querySelector('tbody');
@@ -228,10 +355,27 @@ function completaTabla(arrayControl) {
       if (filaOculta) {
         filaOculta.style.display = 'none';
       }
+      ID -= 1;
     }
-    // ! cargamos consultas dinamicas sd
+    // ! cargamos consultas dinamicas sd en columna 2
     if (element[5] === 'sd' && element[8] === 's' && (element[19] !== '' || element[19] !== null)) {
       traerRutina(element[19], selectDinamic);
+    }
+    // ! cargamos valor por defecto de un sql query en columna 2
+    if (element[5] === 'n' || element[5] === 't' || element[5] === 'tx') {
+      if (element[23] !== '' && element[23] !== ' ' && element[23] !== null && element[23] !== undefined) {
+        traerValorPorDefecto(element[23], element[5], elementHTML);
+      }
+    }
+    // ! cargamos consultas dinamicas sd en columna 4
+    if (element[9] === 'sd' && (element[26] !== '' || element[26] !== null)) {
+      traerRutina(element[26], selectDinamic);
+    }
+    // ! cargamos valor por defecto de un sql query en columna 4
+    if (element[9] === 'n' || element[9] === 't' || element[9] === 'tx') {
+      if (element[27] !== '' && element[27] !== ' ' && element[27] !== null && element[27] !== undefined) {
+        traerValorPorDefecto(element[27], element[9], elementHTML);
+      }
     }
   });
 }
