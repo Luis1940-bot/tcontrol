@@ -12,6 +12,7 @@ let arrayWidthEncabezado;
 let selectDinamic;
 let elementHTML;
 let ID = 0;
+let fila = 0;
 
 function estilosTheadCell(element, index) {
   const cell = document.createElement('th');
@@ -54,7 +55,7 @@ function estilosCell(
     cell.appendChild(type);
   }
   cell.style.borderBottom = '1px solid #cecece';
-  cell.style.background = background;
+  // cell.style.background = background;
   cell.style.zIndex = 2;
   cell.style.textAlign = alignCenter;
   cell.style.paddingLeft = paddingLeft;
@@ -63,6 +64,8 @@ function estilosCell(
   cell.style.color = colorText;
   colSpan === 1 ? cell.colSpan = 4 : null;
   colSpan === 2 ? cell.style.display = 'none' : null;
+  colSpan === 3 ? cell.colSpan = 3 : null;
+  colSpan === 4 ? cell.style.display = 'none' : null;
   return cell;
 }
 
@@ -109,6 +112,16 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       colSpan = 2;
     }
     i === 1 && orden[i] === 3 && (tipoDeDato !== 'l' && tipoDeDato !== 'subt' && tipoDeDato !== 'title') ? dato = dato.toUpperCase() : null;
+
+    if (i === 3 && tipoDeDato === 'img') {
+      colSpan = 3;
+      dato = null;
+      const ul = ElementGenerator.generateUl();
+      type = ul;
+    }
+    if (i > 3 && tipoDeDato === 'img') {
+      colSpan = 4;
+    }
 
     if (i === 2 && tipoDeDato === 'd') {
       dato = null;
@@ -168,9 +181,10 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       type = select;
     } else if (i === 2 && tipoDeDato === 'img') {
       dato = null;
-      const text = 'SEL';
-      const img = ElementGenerator.generateButtonImage(text);
+      const text = '📸';
+      const img = ElementGenerator.generateButtonImage(text, fila + 1);
       type = img;
+      background = 'transparent';
     } else if (i === 2 && tipoDeDato === 'cn') {
       dato = null;
       let text = element[orden[1]].toUpperCase();
@@ -183,6 +197,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
         text,
         element[orden[1]].toUpperCase(),
         consulta,
+        'InputButton-transparent',
       );
       type = inputButton;
     } else if (i === 2 && tipoDeDato === 'btnQwery') {
@@ -197,6 +212,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
         text,
         element[orden[1]].toUpperCase(),
         consulta,
+        'InputButton-transparent',
       );
       type = buttonQuery;
     } else if (i === 2 && tipoDeDato === 'r') {
@@ -277,6 +293,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
         text,
         element[orden[1]].toUpperCase(),
         consulta,
+        'InputButton-transparent',
       );
       type = inputButton;
     } else if (i === 4 && tipoDeObservacion === 'btnQwery') {
@@ -291,6 +308,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
         text,
         element[orden[1]].toUpperCase(),
         consulta,
+        'InputButton-transparent',
       );
       type = buttonQuery;
     } else if (i === 4 && tipoDeObservacion === 'r') {
@@ -349,7 +367,8 @@ function completaTabla(arrayControl) {
   arrayControl.forEach((element, index) => {
     const newRow = estilosTbodyCell(element, index, cantidadDeRegistros);
     tbody.appendChild(newRow);
-    // ! ocultamos la colomnas para la observacion
+    fila += 1;
+    // ! ocultamos la columnas para la observacion
     if (element[8] === 'n') {
       const filaOculta = tbody.querySelector(`tr:nth-child(${index + 1})`);
       if (filaOculta) {
@@ -381,7 +400,7 @@ function completaTabla(arrayControl) {
 }
 
 export default function tablaVacia(arrayControl, encabezados) {
-  console.log(arrayControl);
+  // console.log(arrayControl);
   encabezado(encabezados);
   completaTabla(arrayControl, encabezados);
 }

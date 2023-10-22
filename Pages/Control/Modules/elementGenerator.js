@@ -137,7 +137,7 @@ class ElementGenerator {
     return img;
   }
 
-  static generateInputButton(text, name, consulta) {
+  static generateInputButton(text, name, consulta, clase) {
     const div = document.createElement('div');
     const inputText = document.createElement('input');
     inputText.setAttribute('type', 'text');
@@ -145,7 +145,8 @@ class ElementGenerator {
     const button = document.createElement('button');
     button.textContent = text;
     button.setAttribute('name', name);
-    button.style.background = '#97B7E8';
+    button.setAttribute('class', clase);
+    // button.style.background = '#97B7E8';
     div.appendChild(button);
     button.addEventListener('click', (event) => {
       consultaCN(event, consulta);
@@ -153,21 +154,29 @@ class ElementGenerator {
     return div;
   }
 
-  static generateButtonImage(text) {
+  static generateUl() {
+    const ul = document.createElement('ul');
+    return ul;
+  }
+
+  static generateButtonImage(text, ID) {
     const button = document.createElement('button');
     button.textContent = text;
-    button.style.background = '#97B7E8';
-    button.addEventListener('click', (event) => {
-      buttonImage(event);
+    // button.style.background = '#97B7E8';
+    button.setAttribute('data-row', ID);
+    button.setAttribute('class', 'transparent-button');
+    button.addEventListener('click', () => {
+      buttonImage(ID);
     });
     return button;
   }
 
-  static generateButtonQuery(text, name, consulta) {
+  static generateButtonQuery(text, name, consulta, clase) {
     const button = document.createElement('button');
     button.textContent = text;
     button.setAttribute('name', name);
-    button.style.background = '#97B7E8';
+    // button.style.background = '#97B7E8';
+    button.setAttribute('class', clase);
     button.addEventListener('click', (event) => {
       consultaQuery(event, consulta);
     });

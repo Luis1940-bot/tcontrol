@@ -93,7 +93,7 @@ table tbody tr td div button{
   margin-right: 10px;
   border-radius: 3px;
 }
-button{
+.InputButton-transparent{
   height: 70%;
   padding-left: 0px;
   padding-top: 0px;
@@ -102,13 +102,14 @@ button{
   font-size: 7px;
   border-radius: 3px;
   cursor: pointer;
+  background: #97B7E8;
 }
-button:hover {
+.InputButton-transparent:hover {
   background: #5588C7;
   border: 1px solid #5588C7;
   color: #fff;
 }
-button:active {
+.InputButton-transparent:active {
   background: #5588C7;
   border: 1px solid #5588C7;
   color: #fff;
@@ -134,8 +135,37 @@ select:focus {
   outline: none;
   border: 1px solid #000;
 }
-
-
+.transparent-button{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  width: 50px;
+  border-radius: 25px;
+}
+.transparent-button:hover{
+  /* background: #cecece;
+  border: 1px solid #000000; */
+  font-size: 18px;
+}
+ul{
+  list-style: none;
+  padding: 0px;
+}
+li{
+  display: inline;
+  margin-right: 5px;
+}
+.img-select{
+  width: 20px;
+  height: 20px;
+}
+.img-select:hover{
+  border: 1px solid #cecece;
+}
+canvas{
+  display: none;
+}
 footer{
   height: 20px;
   margin-top: 5px;
