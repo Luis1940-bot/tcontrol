@@ -8,15 +8,14 @@ let row = 0;
 function buttonImage(id) {
   row = id;
   const miAlerta = new Alerta();
-  // miAlerta.createAlerta(objVariables.objAlertaAceptarCancelar);
-  // const modal = document.getElementById('modalAlert');
-  // modal.style.display = 'block';
 
-  miAlerta.createVerde(objVariables.avisoVerde);
+  miAlerta.createVerde(objVariables.avisoAmarillo);
   const modal = document.getElementById('modalAlert');
   modal.style.display = 'block';
   const imageInput = document.getElementById('imageInput');
-  // imageInput.click();
+  setTimeout(() => {
+    imageInput.click();
+  }, 1500);
 }
 
 function generateLi(image) {
@@ -40,6 +39,8 @@ function loadImage(selectedFile) {
       img.style.maxWidth = '100%';
       img.onload = () => resolve(img);
       img.onerror = reject;
+      const modal = document.getElementById('modalAlert');
+      modal.style.display = 'none';
     };
     reader.readAsDataURL(selectedFile);
   });

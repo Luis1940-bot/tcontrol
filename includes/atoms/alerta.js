@@ -135,7 +135,7 @@ class Alerta {
     this.modal.id = 'modalAlert';
     this.modal.className = 'modal';
     this.modal.style.background = 'rgba(224, 220, 220, 0.7)';
-    const modalContent = createDiv(obj.divVerde);
+    const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
     const spanTexto = createSpan(obj.span);
@@ -146,18 +146,6 @@ class Alerta {
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal);
   }
-
-  // open() {
-  //   if (this.modal) {
-  //     this.modal.style.display = 'block';
-  //   }
-  // }
-
-  // close() {
-  //   if (this.modal) {
-  //     this.modal.style.display = 'none';
-  //   }
-  // }
 }
 
 export default Alerta;

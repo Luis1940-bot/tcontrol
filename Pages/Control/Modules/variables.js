@@ -197,7 +197,7 @@ const avisoVerde = {
     innerHTML: '&times',
     onClick: closeVentanaVerdeRoja,
   },
-  divVerde: {
+  div: {
     position: 'relative',
     borderRadius: '10px',
     width: '305px',
@@ -216,9 +216,9 @@ const avisoVerde = {
     top: '550px',
   },
   span: {
-    text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+    text: '¡Proceso completado con éxito! Todos los pasos del procedimiento se han ejecutado correctamente.',
     fontSize: '12px',
-    fontColor: '#ffffff',
+    fontColor: '#ECECEC',
     marginTop: '0px',
     display: 'block',
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
@@ -258,12 +258,12 @@ const avisoAmarillo = {
     innerHTML: '&times',
     onClick: closeVentanaVerdeRoja,
   },
-  divVerde: {
+  div: {
     position: 'relative',
     borderRadius: '10px',
     width: '305px',
     height: '100px',
-    background: '#21D849',
+    background: '#e5a110',
     border: 'none',
     boxShadow: 'none',
     margin: '20% auto',
@@ -277,7 +277,7 @@ const avisoAmarillo = {
     top: '550px',
   },
   span: {
-    text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+    text: 'El proceso puede demorar unos instantes hasta que se visualice la imágen en la celda correpondiente.',
     fontSize: '12px',
     fontColor: '#ffffff',
     marginTop: '0px',
@@ -319,12 +319,12 @@ const avisoRojo = {
     innerHTML: '&times',
     onClick: closeVentanaVerdeRoja,
   },
-  divVerde: {
+  div: {
     position: 'relative',
     borderRadius: '10px',
     width: '305px',
     height: '100px',
-    background: '#21D849',
+    background: '#D82137',
     border: 'none',
     boxShadow: 'none',
     margin: '20% auto',
@@ -338,7 +338,7 @@ const avisoRojo = {
     top: '550px',
   },
   span: {
-    text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+    text: 'Hubo un error que no permite continuar con el proceso correcto.',
     fontSize: '12px',
     fontColor: '#ffffff',
     marginTop: '0px',
@@ -363,4 +363,6 @@ export default {
   arrayGlobal,
   objAlertaAceptarCancelar,
   avisoVerde,
+  avisoAmarillo,
+  avisoRojo,
 };
