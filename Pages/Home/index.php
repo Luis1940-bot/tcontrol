@@ -4,7 +4,8 @@ session_start();
 if (!isset($_SESSION['factum_validation']['email'] )) {
     unset($_SESSION['factum_validation']['email'] ); 
 }
-
+define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
+define('INCLUDES', ROOT_PATH.'/includes/molecules');
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -24,9 +25,9 @@ if (!isset($_SESSION['factum_validation']['email'] )) {
   <header>
     
     <?php
-      include('./../../includes/molecules/header.php');
-      include('./../../includes/molecules/encabezado.php');
-       include('./../../includes/molecules/whereUs.php');
+      include_once(INCLUDES .'/header.php');
+      include_once(INCLUDES .'/encabezado.php');
+       include_once(INCLUDES .'/whereUs.php');
     ?>
   </header>
   <main>
@@ -36,7 +37,7 @@ if (!isset($_SESSION['factum_validation']['email'] )) {
   </main>
   <footer>
     <?php
-      include('./../../includes/molecules/footer.php');
+      include_once(INCLUDES . '/footer.php');
     ?>
   </footer>
 <script type='module' src='../../Pages/Home/home.js'></script>
