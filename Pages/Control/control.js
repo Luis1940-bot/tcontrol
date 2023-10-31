@@ -5,6 +5,17 @@ import tablaVacia from './Modules/armadoDeTabla.js';
 // eslint-disable-next-line import/extensions
 import arrayGlobal from './Modules/variables.js';
 
+// ! -------------------------------
+// ! ELIMINAR
+const lenguaje = 'es';
+// ! ----------------------------------
+
+const datosUser = localStorage.getItem('datosUser');
+if (datosUser) {
+  const datos = JSON.parse(datosUser);
+  console.log(datos.lng);
+}
+
 let controlN = '';
 let controlT = '';
 let nr = 0;

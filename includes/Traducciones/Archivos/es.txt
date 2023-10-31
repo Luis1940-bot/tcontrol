@@ -1,0 +1,1371 @@
+[g](0,11)>>>>Lote>>>>
+[g](0.11)>>>>Lote>>>>
+[Grs](0,22)>>>>Lote>>>>
+[Grs](0.22)>>>>Lote>>>>
+[Grs]>>>>Lote>>>>
+[Kg/h]
+[Kg]
+[Kg] (ver tabla)>>>>Lote>>>>
+[Kg](0,22)>>>>Lote>>>>
+[Kg](0.22)>>>>Lote>>>>
+[Kg](1,23)>>>>Lote>>>>
+[Kg](1,32)>>>>Lote>>>>
+[Kg](1,41)>>>>Lote>>>>
+[Kg](1,54)>>>>Lote>>>>
+[Kg](1,58)>>>>Lote>>>>
+[Kg](1,76)>>>>Lote>>>>
+[Kg](1.23)>>>>Lote>>>>
+[Kg](1.32)>>>>Lote>>>>
+[Kg](1.41)>>>>Lote>>>>
+[Kg](1.54)>>>>Lote>>>>
+[Kg](1.58)>>>>Lote>>>>
+[Kg](1.76)>>>>Lote>>>>
+[Kg](2,20)>>>>Lote>>>>
+[Kg](2.20)>>>>Lote>>>>
+[Kg](5,0)>>>>Lote>>>>
+[Kg](5.0)>>>>Lote>>>>
+[Kg]>>>>Lote>>>>
+[Lt]0,10 (1,9 lt de solución preparada según ITPE 09)>>>>Lote>>>>
+[Lt]0,10 (1.9 lt de solución preparada según ITPE 09)>>>>Lote>>>>
+[Lt]0.10 (1.9 lt de solución preparada según ITPE 09)>>>>Lote>>>>
+[Tennesse]
+[Tn]
+¿¿Qué sucedió??
+¿Cómo ha ocurrido?
+¿Cómo ocurrió?
+¿por qué?
+¿Qué ocurrió?
+¿Qué pasa con el cliente?
+¿quiem?
+¿quién?
+>>>>Indica a qué te refieres en otros >>>>
+>>>>Indique a qué se refiere en otros>>>>
+>>>>OBSERVACIONES>>>>
+1ra causa
+2da causa
+3ra causa
+abierto
+ABM  UNIDADES TÉCNICAS
+ABM  Unidades Técnicas.
+ABM CONTRATISTAS
+ABM de las familias de fritas.
+ABM IMPLICADO
+ABM INVOLUCRADOS
+ABM SECTORES
+ABM TRANSPORTISTAS
+Accidente de vehículo
+Accidente vehicular
+Acción
+ACCIÓN CORRECTIVA
+Acción por cada causa identificada
+acción rapida
+acción rápida
+Acción rapida.
+Acción rápida.
+Acciones
+acciones a implementar
+Acciones adoptadas
+acciones adoptadas inmediatamente
+acciones inmediatamente adoptadas
+Acciones para cada causa identificada
+ACEPTAR ENTRADA
+ACEPTAR TICKET
+actividad
+ACTIVIDAD INVOLUCRADA
+actividad observada
+ACTIVIDADES
+ACTIVO
+acumulado diario[tn]
+adaptar
+ALMACEN
+ALMACÉN
+ALMIDÓN DEL PAPA
+ALTA DE BATCH AROS-ARO
+ALTA DE BATCH EMOTICONS-EMO
+ALTA DE BATCH MINIONS-MIN
+ALTA DE BATCH NOISSETES
+ALTA DE BATCH NOISSETES FINAS HIERBAS-NFH
+ALTA DE BATCH NOISSETES JAMON Y QUESO-NJQ
+ALTA DE BATCH NOISSETES MARCA BLANCA-NMB
+ALTA DE BATCH SMILES-SMI
+ALTA DE TICKET
+Ampliar los datos de origen.
+Análisis 5 Por qué
+ANÁLISIS DE CAUSA Y DEFINICIÓN DE ACCIÓN POR CAUSA RAÍZ
+ANÁLISIS DE CAUSAS Y DEFINICIÓN DE ACCIÓN POR CAUSA RAÍZ
+Anexo 1 - Seguridad Basada en Comportamientos
+Anexo 1 - Seguridad basada en el comportamiento
+Anota los nombres de los involucrados.
+Anote el número heredado.
+Antigüedad en el puesto
+Antigüedad en la empresa
+Años
+Apagado por CORTE DE ENERGÍA
+apellidos
+apto
+Área
+Área de ocurrencia
+ÁREA INVOLUCRADA
+ASPECTO AMBIENTAL
+Atendido por
+Atrapamiento
+Atropellar
+avance
+avances
+baja  en la velocidad
+baja a velocidad
+baja en la velocidad
+baja en velocidad
+bajada en la velocidad
+bajar a velocidad
+Bajar de nivel / Revertir o viajar
+bajar la velocidad
+BIN
+BIN DESTINO
+BIN ORIGEN
+boleto
+BOLETO CONSUMIDO
+BOLETO ONU PARA ENTRADA MP. NO PONGAS NADA SI VIENE DE OTRO CONTENEDOR.
+BOLSA DETECTOR MANTENIMIENTO DWT EMPAQUE ROTAS
+BOS CALIDAD AI
+BOS CALIDAD ANS
+BOS CALIDAD AS
+BOS ENTORNO MEDIO IA
+BOS MEDIO AMBIENTE ANS
+BOS MEDIO AMBIENTE AS
+BOS MEDIO ENTORNO COMO
+BOS REGLAS DE ORO
+BOS SEGURIDAD ANS
+BOS SEGURIDAD AS
+BOS SEGURIDAD IA
+BOTELLA DE MANTENIMIENTO DWT EMPAQUE
+BUENA CALIDAD COMO
+BUSCAR
+Caída a nivel / Resbalón o tropiezo
+Caída de altura
+Caída desde gran altura
+cambio
+Cambio.
+cara de aleta
+Causa 1
+Causa 2
+Causa 3
+CAUSA AMBIENTAL PRIMARIA - Seleccione la opción correspondiente -
+Causa Directa (C)
+causa potencial
+CAUSA PRIMARIA AMBIENTAL - Seleccione las que correspondan -
+CAUSA PRIMARIA INFRAESTRUCTURA - Seleccione la opción que corresponda -
+CAUSA PRIMARIA INFRAESTRUCTURA - Seleccione las que correspondan -
+CAUSA PRIMARIA LABORAL - Seleccione la opción que corresponda -
+CAUSA PRIMARIA LABORAL - Seleccione las que correspondan -
+causa primordial
+causa raíz
+Causa raíz identificada
+causas
+causas subyacentes
+CERCA
+Cerrado
+Cerrar
+Cierre
+cierre de entrada
+Clasificación de incidentes
+CLASIFICACIÓN DE MANTENIMIENTO DWT EMPAQUE
+Clasificación del Incidente
+colaborador de cierre
+Coloque el desvío según control.
+Coloque el número de control.
+Coloque el número de PCA si corresponde.
+Coloque el número de ticket relacionado.
+Coloque la descripción del problema del tiquet o el que figura en el control.
+Coloque una magnitud.
+Comentario a ser completado únicamente por RRHH
+COMENTARIOS
+COMENTARIOS:
+Comparte
+componente
+comportamiento
+Comportamiento.
+Comprobar si corresponde al Mezclador 1.
+Comprobar si corresponde al Mezclador 2.
+Comprometido Cerrar
+Comprueba si coincide.
+compruebe si el destino es otro BIN.
+Compruebe si el problema se ha resuelto.
+Compruebe si será necesario un PDCA.
+CON CONTROL
+CON ENTRADA
+CON TICKET
+consulta de estándares
+consulta de lotes
+Consulta de Tn
+consulta estándar
+consulta por lotes
+Consulta Tn
+Consulta x lote
+Contacto
+Contacto con energía peligrosa
+Contaminación de agua
+Contaminación de aire
+Contaminación de suelo
+Contaminación del agua
+Contaminación del aire
+Contaminación sólida
+CONTRATISTAS ABM
+control
+Control de actividad.
+Control de actividades.
+Control de calidad basado en el comportamiento.
+Control de calidad basado en el comportamiento. Acto inseguro.
+Control de contratistas
+Control de la seguridad basada en comportamientos para actos NO seguros.
+Control de la seguridad basada en comportamientos para actos seguros.
+Control de la seguridad basada en comportamientos para actos seguros. Acto NO seguro.
+Control de la seguridad basada en comportamientos para actos seguros. Acto seguro.
+Control de la seguridad basada en comportamientos. Desvíos de las reglas de oro.
+Control de los registros de los Down Time de Empaque en Especialidades.
+Control de los registros de los Down Time de Especialidades.
+control de prueba
+control de prueba de facto.
+control de prueba de factum.
+Control de seguridad basado en el comportamiento.
+Control de seguridad basado en el comportamiento. Desviaciones de las reglas de oro.
+Control de transportistas.
+Control del conductor del transporte.
+Control del entorno ambiental basado en el comportamiento.
+Control del entorno ambiental basado en el comportamiento. Acto inseguro.
+Control destinado a la registración y seguimiento de las acciones correctivas. Las mismas son acciones que se completan en un corto lapso de tiempo.
+Control destinado a la registración y seguimiento de planes de acción. Estas son acciones que deben estar  acotados por un plazo de tiempo y son acciones de mediano plazo..
+Control destinado al registro y seguimiento de acciones correctivas. Son acciones que se completan en un corto periodo de tiempo.
+Control destinado al registro y seguimiento de los planes de acción. Son acciones que deben conservarse por un período de tiempo y son acciones de mediano plazo.
+control para definir estándares
+Control para el ABM de los involucrados desde operarios hasta directores.
+Control para el ABM de los involucrados, desde trabajadores hasta directivos.
+Control para el ABM de sectores.
+Control para el alta de ticket de balanza.
+Control para el sector ABM.
+control para establecer estándares
+Control para la definición de estándares.
+Control para la registración de l ingreso de materia prima.
+Control por definición estándar.
+correo
+crítico
+DATOS DE LA PERSONA INVOLUCRADA
+datos de origen
+DATOS DEL INCIDENTE
+datos del origen
+DATOS DEL PERSONAL IMPLICADO
+Debe colocar el número de PCA que corresponda para realizar la trazabilidad de las acciones.
+denominación de equipo
+DEPARTAMENTO
+Derramar
+Derrame de químico
+Derrame de sustancias químicas
+Derrumbe
+Describa el problema con el mayor detalle.
+Describa el problema o copie el mismo del PCA que corresponde.
+Describa el producto terminado.
+Describa el resultado final.
+Describa la actividad.
+Describa la causa raíz considerada.
+Describa la causa raíz encontrada.
+Describa la evolución y las acciones a continuación de la ya existente.
+Describa la familia de PT de especialidades.
+Describa la familia de PT de puré.
+Describa la primera causa probable.
+Describa la segunda causa probable.
+Describa la tercera causa probable.
+Describa las acciones implementadas.
+Describa las acciones inmediatamente adoptadas.
+Describa las medidas y acciones tomadas.
+Describa todas las acciones tomadas.
+Describe el problema con el mayor detalle.
+Describe el problema o cópialo del PCA correspondiente.
+Describe el resultado final.
+Describe la actividad.
+Describe la primera causa probable.
+Describe la segunda causa probable.
+Describe la tercera causa probable.
+Describe una causa directa del por qué anterior.
+Describe una causa directa que se haya observado.
+Describir el producto terminado.
+Describir la evolución y las actuaciones y continuación de la existente.
+Describir la familia de especialidades del PT.
+descripción
+Descripción de evolución y acciones.
+Descripción de la evolución y acciones
+descripción de la evolución y acciones realizadas
+descripción de la evolución y actuaciones realizadas
+Descripción del desvío o problema.
+DESCRIPCION DEL EVENTO
+DESCRIPCIÓN DEL EVENTO
+descripción del problema
+Descripción del problema.
+Destilalo antes de usarlo.
+Destilar si no está activo.
+Destildar si no se encuentra activo.
+Destilde para no utilizarlo.
+Destino >>
+DESTINO DEL CONTENEDOR
+Destino>>
+DESVIO
+DESVÍO
+Detalla el problema. Causas y riesgos identificados.
+Detalla la familia.
+Detallar el progreso.
+DETALLE
+Detalle el Problema. Paradas o riesgos identificados.
+Detalle el resultado final
+Detalle la familia.
+Detalle las acciones que fueron adoptadas de forma inmediata.
+Detalle las acciones que se adoptaron inmediatamente.
+Detalle las medidas o acciones tomadas.
+Detalle los avances.
+detalles
+Detener debido a un problema de calibración
+Detener debido a una falla del sistema
+Detenerse por condición ambiental
+Detenerse por contrapesos
+Deténgase para CAMBIO DE PRODUCTO
+Detenido por Brazo Armador
+Detenido por falta de Poly
+dextrosa
+diestro
+Documentación
+Documentación adicional
+documentación adjunta
+Documento que deja constancia del incumplimiento.
+Documento que registra  una no conformidad.
+dwt calidad papa
+DWT CHO PLANIFICADO
+DWT de prueba de Factum NO USAR
+dwt descongelación planificada
+DWT EMPAQUE CONDICIÓN DE PRODUCCIÓN PRODUCTO
+DWT EMPAQUE GESTIÓN DE PRODUCCIÓN LR
+DWT EMPAQUE MANTENIEMIENTO RAPISTAND
+DWT EMPAQUE MANTENIEMIENTO WRAPPER
+DWT EMPAQUE MANTENIMIENTO ARMADORA DE CAJAS
+DWT EMPAQUE MANTENIMIENTO CAMA RODILLOS
+DWT EMPAQUE MANTENIMIENTO CERRADORA CAJAS
+DWT EMPAQUE MANTENIMIENTO CODIFICADORA CAJAS
+DWT EMPAQUE MANTENIMIENTO DETECTOR BOLSAS ROTAS
+DWT EMPAQUE MANTENIMIENTO DETECTOR DE PESO CAJAS
+DWT EMPAQUE MANTENIMIENTO DETECTOR PESO CAJAS
+DWT EMPAQUE MANTENIMIENTO DTM
+DWT EMPAQUE MANTENIMIENTO ELEVADOR CAJAS
+DWT EMPAQUE MANTENIMIENTO EMPACADORA
+DWT EMPAQUE MANTENIMIENTO ENVASADORA
+DWT EMPAQUE MANTENIMIENTO ETIQUETADOR
+DWT EMPAQUE MANTENIMIENTO GRADING
+DWT EMPAQUE MANTENIMIENTO ISHIDA
+DWT EMPAQUE MANTENIMIENTO PALETIZADORA
+DWT EMPAQUE MANTENIMIENTO SERVICIOS
+DWT EMPAQUE MANTENIMIENTO TOTEROOM
+DWT EMPAQUE OTROS BAJÓN DE TENSIÓN
+DWT EMPAQUE OTROS DEMORA EN GUARDADO
+DWT EMPAQUE OTROS FALTA DE PERSONAL
+DWT EMPAQUE OTROS FALTA DE PERSONAL CAPACITADO
+DWT EMPAQUE OTROS INSUMOS
+DWT EMPAQUE OTROS RETRASOS EN ALMACENAMIENTO
+DWT EMPAQUE OTROS SISTEMAS
+DWT EMPAQUE PRODUCCIÓN CONDICIÓN PRODUCTO
+DWT EMPAQUE PRODUCCIÓN MANEJO LR
+DWT EMPAQUE PRODUCCIÓN OPERATIVO
+DWT ESPECIALIDAD EN MANTENIMIENTO PLANIFICADO CONGELADOR
+DWT ESPECIALIDAD EN MANTENIMIENTO PLANIFICADO FREIDORA
+DWT ESPECIALIDAD EN MANTENIMIENTO PLANIFICADO. ENTRENADOR DE CIGUEÑA
+DWT ESPECIALIDAD EN MANTENIMIENTO PLANIFICADO. ENTRENADOR DE SONRISAS
+DWT ESPECIALIDAD EN MANTENIMIENTO PLANIFICADO. ENTRENADOR ELEV TARROS
+DWT ESPECIALIDAD EN OTRAS PLANIFICACIONES
+DWT ESPECIALIDAD NO PLANIFICADO CALIDAD DE PAPA
+DWT ESPECIALIDAD NO PLANIFICADO MANT. FORMADOR ELEV. TARROS
+DWT ESPECIALIDAD NO PLANIFICADO MANT. FORMADOR SMILES
+DWT ESPECIALIDAD NO PLANIFICADO MANT. FORMADOR STORK
+DWT ESPECIALIDAD NO PLANIFICADO MANTENIMIENTO FREEZER
+DWT ESPECIALIDAD NO PLANIFICADO MANTENIMIENTO FREIDORA
+DWT ESPECIALIDAD NO PLANIFICADO OTROS
+DWT ESPECIALIDADES NO PLANEADO AGRO
+DWT ESPECIALIDADES NO PLANEADO CORRELACIÓN RAW VS LÍNEA
+DWT ESPECIALIDADES NO PLANEADO MANTENIMIENTO
+DWT ESPECIALIDADES NO PLANEADO OTROS
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN BLANCHER
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN COOLER
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN CORTE
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN DRY RECEIVING
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN EMPAQUE
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN GRADING
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN PALETIZADO
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN PROCESO
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN TOTE ROOM
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN WASTE
+DWT ESPECIALIDADES NO PLANEADO PRODUCCIÓN WET RECEIVING
+DWT ESPECIALIDADES PLANEADO
+DWT FRIES L1 EN AGRO PLANIFICADO
+DWT FRIES L1 EN CLASIFICACIÓN DE PRODUCCIÓN PLANIFICADA
+DWT FRIES L1 EN CORTE PLANIFICADO DE PRODUCCIÓN
+DWT FRIES L1 EN EL BATEADO PLANIFICADO
+DWT FRIES L1 EN EL CONGELADOR PLANIFICADO
+DWT FRIES L1 EN EMBALAJE PLANIFICADO
+DWT FRIES L1 EN LA FREIDORA PLANIFICADA
+DWT FRIES L1 EN LA SECADORA PLANIFICADA
+DWT FRIES L1 EN MANTENIMIENTO PLANIFICADO
+DWT FRIES L1 EN PRODUCCIÓN PLANIFICADA DE RECEPCIÓN EN SECO
+DWT FRIES L1 EN PRODUCCIÓN PLANIFICADA EMPAQUE
+DWT FRIES L1 EN PRODUCCIÓN PLANIFICADA PELADORAS
+DWT FRIES L1 EN SALA TOTE DE PRODUCCIÓN PLANIFICADA
+DWT FRIES L1 PLANIFICADO
+DWT FRIES L1 SIN SERVICIOS PÚBLICOS PLANIFICADOS
+DWT FRITAS L1 EN EL BLANCER PLANIFICADO
+DWT FRITAS L1 EN PLAN OPERATIVO
+DWT FRITAS L1 NO ​​HAY OTROS PLANIFICADOS
+DWT FRITAS L1 NO PLANEADO AGRO
+DWT FRITAS L1 NO PLANEADO CORRELACIÓN RAW VS LÍNEA
+DWT FRITAS L1 NO PLANEADO MANTENIMIENTO
+DWT FRITAS L1 NO PLANEADO OTROS
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN CORTE
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN DRY RECEIVING
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN EMPAQUE
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN GRADING
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN PALETIZADO
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN PELADORAS
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN PROCESO
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN RECLAIM
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN SORTER
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN TOTE ROOM
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN WASTE
+DWT FRITAS L1 NO PLANEADO PRODUCCIÓN WET RECEIVING
+DWT FRITAS L1 PLANEADO
+DWT FRITAS L2 NO PLANEADO AGRO
+DWT FRITAS L2 NO PLANEADO CORRELACIÓN RAW vs LÍNEA
+DWT FRITAS L2 NO PLANEADO MANTENIMIENTO
+DWT FRITAS L2 NO PLANEADO OTROS
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN CORTE
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN DEPÓSITO BATTER
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN DRY RECEIVING
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN ECOLAB
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN EMPAQUE
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN GRADING
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN PALETIZADO
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN PELADORAS
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN PLANTA DE ALMIDÓN
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN PROCESO
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN RECLAIM
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN SALA DE TANQUES DE ACEITE
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN SORTER
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN TOTE ROOM
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN WASTE
+DWT FRITAS L2 NO PLANEADO PRODUCCIÓN WET RECEIVING
+DWT FRITAS L2 PLANEADO
+dwt mantenimiento
+DWT NO PLANEADO PRODUCCIÓN COLDSTORE
+dwt otros
+DWT PACK OTRAS TENSION BAJON
+DWT PLANEADO CHO
+dwt planeado defrost
+dwt producción
+DWT PURÉ NO PLANEADO AGRO
+DWT PURÉ NO PLANEADO MANTENIMIENTO
+DWT PURÉ NO PLANEADO OTROS
+DWT PURÉ NO PLANEADO PRODUCCIÓN DRY RECEIVING
+DWT PURÉ NO PLANEADO PRODUCCIÓN EMPAQUE E INSPECCIÓN
+DWT PURÉ NO PLANEADO PRODUCCIÓN EX MATA/INSUMOS
+DWT PURÉ NO PLANEADO PRODUCCIÓN PELADO Y CORTE
+DWT PURÉ NO PLANEADO PRODUCCIÓN PROCESO
+DWT PURÉ NO PLANEADO PRODUCCIÓN WASTE
+DWT PURÉ NO PLANEADO PRODUCCIÓN WET RECEIVING
+DWT PURÉ PLANEADO
+El momento de la realización.
+El PDCA  está en curso y no tiene un cierre.
+El tiempo del momento de la realización.
+elegir usuario
+elementos de protección
+elementos protectores
+Elija la cierre de entrada.
+Elija la fecha de  ingreso.
+elija usuario
+empezar a enfrentar
+ENTRADA
+ENTRADA A DRY RECEIVING
+ENVOLVEDORA DE MANTENIMIENTO DWT EMPAQUE
+Es condición indispensable para recorrer, permanecer y/o trabajar en un sector conocer los riesgos críticos del mismo y la documentación asociada.
+Es condición indispensable para recurrir, permanecer y trabajar en un sector comprender los riesgos críticos del mismo y la documentación asociada.
+Es conveniente escribir el desvío como figura en el control.
+Es conveniente escribir la desviación como una cifra en el control.
+Es imperativo respetar las sendas de circulación demarcadas, así como siempre respetar la regla de los 3 puntos de apoyo en una escalera.
+Es importante que indiques el ticket que generó la acción rápida.
+Es importante que la acción correctiva tenga el control relacionado.
+es importante que la acción correctiva tenga un control relacionado.
+Es importante que se indique el ticket que generó la acción rápida.
+Es imprescindible respetar los caminos de circulación delimitados, así como respetar siempre la regla de los 3 puntos de apoyo en una escalera.
+Es obligación usar correctamente todos los elementos de protección personal asociados a un sector y/o tarea, y conservarlos en óptimo estado.
+Es obligatorio respetar las reglas de conducción segura incluyendo el NO uso de celular mientras estoy conduciendo o mientras me traslado incluso en la modalidad ?manos libres?.
+Es obligatorio respetar las reglas de conducción segura, incluido el NO uso del teléfono celular mientras se conduce o viaja, incluso en el modo “manos libres”.
+Es obligatorio utilizar correctamente todos los elementos de protección personal asociados a un sector y/o tarea, y mantenerlos en excelentes condiciones.
+Escriba el apellido.
+Escriba el nombre de la unidad técnica. >>>> Use este campo para un detalle>>>>
+Escriba el nombre de la unidad técnica. >>>> Utilice este campo para obtener más detalles >>>>
+Escriba el nombre, segundo nombre y apellido.
+Escriba el número de legajo.
+Escriba el primer nombre, segundo nombre y apellido.
+Escriba los nombres  del involucrado.
+Escribe el apellido.
+ESPECIALIDAD DWT EN EL PLANIFICADO CALIDAD DE PAPA
+espectáculo
+esta es una leyenda
+Está estrictamente prohibido desempeñar tareas de la empresa bajo los efectos del alcohol, cualquier tipo de drogas y/o medicamentos que pudieran tener efectos semejantes.
+Está estrictamente prohibido fumar, beber y comer cualquier tipo de alimento fuera de los espacios definidos.
+Está estrictamente prohibido realizar tareas empresariales bajo los efectos del alcohol, cualquier tipo de droga y/o medicamento que pueda tener efectos similares.
+Está terminantemente prohibida la intervención de una maquina o equipo en movimiento, así como el ingreso directo o indirecto dentro de la misma.
+Está terminantemente prohibido el anular total y/o parcialmente, así como de forma permanente y/o momentánea un sistema de seguridad. Es obligatorio verificar el correcto funcionamiento de los mismos antes de comenzar a utilizarlos, así como la interrupción de la tarea y el inmediato aviso a su líder, en caso de fallas.
+Está terminantemente prohibido utilizar como herramienta cualquier tipo de objeto que no haya sido provisto por la empresa para tal fin, así como se debe asegurar su correcto estado antes de su utilización.
+Establecer el desvío según control.
+Establecer una magnitud.
+Estado (Cerrado o necesita un PDCA)
+Estado de movimientos de bines a líneas productivas.
+estado de revisión
+ESTANDAR
+estándar
+ESTANDARES
+Estándares
+esto es una leyenda
+estrategia
+Estrés físico / Manipulación manual de cargas
+ETIQUETADORA DE MANTENIMIENTO DWT EMPAQUE
+EVIDENCIA FOTOGRÁFICA
+Extienda los datos de  origen.
+Factor de Corrección.
+FACTUM DWT ESPECIALIDADES PLANEADO PRUEBA
+FAMILIA
+familia 
+FAMILIA  ESPECIALIDADES
+FAMILIA  PURÉ
+familia de fritas
+familia de papas fritas
+FAMILIA DE PATATAS FRITAS
+FAMILIA FRITAS
+Familias de productos para especialidades.
+Familias de productos para puré.
+fc
+FECHA
+Fecha Comprometida
+fecha de actualización
+Fecha de apertura del PCA.
+Fecha de apertura del PDCA.
+Fecha de cierre
+fecha de ingreso
+Fecha de la observación.
+Fecha de ocurrencia
+Fecha de reprogramación de acciones PDCA.
+Fecha de reprogramación para la implementación de acciones.
+fecha de revisión
+Fecha de Terminación
+Fecha de última actualización.
+Fecha en que se genera el control.
+fecha límite
+FÉCULA DE PAPA
+FIN DE LA PARADA
+FIN DE PARADA
+fin de paradas
+fin de paradda
+fin deparada
+finalizado
+FINAS HIERBAS
+FLUJO DE PAPAS
+Formulario electrónico para cargar observaciones de comportamiento.
+Formulario electrónico para la carga de las observaciones de comportamiento
+Formulario guía para investigación de incidentes
+Formulario guía para la investigación de incidentes
+frec
+frecuencia
+Fuego
+FUNCIÓN
+Golpear contra objetos
+Golpear objetos
+HECHO PRUEBA
+Herramientas y equipo
+herramientas y equipos
+HORA
+Hora de apertura de la PCA.
+Hora de apertura del PDCA.
+Hora de la actualización.
+Hora de ocurrencia
+Hora del momento de realización.
+Horas corridas[hs]
+Horas run[hs]
+Hrun
+Identifica a los responsables de actuar
+Identifica responsable de actuar
+IMAGENES
+IMÁGENES
+impacto
+impacto en la línea
+Impacto en la línea con parada TOTAL.
+impacto en línea
+Incendio
+Incumplimiento
+Incumplimiento legal
+Indica el número BIN de donde procede.
+Indica el tipo de usuario
+indica si eres elegible
+Indicar
+indicar el número del espectáculo
+Indicar peso en Toneladas.
+Indicar un email de contacto.
+Indicar un teléfono de contacto.
+Indicar.
+Indique  la fecha de la revisión.
+Indique el área correspondiente
+Indique el BIN de entrada de MP.
+Indique el BIN de salida.
+Indique el colaborador que concluye las acciones.
+Indique el empleado que completa las acciones.
+Indique el estándar de producción [kgh]
+Indique el estándar de producción[kgh]
+Indique el informe adjunto.
+Indique el MP.
+Indique el nombre como conoce al conductor del transporte.
+Indique el nombre como se conoce al contratista.
+Indique el nombre como se conoce el transportista.
+Indique el nombre que conoce como contratista.
+Indique el número de BIN de donde proviene.
+Indique el número de BIN destino.
+Indique el peso del billete.
+Indique el peso del ticket.
+Indique el peso en Toneladas.
+Indique el plazo en días para su cumplimiento.
+Indique el reporte involucrado.
+Indique el tiempo en minutos que duró el problema.
+Indique el tipo de mantenimiento.
+Indique el tipo de usuario
+indique el turno
+Indique el turno al que pertenece el registrado.
+Indique el turno al que pertenece la persona registrada.
+Indique el turno.
+indique la cantidad de la muestra
+Indique la especialidad a la que se dedica.
+Indique la especialidad o rubro a que se dedica.
+Indique la estrategia que conducirá al plan de acción.
+Indique la estrategia que tendrá el plan de acción.
+Indique la fecha del cierre del PDCA.
+Indique la fecha en que finalizan las acciones del PDCA.
+Indique la fecha en que finalizó la revisión.
+Indique la fecha plazo de implementación.
+Indique la línea afectada.
+Indique la línea de producción.
+Indique la línea donde ocurrió el problema.
+Indique la línea productiva.
+Indique la Materia Prima.
+Indique la MP.
+Indique la persona de contacto.
+Indique la razón social del contratista.
+Indique la unidad técnica afectada.
+Indique las posibles acciones a llevar adelante.
+Indique los involucrados en la  revisión.
+Indique los involucrados en la revisión.
+Indique los minutos de parada si aplica.
+Indique nombre
+Indique peso en Toneladas.
+Indique posibles acciones a tomar más adelante.
+indique si está apto
+Indique si se ha completado el plan de acción.
+Indique si ya fue concluido el plan de acción.
+Indique un email de contacto.
+Indique un mail de contacto.
+Indique un teléfono de contacto,
+Indique un teléfono de contacto.
+Indique.
+informe
+informe de aproximación
+INFORME DE LOS AFECTADOS SOBRE EL EVENTO
+INFORME DE TESTIGO
+Ingrese el BIN de entrada MP.
+Ingrese el número de control.
+Ingrese el número de PCA correspondiente.
+Ingrese el número de ticket relacionado.
+Ingrese su nombre
+INICIAR PARAR
+inicio  de parada
+INICIO DE PARADA
+inicio de paradas
+inicio deparada
+Introduzca el BIN de salida.
+Introduzca el número BIN de destino.
+Introduzca un correo electrónico de contacto.
+INVESTIGACIÓN
+JAMÓN Y QUESO
+KILOS EMPACADOS
+la actualización se cierra
+La fecha cuando se origina el control.
+La fecha en que se origina el control.
+La hora  del momento de la realización.
+legajo
+legojo
+líder
+líder de investigación
+Lider de la investigación
+Líder que anima el PDCA.
+LÍNEA
+línea de entrada
+línea de producción
+linea del destino
+línea destino
+línea productiva
+lotes
+LR c/DWT
+LR con DWT
+LR Nominal
+LR Nominal [TnHr]
+magnitud
+mail
+mantenimiento dwt
+MANTENIMIENTO NO PROGRAMADO PARAR LA CORREA DE ENFRIAMIENTO
+Máquina
+Marca si tienes ALMACÉN como destino.
+MARCAR SI VIENE DE OTRO CONTENEDOR.
+Marque si corresponde al Mixer 1.
+Marque si corresponde al Mixer 2.
+Marque si corresponde.
+marque si el destino es otro BIN.
+Marque si está Cerrado.
+MARQUE SI PROVIENE DE OTRO BIN.
+Marque si se requiere de un PDCA
+Marque si tiene como destino el ALMACÉN.
+materia prima
+Mayor Menor
+Mayor/Menor
+Mayús + 1
+Mayús + 2
+medidas - acciones
+Medidas - Acciones Implementadas (A)
+Medidas - Acciones Implementadas (A) 
+MEDIDAS DE CONTINGENCIA IMPLEMENTADAS
+METHOCEL
+METOCEL
+MEZCLADOR 1
+MEZCLADOR 2
+MIXER 1
+MIXER 2
+montones
+MOVIMIENTO
+muestra
+Nadie podrá violar las normas vigentes y los procedimientos críticos. Ante la más mínima duda deberás consultar a tu líder y/o al líder de área.
+Nadie puede trasgredir normas y/o procedimientos críticos vigentes. Ante la menor duda, debe consultar a su líder y/o al líder del área.
+NO CONFORMIDAD
+No será visible para el usuario.
+No será visible por el usuario.
+Nombra los documentos que se adjuntan.
+Nombre
+NOMBRE CORPORATIVO
+Nombre de quien lidera el PDCA.
+NOMBRE DEL TRANSPORTISTA
+Nombre el o los documentos que se adjunta.
+NOMBRE Y APELLIDO
+NOMBRE Y NOMBRE
+NOMBREs
+nombres x
+NORMAS
+NOTA:
+nueva selección
+nuevo select
+NUEZ MOSCADA + PIMIENTA
+número de PCA
+número PCA
+número telefónico de contacto
+OBSERVACIÓN:
+OMS
+origen
+ORIGEN DEL CONTENEDOR
+otro sd de user
+otros
+PALETIZADORA MANTENIMIENTO DWT EMPAQUE
+PAPELERA
+PAQUETE DWT OTRAS ENTRADAS
+PAQUETES DWT OTROS SISTEMAS
+Para el tiempo
+parada  total
+Parada de agua en el sistema de aire.
+Parada de CAMBIO DE PRODUCTO
+Parada de DEFROST
+Parada de derivación
+Parada de descongelación
+Parada de ESTRATEGIA LR
+Parada de INTERCAMBIO DE PRODUCTOS
+Parada de la bomba de vacío
+parada de MANTENIMIENTO
+parada de paletas
+Parada de temperatura - DTM eyección
+Parada mediante sistema de expulsión
+Parada para ajuste del equipo
+Parada para control de peso
+Parada para EVENTO METEOROLÓGICO
+Parada por  Banda de transporte
+Parada por 235-001
+Parada por 235-002
+Parada por 235-003
+Parada por 235-004
+Parada por 235-005
+Parada por 235-006
+Parada por 235-007
+Parada por 235-008
+Parada por 235-009
+Parada por 235-010
+Parada por 235-011
+Parada por 235-012
+Parada por 235-013
+Parada por Agua en sistema de aire
+Parada por ALTO NIVEL
+Parada por Anillo
+Parada por Aplicador
+Parada por BAJA CALIDAD DE PAPA
+Parada por Bajón de Tensión
+Parada por Banda de ingreso
+Parada por Banda de rodillos
+Parada por Banda de salida
+Parada por Banda de transporte
+Parada por Banda de trasnporte
+Parada por Bandas de transporte
+Parada por BOMBA DE CORTE TRABADA
+Parada por Bomba de vacío
+Parada por BOMBA PARADA FUNCIONADA
+Parada por Brazo armador
+Parada por Brazo de cierre
+Parada por BUENAS PRaCTICAS DE MANUFACTURA
+Parada por BUENAS PRÁCTICAS DE MANUFACTURA
+Parada por Bypass
+Parada por Cabezal
+Parada por Cabezal del detector
+Parada por Cajas
+Parada por CALIDAD MATERIA PRIMA
+Parada por CÁMARA AUTOMÁTICA
+Parada por CÁMARA MANUAL
+Parada por Cambio de bobina
+Parada por CAMBIO DE PRODUCTO
+Parada por CAMBIO DE VARIEDAD
+Parada por Cilindro Tipper
+Parada por CINSTAS COLDSTORE
+Parada por Cinta
+Parada por CINTA COLDSTORE
+Parada por CINTA COLDSTORES
+Parada por CINTA FREIDORA
+Parada por CINTAS COLDSTORE
+Parada por CIRCULACIÓN DE ACEITE
+Parada por Codificado bolsa
+Parada por Compuertas
+Parada por Condición ambiente
+Parada por Contadores
+Parada por Contrapesos
+Parada por Control de peso
+Parada por Controlador
+Parada por Correas
+Parada por CORRELACIÓN DE CALIDAD
+Parada por CORTE DE ENERGÍA
+Parada por CORTE DE RED / SISTEMAS
+Parada por Cortina
+Parada por DEFROST
+Parada por Demora en Guardado
+Parada por Dispenser
+Parada por Ejes
+Parada por Embudo
+Parada por Encintador
+Parada por EVENTO CLIMÁTICO
+Parada por Falla de frenos
+Parada por Falla de sistema
+Parada por FALLA ELÉCTRICA
+Parada por FALLA MECÁNICA
+Parada por FALLA OPERATIVA
+Parada por FALLAS DE FUNCIONAMIENTO
+Parada por FALLAS OPERATIVAS
+Parada por FALLAS OPREATIVAS
+Parada por fallo de frenos
+Parada por Falta de Cajas
+Parada por FALTA DE MATERIA PRIMA
+Parada por FALTA DE MP
+Parada por FALTA DE PERSONAL
+Parada por Falta de personal capacitado
+Parada por FALTA DE PERSONAL ENTRENADO
+Parada por Falta de Poly
+Parada por FALTAS OPERATIVAS
+Parada por FUERZA MAYOR
+Parada por Impresora
+Parada por IMPULSOR DE BOMBA
+Parada por INGENIERÍA
+Parada por INSUMOS
+Parada por INSUMOS - INGREDIENTES
+Parada por LIMPIEZA
+Parada por Longitud - producto entre mordazas
+Parada por MANEJO DE LR
+Parada por MANTENIMIENTO
+Parada por MANTENIMIENTO COLDSTORE
+Parada por MANTENIMIENTO ELÉCTRICO
+Parada por MANTENIMIENTO EMPAQUE
+Parada por MANTENIMIENTO MECÁNICO
+Parada por MANTENIMIENTO SERVICIOS
+Parada por Mecalux
+Parada por MódulosDiafragmas
+Parada por MORDAZA
+Parada por Motor de transporte
+Parada por OBJETOS EXTRAÑOS
+Parada por Pallets
+Parada por PALOS-ELEMENTOS EXTRAÑOS
+Parada por Pantógrafos
+Parada por Patines
+Parada por Plataforma
+Parada por Poly
+Parada por Presión de aire
+Parada por Problema de calibración
+Parada por PRUEBAS / INNOVACIONES
+Parada por Regulación de equipo
+Parada por Rodillos acompañamiento
+Parada por Scanner
+Parada por Semáforos
+Parada por Sensor de posición de bolsa
+Parada por Sensores de nivel
+Parada por Sensores ingreso  egreso
+Parada por Sensores puertas
+Parada por SERVCIOS
+Parada por SERVICIOS
+Parada por Servo motores
+Parada por SINDICAL
+Parada por Sistema de elevación
+Parada por Sistema de eyección
+Parada por Sistema de transporte
+Parada por Sistema empuje en salida
+Parada por Sistema eyección
+Parada por Sistema hidráulico
+Parada por Sistema sellado
+Parada por Sistemas
+Parada por Temperatura - eyección DTM
+Parada por TEMPERATURA DE ACEITE
+Parada por TEMPERATURA DE ACEPTACIÓN
+Parada por Tolvas
+Parada por Tracción de rodillos
+Parada por Transporte poly
+Parada por Volcador
+Parada por Volumen - rotura de cajas
+Parada retrasada en Guardado
+PARADA TOTAL
+PARADAS DE MANTENIMIENTO NO PROGRAMADAS DEL HOGGER
+PARADAS DE MANTENIMIENTO NO PROGRAMADAS MEZCLADORA 1-2
+PARADAS EN LA PRODUCCIÓN PLANIFICADA
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO BLANCHER
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO BOMBA DE CORTE
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO COOKER
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO COOLER
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO COOLING BELT
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO HOGGER
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO HOOPER
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO METERING TANK
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO MIXER 1-2
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO MIXER-1
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO MIXER-2
+PARADAS NO PLANIFICADAS DE MANTENIMIENTO SISTEMA BOMBEO
+PARADAS NO PLANIFICADAS DE PRODUCCIÓN
+PARADAS NO PROGRAMADAS DE MANTENIMIENTO DE LA BLANCADORA
+PARADAS NO PROGRAMADAS DE MANTENIMIENTO DE TOLVA
+PARADAS NO PROGRAMADAS POR MANTENIMIENTO DE COCINAS
+PARADAS NO PROGRAMADAS POR MANTENIMIENTO DEL ENFRIADOR
+PARADAS NO PROGRAMADAS POR MANTENIMIENTO DEL SISTEMA DE BOMBA
+PARADAS NO PROGRAMADAS POR MANTENIMIENTO DEL TANQUE DE MEDICIÓN
+PARADAS PLANIFICADAS
+PARADAS POR MANTENIMIENTO NO PROGRAMADAS BOMBA DE CORTE
+PARADAS POR MANTENIMIENTO NO PROGRAMADAS MEZCLADOR-1
+PARADAS POR MANTENIMIENTO NO PROGRAMADAS MEZCLADOR-2
+Paralización por FALTA DE PERSONAL
+Paralización por falta de personal capacitado
+Parando por servomotores
+PARARSE
+Pasa por Anillo
+Pasa por banda de salida
+Pasa por Banda de Transporte
+Pasa por BLANCHER
+Pasa por Brazo de cierre
+Pasa por Cabezal
+Pasa por CAMARA MANUAL
+Pasa por CINSTAS COLDSTORE
+Pasa por Cinta
+Pasa por Contadores
+Pasa por Correas
+Pasa por Cortina
+Pasa por DESCONGELAMIENTO
+Pasa por Ejes
+Pasa por el 235-001
+Pasa por el 235-002
+Pasa por el 235-003
+Pasa por el 235-004
+Pasa por el 235-005
+Pasa por el 235-006
+Pasa por el 235-007
+Pasa por el 235-008
+Pasa por el 235-009
+Pasa por el 235-010
+Pasa por el 235-011
+Pasa por el 235-012
+Pasa por el 235-013
+Pasa por el controlador
+Pasa por el dispensador
+Pasa por el escáner
+Pasa por el motor de transporte
+Pasa por el sistema de elevación
+Pasa por el sistema de transporte
+Pasa por ELÉCTRICO personal
+Pasa por Embudo
+Pasa por Encintador
+Pasa por ENTRADAS
+Pasa por ENTRADAS - INGREDIENTES
+Pasa por IMPULSOR DE BOMBA
+Pasa por la presión del aire
+Pasa por LIMPIEZA
+Pasa por Longitud - producto entre mandíbulas
+Pasa por MECÁNICO personal
+Pasa por OBJETOS EXTRAÑOS
+Pasa por patines
+Pasa por Plataforma
+Pasa por Poli
+Pasa por Poly Transporte
+Pasa por RED CUT / SISTEMAS
+Pasa por Roller Band
+Pasa por SINDICAL
+Pasa por sistema sellado
+Pasa por Sistemas
+Pasa por Volcador
+Pasa por Volumen - rotura de cajas
+Pasando por los módulos de diafragma
+Pasar por el sensor de posición de la bolsa
+Pásate por BAJA CALIDAD DE PAPA
+Pásate por Bajo de Tensión
+Pásate por Bandas de Transporte
+Pásate por BUENAS PRÁCTICAS DE MANUFACTURA
+Pásate por Cabezal del detector
+Pásate por Cajas
+Pásate por CALIDAD CORRELACIÓN
+Pásate por CALIDAD MATERIA PRIMA
+Pásate por CÁMARA AUTOMÁTICA
+Pásate por CAMBIO DE VARIEDAD
+Pásate por CINTA COLDSTORE
+Pásate por CINTA COLDSTORES
+Pásate por CINTA FREIDORA
+Pásate por CINTAS COLDSTORE
+Pásate por CIRCULACIÓN DE ACEITE
+Pásate por Compuertas
+Pásate por el acompañamiento de Rodillos
+Pásate por Eyección System
+Pásate por FALLA ELÉCTRICA
+Pásate por FALLA MECÁNICA
+Pásate por FALLA OPERATIVA
+Pásate por FALLAS OPREATIVAS
+Pásate por FUERZA MAYOR
+Pásate por INGENIERÍA
+Pásate por MANEJO DE LR
+Pásate por Mecalux
+Pásate por MORDAZA
+Pásate por OPERACIÓN personal
+Pásate por Pantógrafos
+Pásate por PRUEBAS / INNOVACIONES
+Pásate por SERVICIOS
+Pásate por SERVICIOS PÚBLICOS personales
+Pásate por TAMAÑO DE LA PAPA
+Pásate por Tolvás
+Pase por el aplicador
+Pase por el intercambio codificado
+Pase por el semáforo
+Pase por la banda de entrada
+Pase por la impresora
+Pase por los sensores de entrada y salida
+Pase por los sensores de puerta
+PCA (Problema-Causa-Acción)
+PDCA
+PDCA DE PLANTA
+PDCA está en curso.
+PDCA PLANTA
+Perdidas de tanques
+Pérdidas de tanques
+Período
+permanece en la fábrica?
+PERMANECE EN PLANTA
+PERSONA IMPLICADA
+PERSONA INVOLUCRADA
+Persona que detecta el NC.
+Persona que detecta la NC.
+PERSONA QUE LO DETECTÓ
+PERSONA QUE TE DETECTÓ
+PESO DE BATCH
+PESO DEL LOTE
+PLAN DE ACCION
+plan de acción
+PLANTA PDCA
+plazo
+Pon la descripción del problema en el ticket o la que aparece en el control.
+Por qué #1
+Por qué #2
+Por qué #3
+Por qué #4
+Por qué #5
+Precise una causa directa que usted considere.
+Presa y/o mezcla final de efluentes
+problema
+Problema (P) Paradas - Riesgos Identificados
+Problema (P) se detiene: causas identificadas
+procedimientos
+producción
+producción de TPM
+Producción por kilo
+PRODUCCIÓN1
+PRODUCCIÓN3
+PRODUCTO
+PRODUCTO TERMINADO
+PROHIBIDO
+proveedor
+prueba
+PRUEBA FACTUM
+Puede seleccionar uno o ambos mezcladores.
+Puede seleccionar uno o ambos mixer.
+PUESTO
+PURÉ EN ESCALAS
+PURÉ EN ESCAMAS
+Queda terminantemente prohibida la intervención de una máquina o equipo en movimiento, así como el ingreso directo o indirecto al mismo.
+Queda terminantemente prohibido cancelar total y/o parcialmente, así como de forma permanente y momentánea, un sistema de seguridad. Es obligatorio comprobar el correcto funcionamiento de los mismos antes de comenzar a utilizarlos, así como interrumpir la tarea y notificar inmediatamente a su líder, en caso de fallas.
+Queda terminantemente prohibido utilizar como herramienta cualquier tipo de objeto que no haya sido proporcionado por la empresa para tal fin, por lo que se deberá asegurar su correcto estado antes de su uso.
+queja del cliente
+Quién
+Quién es el ejecutor de las medidas o acciones implementadas.
+Quién es el ejecutor de las medidas y acciones implementadas.
+Quién hace el registro.
+Quien realiza la acción a implementar.
+Quién realiza las acciones.
+Quién registra la PCA.
+RAPISTAND DE MANTENIMIENTO DWT EMPAQUE
+RAZÓN SOCIAL
+Razón social del conductor del transporte.
+Razón social del transportista.
+Rebalse y/o mezcla de efluente final
+registrado por
+Registro de alta de batch especialidades Aros.
+Registro de alta de batch especialidades Emoticons.
+Registro de alta de batch especialidades Minions.
+Registro de alta de batch especialidades Noissetes Finas Hierbas.
+Registro de alta de batch especialidades Noissetes Jamon y Queso.
+Registro de alta de batch especialidades Noissetes Marca Blanca.
+Registro de alta de batch especialidades Noissetes.
+Registro de alta de batch especialidades Smiles.
+Registro de incidentes SS
+Registro del flujo de papas expresado en kg/h.
+Registro horario de la producción de WEIGHING.
+REGISTRO HORARIO WEIGHING
+Regla 1
+Regla 10
+Regla 11
+Regla 12
+Regla 2
+Regla 3
+Regla 4
+Regla 5
+Regla 6
+REGLA 7
+Regla 8
+Regla 9
+regla de oro
+Reglas 1
+Reglas 10
+Reglas 11
+Reglas 12
+Reglas 2
+Reglas 3
+Reglas 4
+Reglas 5
+Reglas 6
+REGLAS 7
+Reglas 8
+Reglas 9
+REGLAS DE ORO - Marca no cumplida -
+REGLAS DE ORO - Marcar incumplidas -
+REGLAS DE ORO DE BOS
+RELATO DE LA PERSONA AFECTADA SOBRE EL EVENTO
+RELATO DEL TESTIGO
+reporte
+REPORTE DE INCIDENTE
+reprogramado
+Reservado para comentarios de los observados.
+Reservado para comentarios.
+Reservado para los comentarios del observado.
+RESIDUOS SÓLIDOS/SUBPRODUCTOS
+Responsable
+RESPONSABLE DE CONTROL
+RESPONSABLE DEL CONTROL
+responsable operativo
+resuelto
+resultado
+resultado final
+revisado
+Revisado por...
+revisión
+revisó
+riesgo potencial
+RL nominal
+rojo
+Rotura o perdida de cañería
+RRHH
+rubro
+Ruptura o pérdida de material de tubería.
+sal
+SALIDA
+SALIDA DE DRY RECEIVING
+Se cierra cuando se origina el control.
+Se debe advertir inmediatamente a su líder sobre un accidente y/o incidente de cualquier tipo.
+Se debe dar inmediato aviso a su líder respecto a un accidente y/o incidente de cualquier tipo.
+Se debe ingresar el número de PCA correspondiente para realizar el seguimiento de las acciones.
+Se debe mantener despejado el acceso a los elementos contra incendio, así como las vías de evacuación. Los elementos contra incendio deben estar en óptimo estado y se deben usar las puertas de emergencia solo para esta situación.
+Se deberán mantener abiertos los accesos a los elementos de protección contra incendios, así como las vías de evacuación. Los elementos de protección contra incendios deben estar en excelentes condiciones y las puertas de emergencia deben usarse solas para esta situación.
+Se le dio cierre al PDCA. 
+Se producen toneladas de patatas fritas y sus estándares diarios. LÍNEA 1.
+sector
+Sector al que se aplica el plan de acción.
+Sector de ocurrencia
+Sector donde se aplica el plan de acción.
+Sector encargado de controlar el avance.
+Sector responsable de de realizar las acciones.
+Sector responsable de la realización de las acciones.
+Sector responsable del control del avance.
+SECTORES ABM
+SEGURIDAD BOS
+Selecciona el tipo de familia.
+Seleccionado para activar.
+Seleccionado para activo.
+Seleccionado para producto activo.
+Seleccionar de la lista
+Seleccionar turno
+Seleccione de la lista
+Seleccione el área involucrada.
+Seleccione el BIN de entrada.
+Seleccione el BIN de salida.
+Seleccione el concepto que corresponda.
+Seleccione el diputado.
+Seleccione el MP
+Seleccione el producto en producción.
+Seleccione el producto en producción..
+Seleccione el producto que su unidad técnica está procesando al momento de comenzar la parada.
+Seleccione el producto que su unidad técnica está procesando al momento de iniciar la parada.
+Seleccione el producto.
+Seleccione el que corresponda.
+Seleccione el tamaño.
+Seleccione el tipo de familia.
+Seleccione el tipo de impacto en la organización.
+Seleccione el tipo de impacto en la planta.
+Seleccione el tipo de MP.
+Seleccione el tipo estándar.
+Seleccione el turno cuando se originó el evento.
+Seleccione el turno en el que ocurrió el problema.
+Seleccione el turno.
+Seleccione la actividad involucrada.
+Seleccione la empresa externa adecuada.
+Seleccione la familia de producto.
+Seleccione la familia de productos.
+Seleccione la familia.
+Seleccione la fila afectada.
+Seleccione la línea afectada.
+Seleccione la línea de producción.
+Seleccione la línea productiva.
+Seleccione la máquina afectada.
+Seleccione la MP
+Seleccione la MP.
+Seleccione la ubicación técnica
+Seleccione la ubicación técnica.
+Seleccione la unidad técnica afectada.
+Seleccione lo que coincida.
+Seleccione para activar familia de especialidades.
+Seleccione para activar familia de puré.
+Seleccione para activar la familia de especialidades.
+Seleccione quién revisó la PCA.
+Seleccione quién revisó.
+Seleccione si la parada exige una baja en la velocidad.  >>>>Indique la velocidad en baja>>>>
+Seleccione si la parada exige una baja en la velocidad. >>>>Indique la velocidad en baja>>>>
+"Seleccione si la parada exige una baja en la velocidad. >>>>Indique la velocidad en baja>>>>	"
+Seleccione si la parada requiere una velocidad más baja. >>>>Ingrese la velocidad más baja>>>> 
+Seleccione si la parada requiere una velocidad menor. >>>>Indicar la velocidad baja>>>>
+Seleccione tipo de familia.
+Seleccione tipo de MP.
+Seleccione Turno
+Seleccione un billete.
+Seleccione un diputado.
+Seleccione un ticket.
+Seleccione un tipo de Comportamiento.
+Seleccione un tipo de MP.
+Seleccione un turno.
+Seleccione una familia.
+Seleccione una MP.
+Seleccione una regla de oro que se ajuste.
+Seleccione una regla general que se ajuste.
+Selecciones el concepto que corresponde.
+Selecciones el que corresponda.
+Selecciones el tipo de estándar.
+Ser golpeado por objetos
+servicio
+SERVICIOS DE MANTENIMIENTO DWT EMPAQUE
+Servido por
+Si consume el ticket ACEPTE antes de Guardar.
+Si consumes el billete, ACEPTA antes de guardar.
+Si el PDCA fue finalizado, indique la fecha de finalización.
+Si necesita modificar los datos de los estándares haga firmar al supervisor.
+Si necesita modificar los datos estándar, deberá firmarlo ante el supervisor.
+Si se ha completado el PDCA.
+Situación
+Son las toneladas de fritas producidas y sus estándares diarios. LÍNEA 1.
+Son las toneladas de fritas producidas y sus estándares diarios. LÍNEA 2.
+Son las toneladas en especialidades producidas y sus estándares diarios.
+Son las toneladas en puré producidas y sus estándares diarios.
+Status (Cerrado o Requiere PDCA)
+status de revisión
+Stress físico / Manejo manual de cargas
+tamaño de MP
+teléfono de contacto
+tercera empresa
+término
+TEXT TAREA
+TexTarea
+TEXTO TAREA
+ticket
+TICKET CONSUMIDO
+Ticket consumido, lo modifica el control 103
+Ticket consumido, modifica control 103
+Tiempo de parada
+Tiempo en el oficio
+tiempo en la empresa
+Tildado indica que está activo. Destilar para desactivarlo.
+Tildado indica que está activo. Destilde para desactivarlo.
+Tilde si activa.
+Tilde si activo.
+Tipo de acción
+tipo de comportamiento
+Tipo de diputado
+TIPO DE INCIDENTE
+Tipo de incidente Infraestructura
+Tipo de incidente laboral
+Tipo de incidente: Ambiental
+Tipo de incidente: Infraestructura
+Tipo de incidente: Laboral
+Tipo de MANTENIMIENTO
+Tipo de MP
+tipo de usuario
+TIPOS DE MANTENIMIENTO
+toneladas
+TONELADAS ESPECIALIDADES
+TONELADAS FRITAS L1
+TONELADAS FRITAS L2
+TONELADAS PURÉ
+Tope del cilindro del volquete
+TOTERALA DE MANTENIMIENTO DWT EMPAQUE
+TRANSPORTADORES ABM
+turno
+Turno + 1
+Turno + 2
+Ubicación Funcional
+ubicación técnica
+Última fecha de actualización.
+UN TICKET POR ENTRADA DE MP. NO COLOQUE NADA SI PROVIENE DE OTRO BIN.
+unidad técnica
+unidad téctnica
+UNIDADES TÉCNICAS ABM
+Unidades Técnicas ABM.
+usuario
+USUARIOS
+Variedad
+Variedad de Materia Prima.

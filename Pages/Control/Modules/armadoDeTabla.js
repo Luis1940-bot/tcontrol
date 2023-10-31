@@ -6,6 +6,8 @@ import fechasGenerator from '../../../controllers/fechas.js';
 import arrayGlobal from './variables.js';
 // eslint-disable-next-line import/extensions
 import traerRegistros from './traerRegistros.js';
+// eslint-disable-next-line import/extensions
+import Alerta from '../../../includes/atoms/alerta.js';
 
 const widthScreen = window.innerWidth;
 let arrayWidthEncabezado;
@@ -400,7 +402,21 @@ function completaTabla(arrayControl) {
 }
 
 export default function tablaVacia(arrayControl, encabezados) {
-  // console.log(arrayControl);
-  encabezado(encabezados);
-  completaTabla(arrayControl, encabezados);
+  const miAlerta = new Alerta();
+  // console.log(arrayControl)
+  if (arrayControl.length > 0) {
+    encabezado(encabezados);
+    completaTabla(arrayControl, encabezados);
+    const cantidadDeFilas = document.querySelector('table tbody');
+    if (cantidadDeFilas.childElementCount !== arrayControl.length) {
+      const mensaje = 'La tabla no se completó según lo esperado, vuelva a intentarlo.';
+      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje);
+      const modal = document.getElementById('modalAlert');
+      modal.style.display = 'block';
+    }
+  } else {
+    miAlerta.createVerde(arrayGlobal.avisoRojo);
+    const modal = document.getElementById('modalAlert');
+    modal.style.display = 'block';
+  }
 }

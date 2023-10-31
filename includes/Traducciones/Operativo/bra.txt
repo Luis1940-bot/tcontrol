@@ -1,0 +1,91 @@
+Aceitar
+API
+Atribuir controle
+Bem-vindo
+BOS - Regras de Ouro
+Campo obrigatório
+Cancelar
+CONCEITO
+Consultas
+Controle
+Controle de Mudanças
+Controles
+De
+DETALHE
+Documento
+Documento não assinado digitalmente
+Número do documento
+DWT
+DWT AGRO
+DWT CORRELAÇÃO RAW vs LINHA
+DWT DESCONGELAMENTO
+DWT ESTRATÉGIA LR
+DWT FALHA OPERACIONAL-LIMPEZA-MANEJO LR
+DWT MANUTENÇÃO
+DWT NÃO PLANEJADO
+DWT OUTROS
+DWT PLANEJADO
+DWT PROD BLANCHER
+DWT PROD COLDSTORE
+DWT PROD COOLER
+DWT PROD CORTE
+DWT PROD RECEBIMENTO A SECO
+DWT PROD EMBALAGEM
+DWT PROD CLASSIFICAÇÃO
+DWT PROD PALETIZAÇÃO
+DWT PROD PROCESSAMENTO
+DWT PROD TOTEROOM
+DWT PROD RECEBIMENTO DE RESÍDUOS
+DWT PROD RECEBIMENTO ÚMIDO
+DWT PRODUÇÃO
+Exemplo de Alerta
+E-mail
+Enviar
+Erro ao carregar o arquivo
+Especialidades
+Este é um teste para mensagem de alerta
+ESTABELECIMENTO
+Você está trabalhando com um novo controle que não foi salvo
+Excel
+Datas
+Batatas Fritas
+Salvar
+Fazer assinar
+Até
+ID
+Imprimir
+Imprimir controle
+Indicadores
+Relatórios
+Iniciar sessão
+JSON
+A tabela não foi preenchida conforme o esperado, tente novamente
+Menu
+Modificação
+Não foi possível carregar a imagem
+nºDoc
+Novo
+OBSERVAÇÃO
+Ok
+Esqueci meu e-mail
+PDF
+Por favor, selecione um arquivo de imagem válido
+Pressione uma opção
+Procedimentos
+Purê
+Que controle você procura
+LEVANTAMENTO
+LEVANTAMENTO
+ROVE
+Sair
+Sair sem salvar
+É enviado por e-mail. Desmarque para não enviar
+SETOR
+Selecione o intervalo de datas para
+Selecione sua aplicação
+SGD
+TONELADAS
+Você está em
+Ver
+Ver carregados
+Voltar

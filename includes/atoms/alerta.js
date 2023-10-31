@@ -47,9 +47,9 @@ function createDiv(config) {
   return div;
 }
 
-function createSpan(config) {
+function createSpan(config, texto) {
   const span = document.createElement('span');
-  span.textContent = config.text;
+  span.textContent = texto || config.text;
   span.style.fontSize = config.fontSize;
   span.style.color = config.fontColor;
   config.marginTop !== null ? span.style.marginTop = config.marginTop : null;
@@ -130,7 +130,7 @@ class Alerta {
     document.body.appendChild(this.modal);
   }
 
-  createVerde(obj) {
+  createVerde(obj, texto) {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlert';
     this.modal.className = 'modal';
@@ -138,7 +138,7 @@ class Alerta {
     const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
-    const spanTexto = createSpan(obj.span);
+    const spanTexto = createSpan(obj.span, texto);
     modalContent.appendChild(spanTexto);
 
     this.modal.appendChild(modalContent);

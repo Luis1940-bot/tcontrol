@@ -13,6 +13,7 @@ body{
   padding: 0;
   flex-direction: column;
   min-height: 90vh;
+  background: #FD6C02;
 }
 header{
   display: block;
@@ -25,20 +26,58 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .button-selector {
   margin-bottom: 10px; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  background: white;
-  border: 2px solid black;
+  font-size: 14px;
+  cursor: pointer;
 }
-.button-selector:hover{
+.button-selector b{
+  font-weight: 700;
+}
+.div-selector{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  z-index: 1;
+  position: relative;
+}
+.div-selector:hover{
   background: #ececec;
   cursor: pointer;
 }
+/* .radio-selector{
+  
+} */
+/* Estilos para el botón */
+.my-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bababa;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  float: right; 
+  width: 60px;
+  margin-bottom: 20px;
+  margin-left: 250px;
+
+}
+
+/* Estilos cuando el cursor está sobre el botón */
+/* .my-button:hover {
+   background-color: #bababa;
+} */
+
+/* Estilos cuando el botón está presionado */
+/* .my-button:active { */
+  /* background-color: #212121;
+} */
+
 
 @media only screen and (min-width: 800px) and (orientation: landscape) {
   body{

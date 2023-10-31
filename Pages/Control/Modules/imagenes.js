@@ -8,8 +8,7 @@ let row = 0;
 function buttonImage(id) {
   row = id;
   const miAlerta = new Alerta();
-
-  miAlerta.createVerde(objVariables.avisoAmarillo);
+  miAlerta.createVerde(objVariables.avisoAmarillo, null);
   const modal = document.getElementById('modalAlert');
   modal.style.display = 'block';
   const imageInput = document.getElementById('imageInput');

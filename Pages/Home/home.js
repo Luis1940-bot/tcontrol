@@ -62,6 +62,20 @@ function completaButtons(obj) {
       text: element,
       name: objButtons[obj].name[i],
       class: 'button-selector',
+      innerHTML: null,
+      height: '40px',
+      width: '75%',
+      borderRadius: '5px',
+      border: null,
+      textAlign: 'center',
+      marginLeft: null,
+      marginRight: null,
+      marginTop: null,
+      marginBotton: null,
+      paddingLeft: null,
+      paddingRight: null,
+      paddingTop: null,
+      paddingBotton: null,
     };
     const newButton = createButton(params);
     divButtons.appendChild(newButton);

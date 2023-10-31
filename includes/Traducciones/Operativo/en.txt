@@ -1,0 +1,90 @@
+Accept
+API
+Assign control
+Welcome
+BOS - Golden Rules
+Required field
+Cancel
+CONCEPT
+Queries
+Control
+Change Control
+Controls
+From
+DETAIL
+Doc
+Document not digitally signed
+Document No.
+DWT
+DWT AGRO
+DWT CORRELATION RAW vs LINE
+DWT DEFROST
+DWT STRATEGY LR
+DWT OPERATIONAL FAILURE-CLEANING-HANDLING LR
+DWT MAINTENANCE
+DWT UNPLANNED
+DWT OTHERS
+DWT PLANNED
+DWT PROD BLANCHER
+DWT PROD COLDSTORE
+DWT PROD COOLER
+DWT PROD CUTTING
+DWT PROD DRY RECEIVING
+DWT PROD PACKAGING
+DWT PROD GRADING
+DWT PROD PALLETIZING
+DWT PROD PROCESSING
+DWT PROD TOTEROOM
+DWT PROD WASTE RECEIVING
+DWT PROD WET RECEIVING
+DWT PRODUCTION
+Alert Example
+Email
+Send
+Error loading file
+Specialties
+This is a test for alert message
+ESTABLISHMENT
+You are working with a new control that has not been saved
+Excel
+Dates
+Fries
+Save
+Get signed
+Until
+ID
+Print
+Print control
+Indicators
+Reports
+Log in
+JSON
+The table was not filled in as expected, please try again
+Menu
+Modification
+Image could not be loaded
+Doc number
+New
+OBSERVATION
+Ok
+Forgot my email
+PDF
+Please select a valid image file
+Press an option
+Procedures
+Mashed
+What control are you looking for
+SURVEY
+ROVE
+Exit
+Exit without saving
+Sent by email. Uncheck to not send
+SECTOR
+Select the date range for
+Select your application
+SGD
+TONS
+You are in
+View
+View loaded
+Go back

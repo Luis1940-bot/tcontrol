@@ -1,0 +1,1371 @@
+[g](0,11)>>>>Batch>>>>
+[g](0.11)>>>>Batch>>>>
+[Grs](0.22)>>>>Lot>>>>
+[Grs](0.22)>>>>Lot>>>>
+[Grs]>>>>Lot>>>>
+[Kg/h]
+[Kg]
+[Kg] (see table)>>>>Batch>>>>
+[Kg](0.22)>>>>Batch>>>>
+[Kg](0.22)>>>>Batch>>>>
+[Kg](1.23)>>>>Lot>>>>
+[Kg](1.32)>>>>Lot>>>>
+[Kg](1.41)>>>>Lot>>>>
+[Kg](1.54)>>>>Lot>>>>
+[Kg](1.58)>>>>Lot>>>>
+[Kg](1.76)>>>>Lot>>>>
+[Kg](1.23)>>>>Batch>>>>
+[Kg](1.32)>>>>Batch>>>>
+[Kg](1.41)>>>>Batch>>>>
+[Kg](1.54)>>>>Batch>>>>
+[Kg](1.58)>>>>Lot>>>>
+[Kg](1.76)>>>>Lot>>>>
+[Kg](2.20)>>>>Lot>>>>
+[Kg](2.20)>>>>Batch>>>>
+[Kg](5.0)>>>>Lot>>>>
+[Kg](5.0)>>>>Batch>>>>
+[Kg]>>>>Lot>>>>
+[Lt]0.10 (1.9 lt of solution prepared according to ITPE 09)>>>>Batch>>>>
+[Lt]0.10 (1.9 lt of solution prepared according to ITPE 09)>>>>Batch>>>>
+[Lt]0.10 (1.9 lt of solution prepared according to ITPE 09)>>>>Batch>>>>
+[Tennessee]
+[Tn]
+What happened??
+How did it happen?
+How did it happen?
+because?
+What happened?
+What about the client?
+Who?
+who?
+>>>>Indicate what you mean in others >>>>
+>>>>Indicate what you are referring to in others>>>>
+>>>>OBSERVATIONS>>>>
+1st cause
+2nd cause
+3rd cause
+open
+ABM TECHNICAL UNITS
+ABM Technical Units.
+ABM CONTRACTORS
+ABM of the frit families.
+ABM INVOLVED
+ABM INVOLVED
+ABM SECTORS
+ABM TRANSPORTERS
+vehicle accident
+Vehicular accident
+Action
+CORRECTIVE ACTION
+Action for each identified cause
+fast action
+fast action
+Fast action.
+Fast action.
+Actions
+actions to implement
+Actions taken
+actions taken immediately
+actions immediately taken
+Actions for each identified cause
+ACCEPT INPUT
+ACCEPT TICKET
+activity
+ACTIVITY INVOLVED
+observed activity
+ACTIVITIES
+ASSET
+daily accumulated[tn]
+fit
+STORE
+STORE
+POTATO STARCH
+REGISTRATION OF BATCH HOOPS-HOOPS
+REGISTRATION OF BATCH EMOTICONS-EMO
+REGISTRATION OF BATCH MINIONS-MIN
+HIGH OF BATCH NOISSETES
+HIGH OF BATCH NOISSETES FINE HERBS-NFH
+HIGH OF BATCH NOISSETES HAM AND CHEESE-NJQ
+REGISTRATION OF BATCH NOISSETES WHITE LABEL-NMB
+REGISTRATION OF BATCH SMILES-SMI
+TICKET REGISTRATION
+Expand source data.
+Analysis 5 Why
+CAUSE ANALYSIS AND DEFINITION OF ACTION BY ROOT CAUSE
+ANALYSIS OF CAUSES AND DEFINITION OF ACTION BY ROOT CAUSE
+Annex 1 - Behavior-Based Security
+Annex 1 - Behavior-based security
+Write down the names of those involved.
+Write down the inherited number.
+Length of service
+Seniority in the company
+Years
+Shutdown due to POWER OUTAGE
+surnames
+suitable
+Area
+Area of ​​occurrence
+AREA INVOLVED
+ENVIRONMENTAL ASPECT
+Attended by
+Entrapment
+Run over
+Advance
+progress
+slow down
+slow down
+slow down
+slow down
+drop in speed
+go down at speed
+Downgrade/Revert or Travel
+slow down
+BIN
+DESTINATION BIN
+ORIGIN BIN
+ticket
+TICKET CONSUMED
+UN TICKET FOR MP ENTRY. DO NOT PUT ANYTHING IF IT COMES FROM ANOTHER CONTAINER.
+DWT MAINTENANCE DETECTOR BAG BROKEN PACKAGING
+BOS QUALITY AI
+BOS QUALITY ANS
+BOS AS QUALITY
+BOS MEDIUM ENVIRONMENT IA
+BOS ENVIRONMENT ANS
+BOS ENVIRONMENT AS
+BOS ENVIRONMENT LIKE
+BOS GOLDEN RULES
+BOS SECURITY ANS
+BOS SECURITY AS
+BOS AI SECURITY
+DWT MAINTENANCE BOTTLE PACKAGING
+GOOD QUALITY LIKE
+LOOK FOR
+Fall on level / Slip or trip
+Height drop
+Fall from great height
+change
+Change.
+fin face
+Cause 1
+Cause 2
+Cause 3
+PRIMARY ENVIRONMENTAL CAUSE - Select the corresponding option -
+Direct Cause (C)
+potential cause
+PRIMARY ENVIRONMENTAL CAUSE - Select those that apply -
+PRIMARY CAUSE INFRASTRUCTURE - Select the appropriate option -
+PRIMARY CAUSE INFRASTRUCTURE - Select those that apply -
+PRIMARY WORK CAUSE - Select the appropriate option -
+PRIMARY WORK CAUSE - Select the ones that apply -
+Primary cause
+root cause
+Root cause identified
+Causes
+underlying causes
+NEAR
+Closed
+Close
+Closing
+entrance closure
+Incident classification
+DWT MAINTENANCE CLASSIFICATION PACKAGING
+Incident Classification
+closing collaborator
+Place the detour according to control.
+Enter the control number.
+Enter the PCA number if applicable.
+Enter the related ticket number.
+Enter the description of the problem on the ticket or the one that appears on the control.
+Place a magnitude.
+Comment to be completed only by HR
+COMMENTS
+COMMENTS:
+Share
+component
+behavior
+Behavior.
+Check if it corresponds to Mixer 1.
+Check if it corresponds to Mixer 2.
+Committed Close
+Check if it matches.
+check if the destination is another BIN.
+Check if the issue has been resolved.
+Check if a PDCA will be necessary.
+WITH CONTROL
+WITH ENTRANCE
+WITH TICKET
+standards consultation
+batch query
+Tn consultation
+standard query
+batch query
+Query Tn
+Query x lot
+Contact
+Contact with hazardous energy
+Water contamination
+Air pollution
+Soil pollution
+Water contamination
+Air pollution
+Solid contamination
+ABM CONTRACTORS
+control
+Activity control.
+Activity control.
+Behavior-based quality control.
+Behavior-based quality control. Insecure Act.
+Contractor control
+Behavior-based security control for UNsafe acts.
+Behavior-based safety control for safe acts.
+Behavior-based safety control for safe acts. NOT safe act.
+Behavior-based safety control for safe acts. Safe act.
+Behavior-based security control. Deviations from the golden rules.
+Control of Specialty Packaging Down Time records.
+Control of Specialty Down Time records.
+test control
+de facto test control.
+factum test control.
+Behavior-based security control.
+Behavior-based security control. Deviations from the golden rules.
+Carrier control.
+Transport driver control.
+Control of the environmental environment based on behavior.
+Control of the environmental environment based on behavior. Insecure Act.
+Control intended for the registration and monitoring of corrective actions. These are actions that are completed in a short period of time.
+Control intended for the registration and monitoring of action plans. These are actions that must be limited by a period of time and are medium-term actions.
+Control aimed at recording and monitoring corrective actions. They are actions that are completed in a short period of time.
+Control intended for the registration and monitoring of action plans. They are actions that must be held for a period of time and are medium-term actions.
+control to define standards
+Control for the ABM of those involved from operators to directors.
+Control for the ABM of those involved, from workers to managers.
+Control for the ABM of sectors.
+Control for the registration of scale receipt.
+Control for the ABM sector.
+control to establish standards
+Control for the definition of standards.
+Control for the registration of the entry of raw materials.
+Control by standard definition.
+mail
+critical
+DATA OF THE PERSON INVOLVED
+source data
+INCIDENT DATA
+origin data
+DATA OF THE PERSONNEL INVOLVED
+You must enter the corresponding PCA number to trace the actions.
+equipment name
+DEPARTMENT
+To spill
+chemical spill
+Chemical spill
+Collapse
+Describe the problem in as much detail as possible.
+Describe the problem or copy it from the corresponding PCA.
+Describe the finished product.
+Describe the final result.
+Describe the activity.
+Describe the root cause considered.
+Describe the root cause found.
+Describe the evolution and actions following the existing one.
+Describe the PT family of specialties.
+Describe the mash PT family.
+Describe the first probable cause.
+Describe the second probable cause.
+Describe the third probable cause.
+Describe the actions implemented.
+Describe the actions immediately taken.
+Describe the measures and actions taken.
+Describe all actions taken.
+Describe the problem in as much detail as possible.
+Describe the problem or copy it from the corresponding PCA.
+Describe the final result.
+Describe the activity.
+Describe the first probable cause.
+Describe the second probable cause.
+Describe the third probable cause.
+Describe a direct cause of the above why.
+Describe a direct cause that has been observed.
+Describe the finished product.
+Describe the evolution and the actions and continuation of the existing one.
+Describe the family of PT specialties.
+description
+Description of evolution and actions.
+Description of evolution and actions
+description of the evolution and actions taken
+description of the evolution and actions carried out
+Description of the deviation or problem.
+DESCRIPTION OF THE EVENT
+DESCRIPTION OF THE EVENT
+description of the problem
+Description of the problem.
+Distill it before using it.
+Distill if not active.
+Uncheck if not active.
+Uncheck to not use it.
+Destination >>
+CONTAINER DESTINATION
+Destination>>
+DETOUR
+DETOUR
+Detail the problem. Identified causes and risks.
+Details the family.
+Detail progress.
+DETAIL
+Detail the Problem. Stoppages or risks identified.
+Detail the final result
+Detail the family.
+Detail the actions that were taken immediately.
+Detail the actions that were taken immediately.
+Detail the measures or actions taken.
+Detail the progress.
+details
+Stop due to calibration problem
+Stop due to system failure
+Stop due to environmental condition
+Stop by counterweights
+Stop for PRODUCT CHANGE
+Arrested by Armador
+Arrested for lack of Poly
+dextrose
+right handed
+Documentation
+Additional documentation
+attached documentation
+Document that records the non-compliance.
+Document that records a non-conformity.
+dwt quality potato
+DWT CHO PLANNED
+Factum Test DWT DO NOT USE
+dwt planned defrost
+DWT PACKAGING PRODUCTION CONDITION PRODUCT
+DWT PACKAGING PRODUCTION MANAGEMENT LR
+DWT RAPISTAND MAINTENANCE PACKAGING
+DWT WRAPPER MAINTENANCE PACKAGING
+DWT PACKAGING MAINTENANCE BOX ASSEMBLER
+DWT BED ROLLER MAINTENANCE PACKAGING
+DWT PACKAGING MAINTENANCE BOX CLOSER
+DWT PACKAGING MAINTENANCE CODING MACHINE BOXES
+DWT PACKAGING MAINTENANCE BROKEN BAGS DETECTOR
+DWT PACKAGING MAINTENANCE WEIGHT DETECTOR BOXES
+DWT PACKAGING MAINTENANCE BOX WEIGHT DETECTOR
+DWT PACKAGING DTM MAINTENANCE
+DWT BOX ELEVATOR MAINTENANCE PACKAGING
+DWT PACKAGING PACKING MAINTENANCE
+DWT PACKAGING PACKAGING MAINTENANCE
+DWT PACKAGING MAINTENANCE LABELER
+DWT PACKAGING MAINTENANCE GRADING
+DWT ISHIDA MAINTENANCE PACKAGING
+DWT PALLETIZER MAINTENANCE PACKAGING
+DWT PACKAGING MAINTENANCE SERVICES
+DWT TOTEROOM MAINTENANCE PACKAGING
+DWT PACKAGING OTHER POWER DROP
+DWT PACKAGING OTHER DELAY IN STORAGE
+DWT PACKAGING OTHERS LACK OF STAFF
+DWT PACKAGING OTHERS LACK OF TRAINED PERSONNEL
+DWT PACKAGING OTHER SUPPLIES
+DWT PACKAGING OTHER STORAGE DELAYS
+DWT PACKAGING OTHER SYSTEMS
+DWT PACKAGING PRODUCTION PRODUCT CONDITION
+DWT PACKAGING PRODUCTION HANDLING LR
+DWT PACKAGING PRODUCTION OPERATIONAL
+DWT SPECIALTY IN FREEZER PLANNED MAINTENANCE
+DWT SPECIALTY IN FRYER PLANNED MAINTENANCE
+DWT SPECIALTY IN PLANNED MAINTENANCE. STORK TRAINER
+DWT SPECIALTY IN PLANNED MAINTENANCE. SMILE COACH
+DWT SPECIALTY IN PLANNED MAINTENANCE. JAR LIFT TRAINER
+DWT SPECIALTY IN OTHER PLANNING
+DWT UNPLANNED SPECIALTY POTATO QUALITY
+DWT SPECIALTY UNPLANNED MAINTENANCE ELEVATOR TRAINER JARS
+DWT SPECIALTY UNPLANNED MAINTENANCE SMILES TRAINER
+DWT SPECIALTY UNPLANNED MAINTENANCE STORK TRAINER
+DWT UNPLANNED SPECIALTY FREEZER MAINTENANCE
+DWT UNPLANNED SPECIALTY FRYER MAINTENANCE
+DWT SPECIALTY UNPLANNED OTHERS
+DWT SPECIALTIES UNPLANNED AGRO
+UNPLANNED DWT SPECIALTIES RAW VS LINE CORRELATION
+DWT SPECIALTIES UNPLANNED MAINTENANCE
+DWT SPECIALTIES UNPLANNED OTHERS
+DWT SPECIALTIES UNPLANNED PRODUCTION
+DWT SPECIALTIES UNPLANNED PRODUCTION BLANCHER
+DWT SPECIALTIES UNPLANNED PRODUCTION COOLER
+DWT SPECIALTIES UNPLANNED PRODUCTION CUT
+DWT SPECIALTIES UNPLANNED PRODUCTION DRY RECEIVING
+DWT SPECIALTIES UNPLANNED PRODUCTION PACKAGING
+DWT SPECIALTIES UNPLANNED PRODUCTION GRADING
+DWT SPECIALTIES UNPLANNED PRODUCTION PALLETIZING
+DWT SPECIALTIES UNPLANNED PRODUCTION PROCESS
+DWT SPECIALTIES UNPLANNED PRODUCTION TOTE ROOM
+DWT SPECIALTIES UNPLANNED PRODUCTION WASTE
+DWT SPECIALTIES UNPLANNED PRODUCTION WET RECEIVING
+DWT SPECIALTIES PLANNED
+DWT FRIES L1 IN PLANNED AGRO
+DWT FRIES L1 IN PLANNED PRODUCTION CLASSIFICATION
+DWT FRIES L1 IN PRODUCTION PLANNED CUT
+DWT FRIES L1 IN THE PLANNED BATTING
+DWT FRIES L1 IN THE FREEZER PLANNED
+DWT FRIES L1 IN PLANNED PACKAGING
+DWT FRIES L1 IN THE PLANNED FRYER
+DWT FRIES L1 IN THE PLANNED DRYER
+DWT FRIES L1 IN PLANNED MAINTENANCE
+DWT FRIES L1 IN PLANNED DRY RECEIPT PRODUCTION
+DWT FRIES L1 IN PLANNED PRODUCTION PACKAGING
+DWT FRIES L1 IN PLANNED PRODUCTION PEELING MACHINES
+DWT FRIES L1 IN PLANNED PRODUCTION TOTE ROOM
+DWT FRIES L1 PLANNED
+DWT FRIES L1 WITHOUT PLANNED UTILITIES
+DWT FRIES L1 IN THE PLANNED BLANCER
+DWT FRIES L1 IN OPERATIONAL PLAN
+DWT FRIES L1 NO ​​OTHERS PLANNED
+DWT FRIES L1 UNPLANNED AGRO
+DWT FRIES L1 UNPLANNED RAW VS LINE CORRELATION
+DWT FRIES L1 UNPLANNED MAINTENANCE
+DWT FRIES L1 UNPLANNED OTHERS
+DWT FRIES L1 UNPLANNED PRODUCTION CUT
+DWT FRIES L1 UNPLANNED PRODUCTION DRY RECEIVING
+DWT FRIES L1 UNPLANNED PRODUCTION PACKAGING
+DWT FRIES L1 UNPLANNED PRODUCTION GRADING
+DWT FRIES L1 UNPLANNED PRODUCTION PALLETIZED
+DWT FRIES L1 UNPLANNED PRODUCTION PEELING MACHINES
+DWT FRIES L1 UNPLANNED PRODUCTION PROCESS
+DWT FRIES L1 UNPLANNED PRODUCTION CLAIM
+DWT FRIES L1 UNPLANNED PRODUCTION SORTER
+DWT FRIES L1 UNPLANNED PRODUCTION TOTE ROOM
+DWT FRIES L1 UNPLANNED PRODUCTION WASTE
+DWT FRIES L1 UNPLANNED PRODUCTION WET RECEIVING
+DWT FRIES L1 PLANNED
+DWT FRIES L2 UNPLANNED AGRO
+DWT FRIES L2 UNPLANNED RAW vs LINE CORRELATION
+DWT FRIES L2 UNPLANNED MAINTENANCE
+DWT FRIES L2 UNPLANNED OTHERS
+DWT FRIES L2 UNPLANNED PRODUCTION CUT
+DWT FRIES L2 UNPLANNED BATTER TANK PRODUCTION
+DWT FRIES L2 UNPLANNED PRODUCTION DRY RECEIVING
+DWT FRIES L2 UNPLANNED ECOLAB PRODUCTION
+DWT FRIES L2 UNPLANNED PRODUCTION PACKAGING
+DWT FRIES L2 UNPLANNED PRODUCTION GRADING
+DWT FRIES L2 UNPLANNED PRODUCTION PALLETIZED
+DWT FRIES L2 UNPLANNED PRODUCTION PEELING MACHINES
+DWT FRIES L2 UNPLANNED PRODUCTION STARCH PLANT
+DWT FRIES L2 UNPLANNED PRODUCTION PROCESS
+DWT FRIES L2 UNPLANNED PRODUCTION CLAIM
+DWT FRIES L2 UNPLANNED PRODUCTION OIL TANK ROOM
+DWT FRIES L2 UNPLANNED PRODUCTION SORTER
+DWT FRIES L2 UNPLANNED PRODUCTION TOTE ROOM
+DWT FRIES L2 UNPLANNED PRODUCTION WASTE
+DWT FRIES L2 UNPLANNED PRODUCTION WET RECEIVING
+DWT FRIES L2 PLANNED
+dwt maintenance
+UNPLANNED DWT COLDSTORE PRODUCTION
+dwt others
+DWT PACK OTHER LOW VOLTAGE
+DWT PLANNED CHO
+dwt planned defrost
+dwt production
+DWT MASH UNPLANNED AGRO
+DWT MASH UNPLANNED MAINTENANCE
+DWT MASH UNPLANNED OTHER
+DWT MASH UNPLANNED PRODUCTION DRY RECEIVING
+DWT UNPLANNED MASH PRODUCTION PACKAGING AND INSPECTION
+DWT UNPLANNED MASH PRODUCTION EX MATA/INPUTS
+DWT MASH UNPLANNED PRODUCTION PEELING AND CUTTING
+DWT MASH UNPLANNED PRODUCTION PROCESS
+DWT MASH UNPLANNED WASTE PRODUCTION
+DWT MASH UNPLANNED PRODUCTION WET RECEIVING
+DWT PLANNED MASH
+The moment of realization.
+The PDCA is ongoing and does not have a closure.
+The time of the moment of realization.
+choose user
+protective elements
+protective elements
+Choose the entrance closure.
+Choose the entry date.
+choose user
+start to face
+ENTRANCE
+ENTRANCE TO DRY RECEIVING
+DWT PACKAGING MAINTENANCE WRAPPER
+It is an essential condition to travel, stay and/or work in a sector to know its critical risks and the associated documentation.
+It is an essential condition to resort to, remain and work in a sector to understand its critical risks and the associated documentation.
+It is convenient to write the detour as it appears on the control.
+It is convenient to write the deviation as a figure in the control.
+It is imperative to respect the marked traffic lanes, as well as always respect the rule of 3 points of support on a staircase.
+It is important that you indicate the ticket that generated the quick action.
+It is important that corrective action has related control.
+It is important that the corrective action has a related control.
+It is important that the ticket that generated the quick action is indicated.
+It is essential to respect the delimited circulation paths, as well as always respect the rule of 3 points of support on a staircase.
+It is an obligation to correctly use all personal protection elements associated with a sector and/or task, and keep them in optimal condition.
+It is mandatory to respect the rules of safe driving, including NOT using a cell phone while driving or while traveling, even in "hands-free" mode.
+It is mandatory to respect the rules of safe driving, including NOT using the cell phone while driving or traveling, even in “hands-free” mode.
+It is mandatory to correctly use all personal protection elements associated with a sector and/or task, and keep them in excellent condition.
+Write the last name.
+Enter the name of the technical unit. >>>> Use this field for a detail>>>>
+Enter the name of the technical unit. >>>> Use this field for more details >>>>
+Write the first name, middle name and last name.
+Write the file number.
+Write the first name, middle name and last name.
+Write the names of the person involved.
+Write the last name.
+DWT SPECIALTY IN PAPA'S QUALITY PLANNED
+show
+this is a legend
+It is strictly prohibited to perform company tasks under the influence of alcohol, any type of drugs and/or medications that could have similar effects.
+Smoking, drinking and eating any type of food outside the defined spaces is strictly prohibited.
+It is strictly prohibited to carry out business tasks under the influence of alcohol, any type of drug and/or medication that may have similar effects.
+Intervention with a moving machine or equipment, as well as direct or indirect entry into it, is strictly prohibited.
+It is strictly prohibited to totally and/or partially cancel, as well as permanently and/or momentarily, a security system. It is mandatory to verify their correct operation before starting to use them, as well as interrupting the task and immediately notifying your leader, in case of failure.
+It is strictly prohibited to use any type of object as a tool that has not been provided by the company for this purpose, and its correct condition must be ensured before use.
+Establish the diversion according to control.
+Establish a magnitude.
+Status (Closed or needs a PDCA)
+Status of movements of bins to production lines.
+review status
+STANDARD
+standard
+STANDARDS
+Standards
+this is a legend
+strategy
+Physical stress / Manual handling of loads
+DWT PACKAGING MAINTENANCE LABELING MACHINE
+PHOTOGRAPHIC EVIDENCE
+Extend source data.
+Correction factor.
+FACTUM DWT SPECIALTIES PLANNED TEST
+FAMILY
+family
+FAMILY SPECIALTIES
+MASH FAMILY
+fries family
+french fries family
+FAMILY OF POTATO FRIES
+FRIED FAMILY
+Product families for specialties.
+Families of products for puree.
+fc
+DATE
+Committed Date
+update date
+PCA opening date.
+PDCA opening date.
+Deadline
+date of admission
+Date of observation.
+Incidence date
+PDCA actions rescheduling date.
+Rescheduling date for the implementation of actions.
+review date
+Finish date
+Date for last update.
+Date on which the control is generated.
+deadline
+POTATO STARCH
+END OF THE STOP
+END OF STOP
+end of stops
+end of stop
+end planned
+finalized
+FINE HERBS
+FLOW OF POTATOES
+Electronic form to upload behavioral observations.
+Electronic form for uploading behavioral observations
+Guide form for incident investigation
+Guide form for incident investigation
+freq
+frequency
+Fire
+FUNCTION
+Hit objects
+Hit objects
+MADE PROOF
+Tools and equipment
+tools and equipment
+HOUR
+PCA opening time.
+PDCA opening time.
+Update time.
+Time of occurrence
+Time of the moment of realization.
+Running hours[hs]
+Run hours[hs]
+Hrun
+Identify those responsible for acting
+Identifies responsible for acting
+IMAGES
+IMAGES
+impact
+impact on the line
+Impact on the line with TOTAL stop.
+online impact
+Fire
+Breach
+Legal breach
+Indicates the BIN number where it comes from.
+Indicates the type of user
+indicate if you are eligible
+Indicate
+indicate the show number
+Indicate weight in tons.
+Indicate a contact email.
+Indicate a contact telephone number.
+Indicate.
+Indicate the date of the review.
+Indicate the corresponding area
+Indicate the MP input BIN.
+Indicate the output BIN.
+Indicate the collaborator who concludes the actions.
+Indicate the employee who completes the actions.
+Indicate the production standard [kgh]
+Please indicate the production standard[kgh]
+Please refer to the attached report.
+Indicate the MP.
+Indicate the name as you know the transport driver.
+Indicate the name as the contractor is known.
+Indicate the name as the carrier is known.
+Please indicate the name you know as a contractor.
+Indicate the BIN number where it comes from.
+Indicate the destination BIN number.
+Indicate the weight of the bill.
+Indicate the weight of the ticket.
+Indicate the weight in tons.
+Indicate the period in days for compliance.
+Indicate the report involved.
+Indicate the time in minutes that the problem lasted.
+Indicate the type of maintenance.
+Indicate the type of user
+indicate the turn
+Indicate the shift to which the registered person belongs.
+Indicate the shift to which the registered person belongs.
+Indicate the shift.
+indicate the sample quantity
+Indicate the specialty to which you dedicate yourself.
+Indicate the specialty or field you work in.
+Indicate the strategy that will lead to the action plan.
+Indicate the strategy that the action plan will have.
+Indicate the closing date of the PDCA.
+Indicate the date on which the PDCA actions end.
+Please indicate the date the review was completed.
+Indicate the implementation deadline date.
+Indicate the affected line.
+Indicate the production line.
+Indicate the line where the problem occurred.
+Indicate the production line.
+Indicate the Raw Material.
+Please indicate the MP.
+Indicate the contact person.
+Indicate the company name of the contractor.
+Indicate the technical unit affected.
+Indicate the possible actions to be taken.
+Indicate those involved in the review.
+Indicate those involved in the review.
+Indicate the stop minutes if applicable.
+indicate name
+Indicate weight in tons.
+Indicate possible actions to take later.
+indicate if you are eligible
+Indicate whether the action plan has been completed.
+Indicate if the action plan has already been completed.
+Indicate a contact email.
+Indicate a contact email.
+Indicate a contact telephone number,
+Indicate a contact telephone number.
+Please indicate.
+report
+approach report
+REPORT OF THOSE AFFECTED ABOUT THE EVENT
+WITNESS REPORT
+Enter the MP input BIN.
+Enter the control number.
+Enter the corresponding PCA number.
+Enter the related ticket number.
+Enter your name
+START STOP
+start stop
+START STOP
+start of stops
+start stop
+Enter the output BIN.
+Enter the destination BIN number.
+Enter a contact email.
+INVESTIGATION
+HAM AND CHEESE
+PACKED KILOS
+update closes
+The date when the control originates.
+The date on which the control originates.
+The time of the moment of realization.
+file
+legojo
+leader
+research leader
+Research leader
+Leader who encourages the PDCA.
+LINE
+input line
+production line
+destiny line
+destination line
+productive line
+lots
+LR w/DWT
+LR with DWT
+LR Nominal
+Nominal LR [TnHr]
+magnitude
+email
+dwt maintenance
+UNSCHEDULED MAINTENANCE STOP THE COOLING BELT
+Machine
+Check if you have WAREHOUSE as a destination.
+MARK IF IT COMES FROM ANOTHER CONTAINER.
+Check if it applies to Mixer 1.
+Check if applicable to Mixer 2.
+Check if applicable.
+check if the destination is another BIN.
+Check if Closed.
+CHECK IF IT COME FROM ANOTHER BIN.
+Check if a PDCA is required
+Check if the destination is WAREHOUSE.
+raw material
+Major Minor
+Major/Minor
+Shift + 1
+Shift + 2
+measures - actions
+Measures - Actions Implemented (A)
+Measures - Actions Implemented (A)
+CONTINGENCY MEASURES IMPLEMENTED
+METHOCEL
+METHOCEL
+MIXER 1
+MIXER 2
+MIXER 1
+MIXER 2
+lots
+MOTION
+sample
+No one may violate current regulations and critical procedures. If you have the slightest doubt, you should consult your leader and/or the area leader.
+No one can transgress current critical rules and/or procedures. If you have the slightest doubt, you should consult your leader and/or the area leader.
+NON-CONFORMITY
+It will not be visible to the user.
+It will not be visible to the user.
+Name the documents that are attached.
+Name
+CORPORATE NAME
+Name of who leads the PDCA.
+CARRIER NAME
+Name the document(s) attached.
+NAME AND SURNAME
+NAME AND NAME
+Names
+names x
+RULES
+NOTE:
+new selection
+new select
+NUTMEG + PEPPER
+PCA number
+GWP number
+contact telephone number
+OBSERVATION:
+WHO
+origin
+ORIGIN OF THE CONTAINER
+another user sd
+others
+PALLETIZER MAINTENANCE DWT PACKAGING
+PAPER BIN
+DWT PACKAGE OTHER ENTRIES
+DWT PACKAGES OTHER SYSTEMS
+For the time
+total stop
+Stop water in the air system.
+PRODUCT CHANGE STOP
+DEFROST stop
+Bypass stop
+Defrost stop
+Stop LR STRATEGY
+PRODUCT EXCHANGE STOP
+Vacuum pump stop
+MAINTENANCE stop
+pallet stop
+Temperature stop - DTM ejection
+Stop by ejection system
+Stop for equipment adjustment
+Stop for weight control
+Stop for WEATHER EVENT
+Transportation Belt Stop
+Stop by 235-001
+Stop by 235-002
+Stop by 235-003
+Stop by 235-004
+Stop by 235-005
+Stop by 235-006
+Stop by 235-007
+Stop by 235-008
+Stop by 235-009
+Stop by 235-010
+Stop by 235-011
+Stop by 235-012
+Stop by 235-013
+Water shutdown in air system
+Stop by HIGH LEVEL
+Ring Stop
+Stop by Applicator
+Stopped due to LOW QUALITY OF POTATO
+Shutdown due to Voltage Loss
+Stop by entrance band
+Roller Belt Stop
+Stop by Exit Band
+Transportation Belt Stop
+Bus stop
+Bus stop
+Stop due to LOCKED CUT-OFF PUMP
+Stop by Vacuum Pump
+Stop due to PUMP STOP WORKING
+Stop by arm
+Stop by Closing Arm
+Stop for GOOD MANUFACTURING PRACTICES
+Stop for GOOD MANUFACTURING PRACTICES
+Bypass Stop
+Head Stop
+Stop by Detector Head
+Cashier Stop
+Stop for RAW MATERIAL QUALITY
+Stop by AUTOMATIC CAMERA
+Stop by MANUAL CAMERA
+Stop due to coil change
+Stop due to PRODUCT CHANGE
+Stop due to CHANGE OF VARIETY
+Tipper Cylinder Stop
+Stop by CINSTAS COLDSTORE
+Tape Stop
+Stop by CINTA COLDSTORE
+Stop by CINTA COLDSTORES
+Stop for FRYER BELT
+Stop by CINTAS COLDSTORE
+Stop due to OIL CIRCULATION
+Stop by Coded Bag
+Stop by Gates
+Stop due to ambient condition
+Stop by Counters
+Stop by Counterweights
+Stop for Weight Control
+Stop by Controller
+Stop by Straps
+Stop for QUALITY CORRELATION
+Stop due to POWER OUTAGE
+Stop due to NETWORK/SYSTEMS CUTOUT
+Stop by Cortina
+Stop by DEFROST
+Stop due to Delay in Saving
+Stop by Dispenser
+Axle Stop
+Stop by Funnel
+Wrapper Stop
+Stop for CLIMATE EVENT
+Stop due to brake failure
+Shutdown due to system failure
+Stop due to ELECTRICAL FAILURE
+Stop due to MECHANICAL FAILURE
+Stop due to OPERATIONAL FAILURE
+Shutdown due to malfunction
+Shutdown due to OPERATIONAL FAILURES
+Stop due to OPERATIONAL FAILURES
+Stop due to brake failure
+Stop due to lack of boxes
+Stop due to LACK OF RAW MATERIALS
+Stop due to LACK OF MP
+Stop due to LACK OF PERSONNEL
+Stoppage due to lack of trained personnel
+Stop due to LACK OF TRAINED PERSONNEL
+Stop for Lack of Poly
+Stop due to OPERATIONAL FAULTS
+Stop due to FORCE MAJEURE
+Printer Stop
+PUMP IMPELLER STOP
+Stop for ENGINEERING
+Stop for SUPPLIES
+Stop by SUPPLIES - INGREDIENTS
+Stop for CLEANING
+Stop by Length - product between jaws
+Stop for LR DRIVING
+Stop for MAINTENANCE
+Stop by COLDSTORE MAINTENANCE
+Stop for ELECTRICAL MAINTENANCE
+Stop for PACKAGING MAINTENANCE
+Stop for MECHANICAL MAINTENANCE
+Stop for MAINTENANCE SERVICES
+Stop by Mecalux
+Stop by ModulesDiaphragms
+Stop by GAG
+Transport Engine Shutdown
+Stop for FOREIGN OBJECTS
+Stop for Pallets
+Stop by STRANGE ELEMENTS-STICKS
+Stop by Pantographs
+Skate Stop
+Stop by Platform
+Stop by Poly
+Air Pressure Stop
+Shutdown due to calibration problem
+Stop for TESTS / INNOVATIONS
+Shutdown due to equipment regulation
+Accompaniment Roller Stop
+Stop by Scanner
+Stop by Traffic Lights
+Stop by Bag Position Sensor
+Stop by Level Sensors
+Stop by ingress egress sensors
+Stop by door sensors
+Stop for SERVICES
+Stop for SERVICES
+Stop by Servo motors
+Stop by SINDICAL
+Stop by Lifting System
+Stop by Ejection System
+Stop by Transportation System
+Stop by push-out system
+Stop by Ejection System
+Stop by hydraulic system
+Shutdown by Sealed System
+Shutdown by Systems
+Temperature Shutdown - DTM ejection
+Shutdown due to OIL TEMPERATURE
+Shutdown due to ACCEPTANCE TEMPERATURE
+Stop by Hoppers
+Roller Traction Stop
+Stop by Poly Transport
+Stop by Tipper
+Volume Stop - box breakage
+Delayed Stop on Saved
+TOTAL STOP
+HOGGER UNSCHEDULED MAINTENANCE STOPS
+UNSCHEDULED MAINTENANCE STOPS MIXER 1-2
+STOPS IN PLANNED PRODUCTION
+UNPLANNED BLANCHER MAINTENANCE STOPS
+UNPLANNED CUTTING PUMP MAINTENANCE STOPS
+UNPLANNED COOKER MAINTENANCE STOPS
+UNPLANNED COOLER MAINTENANCE STOPS
+UNPLANNED MAINTENANCE STOPS COOLING BELT
+UNPLANNED HOGGER MAINTENANCE STOPS
+UNPLANNED HOOPER MAINTENANCE STOPS
+UNPLANNED METERING TANK MAINTENANCE STOPS
+UNPLANNED MAINTENANCE STOPS MIXER 1-2
+UNPLANNED MIXER-1 MAINTENANCE STOPS
+UNPLANNED MIXER-2 MAINTENANCE STOPS
+UNPLANNED PUMPING SYSTEM MAINTENANCE STOPS
+UNPLANNED PRODUCTION STOPS
+UNSCHEDULED BLEACH MAINTENANCE STOPS
+UNSCHEDULED HOPPER MAINTENANCE STOPS
+UNSCHEDULED STOPS FOR KITCHEN MAINTENANCE
+UNSCHEDULED STOPS FOR COOLER MAINTENANCE
+UNSCHEDULED STOPS FOR PUMP SYSTEM MAINTENANCE
+UNSCHEDULED STOPS FOR MAINTENANCE OF THE MEASUREMENT TANK
+PLANNED STOPS
+UNSCHEDULED MAINTENANCE STOPS CUTTING PUMP
+UNSCHEDULED MAINTENANCE STOPS MIXER-1
+UNSCHEDULED MAINTENANCE STOPS MIXER-2
+Stoppage due to LACK OF STAFF
+Stoppage due to lack of trained personnel
+Stopping by servomotors
+STOP
+Go through Ring
+Passes through exit band
+Passes through Transportation Belt
+Stop by BLANCHER
+Passes through Closing arm
+Go through Head
+Go through MANUAL CAMERA
+Stop by CINSTAS COLDSTORE
+Go through Tape
+Go through Accountants
+Go through Correas
+Go through Cortina
+Go through DEFROST
+Go through axes
+Stop by 235-001
+Stop by 235-002
+Stop by 235-003
+Stop by 235-004
+Stop by 235-005
+Stop by 235-006
+Stop by 235-007
+Stop by 235-008
+Stop by 235-009
+Stop by 235-010
+Stop by 235-011
+Stop by 235-012
+Stop by 235-013
+Go through the controller
+Go through the dispenser
+Go through the scanner
+Go through the transport engine
+Go through the lifting system
+Go through the transportation system
+Stop by ELECTRICAL staff
+Go through Funnel
+Stop by Encintador
+Go through TICKETS
+Go through ENTRIES - INGREDIENTS
+Go through PUMP IMPELLER
+Passes through air pressure
+Go through CLEANING
+Pass by Length - product between jaws
+Stop by personal MECHANIC
+Go through STRANGE OBJECTS
+Go through skates
+Go through Platform
+Stop by Poli
+Stop by Poly Transporte
+Stop by RED CUT / SYSTEMS
+Stop by Roller Band
+Go through UNION
+Passes through sealed system
+Go through Systems
+Pass through Volcador
+Goes through Volume - box breakage
+Going through the diaphragm modules
+Pass through bag position sensor
+Stop by LOW QUALITY OF PAPA
+Go to Low Voltage
+Go through Transportation Belts
+Stop by GOOD MANUFACTURING PRACTICES
+Stop by Detector head
+Stop by Boxes
+Stop by QUALITY CORRELATION
+Stop by RAW MATERIAL QUALITY
+Stop by AUTOMATIC CAMERA
+Stop by VARIETY CHANGE
+Stop by CINTA COLDSTORE
+Stop by CINTA COLDSTORES
+Stop by FRYER BELT
+Stop by CINTAS COLDSTORE
+Stop by OIL CIRCULATION
+Stop by Gates
+Stop by the accompaniment of Rollos
+Stop by Ejection System
+Stop by ELECTRICAL FAILURE
+Stop by MECHANICAL FAILURE
+Go through OPERATIONAL FAILURE
+Stop by OPERATIVE FAILURES
+Go through FORCE MAJEURE
+Stop by ENGINEERING
+Stop by LR MANAGEMENT
+Stop by Mecalux
+Stop by MORDAZA
+Stop by personal OPERATION
+Stop by Pantographs
+Stop by TESTS / INNOVATIONS
+Stop by SERVICES
+Stop by personal PUBLIC SERVICES
+Stop by POTATO SIZE
+Stop by Tolvás
+Go through the applicator
+Go through the encrypted exchange
+Go through the traffic light
+Go through the entrance strip
+Go through the printer
+Pass through entry and exit sensors
+Pass through door sensors
+PCA (Problem-Cause-Action)
+PDCA
+PLANT PDCA
+PDCA is ongoing.
+PDCA PLANT
+Tank losses
+Tank losses
+Period
+remains in the factory?
+STAY ON THE FLOOR
+PERSON INVOLVED
+PERSON INVOLVED
+Person who detects the NC.
+Person who detects NC.
+PERSON WHO DETECTED IT
+PERSON WHO DETECTED YOU
+BATCH WEIGHT
+LOT WEIGHT
+ACTION PLAN
+action plan
+PDCA PLANT
+term
+Put the description of the problem on the ticket or the one that appears on the control.
+Why #1
+Why #2
+Why3
+Why #4
+Why #5
+Specify a direct cause that you consider.
+Dam and/or final effluent mix
+problem
+Problem (P) Shutdowns - Identified Risks
+Problem (P) stops: causes identified
+procedures
+production
+TPM production
+Production per kilo
+PRODUCTION1
+PRODUCTION3
+PRODUCT
+FINISHED PRODUCT
+FORBIDDEN
+supplier
+proof
+FACTUM PROOF
+You can select one or both mixers.
+You can select one or both mixers.
+POSITION
+MASH IN SCALES
+FLAKED MASH
+Intervention on a moving machine or equipment, as well as direct or indirect entry into it, is strictly prohibited.
+It is strictly prohibited to totally and/or partially cancel, as well as permanently and momentarily, a security system. It is mandatory to check their correct operation before starting to use them, as well as interrupt the task and immediately notify your leader, in case of failure.
+It is strictly prohibited to use any type of object as a tool that has not been provided by the company for this purpose, so its correct condition must be ensured before use.
+customer complaint
+Who
+Who is the executor of the measures or actions implemented.
+Who is the executor of the measures and actions implemented.
+Who does the registration.
+Who performs the action to be implemented.
+Who performs the actions.
+Who registers the PCA.
+DWT MAINTENANCE RAPISTAND PACKING
+BUSINESS NAME
+Company name of the transport driver.
+Company name of the carrier.
+Overflow and/or final effluent mixing
+registered by
+Registration of batch specialties Aros.
+Registration of batch specialties Emoticons.
+Minions specialties batch registration registration.
+Registration of batch specialties Noissetes Finas Hierbas.
+Registration of batch specialties Noissetes Ham and Cheese.
+Registration of batch specialties White Label Noissetes.
+Noissetes specialties batch registration registration.
+Smiles specialties batch registration registration.
+SS incident log
+Record of the flow of potatoes expressed in kg/h.
+WEIGHING production time record.
+WEIGHING TIME RECORD
+Rule 1
+Rule 10
+Rule 11
+Rule 12
+Rule 2
+Rule 3
+Rule 4
+Rule 5
+Rule 6
+RULE 7
+Rule 8
+Rule 9
+Golden Rule
+Rules 1
+Rules 10
+Rules 11
+Rules 12
+Rules 2
+Rules 3
+Rules 4
+Rules 5
+Rules 6
+RULES 7
+Rules 8
+Rules 9
+GOLDEN RULES - Brand not fulfilled -
+GOLDEN RULES - Mark broken -
+BOS GOLDEN RULES
+REPORT OF THE AFFECTED PERSON ABOUT THE EVENT
+WITNESS ACCOUNT
+report
+INCIDENT REPORT
+rescheduled
+Reserved for comments from those observed.
+Reserved for comments.
+Reserved for the comments of the observed.
+SOLID WASTE/BYPRODUCTS
+Responsible
+CONTROL RESPONSIBLE
+RESPONSIBLE FOR CONTROL
+operational manager
+resolved
+result
+final score
+reviewed
+Reviewed by...
+revision
+revised
+potential risk
+Nominal RL
+red
+Breakage or loss of pipe
+HR
+category
+Breakage or loss of pipe material.
+salt
+EXIT
+DRY RECEIVING OUTPUT
+It is closed when the control is originated.
+Your leader must be immediately warned of an accident and/or incident of any kind.
+Immediate notification must be given to your leader regarding an accident and/or incident of any type.
+The corresponding PCA number must be entered to track actions.
+Access to fire-fighting elements, as well as evacuation routes, must be kept clear. Fire protection elements must be in optimal condition and emergency doors must be used only for this situation.
+Access to fire protection elements, as well as evacuation routes, must be kept open. Fire protection elements must be in excellent condition and emergency doors must be used alone for this situation.
+The PDCA was closed.
+Tons of French fries and their daily standards are produced. LINE 1.
+sector
+Sector to which the action plan applies.
+Sector of occurrence
+Sector where the action plan is applied.
+Sector in charge of controlling progress.
+Sector responsible for carrying out the actions.
+Sector responsible for carrying out the actions.
+Sector responsible for progress control.
+ABM SECTORS
+BOS SECURITY
+Select the type of family.
+Selected to activate.
+Selected for active.
+Selected for active product.
+Select from list
+Select shift
+Select from list
+Select the area involved.
+Select the input BIN.
+Select the output BIN.
+Select the corresponding concept.
+Select the deputy.
+Select the MP
+Select the product in production.
+Select the product in production.
+Select the product that your technical unit is processing at the time the shutdown begins.
+Select the product that your technical unit is processing at the time of initiating the stop.
+Select the product.
+Select the one that applies.
+Select size.
+Select the type of family.
+Select the type of impact on the organization.
+Select the type of impact on the plant.
+Select the type of PM.
+Select the standard type.
+Select the shift when the event originated.
+Select the shift in which the problem occurred.
+Select the shift.
+Select the activity involved.
+Select the appropriate external company.
+Select the product family.
+Select the product family.
+Select the family.
+Select the affected row.
+Select the affected line.
+Select the production line.
+Select the production line.
+Select the affected machine.
+Select the MP
+Select the MP.
+Select the functional location
+Select the functional location.
+Select the affected technical unit.
+Select what matches.
+Select to activate specialty family.
+Select to activate mash family.
+Select to activate the specialty family.
+Select who reviewed the PCA.
+Select who reviewed.
+Select if the stop requires a reduction in speed. >>>>Indicate the low speed>>>>
+Select if the stop requires a reduction in speed. >>>>Indicate the low speed>>>>
+"Select if the stop requires a reduction in speed. >>>>Indicate the low speed>>>> "
+Select if the stop requires a lower speed. >>>>Enter the lowest speed>>>>
+Select if the stop requires a lower speed. >>>>Indicate low speed>>>>
+Select family type.
+Select MP type.
+Select Shift
+Select a ticket.
+Select a deputy.
+Select a ticket.
+Select a type of Behavior.
+Select a PM type.
+Select a shift.
+Select a family.
+Select an MP.
+Select a rule of thumb that fits.
+Select a rule of thumb that fits.
+Select the corresponding concept.
+Select the one that applies.
+Select the type of standard.
+Being hit by objects
+service
+DWT PACKAGING MAINTENANCE SERVICES
+Served by
+If you consume the ticket, ACCEPT before Saving.
+If you consume the ticket, ACCEPT before saving.
+If the PDCA was finalized, indicate the completion date.
+If you need to modify the standards data, have the supervisor sign.
+If you need to modify the standard data, you must sign it in front of the supervisor.
+Whether the PDCA has been completed.
+Situation
+They are the tons of fries produced and their daily standards. LINE 1.
+They are the tons of fries produced and their daily standards. LINE 2.
+They are the tons of specialties produced and their daily standards.
+These are the tons of mash produced and their daily standards.
+Status (Closed or Requires PDCA)
+revision status
+Physical stress / Manual handling of loads
+MP size
+telephone contact
+third company
+term
+TEXT TASK
+TexTask
+TASK TEXT
+ticket
+TICKET CONSUMED
+Ticket consumed, modified by control 103
+Ticket consumed, modify control 103
+Downtime
+Time in the job
+time in the company
+Checked indicates that it is active. Distill to deactivate it.
+Checked indicates that it is active. Uncheck to disable it.
+Tilde if active.
+Check if active.
+Type of action
+type of behavior
+Type of deputy
+INCIDENT TYPE
+Incident type Infrastructure
+Type of work incident
+Incident type: Environmental
+Incident type: Infrastructure
+Type of incident: Work
+MAINTENANCE Type
+MP Type
+type of user
+TYPES OF MAINTENANCE
+tons
+TONS OF SPECIALTIES
+FRIED TONS L1
+FRIED TONS L2
+TONS MASH
+Tipper cylinder stop
+DWT MAINTENANCE TOTERALA PACKAGING
+ABM CONVEYORS
+shift
+Turn + 1
+Turn + 2
+Functional Location
+technical location
+Last update date.
+ONE TICKET PER MP ENTRY. DO NOT PLACE ANYTHING IF IT COME FROM ANOTHER BIN.
+technical unit
+technical unit
+ABM TECHNICAL UNITS
+ABM Technical Units.
+user
+USERS
+Variety
+Variety of Raw Materials.

@@ -1,5 +1,9 @@
 {
   "planta": "McCain Balcarce-BsAs-Argentina",
+  "idiomas": {
+    "bienvenido": ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
+    "abreviatura": ["es", "bra", "en"]
+  },
   "apps": {
     "name": ["Especialidades", "FFL1", "FFL2", "Puré", "BOS - Reglas de Oro", "SGD"],
     "type": ["btn", "btn", "btn", "btn", "btn", "btn"],
