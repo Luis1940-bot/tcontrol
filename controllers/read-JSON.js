@@ -1,6 +1,6 @@
 function readJSON(json) {
   return new Promise((resolve, reject) => {
-    const ruta = `../models/${json}.json`;
+    const ruta = `/models/${json}.json`;
     fetch(ruta)
       .then((response) => {
         if (!response.ok) {

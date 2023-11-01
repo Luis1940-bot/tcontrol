@@ -22,11 +22,10 @@ main{
   overflow-y: scroll;
    height: 500px;
 }
-.div-buttons{
+.div-landing-buttons{
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 20px; */
 }
 .button-selector {
   margin-bottom: 10px; 
@@ -49,9 +48,7 @@ main{
   background: #ececec;
   cursor: pointer;
 }
-/* .radio-selector{
-  
-} */
+
 /* Estilos para el botón */
 .my-button {
   padding: 10px 20px;
@@ -68,16 +65,6 @@ main{
 
 }
 
-/* Estilos cuando el cursor está sobre el botón */
-/* .my-button:hover {
-   background-color: #bababa;
-} */
-
-/* Estilos cuando el botón está presionado */
-/* .my-button:active { */
-  /* background-color: #212121;
-} */
-
 
 @media only screen and (min-width: 800px) and (orientation: landscape) {
   body{
@@ -86,7 +73,7 @@ main{
   main{
     height: 200px;
   }
-  .div-buttons{
+  .div-landing-buttons{
     margin-top: 5px;
   }
 }

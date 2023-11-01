@@ -21,7 +21,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <title>Factum</title>
 </head>
 <body>
-  <div class="spinner"></div>
+  <div class='spinner'></div>
   <header>
     
     <?php
@@ -30,7 +30,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
     ?>
   </header>
   <main>
-    <div class="div-buttons">
+    <div class='div-landing-buttons'>
 
     </div>
   </main>

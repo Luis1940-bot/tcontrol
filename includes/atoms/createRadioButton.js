@@ -19,6 +19,7 @@ function createRadioButton(params) {
   // eslint-disable-next-line max-len
   params.paddingBotton !== null ? nuevoRadioButton.style.paddingBotton = params.paddingBotton : null;
   params.disabled !== null ? nuevoRadioButton.setAttribute('disabled', params.disabled) : null;
+  params.dataCustom !== null ? nuevoRadioButton.setAttribute('data-custom', params.dataCustom) : null;
 
   return nuevoRadioButton;
 }

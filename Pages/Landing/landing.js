@@ -30,7 +30,7 @@ function storage(idioma) {
 }
 
 function completaButtons(obj) {
-  const divButtons = document.querySelector('.div-buttons');
+  const divButtons = document.querySelector('.div-landing-buttons');
   divButtons.innerHTML = '';
   document.getElementById('spanUbicacion').innerText = objButtons.planta;
 
@@ -85,7 +85,7 @@ function completaButtons(obj) {
     };
     const newButton = createButton(params);
     params = {
-      name: abreviatura,
+      name: 'radio',
       class: 'radio-selector',
       height: '20px',
       width: '20px',
@@ -102,6 +102,7 @@ function completaButtons(obj) {
       paddingTop: null,
       paddingBotton: null,
       disabled: 'disabled',
+      dataCustom: abreviatura,
     };
     const newRadioButton = createRadioButton(params);
     // Agregar el botón y el radio button al contenedor
@@ -111,15 +112,19 @@ function completaButtons(obj) {
     // Agregar el contenedor al divButtons
     divButtons.appendChild(container);
   }
-
   const divs = document.querySelectorAll('.div-selector');
   const radios = document.querySelectorAll('.radio-selector');
-  divs.forEach((div, index) => {
+  const seguir = document.querySelector('.my-button');
+  let language = '';
+  let index = 0;
+  divs.forEach((div, i) => {
+    language = radios[i].getAttribute('data-custom');
+    index = i;
     div.addEventListener('click', () => {
-      const radio = radios[index];
+      const radio = radios[i];
       radio.checked = true;
-      storage(radio.name);
-      const seguir = document.querySelector('.my-button');
+      language = radios[i].getAttribute('data-custom');
+      storage(language.slice(0, 2).toLowerCase());
       seguir.disabled = false;
       seguir.style.background = '#212121';
       seguir.addEventListener('mouseover', () => {
@@ -131,6 +136,14 @@ function completaButtons(obj) {
         seguir.style.background = '#212121';
       });
     });
+    const userLanguage = navigator.language || navigator.userLanguage;
+    if (userLanguage.slice(0, 2).toLowerCase() === language.slice(0, 2).toLowerCase()) {
+      radios[index].checked = true;
+      seguir.disabled = false;
+      seguir.style.background = '#212121';
+      document.querySelector('.custom-button').innerText = language.slice(0, 2).toUpperCase();
+      storage(language.slice(0, 2).toLowerCase());
+    }
   });
 }
 
@@ -161,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const button = document.querySelector('.my-button');
 button.addEventListener('click', () => {
+  spinner.style.visibility = 'visible';
   const url = '../../Pages/Home';
   window.location.href = url;
 });

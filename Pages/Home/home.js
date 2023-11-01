@@ -2,6 +2,15 @@
 import readJSON from '../../controllers/read-JSON.js';
 // eslint-disable-next-line import/extensions
 import createButton from '../../includes/atoms/createButton.js';
+// eslint-disable-next-line import/extensions
+import translate from '../../controllers/translate.js';
+
+let arrayTranslateOperativo = [];
+let arrayEspanolOperativo = [];
+// eslint-disable-next-line no-unused-vars
+let arrayTranslateArchivo = [];
+// eslint-disable-next-line no-unused-vars
+let arrayEspanolArchivo = [];
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
@@ -22,16 +31,25 @@ function leeVersion(json) {
     });
 }
 
+function tr(palabra) {
+  const index = arrayEspanolOperativo.indexOf(palabra.trim());
+  if (index !== -1) {
+    return arrayTranslateOperativo[index];
+  }
+  return null;
+}
+
 /* eslint-disable no-use-before-define */
 function asignarEventos() {
-  const buttons = document.querySelectorAll('.button-selector');
+  const buttons = document.querySelectorAll('.button-selector-home');
   buttons.forEach((button, index) => {
     button.addEventListener('click', (e) => {
       if (objButtons[navegador.estadoAnteriorButton].type[index] === 'btn') {
-        document.getElementById('whereUs').innerText += `${espacio}${e.target.innerText}`;
+        const lugar = tr(e.target.innerText) || e.target.innerText;
+        document.getElementById('whereUs').innerText += `${espacio}${lugar}`;
         document.getElementById('volver').style.display = 'block';
         document.getElementById('whereUs').style.display = 'inline';
-        completaButtons(e.target.innerText);
+        completaButtons(e.target.name);
       } else {
         const control = `${objButtons[navegador.estadoAnteriorButton].ruta[index]}`;
         let url = '';
@@ -43,15 +61,15 @@ function asignarEventos() {
         localStorage.setItem('history_pages', navegador.estadoAnteriorWhereUs);
         window.location.href = url;
       }
-      navegador.estadoAnteriorButton = e.target.innerText;
-      navegador.estadoAnteriorWhereUs.push(e.target.innerText);
+      navegador.estadoAnteriorButton = e.target.name;
+      navegador.estadoAnteriorWhereUs.push(e.target.name);
     });
   });
 }
 /* eslint-enable no-use-before-define */
 
 function completaButtons(obj) {
-  const divButtons = document.querySelector('.div-buttons');
+  const divButtons = document.querySelector('.div-home-buttons');
   divButtons.innerHTML = '';
   document.getElementById('spanUbicacion').innerText = objButtons.planta;
   // eslint-disable-next-line no-plusplus
@@ -59,11 +77,11 @@ function completaButtons(obj) {
     const element = objButtons[obj].name[i];
     // const ruta = objButtons[obj].ruta[i];
     const params = {
-      text: element,
+      text: tr(element) || element,
       name: objButtons[obj].name[i],
-      class: 'button-selector',
+      class: 'button-selector-home',
       innerHTML: null,
-      height: '40px',
+      height: '35px',
       width: '75%',
       borderRadius: '5px',
       border: null,
@@ -76,6 +94,7 @@ function completaButtons(obj) {
       paddingRight: null,
       paddingTop: null,
       paddingBotton: null,
+      background: null,
     };
     const newButton = createButton(params);
     divButtons.appendChild(newButton);
@@ -97,12 +116,42 @@ function leeApp(json) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  spinner.style.visibility = 'visible';
-  const ustedEstaEn = 'Usted está en ';
+function dondeEstaEn() {
+  const ustedEstaEn = `${tr('Usted está en')} ` || 'Usted está en ';
   document.getElementById('whereUs').innerText = ustedEstaEn;
-  leeVersion('version');
-  leeApp('app');
+}
+
+async function loadLenguages(leng) {
+  try {
+    const {
+      arrayTranslateOperativo: translateOperativo,
+      arrayEspanolOperativo: espanolOperativo,
+      arrayTranslateArchivo: translateArchivo,
+      arrayEspanolArchivo: espanolArchivo,
+    } = await translate.translate(leng);
+    arrayTranslateOperativo = translateOperativo;
+    arrayEspanolOperativo = espanolOperativo;
+    arrayTranslateArchivo = translateArchivo;
+    arrayEspanolArchivo = espanolArchivo;
+    leeVersion('version');
+    setTimeout(() => {
+      dondeEstaEn();
+      leeApp('app');
+    }, 200);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Ocurrió un error al cargar los datos:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  spinner.style.visibility = 'visible';
+  const datosUser = localStorage.getItem('datosUser');
+  if (datosUser) {
+    const datos = JSON.parse(datosUser);
+    document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
+    loadLenguages(datos.lng);
+  }
   spinner.style.visibility = 'hidden';
 });
 
@@ -128,4 +177,10 @@ function goBack() {
 const volver = document.getElementById('volver');
 volver.addEventListener('click', () => {
   goBack(null);
+});
+
+const goLanding = document.querySelector('.custom-button');
+goLanding.addEventListener('click', () => {
+  const url = '../../Pages/Landing';
+  window.location.href = url;
 });

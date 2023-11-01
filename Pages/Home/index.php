@@ -31,7 +31,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
     ?>
   </header>
   <main>
-    <div class="div-buttons">
+    <div class='div-home-buttons'>
 
     </div>
   </main>
