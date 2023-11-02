@@ -47,9 +47,10 @@ function createDiv(config) {
   return div;
 }
 
-function createSpan(config, texto) {
+function createSpan(config, text) {
   const span = document.createElement('span');
-  span.textContent = texto || config.text;
+  const texto = text || config.text;
+  span.textContent = texto;
   span.style.fontSize = config.fontSize;
   span.style.color = config.fontColor;
   config.marginTop !== null ? span.style.marginTop = config.marginTop : null;

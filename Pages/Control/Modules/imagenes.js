@@ -2,13 +2,41 @@
 import Alerta from '../../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
 import objVariables from './variables.js';
+import translate, {
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateArchivo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolArchivo,
+// eslint-disable-next-line import/extensions
+} from '../../../controllers/translate.js';
+
+let data = {};
+let translateOperativo = [];
+let espanolOperativo = [];
+// let translateArchivo = [];
+// let espanolArchivo = [];
+
+function trO(palabra) {
+  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+  const index = espanolOperativo.findIndex(
+    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+  );
+  if (index !== -1) {
+    return translateOperativo[index];
+  }
+  return palabra;
+}
 
 let row = 0;
-
 function buttonImage(id) {
   row = id;
   const miAlerta = new Alerta();
-  miAlerta.createVerde(objVariables.avisoAmarillo, null);
+  const mensaje = trO(objVariables.avisoAmarillo.span.text);
+  miAlerta.createVerde(objVariables.avisoAmarillo, mensaje);
   const modal = document.getElementById('modalAlert');
   modal.style.display = 'block';
   const imageInput = document.getElementById('imageInput');
@@ -61,6 +89,17 @@ imageInput.addEventListener('change', async (event) => {
       // eslint-disable-next-line no-alert
       alert('Por favor, selecciona un archivo de imagen válido.');
     }
+  }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const datosUser = localStorage.getItem('datosUser');
+  if (datosUser) {
+    const datos = JSON.parse(datosUser);
+    document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
+    data = await translate(datos.lng);
+    translateOperativo = data.arrayTranslateOperativo;
+    espanolOperativo = data.arrayEspanolOperativo;
   }
 });
 

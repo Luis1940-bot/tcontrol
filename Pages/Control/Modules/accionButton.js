@@ -1,5 +1,44 @@
 // eslint-disable-next-line import/extensions
 import traerRegistros from './traerRegistros.js';
+import translate, {
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateArchivo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolArchivo,
+// eslint-disable-next-line import/extensions
+} from '../../../controllers/translate.js';
+
+let data = {};
+let translateOperativo = [];
+let espanolOperativo = [];
+// let translateArchivo = [];
+// let espanolArchivo = [];
+
+function trO(palabra) {
+  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+  const index = espanolOperativo.findIndex(
+    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+  );
+  if (index !== -1) {
+    return translateOperativo[index];
+  }
+  return palabra;
+}
+
+// function trA(palabra) {
+//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+//   const index = espanolArchivo.findIndex(
+//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+//   );
+//   if (index !== -1) {
+//     return translateArchivo[index];
+//   }
+//   return palabra;
+// }
 
 async function cargaModal(respuesta, input, haceClick) {
   try {
@@ -145,6 +184,7 @@ document.getElementById('closeModalButton').onclick = () => {
 };
 
 const buscarModal = document.getElementById('searchInput');
+
 buscarModal.addEventListener('input', (e) => {
   const valorBuscado = e.target.value.trim().toLowerCase();
   const table = document.querySelector('.modal-content table');
@@ -171,6 +211,22 @@ buscarModal.addEventListener('input', (e) => {
       row.style.display = 'none'; // Oculta la fila si no coincide
     }
   });
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const datosUser = localStorage.getItem('datosUser');
+  if (datosUser) {
+    const datos = JSON.parse(datosUser);
+    document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
+    data = await translate(datos.lng);
+    translateOperativo = data.arrayTranslateOperativo;
+    espanolOperativo = data.arrayEspanolOperativo;
+    // translateArchivo = data.arrayTranslateArchivo;
+    // espanolArchivo = data.arrayEspanolArchivo;
+    // eslint-disable-next-line prefer-destructuring
+    const placeholder = buscarModal.placeholder;
+    buscarModal.placeholder = trO(placeholder) || placeholder;
+  }
 });
 
 export {

@@ -6,6 +6,8 @@ import createButton from '../../includes/atoms/createButton.js';
 import createDiv from '../../includes/atoms/createDiv.js';
 // eslint-disable-next-line import/extensions
 import createRadioButton from '../../includes/atoms/createRadioButton.js';
+// eslint-disable-next-line import/extensions
+import translate from '../../controllers/translate.js';
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
@@ -172,9 +174,25 @@ document.addEventListener('DOMContentLoaded', () => {
   spinner.style.visibility = 'hidden';
 });
 
+async function loadLenguages(leng) {
+  try {
+    await translate(leng);
+    setTimeout(() => {
+      const url = '../../Pages/Home';
+      window.location.href = url;
+    }, 1000);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Ocurrió un error al cargar los datos:', error);
+  }
+}
+
 const button = document.querySelector('.my-button');
 button.addEventListener('click', () => {
-  spinner.style.visibility = 'visible';
-  const url = '../../Pages/Home';
-  window.location.href = url;
+  const datosUser = localStorage.getItem('datosUser');
+  if (datosUser) {
+    spinner.style.visibility = 'visible';
+    const datos = JSON.parse(datosUser);
+    loadLenguages(datos.lng);
+  }
 });

@@ -8,6 +8,24 @@ import arrayGlobal from './variables.js';
 import traerRegistros from './traerRegistros.js';
 // eslint-disable-next-line import/extensions
 import Alerta from '../../../includes/atoms/alerta.js';
+// eslint-disable-next-line import/extensions
+import translate, {
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateArchivo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolArchivo,
+// eslint-disable-next-line import/extensions
+} from '../../../controllers/translate.js';
+
+let data = {};
+let translateOperativo = [];
+let espanolOperativo = [];
+let translateArchivo = [];
+let espanolArchivo = [];
 
 const widthScreen = window.innerWidth;
 let arrayWidthEncabezado;
@@ -16,9 +34,31 @@ let elementHTML;
 let ID = 0;
 let fila = 0;
 
+function trO(palabra) {
+  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+  const index = espanolOperativo.findIndex(
+    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+  );
+  if (index !== -1) {
+    return translateOperativo[index];
+  }
+  return palabra;
+}
+
+function trA(palabra) {
+  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+  const index = espanolArchivo.findIndex(
+    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+  );
+  if (index !== -1) {
+    return translateArchivo[index];
+  }
+  return palabra;
+}
+
 function estilosTheadCell(element, index) {
   const cell = document.createElement('th');
-  cell.textContent = element.toUpperCase();
+  cell.textContent = trO(element.toUpperCase()) || element.toUpperCase();
   cell.style.background = '#000000';
   cell.style.border = '1px solid #cecece';
   cell.style.overflow = 'hidden';
@@ -42,7 +82,7 @@ function estilosCell(
   alignCenter,
   paddingLeft,
   type,
-  dato,
+  datos,
   colSpan,
   fontStyle,
   fontWeight,
@@ -51,8 +91,10 @@ function estilosCell(
   requerido,
 ) {
   const cell = document.createElement('td');
+  let dato = '';
+  typeof datos === 'string' && datos !== null ? dato = trA(datos) : dato = datos;
   if (dato !== null && type === null) {
-    cell.textContent = `${dato} ${requerido}`;
+    cell.textContent = `${dato} ${requerido}` || `${dato} ${requerido}`;
   } else if ((dato === null && type !== null)) {
     cell.appendChild(type);
   }
@@ -401,22 +443,44 @@ function completaTabla(arrayControl) {
   });
 }
 
-export default function tablaVacia(arrayControl, encabezados) {
+async function arraysLoad() {
+  const datosUser = localStorage.getItem('datosUser');
+  if (datosUser) {
+    const datos = JSON.parse(datosUser);
+    document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
+    data = await translate(datos.lng);
+    translateOperativo = data.arrayTranslateOperativo;
+    espanolOperativo = data.arrayEspanolOperativo;
+    translateArchivo = data.arrayTranslateArchivo;
+    espanolArchivo = data.arrayEspanolArchivo;
+    const url = new URL(window.location.href);
+    const controlT = url.searchParams.get('control_T');
+    document.getElementById('wichC').innerText = trA(controlT);
+  }
+}
+
+function loadTabla(arrayControl, encabezados) {
   const miAlerta = new Alerta();
-  // console.log(arrayControl)
   if (arrayControl.length > 0) {
     encabezado(encabezados);
     completaTabla(arrayControl, encabezados);
     const cantidadDeFilas = document.querySelector('table tbody');
     if (cantidadDeFilas.childElementCount !== arrayControl.length) {
-      const mensaje = 'La tabla no se completó según lo esperado, vuelva a intentarlo.';
+      const mensaje = trO('La tabla no se completó según lo esperado, vuelva a intentarlo.') || 'La tabla no se completó según lo esperado, vuelva a intentarlo.';
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje);
       const modal = document.getElementById('modalAlert');
       modal.style.display = 'block';
     }
   } else {
-    miAlerta.createVerde(arrayGlobal.avisoRojo);
+    miAlerta.createVerde(arrayGlobal.avisoRojo, null);
     const modal = document.getElementById('modalAlert');
     modal.style.display = 'block';
   }
+}
+
+export default function tablaVacia(arrayControl, encabezados) {
+  arraysLoad();
+  setTimeout(() => {
+    loadTabla(arrayControl, encabezados);
+  }, 100);
 }

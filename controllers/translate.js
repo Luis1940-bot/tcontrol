@@ -1,3 +1,12 @@
+// eslint-disable-next-line no-unused-vars
+const arrayTranslateOperativo = [];
+// eslint-disable-next-line no-unused-vars
+const arrayEspanolOperativo = [];
+// eslint-disable-next-line no-unused-vars
+const arrayTranslateArchivo = [];
+// eslint-disable-next-line no-unused-vars
+const arrayEspanolArchivo = [];
+
 const OperativoURL = '/includes/Traducciones/Operativo/';
 const FileURL = '/includes/Traducciones/Archivos/';
 
@@ -16,26 +25,36 @@ async function leerArchivo(url) {
   }
 }
 
-export default {
-  async translate(leng) {
-    try {
-      const [operatiEspanol, operativoOther, archivoEspanol, archivoOther] = await Promise.all([
-        leerArchivo(`${OperativoURL}es.txt`),
-        leerArchivo(`${OperativoURL}${leng}.txt`),
-        leerArchivo(`${FileURL}es.txt`),
-        leerArchivo(`${FileURL}${leng}.txt`),
-      ]);
+// export default {
+// async translate(leng) {
+const translate = async (leng) => {
+  try {
+    const [operatiEspanol, operativoOther, archivoEspanol, archivoOther] = await Promise.all([
+      leerArchivo(`${OperativoURL}es.txt`),
+      leerArchivo(`${OperativoURL}${leng}.txt`),
+      leerArchivo(`${FileURL}es.txt`),
+      leerArchivo(`${FileURL}${leng}.txt`),
+    ]);
 
-      return {
-        arrayEspanolOperativo: [...operatiEspanol],
-        arrayTranslateOperativo: [...operativoOther],
-        arrayEspanolArchivo: [...archivoEspanol],
-        arrayTranslateArchivo: [...archivoOther],
-      };
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error al cargar palabras:', error);
-      throw error;
-    }
-  },
+    return {
+      arrayEspanolOperativo: [...operatiEspanol],
+      arrayTranslateOperativo: [...operativoOther],
+      arrayEspanolArchivo: [...archivoEspanol],
+      arrayTranslateArchivo: [...archivoOther],
+    };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error al cargar palabras:', error);
+    throw error;
+  }
 };
+// };
+
+export {
+  arrayTranslateOperativo,
+  arrayEspanolOperativo,
+  arrayTranslateArchivo,
+  arrayEspanolArchivo,
+  translate,
+};
+export default translate;

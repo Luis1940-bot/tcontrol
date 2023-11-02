@@ -75,7 +75,6 @@ Procedimentos
 Purê
 Que controle você procura
 LEVANTAMENTO
-LEVANTAMENTO
 ROVE
 Sair
 Sair sem salvar
@@ -89,3 +88,7 @@ Você está em
 Ver
 Ver carregados
 Voltar
+¡Processo concluído com sucesso! Todas as etapas do procedimento foram executadas corretamente.
+O processo pode demorar alguns instantes até que a imagem seja exibida na célula correspondente.
+Ocorreu um erro que não permite continuar com o processo correto.
+Procurar...

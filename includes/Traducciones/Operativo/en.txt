@@ -75,7 +75,6 @@ Procedures
 Mashed
 What control are you looking for
 SURVEY
-SURVEY
 ROVE
 Exit
 Exit without saving
@@ -89,3 +88,7 @@ You are in
 View
 View loaded
 Go back
+Process completed successfully! All steps of the procedure have been executed correctly.
+The process may take a few moments until the image is displayed in the corresponding cell.
+There was an error that does not allow you to continue with the correct process.
+Search...

@@ -75,7 +75,6 @@ Procedimientos
 Puré
 Qué control buscas
 RELEVAMIENTO
-RELEVAMIENTO
 ROVE
 Salir
 Salir sin guardar
@@ -89,3 +88,7 @@ Usted está en
 Ver
 Ver cargados
 Volver
+¡Proceso completado con éxito! Todos los pasos del procedimiento se han ejecutado correctamente.
+El proceso puede demorar unos instantes hasta que se visualice la imágen en la celda correpondiente.
+Hubo un error que no permite continuar con el proceso correcto.
+Buscar...

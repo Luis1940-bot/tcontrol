@@ -3,14 +3,16 @@ import readJSON from '../../controllers/read-JSON.js';
 // eslint-disable-next-line import/extensions
 import createButton from '../../includes/atoms/createButton.js';
 // eslint-disable-next-line import/extensions
-import translate from '../../controllers/translate.js';
+import translate, {
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolOperativo,
+// eslint-disable-next-line import/extensions
+} from '../../controllers/translate.js';
 
-let arrayTranslateOperativo = [];
-let arrayEspanolOperativo = [];
-// eslint-disable-next-line no-unused-vars
-let arrayTranslateArchivo = [];
-// eslint-disable-next-line no-unused-vars
-let arrayEspanolArchivo = [];
+let translateOperativo = [];
+let espanolOperativo = [];
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
@@ -32,11 +34,14 @@ function leeVersion(json) {
 }
 
 function tr(palabra) {
-  const index = arrayEspanolOperativo.indexOf(palabra.trim());
+  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+  const index = espanolOperativo.findIndex(
+    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+  );
   if (index !== -1) {
-    return arrayTranslateOperativo[index];
+    return translateOperativo[index];
   }
-  return null;
+  return palabra;
 }
 
 /* eslint-disable no-use-before-define */
@@ -121,36 +126,20 @@ function dondeEstaEn() {
   document.getElementById('whereUs').innerText = ustedEstaEn;
 }
 
-async function loadLenguages(leng) {
-  try {
-    const {
-      arrayTranslateOperativo: translateOperativo,
-      arrayEspanolOperativo: espanolOperativo,
-      arrayTranslateArchivo: translateArchivo,
-      arrayEspanolArchivo: espanolArchivo,
-    } = await translate.translate(leng);
-    arrayTranslateOperativo = translateOperativo;
-    arrayEspanolOperativo = espanolOperativo;
-    arrayTranslateArchivo = translateArchivo;
-    arrayEspanolArchivo = espanolArchivo;
-    leeVersion('version');
-    setTimeout(() => {
-      dondeEstaEn();
-      leeApp('app');
-    }, 200);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Ocurrió un error al cargar los datos:', error);
-  }
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible';
   const datosUser = localStorage.getItem('datosUser');
   if (datosUser) {
     const datos = JSON.parse(datosUser);
     document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
-    loadLenguages(datos.lng);
+    const data = await translate(datos.lng);
+    translateOperativo = data.arrayTranslateOperativo;
+    espanolOperativo = data.arrayEspanolOperativo;
+    leeVersion('version');
+    setTimeout(() => {
+      dondeEstaEn();
+      leeApp('app');
+    }, 200);
   }
   spinner.style.visibility = 'hidden';
 });

@@ -684,7 +684,7 @@ Insira o número PCA correspondente.
 Insira o número do ticket relacionado.
 Digite seu nome
 INICIAR PARAR
-começar parar
+INICIO DA PARADA
 INICIAR PARAR
 início das paradas
 começar parar
