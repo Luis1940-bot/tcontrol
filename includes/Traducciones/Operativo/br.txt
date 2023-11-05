@@ -92,3 +92,10 @@ Voltar
 O processo pode demorar alguns instantes até que a imagem seja exibida na célula correspondente.
 Ocorreu um erro que não permite continuar com o processo correto.
 Procurar...
+Fechar Sessão
+Salvar alterações
+Salvar como novo
+Recarregar F5
+Você está trabalhando com um novo controle que não foi salvo.
+Documento não assinado digitalmente.
+É enviado por e-mail. Desmarque para não enviar.

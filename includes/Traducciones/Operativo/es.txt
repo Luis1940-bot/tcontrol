@@ -92,3 +92,10 @@ Volver
 El proceso puede demorar unos instantes hasta que se visualice la imágen en la celda correpondiente.
 Hubo un error que no permite continuar con el proceso correcto.
 Buscar...
+Cerrar sesión
+Guardar cambios
+Guardar como nuevo
+Recargar F5
+Estas trabajando con un control nuevo que no se ha guardado.
+Documento no firmado digitalmente.
+Se envía por email. Destilde para no enviar.

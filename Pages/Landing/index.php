@@ -3,6 +3,8 @@ header('Content-Type: text/html;charset=utf-8');
 session_start();
 if (!isset($_SESSION['factum_validation']['email'] )) {
     unset($_SESSION['factum_validation']['email'] ); 
+    // header('Location: ../../../../404.php');
+    // exit;
 }
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 define('INCLUDES', ROOT_PATH.'/includes/molecules');

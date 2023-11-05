@@ -1,14 +1,14 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
 session_start();
-$_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
-$_SESSION['factum_validation']['plant'] = '1';
-$_SESSION['factum_validation']['lng'] = 'es';
 if (isset($_SESSION['factum_validation']['email'] )) {
-   
+  $_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
+  $_SESSION['factum_validation']['plant'] = '1';
+  $_SESSION['factum_validation']['lng'] = 'es';
+  $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
 }else{
-  header('Location: /404.php');
-  exit;
+  // header('Location: /404.php');
+  // exit;
 }
 
 ?>

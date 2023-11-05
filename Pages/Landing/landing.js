@@ -126,6 +126,7 @@ function completaButtons(obj) {
       const radio = radios[i];
       radio.checked = true;
       language = radios[i].getAttribute('data-custom');
+      document.querySelector('.custom-button').innerText = language.slice(0, 2).toUpperCase();
       storage(language.slice(0, 2).toLowerCase());
       seguir.disabled = false;
       seguir.style.background = '#212121';

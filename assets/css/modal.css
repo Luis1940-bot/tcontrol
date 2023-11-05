@@ -76,3 +76,9 @@
 .modal-content table tbody{
   max-height: 400px;
 }
+hr {
+  border: none;
+  height: 1px;
+  background-color: #bababa;
+  margin: 0;
+}

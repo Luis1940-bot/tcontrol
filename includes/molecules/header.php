@@ -1,5 +1,7 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
+define('ROOT_PATHP', $_SERVER['DOCUMENT_ROOT']);
+define('MODALSP', ROOT_PATHP.'/includes/molecules/modales');
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -11,9 +13,14 @@ header('Content-Type: text/html;charset=utf-8');
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='./../../assets/css/header.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='../../assets/css/alerta.css' media='screen'>
   <title>Factum</title>
 </head>
 <body>
+  <?php
+    include_once(MODALSP . '/modalPerson.php');
+    include_once(MODALSP . '/modalMenu.php');
+  ?>
   <div class='div-header'>
     <div class='headerMenu'>
       <div class='div-menu'><img id='hamburguesa'  src='./../../assets/img/hamburguesa.png' alt='Menu'></div>

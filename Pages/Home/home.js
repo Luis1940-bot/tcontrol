@@ -10,6 +10,8 @@ import translate, {
   arrayEspanolOperativo,
 // eslint-disable-next-line import/extensions
 } from '../../controllers/translate.js';
+// eslint-disable-next-line import/extensions
+import personModal from '../../controllers/person.js';
 
 let translateOperativo = [];
 let espanolOperativo = [];
@@ -33,7 +35,7 @@ function leeVersion(json) {
     });
 }
 
-function tr(palabra) {
+function trO(palabra) {
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
   const index = espanolOperativo.findIndex(
     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
@@ -50,7 +52,7 @@ function asignarEventos() {
   buttons.forEach((button, index) => {
     button.addEventListener('click', (e) => {
       if (objButtons[navegador.estadoAnteriorButton].type[index] === 'btn') {
-        const lugar = tr(e.target.innerText) || e.target.innerText;
+        const lugar = trO(e.target.innerText) || e.target.innerText;
         document.getElementById('whereUs').innerText += `${espacio}${lugar}`;
         document.getElementById('volver').style.display = 'block';
         document.getElementById('whereUs').style.display = 'inline';
@@ -82,7 +84,7 @@ function completaButtons(obj) {
     const element = objButtons[obj].name[i];
     // const ruta = objButtons[obj].ruta[i];
     const params = {
-      text: tr(element) || element,
+      text: trO(element) || element,
       name: objButtons[obj].name[i],
       class: 'button-selector-home',
       innerHTML: null,
@@ -122,12 +124,14 @@ function leeApp(json) {
 }
 
 function dondeEstaEn() {
-  const ustedEstaEn = `${tr('Usted está en')} ` || 'Usted está en ';
+  const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
   document.getElementById('whereUs').innerText = ustedEstaEn;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible';
+  const hamburguesa = document.querySelector('#hamburguesa');
+  hamburguesa.style.display = 'none';
   const datosUser = localStorage.getItem('datosUser');
   if (datosUser) {
     const datos = JSON.parse(datosUser);
@@ -162,6 +166,21 @@ function goBack() {
   }
   completaButtons(navegador.estadoAnteriorWhereUs[navegador.estadoAnteriorWhereUs.length - 1]);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const person = document.getElementById('person');
+  person.addEventListener('click', () => {
+    person.style.border = '3px solid #212121';
+    person.style.background = '#212121';
+    person.style.borderRadius = '10px 10px 0px 0px';
+    const persona = document.getElementById('sessionPerson').textContent;
+    const user = {
+      person: persona,
+      salir: trO('Cerrar sesión'),
+    };
+    personModal(user);
+  });
+});
 
 const volver = document.getElementById('volver');
 volver.addEventListener('click', () => {

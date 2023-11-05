@@ -3,7 +3,7 @@ import ElementGenerator from './elementGenerator.js';
 // eslint-disable-next-line import/extensions
 import fechasGenerator from '../../../controllers/fechas.js';
 // eslint-disable-next-line import/extensions
-import arrayGlobal from './variables.js';
+import arrayGlobal from '../../../controllers/variables.js';
 // eslint-disable-next-line import/extensions
 import traerRegistros from './traerRegistros.js';
 // eslint-disable-next-line import/extensions

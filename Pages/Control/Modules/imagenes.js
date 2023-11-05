@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/extensions
 import Alerta from '../../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
-import objVariables from './variables.js';
+import objVariables from '../../../controllers/variables.js';
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,
