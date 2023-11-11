@@ -99,3 +99,8 @@ Recarregar F5
 Você está trabalhando com um novo controle que não foi salvo.
 Documento não assinado digitalmente.
 É enviado por e-mail. Desmarque para não enviar.
+Um novo controle será salvo.
+As alterações serão salvas.
+Salvar como...
+Uma cópia do atual é feita.
+O processo pode demorar alguns instantes enquanto os dados inferidos são verificados.

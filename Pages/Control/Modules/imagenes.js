@@ -37,7 +37,7 @@ function buttonImage(id) {
   const miAlerta = new Alerta();
   const mensaje = trO(objVariables.avisoAmarillo.span.text);
   miAlerta.createVerde(objVariables.avisoAmarillo, mensaje);
-  const modal = document.getElementById('modalAlert');
+  const modal = document.getElementById('modalAlertVerde');
   modal.style.display = 'block';
   const imageInput = document.getElementById('imageInput');
   setTimeout(() => {
@@ -63,10 +63,16 @@ function loadImage(selectedFile) {
     reader.onload = (e) => {
       const img = new Image();
       img.src = e.target.result;
+      const fileName = selectedFile.name;
+      const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+      const fileNameWithoutExtension = fileName.substring(0, fileName.lastIndexOf('.'));
+      img.setAttribute('data-filename', fileName);
+      img.setAttribute('data-fileextension', fileExtension);
+      img.setAttribute('data-fileNameWithoutExtension', fileNameWithoutExtension);
       img.style.maxWidth = '100%';
       img.onload = () => resolve(img);
       img.onerror = reject;
-      const modal = document.getElementById('modalAlert');
+      const modal = document.getElementById('modalAlertVerde');
       modal.style.display = 'none';
     };
     reader.readAsDataURL(selectedFile);

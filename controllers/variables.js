@@ -1,12 +1,45 @@
+// eslint-disable-next-line import/no-cycle, import/extensions
+// import guardarNuevo from '../Pages/Control/Modules/Controladores/guardarNuevo.js';
+
 /* eslint-disable prefer-const */
 // eslint-disable-next-line prefer-const, import/no-mutable-exports
 let arraySelect = [];
 let arrayEmpresa = [];
-
-const funcionDeAceptar = () => {
-  const modal = document.getElementById('modalAlert');
-  modal.style.display = 'none';
+let arrayControl = [];
+let objetoControl = {
+  fecha: [],
+  nuxpedido: [],
+  desvio: [],
+  valor: [],
+  idusuario: [],
+  tipodedato: [],
+  idLTYreporte: [],
+  idLTYcontrol: [],
+  supervisor: [],
+  tpdeobserva: [],
+  selector: [],
+  selector2: [],
+  valorS: [],
+  valorOBS: [],
+  familiaselector: [],
+  observacion: [],
+  // del: [],
+  imagenes: [],
+  displayRow: [],
+  // concepto: [],
+  // detalle: [],
+  // tipodedato_2: [],
+  // valor_2: [],
+  // tipodedato_3: [],
+  // valor_3: [],
+  // img: [],
 };
+
+// const funcionDeAceptar = () => {
+//   const modal = document.getElementById('modalAlert');
+//   modal.style.display = 'none';
+//   guardarNuevo(objetoControl);
+// };
 
 const funcionDeCancelar = () => {
   const modal = document.getElementById('modalAlert');
@@ -36,7 +69,7 @@ const funcionDeCloseM = () => {
 };
 
 const closeVentanaVerdeRoja = () => {
-  const modal = document.getElementById('modalAlert');
+  const modal = document.getElementById('modalAlertVerde');
   modal.style.display = 'none';
 };
 
@@ -54,7 +87,11 @@ const arrayGlobal = {
 
 const objAlertaAceptarCancelar = {
   titulo: {
-    text: 'Ejemplo de Alerta',
+    text: {
+      guardar: 'Guardar',
+      guardarCambio: 'Guardar cambios',
+      guardarComoNuevo: 'Guardar como...',
+    },
     fontSize: '20px',
     fontColor: '#212121',
     marginTop: '30px',
@@ -65,7 +102,11 @@ const objAlertaAceptarCancelar = {
   },
   span: {
     id: null,
-    text: 'Esta es una prueba para mensaje de alerta.',
+    text: {
+      guardar: 'Se guardará un control nuevo.',
+      guardarCambio: 'Se guardarán los cambios.',
+      guardarComoNuevo: 'Se hace una copia del actual.',
+    },
     fontSize: '14px',
     fontColor: '#212121',
     marginTop: '0px',
@@ -86,7 +127,7 @@ const objAlertaAceptarCancelar = {
     margin: null,
   },
   btnaccept: {
-    id: null,
+    id: 'idAceptar',
     text: 'Aceptar',
     fontSize: '14px',
     fontColor: '#ffffff',
@@ -102,10 +143,10 @@ const objAlertaAceptarCancelar = {
     borderRadius: '5px',
     hoverBackground: '#cecece',
     hoverColor: '#000000',
-    onClick: funcionDeAceptar,
+    // onClick: funcionDeAceptar,
   },
   btncancel: {
-    id: null,
+    id: 'idCancelar',
     text: 'Cancelar',
     fontSize: '14px',
     fontColor: '#212121',
@@ -161,6 +202,9 @@ const objAlertaAceptarCancelar = {
     gap: '0px',
     top: null,
     alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
     cursor: null,
   },
   divButtons: {
@@ -182,6 +226,9 @@ const objAlertaAceptarCancelar = {
     gap: '10px',
     top: null,
     alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
     cursor: null,
   },
   close: {
@@ -250,6 +297,9 @@ const avisoVerde = {
     gap: '0px',
     top: '550px',
     alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
     cursor: null,
   },
   span: {
@@ -317,6 +367,9 @@ const avisoAmarillo = {
     gap: '0px',
     top: '550px',
     alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
     cursor: null,
   },
   span: {
@@ -383,6 +436,9 @@ const avisoRojo = {
     gap: '0px',
     top: '550px',
     alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
     cursor: null,
   },
   span: {
@@ -599,9 +655,9 @@ const objMenu = {
     innerHTML: null,
     margin: null,
   },
-  guardarComo: {
+  guardarCambio: {
     text: 'Guardar cambios',
-    id: 'idGuardarComo',
+    id: 'idGuardarCambio',
     fontSize: '14px',
     fontColor: '#212121',
     marginTop: '0px',
@@ -893,6 +949,12 @@ const objMenu = {
   },
 };
 
+const mensajesVarios = {
+  guardar: {
+    esperaAmarillo: 'El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.',
+  },
+};
+
 export default {
   arrayGlobal,
   objAlertaAceptarCancelar,
@@ -901,4 +963,7 @@ export default {
   avisoRojo,
   objPerson,
   objMenu,
+  objetoControl,
+  arrayControl,
+  mensajesVarios,
 };

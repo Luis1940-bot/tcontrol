@@ -99,3 +99,8 @@ Recargar F5
 Estas trabajando con un control nuevo que no se ha guardado.
 Documento no firmado digitalmente.
 Se envía por email. Destilde para no enviar.
+Se guardará un control nuevo.
+Se guardarán los cambios.
+Guardar como...
+Se hace una copia del actual.
+El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.

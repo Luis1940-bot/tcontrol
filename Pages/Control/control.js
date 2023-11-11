@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-import traerRegistros from './Modules/traerRegistros.js';
+import traerRegistros from './Modules/Controladores/traerRegistros.js';
 // eslint-disable-next-line import/extensions
 import tablaVacia from './Modules/armadoDeTabla.js';
 // eslint-disable-next-line import/extensions
@@ -21,7 +21,7 @@ import translate, {
 
 let translateOperativo = [];
 let espanolOperativo = [];
-let objTranslate = {
+const objTranslate = {
   operativoES: [],
   operativoTR: [],
 };
@@ -32,10 +32,10 @@ let nr = 0;
 const spinner = document.querySelector('.spinner');
 const encabezados = {
   title: [
-    'id', 'concepto', 'relevamiento', 'detalle', 'observación',
+    'id', 'concepto', 'relevamiento', 'detalle', 'observación', 'idControl',
   ],
   width: [
-    '.05', '.15', '.25', '.25', '.25',
+    '.05', '.15', '.25', '.25', '.25', '0',
   ],
 };
 
@@ -61,16 +61,16 @@ function configuracionLoad() {
   document.getElementById('wichC').style.display = 'inline';
 }
 
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
-  );
-  if (index !== -1) {
-    return translateOperativo[index];
-  }
-  return palabra;
-}
+// function trO(palabra) {
+//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+//   const index = espanolOperativo.findIndex(
+//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+//   );
+//   if (index !== -1) {
+//     return translateOperativo[index];
+//   }
+//   return palabra;
+// }
 
 async function cargaDeRegistros() {
   const empresaData = await traerRegistros('empresa');
@@ -80,6 +80,7 @@ async function cargaDeRegistros() {
   arrayGlobal.arraySelect = [...selectoresData];
 
   const nuevoControlData = await traerRegistros(`NuevoControl,${controlN}`);
+  arrayGlobal.arrayControl = [...nuevoControlData];
   tablaVacia(nuevoControlData, encabezados);
 }
 

@@ -5,7 +5,7 @@ import fechasGenerator from '../../../controllers/fechas.js';
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../../controllers/variables.js';
 // eslint-disable-next-line import/extensions
-import traerRegistros from './traerRegistros.js';
+import traerRegistros from './Controladores/traerRegistros.js';
 // eslint-disable-next-line import/extensions
 import Alerta from '../../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
@@ -58,12 +58,16 @@ function trA(palabra) {
 
 function estilosTheadCell(element, index) {
   const cell = document.createElement('th');
-  cell.textContent = trO(element.toUpperCase()) || element.toUpperCase();
-  cell.style.background = '#000000';
-  cell.style.border = '1px solid #cecece';
-  cell.style.overflow = 'hidden';
-  const widthCell = widthScreen * arrayWidthEncabezado[index];
-  cell.style.width = `${widthCell}px`;
+  if (index < 5) {
+    cell.textContent = trO(element.toUpperCase()) || element.toUpperCase();
+    cell.style.background = '#000000';
+    cell.style.border = '1px solid #cecece';
+    cell.style.overflow = 'hidden';
+    const widthCell = widthScreen * arrayWidthEncabezado[index];
+    cell.style.width = `${widthCell}px`;
+  } else {
+    cell.style.display = 'none';
+  }
   return cell;
 }
 
@@ -89,6 +93,7 @@ function estilosCell(
   background,
   colorText,
   requerido,
+  display,
 ) {
   const cell = document.createElement('td');
   let dato = '';
@@ -110,14 +115,15 @@ function estilosCell(
   colSpan === 2 ? cell.style.display = 'none' : null;
   colSpan === 3 ? cell.colSpan = 3 : null;
   colSpan === 4 ? cell.style.display = 'none' : null;
+  display !== null ? cell.style.display = display : null;
   return cell;
 }
 
 function estilosTbodyCell(element, index, cantidadDeRegistros) {
   const newRow = document.createElement('tr');
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < 5; i++) {
-    const orden = [0, 3, 4, 6, 7];
+  for (let i = 0; i < 6; i++) {
+    const orden = [0, 3, 4, 6, 7, 1];
     let dato = element[orden[i]];
     const tipoDeDato = element[5];
     const tipoDeObservacion = element[9];
@@ -130,6 +136,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
     let type = null;
     let colorText = '#000000';
     let requerido = '';
+    let display = null;
     if (i === 0) {
       ID += 1;
       dato = ID;
@@ -141,6 +148,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       alignCenter = 'center';
     } else if (i === 4) {
       dato = '';
+    } else if (i === 5) {
+      display = 'none';
     }
     if (i === 1 && tipoDeDato === 'l') {
       fontStyle = 'italic';
@@ -375,6 +384,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       background,
       colorText,
       requerido,
+      display,
     );
     newRow.appendChild(cell);
   }
@@ -443,7 +453,7 @@ function completaTabla(arrayControl) {
   });
 }
 
-async function arraysLoad() {
+async function arraysLoadTranslate() {
   const datosUser = localStorage.getItem('datosUser');
   if (datosUser) {
     const datos = JSON.parse(datosUser);
@@ -479,7 +489,7 @@ function loadTabla(arrayControl, encabezados) {
 }
 
 export default function tablaVacia(arrayControl, encabezados) {
-  arraysLoad();
+  arraysLoadTranslate();
   setTimeout(() => {
     loadTabla(arrayControl, encabezados);
   }, 100);

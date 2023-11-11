@@ -6,6 +6,7 @@ if (isset($_SESSION['factum_validation']['email'] )) {
   $_SESSION['factum_validation']['plant'] = '1';
   $_SESSION['factum_validation']['lng'] = 'es';
   $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
+  $_SESSION['factum_validation']['id'] = '6';
 }else{
   // header('Location: /404.php');
   // exit;

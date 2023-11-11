@@ -99,3 +99,8 @@ Reload F5
 You are working with a new control that has not been saved.
 Document not digitally signed.
 It is sent by email. Deselect not to send.
+A new control will be saved.
+Changes will be saved.
+Save as...
+A copy of the current one is made.
+The process may take a few moments as the inferred data is checked.

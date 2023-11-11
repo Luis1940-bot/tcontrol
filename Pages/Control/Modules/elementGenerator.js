@@ -45,7 +45,7 @@ class ElementGenerator {
     const inputNumber = document.createElement('input');
     inputNumber.setAttribute('type', 'text');
     inputNumber.setAttribute('inputmode', 'decimal');
-    inputNumber.setAttribute('pattern', '^[0-9]*[.]?[0-9]*$');
+    inputNumber.setAttribute('pattern', '^[0-9]{0,10}(\\.[0-9]{0,2})?$');
     width ? inputNumber.style.width = width : null;
     valorPorDefecto !== '' && valorPorDefecto !== ' ' && valorPorDefecto !== null && valorPorDefecto !== undefined ? inputNumber.value = valorPorDefecto : null;
     inputNumber.addEventListener('input', function handleInput() {
@@ -87,6 +87,7 @@ class ElementGenerator {
 
   static generateSelectDinamic(hijo, sqlHijo) {
     const selectDinamic = document.createElement('select');
+    selectDinamic.setAttribute('selector', 'selectDinamic');
     selectDinamic.addEventListener('change', (event) => {
       eventSelect(event, hijo, sqlHijo);
     });
@@ -98,6 +99,11 @@ class ElementGenerator {
     while (select.firstChild) {
       select.removeChild(select.firstChild);
     }
+    const nuevoArray = [...array];
+    nuevoArray.forEach((element, index) => {
+      index === 1 ? select.setAttribute('selector', element[2]) : null;
+    });
+
     if (array.length > 0) {
       const emptyOption = document.createElement('option');
       emptyOption.value = '';
@@ -110,6 +116,7 @@ class ElementGenerator {
         select.appendChild(option);
       });
     }
+
     return select;
   }
 

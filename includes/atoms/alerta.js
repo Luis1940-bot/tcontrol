@@ -1,14 +1,34 @@
 // eslint-disable-next-line import/extensions
-import {funciones} from '../../Pages/Control/Modules/funcionesMenu.js';
+import { funciones } from '../../Pages/Control/Modules/funcionesMenu.js';
+// eslint-disable-next-line import/extensions
+import arrayGlobal from '../../controllers/variables.js';
+// eslint-disable-next-line import/extensions
+import translate, {
+  // eslint-disable-next-line no-unused-vars
+  arrayTranslateOperativo,
+  // eslint-disable-next-line no-unused-vars
+  arrayEspanolOperativo,
+// eslint-disable-next-line import/extensions
+} from '../../controllers/translate.js';
 
-// const {
-//   Guardar,
-//   GuardarComo,
-//   GuardarComoNuevo,
-//   Refrescar,
-//   Firmar,
-//   Salir,
-// } = funciones;
+const objTraductor = {
+  operativoES: [],
+  operativoTR: [],
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const datosUser = localStorage.getItem('datosUser');
+  if (datosUser) {
+    const datos = JSON.parse(datosUser);
+    const data = await translate(datos.lng);
+    const translateOperativo = data.arrayTranslateOperativo;
+    const espanolOperativo = data.arrayEspanolOperativo;
+    objTraductor.operativoES = [...espanolOperativo];
+    objTraductor.operativoTR = [...translateOperativo];
+    return objTraductor;
+  }
+  return null;
+});
 
 function createButton(config) {
   const button = document.createElement('button');
@@ -18,7 +38,7 @@ function createButton(config) {
   button.style.display = config.display;
   button.style.fontSize = config.fontSize;
   button.style.color = config.fontColor;
-  button.style.background = config.backColor;
+  button.style.backgroundColor = config.backColor;
   button.style.marginTop = config.marginTop;
   button.style.fontWeight = config.fontWeight;
   button.style.width = config.width;
@@ -101,7 +121,7 @@ function createSpan(config, text) {
   config.hoverColor !== null ? span.addEventListener('mouseout', () => {
     span.style.color = config.fontColor;
   }) : null;
-  span.addEventListener('click', (config.onClick));
+  config.onClick !== null ? span.addEventListener('click', (config.onClick)) : null;
   return span;
 }
 
@@ -175,10 +195,10 @@ function createLabel(config) {
 
 function createH3(config) {
   const h3 = document.createElement('h3');
-  h3.textContent = config.text;
+  h3.textContent = config.text.guardar;
   h3.style.fontSize = config.fontSize;
   h3.style.fontColor = config.fontColor;
-  h3.style.marginTop = config.marginTop;
+  config.marginTop !== null ? h3.style.marginTop = config.marginTop : null;
   h3.style.display = config.display;
   h3.style.fontFamily = config.fontFamily;
   h3.style.alignSelf = config.alignSelf;
@@ -221,16 +241,22 @@ function trO(palabra, objTranslate) {
 }
 
 const funcionGuardar = () => {
-  funciones.Guardar();
+  // eslint-disable-next-line no-use-before-define
+  const miAlerta = new Alerta();
+  const obj = arrayGlobal.objAlertaAceptarCancelar;
+  miAlerta.createAlerta(obj, objTraductor, 'guardar');
+  const modal = document.getElementById('modalAlert');
+  modal.style.display = 'block';
 };
-const funcionGuardarComo = () => {
-  funciones.GuardarComo();
+const funcionGuardarCambio = () => {
+  funciones.GuardarCambio();
 };
 const funcionGuardarComoNuevo = () => {
   funciones.GuardarComoNuevo();
 };
 const funcionRefrescar = () => {
-  funciones.Refrescar();
+  const url = new URL(window.location.href);
+  window.location.href = url.href;
 };
 const funcionHacerFirmar = () => {
   funciones.Firmar();
@@ -244,8 +270,9 @@ class Alerta {
     this.modal = null;
   }
 
-  createAlerta(obj) {
+  createAlerta(objeto, objTrad, typeAlert) {
     // Crear el elemento modal
+    const obj = objeto;
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlert';
     this.modal.className = 'modal';
@@ -256,15 +283,24 @@ class Alerta {
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
 
+    let texto = trO(obj.titulo.text[typeAlert], objTrad) || obj.titulo.text[typeAlert];
+    obj.titulo.text[typeAlert] = texto;
     const title = createH3(obj.titulo);
     modalContent.appendChild(title);
 
-    const spanTexto = createSpan(obj.span);
+    texto = trO(obj.span.text[typeAlert], objTrad) || obj.span.text[typeAlert];
+    obj.span.text[typeAlert] = texto;
+    const spanTexto = createSpan(obj.span, texto);
     modalContent.appendChild(spanTexto);
 
     const divButton = createDiv(obj.divButtons);
 
+    texto = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text;
+    obj.btnaccept.text = texto;
     const buttonAceptar = createButton(obj.btnaccept);
+
+    texto = trO(obj.btncancel.text, objTrad) || obj.btncancel.text;
+    obj.btncancel.text = texto;
     const buttonCancelar = createButton(obj.btncancel);
     const buttonOk = createButton(obj.btnok);
 
@@ -278,11 +314,22 @@ class Alerta {
 
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal);
+    const idAceptar = document.getElementById('idAceptar');
+    idAceptar.addEventListener('click', () => {
+      funciones.Guardar(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
+      const miAlerta = new Alerta();
+      let mensaje = arrayGlobal.mensajesVarios.guardar.esperaAmarillo;
+      arrayGlobal.avisoAmarillo.close.display = 'none';
+      mensaje = trO(mensaje, objTrad);
+      miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje);
+      const modal = document.getElementById('modalAlertVerde');
+      modal.style.display = 'block';
+    });
   }
 
   createVerde(obj, texto) {
     this.modal = document.createElement('div');
-    this.modal.id = 'modalAlert';
+    this.modal.id = 'modalAlertVerde';
     this.modal.className = 'modal';
     this.modal.style.background = 'rgba(224, 220, 220, 0.7)';
     const modalContent = createDiv(obj.div);
@@ -335,6 +382,7 @@ class Alerta {
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
 
+    //! guardar
     obj.divCajita.id = 'idDivGuardar';
     obj.divCajita.onClick = funcionGuardar;
     let div = createDiv(obj.divCajita);
@@ -344,27 +392,31 @@ class Alerta {
     div.appendChild(imgGuardar);
     div.appendChild(spanGuardar);
     modalContent.appendChild(div);
-    // obj.divCajita.onClick = null;
+    obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrGuardar';
     let hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+    //! fin guardar
 
-    obj.divCajita.id = 'idDivGuardarComo';
-    obj.divCajita.onClick = funcionGuardarComo;
+    //! guardar cambio
+    obj.divCajita.id = 'idDivGuardarCambio';
+    obj.divCajita.onClick = funcionGuardarCambio;
     div = createDiv(obj.divCajita);
-    const imgGuardarComo = createIMG(obj.imgGuardar);
-    texto = trO(obj.guardarComo.text, objTranslate) || obj.guardarComo.text;
-    const spanGuardarComo = createSpan(obj.guardarComo, texto);
-    div.appendChild(imgGuardarComo);
-    div.appendChild(spanGuardarComo);
+    const imgGuardarCambio = createIMG(obj.imgGuardar);
+    texto = trO(obj.guardarCambio.text, objTranslate) || obj.guardarCambio.text;
+    const spanGuardarCambio = createSpan(obj.guardarCambio, texto);
+    div.appendChild(imgGuardarCambio);
+    div.appendChild(spanGuardarCambio);
     modalContent.appendChild(div);
-    // obj.divCajita.onClick = null;
+    obj.divCajita.onClick = null;
 
-    obj.hr.id = 'idHrGuardarComo';
+    obj.hr.id = 'idHrGuardarCambio';
     hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+    //! fin guardar cambio
 
+    //! guardar como nuevo
     obj.divCajita.id = 'idDivGuardarComoNuevo';
     obj.divCajita.onClick = funcionGuardarComoNuevo;
     div = createDiv(obj.divCajita);
@@ -374,12 +426,14 @@ class Alerta {
     div.appendChild(imgGuardarComoNuevo);
     div.appendChild(spanGuardarComoNuevo);
     modalContent.appendChild(div);
-    // obj.divCajita.onClick = null;
+    obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrGuardarComoNuevo';
     hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+    //! fin guaradr como nuevo
 
+    //! firmar
     obj.divCajita.id = 'idDivFirmar';
     obj.divCajita.onClick = funcionHacerFirmar;
     div = createDiv(obj.divCajita);
@@ -389,39 +443,46 @@ class Alerta {
     div.appendChild(imgFirmar);
     div.appendChild(spanFirmar);
     modalContent.appendChild(div);
-    // obj.divCajita.onClick = null;
+    obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrFirmar';
     hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+    //! fin firmar
 
-    div = createDiv(obj.divCajita);
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar';
     obj.divCajita.onClick = funcionRefrescar;
+    div = createDiv(obj.divCajita);
     const imgRefresh = createIMG(obj.imgRefresh);
     texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text;
     const spanRefresh = createSpan(obj.refresh, texto);
     div.appendChild(imgRefresh);
     div.appendChild(spanRefresh);
     modalContent.appendChild(div);
-    // obj.divCajita.onClick = null;
+    obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrRefresh';
     hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+    //! fin refrescar
 
-    div = createDiv(obj.divCajita);
+    //! salir
+    obj.divCajita.id = 'idDivSalir';
     obj.divCajita.onClick = funcionSalir;
+    div = createDiv(obj.divCajita);
     const imgSalir = createIMG(obj.imgSalir);
     texto = trO(obj.salir.text, objTranslate) || obj.salir.text;
     const spanSalir = createSpan(obj.salir, texto);
     div.appendChild(imgSalir);
     div.appendChild(spanSalir);
     modalContent.appendChild(div);
-    // obj.divCajita.onClick = null;
+    obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrSalir';
     hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+    //! fin salir
 
     texto = trO(obj.mensaje1.text, objTranslate) || obj.mensaje1.text;
     const spanMensaje1 = createSpan(obj.mensaje1, texto);
@@ -431,9 +492,11 @@ class Alerta {
     const spanMensaje2 = createSpan(obj.mensaje2, texto);
     modalContent.appendChild(spanMensaje2);
 
-    div = createDiv(obj.divCajita);
+    //! checkbox
     obj.input.id = 'idCheckBoxEmail';
     obj.input.type = 'checkbox';
+    obj.divCajita.id = 'idDivCheckBoxEmail';
+    div = createDiv(obj.divCajita);
     const inputEmail = createInput(obj.input);
     texto = trO(obj.label.innerText, objTranslate) || obj.label.innerText;
     obj.label.id = 'idLabelEmail';
@@ -443,20 +506,21 @@ class Alerta {
     div.appendChild(inputEmail);
     div.appendChild(labelEmail);
     modalContent.appendChild(div);
+    //! fin checkbox
 
     this.modal.appendChild(modalContent);
 
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal);
 
-    const idDivGuardarComo = document.getElementById('idDivGuardarComo');
+    const idDivGuardarComo = document.getElementById('idDivGuardarCambio');
     idDivGuardarComo.style.display = 'none';
     const idDivGuardarComoNuevo = document.getElementById('idDivGuardarComoNuevo');
     idDivGuardarComoNuevo.style.display = 'none';
     const idDivFirmar = document.getElementById('idDivFirmar');
     idDivFirmar.style.display = 'none';
-    const idHrGuardarComo = document.getElementById('idHrGuardarComo');
-    idHrGuardarComo.style.display = 'none';
+    const idHrGuardarCambio = document.getElementById('idHrGuardarCambio');
+    idHrGuardarCambio.style.display = 'none';
     const idHrGuardarComoNuevo = document.getElementById('idHrGuardarComoNuevo');
     idHrGuardarComoNuevo.style.display = 'none';
     const idHrFirmar = document.getElementById('idHrFirmar');

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-import traerRegistros from './traerRegistros.js';
+import traerRegistros from './Controladores/traerRegistros.js';
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,
@@ -154,6 +154,7 @@ function insertarDatoEnFila(obj) {
     const posicion = Number(obj.filaInserta) + 1;
     const fila = document.querySelector(`tr:nth-child(${posicion})`);
     const select = fila.querySelector('td:nth-child(3) select');
+    select.setAttribute('selector', 'select-hijo');
     const nuevoArray = obj.res;
     generateOptions(nuevoArray, select);
   } catch (error) {
