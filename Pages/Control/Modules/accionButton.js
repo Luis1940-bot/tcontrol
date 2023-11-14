@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/extensions
 import traerRegistros from './Controladores/traerRegistros.js';
+// eslint-disable-next-line import/no-named-as-default
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,

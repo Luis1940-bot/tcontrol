@@ -2,7 +2,7 @@
 import readJSON from '../../controllers/read-JSON.js';
 // eslint-disable-next-line import/extensions
 import createButton from '../../includes/atoms/createButton.js';
-// eslint-disable-next-line import/extensions
+// eslint-disable-next-line import/extensions, import/no-named-as-default
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,

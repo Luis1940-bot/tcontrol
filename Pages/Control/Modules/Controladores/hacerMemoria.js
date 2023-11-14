@@ -1,11 +1,9 @@
 // eslint-disable-next-line import/extensions
-import fechasGenerator from '../../../../controllers/fechas.js';
+import arrayGlobal from '../../../../controllers/variables.js';
 // eslint-disable-next-line import/extensions
 import respuestaColumna from './armadoDeObjetos.js';
 // eslint-disable-next-line import/extensions
-// import guardaNotas from './guardaNotas.js';
-// eslint-disable-next-line import/extensions
-import comparador from './comparador.js';
+import fechasGenerator from '../../../../controllers/fechas.js';
 
 function buscarEnArray(id, array) {
   const idStr = id.toString().trim();
@@ -13,14 +11,13 @@ function buscarEnArray(id, array) {
   return resultado;
 }
 
-function recorroTable(objetoControl, arrayControl) {
+function hacerMemoria(arrayControl) {
   try {
     const idPerson = document.getElementById('sessionIdPerson').textContent;
     // const email = document.getElementById('idCheckBoxEmail').checked;
     const url = new URL(window.location.href);
     const controlN = url.searchParams.get('control_N');
     // const controlT = url.searchParams.get('control_T');
-    const numberDoc = document.getElementById('numberDoc').textContent;
     const tbody = document.querySelector('tbody');
     const tr = tbody.querySelectorAll('tr');
     // eslint-disable-next-line no-plusplus
@@ -104,40 +101,32 @@ function recorroTable(objetoControl, arrayControl) {
         if (c === 4) {
           // console.log(valor,displayRow)
           const founded = buscarEnArray(td[5].textContent, arrayControl);
-          objetoControl.fecha.push(fechasGenerator.fecha_corta_yyyymmdd(new Date()));
-          objetoControl.nuxpedido.push(0);
-          objetoControl.valor.push(valor);
-          objetoControl.desvio.push(founded[2]);
-          objetoControl.idusuario.push(idPerson);
-          objetoControl.tipodedato.push(founded[5]);
-          objetoControl.idLTYreporte.push(controlN);
-          objetoControl.idLTYcontrol.push(founded[1]);
-          objetoControl.supervisor.push(0);
-          objetoControl.tpdeobserva.push(founded[9]);
-          objetoControl.selector.push(selector1);
-          objetoControl.selector2.push(selector2);
-          objetoControl.valorS.push(valorS);
-          objetoControl.valorOBS.push(valorOBS);
-          objetoControl.familiaselector.push(familiaselector);
-          objetoControl.observacion.push(observacion);
-          imagenes.src.length > 0 ? objetoControl.imagenes.push(imagenes) : objetoControl.imagenes.push('');
-          objetoControl.displayRow.push(displayRow);
+          arrayGlobal.objetoMemoria.fecha.push(fechasGenerator.fecha_corta_yyyymmdd(new Date()));
+          arrayGlobal.objetoMemoria.nuxpedido.push(0);
+          arrayGlobal.objetoMemoria.valor.push(valor);
+          arrayGlobal.objetoMemoria.desvio.push(founded[2]);
+          arrayGlobal.objetoMemoria.idusuario.push(idPerson);
+          arrayGlobal.objetoMemoria.tipodedato.push(founded[5]);
+          arrayGlobal.objetoMemoria.idLTYreporte.push(controlN);
+          arrayGlobal.objetoMemoria.idLTYcontrol.push(founded[1]);
+          arrayGlobal.objetoMemoria.supervisor.push(0);
+          arrayGlobal.objetoMemoria.tpdeobserva.push(founded[9]);
+          arrayGlobal.objetoMemoria.selector.push(selector1);
+          arrayGlobal.objetoMemoria.selector2.push(selector2);
+          arrayGlobal.objetoMemoria.valorS.push(valorS);
+          arrayGlobal.objetoMemoria.valorOBS.push(valorOBS);
+          arrayGlobal.objetoMemoria.familiaselector.push(familiaselector);
+          arrayGlobal.objetoMemoria.observacion.push(observacion);
+          imagenes.src.length > 0 ? arrayGlobal.objetoMemoria.imagenes.push(imagenes) : arrayGlobal.objetoMemoria.imagenes.push('');
+          arrayGlobal.objetoMemoria.displayRow.push(displayRow);
         }
       }
     }
-
-    // console.log(objetoMemoria);
-    // console.log(objetoControl)
-    // console.log(arrayControl);
-    comparador(arrayControl, numberDoc);
+    // console.log(arrayGlobal.objetoMemoria)
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
   }
 }
-function guardarNuevo(objetoControl, arrayControl) {
-  // console.log(objetoControl, arrayControl);
-  recorroTable(objetoControl, arrayControl);
-}
 
-export default guardarNuevo;
+export default hacerMemoria;

@@ -44,6 +44,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
       include_once(INCLUDES .'/header.php');
       include_once(INCLUDES .'/encabezado.php');
       include_once(INCLUDES .'/whereUs.php');
+      
     ?>
   </header>
   <main>

@@ -14,6 +14,9 @@ export default function traerRegistros(sql) {
       .then((res) => res.json())
       .then((data) => {
         resolve(data);
+        let vecesLoad = localStorage.getItem('loadSystem');
+        vecesLoad = Number(vecesLoad) + 1;
+        localStorage.setItem('loadSystem', vecesLoad);
         // eslint-disable-next-line no-console
         console.timeEnd('miTemporizador');
       })

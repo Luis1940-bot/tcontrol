@@ -8,7 +8,7 @@ import arrayGlobal from '../../../controllers/variables.js';
 import traerRegistros from './Controladores/traerRegistros.js';
 // eslint-disable-next-line import/extensions
 import Alerta from '../../../includes/atoms/alerta.js';
-// eslint-disable-next-line import/extensions
+// eslint-disable-next-line import/extensions, import/no-named-as-default
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,
@@ -20,6 +20,8 @@ import translate, {
   arrayEspanolArchivo,
 // eslint-disable-next-line import/extensions
 } from '../../../controllers/translate.js';
+// eslint-disable-next-line import/extensions
+import hacerMemoria from './Controladores/hacerMemoria.js';
 
 let data = {};
 let translateOperativo = [];
@@ -451,6 +453,9 @@ function completaTabla(arrayControl) {
       }
     }
   });
+  const modal = document.getElementById('modalAlertCarga');
+  const vecesLoad = localStorage.getItem('loadSystem');
+  vecesLoad >= 3 ? modal.style.display = 'none' : null;
 }
 
 async function arraysLoadTranslate() {
@@ -481,6 +486,9 @@ function loadTabla(arrayControl, encabezados) {
       const modal = document.getElementById('modalAlert');
       modal.style.display = 'block';
     }
+    setTimeout(() => {
+      hacerMemoria(arrayControl);
+    }, 1000);
   } else {
     miAlerta.createVerde(arrayGlobal.avisoRojo, null);
     const modal = document.getElementById('modalAlert');
@@ -492,5 +500,5 @@ export default function tablaVacia(arrayControl, encabezados) {
   arraysLoadTranslate();
   setTimeout(() => {
     loadTabla(arrayControl, encabezados);
-  }, 100);
+  }, 200);
 }

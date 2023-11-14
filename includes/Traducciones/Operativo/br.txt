@@ -104,3 +104,14 @@ As alterações serão salvas.
 Salvar como...
 Uma cópia do atual é feita.
 O processo pode demorar alguns instantes enquanto os dados inferidos são verificados.
+Aguarde alguns instantes, o processo está em execução. Os controles são instrumentos digitais complexos, durante o carregamento é controlado que tudo aconteça conforme o esperado. Obrigado!
+Relatório:
+Novo
+Removido
+Modificado
+Modificação
+Ação
+Conceito
+Antigo
+Atual
+Se os dados estiverem corretos, aceite, caso contrário você poderá cancelar a operação.\n Se aceitar, não será mais possível desfazer a ação.

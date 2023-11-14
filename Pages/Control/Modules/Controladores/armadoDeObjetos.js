@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 function consologuear(c, i, objParams) {
   const obj = objParams;
   // eslint-disable-next-line no-console

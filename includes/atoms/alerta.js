@@ -1,8 +1,6 @@
 // eslint-disable-next-line import/extensions
-import { funciones } from '../../Pages/Control/Modules/funcionesMenu.js';
-// eslint-disable-next-line import/extensions
 import arrayGlobal from '../../controllers/variables.js';
-// eslint-disable-next-line import/extensions
+// eslint-disable-next-line import/extensions, import/no-named-as-default
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,
@@ -10,6 +8,8 @@ import translate, {
   arrayEspanolOperativo,
 // eslint-disable-next-line import/extensions
 } from '../../controllers/translate.js';
+// eslint-disable-next-line import/extensions
+import guardarNuevo from '../../Pages/Control/Modules/Controladores/guardarNuevo.js';
 
 const objTraductor = {
   operativoES: [],
@@ -35,16 +35,17 @@ function createButton(config) {
   button.className = `${config.className}`;
   button.textContent = config.text;
   config.id !== null ? button.id = config.id : null;
-  button.style.display = config.display;
-  button.style.fontSize = config.fontSize;
-  button.style.color = config.fontColor;
-  button.style.backgroundColor = config.backColor;
-  button.style.marginTop = config.marginTop;
-  button.style.fontWeight = config.fontWeight;
-  button.style.width = config.width;
-  button.style.height = config.height;
-  button.style.cursor = config.cursor;
-  button.style.borderRadius = config.borderRadius;
+  config.display !== null ? button.style.display = config.display : null;
+  config.fontSize !== null ? button.style.fontSize = config.fontSize : null;
+  config.fontColor !== null ? button.style.color = config.fontColor : null;
+  config.backColor !== null ? button.style.backgroundColor = config.backColor : null;
+  config.marginTop !== null ? button.style.marginTop = config.marginTop : null;
+  config.marginLeft !== null ? button.style.marginLeft = config.marginLeft : null;
+  config.fontWeight !== null ? button.style.fontWeight = config.fontWeight : null;
+  config.width !== null ? button.style.width = config.width : null;
+  config.height !== null ? button.style.height = config.height : null;
+  config.cursor !== null ? button.style.cursor = config.cursor : null;
+  config.borderRadius !== null ? button.style.borderRadius = config.borderRadius : null;
   button.style.transition = 'background-color 0.3s';
   button.addEventListener('mouseover', () => {
     button.style.backgroundColor = config.hoverBackground;
@@ -63,20 +64,20 @@ function createDiv(config) {
   const div = document.createElement('div');
   config.className !== null ? div.className = config.className : null;
   config.id !== null ? div.id = config.id : null;
-  div.style.position = config.position;
-  div.style.borderRadius = config.borderRadius;
-  div.style.width = config.width;
-  div.style.height = config.height;
-  div.style.background = config.background;
-  div.style.border = config.border;
-  div.style.boxShadow = config.boxShadow;
-  div.style.margin = config.margin;
-  div.style.display = config.display;
-  div.style.flexDirection = config.flexDirection;
-  div.style.padding = config.padding;
-  div.style.overflow = config.overflow;
-  div.style.textAlign = config.textAlign;
-  div.style.gap = config.gap;
+  config.position !== null ? div.style.position = config.position : null;
+  config.borderRadius !== null ? div.style.borderRadius = config.borderRadius : null;
+  config.width !== null ? div.style.width = config.width : null;
+  config.height !== null ? div.style.height = config.height : null;
+  config.background !== null ? div.style.background = config.background : null;
+  config.border !== null ? div.style.border = config.border : null;
+  config.boxShadow !== null ? div.style.boxShadow = config.boxShadow : null;
+  config.margin !== null ? div.style.margin = config.margin : null;
+  config.display !== null ? div.style.display = config.display : null;
+  config.flexDirection !== null ? div.style.flexDirection = config.flexDirection : null;
+  config.padding !== null ? div.style.padding = config.padding : null;
+  config.overflow !== null ? div.style.overflow = config.overflow : null;
+  config.textAlign !== null ? div.style.textAlign = config.textAlign : null;
+  config.gap !== null ? div.style.gap = config.gap : null;
   config.top !== null ? div.style.top = config.top : null;
   config.cursor !== null ? div.style.cursor = config.cursor : null;
   config.alignItems !== null ? div.style.alignItems = config.alignItems : null;
@@ -97,15 +98,16 @@ function createSpan(config, text) {
   const span = document.createElement('span');
   const texto = text || config.text;
   span.textContent = texto;
-  span.style.fontSize = config.fontSize;
-  span.style.color = config.fontColor;
+  config.fontSize !== null ? span.style.fontSize = config.fontSize : null;
+  config.fontColor !== null ? span.style.color = config.fontColor : null;
   config.id !== null ? span.id = config.id : null;
   config.marginTop !== null ? span.style.marginTop = config.marginTop : null;
-  span.style.display = config.display;
-  span.style.fontFamily = config.fontFamily;
-  span.style.alignSelf = config.alignSelf;
-  span.className = config.className;
-  span.style.fontWeight = config.fontWeight;
+  config.display !== null ? span.style.display = config.display : null;
+  config.fontFamily !== null ? span.style.fontFamily = config.fontFamily : null;
+  config.fontStyle !== null ? span.style.fontStyle = config.fontStyle : null;
+  config.alignSelf !== null ? span.style.alignSelf = config.alignSelf : null;
+  config.className !== null ? span.className = config.className : null;
+  config.fontWeight !== null ? span.style.fontWeight = config.fontWeight : null;
   config.cursor !== null ? span.style.cursor = config.cursor : null;
   config.padding !== null ? span.style.padding = config.padding : null;
   config.position !== null ? span.style.position = config.position : null;
@@ -212,6 +214,7 @@ function createHR(config) {
   config.width !== null ? hr.style.width = config.width : null;
   config.border !== null ? hr.style.border = config.border : null;
   config.height !== null ? hr.style.height = config.height : null;
+  config.marginTop !== null ? hr.style.marginTop = config.marginTop : null;
   config.backgroundColor !== null ? hr.style.backgroundColor = config.backgroundColor : null;
   return hr;
 }
@@ -240,6 +243,68 @@ function trO(palabra, objTranslate) {
   return palabra;
 }
 
+function createTheadCell(celda, index, widthCell, parametros) {
+  const cell = document.createElement('th');
+  if (index < 6) {
+    cell.textContent = celda;
+    cell.style.background = '#000000';
+    cell.style.border = '1px solid #cecece';
+    cell.style.overflow = 'hidden';
+    cell.style.width = `${widthCell}px`;
+    cell.style.fontSize = parametros.fontSize;
+    cell.style.height = '15px';
+    cell.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+  } else {
+    cell.style.display = 'none';
+  }
+  return cell;
+}
+
+function estilosCell(
+  estilos,
+  dato,
+) {
+  const cell = document.createElement('td');
+  cell.textContent = dato;
+  cell.style.borderBottom = '1px solid #cecece';
+  // cell.style.background = background;
+  cell.style.zIndex = 2;
+  cell.style.textAlign = estilos.alignCenter;
+  cell.style.paddingLeft = estilos.paddingLeft;
+  cell.style.fontStyle = estilos.fontStyle;
+  cell.style.fontSize = estilos.fontSize;
+  cell.style.fontWeight = estilos.fontWeight;
+  cell.style.color = estilos.colorText;
+  cell.style.width = `${estilos.width}px`;
+  return cell;
+}
+
+function createTbodyCell(mensaje, estilos, cantidadDeColumnas) {
+  const newRow = document.createElement('tr');
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < cantidadDeColumnas; i++) {
+    let dato = '';
+    if (i === 0) {
+      dato = mensaje.accion;
+    }
+    if (i === 1) {
+      dato = mensaje.concepto;
+    }
+    if (i === 2) {
+      mensaje.anterior !== null ? dato = mensaje.anterior : dato = '';
+    }
+    if (i === 3) {
+      mensaje.actual !== null ? dato = mensaje.actual : dato = '';
+    }
+    const cell = estilosCell(
+      estilos,
+      dato,
+    );
+    newRow.appendChild(cell);
+  }
+  return newRow;
+}
+
 const funcionGuardar = () => {
   // eslint-disable-next-line no-use-before-define
   const miAlerta = new Alerta();
@@ -249,21 +314,28 @@ const funcionGuardar = () => {
   modal.style.display = 'block';
 };
 const funcionGuardarCambio = () => {
-  funciones.GuardarCambio();
+  // funciones.GuardarCambio();
 };
 const funcionGuardarComoNuevo = () => {
-  funciones.GuardarComoNuevo();
+  // funciones.GuardarComoNuevo();
 };
 const funcionRefrescar = () => {
   const url = new URL(window.location.href);
   window.location.href = url.href;
 };
 const funcionHacerFirmar = () => {
-  funciones.Firmar();
+  // funciones.Firmar();
 };
 const funcionSalir = () => {
-  funciones.Salir();
+  console.log('terminar salir');
 };
+
+function cerrarModales() {
+  let modal = document.getElementById('modalAlert');
+  modal.style.display = 'none';
+  modal = document.getElementById('modalAlertM');
+  modal.style.display = 'none';
+}
 
 class Alerta {
   constructor() {
@@ -316,7 +388,11 @@ class Alerta {
     document.body.appendChild(this.modal);
     const idAceptar = document.getElementById('idAceptar');
     idAceptar.addEventListener('click', () => {
-      funciones.Guardar(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
+      cerrarModales();
+      guardarNuevo(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
+      // createInforme(arrayGlobal.objetoMensaje);
+      // guardaNotas(arrayGlobal.objetoControl);
+      // funciones.Guardar(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
       const miAlerta = new Alerta();
       let mensaje = arrayGlobal.mensajesVarios.guardar.esperaAmarillo;
       arrayGlobal.avisoAmarillo.close.display = 'none';
@@ -324,12 +400,32 @@ class Alerta {
       miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje);
       const modal = document.getElementById('modalAlertVerde');
       modal.style.display = 'block';
+
+      const miInforme = new Alerta();
+      miInforme.createInforme(arrayGlobal.objetoMensaje, arrayGlobal.objInforme, objTrad);
     });
   }
 
   createVerde(obj, texto) {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertVerde';
+    this.modal.className = 'modal';
+    this.modal.style.background = 'rgba(224, 220, 220, 0.7)';
+    const modalContent = createDiv(obj.div);
+    const span = createSpan(obj.close);
+    modalContent.appendChild(span);
+    const spanTexto = createSpan(obj.span, texto);
+    modalContent.appendChild(spanTexto);
+
+    this.modal.appendChild(modalContent);
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal);
+  }
+
+  createControl(obj, texto) {
+    this.modal = document.createElement('div');
+    this.modal.id = 'modalAlertCarga';
     this.modal.className = 'modal';
     this.modal.style.background = 'rgba(224, 220, 220, 0.7)';
     const modalContent = createDiv(obj.div);
@@ -525,6 +621,97 @@ class Alerta {
     idHrGuardarComoNuevo.style.display = 'none';
     const idHrFirmar = document.getElementById('idHrFirmar');
     idHrFirmar.style.display = 'none';
+  }
+
+  createInforme(objetoMensaje, objInforme, objTrad) {
+    const obj = objInforme;
+    this.modal = document.createElement('div');
+    this.modal.id = 'modalMensaje';
+    this.modal.className = 'modal';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)';
+    // Crear el contenido del modal
+    const widthScreen = window.innerWidth;
+    const anchoCelda = `${widthScreen * 0.8}px`;
+    obj.divContent.width = anchoCelda;
+    const modalContent = createDiv(obj.divContent);
+
+    //* close
+    let span = createSpan(obj.close);
+    modalContent.appendChild(span);
+
+    //* titulo
+    const titulo = trO(obj.titulo.text, objTrad) || obj.titulo.text;
+    let tipoDeInforme = objetoMensaje.controlNuevoUpdate[0];
+    tipoDeInforme = trO(tipoDeInforme, objTrad) || tipoDeInforme;
+    tipoDeInforme = `${titulo} ${tipoDeInforme}`;
+    span = createSpan(obj.titulo, tipoDeInforme);
+    modalContent.appendChild(span);
+
+    const hr = createHR(obj.hr);
+    modalContent.appendChild(hr);
+
+    //* thead
+    const thead = document.createElement('thead');
+    const newRow = document.createElement('tr');
+    let cantidadDeColumnas = 0;
+    const arrayWidthEncabezado = obj.encabezado.width;
+    let widthCell = 0;
+    obj.encabezado.titulos.forEach((element, index) => {
+      cantidadDeColumnas += 1;
+      const parametros = {
+        fontSize: obj.encabezado.fontSize,
+        fontWeight: obj.encabezado.fontWeight,
+      };
+
+      widthCell = widthScreen * 0.9 * arrayWidthEncabezado[index];
+      let cell = trO(element.toUpperCase(), objTrad) || element.toUpperCase();
+      cell = createTheadCell(cell, index, widthCell, parametros);
+      newRow.appendChild(cell);
+    });
+    thead.style.marginTop = '10px';
+    thead.appendChild(newRow);
+    modalContent.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    objetoMensaje.valor.forEach((element, index) => {
+      let tipoDeAccion = objetoMensaje.tipoDeAccion[index];
+      tipoDeAccion = trO(tipoDeAccion, objTrad) || tipoDeAccion;
+      const mensaje = {
+        accion: tipoDeAccion,
+        concepto: objetoMensaje.nameControl[index],
+        anterior: objetoMensaje.valorAnterior[index],
+        actual: objetoMensaje.valor[index],
+      };
+      widthCell = widthScreen * 0.9 * arrayWidthEncabezado[index];
+      obj.celdas.width = widthCell;
+      // eslint-disable-next-line max-len
+      const newRowTbody = createTbodyCell(mensaje, objInforme.celdas, cantidadDeColumnas);
+      tbody.appendChild(newRowTbody);
+    });
+    modalContent.appendChild(tbody);
+    this.modal.appendChild(modalContent);
+
+    const mensajeInfo = trO(obj.mensajeInfo.text, objTrad) || obj.mensajeInfo.text;
+    span = createSpan(obj.mensajeInfo, mensajeInfo);
+    modalContent.appendChild(span);
+    this.modal.appendChild(modalContent);
+
+    const divButton = createDiv(obj.divButtons);
+
+    const aceptar = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text;
+    obj.btnaccept.text = aceptar;
+    const buttonAceptar = createButton(obj.btnaccept);
+    const cancelar = trO(obj.btncancel.text, objTrad) || obj.btncancel.text;
+    obj.btncancel.text = cancelar;
+    const buttonCancelar = createButton(obj.btncancel);
+
+    divButton.appendChild(buttonAceptar);
+    divButton.appendChild(buttonCancelar);
+    modalContent.appendChild(divButton);
+    this.modal.appendChild(modalContent);
+
+    document.body.appendChild(this.modal);
+    this.modal.style.display = 'block';
   }
 }
 

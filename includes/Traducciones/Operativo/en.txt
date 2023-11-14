@@ -103,4 +103,14 @@ A new control will be saved.
 Changes will be saved.
 Save as...
 A copy of the current one is made.
-The process may take a few moments as the inferred data is checked.
+Wait a few moments, the process is running. The controls are complex digital instruments, during loading it is controlled that everything happens as expected. Thank you!
+Report:
+New
+Removed
+Modified
+Modification
+Action
+Concept
+Former
+Current
+If the data is correct, accept, otherwise you can cancel the operation.\n If you accept, you will no longer be able to undo the action.

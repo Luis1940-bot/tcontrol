@@ -68,6 +68,7 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   </footer>
     <?php
       include_once(MODALS . '/modal.php');
+      include_once(MODALS .'/modalInforme.php');
     ?>
 <script type='module' src='./control.js'></script>
 </body>

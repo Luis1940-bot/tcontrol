@@ -10,7 +10,7 @@ import readJSON from '../../controllers/read-JSON.js';
 import menuModal from '../../controllers/menu.js';
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js';
-// eslint-disable-next-line import/extensions
+// eslint-disable-next-line import/extensions, import/no-named-as-default
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,
@@ -18,7 +18,10 @@ import translate, {
   arrayEspanolOperativo,
 // eslint-disable-next-line import/extensions
 } from '../../controllers/translate.js';
+// eslint-disable-next-line import/extensions
+import Alerta from '../../includes/atoms/alerta.js';
 
+let data = {};
 let translateOperativo = [];
 let espanolOperativo = [];
 const objTranslate = {
@@ -41,8 +44,8 @@ const encabezados = {
 
 function leeVersion(json) {
   readJSON(json)
-    .then((data) => {
-      document.querySelector('.version').innerText = data.version;
+    .then((datas) => {
+      document.querySelector('.version').innerText = datas.version;
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -61,16 +64,16 @@ function configuracionLoad() {
   document.getElementById('wichC').style.display = 'inline';
 }
 
-// function trO(palabra) {
-//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
-//   const index = espanolOperativo.findIndex(
-//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
-//   );
-//   if (index !== -1) {
-//     return translateOperativo[index];
-//   }
-//   return palabra;
-// }
+function trO(palabra) {
+  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+  const index = espanolOperativo.findIndex(
+    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+  );
+  if (index !== -1) {
+    return translateOperativo[index];
+  }
+  return palabra;
+}
 
 async function cargaDeRegistros() {
   const empresaData = await traerRegistros('empresa');
@@ -84,6 +87,27 @@ async function cargaDeRegistros() {
   tablaVacia(nuevoControlData, encabezados);
 }
 
+function mensajeDeCarga() {
+  const miAlerta = new Alerta();
+  const mensaje = trO(arrayGlobal.avisoCargandoControl.span.text);
+  miAlerta.createControl(arrayGlobal.avisoCargandoControl, mensaje);
+  const modal = document.getElementById('modalAlertCarga');
+  modal.style.display = 'block';
+  localStorage.setItem('loadSystem', 0);
+  cargaDeRegistros();
+}
+
+async function arraysLoadTranslate() {
+  const datosUser = localStorage.getItem('datosUser');
+  if (datosUser) {
+    const datos = JSON.parse(datosUser);
+    data = await translate(datos.lng);
+    translateOperativo = data.arrayTranslateOperativo;
+    espanolOperativo = data.arrayEspanolOperativo;
+    mensajeDeCarga();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible';
   // eslint-disable-next-line no-console
@@ -94,15 +118,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       const datos = JSON.parse(datosUser);
       document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
       leeVersion('version');
-      const data = await translate(datos.lng);
-      translateOperativo = data.arrayTranslateOperativo;
-      espanolOperativo = data.arrayEspanolOperativo;
+      const datas = await translate(datos.lng);
+      translateOperativo = datas.arrayTranslateOperativo;
+      espanolOperativo = datas.arrayEspanolOperativo;
       objTranslate.operativoES = [...espanolOperativo];
       objTranslate.operativoTR = [...translateOperativo];
 
       setTimeout(() => {
         configuracionLoad();
-        cargaDeRegistros();
+        // cargaDeRegistros();
+        arraysLoadTranslate();
         spinner.style.visibility = 'hidden';
         // eslint-disable-next-line no-console
         console.timeEnd('timeControl');

@@ -104,3 +104,14 @@ Se guardarán los cambios.
 Guardar como...
 Se hace una copia del actual.
 El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.
+Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!
+Informe:
+Nuevo
+Eliminado
+Modificado
+Modificación
+Acción
+Concepto
+Anterior
+Actual
+Si los datos son correctos acepte, de lo contrario puede cancelar la operación.\n Si acepta ya no podrá deshacer la acción.

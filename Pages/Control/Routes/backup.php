@@ -22,8 +22,8 @@ if ($data_string === false) {
     exit;
 }
 
-// Escribir el objeto en el archivo
-// file_put_contents($file_path, $data_string);
+// Borrar todo el contenido del archivo antes de escribir
+file_put_contents($file_path, '');
 
 if (file_put_contents($file_path, $data_string . PHP_EOL, FILE_APPEND | LOCK_EX ) === false) {
     // Manejar errores de escritura en el archivo

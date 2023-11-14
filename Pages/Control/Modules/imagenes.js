@@ -2,6 +2,7 @@
 import Alerta from '../../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
 import objVariables from '../../../controllers/variables.js';
+// eslint-disable-next-line import/no-named-as-default
 import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayTranslateOperativo,
@@ -35,8 +36,8 @@ let row = 0;
 function buttonImage(id) {
   row = id;
   const miAlerta = new Alerta();
-  const mensaje = trO(objVariables.avisoAmarillo.span.text);
-  miAlerta.createVerde(objVariables.avisoAmarillo, mensaje);
+  const mensaje = trO(objVariables.avisoImagenes.span.text);
+  miAlerta.createVerde(objVariables.avisoImagenes, mensaje);
   const modal = document.getElementById('modalAlertVerde');
   modal.style.display = 'block';
   const imageInput = document.getElementById('imageInput');
