@@ -22,9 +22,9 @@ function closeModal() {
   });
 }
 
-export default function personModal(user) {
+export default function personModal(user, objTranslate) {
   const miAlertaP = new Alerta();
-  miAlertaP.createModalPerson(objVariables.objPerson, user);
+  miAlertaP.createModalPerson(objVariables.objPerson, user, objTranslate);
   const modal = document.getElementById('modalAlertP');
   const closeButton = document.querySelector('.modal-close');
   closeButton.addEventListener('click', closeModal);

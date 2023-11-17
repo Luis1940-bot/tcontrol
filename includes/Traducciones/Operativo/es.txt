@@ -115,3 +115,9 @@ Concepto
 Anterior
 Actual
 Si los datos son correctos acepte, de lo contrario puede cancelar la operación.\n Si acepta ya no podrá deshacer la acción.
+Este control se enviará por email de acuerdo a la configuración de correos.
+Este control NO se enviará por email.
+La tabla no se completó según lo esperado, vuelva a intentarlo.
+No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.
+Al firmar asegúrese de los datos conferidos.
+Firmado por

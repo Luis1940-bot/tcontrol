@@ -10,6 +10,8 @@ import translate, {
 } from '../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
 import guardarNuevo from '../../Pages/Control/Modules/Controladores/guardarNuevo.js';
+// eslint-disable-next-line import/extensions
+import traerFirma from '../../Pages/Control/Modules/Controladores/traerFirma.js';
 
 const objTraductor = {
   operativoES: [],
@@ -115,7 +117,7 @@ function createSpan(config, text) {
   config.right !== null ? span.style.right = config.right : null;
   config.left !== null ? span.style.left = config.left : null;
   config.innerHTML !== null ? span.innerHTML = config.innerHTML : null;
-  config.margin !== null ? span.margin = config.margin : null;
+  config.margin !== null ? span.style.margin = config.margin : null;
   span.style.transition = 'background-color 0.3s';
   config.hoverColor !== null ? span.addEventListener('mouseover', () => {
     span.style.color = config.hoverColor;
@@ -149,8 +151,8 @@ function createInput(config) {
   config.fontFamily !== null ? input.style.fontFamily = config.fontFamily : null;
   config.fontWeight !== null ? input.style.fontWeight = config.fontWeight : null;
   config.innerHTML !== null ? input.innerHTML = config.innerHTML : null;
-  config.placeolder !== null ? input.placeHolder = config.placeHolder : null;
-  config.focus !== null ? input.focus = config.focus : null;
+  config.placeholder !== null ? input.placeHolder = config.placeHolder : null;
+  config.focus !== null ? setTimeout(() => input.focus(), 0) : null;
   input.style.transition = 'background-color 0.3s';
   config.hoverColor !== null ? input.addEventListener('mouseover', () => {
     input.style.color = config.hoverColor;
@@ -159,6 +161,20 @@ function createInput(config) {
     input.style.color = config.fontColor;
   }) : null;
   config.onClick !== null ? input.addEventListener('click', (config.onClick)) : null;
+  input.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      // Lógica que se ejecutará al presionar "Enter"
+      if (config.onEnterPress) {
+        config.onEnterPress();
+      }
+    }
+  });
+  input.addEventListener('focus', () => {
+    // Lógica que se ejecutará al obtener el foco
+    if (config.onFocus) {
+      config.onFocus();
+    }
+  });
   return input;
 }
 
@@ -195,9 +211,9 @@ function createLabel(config) {
   return label;
 }
 
-function createH3(config) {
+function createH3(config, typeAlert) {
   const h3 = document.createElement('h3');
-  h3.textContent = config.text.guardar;
+  h3.textContent = config.text[typeAlert];
   h3.style.fontSize = config.fontSize;
   h3.style.fontColor = config.fontColor;
   config.marginTop !== null ? h3.style.marginTop = config.marginTop : null;
@@ -233,6 +249,9 @@ function createIMG(config) {
 }
 
 function trO(palabra, objTranslate) {
+  if (palabra === undefined) {
+    return '';
+  }
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
   const index = objTranslate.operativoES.findIndex(
     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
@@ -306,12 +325,23 @@ function createTbodyCell(mensaje, estilos, cantidadDeColumnas) {
 }
 
 const funcionGuardar = () => {
-  // eslint-disable-next-line no-use-before-define
-  const miAlerta = new Alerta();
-  const obj = arrayGlobal.objAlertaAceptarCancelar;
-  miAlerta.createAlerta(obj, objTraductor, 'guardar');
-  const modal = document.getElementById('modalAlert');
-  modal.style.display = 'block';
+  const { habilitadoGuardar } = arrayGlobal;
+  if (habilitadoGuardar) {
+    // eslint-disable-next-line no-use-before-define
+    const miAlerta = new Alerta();
+    const obj = arrayGlobal.objAlertaAceptarCancelar;
+    miAlerta.createAlerta(obj, objTraductor, 'guardar');
+    const modal = document.getElementById('modalAlert');
+    modal.style.display = 'block';
+  } else {
+    // eslint-disable-next-line no-use-before-define
+    const miAlerta = new Alerta();
+    const obj = arrayGlobal.avisoRojo;
+    const texto = arrayGlobal.mensajesVarios.guardar.sinModificaciones;
+    miAlerta.createVerde(obj, texto, objTraductor);
+    const modal = document.getElementById('modalAlertVerde');
+    modal.style.display = 'block';
+  }
 };
 const funcionGuardarCambio = () => {
   // funciones.GuardarCambio();
@@ -324,17 +354,39 @@ const funcionRefrescar = () => {
   window.location.href = url.href;
 };
 const funcionHacerFirmar = () => {
-  // funciones.Firmar();
+  // eslint-disable-next-line no-use-before-define
+  const miAlertaFirmar = new Alerta();
+  const obj = arrayGlobal.objAlertaAceptarCancelar;
+  miAlertaFirmar.createFirma(obj, objTraductor, 'firmar');
+  const modal = document.getElementById('modalAlert');
+  modal.style.display = 'block';
 };
 const funcionSalir = () => {
-  console.log('terminar salir');
+
 };
 
 function cerrarModales() {
   let modal = document.getElementById('modalAlert');
   modal.style.display = 'none';
+  modal.remove();
   modal = document.getElementById('modalAlertM');
   modal.style.display = 'none';
+}
+
+async function firmar(firmadoPor) {
+  const pass = document.getElementById('idInputFirma').value;
+  const supervisor = await traerFirma(pass);
+  const modal = document.getElementById('modalAlert');
+  modal.style.display = 'none';
+  modal.remove();
+  const idMensajeFirmado = document.getElementById('idMensajeFirmado');
+  idMensajeFirmado.innerText = `${firmadoPor}: ${supervisor.nombre}`;
+  idMensajeFirmado.style.display = 'block';
+  const divFirma = document.getElementById('idDivFirmar');
+  divFirma.style.display = 'none';
+  const idDivFirmado = document.getElementById('idDivFirmado');
+  idDivFirmado.style.display = 'block';
+  localStorage.setItem('firmado', supervisor);
 }
 
 class Alerta {
@@ -357,7 +409,7 @@ class Alerta {
 
     let texto = trO(obj.titulo.text[typeAlert], objTrad) || obj.titulo.text[typeAlert];
     obj.titulo.text[typeAlert] = texto;
-    const title = createH3(obj.titulo);
+    const title = createH3(obj.titulo, typeAlert);
     modalContent.appendChild(title);
 
     texto = trO(obj.span.text[typeAlert], objTrad) || obj.span.text[typeAlert];
@@ -389,24 +441,105 @@ class Alerta {
     const idAceptar = document.getElementById('idAceptar');
     idAceptar.addEventListener('click', () => {
       cerrarModales();
+      const existenciaControl = arrayGlobal.objetoControl.valor.length;
+      const existenciaMensaje = arrayGlobal.objetoMensaje.valor.length;
+      const recarga = existenciaControl > 0 && existenciaMensaje > 0;
+      if (recarga) {
+        Object.keys(arrayGlobal.objetoControl).forEach((clave) => {
+          arrayGlobal.objetoControl[clave] = [];
+        });
+        Object.keys(arrayGlobal.objetoMensaje).forEach((clave) => {
+          arrayGlobal.objetoMensaje[clave] = [];
+        });
+      }
       guardarNuevo(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
-      // createInforme(arrayGlobal.objetoMensaje);
       // guardaNotas(arrayGlobal.objetoControl);
-      // funciones.Guardar(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
+
       const miAlerta = new Alerta();
       let mensaje = arrayGlobal.mensajesVarios.guardar.esperaAmarillo;
       arrayGlobal.avisoAmarillo.close.display = 'none';
       mensaje = trO(mensaje, objTrad);
-      miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje);
+      miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, null);
       const modal = document.getElementById('modalAlertVerde');
       modal.style.display = 'block';
-
       const miInforme = new Alerta();
       miInforme.createInforme(arrayGlobal.objetoMensaje, arrayGlobal.objInforme, objTrad);
     });
   }
 
-  createVerde(obj, texto) {
+  createFirma(objeto, objTrad, typeAlert) {
+    // Crear el elemento modal
+    const obj = objeto;
+    this.modal = document.createElement('div');
+    this.modal.id = 'modalAlert';
+    this.modal.className = 'modal';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+    // Crear el contenido del modal
+    obj.divContent.height = '260px';
+    const modalContent = createDiv(obj.divContent);
+
+    const span = createSpan(obj.close);
+    modalContent.appendChild(span);
+
+    let texto = trO(obj.titulo.text[typeAlert], objTrad) || obj.titulo.text[typeAlert];
+    obj.titulo.text[typeAlert] = texto;
+    const title = createH3(obj.titulo, typeAlert);
+    modalContent.appendChild(title);
+
+    texto = trO(obj.span.text[typeAlert], objTrad) || obj.span.text[typeAlert];
+    obj.span.text[typeAlert] = texto;
+    const spanTexto = createSpan(obj.span, texto);
+    modalContent.appendChild(spanTexto);
+
+    const firmadoPor = trO('Firmado por', objTrad) || obj.mensajeFirmado.text;
+    obj.divCajita.id = 'idDivFirmar';
+    const divFirmar = createDiv(obj.divCajita);
+    obj.input.id = 'idInputFirma';
+    obj.input.type = 'password';
+    const inputEmail = createInput(obj.input);
+    texto = trO(obj.label.innerText, objTrad) || obj.label.innerText;
+    obj.label.id = 'idLabelFirma';
+    obj.label.for = 'idInputFirma';
+    obj.label.innerText = texto;
+    const labelEmail = createLabel(obj.label);
+    divFirmar.appendChild(inputEmail);
+    divFirmar.appendChild(labelEmail);
+    modalContent.appendChild(divFirmar);
+
+    const divButton = createDiv(obj.divButtons);
+    texto = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text;
+    obj.btnaccept.text = texto;
+    const buttonAceptar = createButton(obj.btnaccept);
+
+    texto = trO(obj.btncancel.text, objTrad) || obj.btncancel.text;
+    obj.btncancel.text = texto;
+    const buttonCancelar = createButton(obj.btncancel);
+    const buttonOk = createButton(obj.btnok);
+
+    divButton.appendChild(buttonAceptar);
+    divButton.appendChild(buttonCancelar);
+    divButton.appendChild(buttonOk);
+
+    modalContent.appendChild(divButton);
+    // Agregar el contenido al modal
+    this.modal.appendChild(modalContent);
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal);
+    const idAceptar = document.getElementById('idAceptar');
+    idAceptar.addEventListener('click', () => {
+      firmar(firmadoPor);
+      //! colocar la firma en el menu
+    });
+    const idInputFirma = document.getElementById('idInputFirma');
+    idInputFirma.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        firmar(firmadoPor);
+      }
+    });
+  }
+
+  createVerde(obj, texto, objTrad) {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertVerde';
     this.modal.className = 'modal';
@@ -414,7 +547,13 @@ class Alerta {
     const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
-    const spanTexto = createSpan(obj.span, texto);
+    let frase = '';
+    if (objTrad === null) {
+      frase = texto;
+    } else {
+      frase = trO(texto, objTrad) || texto;
+    }
+    const spanTexto = createSpan(obj.span, frase);
     modalContent.appendChild(spanTexto);
 
     this.modal.appendChild(modalContent);
@@ -423,7 +562,7 @@ class Alerta {
     document.body.appendChild(this.modal);
   }
 
-  createControl(obj, texto) {
+  createControl(obj, texto, objTrad) {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertCarga';
     this.modal.className = 'modal';
@@ -431,7 +570,13 @@ class Alerta {
     const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
-    const spanTexto = createSpan(obj.span, texto);
+    let frase = '';
+    if (objTrad === null) {
+      frase = texto;
+    } else {
+      frase = trO(texto, objTrad) || texto;
+    }
+    const spanTexto = createSpan(obj.span, frase);
     modalContent.appendChild(spanTexto);
 
     this.modal.appendChild(modalContent);
@@ -440,7 +585,7 @@ class Alerta {
     document.body.appendChild(this.modal);
   }
 
-  createModalPerson(obj, user) {
+  createModalPerson(obj, user, objTranslate) {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertP';
     this.modal.className = 'modal';
@@ -457,7 +602,8 @@ class Alerta {
     const hr = createHR(obj.hr);
     modalContent.appendChild(hr);
 
-    const spanSalir = createSpan(obj.salir, user.salir);
+    const texto = trO(user.salir, objTranslate) || user.salir;
+    const spanSalir = createSpan(obj.salir, texto);
     modalContent.appendChild(spanSalir);
 
     this.modal.appendChild(modalContent);
@@ -536,14 +682,29 @@ class Alerta {
     const imgFirmar = createIMG(obj.imgFirmar);
     texto = trO(obj.firmar.text, objTranslate) || obj.firmar.text;
     const spanFirmar = createSpan(obj.firmar, texto);
+    const spanFirmado = createSpan(obj.mensajeFirmado, null);
     div.appendChild(imgFirmar);
     div.appendChild(spanFirmar);
+
+    modalContent.appendChild(span);
+    modalContent.appendChild(div);
+
+    obj.divCajita.id = 'idDivFirmado';
+    obj.divCajita.hoverBackground = null;
+    obj.divCajita.hoverColor = null;
+    obj.divCajita.cursor = null;
+    div = createDiv(obj.divCajita);
+
+    div.appendChild(spanFirmado);
     modalContent.appendChild(div);
     obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrFirmar';
     hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+    obj.divCajita.hoverBackground = '#cecece';
+    obj.divCajita.hoverColor = '#cecece';
+    obj.divCajita.cursor = 'pointer';
     //! fin firmar
 
     //! refrescar
@@ -613,18 +774,23 @@ class Alerta {
     idDivGuardarComo.style.display = 'none';
     const idDivGuardarComoNuevo = document.getElementById('idDivGuardarComoNuevo');
     idDivGuardarComoNuevo.style.display = 'none';
-    const idDivFirmar = document.getElementById('idDivFirmar');
-    idDivFirmar.style.display = 'none';
+    // const idDivFirmar = document.getElementById('idDivFirmar');
+    // idDivFirmar.style.display = 'block';
     const idHrGuardarCambio = document.getElementById('idHrGuardarCambio');
     idHrGuardarCambio.style.display = 'none';
     const idHrGuardarComoNuevo = document.getElementById('idHrGuardarComoNuevo');
     idHrGuardarComoNuevo.style.display = 'none';
-    const idHrFirmar = document.getElementById('idHrFirmar');
-    idHrFirmar.style.display = 'none';
+    // const idHrFirmar = document.getElementById('idHrFirmar');
+    // idHrFirmar.style.display = 'none';
+    const idDivFirmado = document.getElementById('idDivFirmado');
+    idDivFirmado.style.display = 'none';
   }
 
   createInforme(objetoMensaje, objInforme, objTrad) {
     const obj = objInforme;
+    const CheckBoxEmail = document.getElementById('idCheckBoxEmail');
+    const estaChecked = CheckBoxEmail.checked;
+
     this.modal = document.createElement('div');
     this.modal.id = 'modalMensaje';
     this.modal.className = 'modal';
@@ -647,8 +813,23 @@ class Alerta {
     span = createSpan(obj.titulo, tipoDeInforme);
     modalContent.appendChild(span);
 
+    const usuario = document.getElementById('sessionPerson').textContent;
+    obj.mensajeInfo.margin = '0px 0px 5px 5px';
+    span = createSpan(obj.mensajeInfo, usuario);
+    modalContent.appendChild(span);
+
     const hr = createHR(obj.hr);
     modalContent.appendChild(hr);
+
+    let mensajeEmail;
+    mensajeEmail = trO(obj.enviaPorEmail.noEnvia, objTrad) || obj.enviaPorEmail.noEnvia;
+    if (estaChecked) {
+      mensajeEmail = trO(obj.enviaPorEmail.envia, objTrad) || obj.enviaPorEmail.envia;
+    }
+    obj.mensajeInfo.id = 'idMensajeEmail';
+    obj.mensajeInfo.margin = '5px 0px 0px 0px';
+    const spanEmail = createSpan(obj.mensajeInfo, mensajeEmail);
+    modalContent.appendChild(spanEmail);
 
     //* thead
     const thead = document.createElement('thead');
@@ -691,6 +872,7 @@ class Alerta {
     modalContent.appendChild(tbody);
     this.modal.appendChild(modalContent);
 
+    obj.mensajeInfo.id = 'idMensajeInfo';
     const mensajeInfo = trO(obj.mensajeInfo.text, objTrad) || obj.mensajeInfo.text;
     span = createSpan(obj.mensajeInfo, mensajeInfo);
     modalContent.appendChild(span);
@@ -712,6 +894,16 @@ class Alerta {
 
     document.body.appendChild(this.modal);
     this.modal.style.display = 'block';
+  }
+
+  destroyAlerta() {
+    if (this.modal) {
+      // Elimina el elemento modal del DOM
+      this.modal.remove();
+
+      // Limpia la referencia al elemento
+      this.modal = null;
+    }
   }
 }
 

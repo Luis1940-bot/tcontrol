@@ -115,3 +115,9 @@ Conceito
 Antigo
 Atual
 Se os dados estiverem corretos, aceite, caso contrário você poderá cancelar a operação.\n Se aceitar, não será mais possível desfazer a ação.
+Este controle será enviado por email conforme configuração do email.
+Este controle NÃO será enviado por email.
+A tabela não foi preenchida conforme o esperado. Tente novamente.
+Não fez nenhuma alteração àquelas determinadas pela configuração. Você não poderá salvar nenhum controle.
+Ao assinar, certifique-se dos dados fornecidos.
+Assinado por

@@ -23,6 +23,7 @@ function recorroTable(objetoControl, arrayControl) {
     const numberDoc = document.getElementById('numberDoc').textContent;
     const tbody = document.querySelector('tbody');
     const tr = tbody.querySelectorAll('tr');
+
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length; i++) {
       let valor;
@@ -120,6 +121,7 @@ function recorroTable(objetoControl, arrayControl) {
           objetoControl.valorOBS.push(valorOBS);
           objetoControl.familiaselector.push(familiaselector);
           objetoControl.observacion.push(observacion);
+          // objetoControl.requerido.push(arrayControl[i][21]);
           imagenes.src.length > 0 ? objetoControl.imagenes.push(imagenes) : objetoControl.imagenes.push('');
           objetoControl.displayRow.push(displayRow);
         }

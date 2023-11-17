@@ -6,9 +6,9 @@ function comparador(arrayQuery, numberDoc) {
     const { objetoControl } = arrayGlobal;
     const { objetoMemoria } = arrayGlobal;
     const { objetoMensaje } = arrayGlobal;
-    // console.log(arrayQuery);
     // console.log(objetoControl);
     // console.log(objetoMemoria);
+    // console.log(objetoMensaje);
     let diferenciasConIndices = [];
 
     Object.keys(objetoControl).forEach((key) => {

@@ -42,6 +42,6 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
       include_once(INCLUDES . '/footer.php');
     ?>
   </footer>
-<script type='module' src='../../Pages/Landing/landing.js'></script>
+<script type='module' src='../../Pages/Landing/landing.js?v=<?php echo(rand()); ?>'></script>
 </body>
 </html>

@@ -114,3 +114,9 @@ Concept
 Former
 Current
 If the data is correct, accept, otherwise you can cancel the operation.\n If you accept, you will no longer be able to undo the action.
+This control will be sent by email according to the email configuration.
+This control will NOT be sent by email.
+The table did not populate as expected, please try again.
+Did not make any changes to those determined by configuration. You will not be able to save any controls.
+When signing, be sure of the data provided.
+Signed by

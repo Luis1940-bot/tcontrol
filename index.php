@@ -36,6 +36,6 @@ if (isset($_SESSION['factum_validation']['email'] )) {
         </a>
         </div>
     </div>
-<script type='module' src='./controllers/index.js'></script>
+<script type='module' src='./controllers/index.js?v=<?php echo(rand()); ?>'></script>
 </body>
 </html>

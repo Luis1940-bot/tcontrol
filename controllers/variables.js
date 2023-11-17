@@ -22,6 +22,7 @@ let objetoControl = {
   observacion: [],
   imagenes: [],
   displayRow: [],
+  // requerido: [],
 };
 let objetoMemoria = {
   fecha: [],
@@ -51,7 +52,7 @@ let objetoMensaje = {
   controlNuevoUpdate: [],
   valorAnterior: [],
 };
-
+let habilitadoGuardar = false;
 // const funcionDeAceptar = () => {
 //   const modal = document.getElementById('modalAlert');
 //   modal.style.display = 'none';
@@ -61,33 +62,39 @@ let objetoMensaje = {
 const funcionDeCancelar = () => {
   const modal = document.getElementById('modalAlert');
   modal.style.display = 'none';
+  modal.remove();
 };
 const funcionDeOk = () => {
   const modal = document.getElementById('modalAlert');
   modal.style.display = 'none';
+  modal.remove();
 };
 const funcionDeClose = () => {
   const modal = document.getElementById('modalAlert');
-  const modalContent = document.querySelector('.modal-content');
-  modalContent.innerHTML = '';
   modal.style.display = 'none';
+  modal.remove();
 };
 const funcionDeCloseP = () => {
   const modal = document.getElementById('modalAlertP');
-  const modalContent = document.querySelector('.modal-content');
-  modalContent.innerHTML = '';
   modal.style.display = 'none';
+  modal.remove();
 };
 const funcionDeCloseM = () => {
   const modal = document.getElementById('modalAlertM');
-  const modalContent = document.querySelector('.modal-content');
-  modalContent.innerHTML = '';
   modal.style.display = 'none';
+  modal.remove();
 };
 
 const closeVentanaVerdeRoja = () => {
   const modal = document.getElementById('modalAlertVerde');
   modal.style.display = 'none';
+  modal.remove();
+};
+
+const closeVentanaVerdeRojaImg = () => {
+  const modal = document.getElementById('modalAlertVerde');
+  modal.style.display = 'none';
+  modal.remove();
 };
 
 const funcionLogOut = () => {
@@ -96,10 +103,15 @@ const funcionLogOut = () => {
 };
 
 const funcionDeCloseInf = () => {
-  const modal = document.getElementById('modalMensaje');
-  const modalContent = document.querySelector('.modal-content');
-  modalContent.innerHTML = '';
+  let modal = document.getElementById('modalMensaje');
   modal.style.display = 'none';
+  modal.remove();
+  modal = document.getElementById('modalAlertVerde');
+  modal.style.display = 'none';
+  modal.remove();
+  modal = document.getElementById('modalAlertM');
+  modal.style.display = 'none';
+  modal.remove();
 };
 
 const arrayGlobal = {
@@ -113,6 +125,7 @@ const objAlertaAceptarCancelar = {
       guardar: 'Guardar',
       guardarCambio: 'Guardar cambios',
       guardarComoNuevo: 'Guardar como...',
+      firmar: 'Firmar',
     },
     fontSize: '20px',
     fontColor: '#212121',
@@ -129,8 +142,9 @@ const objAlertaAceptarCancelar = {
       guardar: 'Se guardará un control nuevo.',
       guardarCambio: 'Se guardarán los cambios.',
       guardarComoNuevo: 'Se hace una copia del actual.',
+      firmar: 'Al firmar asegúrese de los datos conferidos.',
     },
-    fontSize: '14px',
+    fontSize: '12px',
     fontColor: '#212121',
     marginTop: '0px',
     display: 'block',
@@ -278,8 +292,91 @@ const objAlertaAceptarCancelar = {
     hoverBackground: null,
     hoverColor: 'red',
     innerHTML: '&times',
+    margin: null,
     fontStyle: null,
     onClick: funcionDeClose,
+  },
+  input: {
+    id: null,
+    type: null,
+    name: null,
+    value: null,
+    className: null,
+    height: '30px',
+    width: '50%',
+    border: null,
+    checked: null,
+    color: '#212121',
+    backgroundColor: null,
+    padding: null,
+    margin: '10px auto 0px auto',
+    cursor: 'text',
+    borderRadius: '5px 5px 5px 5px',
+    outline: null,
+    boxShadow: null,
+    textAlign: 'center',
+    fontSize: '18px',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    fontWeight: '700',
+    fontColor: '#212121',
+    hoverColor: null,
+    hoverBackground: null,
+    innerHTML: null,
+    placeHolder: null,
+    focus: null,
+    onClick: null,
+    onEnterPress: null,
+  },
+  label: {
+    id: null,
+    innerText: 'Hacer firmar',
+    className: null,
+    height: 'auto',
+    width: '100%',
+    border: null,
+    color: null,
+    backgroundColor: null,
+    padding: null,
+    margin: null,
+    cursor: null,
+    borderRadius: null,
+    boxShadow: null,
+    textAlign: null,
+    fontSize: '10px',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    fontWeight: '500',
+    hoverColor: null,
+    hoverBackground: null,
+    innerHTML: null,
+    onClick: null,
+    active: null,
+    before: null,
+    after: null,
+    htmlFor: null,
+  },
+  divCajita: {
+    id: null,
+    position: 'relative',
+    borderRadius: null,
+    width: '100%',
+    height: '95px',
+    background: '#ffffff',
+    border: null,
+    boxShadow: null,
+    margin: null,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '5px',
+    overflow: 'hidden',
+    className: 'div-cajita',
+    textAlign: 'center',
+    gap: '2px',
+    top: '0px',
+    alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    cursor: null,
   },
 };
 
@@ -304,6 +401,7 @@ const avisoVerde = {
     hoverBackground: null,
     hoverColor: 'red',
     innerHTML: '&times',
+    margin: null,
     onClick: closeVentanaVerdeRoja,
     fontStyle: null,
   },
@@ -351,6 +449,7 @@ const avisoVerde = {
     hoverBackground: null,
     hoverColor: null,
     innerHTML: null,
+    margin: null,
     fontStyle: null,
   },
 };
@@ -423,6 +522,7 @@ const avisoAmarillo = {
     hoverBackground: null,
     hoverColor: null,
     innerHTML: null,
+    margin: null,
     fontStyle: null,
   },
 };
@@ -433,7 +533,7 @@ const avisoImagenes = {
     fontSize: '18px',
     fontColor: '#ffffff',
     marginTop: '0px',
-    display: 'none',
+    display: 'block',
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     alignSelf: 'center',
     className: 'verde-close',
@@ -449,7 +549,7 @@ const avisoImagenes = {
     innerHTML: '&times',
     margin: null,
     fontStyle: null,
-    onClick: closeVentanaVerdeRoja,
+    onClick: closeVentanaVerdeRojaImg,
   },
   div: {
     id: null,
@@ -495,6 +595,7 @@ const avisoImagenes = {
     hoverBackground: null,
     hoverColor: null,
     innerHTML: null,
+    margin: null,
     fontStyle: null,
   },
 };
@@ -519,6 +620,7 @@ const avisoRojo = {
     hoverBackground: null,
     hoverColor: 'red',
     innerHTML: '&times',
+    margin: null,
     fontStyle: null,
     onClick: closeVentanaVerdeRoja,
   },
@@ -591,6 +693,7 @@ const avisoCargandoControl = {
     hoverBackground: null,
     hoverColor: 'red',
     innerHTML: '&times',
+    margin: null,
     fontStyle: null,
     onClick: null,
   },
@@ -638,6 +741,7 @@ const avisoCargandoControl = {
     hoverBackground: null,
     hoverColor: null,
     innerHTML: null,
+    margin: null,
     fontStyle: null,
   },
 };
@@ -672,6 +776,7 @@ const objPerson = {
     hoverBackground: null,
     hoverColor: 'red',
     innerHTML: '&times',
+    margin: null,
     fontStyle: null,
     onClick: funcionDeCloseP,
   },
@@ -787,6 +892,7 @@ const objMenu = {
     hoverBackground: null,
     hoverColor: 'red',
     innerHTML: '&times',
+    margin: null,
     fontStyle: null,
     onClick: funcionDeCloseM,
   },
@@ -998,6 +1104,29 @@ const objMenu = {
     margin: null,
     fontStyle: null,
   },
+  mensajeFirmado: {
+    text: 'Firmado por:',
+    id: 'idMensajeFirmado',
+    fontSize: '10px',
+    fontColor: '#0066FF',
+    marginTop: null,
+    display: 'none',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: null,
+    className: 'comentarios',
+    fontWeight: '500',
+    cursor: null,
+    padding: null,
+    position: null,
+    top: null,
+    right: null,
+    left: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    margin: '0px 0px 2px 5px',
+    fontStyle: 'italic',
+  },
   divCajita: {
     id: null,
     position: 'relative',
@@ -1101,6 +1230,7 @@ const objMenu = {
     placeHolder: null,
     focus: null,
     onClick: null,
+    onEnterPress: null,
   },
   label: {
     id: null,
@@ -1141,9 +1271,14 @@ const objMenu = {
 const mensajesVarios = {
   guardar: {
     esperaAmarillo: 'El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.',
+    sinModificaciones: 'No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.',
   },
   cargarControl: {
     esperaVerde: 'Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!',
+    fallaCarga: 'La tabla no se completó según lo esperado, vuelva a intentarlo.',
+  },
+  controlSinCambios: {
+    vacioDeDatos: 'No hay modificaciones en el control que requieran ser guardadas, verifique los datos inferidos ya que los datos presentes son los estándares.',
   },
 };
 const objInforme = {
@@ -1190,6 +1325,7 @@ const objInforme = {
     hoverBackground: null,
     hoverColor: 'red',
     innerHTML: '&times',
+    margin: null,
     fontStyle: null,
     onClick: funcionDeCloseInf,
   },
@@ -1198,7 +1334,7 @@ const objInforme = {
     position: 'relative',
     borderRadius: '10px 10px 10px 10px',
     width: '300px',
-    height: '600px',
+    height: 'auto',
     background: '#ffffff',
     border: '3px solid #000000',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
@@ -1307,7 +1443,7 @@ const objInforme = {
     hoverBackground: '#cecece',
     hoverColor: '#000000',
     marginLeft: null,
-    // onClick: funcionDeCancelar,
+    onClick: funcionDeCloseInf,
   },
   mensajeInfo: {
     text: 'Si los datos son correctos acepte, de lo contrario puede cancelar la operación.\n Si acepta ya no podrá deshacer la acción.',
@@ -1332,6 +1468,10 @@ const objInforme = {
     margin: null,
     fontStyle: 'italic',
   },
+  enviaPorEmail: {
+    envia: 'Este control se enviará por email de acuerdo a la configuración de correos.',
+    noEnvia: 'Este control NO se enviará por email.',
+  },
 };
 
 export default {
@@ -1350,4 +1490,5 @@ export default {
   avisoImagenes,
   avisoCargandoControl,
   objInforme,
+  habilitadoGuardar,
 };

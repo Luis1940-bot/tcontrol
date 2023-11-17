@@ -28,6 +28,10 @@ let translateOperativo = [];
 let espanolOperativo = [];
 let translateArchivo = [];
 let espanolArchivo = [];
+const objTranslate = {
+  operativoES: [...translateOperativo],
+  operativoTR: [...espanolOperativo],
+};
 
 const widthScreen = window.innerWidth;
 let arrayWidthEncabezado;
@@ -455,7 +459,7 @@ function completaTabla(arrayControl) {
   });
   const modal = document.getElementById('modalAlertCarga');
   const vecesLoad = localStorage.getItem('loadSystem');
-  vecesLoad >= 3 ? modal.style.display = 'none' : null;
+  vecesLoad >= 3 ? (modal.style.display = 'none', modal.remove()) : null;
 }
 
 async function arraysLoadTranslate() {
@@ -480,9 +484,10 @@ function loadTabla(arrayControl, encabezados) {
     encabezado(encabezados);
     completaTabla(arrayControl, encabezados);
     const cantidadDeFilas = document.querySelector('table tbody');
+    let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga;
     if (cantidadDeFilas.childElementCount !== arrayControl.length) {
-      const mensaje = trO('La tabla no se completó según lo esperado, vuelva a intentarlo.') || 'La tabla no se completó según lo esperado, vuelva a intentarlo.';
-      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje);
+      mensaje = trO(mensaje) || mensaje;
+      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null);
       const modal = document.getElementById('modalAlert');
       modal.style.display = 'block';
     }
@@ -490,7 +495,7 @@ function loadTabla(arrayControl, encabezados) {
       hacerMemoria(arrayControl);
     }, 1000);
   } else {
-    miAlerta.createVerde(arrayGlobal.avisoRojo, null);
+    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTranslate);
     const modal = document.getElementById('modalAlert');
     modal.style.display = 'block';
   }

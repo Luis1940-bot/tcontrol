@@ -90,7 +90,7 @@ async function cargaDeRegistros() {
 function mensajeDeCarga() {
   const miAlerta = new Alerta();
   const mensaje = trO(arrayGlobal.avisoCargandoControl.span.text);
-  miAlerta.createControl(arrayGlobal.avisoCargandoControl, mensaje);
+  miAlerta.createControl(arrayGlobal.avisoCargandoControl, mensaje, objTranslate);
   const modal = document.getElementById('modalAlertCarga');
   modal.style.display = 'block';
   localStorage.setItem('loadSystem', 0);
@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible';
   // eslint-disable-next-line no-console
   console.time('timeControl');
+  arrayGlobal.habilitadoGuardar = false;
   try {
     const datosUser = localStorage.getItem('datosUser');
     if (datosUser) {
@@ -155,7 +156,14 @@ document.addEventListener('DOMContentLoaded', () => {
       person: persona,
       salir: 'Cerrar sesión',
     };
-    personModal(user);
+    personModal(user, objTranslate);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tableControl = document.getElementById('tableControl');
+  tableControl.addEventListener('change', () => {
+    arrayGlobal.habilitadoGuardar = true;
   });
 });
 
@@ -164,3 +172,30 @@ goLanding.addEventListener('click', () => {
   const url = '../Landing';
   window.location.href = url;
 });
+
+if (navigator.connection) {
+  const connectionType = navigator.connection.type;
+
+  switch (connectionType) {
+    case 'wifi':
+      console.log('El usuario está conectado a través de Wi-Fi.');
+      break;
+    case 'cellular':
+      console.log('El usuario está conectado a través de una red celular.');
+      break;
+    case 'ethernet':
+      console.log('El usuario está conectado a través de una conexión Ethernet.');
+      break;
+    case 'none':
+      console.log('El usuario no tiene conexión a Internet.');
+      break;
+    default:
+      console.log('Tipo de conexión no reconocido:', connectionType);
+  }
+
+  // Puedes acceder a más detalles de la conexión, como la velocidad
+  const connectionSpeed = navigator.connection.downlink;
+  console.log('Velocidad de conexión:', connectionSpeed);
+} else {
+  console.log('El navegador no admite la API de Network Information.');
+}

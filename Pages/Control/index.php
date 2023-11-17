@@ -55,7 +55,7 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
     </div>
   </header>
   <main>
-    <table>
+    <table id='tableControl'>
         <thead></thead>
         <tbody></tbody>
     </table>
@@ -70,6 +70,6 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
       include_once(MODALS . '/modal.php');
       include_once(MODALS .'/modalInforme.php');
     ?>
-<script type='module' src='./control.js'></script>
+<script type='module' src='./control.js?v=<?php echo(rand()); ?>'></script>
 </body>
 </html>

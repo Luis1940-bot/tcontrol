@@ -20,8 +20,15 @@ let translateOperativo = [];
 let espanolOperativo = [];
 // let translateArchivo = [];
 // let espanolArchivo = [];
-
+// const objTranslate = {
+//   operativoES: [...translateOperativo],
+//   operativoTR: [...espanolOperativo],
+// };
+const reader = new FileReader();
 function trO(palabra) {
+  if (palabra === undefined) {
+    return '';
+  }
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
   const index = espanolOperativo.findIndex(
     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
@@ -36,14 +43,14 @@ let row = 0;
 function buttonImage(id) {
   row = id;
   const miAlerta = new Alerta();
-  const mensaje = trO(objVariables.avisoImagenes.span.text);
-  miAlerta.createVerde(objVariables.avisoImagenes, mensaje);
+  const mensaje = trO(objVariables.avisoImagenes.span.text) || objVariables.avisoImagenes.span.text;
+  miAlerta.createVerde(objVariables.avisoImagenes, mensaje, null);
   const modal = document.getElementById('modalAlertVerde');
   modal.style.display = 'block';
   const imageInput = document.getElementById('imageInput');
   setTimeout(() => {
     imageInput.click();
-  }, 1500);
+  }, 500);
 }
 
 function generateLi(image) {
@@ -60,7 +67,7 @@ function generateLi(image) {
 
 function loadImage(selectedFile) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+    // const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
       img.src = e.target.result;
@@ -75,6 +82,7 @@ function loadImage(selectedFile) {
       img.onerror = reject;
       const modal = document.getElementById('modalAlertVerde');
       modal.style.display = 'none';
+      modal.remove();
     };
     reader.readAsDataURL(selectedFile);
   });
@@ -82,8 +90,12 @@ function loadImage(selectedFile) {
 
 const imageInput = document.getElementById('imageInput');
 imageInput.addEventListener('change', async (event) => {
-  const selectedFile = event.target.files[0];
-  if (selectedFile) {
+  event.preventDefault();
+  const selectedFiles = event.target.files;
+  // Verificar si se seleccionaron archivos
+  if (selectedFiles.length > 0) {
+    const selectedFile = selectedFiles[0];
+
     if (/\.(jpg|jpeg|bmp|png)$/i.test(selectedFile.name)) {
       try {
         const img = await loadImage(selectedFile);
@@ -96,6 +108,11 @@ imageInput.addEventListener('change', async (event) => {
       // eslint-disable-next-line no-alert
       alert('Por favor, selecciona un archivo de imagen válido.');
     }
+  } else {
+    // No se seleccionaron archivos (se presionó "Cancelar")
+    const modal = document.getElementById('modalAlertVerde');
+    modal.style.display = 'none';
+    modal.remove();
   }
 });
 
@@ -107,6 +124,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     data = await translate(datos.lng);
     translateOperativo = data.arrayTranslateOperativo;
     espanolOperativo = data.arrayEspanolOperativo;
+    // objTranslate.operativoES = [...translateOperativo];
+    // objTranslate.operativoTR = [...espanolOperativo];
   }
 });
 

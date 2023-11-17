@@ -57,6 +57,6 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
       include_once(INCLUDES . '/footer.php');
     ?>
   </footer>
-<script type='module' src='../../Pages/Home/home.js'></script>
+<script type='module' src='../../Pages/Home/home.js?v=<?php echo(rand()); ?>'></script>
 </body>
 </html>
