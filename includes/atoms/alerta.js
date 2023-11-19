@@ -12,6 +12,8 @@ import translate, {
 import guardarNuevo from '../../Pages/Control/Modules/Controladores/guardarNuevo.js';
 // eslint-disable-next-line import/extensions
 import traerFirma from '../../Pages/Control/Modules/Controladores/traerFirma.js';
+// eslint-disable-next-line import/extensions
+import guardaNotas from '../../Pages/Control/Modules/Controladores/guardaNotas.js';
 
 const objTraductor = {
   operativoES: [],
@@ -262,67 +264,67 @@ function trO(palabra, objTranslate) {
   return palabra;
 }
 
-function createTheadCell(celda, index, widthCell, parametros) {
-  const cell = document.createElement('th');
-  if (index < 6) {
-    cell.textContent = celda;
-    cell.style.background = '#000000';
-    cell.style.border = '1px solid #cecece';
-    cell.style.overflow = 'hidden';
-    cell.style.width = `${widthCell}px`;
-    cell.style.fontSize = parametros.fontSize;
-    cell.style.height = '15px';
-    cell.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-  } else {
-    cell.style.display = 'none';
-  }
-  return cell;
-}
+// function createTheadCell(celda, index, widthCell, parametros) {
+//   const cell = document.createElement('th');
+//   if (index < 6) {
+//     cell.textContent = celda;
+//     cell.style.background = '#000000';
+//     cell.style.border = '1px solid #cecece';
+//     cell.style.overflow = 'hidden';
+//     cell.style.width = `${widthCell}px`;
+//     cell.style.fontSize = parametros.fontSize;
+//     cell.style.height = '15px';
+//     cell.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+//   } else {
+//     cell.style.display = 'none';
+//   }
+//   return cell;
+// }
 
-function estilosCell(
-  estilos,
-  dato,
-) {
-  const cell = document.createElement('td');
-  cell.textContent = dato;
-  cell.style.borderBottom = '1px solid #cecece';
-  // cell.style.background = background;
-  cell.style.zIndex = 2;
-  cell.style.textAlign = estilos.alignCenter;
-  cell.style.paddingLeft = estilos.paddingLeft;
-  cell.style.fontStyle = estilos.fontStyle;
-  cell.style.fontSize = estilos.fontSize;
-  cell.style.fontWeight = estilos.fontWeight;
-  cell.style.color = estilos.colorText;
-  cell.style.width = `${estilos.width}px`;
-  return cell;
-}
+// function estilosCell(
+//   estilos,
+//   dato,
+// ) {
+//   const cell = document.createElement('td');
+//   cell.textContent = dato;
+//   cell.style.borderBottom = '1px solid #cecece';
+//   // cell.style.background = background;
+//   cell.style.zIndex = 2;
+//   cell.style.textAlign = estilos.alignCenter;
+//   cell.style.paddingLeft = estilos.paddingLeft;
+//   cell.style.fontStyle = estilos.fontStyle;
+//   cell.style.fontSize = estilos.fontSize;
+//   cell.style.fontWeight = estilos.fontWeight;
+//   cell.style.color = estilos.colorText;
+//   cell.style.width = `${estilos.width}px`;
+//   return cell;
+// }
 
-function createTbodyCell(mensaje, estilos, cantidadDeColumnas) {
-  const newRow = document.createElement('tr');
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < cantidadDeColumnas; i++) {
-    let dato = '';
-    if (i === 0) {
-      dato = mensaje.accion;
-    }
-    if (i === 1) {
-      dato = mensaje.concepto;
-    }
-    if (i === 2) {
-      mensaje.anterior !== null ? dato = mensaje.anterior : dato = '';
-    }
-    if (i === 3) {
-      mensaje.actual !== null ? dato = mensaje.actual : dato = '';
-    }
-    const cell = estilosCell(
-      estilos,
-      dato,
-    );
-    newRow.appendChild(cell);
-  }
-  return newRow;
-}
+// function createTbodyCell(mensaje, estilos, cantidadDeColumnas) {
+//   const newRow = document.createElement('tr');
+//   // eslint-disable-next-line no-plusplus
+//   for (let i = 0; i < cantidadDeColumnas; i++) {
+//     let dato = '';
+//     if (i === 0) {
+//       dato = mensaje.accion;
+//     }
+//     if (i === 1) {
+//       dato = mensaje.concepto;
+//     }
+//     if (i === 2) {
+//       mensaje.anterior !== null ? dato = mensaje.anterior : dato = '';
+//     }
+//     if (i === 3) {
+//       mensaje.actual !== null ? dato = mensaje.actual : dato = '';
+//     }
+//     const cell = estilosCell(
+//       estilos,
+//       dato,
+//     );
+//     newRow.appendChild(cell);
+//   }
+//   return newRow;
+// }
 
 const funcionGuardar = () => {
   const { habilitadoGuardar } = arrayGlobal;
@@ -386,7 +388,30 @@ async function firmar(firmadoPor) {
   divFirma.style.display = 'none';
   const idDivFirmado = document.getElementById('idDivFirmado');
   idDivFirmado.style.display = 'block';
-  localStorage.setItem('firmado', supervisor);
+  localStorage.setItem('firmado', JSON.stringify(supervisor));
+  const configMenu = {
+    guardar: true,
+    guardarComo: false,
+    guardarCambios: false,
+    firma: false,
+    configFirma: supervisor,
+  };
+  setTimeout(() => {
+    const menu = document.getElementById('modalAlertM');
+    menu.style.display = 'none';
+    menu.remove();
+  }, 1000);
+  localStorage.setItem('config_menu', JSON.stringify(configMenu));
+}
+
+function limpiaArrays() {
+  const existenciaControl = arrayGlobal.objetoControl.valor.length;
+  const recarga = existenciaControl > 0;
+  if (recarga) {
+    Object.keys(arrayGlobal.objetoControl).forEach((clave) => {
+      arrayGlobal.objetoControl[clave] = [];
+    });
+  }
 }
 
 class Alerta {
@@ -441,29 +466,42 @@ class Alerta {
     const idAceptar = document.getElementById('idAceptar');
     idAceptar.addEventListener('click', () => {
       cerrarModales();
-      const existenciaControl = arrayGlobal.objetoControl.valor.length;
-      const existenciaMensaje = arrayGlobal.objetoMensaje.valor.length;
-      const recarga = existenciaControl > 0 && existenciaMensaje > 0;
-      if (recarga) {
-        Object.keys(arrayGlobal.objetoControl).forEach((clave) => {
-          arrayGlobal.objetoControl[clave] = [];
-        });
-        Object.keys(arrayGlobal.objetoMensaje).forEach((clave) => {
-          arrayGlobal.objetoMensaje[clave] = [];
-        });
-      }
+      limpiaArrays();
       guardarNuevo(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
-      // guardaNotas(arrayGlobal.objetoControl);
+      const requerido = JSON.parse(localStorage.getItem('requerido'));
 
-      const miAlerta = new Alerta();
-      let mensaje = arrayGlobal.mensajesVarios.guardar.esperaAmarillo;
-      arrayGlobal.avisoAmarillo.close.display = 'none';
-      mensaje = trO(mensaje, objTrad);
-      miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, null);
-      const modal = document.getElementById('modalAlertVerde');
-      modal.style.display = 'block';
-      const miInforme = new Alerta();
-      miInforme.createInforme(arrayGlobal.objetoMensaje, arrayGlobal.objInforme, objTrad);
+      if (requerido.requerido) {
+        const miAlerta = new Alerta();
+        let mensaje = arrayGlobal.mensajesVarios.guardar.esperaAmarillo;
+        arrayGlobal.avisoAmarillo.close.display = 'none';
+        mensaje = trO(mensaje, objTrad);
+        miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, null);
+        const modal = document.getElementById('modalAlertVerde');
+        modal.style.display = 'block';
+        // const miInforme = new Alerta();
+        guardaNotas(arrayGlobal.objetoControl);
+      } else {
+        limpiaArrays();
+        const fila = 1;
+        const { idLTYcontrol } = requerido;
+        const table = document.querySelector('#tableControl');
+        const tbody = table.querySelector('tbody');
+        let filas = tbody.querySelector(`tr:nth-child(${fila})`);
+        let celda = filas.querySelector('td:nth-child(6)');
+        let id = celda.textContent.trim();
+        let incremento = fila;
+        while (idLTYcontrol !== id) {
+          filas.style.backgroundColor = '#ffffff';
+          incremento += 1;
+          filas = tbody.querySelector(`tr:nth-child(${incremento})`);
+          celda = filas.querySelector('td:nth-child(6)');
+          id = celda.textContent.trim();
+        }
+        filas.style.backgroundColor = '#f7bfc6';
+        const modal = document.getElementById('modalAlertM');
+        modal.style.display = 'none';
+        modal.remove();
+      }
     });
   }
 
@@ -613,6 +651,10 @@ class Alerta {
   }
 
   createModalMenu(objeto, objTranslate) {
+    const configFirma = JSON.parse(localStorage.getItem('firma'));
+    let configMenu = JSON.parse(localStorage.getItem('config_menu'));
+    const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
+
     const obj = objeto;
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertM';
@@ -770,131 +812,156 @@ class Alerta {
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal);
 
-    const idDivGuardarComo = document.getElementById('idDivGuardarCambio');
-    idDivGuardarComo.style.display = 'none';
-    const idDivGuardarComoNuevo = document.getElementById('idDivGuardarComoNuevo');
-    idDivGuardarComoNuevo.style.display = 'none';
-    // const idDivFirmar = document.getElementById('idDivFirmar');
-    // idDivFirmar.style.display = 'block';
-    const idHrGuardarCambio = document.getElementById('idHrGuardarCambio');
-    idHrGuardarCambio.style.display = 'none';
-    const idHrGuardarComoNuevo = document.getElementById('idHrGuardarComoNuevo');
-    idHrGuardarComoNuevo.style.display = 'none';
-    // const idHrFirmar = document.getElementById('idHrFirmar');
-    // idHrFirmar.style.display = 'none';
-    const idDivFirmado = document.getElementById('idDivFirmado');
-    idDivFirmado.style.display = 'none';
-  }
-
-  createInforme(objetoMensaje, objInforme, objTrad) {
-    const obj = objInforme;
-    const CheckBoxEmail = document.getElementById('idCheckBoxEmail');
-    const estaChecked = CheckBoxEmail.checked;
-
-    this.modal = document.createElement('div');
-    this.modal.id = 'modalMensaje';
-    this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(0, 0, 0, 0.1)';
-    // Crear el contenido del modal
-    const widthScreen = window.innerWidth;
-    const anchoCelda = `${widthScreen * 0.8}px`;
-    obj.divContent.width = anchoCelda;
-    const modalContent = createDiv(obj.divContent);
-
-    //* close
-    let span = createSpan(obj.close);
-    modalContent.appendChild(span);
-
-    //* titulo
-    const titulo = trO(obj.titulo.text, objTrad) || obj.titulo.text;
-    let tipoDeInforme = objetoMensaje.controlNuevoUpdate[0];
-    tipoDeInforme = trO(tipoDeInforme, objTrad) || tipoDeInforme;
-    tipoDeInforme = `${titulo} ${tipoDeInforme}`;
-    span = createSpan(obj.titulo, tipoDeInforme);
-    modalContent.appendChild(span);
-
-    const usuario = document.getElementById('sessionPerson').textContent;
-    obj.mensajeInfo.margin = '0px 0px 5px 5px';
-    span = createSpan(obj.mensajeInfo, usuario);
-    modalContent.appendChild(span);
-
-    const hr = createHR(obj.hr);
-    modalContent.appendChild(hr);
-
-    let mensajeEmail;
-    mensajeEmail = trO(obj.enviaPorEmail.noEnvia, objTrad) || obj.enviaPorEmail.noEnvia;
-    if (estaChecked) {
-      mensajeEmail = trO(obj.enviaPorEmail.envia, objTrad) || obj.enviaPorEmail.envia;
+    if (configMenu === 'x') {
+      configMenu = {
+        guardar: true,
+        guardarComo: false,
+        guardarCambios: false,
+        firma: true,
+        configFirma,
+      };
+      const idDivGuardarComo = document.getElementById('idDivGuardarCambio');
+      idDivGuardarComo.style.display = 'none';
+      const idDivGuardarComoNuevo = document.getElementById('idDivGuardarComoNuevo');
+      idDivGuardarComoNuevo.style.display = 'none';
+      const idHrGuardarCambio = document.getElementById('idHrGuardarCambio');
+      idHrGuardarCambio.style.display = 'none';
+      const idHrGuardarComoNuevo = document.getElementById('idHrGuardarComoNuevo');
+      idHrGuardarComoNuevo.style.display = 'none';
+      const idDivFirmado = document.getElementById('idDivFirmado');
+      idDivFirmado.style.display = 'none';
+    } else {
+      const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text;
+      const firmadoPor = trO(textFirmado, objTranslate) || textFirmado;
+      const idMensajeFirmado = document.getElementById('idMensajeFirmado');
+      idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma.nombre}`;
+      idMensajeFirmado.style.display = 'block';
+      const divFirma = document.getElementById('idDivFirmar');
+      divFirma.style.display = 'none';
+      const idDivFirmado = document.getElementById('idDivFirmado');
+      idDivFirmado.style.display = 'block';
+      const idDivGuardarComo = document.getElementById('idDivGuardarCambio');
+      idDivGuardarComo.style.display = 'none';
+      const idDivGuardarComoNuevo = document.getElementById('idDivGuardarComoNuevo');
+      idDivGuardarComoNuevo.style.display = 'none';
+      const idHrGuardarCambio = document.getElementById('idHrGuardarCambio');
+      idHrGuardarCambio.style.display = 'none';
+      const idHrGuardarComoNuevo = document.getElementById('idHrGuardarComoNuevo');
+      idHrGuardarComoNuevo.style.display = 'none';
     }
-    obj.mensajeInfo.id = 'idMensajeEmail';
-    obj.mensajeInfo.margin = '5px 0px 0px 0px';
-    const spanEmail = createSpan(obj.mensajeInfo, mensajeEmail);
-    modalContent.appendChild(spanEmail);
-
-    //* thead
-    const thead = document.createElement('thead');
-    const newRow = document.createElement('tr');
-    let cantidadDeColumnas = 0;
-    const arrayWidthEncabezado = obj.encabezado.width;
-    let widthCell = 0;
-    obj.encabezado.titulos.forEach((element, index) => {
-      cantidadDeColumnas += 1;
-      const parametros = {
-        fontSize: obj.encabezado.fontSize,
-        fontWeight: obj.encabezado.fontWeight,
-      };
-
-      widthCell = widthScreen * 0.9 * arrayWidthEncabezado[index];
-      let cell = trO(element.toUpperCase(), objTrad) || element.toUpperCase();
-      cell = createTheadCell(cell, index, widthCell, parametros);
-      newRow.appendChild(cell);
-    });
-    thead.style.marginTop = '10px';
-    thead.appendChild(newRow);
-    modalContent.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
-    objetoMensaje.valor.forEach((element, index) => {
-      let tipoDeAccion = objetoMensaje.tipoDeAccion[index];
-      tipoDeAccion = trO(tipoDeAccion, objTrad) || tipoDeAccion;
-      const mensaje = {
-        accion: tipoDeAccion,
-        concepto: objetoMensaje.nameControl[index],
-        anterior: objetoMensaje.valorAnterior[index],
-        actual: objetoMensaje.valor[index],
-      };
-      widthCell = widthScreen * 0.9 * arrayWidthEncabezado[index];
-      obj.celdas.width = widthCell;
-      // eslint-disable-next-line max-len
-      const newRowTbody = createTbodyCell(mensaje, objInforme.celdas, cantidadDeColumnas);
-      tbody.appendChild(newRowTbody);
-    });
-    modalContent.appendChild(tbody);
-    this.modal.appendChild(modalContent);
-
-    obj.mensajeInfo.id = 'idMensajeInfo';
-    const mensajeInfo = trO(obj.mensajeInfo.text, objTrad) || obj.mensajeInfo.text;
-    span = createSpan(obj.mensajeInfo, mensajeInfo);
-    modalContent.appendChild(span);
-    this.modal.appendChild(modalContent);
-
-    const divButton = createDiv(obj.divButtons);
-
-    const aceptar = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text;
-    obj.btnaccept.text = aceptar;
-    const buttonAceptar = createButton(obj.btnaccept);
-    const cancelar = trO(obj.btncancel.text, objTrad) || obj.btncancel.text;
-    obj.btncancel.text = cancelar;
-    const buttonCancelar = createButton(obj.btncancel);
-
-    divButton.appendChild(buttonAceptar);
-    divButton.appendChild(buttonCancelar);
-    modalContent.appendChild(divButton);
-    this.modal.appendChild(modalContent);
-
-    document.body.appendChild(this.modal);
-    this.modal.style.display = 'block';
+    const enviaEmail = document.getElementById('idCheckBoxEmail');
+    enviaPorEmail ? enviaEmail.checked = true : enviaEmail.checked = false;
   }
+
+  // createInforme(objetoMensaje, objInforme, objTrad) {
+  //   const obj = objInforme;
+  //   const CheckBoxEmail = document.getElementById('idCheckBoxEmail');
+  //   const estaChecked = CheckBoxEmail.checked;
+
+  //   this.modal = document.createElement('div');
+  //   this.modal.id = 'modalMensaje';
+  //   this.modal.className = 'modal';
+  //   this.modal.style.background = 'rgba(0, 0, 0, 0.1)';
+  //   // Crear el contenido del modal
+  //   const widthScreen = window.innerWidth;
+  //   const anchoCelda = `${widthScreen * 0.8}px`;
+  //   obj.divContent.width = anchoCelda;
+  //   const modalContent = createDiv(obj.divContent);
+
+  //   //* close
+  //   let span = createSpan(obj.close);
+  //   modalContent.appendChild(span);
+
+  //   //* titulo
+  //   const titulo = trO(obj.titulo.text, objTrad) || obj.titulo.text;
+  //   let tipoDeInforme = objetoMensaje.controlNuevoUpdate[0];
+  //   tipoDeInforme = trO(tipoDeInforme, objTrad) || tipoDeInforme;
+  //   tipoDeInforme = `${titulo} ${tipoDeInforme}`;
+  //   span = createSpan(obj.titulo, tipoDeInforme);
+  //   modalContent.appendChild(span);
+
+  //   const usuario = document.getElementById('sessionPerson').textContent;
+  //   obj.mensajeInfo.margin = '0px 0px 5px 5px';
+  //   span = createSpan(obj.mensajeInfo, usuario);
+  //   modalContent.appendChild(span);
+
+  //   const hr = createHR(obj.hr);
+  //   modalContent.appendChild(hr);
+
+  //   let mensajeEmail;
+  //   mensajeEmail = trO(obj.enviaPorEmail.noEnvia, objTrad) || obj.enviaPorEmail.noEnvia;
+  //   if (estaChecked) {
+  //     mensajeEmail = trO(obj.enviaPorEmail.envia, objTrad) || obj.enviaPorEmail.envia;
+  //   }
+  //   obj.mensajeInfo.id = 'idMensajeEmail';
+  //   obj.mensajeInfo.margin = '5px 0px 0px 0px';
+  //   const spanEmail = createSpan(obj.mensajeInfo, mensajeEmail);
+  //   modalContent.appendChild(spanEmail);
+
+  //   //* thead
+  //   const thead = document.createElement('thead');
+  //   const newRow = document.createElement('tr');
+  //   let cantidadDeColumnas = 0;
+  //   const arrayWidthEncabezado = obj.encabezado.width;
+  //   let widthCell = 0;
+  //   obj.encabezado.titulos.forEach((element, index) => {
+  //     cantidadDeColumnas += 1;
+  //     const parametros = {
+  //       fontSize: obj.encabezado.fontSize,
+  //       fontWeight: obj.encabezado.fontWeight,
+  //     };
+
+  //     widthCell = widthScreen * 0.9 * arrayWidthEncabezado[index];
+  //     let cell = trO(element.toUpperCase(), objTrad) || element.toUpperCase();
+  //     cell = createTheadCell(cell, index, widthCell, parametros);
+  //     newRow.appendChild(cell);
+  //   });
+  //   thead.style.marginTop = '10px';
+  //   thead.appendChild(newRow);
+  //   modalContent.appendChild(thead);
+
+  //   const tbody = document.createElement('tbody');
+  //   objetoMensaje.valor.forEach((element, index) => {
+  //     let tipoDeAccion = objetoMensaje.tipoDeAccion[index];
+  //     tipoDeAccion = trO(tipoDeAccion, objTrad) || tipoDeAccion;
+  //     const mensaje = {
+  //       accion: tipoDeAccion,
+  //       concepto: objetoMensaje.nameControl[index],
+  //       anterior: objetoMensaje.valorAnterior[index],
+  //       actual: objetoMensaje.valor[index],
+  //     };
+  //     widthCell = widthScreen * 0.9 * arrayWidthEncabezado[index];
+  //     obj.celdas.width = widthCell;
+  //     // eslint-disable-next-line max-len
+  //     const newRowTbody = createTbodyCell(mensaje, objInforme.celdas, cantidadDeColumnas);
+  //     tbody.appendChild(newRowTbody);
+  //   });
+  //   modalContent.appendChild(tbody);
+  //   this.modal.appendChild(modalContent);
+
+  //   obj.mensajeInfo.id = 'idMensajeInfo';
+  //   const mensajeInfo = trO(obj.mensajeInfo.text, objTrad) || obj.mensajeInfo.text;
+  //   span = createSpan(obj.mensajeInfo, mensajeInfo);
+  //   modalContent.appendChild(span);
+  //   this.modal.appendChild(modalContent);
+
+  //   const divButton = createDiv(obj.divButtons);
+
+  //   const aceptar = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text;
+  //   obj.btnaccept.text = aceptar;
+  //   const buttonAceptar = createButton(obj.btnaccept);
+  //   const cancelar = trO(obj.btncancel.text, objTrad) || obj.btncancel.text;
+  //   obj.btncancel.text = cancelar;
+  //   const buttonCancelar = createButton(obj.btncancel);
+
+  //   divButton.appendChild(buttonAceptar);
+  //   divButton.appendChild(buttonCancelar);
+  //   modalContent.appendChild(divButton);
+  //   this.modal.appendChild(modalContent);
+
+  //   document.body.appendChild(this.modal);
+  //   this.modal.style.display = 'block';
+  // }
 
   destroyAlerta() {
     if (this.modal) {

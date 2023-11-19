@@ -22,7 +22,7 @@ let objetoControl = {
   observacion: [],
   imagenes: [],
   displayRow: [],
-  // requerido: [],
+  requerido: [],
 };
 let objetoMemoria = {
   fecha: [],
@@ -44,20 +44,8 @@ let objetoMemoria = {
   imagenes: [],
   displayRow: [],
 };
-let objetoMensaje = {
-  valor: [],
-  imagenes: [],
-  nameControl: [],
-  tipoDeAccion: [],
-  controlNuevoUpdate: [],
-  valorAnterior: [],
-};
+
 let habilitadoGuardar = false;
-// const funcionDeAceptar = () => {
-//   const modal = document.getElementById('modalAlert');
-//   modal.style.display = 'none';
-//   guardarNuevo(objetoControl);
-// };
 
 const funcionDeCancelar = () => {
   const modal = document.getElementById('modalAlert');
@@ -102,16 +90,9 @@ const funcionLogOut = () => {
   window.location.href = url;
 };
 
-const funcionDeCloseInf = () => {
-  let modal = document.getElementById('modalMensaje');
-  modal.style.display = 'none';
-  modal.remove();
-  modal = document.getElementById('modalAlertVerde');
-  modal.style.display = 'none';
-  modal.remove();
-  modal = document.getElementById('modalAlertM');
-  modal.style.display = 'none';
-  modal.remove();
+const enviaPorEmail = (event) => {
+  const { checked } = event.target;
+  localStorage.setItem('envia_por_email', checked);
 };
 
 const arrayGlobal = {
@@ -1105,7 +1086,7 @@ const objMenu = {
     fontStyle: null,
   },
   mensajeFirmado: {
-    text: 'Firmado por:',
+    text: 'Firmado por',
     id: 'idMensajeFirmado',
     fontSize: '10px',
     fontColor: '#0066FF',
@@ -1229,7 +1210,7 @@ const objMenu = {
     innerHTML: null,
     placeHolder: null,
     focus: null,
-    onClick: null,
+    onClick: enviaPorEmail,
     onEnterPress: null,
   },
   label: {
@@ -1327,7 +1308,7 @@ const objInforme = {
     innerHTML: '&times',
     margin: null,
     fontStyle: null,
-    onClick: funcionDeCloseInf,
+    // onClick: funcionDeCloseInf,
   },
   divContent: {
     id: null,
@@ -1443,7 +1424,7 @@ const objInforme = {
     hoverBackground: '#cecece',
     hoverColor: '#000000',
     marginLeft: null,
-    onClick: funcionDeCloseInf,
+    // onClick: funcionDeCloseInf,
   },
   mensajeInfo: {
     text: 'Si los datos son correctos acepte, de lo contrario puede cancelar la operación.\n Si acepta ya no podrá deshacer la acción.',
@@ -1486,7 +1467,6 @@ export default {
   arrayControl,
   mensajesVarios,
   objetoMemoria,
-  objetoMensaje,
   avisoImagenes,
   avisoCargandoControl,
   objInforme,

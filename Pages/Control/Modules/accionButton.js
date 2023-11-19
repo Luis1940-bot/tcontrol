@@ -170,7 +170,7 @@ async function eventSelect(event, hijo, sqlHijo) {
   const selectedOptions = select.selectedOptions;
   const columnValues = Array.from(selectedOptions).map((option) => option.value);
   let obj;
-  if (hijo === '1') {
+  if (hijo === '1' && columnValues[0]) {
     try {
       obj = await traerHijo(sqlHijo, columnValues);
       insertarDatoEnFila(obj);

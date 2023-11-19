@@ -2,10 +2,8 @@
 import fechasGenerator from '../../../../controllers/fechas.js';
 // eslint-disable-next-line import/extensions
 import respuestaColumna from './armadoDeObjetos.js';
-// eslint-disable-next-line import/extensions
+// // eslint-disable-next-line import/extensions
 // import guardaNotas from './guardaNotas.js';
-// eslint-disable-next-line import/extensions
-import comparador from './comparador.js';
 
 function buscarEnArray(id, array) {
   const idStr = id.toString().trim();
@@ -20,9 +18,10 @@ function recorroTable(objetoControl, arrayControl) {
     const url = new URL(window.location.href);
     const controlN = url.searchParams.get('control_N');
     // const controlT = url.searchParams.get('control_T');
-    const numberDoc = document.getElementById('numberDoc').textContent;
+    // const numberDoc = document.getElementById('numberDoc').textContent;
     const tbody = document.querySelector('tbody');
     const tr = tbody.querySelectorAll('tr');
+    let estanTodosLosRequeridos = true;
 
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length; i++) {
@@ -121,9 +120,25 @@ function recorroTable(objetoControl, arrayControl) {
           objetoControl.valorOBS.push(valorOBS);
           objetoControl.familiaselector.push(familiaselector);
           objetoControl.observacion.push(observacion);
-          // objetoControl.requerido.push(arrayControl[i][21]);
+          objetoControl.requerido.push(founded[21]);
           imagenes.src.length > 0 ? objetoControl.imagenes.push(imagenes) : objetoControl.imagenes.push('');
           objetoControl.displayRow.push(displayRow);
+
+          // console.log(typeof founded[21], founded[21], valor);
+          if (founded[21] === '0' || founded[21] === null || founded[21] === undefined) {
+            estanTodosLosRequeridos = true;
+          }
+          if (founded[21] === '1' && (valor === '' || valor === null || valor === undefined)) {
+            estanTodosLosRequeridos = false;
+            const requerido = {
+              requerido: false,
+              fila: i,
+              idLTYcontrol: founded[1],
+            };
+            localStorage.setItem('requerido', JSON.stringify(requerido));
+            return false;
+          // eslint-disable-next-line max-len
+          }
         }
       }
     }
@@ -131,11 +146,20 @@ function recorroTable(objetoControl, arrayControl) {
     // console.log(objetoMemoria);
     // console.log(objetoControl)
     // console.log(arrayControl);
-    comparador(arrayControl, numberDoc);
+    // console.log(estanTodosLosRequeridos)
+    if (estanTodosLosRequeridos) {
+      const requerido = {
+        requerido: true,
+        fila: 0,
+        idLTYcontrol: 0,
+      };
+      localStorage.setItem('requerido', JSON.stringify(requerido));
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
   }
+  return null;
 }
 function guardarNuevo(objetoControl, arrayControl) {
   // console.log(objetoControl, arrayControl);

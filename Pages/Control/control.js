@@ -113,6 +113,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // eslint-disable-next-line no-console
   console.time('timeControl');
   arrayGlobal.habilitadoGuardar = false;
+  localStorage.setItem('firma', JSON.stringify('x'));
+  localStorage.setItem('config_menu', JSON.stringify('x'));
+  localStorage.setItem('envia_por_email', false);
   try {
     const datosUser = localStorage.getItem('datosUser');
     if (datosUser) {
