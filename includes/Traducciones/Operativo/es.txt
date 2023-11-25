@@ -121,3 +121,9 @@ La tabla no se completó según lo esperado, vuelva a intentarlo.
 No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.
 Al firmar asegúrese de los datos conferidos.
 Firmado por
+Están faltando datos requeridos que no se han completado. Cierre este mensaje, complete el dato requerido y acepte nuevamente.
+Fecha de alerta:
+Hora de alerta:
+Entre al sistema y acceda al documento número
+Notifica
+Ir A

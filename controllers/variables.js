@@ -23,6 +23,19 @@ let objetoControl = {
   imagenes: [],
   displayRow: [],
   requerido: [],
+  name: [],
+  email: {
+    address: '',
+    planta: '',
+    titulo: '',
+    reporte: '',
+    fecha: '',
+    hora: '',
+    notificador: '',
+    url: '',
+  },
+  detalle: [],
+  objImagen: [],
 };
 let objetoMemoria = {
   fecha: [],
@@ -74,7 +87,10 @@ const funcionDeCloseM = () => {
 };
 
 const closeVentanaVerdeRoja = () => {
-  const modal = document.getElementById('modalAlertVerde');
+  let modal = document.getElementById('modalAlertVerde');
+  modal.style.display = 'none';
+  modal.remove();
+  modal = document.getElementById('modalAlertM');
   modal.style.display = 'none';
   modal.remove();
 };
@@ -93,6 +109,12 @@ const funcionLogOut = () => {
 const enviaPorEmail = (event) => {
   const { checked } = event.target;
   localStorage.setItem('envia_por_email', checked);
+  const sobrecito = document.getElementById('wichCEmail');
+  if (checked) {
+    sobrecito.style.display = 'inline-block';
+  } else {
+    sobrecito.style.display = 'none';
+  }
 };
 
 const arrayGlobal = {
@@ -786,7 +808,7 @@ const objPerson = {
     cursor: null,
   },
   user: {
-    id: null,
+    id: 'idUserPerson',
     text: '',
     fontSize: '9px',
     fontColor: '#212121',
@@ -1253,6 +1275,7 @@ const mensajesVarios = {
   guardar: {
     esperaAmarillo: 'El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.',
     sinModificaciones: 'No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.',
+    faltanRequeridos: 'Están faltando datos requeridos que no se han completado. Cierre este mensaje, complete el dato requerido y acepte nuevamente.',
   },
   cargarControl: {
     esperaVerde: 'Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!',
@@ -1260,6 +1283,17 @@ const mensajesVarios = {
   },
   controlSinCambios: {
     vacioDeDatos: 'No hay modificaciones en el control que requieran ser guardadas, verifique los datos inferidos ya que los datos presentes son los estándares.',
+  },
+  email: {
+    fechaDeAlerta: 'Fecha de alerta:',
+    horaDeAlerta: 'Hora de alerta:',
+    sistema: 'Entre al sistema y acceda al documento número',
+    irA: 'Ir a',
+    notifica: 'Notifica',
+    concepto: 'Concepto',
+    relevamiento: 'Relevamiento',
+    detalle: 'Detalle',
+    observacion: 'Observación',
   },
 };
 const objInforme = {

@@ -116,6 +116,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   localStorage.setItem('firma', JSON.stringify('x'));
   localStorage.setItem('config_menu', JSON.stringify('x'));
   localStorage.setItem('envia_por_email', false);
+  const supervisor = {
+    id: 0,
+    mail: '',
+    mi_cfg: '',
+    nombre: '',
+    tipo: 0,
+  };
+  localStorage.setItem('firmado', JSON.stringify(supervisor));
   try {
     const datosUser = localStorage.getItem('datosUser');
     if (datosUser) {

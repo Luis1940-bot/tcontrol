@@ -35,7 +35,7 @@ define('MODALSP', ROOT_PATHP.'/includes/molecules/modales');
         </a>
         </div>
     </div>
-    <div class='headerLenguaje'><button class='custom-button'>Español</button></div>
+    <div class='headerLenguaje'><button class='custom-button' id='planta'>Español</button></div>
     <div class='headerPerson'><img id='person' src='./../../assets/img/person.png' alt='Person'></div>
   </div>
   <div class='header-McCain'>

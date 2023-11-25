@@ -1,6 +1,4 @@
 // eslint-disable-next-line import/extensions
-import Alerta from '../../../includes/atoms/alerta.js';
-// eslint-disable-next-line import/extensions
 import objVariables from '../../../controllers/variables.js';
 // eslint-disable-next-line import/no-named-as-default
 import translate, {
@@ -14,6 +12,8 @@ import translate, {
   arrayEspanolArchivo,
 // eslint-disable-next-line import/extensions
 } from '../../../controllers/translate.js';
+// eslint-disable-next-line import/extensions
+import Alerta from '../../../includes/atoms/alerta.js';
 
 let data = {};
 let translateOperativo = [];
@@ -71,8 +71,9 @@ function loadImage(selectedFile) {
     reader.onload = (e) => {
       const img = new Image();
       img.src = e.target.result;
-      const fileName = selectedFile.name;
+      let fileName = selectedFile.name;
       const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+      fileName = `imagen_${Date.now()}.${fileExtension}`;
       const fileNameWithoutExtension = fileName.substring(0, fileName.lastIndexOf('.'));
       img.setAttribute('data-filename', fileName);
       img.setAttribute('data-fileextension', fileExtension);

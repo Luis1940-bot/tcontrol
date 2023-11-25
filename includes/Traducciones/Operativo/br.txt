@@ -121,3 +121,9 @@ A tabela não foi preenchida conforme o esperado. Tente novamente.
 Não fez nenhuma alteração àquelas determinadas pela configuração. Você não poderá salvar nenhum controle.
 Ao assinar, certifique-se dos dados fornecidos.
 Assinado por
+Os dados necessários estão faltando e não foram preenchidos. Feche esta mensagem, preencha as informações solicitadas e aceite novamente.
+Data do alerta:
+Tempo de alerta:
+Entre no sistema e acesse o número do documento
+Notifica
+Vai

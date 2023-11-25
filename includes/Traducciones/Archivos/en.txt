@@ -1369,3 +1369,4 @@ user
 USERS
 Variety
 Variety of Raw Materials.
+Required data is missing and has not been completed. Close this message, complete the required information and accept again.

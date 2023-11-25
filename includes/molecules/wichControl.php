@@ -18,6 +18,7 @@ header('Content-Type: text/html;charset=utf-8');
     <div class='div-wich'>
       <img src='../../assets/img/icons8-brick-wall-50.png' alt='' width='10px' height='10px'>
       <span id='wichC'></span>
+      <span id='wichCEmail'>📧</span>
     </div>
   </div>
 </body>

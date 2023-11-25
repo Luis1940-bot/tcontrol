@@ -120,3 +120,8 @@ The table did not populate as expected, please try again.
 Did not make any changes to those determined by configuration. You will not be able to save any controls.
 When signing, be sure of the data provided.
 Signed by
+Alert date:
+Alert time:
+Enter the system and access document number
+Notify
+Gonna
