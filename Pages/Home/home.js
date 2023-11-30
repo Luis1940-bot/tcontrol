@@ -15,6 +15,10 @@ import personModal from '../../controllers/person.js';
 
 let translateOperativo = [];
 let espanolOperativo = [];
+const objTranslate = {
+  operativoES: [],
+  operativoTR: [],
+};
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
@@ -139,6 +143,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await translate(datos.lng);
     translateOperativo = data.arrayTranslateOperativo;
     espanolOperativo = data.arrayEspanolOperativo;
+    objTranslate.operativoES = [...espanolOperativo];
+    objTranslate.operativoTR = [...translateOperativo];
     leeVersion('version');
     setTimeout(() => {
       dondeEstaEn();
@@ -178,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
       person: persona,
       salir: trO('Cerrar sesión'),
     };
-    personModal(user);
+    personModal(user, objTranslate);
   });
 });
 

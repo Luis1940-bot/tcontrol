@@ -7,8 +7,10 @@ const arrayTranslateArchivo = [];
 // eslint-disable-next-line no-unused-vars
 const arrayEspanolArchivo = [];
 
-const OperativoURL = '/includes/Traducciones/Operativo/';
-const FileURL = '/includes/Traducciones/Archivos/';
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '';
+const OperativoURL = `${SERVER}/includes/Traducciones/Operativo/`;
+const FileURL = `${SERVER}/includes/Traducciones/Archivos/`;
 
 async function leerArchivo(url) {
   try {

@@ -31,7 +31,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='/Pages/Home/home.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='../../Pages/Home/home.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
   <title>Factum</title>
   <p id='sessionPerson' style='display: none'><?php echo $_SESSION['factum_validation']['person'] ?></p>
@@ -41,9 +41,9 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <header>
     
     <?php
-      include_once(INCLUDES .'/header.php');
-      include_once(INCLUDES .'/encabezado.php');
-      include_once(INCLUDES .'/whereUs.php');
+      include_once('../../includes/molecules/header.php');
+      include_once('../../includes/molecules/encabezado.php');
+      include_once('../../includes/molecules/whereUs.php');
       
     ?>
   </header>
@@ -54,9 +54,9 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   </main>
   <footer>
     <?php
-      include_once(INCLUDES . '/footer.php');
+      include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='../../Pages/Home/home.js?v=<?php echo(rand()); ?>'></script>
+<script type='module' src='../../Pages/Home/home.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

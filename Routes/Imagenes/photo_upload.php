@@ -81,7 +81,7 @@ if (isset($datos)) {
                 $responses[] = array(
                     'success' => true,
                     'message' => "Elemento $i: Imagen subida y redimensionada correctamente",
-                    'rutaImagen' => $rutaImagen
+                    // 'rutaImagen' => $rutaImagen
                 );
 
                 imagedestroy($image);

@@ -19,6 +19,9 @@ import insertarRegistro from '../../Pages/Control/Modules/Controladores/insertar
 // eslint-disable-next-line import/extensions
 import enviaMail from '../../Nodemailer/sendEmail.js';
 
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '../../';
+
 const objTraductor = {
   operativoES: [],
   operativoTR: [],
@@ -377,7 +380,9 @@ function limpiaArrays() {
   }
 }
 
-function convertirObjATextPlano(data) {
+function convertirObjATextPlano(obj) {
+  const data = { ...obj };
+  delete data.objImagen;
   const lines = [];
 
   // Iterar sobre las claves del objeto
@@ -399,9 +404,15 @@ function convertirObjATextPlano(data) {
 }
 
 function subirImagenes(img) {
+  if (img.length === 0) {
+    return;
+  }
+  if (img[0].extension.length === 0) {
+    return;
+  }
   const formData = new FormData();
   formData.append('imgBase64', encodeURIComponent(JSON.stringify(img[0])));
-  fetch('../../Routes/Imagenes/photo_upload.php', {
+  fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
     method: 'POST',
     body: formData,
   })
@@ -426,6 +437,7 @@ function insert(nuevoObjeto, convertido, objEncabezados) {
   const promise = Promise.resolve(insertado);
   promise.then((value) => {
     console.log(value);
+    subirImagenes(nuevoObjeto.objImagen);
     const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
     const encabezados = { ...objEncabezados };
     encabezados.documento = value.documento;
@@ -477,10 +489,10 @@ function armaEncabezado(arrayMensajes, objTrad) {
   return encabezados;
 }
 
-function soloEnviaEmail(nuevoObjeto, encabezados) {
-  subirImagenes(nuevoObjeto.objImagen);
-  // enviaMail(nuevoObjeto, encabezados);
-}
+// function soloEnviaEmail(nuevoObjeto, encabezados) {
+//   subirImagenes(nuevoObjeto.objImagen);
+//   enviaMail(nuevoObjeto, encabezados);
+// }
 
 class Alerta {
   constructor() {
@@ -557,8 +569,8 @@ class Alerta {
           objJSON: Array(arrayGlobal.objetoControl.fecha.length).fill(null).map((_, index) => (index === 0 ? convertido : null)),
         };
         const encabezados = armaEncabezado(arrayGlobal, objTrad);
-        soloEnviaEmail(nuevoObjeto, encabezados);
-        // insert(nuevoObjeto, convertido, encabezados);
+        // soloEnviaEmail(nuevoObjeto, encabezados);
+        insert(nuevoObjeto, convertido, encabezados);
       }
       if (!requerido.requerido || !okGuardar) {
         limpiaArrays();
@@ -668,6 +680,7 @@ class Alerta {
     const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
+
     let frase = '';
     if (objTrad === null) {
       frase = texto;
@@ -691,6 +704,7 @@ class Alerta {
     const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
+
     let frase = '';
     if (objTrad === null) {
       frase = texto;

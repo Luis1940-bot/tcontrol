@@ -1,10 +1,13 @@
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '../../../..';
+
 function send(filtrado, encabezados) {
   try {
     const formData = new FormData();
     formData.append('datos', JSON.stringify(filtrado));
     formData.append('encabezados', JSON.stringify(encabezados));
-    // console.log(formData);
-    fetch('/Nodemailer/Routes/sendEmail.php', {
+    console.log(formData);
+    fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
       method: 'POST',
       body: formData,
     })
@@ -37,7 +40,7 @@ function enviaMail(datos, encabezados) {
       const valorHtmlName = datos.name[indice];
       let valorHtmlDetalle = datos.detalle[indice];
       let valorHtmlObservacion = datos.observacion[indice];
-      const src = datos.imagenes[indice];
+      const image = datos.imagenes[indice];
       let colSpanName = '1';
       let colSpanValor = '1';
       let colSpanDetalle = '1';
@@ -57,21 +60,8 @@ function enviaMail(datos, encabezados) {
       if (tipoDeDato === 'x' || tipoDeDato === 'btnQwery' || tipoDeDato === 'img') {
         valorHtmlValor = '';
       }
-      if (tipoDeDato === 'img' && src !== '') {
+      if (tipoDeDato === 'img' && image !== '') {
         valorHtmlValor = 'img';
-        const imagenBinaria = src;
-        const blob = new Blob([imagenBinaria]);
-        const blobURL = URL.createObjectURL(blob);
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const contexto = canvas.getContext('2d');
-          contexto.drawImage(img, 0, 0);
-          dataURL = canvas.toDataURL();
-        };
-        img.src = blobURL;
       }
       if (tipoDeDato === 's' || tipoDeDato === 'sd') {
         if (valorHtmlValor === '' || valorHtmlValor === 's' || valorHtmlValor === 'sd') {
@@ -108,7 +98,7 @@ function enviaMail(datos, encabezados) {
           displayValor,
           displayDetalle,
           displayObservacion,
-          src,
+          image,
           dataURL,
         };
       }

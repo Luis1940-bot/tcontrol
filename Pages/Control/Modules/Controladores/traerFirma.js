@@ -1,9 +1,12 @@
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '../../../..';
+
 export default function traerFirma(pss) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`;
     const pass = encodeURIComponent(pss);
-    const ruta = `../../../Pages/Control/Routes/supervisores.php?q=${pass}${rax}`;
+    const ruta = `${SERVER}/Pages/Control/Routes/supervisores.php?q=${pass}${rax}`;
     fetch(ruta, {
       method: 'POST',
       headers: {

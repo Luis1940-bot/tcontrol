@@ -11,7 +11,9 @@ function buscarEnArray(id, array) {
   return resultado;
 }
 
-function convertirObjATextPlano(data) {
+function convertirObjATextPlano(obj) {
+  const data = { ...obj };
+  delete data.src;
   const lines = [];
 
   // Iterar sobre las claves del objeto
@@ -29,7 +31,6 @@ function convertirObjATextPlano(data) {
 
   // Convertir el arreglo de líneas a un solo texto con saltos de línea
   const plainText = lines.join('\n');
-
   return plainText;
 }
 

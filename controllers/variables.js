@@ -747,6 +747,19 @@ const avisoCargandoControl = {
     margin: null,
     fontStyle: null,
   },
+  titulo: {
+    text: {
+      time: 'time',
+    },
+    fontSize: '40px',
+    fontColor: '#212121',
+    marginTop: '30px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'center',
+    className: 'titulo',
+    fontStyle: null,
+  },
 };
 const objPerson = {
   titulo: {
@@ -1156,7 +1169,7 @@ const objMenu = {
   },
   imgGuardar: {
     id: null,
-    src: '../../../assets/img/icons8-save-50.png',
+    src: '../../assets/img/icons8-save-50.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1166,7 +1179,7 @@ const objMenu = {
   },
   imgGuardarComo: {
     id: null,
-    src: '../../../assets/img/icons8-save-50.png',
+    src: '../../assets/img/icons8-save-50.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1176,7 +1189,7 @@ const objMenu = {
   },
   imgSalir: {
     id: null,
-    src: '../../../assets/img/icons8-logout-26.png',
+    src: '../../assets/img/icons8-logout-26.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1186,7 +1199,7 @@ const objMenu = {
   },
   imgFirmar: {
     id: null,
-    src: '../../../assets/img/icons8-sign-30.png',
+    src: '../../assets/img/icons8-sign-30.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1196,7 +1209,7 @@ const objMenu = {
   },
   imgRefresh: {
     id: null,
-    src: '../../../assets/img/icons8-refresh-50.png',
+    src: '../../assets/img/icons8-refresh-50.png',
     className: 'img-menu',
     alt: '',
     height: 20,

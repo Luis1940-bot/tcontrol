@@ -5,13 +5,18 @@
   header ("MIME-Version: 1.0\r\n");
   define('ROOT_PATHP', $_SERVER['DOCUMENT_ROOT']);
   define('EMAIL', ROOT_PATHP.'/Nodemailer/emailFactum');
+  define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] . '/iControl-Vanilla/icontrol/Nodemailer');
 
+
+  // $SERVER = '/iControl-Vanilla/icontrol/Nodemailer';
+ $SERVER = EMAIL;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 $basePath =  realpath(__DIR__ . '/../../Nodemailer');
+// $basePath =  'ROOT_PATH';
 
 require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php' ;
 require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
@@ -20,10 +25,13 @@ require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 include('datos.php');
 
 try {
-   $datos =json_decode($_POST['datos'], true);
-   $encabezados =json_decode($_POST['encabezados'], true);
-  // echo $datox;
-  // $datos =json_decode($datox, true);
+  //  $datos =json_decode($_POST['datos'], true);
+  //  $encabezados =json_decode($_POST['encabezados'], true);
+  
+  $datos =json_decode($datox, true);
+  $encabezados =json_decode($encabezadox, true);
+
+
    if ($datos === null && json_last_error() !== JSON_ERROR_NONE) {
     die('Error al decodificar JSON');
   }
@@ -46,7 +54,10 @@ try {
     $detalle = $encabezados['detalle'];
     $observacion = $encabezados['observacion'];
 
-   $html  = file_get_contents(EMAIL . '/email.html');
+
+   $html  = file_get_contents($SERVER . '/email.html');
+  //  $html  = file_get_contents(ROOT_PATH . '/emailFactum/email.html');
+   
    $html  = str_replace('{planta}', $planta, $html);
    $html  = str_replace('{notificacion}', $titulo, $html);
    $html  = str_replace('{nombreDeControl}', $reporte, $html);
@@ -65,15 +76,15 @@ try {
    $html  = str_replace('{detalle}', $detalle, $html);
    $html  = str_replace('{observacion}', $observacion , $html);
    $html  = str_replace('{contenido_dinamico}', generarContenidoDinamico($datos), $html);
-
+ echo 'html>>>> '.$html;
     $mail = new PHPMailer(true);
   // Configura el servidor SMTP
     $mail->isSMTP();
     $mail->CharSet = 'UTF-8';
     $mail->Encoding = "quoted-printable";
     $mail->SMTPAuth = true;
-    $mail->Host ="smtp.factumconsultora.com"; 
-    $mail->Username = "alerta.factum@factumconsultora.com"; ;
+    $mail->Host ="smtp.factumconsultora.com";
+    $mail->Username = "alerta.factum@factumconsultora.com";
     $mail->Password = "Factum2017admin";
     // $mail->SMTPSecure = 'tls';
     $mail->Port = 25;
@@ -148,14 +159,34 @@ function generarContenidoDinamico($datos) {
           $paddingLeft = '10px';
         }
         $valor = $elemento['valor'];
-        $imagenBase64 = $elemento['src'];
-        if ($valor === 'img' && $imagenBase64) {
-          $imagenBinaria = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagenBase64));
-          $identificador = time();
-          $nombreImagen = 'imagen_generada_' . $identificador . '.png';
-          file_put_contents($nombreImagen, $imagenBinaria);
-          // $valor = '<img id="imagenGenerada" src=' . $nombreImagen . '" alt="Imagen Generada">';
-          $valor = '<canvas id="miCanvas" width="400" height="300"></canvas>';
+        $fileName = null;
+        $string = $elemento['image'];
+        
+        // Definir el patrón de expresión regular
+        $pattern = '/fileName:\s*\["([^"]+)"\]\s*extension:\s*\["([^"]+)"\]/';
+        
+        // Buscar coincidencias en la cadena
+        if ($string !== '') {
+           if (preg_match($pattern, $string, $matches)) {
+            // Obtener el valor de 'fileName'
+            $fileName = $matches[1];
+            echo 'valor> '.$valor."Nombre del archivo: $fileName".'<br>';
+          } else {
+            $fileName = null;
+              echo "No se encontró un formato válido en la cadena proporcionada.".'<br>';
+          }
+        }
+       
+
+        $valor = trim($valor);
+        $valor = strtolower(trim($valor));
+        $fileName = trim($fileName);
+        if ($valor === 'img' && $fileName) {
+          $directorioImagenes = dirname(dirname(dirname($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_NAME']))) . "/assets/Imagenes/";
+          $fileName = $directorioImagenes . $fileName;
+          echo $fileName.'<br>';
+          $valor = '<td><img src='.$fileName.'></td>';
+          echo $valor.'<br>';
         }
         if ($display === 'none') {
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; display:none;">' . $valor . '</td>';

@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 header('Content-Type: text/html;charset=utf-8');
 session_start();
 if (!isset($_SESSION['factum_validation']['email'] )) {
@@ -6,9 +10,9 @@ if (!isset($_SESSION['factum_validation']['email'] )) {
     // header('Location: ../../../../404.php');
     // exit;
 }
-define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
-define('INCLUDES', ROOT_PATH.'/includes/molecules');
+
 ?>
+
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
 <head>
@@ -18,7 +22,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='/Pages/Landing/landing.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='../../Pages/Landing/landing.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
   <title>Factum</title>
 </head>
@@ -27,8 +31,8 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <header>
     
     <?php
-      include_once(INCLUDES .'/header.php');
-      include_once(INCLUDES .'/encabezado.php');
+    include_once('../../includes/molecules/header.php');
+    include_once('../../includes/molecules/encabezado.php');
     ?>
   </header>
   <main>
@@ -39,9 +43,9 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <button class='my-button' disabled><img id='seguir'  src='../../assets/img/icons8-arrow-30.png' alt='' height='20px' width='20px'></button>
   <footer>
     <?php
-      include_once(INCLUDES . '/footer.php');
+      include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='../../Pages/Landing/landing.js?v=<?php echo(rand()); ?>'></script>
+<script type='module' src='../../Pages/Landing/landing.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

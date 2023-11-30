@@ -1,7 +1,5 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
-define('ROOT_PATHP', $_SERVER['DOCUMENT_ROOT']);
-define('MODALSP', ROOT_PATHP.'/includes/molecules/modales');
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -18,8 +16,8 @@ define('MODALSP', ROOT_PATHP.'/includes/molecules/modales');
 </head>
 <body>
   <?php
-    include_once(MODALSP . '/modalPerson.php');
-    include_once(MODALSP . '/modalMenu.php');
+     include_once('../../includes/molecules/modales/modalPerson.php');
+      include_once('../../includes/molecules/modales/modalMenu.php');
   ?>
   <div class='div-header'>
     <div class='headerMenu'>

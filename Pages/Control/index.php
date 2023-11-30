@@ -34,7 +34,7 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='/Pages/Control/css/control.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='../../Pages/Control/css/control.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/alerta.css' media='screen'>
   <title>Factum</title>
@@ -45,8 +45,8 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   <div class='spinner'></div>
   <header>
     <?php
-      include(INCLUDES . '/header.php');
-      include(INCLUDES . '/wichControl.php');
+      include('../../includes/molecules/header.php');
+      include('../../includes/molecules/wichControl.php');
     ?>
     </div>
      <div class='div-span'>
@@ -63,13 +63,13 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   </main>
   <footer>
     <?php
-      include(INCLUDES . '/footer.php');
+      include('../../includes/molecules/footer.php');
     ?>
   </footer>
     <?php
-      include_once(MODALS . '/modal.php');
-      include_once(MODALS .'/modalInforme.php');
+      include_once('../../includes/molecules/modales/modal.php');
+      include_once('../../includes/molecules/modales/modalInforme.php');
     ?>
-<script type='module' src='./control.js?v=<?php echo(rand()); ?>'></script>
+<script type='module' src='./control.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

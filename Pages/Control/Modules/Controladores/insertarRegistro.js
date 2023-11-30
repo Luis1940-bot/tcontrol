@@ -1,3 +1,6 @@
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '../../../..';
+
 // eslint-disable-next-line quotes
 function limpiarObjeto(objeto) {
   const {
@@ -16,10 +19,9 @@ function insertarRegistro(objeto) {
   // eslint-disable-next-line no-console
   console.time('insert_time');
   const objLimpio = limpiarObjeto(objeto);
-  // console.log(objLimpio);
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio));
   // console.log(nuevoObjeto);
-  const ruta = `../../../../Pages/Control/Routes/insert.php?v=${Math.round(Math.random() * 10)}`;
+  const ruta = `${SERVER}/Pages/Control/Routes/insert.php?v=${Math.round(Math.random() * 10)}`;
 
   return new Promise((resolve, reject) => {
     // Realiza el fetch y maneja la lógica de la respuesta
