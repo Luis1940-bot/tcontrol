@@ -133,3 +133,6 @@ El proceso de insertar resultó exitosamente.
 Se insertaron la cantidad de:
 items.
 Documento nº
+Algo salió mal.
+El proceso falló ya que no se registran datos insertados. Compruebe la conexión a internet y vuelva a intentarlo.Si el problema persiste comunique al analista de su área.
+Se ha enviado emails acorde a la configuración del control.

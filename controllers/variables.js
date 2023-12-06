@@ -1302,6 +1302,7 @@ const mensajesVarios = {
     documento: 'Documento nº',
     ups: 'Algo salió mal.',
     fail: 'El proceso falló ya que no se registran datos insertados. Compruebe la conexión a internet y vuelva a intentarlo.\nSi el problema persiste comunique al analista de su área.',
+    enviado: 'Se ha enviado emails acorde a la configuración del control.',
   },
   cargarControl: {
     esperaVerde: 'Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!',
@@ -1542,7 +1543,7 @@ const procesoExitoso = {
     fontStyle: null,
   },
   div: {
-    id: null,
+    id: 'idProcesoExitoso',
     position: 'relative',
     borderRadius: '10px',
     width: '305px',
@@ -1566,7 +1567,7 @@ const procesoExitoso = {
     cursor: null,
   },
   span: {
-    id: null,
+    id: 'idSpanAvisoVerde',
     text: 'El proceso de guardado resulto exitosamente.',
     fontSize: '16px',
     fontColor: '#ECECEC',
@@ -1577,7 +1578,7 @@ const procesoExitoso = {
     className: 'comentarios',
     fontWeight: '500',
     cursor: null,
-    padding: '15px 15px 15px 15px',
+    padding: '5px 15px 15px 15px',
     position: null,
     top: null,
     right: null,

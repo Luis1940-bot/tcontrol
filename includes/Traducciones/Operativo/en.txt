@@ -130,4 +130,7 @@ Alert system notification
 The insertion process was successful.
 The quantity of:
 items.
-Document no.
+Document no
+Something went wrong.
+The process failed as no inserted data is recorded. Check the internet connection and try again.If the problem persists, contact the analyst in your area.
+Emails have been sent according to the control configuration.

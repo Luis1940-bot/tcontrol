@@ -428,7 +428,16 @@ function subirImagenes(img) {
   return null;
 }
 
-function cartelVerdeInsertado(typeAlert, objeto, modalContent, objTrad, mensaje, insertado, modal) {
+function cartelVerdeInsertado(
+  typeAlert,
+  objeto,
+  modalContent,
+  objTrad,
+  mensaje,
+  insertado,
+  modal,
+  enviado,
+) {
   const obj = objeto;
   let span = document.getElementById('idSpanAvisoVerde');
   span.style.display = 'none';
@@ -446,7 +455,7 @@ function cartelVerdeInsertado(typeAlert, objeto, modalContent, objTrad, mensaje,
   texto = trO(mensaje.cantidadRegistros, objTrad) || mensaje.cantidadRegistros;
   frase = `${texto} ${insertado.registros}`;
   texto = trO(mensaje.items, objTrad) || mensaje.items;
-  frase = `${frase} ${texto}\n`;
+  frase = `${frase} ${texto}`;
   obj.span.text = frase;
   obj.span.fontSize = '14px';
   obj.span.fontColor = '#ececec';
@@ -455,7 +464,7 @@ function cartelVerdeInsertado(typeAlert, objeto, modalContent, objTrad, mensaje,
   let spanTexto = createSpan(obj.span, frase);
   modalContent.appendChild(spanTexto);
   texto = trO(mensaje.documento, objTrad) || mensaje.documento;
-  frase = `${texto} ${insertado.documento}\n`;
+  frase = `${texto} ${insertado.documento}.`;
   obj.span.text = frase;
   obj.span.fontSize = '14px';
   obj.span.fontColor = '#ececec';
@@ -464,6 +473,18 @@ function cartelVerdeInsertado(typeAlert, objeto, modalContent, objTrad, mensaje,
   spanTexto = createSpan(obj.span, frase);
   modalContent.appendChild(spanTexto);
   modal.appendChild(modalContent);
+  if (enviado) {
+    texto = trO(mensaje.enviado, objTrad) || mensaje.enviado;
+    frase = `${texto}`;
+    obj.span.text = frase;
+    obj.span.fontSize = '14px';
+    obj.span.fontColor = '#ececec';
+    obj.span.fontWeight = '500';
+    obj.span.marginTop = '0px';
+    spanTexto = createSpan(obj.span, frase);
+    modalContent.appendChild(spanTexto);
+    modal.appendChild(modalContent);
+  }
   document.body.appendChild(modal);
 }
 
@@ -471,7 +492,7 @@ function cartelRojoInsertado(typeAlert, objeto, modalContent, objTrad, mensaje, 
   const obj = objeto;
   let span = document.getElementById('idSpanAvisoVerde');
   span.style.display = 'none';
-  let texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert];
+  const texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert];
   obj.span.text = texto;
   obj.span.fontSize = '16px';
   obj.span.fontColor = '#ececec';
@@ -481,8 +502,7 @@ function cartelRojoInsertado(typeAlert, objeto, modalContent, objTrad, mensaje, 
   modalContent.appendChild(spanTitulo);
   span = createSpan(obj.close);
   modalContent.appendChild(span);
-  const frase = '';
-  texto = trO(mensaje.fail, objTrad) || mensaje.fail;
+  const frase = trO(mensaje.fail, objTrad) || mensaje.fail;
   obj.span.text = frase;
   obj.span.fontSize = '14px';
   obj.span.fontColor = '#ececec';
@@ -496,56 +516,23 @@ function cartelRojoInsertado(typeAlert, objeto, modalContent, objTrad, mensaje, 
 
 function informe(convertido, insertado, imagenes, enviado, miAlerta, objTrad, mod) {
   const modal = mod;
-  const div = document.getElementById('idDivAvisoVerde');
-  // let span = document.getElementById('idSpanAvisoVerde');
-  div.style.display = 'none';
-  // span.style.display = 'none';
   const mensaje = arrayGlobal.mensajesVarios.guardar;
   const obj = arrayGlobal.procesoExitoso;
   modal.style.background = 'rgba(224, 220, 220, 0.7)';
-  const modalContent = createDiv(obj.div);
   if (insertado.success) {
+    obj.div.background = '#21D849';
+    const modalContent = createDiv(obj.div);
     const typeAlert = 'success';
-    cartelVerdeInsertado(typeAlert, obj, modalContent, objTrad, mensaje, insertado, modal);
-    // let texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert];
-    // obj.span.text = texto;
-    // obj.span.fontSize = '16px';
-    // obj.span.fontColor = '#ececec';
-    // obj.span.fontWeight = '700';
-    // obj.span.marginTop = '10px';
-    // const spanTitulo = createSpan(obj.span, texto);
-    // modalContent.appendChild(spanTitulo);
-
-    // span = createSpan(obj.close);
-    // modalContent.appendChild(span);
-
-    // let frase = '';
-    // texto = trO(mensaje.cantidadRegistros, objTrad) || mensaje.cantidadRegistros;
-    // frase = `${texto} ${insertado.registros}`;
-    // texto = trO(mensaje.items, objTrad) || mensaje.items;
-    // frase = `${frase} ${texto}\n`;
-    // obj.span.text = frase;
-    // obj.span.fontSize = '14px';
-    // obj.span.fontColor = '#ececec';
-    // obj.span.fontWeight = '500';
-    // obj.span.marginTop = '0px';
-    // let spanTexto = createSpan(obj.span, frase);
-    // modalContent.appendChild(spanTexto);
-
-    // texto = trO(mensaje.documento, objTrad) || mensaje.documento;
-    // frase = `${texto} ${insertado.documento}\n`;
-    // obj.span.text = frase;
-    // obj.span.fontSize = '14px';
-    // obj.span.fontColor = '#ececec';
-    // obj.span.fontWeight = '500';
-    // obj.span.marginTop = '0px';
-    // spanTexto = createSpan(obj.span, frase);
-    // modalContent.appendChild(spanTexto);
-
-    // modal.appendChild(modalContent);
-
-    // Agregar el modal al body del documento
-    // document.body.appendChild(modal);
+    cartelVerdeInsertado(
+      typeAlert,
+      obj,
+      modalContent,
+      objTrad,
+      mensaje,
+      insertado,
+      modal,
+      enviado.success,
+    );
 
     const documento = document.getElementById('numberDoc');
     documento.innerText = insertado.documento;
@@ -567,10 +554,14 @@ function informe(convertido, insertado, imagenes, enviado, miAlerta, objTrad, mo
     limpiaArrays();
     guardaNotas(convertido);
   } else {
+    obj.div.background = '#D82137';
+    const modalContent = createDiv(obj.div);
     const typeAlert = 'ups';
-    cartelRojoInsertado(typeAlert, obj, modalContent, objTrad, mensaje, insertado, modal);
+    cartelRojoInsertado(typeAlert, obj, modalContent, objTrad, mensaje, modal);
     limpiaArrays();
   }
+  // Agregar el modal al body del documento
+  document.body.appendChild(modal);
 }
 
 async function insert(nuevoObjeto, convertido, objEncabezados, miAlertaInforme, objTrad, modal) {
@@ -581,27 +572,27 @@ async function insert(nuevoObjeto, convertido, objEncabezados, miAlertaInforme, 
     delete nuevoObjetoControl.detalle;
     delete nuevoObjetoControl.objImagen;
 
-    // const insertado = await insertarRegistro(nuevoObjetoControl);
-    const insertado = { success: true, message: 'ok', registros: '18', documento: '22222222222' };
+    const insertado = await insertarRegistro(nuevoObjetoControl);
+    // eslint-disable-next-line max-len
+    // const insertado = { success: true, message: 'ok', registros: '18', documento: '22222222222' };
     // console.log(insertado);
 
-    // const imagenes = await subirImagenes(nuevoObjeto.objImagen);
-    const imagenes = { success: true, message: 'ok', rutaImagen: '../../' };
+    const imagenes = await subirImagenes(nuevoObjeto.objImagen);
+    // const imagenes = { success: true, message: 'ok', rutaImagen: '../../' };
     // console.log(imagenes);
 
     const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
     const encabezados = { ...objEncabezados };
-    // encabezados.documento = insertado.documento;
-
+    encabezados.documento = insertado.documento;
+    let enviado = '';
     if (enviaPorEmail) {
-      // const enviado = await enviaMail(nuevoObjeto, encabezados);
-      const enviado = { success: true, message: 'ok', reporte: 'DWT', documento: '22222222222' };
+      enviado = await enviaMail(nuevoObjeto, encabezados);
+      // enviado = { success: true, message: 'ok', reporte: 'DWT', documento: '22222222222' };
       // console.log(enviado);
-      informe(convertido, insertado, imagenes, enviado, miAlertaInforme, objTrad, modal);
     }
-    const amarillo = document.getElementById('modalAlertVerde');
+    const amarillo = document.getElementById('idDivAvisoVerde');
     amarillo.style.display = 'none';
-    amarillo.remove();
+    informe(convertido, insertado, imagenes, enviado, miAlertaInforme, objTrad, modal);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error:', error);
