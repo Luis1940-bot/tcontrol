@@ -23,13 +23,17 @@ header{
   height: 140px;
 }
 
-#doc{
+#doc, #numberDoc{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
   width: auto;
   margin-left: 10px;
+}
+#numberDoc{
+  font-weight: 700;
+  background: #ececec;
 }
  hr {
   width: 100%;

@@ -23,13 +23,13 @@ function leeVersion(json) {
     });
 }
 
-function storage(idioma) {
-  const datos = {
-    lng: idioma,
-  };
-  const datosString = JSON.stringify(datos);
-  localStorage.setItem('datosUser', datosString);
-}
+// function storage(idioma) {
+//   const datos = {
+//     lng: idioma,
+//   };
+//   const datosString = JSON.stringify(datos);
+//   localStorage.setItem('datosUser', datosString);
+// }
 
 function completaButtons(obj) {
   const divButtons = document.querySelector('.div-landing-buttons');
@@ -124,10 +124,14 @@ function completaButtons(obj) {
     index = i;
     div.addEventListener('click', () => {
       const radio = radios[i];
+      // Obtener el objeto almacenado en localStorage
+      const userData = JSON.parse(localStorage.getItem('user'));
       radio.checked = true;
       language = radios[i].getAttribute('data-custom');
+      userData.lng = language.slice(0, 2);
+      localStorage.setItem('user', JSON.stringify(userData));
       document.querySelector('.custom-button').innerText = language.slice(0, 2).toUpperCase();
-      storage(language.slice(0, 2).toLowerCase());
+      // storage(language.slice(0, 2).toLowerCase());
       seguir.disabled = false;
       seguir.style.background = '#212121';
       seguir.addEventListener('mouseover', () => {
@@ -139,13 +143,13 @@ function completaButtons(obj) {
         seguir.style.background = '#212121';
       });
     });
-    const userLanguage = navigator.language || navigator.userLanguage;
-    if (userLanguage.slice(0, 2).toLowerCase() === language.slice(0, 2).toLowerCase()) {
+
+    const persona = JSON.parse(localStorage.getItem('user'));
+    const buttonSelector = div.childNodes[0].name.slice(0, 2);
+    if (buttonSelector.slice(0, 2).toLowerCase() === persona.lng.toLowerCase()) {
       radios[index].checked = true;
       seguir.disabled = false;
       seguir.style.background = '#212121';
-      document.querySelector('.custom-button').innerText = language.slice(0, 2).toUpperCase();
-      storage(language.slice(0, 2).toLowerCase());
     }
   });
 }
@@ -164,8 +168,10 @@ function leeApp(json) {
 
 document.addEventListener('DOMContentLoaded', () => {
   spinner.style.visibility = 'visible';
-  const customButton = document.querySelector('.custom-button');
-  customButton.innerText = '';
+  const customButton = document.getElementById('planta');
+  const persona = JSON.parse(localStorage.getItem('user'));
+  const personaLng = persona.lng;
+  customButton.innerText = personaLng.toUpperCase();
   const person = document.querySelector('#person');
   person.style.display = 'none';
   const hamburguesa = document.querySelector('#hamburguesa');
@@ -190,10 +196,7 @@ async function loadLenguages(leng) {
 
 const button = document.querySelector('.my-button');
 button.addEventListener('click', () => {
-  const datosUser = localStorage.getItem('datosUser');
-  if (datosUser) {
-    spinner.style.visibility = 'visible';
-    const datos = JSON.parse(datosUser);
-    loadLenguages(datos.lng);
-  }
+  const persona = JSON.parse(localStorage.getItem('user'));
+  spinner.style.visibility = 'visible';
+  loadLenguages(persona.lng);
 });

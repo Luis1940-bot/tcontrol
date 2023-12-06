@@ -13,11 +13,11 @@ if (ini_get("session.use_cookies")) {
         $params["secure"], $params["httponly"]
     );
 }
-
+session_regenerate_id(true);
 // Finalmente, destruye la sesión.
 session_destroy();
 
 // Redirige a la página de inicio de sesión o a donde desees.
-header("Location: ../../../../404.php"); // Cambia "login.php" al nombre de tu página de inicio de sesión
+header("Location: ../../../../index.php"); // Cambia "login.php" al nombre de tu página de inicio de sesión
 exit;
 ?>

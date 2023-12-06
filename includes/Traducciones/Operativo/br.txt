@@ -127,3 +127,9 @@ Tempo de alerta:
 Entre no sistema e acesse o número do documento
 Notifica
 Vai
+Sistema de Alerta
+Notificação do sistema de alerta
+O processo de inserção foi bem-sucedido.
+A quantidade de:
+Unid.
+N º do documento.

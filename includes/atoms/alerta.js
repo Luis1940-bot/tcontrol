@@ -28,10 +28,9 @@ const objTraductor = {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const datosUser = localStorage.getItem('datosUser');
-  if (datosUser) {
-    const datos = JSON.parse(datosUser);
-    const data = await translate(datos.lng);
+  const persona = JSON.parse(localStorage.getItem('user'));
+  if (persona) {
+    const data = await translate(persona.lng);
     const translateOperativo = data.arrayTranslateOperativo;
     const espanolOperativo = data.arrayEspanolOperativo;
     objTraductor.operativoES = [...espanolOperativo];
@@ -112,6 +111,7 @@ function createSpan(config, text) {
   config.fontSize !== null ? span.style.fontSize = config.fontSize : null;
   config.fontColor !== null ? span.style.color = config.fontColor : null;
   config.id !== null ? span.id = config.id : null;
+  span.style.width = 'auto';
   config.marginTop !== null ? span.style.marginTop = config.marginTop : null;
   config.display !== null ? span.style.display = config.display : null;
   config.fontFamily !== null ? span.style.fontFamily = config.fontFamily : null;
@@ -335,7 +335,6 @@ const funcionHacerFirmar = () => {
   procesoStyleDisplay(elementosStyle);
 };
 const funcionSalir = () => {
-
 };
 
 async function firmar(firmadoPor) {
@@ -405,10 +404,10 @@ function convertirObjATextPlano(obj) {
 
 function subirImagenes(img) {
   if (img.length === 0) {
-    return;
+    return null;
   }
   if (img[0].extension.length === 0) {
-    return;
+    return null;
   }
   const formData = new FormData();
   formData.append('imgBase64', encodeURIComponent(JSON.stringify(img[0])));
@@ -420,30 +419,193 @@ function subirImagenes(img) {
     .then((data) => {
       // eslint-disable-next-line no-console
       console.log('Respuesta del servidor:', data);
+      return data;
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
       console.error('Error al enviar la imagen:', error);
     });
+  return null;
 }
 
-function insert(nuevoObjeto, convertido, objEncabezados) {
-  const nuevoObjetoControl = { ...nuevoObjeto };
-  delete nuevoObjetoControl.name;
-  delete nuevoObjetoControl.email;
-  delete nuevoObjetoControl.detalle;
-  delete nuevoObjetoControl.objImagen;
-  const insertado = insertarRegistro(nuevoObjetoControl);
-  const promise = Promise.resolve(insertado);
-  promise.then((value) => {
-    console.log(value);
-    subirImagenes(nuevoObjeto.objImagen);
+function cartelVerdeInsertado(typeAlert, objeto, modalContent, objTrad, mensaje, insertado, modal) {
+  const obj = objeto;
+  let span = document.getElementById('idSpanAvisoVerde');
+  span.style.display = 'none';
+  let texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert];
+  obj.span.text = texto;
+  obj.span.fontSize = '16px';
+  obj.span.fontColor = '#ececec';
+  obj.span.fontWeight = '700';
+  obj.span.marginTop = '10px';
+  const spanTitulo = createSpan(obj.span, texto);
+  modalContent.appendChild(spanTitulo);
+  span = createSpan(obj.close);
+  modalContent.appendChild(span);
+  let frase = '';
+  texto = trO(mensaje.cantidadRegistros, objTrad) || mensaje.cantidadRegistros;
+  frase = `${texto} ${insertado.registros}`;
+  texto = trO(mensaje.items, objTrad) || mensaje.items;
+  frase = `${frase} ${texto}\n`;
+  obj.span.text = frase;
+  obj.span.fontSize = '14px';
+  obj.span.fontColor = '#ececec';
+  obj.span.fontWeight = '500';
+  obj.span.marginTop = '0px';
+  let spanTexto = createSpan(obj.span, frase);
+  modalContent.appendChild(spanTexto);
+  texto = trO(mensaje.documento, objTrad) || mensaje.documento;
+  frase = `${texto} ${insertado.documento}\n`;
+  obj.span.text = frase;
+  obj.span.fontSize = '14px';
+  obj.span.fontColor = '#ececec';
+  obj.span.fontWeight = '500';
+  obj.span.marginTop = '0px';
+  spanTexto = createSpan(obj.span, frase);
+  modalContent.appendChild(spanTexto);
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+}
+
+function cartelRojoInsertado(typeAlert, objeto, modalContent, objTrad, mensaje, modal) {
+  const obj = objeto;
+  let span = document.getElementById('idSpanAvisoVerde');
+  span.style.display = 'none';
+  let texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert];
+  obj.span.text = texto;
+  obj.span.fontSize = '16px';
+  obj.span.fontColor = '#ececec';
+  obj.span.fontWeight = '700';
+  obj.span.marginTop = '10px';
+  const spanTitulo = createSpan(obj.span, texto);
+  modalContent.appendChild(spanTitulo);
+  span = createSpan(obj.close);
+  modalContent.appendChild(span);
+  const frase = '';
+  texto = trO(mensaje.fail, objTrad) || mensaje.fail;
+  obj.span.text = frase;
+  obj.span.fontSize = '14px';
+  obj.span.fontColor = '#ececec';
+  obj.span.fontWeight = '500';
+  obj.span.marginTop = '0px';
+  const spanTexto = createSpan(obj.span, frase);
+  modalContent.appendChild(spanTexto);
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+}
+
+function informe(convertido, insertado, imagenes, enviado, miAlerta, objTrad, mod) {
+  const modal = mod;
+  const div = document.getElementById('idDivAvisoVerde');
+  // let span = document.getElementById('idSpanAvisoVerde');
+  div.style.display = 'none';
+  // span.style.display = 'none';
+  const mensaje = arrayGlobal.mensajesVarios.guardar;
+  const obj = arrayGlobal.procesoExitoso;
+  modal.style.background = 'rgba(224, 220, 220, 0.7)';
+  const modalContent = createDiv(obj.div);
+  if (insertado.success) {
+    const typeAlert = 'success';
+    cartelVerdeInsertado(typeAlert, obj, modalContent, objTrad, mensaje, insertado, modal);
+    // let texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert];
+    // obj.span.text = texto;
+    // obj.span.fontSize = '16px';
+    // obj.span.fontColor = '#ececec';
+    // obj.span.fontWeight = '700';
+    // obj.span.marginTop = '10px';
+    // const spanTitulo = createSpan(obj.span, texto);
+    // modalContent.appendChild(spanTitulo);
+
+    // span = createSpan(obj.close);
+    // modalContent.appendChild(span);
+
+    // let frase = '';
+    // texto = trO(mensaje.cantidadRegistros, objTrad) || mensaje.cantidadRegistros;
+    // frase = `${texto} ${insertado.registros}`;
+    // texto = trO(mensaje.items, objTrad) || mensaje.items;
+    // frase = `${frase} ${texto}\n`;
+    // obj.span.text = frase;
+    // obj.span.fontSize = '14px';
+    // obj.span.fontColor = '#ececec';
+    // obj.span.fontWeight = '500';
+    // obj.span.marginTop = '0px';
+    // let spanTexto = createSpan(obj.span, frase);
+    // modalContent.appendChild(spanTexto);
+
+    // texto = trO(mensaje.documento, objTrad) || mensaje.documento;
+    // frase = `${texto} ${insertado.documento}\n`;
+    // obj.span.text = frase;
+    // obj.span.fontSize = '14px';
+    // obj.span.fontColor = '#ececec';
+    // obj.span.fontWeight = '500';
+    // obj.span.marginTop = '0px';
+    // spanTexto = createSpan(obj.span, frase);
+    // modalContent.appendChild(spanTexto);
+
+    // modal.appendChild(modalContent);
+
+    // Agregar el modal al body del documento
+    // document.body.appendChild(modal);
+
+    const documento = document.getElementById('numberDoc');
+    documento.innerText = insertado.documento;
+    localStorage.setItem('doc', insertado.documento);
+    const configMenuStorage = JSON.parse(localStorage.getItem('config_menu'));
+    const configMenu = {
+      guardar: true,
+      guardarComo: false,
+      guardarCambios: false,
+      firma: false,
+      configFirma: {},
+    };
+    configMenu.guardar = false;
+    configMenu.guardarComo = true;
+    configMenu.guardarCambios = true;
+    configMenu.configFirma = { ...configMenu.configFirma, ...configMenuStorage.configFirma };
+    localStorage.setItem('config_menu', JSON.stringify(configMenu));
+
+    limpiaArrays();
+    guardaNotas(convertido);
+  } else {
+    const typeAlert = 'ups';
+    cartelRojoInsertado(typeAlert, obj, modalContent, objTrad, mensaje, insertado, modal);
+    limpiaArrays();
+  }
+}
+
+async function insert(nuevoObjeto, convertido, objEncabezados, miAlertaInforme, objTrad, modal) {
+  try {
+    const nuevoObjetoControl = { ...nuevoObjeto };
+    delete nuevoObjetoControl.name;
+    delete nuevoObjetoControl.email;
+    delete nuevoObjetoControl.detalle;
+    delete nuevoObjetoControl.objImagen;
+
+    // const insertado = await insertarRegistro(nuevoObjetoControl);
+    const insertado = { success: true, message: 'ok', registros: '18', documento: '22222222222' };
+    // console.log(insertado);
+
+    // const imagenes = await subirImagenes(nuevoObjeto.objImagen);
+    const imagenes = { success: true, message: 'ok', rutaImagen: '../../' };
+    // console.log(imagenes);
+
     const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
     const encabezados = { ...objEncabezados };
-    encabezados.documento = value.documento;
-    enviaPorEmail ? enviaMail(nuevoObjeto, encabezados) : null;
-    guardaNotas(convertido);
-  });
+    // encabezados.documento = insertado.documento;
+
+    if (enviaPorEmail) {
+      // const enviado = await enviaMail(nuevoObjeto, encabezados);
+      const enviado = { success: true, message: 'ok', reporte: 'DWT', documento: '22222222222' };
+      // console.log(enviado);
+      informe(convertido, insertado, imagenes, enviado, miAlertaInforme, objTrad, modal);
+    }
+    const amarillo = document.getElementById('modalAlertVerde');
+    amarillo.style.display = 'none';
+    amarillo.remove();
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error:', error);
+  }
 }
 
 function armaEncabezado(arrayMensajes, objTrad) {
@@ -466,6 +628,10 @@ function armaEncabezado(arrayMensajes, objTrad) {
   const detalle = trO(mensaje, objTrad) || mensaje;
   mensaje = arrayMensajes.mensajesVarios.email.observacion;
   const observacion = trO(mensaje, objTrad) || mensaje;
+  mensaje = arrayMensajes.mensajesVarios.email.subject;
+  const subject = trO(mensaje, objTrad) || mensaje;
+  mensaje = arrayMensajes.mensajesVarios.email.titulo;
+  const titulo = trO(mensaje, objTrad) || mensaje;
   const encabezados = {
     documento: '3333333333333',
     address: encabezadosEmail.address,
@@ -474,7 +640,7 @@ function armaEncabezado(arrayMensajes, objTrad) {
     notificador: encabezadosEmail.notificador,
     planta: encabezadosEmail.planta,
     reporte: encabezadosEmail.reporte,
-    titulo: encabezadosEmail.titulo,
+    titulo,
     url: encabezadosEmail.url,
     fechaDeAlerta,
     horaDeAlerta,
@@ -485,8 +651,88 @@ function armaEncabezado(arrayMensajes, objTrad) {
     relevamiento,
     detalle,
     observacion,
+    subject,
   };
   return encabezados;
+}
+
+function formatarMenu(doc, configMenu, objTranslate) {
+  const firmado = configMenu.configFirma && Object.keys(configMenu.configFirma).length !== 0;
+  let elementosStyle;
+  let nuevoConfigMenu;
+  if (doc === 'null' && firmado === undefined) {
+    //! console.log('menu básico sin doc');
+    nuevoConfigMenu = {
+      guardar: true,
+      guardarComo: false,
+      guardarCambios: false,
+      firma: true,
+      configFirma: 'x',
+    };
+    elementosStyle = {
+      element: ['idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idDivFirmado'],
+      style: ['none', 'none', 'none', 'none', 'none'],
+      remove: [null, null, null, null, null],
+    };
+  }
+  if (doc === 'null' && firmado === true) {
+    //! console.log('menú con firma sin doc');
+    const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text;
+    const firmadoPor = trO(textFirmado, objTranslate) || textFirmado;
+    const idMensajeFirmado = document.getElementById('idMensajeFirmado');
+    idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma.nombre}`;
+    idMensajeFirmado.style.display = 'flex';
+    nuevoConfigMenu = {
+      guardar: configMenu.guardar,
+      guardarComo: configMenu.guardarComo,
+      guardarCambios: configMenu.guardarCambios,
+      firma: configMenu.firma,
+      configFirma: configMenu.configFirma,
+    };
+    elementosStyle = {
+      element: ['idMensajeFirmado', 'idDivFirmar', 'idDivFirmado', 'idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idMensaje2'],
+      style: ['flex', 'none', 'flex', 'none', 'none', 'none', 'none', 'none'],
+      remove: [null, null, null, null, null, null, null, null],
+    };
+  }
+  if (doc !== 'null' && firmado === false) {
+    //! console.log('menú guardado con doc y  sin firma');
+    nuevoConfigMenu = {
+      guardar: false,
+      guardarComo: true,
+      guardarCambios: true,
+      firma: false,
+      configFirma: 'x',
+    };
+    localStorage.setItem('config_menu', JSON.stringify(nuevoConfigMenu));
+    elementosStyle = {
+      element: ['idDivGuardar', 'idHrGuardar', 'idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idDivFirmado'],
+      style: ['none', 'none', 'flex', 'flex', 'flex', 'flex', 'none'],
+      remove: [null, null, null, null, null, null, null],
+    };
+  }
+  if (doc !== 'null' && firmado === true) {
+    //! console.log('menú guardado con firma');
+    const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text;
+    const firmadoPor = trO(textFirmado, objTranslate) || textFirmado;
+    const idMensajeFirmado = document.getElementById('idMensajeFirmado');
+    idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma.nombre}`;
+    idMensajeFirmado.style.display = 'flex';
+    nuevoConfigMenu = {
+      guardar: false,
+      guardarComo: true,
+      guardarCambios: true,
+      firma: false,
+      configFirma: 'x',
+    };
+    localStorage.setItem('config_menu', JSON.stringify(nuevoConfigMenu));
+    elementosStyle = {
+      element: ['idDivGuardar', 'idHrGuardar', 'idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idDivFirmado', 'idMensajeFirmado', 'idDivFirmar'],
+      style: ['none', 'none', 'flex', 'flex', 'flex', 'flex', 'flex', 'flex', 'none'],
+      remove: [null, null, null, null, null, null, null, null, null],
+    };
+  }
+  procesoStyleDisplay(elementosStyle);
 }
 
 // function soloEnviaEmail(nuevoObjeto, encabezados) {
@@ -556,6 +802,7 @@ class Alerta {
       const requerido = JSON.parse(localStorage.getItem('requerido'));
       if (requerido.requerido && okGuardar) {
         const miAlerta = new Alerta();
+        const miAlertaInforme = new Alerta();
         let mensaje = arrayGlobal.mensajesVarios.guardar.esperaAmarillo;
         arrayGlobal.avisoAmarillo.close.display = 'none';
         mensaje = trO(mensaje, objTrad);
@@ -570,7 +817,8 @@ class Alerta {
         };
         const encabezados = armaEncabezado(arrayGlobal, objTrad);
         // soloEnviaEmail(nuevoObjeto, encabezados);
-        insert(nuevoObjeto, convertido, encabezados);
+        // console.log(encabezados);
+        insert(nuevoObjeto, convertido, encabezados, miAlertaInforme, objTrad, modal);
       }
       if (!requerido.requerido || !okGuardar) {
         limpiaArrays();
@@ -748,8 +996,9 @@ class Alerta {
   }
 
   createModalMenu(objeto, objTranslate) {
+    // eslint-disable-next-line no-unused-vars
     const configFirma = JSON.parse(localStorage.getItem('firma'));
-    let configMenu = JSON.parse(localStorage.getItem('config_menu'));
+    const configMenu = JSON.parse(localStorage.getItem('config_menu'));
     const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
 
     const obj = objeto;
@@ -908,34 +1157,10 @@ class Alerta {
 
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal);
-
-    if (configMenu === 'x') {
-      configMenu = {
-        guardar: true,
-        guardarComo: false,
-        guardarCambios: false,
-        firma: true,
-        configFirma,
-      };
-      const elementosStyle = {
-        element: ['idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idDivFirmado'],
-        style: ['none', 'none', 'none', 'none', 'none'],
-        remove: [null, null, null, null, null],
-      };
-      procesoStyleDisplay(elementosStyle);
-    } else {
-      const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text;
-      const firmadoPor = trO(textFirmado, objTranslate) || textFirmado;
-      const idMensajeFirmado = document.getElementById('idMensajeFirmado');
-      idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma.nombre}`;
-      idMensajeFirmado.style.display = 'block';
-      const elementosStyle = {
-        element: ['idMensajeFirmado', 'idDivFirmar', 'idDivFirmado', 'idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idMensaje2'],
-        style: ['block', 'none', 'block', 'none', 'none', 'none', 'none', 'none'],
-        remove: [null, null, null, null, null, null, null, null],
-      };
-      procesoStyleDisplay(elementosStyle);
-    }
+    // let elementosStyle;
+    const doc = localStorage.getItem('doc');
+    // console.log(doc)
+    formatarMenu(doc, configMenu, objTranslate);
     const enviaEmail = document.getElementById('idCheckBoxEmail');
     enviaPorEmail ? enviaEmail.checked = true : enviaEmail.checked = false;
   }
@@ -952,3 +1177,4 @@ class Alerta {
 }
 
 export default Alerta;
+export { Alerta };

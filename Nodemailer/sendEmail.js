@@ -1,34 +1,56 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..';
 
-function send(filtrado, encabezados) {
+// async function send(filtrado, encabezados) {
+//   try {
+//     const formData = new FormData();
+//     formData.append('datos', JSON.stringify(filtrado));
+//     formData.append('encabezados', JSON.stringify(encabezados));
+//     // console.log(formData);
+//     fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
+//       method: 'POST',
+//       body: formData,
+//     })
+//       .then((response) => {
+//         if (response.ok) {
+//           return response.json();
+//         }
+//         throw new Error('Error en la respuesta de la red.');
+//       })
+//       // .then((data) => {
+//       //   // eslint-disable-next-line no-console
+//       //   console.log(JSON.parse(data));
+//       // })
+//       .catch((error) => {
+//         // eslint-disable-next-line indent, no-console
+//         console.error('Error:', error);
+//       });
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.warn(error);
+//   }
+// }
+
+async function send(nuevoObjeto, encabezados) {
   try {
     const formData = new FormData();
-    formData.append('datos', JSON.stringify(filtrado));
+    formData.append('datos', JSON.stringify(nuevoObjeto));
     formData.append('encabezados', JSON.stringify(encabezados));
-    console.log(formData);
-    fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
+
+    const response = await fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
       method: 'POST',
       body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        }
-        throw new Error('Error en la respuesta de la red.');
-      })
-      .then((data) => {
-        // eslint-disable-next-line no-console
-        console.log(data);
-      })
-      .catch((error) => {
-        // eslint-disable-next-line indent, no-console
-        console.error('Error:', error);
-      });
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data; // Devuelve la respuesta del servidor
+    }
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn(error);
+    console.error('Error:', error);
+    throw error; // Re-lanza el error para que pueda ser manejado por el bloque catch en insert
   }
+  return null;
 }
 
 function enviaMail(datos, encabezados) {
@@ -104,11 +126,13 @@ function enviaMail(datos, encabezados) {
       }
       return null;
     }).filter((elemento) => elemento !== null);
-    send(filtrados, encabezados);
+    const enviado = send(filtrados, encabezados);
+    return enviado;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
   }
+  return null;
 }
 
 export default enviaMail;

@@ -125,3 +125,9 @@ Alert time:
 Enter the system and access document number
 Notify
 Gonna
+Alert System
+Alert system notification
+The insertion process was successful.
+The quantity of:
+items.
+Document no.

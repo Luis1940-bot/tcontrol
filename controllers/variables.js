@@ -33,6 +33,8 @@ let objetoControl = {
     hora: '',
     notificador: '',
     url: '',
+    subject: '',
+    mailNotificador: '',
   },
   detalle: [],
   objImagen: [],
@@ -60,48 +62,53 @@ let objetoMemoria = {
 
 let habilitadoGuardar = false;
 
+function removeModal(mod) {
+  const modal = mod;
+  if (modal) {
+    modal.style.display = 'none';
+    modal.remove();
+  }
+}
+
 const funcionDeCancelar = () => {
   const modal = document.getElementById('modalAlert');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
 };
 const funcionDeOk = () => {
   const modal = document.getElementById('modalAlert');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
 };
 const funcionDeClose = () => {
   const modal = document.getElementById('modalAlert');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
 };
 const funcionDeCloseP = () => {
   const modal = document.getElementById('modalAlertP');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
 };
 const funcionDeCloseM = () => {
   const modal = document.getElementById('modalAlertM');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
 };
 
 const closeVentanaVerdeRoja = () => {
   let modal = document.getElementById('modalAlertVerde');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
   modal = document.getElementById('modalAlertM');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
 };
 
 const closeVentanaVerdeRojaImg = () => {
   const modal = document.getElementById('modalAlertVerde');
-  modal.style.display = 'none';
-  modal.remove();
+  removeModal(modal);
 };
 
 const funcionLogOut = () => {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    localStorage.removeItem(key);
+  }
   const url = '../../../includes/molecules/logout.php';
   window.location.href = url;
 };
@@ -482,7 +489,7 @@ const avisoAmarillo = {
     fontStyle: null,
   },
   div: {
-    id: null,
+    id: 'idDivAvisoVerde',
     position: 'relative',
     borderRadius: '10px',
     width: '305px',
@@ -506,7 +513,7 @@ const avisoAmarillo = {
     cursor: null,
   },
   span: {
-    id: null,
+    id: 'idSpanAvisoVerde',
     text: 'El proceso puede demorar unos instantes hasta que se visualice la imágen en la celda correpondiente.',
     fontSize: '12px',
     fontColor: '#ffffff',
@@ -917,7 +924,7 @@ const objMenu = {
     position: 'relative',
     borderRadius: '0px 10px 10px 10px',
     width: '200px',
-    height: '300px',
+    height: 'auto',
     background: '#ffffff',
     border: '3px solid #000000',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
@@ -947,7 +954,7 @@ const objMenu = {
     alignSelf: null,
     className: 'comentarios',
     fontWeight: '700',
-    cursor: null,
+    cursor: 'pointer',
     padding: null,
     position: null,
     top: null,
@@ -965,7 +972,7 @@ const objMenu = {
     fontSize: '14px',
     fontColor: '#212121',
     marginTop: '0px',
-    display: 'block',
+    display: null,
     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     alignSelf: null,
     className: 'comentarios',
@@ -1147,7 +1154,7 @@ const objMenu = {
     id: null,
     position: 'relative',
     borderRadius: '5px 5px 5px 5px',
-    width: '80%',
+    width: 'auto',
     height: '20px',
     background: '#ffffff',
     border: null,
@@ -1289,6 +1296,12 @@ const mensajesVarios = {
     esperaAmarillo: 'El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.',
     sinModificaciones: 'No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.',
     faltanRequeridos: 'Están faltando datos requeridos que no se han completado. Cierre este mensaje, complete el dato requerido y acepte nuevamente.',
+    success: 'El proceso de insertar resultó exitosamente.',
+    cantidadRegistros: 'Se insertaron la cantidad de:',
+    items: 'items.',
+    documento: 'Documento nº',
+    ups: 'Algo salió mal.',
+    fail: 'El proceso falló ya que no se registran datos insertados. Compruebe la conexión a internet y vuelva a intentarlo.\nSi el problema persiste comunique al analista de su área.',
   },
   cargarControl: {
     esperaVerde: 'Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!',
@@ -1307,6 +1320,8 @@ const mensajesVarios = {
     relevamiento: 'Relevamiento',
     detalle: 'Detalle',
     observacion: 'Observación',
+    subject: 'Sistema de Alertas',
+    titulo: 'Notificación del sistema de alerta',
   },
 };
 const objInforme = {
@@ -1501,6 +1516,123 @@ const objInforme = {
     noEnvia: 'Este control NO se enviará por email.',
   },
 };
+const procesoExitoso = {
+  close: {
+    id: null,
+    text: 'x ',
+    fontSize: '18px',
+    fontColor: '#ffffff',
+    marginTop: '0px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'center',
+    className: 'verde-close',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    padding: '10px 10px',
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    left: null,
+    hoverBackground: null,
+    hoverColor: 'red',
+    innerHTML: '&times',
+    margin: null,
+    onClick: closeVentanaVerdeRoja,
+    fontStyle: null,
+  },
+  div: {
+    id: null,
+    position: 'relative',
+    borderRadius: '10px',
+    width: '305px',
+    height: '200px',
+    background: '#21D849',
+    border: 'none',
+    boxShadow: 'none',
+    margin: '20% auto',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '10px',
+    overflow: 'hidden',
+    className: 'div-verde',
+    textAlign: '',
+    gap: '0px',
+    top: '450px',
+    alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    cursor: null,
+  },
+  span: {
+    id: null,
+    text: 'El proceso de guardado resulto exitosamente.',
+    fontSize: '16px',
+    fontColor: '#ECECEC',
+    marginTop: '0px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'center',
+    className: 'comentarios',
+    fontWeight: '500',
+    cursor: null,
+    padding: '15px 15px 15px 15px',
+    position: null,
+    top: null,
+    right: null,
+    left: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    margin: null,
+    fontStyle: null,
+  },
+  btnaccept: {
+    id: 'idAceptar',
+    text: 'Aceptar',
+    fontSize: '14px',
+    fontColor: '#ffffff',
+    backColor: '#212121',
+    marginTop: '10px',
+    display: 'block',
+    fontWeight: 700,
+    width: '40%',
+    height: '35px',
+    border: 'none',
+    className: 'aceptar',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    hoverBackground: '#cecece',
+    hoverColor: '#000000',
+    marginLeft: null,
+    onClick: closeVentanaVerdeRoja,
+  },
+  divButtons: {
+    id: null,
+    position: '',
+    borderRadius: '5px',
+    width: '100%',
+    height: '50px',
+    background: '#21D849',
+    border: 'none',
+    boxShadow: '',
+    margin: '0',
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '2px 2px 2px 2px',
+    overflow: 'hidden',
+    className: 'div-button',
+    textAlign: 'left',
+    gap: '5px',
+    top: null,
+    alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    cursor: null,
+  },
+};
 
 export default {
   arrayGlobal,
@@ -1518,4 +1650,5 @@ export default {
   avisoCargandoControl,
   objInforme,
   habilitadoGuardar,
+  procesoExitoso,
 };

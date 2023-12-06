@@ -13,7 +13,8 @@ function buscarEnArray(id, array) {
 
 function hacerMemoria(arrayControl) {
   try {
-    const idPerson = document.getElementById('sessionIdPerson').textContent;
+    const person = JSON.parse(localStorage.getItem('user'));
+    const idPerson = person.id;
     // const email = document.getElementById('idCheckBoxEmail').checked;
     const url = new URL(window.location.href);
     const controlN = url.searchParams.get('control_N');

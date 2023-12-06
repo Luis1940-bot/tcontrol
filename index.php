@@ -1,18 +1,13 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
 session_start();
-header('Cache-Control: no-cache, must-revalidate');
-if (isset($_SESSION['factum_validation']['email'] )) {
-  $_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
-  $_SESSION['factum_validation']['plant'] = '1';
-  $_SESSION['factum_validation']['lng'] = 'es';
-  $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
-  $_SESSION['factum_validation']['id'] = '6';
-// }else{
-  // header('Location: /404.php');
-  // exit;
-}
+// if (!isset($_SESSION['factum_validation'])) {
 
+    // header('Location: /404.php');
+    // exit;
+// }
+define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
+define('INCLUDES', ROOT_PATH.'/includes/molecules');
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -23,6 +18,8 @@ if (isset($_SESSION['factum_validation']['email'] )) {
   <meta name='description' content='Factum Consultora'>
   <meta name='author' content='Luis1940-bot'>
   <!-- <meta http-equiv='refresh' content='1;url=./Pages/Landing'> -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:8080"> -->
+
   <link rel='shortcut icon' type='image/x-icon' href='./assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='./assets/css/index.css?v=<?php echo(time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='./assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>

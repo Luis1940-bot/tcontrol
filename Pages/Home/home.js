@@ -136,11 +136,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible';
   const hamburguesa = document.querySelector('#hamburguesa');
   hamburguesa.style.display = 'none';
-  const datosUser = localStorage.getItem('datosUser');
-  if (datosUser) {
-    const datos = JSON.parse(datosUser);
-    document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
-    const data = await translate(datos.lng);
+  const persona = JSON.parse(localStorage.getItem('user'));
+  if (persona) {
+    document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
+    const data = await translate(persona.lng);
     translateOperativo = data.arrayTranslateOperativo;
     espanolOperativo = data.arrayEspanolOperativo;
     objTranslate.operativoES = [...espanolOperativo];
@@ -179,9 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
     person.style.border = '3px solid #212121';
     person.style.background = '#212121';
     person.style.borderRadius = '10px 10px 0px 0px';
-    const persona = document.getElementById('sessionPerson').textContent;
+    const persona = JSON.parse(localStorage.getItem('user'));
     const user = {
-      person: persona,
+      person: persona.person,
       salir: trO('Cerrar sesión'),
     };
     personModal(user, objTranslate);

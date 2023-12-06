@@ -216,11 +216,10 @@ buscarModal.addEventListener('input', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const datosUser = localStorage.getItem('datosUser');
-  if (datosUser) {
-    const datos = JSON.parse(datosUser);
-    document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
-    data = await translate(datos.lng);
+  const persona = JSON.parse(localStorage.getItem('user'));
+  if (persona) {
+    document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
+    data = await translate(persona.lng);
     translateOperativo = data.arrayTranslateOperativo;
     espanolOperativo = data.arrayEspanolOperativo;
     // translateArchivo = data.arrayTranslateArchivo;

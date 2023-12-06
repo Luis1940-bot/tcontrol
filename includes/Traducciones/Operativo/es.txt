@@ -127,3 +127,9 @@ Hora de alerta:
 Entre al sistema y acceda al documento número
 Notifica
 Ir A
+Sistema de Alertas
+Notificación del sistema de alerta
+El proceso de insertar resultó exitosamente.
+Se insertaron la cantidad de:
+items.
+Documento nº

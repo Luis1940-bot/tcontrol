@@ -6,6 +6,9 @@
   define('ROOT_PATHP', $_SERVER['DOCUMENT_ROOT']);
   define('EMAIL', ROOT_PATHP.'/Nodemailer/emailFactum');
   define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] . '/iControl-Vanilla/icontrol/Nodemailer');
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
 
 
   // $SERVER = '/iControl-Vanilla/icontrol/Nodemailer';
@@ -16,20 +19,20 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 $basePath =  realpath(__DIR__ . '/../../Nodemailer');
-// $basePath =  'ROOT_PATH';
+// $basePath =  ROOT_PATH;
 
 require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php' ;
 require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
 require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
-include('datos.php');
+include('..//Routes/datos.php');
 
 try {
-  //  $datos =json_decode($_POST['datos'], true);
-  //  $encabezados =json_decode($_POST['encabezados'], true);
+   $datos =json_decode($_POST['datos'], true);
+   $encabezados =json_decode($_POST['encabezados'], true);
   
-  $datos =json_decode($datox, true);
-  $encabezados =json_decode($encabezadox, true);
+  // $datos =json_decode($datox, true);
+  // $encabezados =json_decode($encabezadox, true);
 
 
    if ($datos === null && json_last_error() !== JSON_ERROR_NONE) {
@@ -53,9 +56,13 @@ try {
     $relevamiento = $encabezados['relevamiento'];
     $detalle = $encabezados['detalle'];
     $observacion = $encabezados['observacion'];
+    $subject = $encabezados['subject'];
 
+ob_start();
+include($SERVER . '/email.html');
+$html = ob_get_clean();
 
-   $html  = file_get_contents($SERVER . '/email.html');
+  //  $html  = file_get_contents($SERVER . '/email.html');
   //  $html  = file_get_contents(ROOT_PATH . '/emailFactum/email.html');
    
    $html  = str_replace('{planta}', $planta, $html);
@@ -76,7 +83,7 @@ try {
    $html  = str_replace('{detalle}', $detalle, $html);
    $html  = str_replace('{observacion}', $observacion , $html);
    $html  = str_replace('{contenido_dinamico}', generarContenidoDinamico($datos), $html);
- echo 'html>>>> '.$html;
+//  echo 'html>>>> '.$html;
     $mail = new PHPMailer(true);
   // Configura el servidor SMTP
     $mail->isSMTP();
@@ -101,27 +108,28 @@ try {
     // $mail->addAddress('destinatario@example.com', 'Destinatario');
     $mail->addBCC('alerta.factum@factumconsultora.com');
     // Configura el asunto y el cuerpo del correo electrónico
-    $mail->Subject = "Sistema de Alertas"; 
+    $mail->Subject = $subject; 
     $mail->Body    = $html;
     
 
-    // if (strlen($mails_destino)>0) {
-    //   $dirs = explode("/", $mails_destino);
-    //   $cantidad_emails=count($dirs);
-    //   for ($i=0; $i < $cantidad_emails; $i++) { 
-    //     $mail->AddAddress($dirs[$i]);
-    //   };
-    //     $email_supervisor!=''?$mail->AddAddress($email_supervisor):null;
-    // }else{
-    //   $mail->addAddress($email_usuario, $name_usuario);
-    // }
+    if (strlen($address)>0) {
+      $dirs = explode(",", $address);
+      $cantidad_emails=count($dirs);
+      for ($i=0; $i < $cantidad_emails; $i++) { 
+        $mail->AddAddress($dirs[$i]);
+      };
+    }else{
+      $mail->addAddress($email_usuario, $notificador);
+    }
     
-    $mail->addAddress('luisglogista@gmail.com', 'Luis');
+    // $mail->addAddress('luisglogista@gmail.com', 'Luis');
 
     // Envía el correo electrónico
     $mail->send();
+    $response = array('success' => true, 'message' => 'El email se envió con éxito!', 'reporte' => $reporte, 'documento' => $documento);
+    echo json_encode($response);
 } catch (Exception $e) {
-  echo "Error en el envío del correo: " . $e->errorMessage();
+  echo "Error en el envío del correo: " . $e->getMessage();
 }
 
 
@@ -129,6 +137,35 @@ try {
 ?>
 
 <?php
+function utf8_to_iso8859_1(string $string): string {
+    $s = (string) $string;
+    $len = \strlen($s);
+
+    for ($i = 0, $j = 0; $i < $len; ++$i, ++$j) {
+        switch ($s[$i] & "\xF0") {
+            case "\xC0":
+            case "\xD0":
+                $c = (\ord($s[$i] & "\x1F") << 6) | \ord($s[++$i] & "\x3F");
+                $s[$j] = $c < 256 ? \chr($c) : '?';
+                break;
+
+            case "\xF0":
+                ++$i;
+                // no break
+
+            case "\xE0":
+                $s[$j] = '?';
+                $i += 2;
+                break;
+
+            default:
+                $s[$j] = $s[$i];
+        }
+    }
+
+    return substr($s, 0, $j);
+}
+
 function generarContenidoDinamico($datos) {
     $contenido = ''; 
     foreach ($datos as $elemento) {
@@ -159,6 +196,7 @@ function generarContenidoDinamico($datos) {
           $paddingLeft = '10px';
         }
         $valor = $elemento['valor'];
+        $valor = utf8_to_iso8859_1($valor);
         $fileName = null;
         $string = $elemento['image'];
         
@@ -180,6 +218,7 @@ function generarContenidoDinamico($datos) {
 
         $valor = trim($valor);
         $valor = strtolower(trim($valor));
+        $valor = utf8_to_iso8859_1($valor);
         $fileName = trim($fileName);
         if ($valor === 'img' && $fileName) {
           $directorioImagenes = dirname(dirname(dirname($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_NAME']))) . "/assets/Imagenes/";

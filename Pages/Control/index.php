@@ -2,23 +2,16 @@
 ob_start();
 header('Content-Type: text/html;charset=utf-8');
 session_start();
-// if (!isset($_SESSION['factum_validation']['email'] )) {
-//     unset($_SESSION['factum_validation']['email'] ); 
-//     // header('Location: ../../../../404.php');
-//     // exit;
-// } else {
-//   $_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
-//   $_SESSION['factum_validation']['plant'] = '1';
-//   $_SESSION['factum_validation']['lng'] = 'es';
-//   $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
-// }
+if (!isset($_SESSION['factum_validation']['email'] )) {
+
+}
 if (!isset($_SESSION['factum_validation'])) {
-    $_SESSION['factum_validation'] = array(); // Inicializar el array si no existe
-    $_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
-    $_SESSION['factum_validation']['plant'] = '1';
-    $_SESSION['factum_validation']['lng'] = 'es';
-    $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
-    $_SESSION['factum_validation']['id'] = '6';
+    // $_SESSION['factum_validation'] = array(); // Inicializar el array si no existe
+    // $_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
+    // $_SESSION['factum_validation']['plant'] = '1';
+    // $_SESSION['factum_validation']['lng'] = 'es';
+    // $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
+    // $_SESSION['factum_validation']['id'] = '6';
 }
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 define('MODALS', ROOT_PATH.'/includes/molecules/modales');
@@ -38,8 +31,6 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/alerta.css' media='screen'>
   <title>Factum</title>
-  <p id='sessionPerson' style='display: none'><?php echo $_SESSION['factum_validation']['person'] ?></p>
-  <p id='sessionIdPerson' style='display: none'><?php echo $_SESSION['factum_validation']['id'] ?></p>
 </head>
 <body>
   <div class='spinner'></div>

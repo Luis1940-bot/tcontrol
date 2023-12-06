@@ -58,7 +58,7 @@ function configuracionLoad() {
   controlN = url.searchParams.get('control_N');
   // controlT = url.searchParams.get('control_T');
   nr = url.searchParams.get('nr');
-  nr === '0' ? nr = '-' : nr;
+  nr === '0' ? nr = '' : nr;
   document.getElementById('doc').innerText = `Doc: ${nr}`;
   // document.getElementById('wichC').innerText = controlT;
   document.getElementById('wichC').style.display = 'inline';
@@ -98,10 +98,9 @@ function mensajeDeCarga() {
 }
 
 async function arraysLoadTranslate() {
-  const datosUser = localStorage.getItem('datosUser');
-  if (datosUser) {
-    const datos = JSON.parse(datosUser);
-    data = await translate(datos.lng);
+  const persona = JSON.parse(localStorage.getItem('user'));
+  if (persona) {
+    data = await translate(persona.lng);
     translateOperativo = data.arrayTranslateOperativo;
     espanolOperativo = data.arrayEspanolOperativo;
     mensajeDeCarga();
@@ -116,6 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   localStorage.setItem('firma', JSON.stringify('x'));
   localStorage.setItem('config_menu', JSON.stringify('x'));
   localStorage.setItem('envia_por_email', false);
+  localStorage.setItem('doc', null);
   const supervisor = {
     id: 0,
     mail: '',
@@ -125,12 +125,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   localStorage.setItem('firmado', JSON.stringify(supervisor));
   try {
-    const datosUser = localStorage.getItem('datosUser');
-    if (datosUser) {
-      const datos = JSON.parse(datosUser);
-      document.querySelector('.custom-button').innerText = datos.lng.toUpperCase();
+    const persona = JSON.parse(localStorage.getItem('user'));
+    if (persona) {
+      document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
       leeVersion('version');
-      const datas = await translate(datos.lng);
+      const datas = await translate(persona.lng);
       translateOperativo = datas.arrayTranslateOperativo;
       espanolOperativo = datas.arrayEspanolOperativo;
       objTranslate.operativoES = [...espanolOperativo];
@@ -162,9 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const person = document.getElementById('person');
   person.addEventListener('click', () => {
-    const persona = document.getElementById('sessionPerson').textContent;
+    const persona = JSON.parse(localStorage.getItem('user'));
     const user = {
-      person: persona,
+      person: persona.person,
       salir: 'Cerrar sesión',
     };
     personModal(user, objTranslate);

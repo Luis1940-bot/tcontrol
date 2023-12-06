@@ -34,18 +34,33 @@ function convertirObjATextPlano(obj) {
   return plainText;
 }
 
-function tuFuncion(objetoControl, founded, planta, reporte, notificador, fechaActual, horaActual) {
+function tuFuncion(
+  objetoControl,
+  founded,
+  planta,
+  reporte,
+  notificador,
+  mailUser,
+  fechaActual,
+  horaActual,
+  supervisor,
+) {
   // Crea una copia del objeto para evitar modificar el parámetro directamente
+  let emailSupervisor = '';
+  if (supervisor) {
+    emailSupervisor = `,${supervisor}`;
+  }
   const objetoControlCopia = { ...objetoControl };
   // eslint-disable-next-line prefer-destructuring
-  objetoControlCopia.email.address = founded[28];
+  objetoControlCopia.email.address = `${founded[28]}${emailSupervisor}`;
   objetoControlCopia.email.planta = planta;
   objetoControlCopia.email.titulo = 'Notificación del sistema de alerta';
   objetoControlCopia.email.reporte = reporte;
   objetoControlCopia.email.fecha = fechaActual;
   objetoControlCopia.email.hora = horaActual;
   objetoControlCopia.email.notificador = notificador;
-  objetoControlCopia.email.url = 'https://factumconsultora.com/';
+  objetoControlCopia.email.url = 'https://factumconsultora.com/mccain';
+  objetoControlCopia.email.mailNotificador = mailUser;
 
   // Puedes retornar la copia del objeto si es necesario
   return objetoControlCopia;
@@ -53,7 +68,8 @@ function tuFuncion(objetoControl, founded, planta, reporte, notificador, fechaAc
 
 function recorroTable(objetoControl, arrayControl) {
   try {
-    const idPerson = document.getElementById('sessionIdPerson').textContent;
+    const person = JSON.parse(localStorage.getItem('user'));
+    const idPerson = person.id;
     // const email = document.getElementById('idCheckBoxEmail').checked;
     const url = new URL(window.location.href);
     const controlN = url.searchParams.get('control_N');
@@ -62,8 +78,10 @@ function recorroTable(objetoControl, arrayControl) {
     const tbody = document.querySelector('tbody');
     const tr = tbody.querySelectorAll('tr');
     let estanTodosLosRequeridos = true;
+    let emailSupervisor = null;
     let supervisor = JSON.parse(localStorage.getItem('firmado'));
-    supervisor.id === 0 ? supervisor = 0 : supervisor = Number(supervisor.id);
+    // eslint-disable-next-line max-len
+    supervisor.id === 0 ? supervisor = 0 : (supervisor = Number(supervisor.id), emailSupervisor = JSON.parse(localStorage.getItem('firmado')).mail);
     let founded;
     let fechaActual = '';
     let horaActual = '';
@@ -206,10 +224,11 @@ function recorroTable(objetoControl, arrayControl) {
     // console.log(estanTodosLosRequeridos)
     const planta = document.getElementById('planta').textContent;
     const reporte = document.getElementById('wichC').textContent;
-    const notificador = document.getElementById('sessionPerson').textContent;
-
+    const persona = JSON.parse(localStorage.getItem('user'));
+    const notificador = persona.person;
+    const mailUser = person.mail;
     // eslint-disable-next-line no-unused-vars, max-len
-    const objetoControlModificado = tuFuncion(objetoControl, founded, planta, reporte, notificador, fechaActual, horaActual);
+    const objetoControlModificado = tuFuncion(objetoControl, founded, planta, reporte, notificador, mailUser, fechaActual, horaActual, emailSupervisor);
     if (estanTodosLosRequeridos) {
       const requerido = {
         requerido: true,

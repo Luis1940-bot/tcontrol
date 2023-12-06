@@ -33,7 +33,7 @@ header('Content-Type: text/html;charset=utf-8');
         </a>
         </div>
     </div>
-    <div class='headerLenguaje'><button class='custom-button' id='planta'>Español</button></div>
+    <div class='headerLenguaje'><button class='custom-button' id='planta'></button></div>
     <div class='headerPerson'><img id='person' src='./../../assets/img/person.png' alt='Person'></div>
   </div>
   <div class='header-McCain'>
