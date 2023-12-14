@@ -28,8 +28,8 @@ header('Content-Type: text/html;charset=utf-8');
     </div>
     <div class='headerFactum'>
       <div class='logoFactum'>
-        <a href='https://www.factumconsultora.com'>
-          <img id='logo_factum' src='./../../assets/img/ftm.png' alt='Factum Consultora'>
+        <a id='linkInstitucional' target='_blank'>
+          <img id='logo_factum'>
         </a>
         </div>
     </div>

@@ -7,7 +7,7 @@ import arrayGlobal from '../../../controllers/variables.js';
 // eslint-disable-next-line import/extensions
 import traerRegistros from './Controladores/traerRegistros.js';
 // eslint-disable-next-line import/extensions
-import Alerta from '../../../includes/atoms/alerta.js';
+import { Alerta } from '../../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions, import/no-named-as-default
 import translate, {
   // eslint-disable-next-line no-unused-vars
@@ -424,7 +424,14 @@ async function traerValorPorDefecto(sql, tipo, html) {
 function completaTabla(arrayControl) {
   const tbody = document.querySelector('tbody');
   const cantidadDeRegistros = arrayControl.length;
+
   arrayControl.forEach((element, index) => {
+    const unidades = parseFloat(index + 1);
+    const porcentaje = parseFloat(unidades / parseFloat(cantidadDeRegistros + 0.2));
+    const idSpanCarga = document.getElementById('idSpanCarga');
+    setTimeout(() => {
+      idSpanCarga.innerText = `${Math.floor(porcentaje * 100)}%`;
+    }, 100);
     const newRow = estilosTbodyCell(element, index, cantidadDeRegistros);
     tbody.appendChild(newRow);
     fila += 1;
@@ -457,9 +464,6 @@ function completaTabla(arrayControl) {
       }
     }
   });
-  const modal = document.getElementById('modalAlertCarga');
-  const vecesLoad = localStorage.getItem('loadSystem');
-  vecesLoad >= 3 ? (modal.style.display = 'none', modal.remove()) : null;
 }
 
 async function arraysLoadTranslate() {

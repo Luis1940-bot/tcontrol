@@ -1,13 +1,18 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
-header('Content-Type: application/json');
-
+// header('Content-Type: application/json');
+define('ROOT_PATHP', $_SERVER['DOCUMENT_ROOT']);
+define('IMAGE', ROOT_PATHP.'/assets/Imagenes/');
+// $SERVER = ROOT_PATHP.'/iControl-Vanilla/icontrol/assets/Imagenes/';
+$SERVER = IMAGE;
+// include('datos.php');
 $datos = $_POST['imgBase64'];
+// $datos = $datox;
 
 if (isset($datos)) {
-    $dato_decodificado = urldecode($datos);
+  
+    $dato_decodificado = ($datos);//urldecode
     $imgJson = json_decode($dato_decodificado, true);
-
     $srcArray = $imgJson['src'];
     $fileNameArray = $imgJson['fileName'];
     $extensionArray = $imgJson['extension'];
@@ -67,7 +72,8 @@ if (isset($datos)) {
                 $imageName = $fileName;
 
                 // Construir la ruta de la imagen
-                $directorioImagenes = dirname(dirname(dirname($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_NAME']))) . "/assets/Imagenes/";
+               
+                $directorioImagenes = $SERVER;
 
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);
@@ -89,10 +95,12 @@ if (isset($datos)) {
             } else {
                 // Si la imagen es válida en términos de tamaño, proceder a guardarla como antes
                 // Generar un nombre único para la imagen
-                $imageName = 'imagen_' . uniqid() . '.' . $extension;
+                $imageName = $fileName;
+                // $imageName = 'imagen_' . uniqid() . '.' . $extension;
 
                 // Construir la ruta de la imagen
-                $directorioImagenes = dirname(dirname(dirname($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_NAME']))) . "/assets/Imagenes/";
+                
+                $directorioImagenes = $SERVER;
 
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);

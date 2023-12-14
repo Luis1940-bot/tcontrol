@@ -13,7 +13,7 @@ import translate, {
 // eslint-disable-next-line import/extensions
 } from '../../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
-import Alerta from '../../../includes/atoms/alerta.js';
+import { Alerta } from '../../../includes/atoms/alerta.js';
 
 let data = {};
 let translateOperativo = [];

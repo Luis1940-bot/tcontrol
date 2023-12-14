@@ -19,7 +19,7 @@ import translate, {
 // eslint-disable-next-line import/extensions
 } from '../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
-import Alerta from '../../includes/atoms/alerta.js';
+import { Alerta } from '../../includes/atoms/alerta.js';
 
 let data = {};
 let translateOperativo = [];
@@ -75,26 +75,76 @@ function trO(palabra) {
   return palabra;
 }
 
+function actualizarProgreso(porcentaje) {
+  return new Promise((resolve) => {
+    const idSpanCarga = document.getElementById('idSpanCarga');
+    const startTime = new Date().getTime();
+    const duration = 1000; // Duración total en milisegundos (1 segundo)
+    const startPercentage = parseFloat(idSpanCarga.innerText) || 0; // Obtener el porcentaje inicial
+
+    function update() {
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - startTime;
+
+      // Calcular el porcentaje interpolado y convertir a cadena para eliminar decimales
+      const interpolatedPercentage = Math.min(100, startPercentage + (elapsedTime / duration) * 10);
+      const parteEntera = Math.floor(interpolatedPercentage);
+
+      // Actualizar el elemento con el porcentaje interpolado
+      idSpanCarga.innerText = `${parteEntera}%`;
+
+      if (elapsedTime < duration) {
+        // Si no ha pasado el tiempo total, seguir actualizando
+        requestAnimationFrame(update);
+      } else {
+        // Si ha pasado el tiempo total, establecer el porcentaje final y resolver la promesa
+        idSpanCarga.innerText = porcentaje;
+        resolve();
+      }
+    }
+
+    // Iniciar la actualización
+    update();
+  });
+}
+
 async function cargaDeRegistros() {
+  await actualizarProgreso('10%');
+  const countSelect = await traerRegistros(`countSelect,${controlN}`);
+  localStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4);
+
+  await actualizarProgreso('20%');
   const empresaData = await traerRegistros('empresa');
   arrayGlobal.arrayEmpresa = [...empresaData];
 
+  await actualizarProgreso('30%');
   const selectoresData = await traerRegistros(`Selectores,${controlN}`);
   arrayGlobal.arraySelect = [...selectoresData];
 
+  await actualizarProgreso('40%');
   const nuevoControlData = await traerRegistros(`NuevoControl,${controlN}`);
   arrayGlobal.arrayControl = [...nuevoControlData];
+
+  // Finaliza la carga y realiza cualquier otra acción necesaria
   tablaVacia(nuevoControlData, encabezados);
+
+  // Ajustar el porcentaje a 100% al finalizar
+  await actualizarProgreso('99%');
 }
 
-function mensajeDeCarga() {
+async function mensajeDeCarga() {
   const miAlerta = new Alerta();
   const mensaje = trO(arrayGlobal.avisoCargandoControl.span.text);
   miAlerta.createControl(arrayGlobal.avisoCargandoControl, mensaje, objTranslate);
   const modal = document.getElementById('modalAlertCarga');
   modal.style.display = 'block';
-  localStorage.setItem('loadSystem', 0);
-  cargaDeRegistros();
+  localStorage.setItem('loadSystem', 1);
+
+  // Agrega un retraso antes de iniciar la carga de registros
+  // eslint-disable-next-line no-promise-executor-return
+  await new Promise((resolve) => setTimeout(() => resolve(), 200));
+
+  await cargaDeRegistros();
 }
 
 async function arraysLoadTranslate() {

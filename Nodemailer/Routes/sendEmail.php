@@ -11,7 +11,7 @@
   error_reporting(E_ALL);
 
 
-  // $SERVER = '/iControl-Vanilla/icontrol/Nodemailer';
+  // $SERVER = '/iControl-Vanilla/icontrol/Nodemailer/emailFactum';
  $SERVER = EMAIL;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -25,7 +25,11 @@ require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php' ;
 require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
 require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
-include('..//Routes/datos.php');
+// require $basePath   .  '/PHPMailer-master/src/Exception.php' ;
+// require $basePath   .  '/PHPMailer-master/src/PHPMailer.php';
+// require $basePath   .  '/PHPMailer-master/src/SMTP.php';
+
+// include('..//Routes/datos.php');
 
 try {
    $datos =json_decode($_POST['datos'], true);
@@ -57,7 +61,7 @@ try {
     $detalle = $encabezados['detalle'];
     $observacion = $encabezados['observacion'];
     $subject = $encabezados['subject'];
-
+    //echo $SERVER . '/email.html<br>';
 ob_start();
 include($SERVER . '/email.html');
 $html = ob_get_clean();
@@ -106,7 +110,7 @@ $html = ob_get_clean();
     // Configura los destinatarios
     $mail->SetFrom("alerta.factum@factumconsultora.com");
     // $mail->addAddress('destinatario@example.com', 'Destinatario');
-    $mail->addBCC('alerta.factum@factumconsultora.com');
+    $mail->addBCC('luisfactum@gmail.com');
     // Configura el asunto y el cuerpo del correo electrónico
     $mail->Subject = $subject; 
     $mail->Body    = $html;
@@ -199,42 +203,56 @@ function generarContenidoDinamico($datos) {
         $valor = utf8_to_iso8859_1($valor);
         $fileName = null;
         $string = $elemento['image'];
-        
-        // Definir el patrón de expresión regular
-        $pattern = '/fileName:\s*\["([^"]+)"\]\s*extension:\s*\["([^"]+)"\]/';
-        
-        // Buscar coincidencias en la cadena
-        if ($string !== '') {
-           if (preg_match($pattern, $string, $matches)) {
-            // Obtener el valor de 'fileName'
-            $fileName = $matches[1];
-            echo 'valor> '.$valor."Nombre del archivo: $fileName".'<br>';
-          } else {
-            $fileName = null;
-              echo "No se encontró un formato válido en la cadena proporcionada.".'<br>';
-          }
-        }
+        $pattern = '/fileName: \[([^\]]+)\]/';
+        preg_match($pattern, $string, $matches);
+        // echo 'matches>'.$matches.'<br>';
+        if (isset($matches[1])) {
+            // Obtener los elementos de fileName como un array
+            $fileNameArray = explode(',', $matches[1]);
+            // Limpiar y formatear cada elemento
+            foreach ($fileNameArray as &$fileName) {
+                $fileName = trim($fileName, ' "[]');
+            }
+        } 
        
-
         $valor = trim($valor);
         $valor = strtolower(trim($valor));
         $valor = utf8_to_iso8859_1($valor);
-        $fileName = trim($fileName);
+        $imagenes = '';
         if ($valor === 'img' && $fileName) {
-          $directorioImagenes = dirname(dirname(dirname($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_NAME']))) . "/assets/Imagenes/";
-          $fileName = $directorioImagenes . $fileName;
-          echo $fileName.'<br>';
-          $valor = '<td><img src='.$fileName.'></td>';
-          echo $valor.'<br>';
+            foreach ($fileNameArray as &$fileName) {
+                $fileName = trim($fileName, ' "[]');
+                // $directorioImagenes = dirname(dirname(dirname($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_NAME']))) . "/assets/Imagenes/";
+                $directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/Imagenes/';
+                // $directorioImagenes = realpath(dirname(dirname(dirname(__FILE__)))) . "/assets/Imagenes/";
+                $filePath = $directorioImagenes . $fileName;
+                $valor = '<img src="' . $filePath . '" alt="img" width="50px" height="50px">';
+                // if (file_exists($filePath)) {
+                //     $valor = '<img src="' . $filePath . '" alt="img" width="50px" height="50px">';
+                // } else {
+                //     $valor = 'img';
+                // }
+               $imagenes = $imagenes .' '. $valor;
+            }
+            // $colSpan = 'colspan="3"';
+            $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; '.$bold.'" colspan="3">' . $imagenes . '</td>';
+            $valor = 'img';
+            
         }
-        if ($display === 'none') {
-          $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; display:none;">' . $valor . '</td>';
-        } else {
-          $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; '.$bold.'" '.$colSpan.'>' . $valor . '</td>';
+        if ($valor !== 'img') {
+                if ($display === 'none') {
+                  $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; display:none;">' . $valor . '</td>';
+                } else if ($display !== 'none'){
+                  $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; '.$bold.'" '.$colSpan.'>' . $valor . '</td>';
+                }
         }
         
         $display = $elemento['displayDetalle'];
         $colSpan = 'colspan="'.$elemento['colSpanDetalle'].'"';
+        if ($valor === 'img') {
+          $display = 'none';
+          $colSpan = 'colspan="1"';
+        }
         if ($elemento['colSpanName'] !== '1') {
           $bold = 'font-weight:bold';
           $paddingLeft = '50px';
@@ -244,12 +262,16 @@ function generarContenidoDinamico($datos) {
         }
         if ($display === 'none') {
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:10px; display:none;">' . $elemento['detalle'] . '</td>';
-        } else {
+        } else if ($display !== 'none'){
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:10px; '.$bold.'" '.$colSpan.'>' . $elemento['detalle'] . '</td>';
         }
 
         $display = $elemento['displayObservacion'];
         $colSpan = 'colspan="'.$elemento['colSpanObservacion'].'"';
+        if ($valor === 'img') {
+          $display = 'none';
+          $colSpan = 'colspan="1"';
+        }
         if ($elemento['colSpanName'] !== '1') {
           $bold = 'font-weight:bold';
           $paddingLeft = '50px';
@@ -259,7 +281,7 @@ function generarContenidoDinamico($datos) {
         }
         if ($display === 'none') {
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; display:none;">' . $elemento['observacion'] . '</td>';
-        } else {
+        } else if ($display !== 'none'){
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; '.$bold.'" '.$colSpan.'>' . $elemento['observacion'] . '</td>';
         }
 

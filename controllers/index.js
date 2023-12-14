@@ -1,6 +1,27 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '';
 
+function configPHP() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const {
+    developer, content, logo, by,
+  } = user;
+  const metaDescription = document.querySelector('meta[name="description"]');
+  metaDescription.setAttribute('content', content);
+  const faviconLink = document.querySelector('link[rel="shortcut icon"]');
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`;
+  document.title = developer;
+  const logoi = document.getElementById('logo_png');
+  const srcValue = `${SERVER}/assets/img/${logo}.png`;
+  const altValue = 'Tenki Web';
+  logoi.src = srcValue;
+  logoi.alt = altValue;
+  logoi.width = 100;
+  logoi.height = 40;
+  const linkInstitucional = document.getElementById('linkInstitucional');
+  linkInstitucional.href = by;
+}
+
 function session() {
   fetch(`${SERVER}/Pages/Session/session.php`)
     .then((response) => {
@@ -21,6 +42,7 @@ function session() {
         // } = parsedData;
         localStorage.setItem('user', JSON.stringify(parsedData));
         // console.log(parsedData);
+        configPHP();
       } catch (error) {
         // Manejar errores al analizar JSON
         // eslint-disable-next-line no-console
@@ -53,6 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
   limpiezaDeCache();
   session();
   setTimeout(() => {
-    window.location.href = '/Pages/Landing/';
+    window.location.href = `${SERVER}/Pages/Landing/`;
   }, 1000);
 });

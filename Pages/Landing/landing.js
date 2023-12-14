@@ -166,7 +166,32 @@ function leeApp(json) {
     });
 }
 
+function configPHP() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const {
+    developer, content, by, rutaDeveloper, logo,
+  } = user;
+  const metaDescription = document.querySelector('meta[name="description"]');
+  metaDescription.setAttribute('content', content);
+  const faviconLink = document.querySelector('link[rel="shortcut icon"]');
+  faviconLink.href = '../../assets/img/favicon.ico';
+  document.title = developer;
+  const logoi = document.getElementById('logo_factum');
+  const srcValue = `./../../assets/img/${logo}.png`;
+  const altValue = 'Tenki Web';
+  logoi.src = srcValue;
+  logoi.alt = altValue;
+  logoi.width = 50;
+  logoi.height = 20;
+  const footer = document.getElementById('footer');
+  footer.innerText = by;
+  footer.href = rutaDeveloper;
+  const linkInstitucional = document.getElementById('linkInstitucional');
+  linkInstitucional.href = rutaDeveloper;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  configPHP();
   spinner.style.visibility = 'visible';
   const customButton = document.getElementById('planta');
   const persona = JSON.parse(localStorage.getItem('user'));

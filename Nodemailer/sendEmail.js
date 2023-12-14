@@ -1,42 +1,12 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..';
 
-// async function send(filtrado, encabezados) {
-//   try {
-//     const formData = new FormData();
-//     formData.append('datos', JSON.stringify(filtrado));
-//     formData.append('encabezados', JSON.stringify(encabezados));
-//     // console.log(formData);
-//     fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
-//       method: 'POST',
-//       body: formData,
-//     })
-//       .then((response) => {
-//         if (response.ok) {
-//           return response.json();
-//         }
-//         throw new Error('Error en la respuesta de la red.');
-//       })
-//       // .then((data) => {
-//       //   // eslint-disable-next-line no-console
-//       //   console.log(JSON.parse(data));
-//       // })
-//       .catch((error) => {
-//         // eslint-disable-next-line indent, no-console
-//         console.error('Error:', error);
-//       });
-//   } catch (error) {
-//     // eslint-disable-next-line no-console
-//     console.warn(error);
-//   }
-// }
-
 async function send(nuevoObjeto, encabezados) {
   try {
     const formData = new FormData();
     formData.append('datos', JSON.stringify(nuevoObjeto));
     formData.append('encabezados', JSON.stringify(encabezados));
-
+    // console.log(formData);
     const response = await fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
       method: 'POST',
       body: formData,
@@ -47,6 +17,7 @@ async function send(nuevoObjeto, encabezados) {
       return data; // Devuelve la respuesta del servidor
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error:', error);
     throw error; // Re-lanza el error para que pueda ser manejado por el bloque catch en insert
   }

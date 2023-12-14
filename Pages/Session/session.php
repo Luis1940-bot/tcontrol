@@ -11,6 +11,11 @@ $response = [
     'person' => isset($_SESSION['factum_validation']['person']) ? $_SESSION['factum_validation']['person'] : 'Luis Gimenez',
     'id' => isset($_SESSION['factum_validation']['id']) ? $_SESSION['factum_validation']['id'] : '6',
     'tipo' => isset($_SESSION['factum_validation']['tipo']) ? $_SESSION['factum_validation']['tipo'] : '7',
+    'developer' => 'Factum', //* Tenki
+    'content' => 'Factum Consultora', //* Tenki Web
+    'logo' => 'ftm', //* icontrol 
+    'by' => 'by Factum Consultora', //* by Tenkyweb
+    'rutaDeveloper' => 'https://www.factumconsultora.com', //* https://linkedin.com/in/luisergimenez/
 ];
 
 echo json_encode($response);

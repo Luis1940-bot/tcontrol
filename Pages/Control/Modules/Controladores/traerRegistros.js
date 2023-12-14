@@ -3,7 +3,7 @@ const SERVER = '../../../..';
 
 export default function traerRegistros(sql) {
   // eslint-disable-next-line no-console
-  console.time('miTemporizador');
+  console.time('traerRegistros');
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`;
     const ruta = `${SERVER}/Pages/Control/Routes/traerRegistros.php?q=${sql}${rax}`;
@@ -19,10 +19,14 @@ export default function traerRegistros(sql) {
       .then((data) => {
         resolve(data);
         let vecesLoad = localStorage.getItem('loadSystem');
+        const cantidadProcesos = localStorage.getItem('cantidadProcesos');
         vecesLoad = Number(vecesLoad) + 1;
         localStorage.setItem('loadSystem', vecesLoad);
+        const modal = document.getElementById('modalAlertCarga');
+
+        vecesLoad > Number(cantidadProcesos) ? (modal.style.display = 'none', modal.remove()) : null;
         // eslint-disable-next-line no-console
-        console.timeEnd('miTemporizador');
+        console.timeEnd('traerRegistros');
       })
       .catch((error) => {
         reject(error);

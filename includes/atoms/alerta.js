@@ -409,8 +409,10 @@ function subirImagenes(img) {
   if (img[0].extension.length === 0) {
     return null;
   }
+  // console.log(img)
   const formData = new FormData();
-  formData.append('imgBase64', encodeURIComponent(JSON.stringify(img[0])));
+  formData.append('imgBase64', JSON.stringify(img[0]));// encodeURIComponent
+  // console.log(formData);
   fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
     method: 'POST',
     body: formData,
@@ -915,8 +917,27 @@ class Alerta {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertVerde';
     this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(224, 220, 220, 0.7)';
+    this.modal.style.background = '#0D0E0F;'; // 'rgba(224, 220, 220, 0.7)';
     const modalContent = createDiv(obj.div);
+
+    // Crear el spinner
+    const spinner = document.createElement('div');
+    spinner.id = 'idSpanInsert';
+    spinner.className = 'spinner';
+    spinner.style.width = '100px';
+    spinner.style.height = '2px';
+    spinner.style.borderRadius = '2px';
+    spinner.style.borderTop = '4px solid transparent';
+    spinner.style.position = 'absolute';
+    spinner.style.top = '4px';
+    spinner.style.left = '50%';
+    spinner.style.transform = 'translate(-50%, -50%)';
+    spinner.style.zIndex = '9999';
+    spinner.style.background = '#212121';
+    spinner.style.animation = 'spinner 2s linear infinite';
+    spinner.style.visibility = 'visible';
+    modalContent.appendChild(spinner);
+
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
 
@@ -943,6 +964,9 @@ class Alerta {
     const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
+
+    const spanCarga = createSpan(obj.spanCarga);
+    this.modal.appendChild(spanCarga);
 
     let frase = '';
     if (objTrad === null) {

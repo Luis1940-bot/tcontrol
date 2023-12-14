@@ -132,7 +132,32 @@ function dondeEstaEn() {
   document.getElementById('whereUs').innerText = ustedEstaEn;
 }
 
+function configPHP() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const {
+    developer, content, by, rutaDeveloper,
+  } = user;
+  const metaDescription = document.querySelector('meta[name="description"]');
+  metaDescription.setAttribute('content', content);
+  const faviconLink = document.querySelector('link[rel="shortcut icon"]');
+  faviconLink.href = './../../assets/img/favicon.ico';
+  document.title = developer;
+  // const logo = document.getElementById('logo_factum');
+  // const srcValue = './assets/img/icontrol.png';
+  // const altValue = 'Tenki Web';
+  // logo.src = srcValue;
+  // logo.alt = altValue;
+  // logo.width = 100;
+  // logo.height = 40;
+  const footer = document.getElementById('footer');
+  footer.innerText = by;
+  footer.href = rutaDeveloper;
+  // const linkInstitucional = document.getElementById('linkInstitucional');
+  // linkInstitucional.href = 'https://www.factumconsultora.com';
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
+  configPHP();
   spinner.style.visibility = 'visible';
   const hamburguesa = document.querySelector('#hamburguesa');
   hamburguesa.style.display = 'none';

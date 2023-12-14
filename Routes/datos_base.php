@@ -9,5 +9,4 @@
          $conexion= null;
          $port=3306;
          $chartset="utf-8";
-
 ?>

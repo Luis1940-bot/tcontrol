@@ -67,6 +67,22 @@
                 ORDER BY LTYimage.orden ASC;";
             break;
 
+            case 'countSelect':
+                $sql="SELECT COUNT(*)
+                          FROM LTYcontrol c
+                          WHERE c.idLTYreporte = ".$porciones[1]."
+                            AND (
+                              (c.tipodato NOT IN (TRIM('cn'), TRIM('btnQwery')))
+                              AND (c.tpdeobserva NOT IN (TRIM('cn'), TRIM('btnQwery')))
+                            )
+                            AND (
+                              c.rutinasql LIKE 'SELECT%'
+                              OR c.valor_defecto LIKE 'SELECT%'
+                              OR c.valor_defecto22 LIKE 'SELECT%'
+                              OR c.sql_valor_defecto22 LIKE 'SELECT%'
+                              OR c.valor_sql LIKE 'SELECT%'
+                            );";
+            break;
 
             case 'traer_LTYsql':
               
