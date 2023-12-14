@@ -109,27 +109,36 @@ function actualizarProgreso(porcentaje) {
 }
 
 async function cargaDeRegistros() {
-  await actualizarProgreso('10%');
-  const countSelect = await traerRegistros(`countSelect,${controlN}`);
-  localStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4);
+  try {
+    await actualizarProgreso('10%');
+    const countSelect = await traerRegistros(`countSelect,${controlN}`);
+    localStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4);
 
-  await actualizarProgreso('20%');
-  const empresaData = await traerRegistros('empresa');
-  arrayGlobal.arrayEmpresa = [...empresaData];
+    await actualizarProgreso('20%');
+    const empresaData = await traerRegistros('empresa');
+    arrayGlobal.arrayEmpresa = [...empresaData];
 
-  await actualizarProgreso('30%');
-  const selectoresData = await traerRegistros(`Selectores,${controlN}`);
-  arrayGlobal.arraySelect = [...selectoresData];
+    await actualizarProgreso('30%');
+    const selectoresData = await traerRegistros(`Selectores,${controlN}`);
+    arrayGlobal.arraySelect = [...selectoresData];
 
-  await actualizarProgreso('40%');
-  const nuevoControlData = await traerRegistros(`NuevoControl,${controlN}`);
-  arrayGlobal.arrayControl = [...nuevoControlData];
+    await actualizarProgreso('40%');
+    const nuevoControlData = await traerRegistros(`NuevoControl,${controlN}`);
+    arrayGlobal.arrayControl = [...nuevoControlData];
 
-  // Finaliza la carga y realiza cualquier otra acción necesaria
-  tablaVacia(nuevoControlData, encabezados);
+    // Finaliza la carga y realiza cualquier otra acción necesaria
+    tablaVacia(nuevoControlData, encabezados);
 
-  // Ajustar el porcentaje a 100% al finalizar
-  await actualizarProgreso('99%');
+    // Ajustar el porcentaje a 100%
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(error);
+    // eslint-disable-next-line no-console
+    console.log('error por espera de la carga de un modal');
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  }
 }
 
 async function mensajeDeCarga() {
