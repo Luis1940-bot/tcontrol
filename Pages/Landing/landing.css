@@ -20,7 +20,7 @@ header{
 }
 main{
   overflow-y: scroll;
-   height: 500px;
+   height: auto;
 }
 .div-landing-buttons{
   display: flex;
@@ -38,6 +38,9 @@ main{
 }
 .div-selector{
   display: flex;
+  height: 50px;
+  width: 252px;
+  margin-top: 15px;
   justify-content: space-between;
   align-items: center;
   background: #ffffff;
@@ -65,27 +68,57 @@ main{
 
 }
 
-
-@media only screen and (min-width: 800px) and (orientation: landscape) {
-  body{
+@media only screen and (min-width: 760px) and (orientation: landscape) {
+  body {
     min-height: 50vh;
   }
-  main{
-    height: 200px;
+  main {
+    height: auto;
   }
-  .div-landing-buttons{
+  .div-selector {
+    width: 400px;
+    height: 40px;
     margin-top: 5px;
+  }
+  .button-selector {
+    font-size: 12px;
+  }
+  .div-landing-buttons {
+    margin-top: 5px;
+  }
+  .my-button {
+    margin-left: 70%;
+    height: 30px;
+    margin-bottom: 0;
+    margin-top: 5px;
+    padding: 5px 10px 5px 10px;
   }
 }
 
-@media screen and (min-width: 800px) {
-  .button-selector{
+@media only screen and (min-width: 800px) {
+  .button-selector {
     width: 300px;
   }
-    body{
+  body {
     min-height: 90vh;
   }
-  main{
-    height: 800px;
+  main {
+    height: auto;
+  }
+  .div-landing-buttons {
+    /* Ajusta este valor según tus necesidades */
+    height: 60px;
+  }
+  .div-selector {
+    width: 400px;
+    height: 40px;
+    margin-top: 10px;
+  }
+  .my-button {
+    margin-left: 63%;
+    height: 40px;
+    margin-bottom: 0;
+    margin-top: 5px;
+    padding: 5px 10px 5px 10px;
   }
 }

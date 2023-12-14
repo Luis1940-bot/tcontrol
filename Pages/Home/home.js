@@ -92,8 +92,8 @@ function completaButtons(obj) {
       name: objButtons[obj].name[i],
       class: 'button-selector-home',
       innerHTML: null,
-      height: '35px',
-      width: '75%',
+      height: null, // 35
+      width: null, // 75%
       borderRadius: '5px',
       border: null,
       textAlign: 'center',

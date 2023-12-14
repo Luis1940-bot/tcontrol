@@ -12,7 +12,7 @@ body{
   margin: 0px;
   padding: 0px;
   flex-direction: column;
-  height: 90vh;
+  height: auto;
   overflow-x: hidden;
 }
 header{
@@ -20,7 +20,7 @@ header{
   top: 0;
   width: 100%;
   background: #ffffff;
-  height: 140px;
+  height: auto;
 }
 
 #doc, #numberDoc{
@@ -42,6 +42,9 @@ header{
 
 table{
   width: 100%;
+}
+#tableControl {
+  margin-top: 0;
 }
 thead{
   background: #000000;
@@ -174,6 +177,9 @@ footer{
   height: 20px;
   margin-top: 5px;
 }
+#idCarteles, #idProcesoExitoso{
+  width: 305px;
+}
 @keyframes spinner {
   0% {
     left: -100%; /* Inicio de la animación */
@@ -184,7 +190,7 @@ footer{
 }
 
 
-@media only screen and (min-width: 700px) and (orientation: landscape) {
+@media only screen and (min-width: 760px) and (orientation: landscape) {
   body{
     min-height: 95vh;
   }
@@ -200,10 +206,13 @@ footer{
   footer{
     display: none;
   }
+  #idCarteles, #idProcesoExitoso {
+    width: 600px;
+  }
 
 }
 
-@media screen and (min-width: 810px) {
+@media only screen and (min-width: 800px) {
   table{
     margin-top: 10px;
   
@@ -211,7 +220,37 @@ footer{
   table tbody tr td {
     font-size: 10px;
   }
-
+  tbody tr td{
+    height: 30px;
+    font-size: 14px;
+  }
+  thead{
+    height: 25px;
+    font-size: 12px;
+  }
+  table tbody tr td input, table tbody tr td div input, .InputButton-transparent {
+    font-size: 12px;
+    height: 20px;
+  }
+  table tbody tr td textarea, table tbody tr td{
+    font-size: 12px;
+  }
+  table tbody tr td select{
+    font-size: 12px;
+  }
+  table tbody tr td select option{
+    font-size: 12px;
+  }
+  table tbody tr td button {
+    font-size: 12px;
+    height: 20px;
+  }
+  #doc, #numberDoc{
+    font-size: 14px;
+  }
+  #idCarteles, #idProcesoExitoso {
+    width: 600px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
