@@ -177,8 +177,23 @@ footer{
   height: 20px;
   margin-top: 5px;
 }
-#idCarteles, #idProcesoExitoso{
+#idCarteles, #idDivVerde{
   width: 305px;
+  top: 250px;
+}
+#idDivAvisoRojo, #idDivAvisoImagenes{
+  width: 305px;
+  top: 550px;
+}
+#idProcesoExitoso, #idDivAvisoVerde{
+  width: 305px;
+  top: 450px;
+}
+#idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+  font-size: 12px;
+}
+.comentarios {
+  font-size: 16px;
 }
 @keyframes spinner {
   0% {
@@ -206,10 +221,16 @@ footer{
   footer{
     display: none;
   }
-  #idCarteles, #idProcesoExitoso {
+  #idCarteles, #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo {
     width: 600px;
   }
-
+  #idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+    font-size: 16px;
+    /* top: 50px */
+  }
+  .comentarios {
+    font-size: 16px;
+  }
 }
 
 @media only screen and (min-width: 800px) {
@@ -228,7 +249,11 @@ footer{
     height: 25px;
     font-size: 12px;
   }
-  table tbody tr td input, table tbody tr td div input, .InputButton-transparent {
+  table tbody tr td input, table tbody tr td div input {
+    font-size: 12px;
+    height: 20px;
+  }
+  .InputButton-transparent {
     font-size: 12px;
     height: 20px;
   }
@@ -248,8 +273,15 @@ footer{
   #doc, #numberDoc{
     font-size: 14px;
   }
-  #idCarteles, #idProcesoExitoso {
+  #idCarteles, #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo{
     width: 600px;
+    top: 350px;
+  }
+  #idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+    font-size: 16px;
+  }
+  .comentarios {
+    font-size: 16px;
   }
 }
 

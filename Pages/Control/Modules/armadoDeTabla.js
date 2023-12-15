@@ -34,6 +34,7 @@ const objTranslate = {
 };
 
 const widthScreen = window.innerWidth;
+const widthScreenAjustado = 360 / widthScreen;
 let arrayWidthEncabezado;
 let selectDinamic;
 let elementHTML;
@@ -69,7 +70,7 @@ function estilosTheadCell(element, index) {
     cell.style.background = '#000000';
     cell.style.border = '1px solid #cecece';
     cell.style.overflow = 'hidden';
-    const widthCell = widthScreen * arrayWidthEncabezado[index];
+    const widthCell = widthScreenAjustado * widthScreen * arrayWidthEncabezado[index];
     cell.style.width = `${widthCell}px`;
   } else {
     cell.style.display = 'none';
@@ -248,7 +249,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       dato = null;
       let text = element[orden[1]].toUpperCase();
       const consulta = element[23] || '';
-      const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.2;
+      const anchoButton = widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.2;
       const wordLenght = text.length * 7;
       const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
       text = `${text.substring(0, caracteres)}.`;
@@ -263,7 +264,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       dato = null;
       let text = element[orden[1]].toUpperCase();
       const consulta = element[23] || '';
-      const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.9;
+      const anchoButton = widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.9;
       const wordLenght = text.length * 7;
       const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
       text = `${text.substring(0, caracteres)}...`;
@@ -344,7 +345,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       dato = null;
       let text = element[orden[1]].toUpperCase();
       const consulta = element[23] || '';
-      const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.2;
+      const anchoButton = widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.2;
       const wordLenght = text.length * 7;
       const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
       text = `${text.substring(0, caracteres)}.`;
@@ -359,7 +360,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       dato = null;
       let text = element[orden[1]].toUpperCase();
       const consulta = element[23] || '';
-      const anchoButton = widthScreen * arrayWidthEncabezado[2] * 0.9;
+      const anchoButton = widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.9;
       const wordLenght = text.length * 7;
       const caracteres = Math.ceil((wordLenght - anchoButton) / 7);
       text = `${text.substring(0, caracteres)}...`;
