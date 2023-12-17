@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-import Alerta from '../includes/atoms/alerta.js';
+import { Alerta } from '../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
 import objVariables from './variables.js';
 

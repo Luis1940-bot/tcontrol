@@ -15,6 +15,10 @@ body{
   height: auto;
   overflow-x: hidden;
 }
+main {
+  /* height: auto; */
+  /* overflow-y: auto; */
+}
 header{
   display: block;
   top: 0;
@@ -203,6 +207,12 @@ footer{
     left: 100%; /* Fin de la animación */
   }
 }
+#idDivMenu {
+  margin: 22px 0px 0px 1px;
+}
+#idDivPerson {
+  margin: 22px 0px 20px auto;
+}
 
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
@@ -230,6 +240,9 @@ footer{
   }
   .comentarios {
     font-size: 16px;
+  }
+  .transparent-button {
+    font-size: 30px;
   }
 }
 
@@ -273,9 +286,13 @@ footer{
   #doc, #numberDoc{
     font-size: 14px;
   }
-  #idCarteles, #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo{
+  #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo{
     width: 600px;
     top: 350px;
+  }
+  #idCarteles {
+    width: 600px;
+    top: 0px;
   }
   #idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
     font-size: 16px;
@@ -283,26 +300,76 @@ footer{
   .comentarios {
     font-size: 16px;
   }
+  .transparent-button {
+    font-size: 30px;
+  }
 }
 
-@media screen and (min-width: 1280px) {
+@media only screen and (min-width: 1200px) {
+   body{
+    height: auto;
+    padding:  20px 200px 20px 200px;
+  }
   table{
-    margin-top: 35px;
-  }
-  #doc{
-    font-size: 18px;
-  }
-  thead{
-    height: 30px;
-    font-size: 16px;
-    font-weight: normal;
+    margin-top: 10px;
+  
   }
   table tbody tr td {
-    height: 40px;
+    font-size: 10px;
+  }
+  tbody tr td{
+    height: 30px;
     font-size: 14px;
   }
-    footer{
-    display: inline-block;
+  thead{
+    height: 25px;
+    font-size: 12px;
   }
-
+  table tbody tr td input, table tbody tr td div input {
+    font-size: 12px;
+    height: 20px;
+  }
+  .InputButton-transparent {
+    font-size: 12px;
+    height: 20px;
+  }
+  table tbody tr td textarea, table tbody tr td{
+    font-size: 12px;
+  }
+  table tbody tr td select{
+    font-size: 12px;
+  }
+  table tbody tr td select option{
+    font-size: 12px;
+  }
+  table tbody tr td button {
+    font-size: 12px;
+    height: 20px;
+  }
+  #doc, #numberDoc{
+    font-size: 14px;
+  }
+  #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo{
+    width: 600px;
+    top: 350px;
+  }
+  #idCarteles {
+    width: 600px;
+    top: 0px;
+  }
+  #idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+    font-size: 16px;
+  }
+  .comentarios {
+    font-size: 16px;
+  }
+  .transparent-button {
+    font-size: 30px;
+  }
+  #idDivMenu {
+    margin: 45px 0px 0px 200px;
+  }
+  #idDivPerson {
+    margin: 45px 200px 20px auto;
+  }
 }

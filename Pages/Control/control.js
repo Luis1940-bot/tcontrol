@@ -20,6 +20,8 @@ import translate, {
 } from '../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../includes/atoms/alerta.js';
+// eslint-disable-next-line import/extensions
+import { inicioPerformance, finPerformance } from '../../includes/Conection/conection.js';
 
 let data = {};
 let translateOperativo = [];
@@ -53,7 +55,32 @@ function leeVersion(json) {
     });
 }
 
+function configPHP() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const {
+    developer, content, by, rutaDeveloper, logo,
+  } = user;
+  const metaDescription = document.querySelector('meta[name="description"]');
+  metaDescription.setAttribute('content', content);
+  const faviconLink = document.querySelector('link[rel="shortcut icon"]');
+  faviconLink.href = './../../assets/img/favicon.ico';
+  document.title = developer;
+  const logoi = document.getElementById('logo_factum');
+  const srcValue = `./../../assets/img/${logo}.png`;
+  const altValue = 'Tenki Web';
+  logoi.src = srcValue;
+  logoi.alt = altValue;
+  logoi.width = 100;
+  logoi.height = 40;
+  const footer = document.getElementById('footer');
+  footer.innerText = by;
+  footer.href = rutaDeveloper;
+  // const linkInstitucional = document.getElementById('linkInstitucional');
+  // linkInstitucional.href = 'https://www.factumconsultora.com';
+}
+
 function configuracionLoad() {
+  inicioPerformance();
   const url = new URL(window.location.href);
   controlN = url.searchParams.get('control_N');
   // controlT = url.searchParams.get('control_T');
@@ -62,6 +89,8 @@ function configuracionLoad() {
   document.getElementById('doc').innerText = `Doc: ${nr}`;
   // document.getElementById('wichC').innerText = controlT;
   document.getElementById('wichC').style.display = 'inline';
+  configPHP();
+  finPerformance();
 }
 
 function trO(palabra) {
@@ -110,6 +139,7 @@ function actualizarProgreso(porcentaje) {
 
 async function cargaDeRegistros() {
   try {
+    inicioPerformance();
     await actualizarProgreso('10%');
     const countSelect = await traerRegistros(`countSelect,${controlN}`);
     localStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4);
@@ -128,7 +158,7 @@ async function cargaDeRegistros() {
 
     // Finaliza la carga y realiza cualquier otra acción necesaria
     tablaVacia(nuevoControlData, encabezados);
-
+    finPerformance();
     // Ajustar el porcentaje a 100%
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -241,30 +271,3 @@ goLanding.addEventListener('click', () => {
   const url = '../Landing';
   window.location.href = url;
 });
-
-if (navigator.connection) {
-  const connectionType = navigator.connection.type;
-
-  switch (connectionType) {
-    case 'wifi':
-      console.log('El usuario está conectado a través de Wi-Fi.');
-      break;
-    case 'cellular':
-      console.log('El usuario está conectado a través de una red celular.');
-      break;
-    case 'ethernet':
-      console.log('El usuario está conectado a través de una conexión Ethernet.');
-      break;
-    case 'none':
-      console.log('El usuario no tiene conexión a Internet.');
-      break;
-    default:
-      console.log('Tipo de conexión no reconocido:', connectionType);
-  }
-
-  // Puedes acceder a más detalles de la conexión, como la velocidad
-  const connectionSpeed = navigator.connection.downlink;
-  console.log('Velocidad de conexión:', connectionSpeed);
-} else {
-  console.log('El navegador no admite la API de Network Information.');
-}

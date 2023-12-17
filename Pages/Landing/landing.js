@@ -8,6 +8,8 @@ import createDiv from '../../includes/atoms/createDiv.js';
 import createRadioButton from '../../includes/atoms/createRadioButton.js';
 // eslint-disable-next-line import/extensions, import/no-named-as-default
 import translate from '../../controllers/translate.js';
+// eslint-disable-next-line import/extensions
+import { inicioPerformance, finPerformance } from '../../includes/Conection/conection.js';
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
@@ -191,6 +193,7 @@ function configPHP() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  inicioPerformance();
   configPHP();
   spinner.style.visibility = 'visible';
   const customButton = document.getElementById('planta');
@@ -204,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   leeVersion('version');
   leeApp('app');
   spinner.style.visibility = 'hidden';
+  finPerformance();
 });
 
 async function loadLenguages(leng) {

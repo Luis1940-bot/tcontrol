@@ -12,6 +12,8 @@ import translate, {
 } from '../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js';
+// eslint-disable-next-line import/extensions
+import { inicioPerformance, finPerformance } from '../../includes/Conection/conection.js';
 
 let translateOperativo = [];
 let espanolOperativo = [];
@@ -135,20 +137,20 @@ function dondeEstaEn() {
 function configPHP() {
   const user = JSON.parse(localStorage.getItem('user'));
   const {
-    developer, content, by, rutaDeveloper,
+    developer, content, by, rutaDeveloper, logo,
   } = user;
   const metaDescription = document.querySelector('meta[name="description"]');
   metaDescription.setAttribute('content', content);
   const faviconLink = document.querySelector('link[rel="shortcut icon"]');
   faviconLink.href = './../../assets/img/favicon.ico';
   document.title = developer;
-  // const logo = document.getElementById('logo_factum');
-  // const srcValue = './assets/img/icontrol.png';
-  // const altValue = 'Tenki Web';
-  // logo.src = srcValue;
-  // logo.alt = altValue;
-  // logo.width = 100;
-  // logo.height = 40;
+  const logoi = document.getElementById('logo_factum');
+  const srcValue = `./../../assets/img/${logo}.png`;
+  const altValue = 'Tenki Web';
+  logoi.src = srcValue;
+  logoi.alt = altValue;
+  logoi.width = 100;
+  logoi.height = 40;
   const footer = document.getElementById('footer');
   footer.innerText = by;
   footer.href = rutaDeveloper;
@@ -157,6 +159,7 @@ function configPHP() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  inicioPerformance();
   configPHP();
   spinner.style.visibility = 'visible';
   const hamburguesa = document.querySelector('#hamburguesa');
@@ -176,6 +179,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 200);
   }
   spinner.style.visibility = 'hidden';
+  finPerformance();
 });
 
 function goBack() {

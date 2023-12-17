@@ -11,6 +11,7 @@ header('Content-Type: text/html;charset=utf-8');
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='./../../assets/css/header.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='./../../assets/css/conection.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/alerta.css' media='screen'>
   <title>Factum</title>
 </head>
@@ -24,7 +25,7 @@ header('Content-Type: text/html;charset=utf-8');
       <div class='div-menu'><img id='hamburguesa'  src='./../../assets/img/hamburguesa.png' alt='Menu'></div>
     </div>
     <div class='headerVersion'>
-      <span class="version">V1.0</span>
+      <span class="version">V1.0</span><img id='idSignal' src='' alt=''>
     </div>
     <div class='headerFactum'>
       <div class='logoFactum'>

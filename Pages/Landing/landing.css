@@ -19,7 +19,7 @@ header{
   display: block;
 }
 main{
-  overflow-y: scroll;
+  overflow-y: hidden;
    height: auto;
 }
 .div-landing-buttons{
@@ -69,9 +69,6 @@ main{
 }
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
-  body {
-    min-height: 50vh;
-  }
   main {
     height: auto;
   }
@@ -96,14 +93,40 @@ main{
 }
 
 @media only screen and (min-width: 800px) {
+  main {
+    height: auto;
+  }
   .button-selector {
     width: 300px;
   }
-  body {
-    min-height: 90vh;
+  .div-landing-buttons {
+    /* Ajusta este valor según tus necesidades */
+    height: 60px;
+  }
+  .div-selector {
+    width: 400px;
+    height: 40px;
+    margin-top: 10px;
+  }
+  .my-button {
+    margin-left: 63%;
+    height: 40px;
+    margin-bottom: 0;
+    margin-top: 5px;
+    padding: 5px 10px 5px 10px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+   body {
+    height: auto;
+    padding:  20px 200px 20px 200px;
   }
   main {
     height: auto;
+  }
+  .button-selector {
+    width: 300px;
   }
   .div-landing-buttons {
     /* Ajusta este valor según tus necesidades */
