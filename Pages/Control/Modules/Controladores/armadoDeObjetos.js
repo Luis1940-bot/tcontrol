@@ -76,12 +76,27 @@ function respuestaColumna(c, i, objParams) {
         imagenes.extension.push(fileExtension);
       }
     }
+    if (tagName === 'IMG') {
+      const nombreDeLaImagen = obj.node.alt;
+      const { extension } = obj.node.dataset;
+      const imagen = `${nombreDeLaImagen}.${extension}`;
+      const { width } = obj.node;
+      const { height } = obj.node;
+      valor = `{"img": "${imagen}", "width" : ${width}, "height": ${height}}`;
+    }
     // console.log(c,i,valor)
     // consologuear(c, i, obj);
     // const valorr = `c:${c} i:${i} /${valor}`;
     // valor = valorr;
     return {
-      valor, selector1, selector2, valorS, valorOBS, familiaselector, imagenes, observacion,
+      valor,
+      selector1,
+      selector2,
+      valorS,
+      valorOBS,
+      familiaselector,
+      imagenes,
+      observacion,
     };
   } catch (error) {
     // eslint-disable-next-line no-console

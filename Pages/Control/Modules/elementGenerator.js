@@ -139,8 +139,33 @@ class ElementGenerator {
     }
   }
 
-  static generateImg() {
+  static generateImg(src, alt, dim, extension) {
+    const dimensiones = dim;
     const img = document.createElement('img');
+    img.src = `../../../assets/img/planos/${src}`;
+    img.alt = alt;
+    img.dataset.extension = extension;
+
+    // Verificar si las dimensiones están presentes y no vacías
+    if (dimensiones && dimensiones.trim() !== '') {
+      try {
+        // Utilizar JSON.parse para convertir la cadena en un objeto
+        const ajustada = dimensiones.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2": ');
+        const objeto = JSON.parse(ajustada);
+        // Verificar si el objeto tiene propiedades width y height
+        if (objeto.width && objeto.height) {
+          img.style.width = `${objeto.width}px`;
+          img.style.height = `${objeto.height}px`;
+        } else {
+          // eslint-disable-next-line no-console
+          console.error('Las dimensiones proporcionadas no son válidas. Se aplicarán dimensiones predeterminadas.');
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error al analizar las dimensiones como JSON. Se aplicarán dimensiones predeterminadas.');
+      }
+    }
+
     return img;
   }
 

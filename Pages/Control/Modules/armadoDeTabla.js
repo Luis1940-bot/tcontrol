@@ -122,6 +122,7 @@ function estilosCell(
   colSpan === 2 ? cell.style.display = 'none' : null;
   colSpan === 3 ? cell.colSpan = 3 : null;
   colSpan === 4 ? cell.style.display = 'none' : null;
+  colSpan === 5 ? cell.colSpan = 3 : null;
   display !== null ? cell.style.display = display : null;
   return cell;
 }
@@ -170,6 +171,13 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
     }
     if (i > 1 && (tipoDeDato === 'l' || tipoDeDato === 'subt' || tipoDeDato === 'title')) {
       colSpan = 2;
+    }
+    if (i === 2 && tipoDeDato === 'photo') {
+      colSpan = 5;
+      paddingLeft = '0px';
+    }
+    if (i > 2 && tipoDeDato === 'photo') {
+      display = 'none';
     }
     i === 1 && orden[i] === 3 && (tipoDeDato !== 'l' && tipoDeDato !== 'subt' && tipoDeDato !== 'title') ? dato = dato.toUpperCase() : null;
 
@@ -283,6 +291,15 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       element[12] !== '0' ? name = `Group${element[12]}` : name = '0';
       const radioButton = ElementGenerator.generateSelectedRadioButton(checked, name);
       type = radioButton;
+    } else if (i === 2 && tipoDeDato === 'photo') {
+      dato = null;
+      const src = element[20];
+      const alt = src.replace(/\.[^/.]+$/, '');
+      const partes = element[20].split('.');
+      const extension = partes.pop();
+      const dimensiones = element[17];
+      const img = ElementGenerator.generateImg(src, alt, dimensiones, extension);
+      type = img;
     }
     if (i > 2 && tipoDeDato === 'tx') {
       const indexMas = index + 1;

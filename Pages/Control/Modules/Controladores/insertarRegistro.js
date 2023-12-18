@@ -20,7 +20,6 @@ function insertarRegistro(objeto) {
   console.time('insert_time');
   const objLimpio = limpiarObjeto(objeto);
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio));
-  // console.log(nuevoObjeto);
   const ruta = `${SERVER}/Pages/Control/Routes/insert.php?v=${Math.round(Math.random() * 10)}`;
 
   return new Promise((resolve, reject) => {

@@ -87,7 +87,7 @@ $html = ob_get_clean();
    $html  = str_replace('{detalle}', $detalle, $html);
    $html  = str_replace('{observacion}', $observacion , $html);
    $html  = str_replace('{contenido_dinamico}', generarContenidoDinamico($datos), $html);
-//  echo 'html>>>> '.$html;
+   // echo 'html>>>> '.$html;
     $mail = new PHPMailer(true);
   // Configura el servidor SMTP
     $mail->isSMTP();
@@ -174,7 +174,6 @@ function generarContenidoDinamico($datos) {
     $contenido = ''; 
     foreach ($datos as $elemento) {
         $contenido .= '<tr style="background:#fff; width:100%; height:20px;">';
-
         $display = $elemento['displayName'];
         $colSpan = 'colspan="'.$elemento['colSpanName'].'"';
         if ($elemento['colSpanName'] !== '1') {
@@ -184,9 +183,11 @@ function generarContenidoDinamico($datos) {
           $bold = '';
           $paddingLeft = '10px';
         }
+        $valor = $elemento['valor'];
+        $valor = trim($valor);
         if ($display === 'none') {
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; display:none;">' . $elemento['name'] . '</td>';
-        } else {
+        } else if ($display !== 'none' ) {
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; '.$bold.'" '.$colSpan.'>' . $elemento['name'] . '</td>';
         }
         
@@ -199,6 +200,22 @@ function generarContenidoDinamico($datos) {
           $bold = '';
           $paddingLeft = '10px';
         }
+
+        $valor = $elemento['valor'];
+        $valor = trim($valor);
+        if ($valor === 'photo' ) {
+          $display = 'none';
+          $colSpan = 'colspan="3"';
+          $directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/img/planos/';
+          $array = json_decode($elemento['displayDetalle'], true);
+          $img = $array['img'];
+          $width = $array['width'];
+          $height = $array['height'];
+          $filePath = $directorioImagenes . $img;
+          $imagenes = '<img src="' . $filePath . '" alt="img" width="'.$width.'" height="'.$height.'">';
+          $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.';" '.$colSpan.'>' . $imagenes . '</td>';
+        }
+
         $valor = $elemento['valor'];
         $valor = utf8_to_iso8859_1($valor);
         $fileName = null;
@@ -222,16 +239,9 @@ function generarContenidoDinamico($datos) {
         if ($valor === 'img' && $fileName) {
             foreach ($fileNameArray as &$fileName) {
                 $fileName = trim($fileName, ' "[]');
-                // $directorioImagenes = dirname(dirname(dirname($_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_NAME']))) . "/assets/Imagenes/";
                 $directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/Imagenes/';
-                // $directorioImagenes = realpath(dirname(dirname(dirname(__FILE__)))) . "/assets/Imagenes/";
                 $filePath = $directorioImagenes . $fileName;
                 $valor = '<img src="' . $filePath . '" alt="img" width="50px" height="50px">';
-                // if (file_exists($filePath)) {
-                //     $valor = '<img src="' . $filePath . '" alt="img" width="50px" height="50px">';
-                // } else {
-                //     $valor = 'img';
-                // }
                $imagenes = $imagenes .' '. $valor;
             }
             // $colSpan = 'colspan="3"';
@@ -239,10 +249,10 @@ function generarContenidoDinamico($datos) {
             $valor = 'img';
             
         }
-        if ($valor !== 'img') {
-                if ($display === 'none') {
+        if ($valor !== 'img' ) {
+                if ($display === 'none' ) {
                   $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; display:none;">' . $valor . '</td>';
-                } else if ($display !== 'none'){
+                } else if ($display !== 'none' && $valor !== 'photo'){
                   $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; '.$bold.'" '.$colSpan.'>' . $valor . '</td>';
                 }
         }
@@ -262,7 +272,7 @@ function generarContenidoDinamico($datos) {
         }
         if ($display === 'none') {
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:10px; display:none;">' . $elemento['detalle'] . '</td>';
-        } else if ($display !== 'none'){
+        } else if ($display !== 'none' && $valor !== 'photo'){
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:10px; '.$bold.'" '.$colSpan.'>' . $elemento['detalle'] . '</td>';
         }
 
@@ -272,6 +282,7 @@ function generarContenidoDinamico($datos) {
           $display = 'none';
           $colSpan = 'colspan="1"';
         }
+  
         if ($elemento['colSpanName'] !== '1') {
           $bold = 'font-weight:bold';
           $paddingLeft = '50px';
@@ -281,11 +292,9 @@ function generarContenidoDinamico($datos) {
         }
         if ($display === 'none') {
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; display:none;">' . $elemento['observacion'] . '</td>';
-        } else if ($display !== 'none'){
+        } else if ($display !== 'none' && $valor !== 'photo'){
           $contenido .= '<td style="border: 1px solid #cecece; padding-left: '.$paddingLeft.'; font-style:normal; font-size:12px; '.$bold.'" '.$colSpan.'>' . $elemento['observacion'] . '</td>';
         }
-
-
         $contenido .= '</tr>';
   
     }

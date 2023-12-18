@@ -26,6 +26,7 @@ async function send(nuevoObjeto, encabezados) {
 
 function enviaMail(datos, encabezados) {
   try {
+    // console.log(datos);
     const filtrados = datos.displayRow.map((valor, indice) => {
       const tipoDeDato = datos.tipodedato[indice];
       const campoValor = datos.valor[indice];
@@ -55,6 +56,10 @@ function enviaMail(datos, encabezados) {
       }
       if (tipoDeDato === 'img' && image !== '') {
         valorHtmlValor = 'img';
+      }
+      if (tipoDeDato === 'photo') {
+        valorHtmlValor = 'photo';
+        displayDetalle = campoValor;
       }
       if (tipoDeDato === 's' || tipoDeDato === 'sd') {
         if (valorHtmlValor === '' || valorHtmlValor === 's' || valorHtmlValor === 'sd') {
@@ -97,6 +102,8 @@ function enviaMail(datos, encabezados) {
       }
       return null;
     }).filter((elemento) => elemento !== null);
+    // console.log(filtrados)
+    // console.log(encabezados);
     const enviado = send(filtrados, encabezados);
     return enviado;
   } catch (error) {
