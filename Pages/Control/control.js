@@ -22,6 +22,10 @@ import translate, {
 import { Alerta } from '../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
 import { inicioPerformance, finPerformance } from '../../includes/Conection/conection.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import traerNR from '../Control/Modules/Controladores/traerNR.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import cargarNR from '../Control/Modules/ControlNR/loadNR.js';
 
 let data = {};
 let translateOperativo = [];
@@ -160,6 +164,14 @@ async function cargaDeRegistros() {
     tablaVacia(nuevoControlData, encabezados);
     finPerformance();
     // Ajustar el porcentaje a 100%
+    if (nr) {
+      const controlNr = await traerNR(nr);
+      setTimeout(() => {
+        const cargaNR = cargarNR(controlNr);
+        // eslint-disable-next-line no-console
+        console.log(cargaNR);
+      }, 1000);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(error);
