@@ -89,7 +89,7 @@ function configuracionLoad() {
   controlN = url.searchParams.get('control_N');
   // controlT = url.searchParams.get('control_T');
   nr = url.searchParams.get('nr');
-  nr === '0' ? nr = '' : nr;
+  nr === '0' ? nr = '' : localStorage.setItem('doc', nr);
   document.getElementById('doc').innerText = `Doc: ${nr}`;
   // document.getElementById('wichC').innerText = controlT;
   document.getElementById('wichC').style.display = 'inline';
@@ -167,9 +167,9 @@ async function cargaDeRegistros() {
     if (nr) {
       const controlNr = await traerNR(nr);
       setTimeout(() => {
-        const cargaNR = cargarNR(controlNr);
+        cargarNR(controlNr);
         // eslint-disable-next-line no-console
-        console.log(cargaNR);
+        // console.log(cargaNR);
       }, 1000);
     }
   } catch (error) {

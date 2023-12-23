@@ -1,4 +1,12 @@
+// eslint-disable-next-line import/extensions
+import traerSupervisor from '../Controladores/traerSupervisor.js';
+// eslint-disable-next-line import/extensions
+import { Alerta } from '../../../../includes/atoms/alerta.js';
+// eslint-disable-next-line import/extensions
+import objVariables from '../../../../controllers/variables.js';
+
 function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
+  // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos);
   const td = tds;
   if ((tagName === 'INPUT' && type === 'date') || (tagName === 'INPUT' && type === 'time')) {
     // console.log(value)
@@ -31,7 +39,7 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
     const checkbox = td[columnaTd].childNodes[0];
     valor === '1' ? checkbox.checked = true : checkbox.checked = false;
   }
-  if (tagName === 'BUTTON' && type === 'submit' && datos[i][23]) {
+  if (tagName === 'BUTTON' && type === 'submit' && datos[i][23] !== '') {
     let cadenaJSON = datos[i][23];
     cadenaJSON = cadenaJSON.replace('fileName', '"fileName"');
     cadenaJSON = cadenaJSON.replace('extension', '"extension"');
@@ -48,10 +56,17 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
       const li = document.createElement('li');
       const fileNameWithoutExtension = nombreArchivo.replace(/\.[^.]+$/, '');
       const rutaCompleta = `${rutaBase}${nombreArchivo}`;
+      li.id = `li_${fileNameWithoutExtension}`;
       img.setAttribute('class', 'img-select');
       img.setAttribute('data-filename', nombreArchivo);
       img.setAttribute('data-fileextension', extension);
       img.setAttribute('data-fileNameWithoutExtension', fileNameWithoutExtension);
+      img.addEventListener('click', () => {
+        const miAlertaImagen = new Alerta();
+        miAlertaImagen.createModalImagenes(objVariables.modalImagen, img);
+        const modal = document.getElementById('modalAlert');
+        modal.style.display = 'block';
+      });
       fetch(rutaCompleta)
         .then((response) => response.blob())
         .then((blob) => {
@@ -68,13 +83,46 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
   }
 }
 
+async function verSupervisor(idSupervisor) {
+  let configMenu;
+  if (idSupervisor !== '0') {
+    const supervisor = await traerSupervisor(idSupervisor);
+    configMenu = {
+      guardar: false,
+      guardarComo: true,
+      guardarCambios: true,
+      firma: true,
+      configFirma: supervisor,
+    };
+    localStorage.setItem('config_menu', JSON.stringify(configMenu));
+  } else if (idSupervisor === '0') {
+    const supervisor = {
+      id: 0,
+      mail: '',
+      mi_cfg: '',
+      nombre: '',
+      tipo: 0,
+    };
+    configMenu = {
+      guardar: false,
+      guardarComo: true,
+      guardarCambios: true,
+      firma: false,
+      configFirma: supervisor,
+    };
+    localStorage.setItem('firma', JSON.stringify('x'));
+    localStorage.setItem('config_menu', JSON.stringify('x'));
+  }
+}
+
 function cargarNR(datos) {
   // console.log(datos);
   try {
+    const idSupervisor = datos[0][6];
     const tbody = document.querySelector('tbody');
     const tr = tbody.querySelectorAll('tr');
     // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < tr.length; i++) {
+    for (let i = 0; i < tr.length - 1; i++) {
       const row = tr[i];
       // console.log(row);
       const td = row.querySelectorAll('td');
@@ -91,14 +139,24 @@ function cargarNR(datos) {
 
       if (codigo.trim() === datos[i][5].trim()) {
         columna2(tagName, type, td, valor, datos, i, 2, 12);
-        columna2(tagNameObservaciones, typeObservaciones, td, valorObservaciones, datos, i, 4, 13);
+        columna2(
+          tagNameObservaciones,
+          typeObservaciones,
+          td,
+          valorObservaciones,
+          datos,
+          i,
+          4,
+          13,
+        );
       }
     }
+    verSupervisor(idSupervisor);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(error);
   }
-  return 'ok';
+  // return 'ok';
 }
 
 export default cargarNR;

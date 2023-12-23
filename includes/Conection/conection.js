@@ -7,17 +7,19 @@ function finPerformance() {
   const inicio = localStorage.getItem('performance');
   const velocidadMbps = fin - inicio;
   const signal = document.getElementById('idSignal');
+  signal.style.height = '12px';
+  signal.style.width = '12px';
   const ruta = '../../assets/img/';
   if (velocidadMbps > 5) {
-    signal.src = `${ruta}no-signal.png`;
+    signal.src = `${ruta}caracol.png`;
     signal.alt = 'No connetc';
     // console.log('mala conexion');
   } else if (velocidadMbps > 2 && velocidadMbps <= 5) {
-    signal.src = `${ruta}lost-signal.png`;
+    signal.src = `${ruta}liebre.png`;
     signal.alt = 'Lost connetc';
     // console.log('conexión intermedia');
   } else {
-    signal.src = `${ruta}signal.png`;
+    signal.src = `${ruta}liebre.png`;
     signal.alt = 'Good connetc';
     // console.log('buena conexión');
   }

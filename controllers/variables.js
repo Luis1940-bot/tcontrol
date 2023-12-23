@@ -98,6 +98,20 @@ const closeVentanaVerdeRoja = () => {
   removeModal(modal);
 };
 
+const closeVentanaImagen = () => {
+  let modal = document.getElementById('modalAlert');
+  removeModal(modal);
+};
+
+const eliminaImagen = () => {
+  const visualizador = document.getElementById('idVisualizador');
+  const dataFilename = visualizador.getAttribute('data-filenamewithoutextension');
+  const liElement = document.getElementById(`li_${dataFilename}`);
+  liElement.parentNode.removeChild(liElement);
+  let modal = document.getElementById('modalAlert');
+  removeModal(modal);
+};
+
 const closeVentanaVerdeRojaImg = () => {
   const modal = document.getElementById('modalAlertVerde');
   removeModal(modal);
@@ -1657,6 +1671,76 @@ const procesoExitoso = {
     cursor: null,
   },
 };
+const modalImagen = {
+  close: {
+    id: null,
+    text: 'x ',
+    fontSize: '18px',
+    fontColor: '#cecece',
+    marginTop: '0px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'center',
+    className: 'verde-close',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    padding: '10px 10px',
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    left: null,
+    hoverBackground: null,
+    hoverColor: 'red',
+    innerHTML: '&times',
+    margin: null,
+    onClick: closeVentanaImagen,
+    fontStyle: null,
+  },
+  div: {
+    id: 'idDivImagen',
+    position: 'relative',
+    borderRadius: '10px',
+    width: '300px',
+    height: '300px',
+    background: '#ffffff',
+    border: 'none',
+    boxShadow: 'none',
+    margin: '20% auto',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '10px',
+    overflow: 'hidden',
+    className: 'div-verde',
+    textAlign: '',
+    gap: '0px',
+    top: '100px',
+    alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    cursor: null,
+  },
+  btntrash: {
+    id: 'idTrash',
+    text: '',
+    fontSize: '14px',
+    fontColor: '#ffffff',
+    backColor: 'transparent',
+    marginTop: '10px',
+    display: 'block',
+    fontWeight: 700,
+    width: '25px',
+    height: '25px',
+    border: 'none',
+    className: 'trash',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    hoverBackground: '#cecece',
+    hoverColor: '#000000',
+    marginLeft: null,
+    onClick: eliminaImagen,
+  },
+};
 
 export default {
   arrayGlobal,
@@ -1675,4 +1759,5 @@ export default {
   objInforme,
   habilitadoGuardar,
   procesoExitoso,
+  modalImagen,
 };

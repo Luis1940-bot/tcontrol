@@ -245,6 +245,7 @@ function createHR(config) {
 }
 
 function createIMG(config) {
+  // console.log(config);
   const img = document.createElement('img');
   config.id !== null ? img.id = config.id : null;
   img.src = config.src;
@@ -688,7 +689,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
       remove: [null, null, null, null, null, null, null, null],
     };
   }
-  if (doc !== 'null' && firmado === false) {
+  if (doc !== 'null' && firmado === undefined) {
     //! console.log('menú guardado con doc y  sin firma');
     nuevoConfigMenu = {
       guardar: false,
@@ -913,6 +914,36 @@ class Alerta {
     });
   }
 
+  createModalImagenes(objeto, imagen) {
+    const imgCopy = imagen;
+    const obj = objeto;
+    this.modal = document.createElement('div');
+    this.modal.id = 'modalAlert';
+    this.modal.className = 'modal';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+    // obj.div.height = '260px';
+    const modalContent = createDiv(obj.div);
+    const span = createSpan(obj.close);
+    modalContent.appendChild(span);
+    const buttonAceptar = createButton(obj.btntrash);
+    buttonAceptar.style.padding = '0px';
+    const trash = document.createElement('img');
+    const ruta = '../../assets/img/icons8-trash-48.png';
+    trash.style.height = '20px';
+    trash.style.width = '20px';
+    trash.src = `${ruta}`;
+    buttonAceptar.appendChild(trash);
+    modalContent.appendChild(buttonAceptar);
+    const img = imgCopy.cloneNode(true);
+    img.id = 'idVisualizador';
+    img.style.height = '250px';
+    img.style.width = '250px';
+    img.style.margin = 'auto auto auto auto';
+    modalContent.appendChild(img);
+    this.modal.appendChild(modalContent);
+    document.body.appendChild(this.modal);
+  }
+
   createVerde(obj, texto, objTrad) {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertVerde';
@@ -1015,7 +1046,6 @@ class Alerta {
     const configFirma = JSON.parse(localStorage.getItem('firma'));
     const configMenu = JSON.parse(localStorage.getItem('config_menu'));
     const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
-
     const obj = objeto;
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertM';

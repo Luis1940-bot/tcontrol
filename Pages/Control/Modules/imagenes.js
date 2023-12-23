@@ -55,9 +55,11 @@ function buttonImage(id) {
 
 function generateLi(image) {
   const img = image;
+  const dataFilename = img.getAttribute('data-filenamewithoutextension');
   const fila = document.querySelector(`tr:nth-child(${row})`);
   const ul = fila.querySelector('ul');
   const li = document.createElement('li');
+  li.id = `li_${dataFilename}`;
   img.setAttribute('class', 'img-select');
   li.appendChild(img);
   // const canvas = document.createElement('canvas');
@@ -79,6 +81,14 @@ function loadImage(selectedFile) {
       img.setAttribute('data-fileextension', fileExtension);
       img.setAttribute('data-fileNameWithoutExtension', fileNameWithoutExtension);
       img.style.maxWidth = '100%';
+      img.setAttribute('className', '');
+      img.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const miAlertaImagen = new Alerta();
+        miAlertaImagen.createModalImagenes(objVariables.modalImagen, img);
+        const modal = document.getElementById('modalAlert');
+        modal.style.display = 'block';
+      });
       img.onload = () => resolve(img);
       img.onerror = reject;
       const modal = document.getElementById('modalAlertVerde');
