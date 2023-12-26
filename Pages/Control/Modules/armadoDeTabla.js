@@ -22,6 +22,8 @@ import translate, {
 } from '../../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
 import hacerMemoria from './Controladores/hacerMemoria.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { desencriptar } from '../../../controllers/cript.js';
 
 let data = {};
 let translateOperativo = [];
@@ -485,7 +487,7 @@ function completaTabla(arrayControl) {
 }
 
 async function arraysLoadTranslate() {
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   if (persona) {
     document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
     data = await translate(persona.lng);
@@ -493,8 +495,10 @@ async function arraysLoadTranslate() {
     espanolOperativo = data.arrayEspanolOperativo;
     translateArchivo = data.arrayTranslateArchivo;
     espanolArchivo = data.arrayEspanolArchivo;
-    const url = new URL(window.location.href);
-    const controlT = url.searchParams.get('control_T');
+    const contenido = (localStorage.getItem('contenido'));
+    const url = desencriptar(contenido);
+    // const url = new URL(window.location.href);
+    const controlT = url.control_T; // url.searchParams.get('control_T');
     document.getElementById('wichC').innerText = trA(controlT);
   }
 }

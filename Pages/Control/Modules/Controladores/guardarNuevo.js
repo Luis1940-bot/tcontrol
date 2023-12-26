@@ -4,6 +4,8 @@ import fechasGenerator from '../../../../controllers/fechas.js';
 import respuestaColumna from './armadoDeObjetos.js';
 // // eslint-disable-next-line import/extensions
 // import guardaNotas from './guardaNotas.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { encriptar, desencriptar } from '../../../../controllers/cript.js';
 
 function buscarEnArray(id, array) {
   const idStr = id.toString().trim();
@@ -68,20 +70,22 @@ function tuFuncion(
 
 function recorroTable(objetoControl, arrayControl) {
   try {
-    const person = JSON.parse(localStorage.getItem('user'));
+    const person = desencriptar(localStorage.getItem('user'));
     const idPerson = person.id;
     // const email = document.getElementById('idCheckBoxEmail').checked;
-    const url = new URL(window.location.href);
-    const controlN = url.searchParams.get('control_N');
+    // const url = new URL(window.location.href);
+    const contenido = (localStorage.getItem('contenido'));
+    const url = desencriptar(contenido);
+    const controlN = url.control_N; // url.searchParams.get('control_N');
     // const controlT = url.searchParams.get('control_T');
     // const numberDoc = document.getElementById('numberDoc').textContent;
     const tbody = document.querySelector('tbody');
     const tr = tbody.querySelectorAll('tr');
     let estanTodosLosRequeridos = true;
     let emailSupervisor = null;
-    let supervisor = JSON.parse(localStorage.getItem('firmado'));
+    let supervisor = desencriptar(localStorage.getItem('firmado'));
     // eslint-disable-next-line max-len
-    supervisor.id === 0 ? supervisor = 0 : (supervisor = Number(supervisor.id), emailSupervisor = JSON.parse(localStorage.getItem('firmado')).mail);
+    supervisor.id === 0 ? supervisor = 0 : (supervisor = Number(supervisor.id), emailSupervisor = desencriptar(localStorage.getItem('firmado')).mail);
     let founded;
     let fechaActual = '';
     let horaActual = '';
@@ -210,7 +214,7 @@ function recorroTable(objetoControl, arrayControl) {
               fila: i,
               idLTYcontrol: founded[1],
             };
-            localStorage.setItem('requerido', JSON.stringify(requerido));
+            localStorage.setItem('requerido', encriptar(requerido));
             return false;
           // eslint-disable-next-line max-len
           }
@@ -224,7 +228,7 @@ function recorroTable(objetoControl, arrayControl) {
     // console.log(estanTodosLosRequeridos)
     const planta = document.getElementById('planta').textContent;
     const reporte = document.getElementById('wichC').textContent;
-    const persona = JSON.parse(localStorage.getItem('user'));
+    const persona = desencriptar(localStorage.getItem('user'));
     const notificador = persona.person;
     const mailUser = person.mail;
     // eslint-disable-next-line no-unused-vars, max-len
@@ -235,7 +239,7 @@ function recorroTable(objetoControl, arrayControl) {
         fila: 0,
         idLTYcontrol: 0,
       };
-      localStorage.setItem('requerido', JSON.stringify(requerido));
+      localStorage.setItem('requerido', encriptar(requerido));
     }
   } catch (error) {
     // eslint-disable-next-line no-console

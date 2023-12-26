@@ -13,6 +13,7 @@ if (!isset($_SESSION['factum_validation'])) {
     // $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
     // $_SESSION['factum_validation']['id'] = '6';
 }
+
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 define('MODALS', ROOT_PATH.'/includes/molecules/modales');
 define('INCLUDES', ROOT_PATH.'/includes/molecules');

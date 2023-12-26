@@ -14,6 +14,8 @@ import translate, {
 } from '../../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../../includes/atoms/alerta.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { desencriptar } from '../../../controllers/cript.js';
 
 let data = {};
 let translateOperativo = [];
@@ -128,7 +130,7 @@ imageInput.addEventListener('change', async (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   if (persona) {
     document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
     data = await translate(persona.lng);

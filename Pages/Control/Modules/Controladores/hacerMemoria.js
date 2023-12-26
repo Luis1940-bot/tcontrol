@@ -4,6 +4,8 @@ import arrayGlobal from '../../../../controllers/variables.js';
 import respuestaColumna from './armadoDeObjetos.js';
 // eslint-disable-next-line import/extensions
 import fechasGenerator from '../../../../controllers/fechas.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { desencriptar } from '../../../../controllers/cript.js';
 
 function buscarEnArray(id, array) {
   const idStr = id.toString().trim();
@@ -13,11 +15,13 @@ function buscarEnArray(id, array) {
 
 function hacerMemoria(arrayControl) {
   try {
-    const person = JSON.parse(localStorage.getItem('user'));
+    const person = desencriptar(localStorage.getItem('user'));
     const idPerson = person.id;
     // const email = document.getElementById('idCheckBoxEmail').checked;
-    const url = new URL(window.location.href);
-    const controlN = url.searchParams.get('control_N');
+    // const url = new URL(window.location.href);
+    const contenido = (localStorage.getItem('contenido'));
+    const url = desencriptar(contenido);
+    const controlN = url.control_N; // url.searchParams.get('control_N');
     // const controlT = url.searchParams.get('control_T');
     const tbody = document.querySelector('tbody');
     const tr = tbody.querySelectorAll('tr');

@@ -18,6 +18,8 @@ import guardaNotas from '../../Pages/Control/Modules/Controladores/guardaNotas.j
 import insertarRegistro from '../../Pages/Control/Modules/Controladores/insertarRegistro.js';
 // eslint-disable-next-line import/extensions
 import enviaMail from '../../Nodemailer/sendEmail.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { encriptar, desencriptar } from '../../controllers/cript.js';
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../';
@@ -28,7 +30,7 @@ const objTraductor = {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   if (persona) {
     const data = await translate(persona.lng);
     const translateOperativo = data.arrayTranslateOperativo;
@@ -354,7 +356,7 @@ async function firmar(firmadoPor) {
   };
   procesoStyleDisplay(elementosStyle);
 
-  localStorage.setItem('firmado', JSON.stringify(supervisor));
+  localStorage.setItem('firmado', encriptar(supervisor));
   const configMenu = {
     guardar: true,
     guardarComo: false,
@@ -367,7 +369,7 @@ async function firmar(firmadoPor) {
     menu.style.display = 'none';
     menu.remove();
   }, 1000);
-  localStorage.setItem('config_menu', JSON.stringify(configMenu));
+  localStorage.setItem('config_menu', encriptar(configMenu));
 }
 
 function limpiaArrays() {
@@ -539,8 +541,8 @@ function informe(convertido, insertado, imagenes, enviado, miAlerta, objTrad, mo
 
     const documento = document.getElementById('numberDoc');
     documento.innerText = insertado.documento;
-    localStorage.setItem('doc', insertado.documento);
-    const configMenuStorage = JSON.parse(localStorage.getItem('config_menu'));
+    localStorage.setItem('doc', encriptar(insertado.documento));
+    const configMenuStorage = desencriptar(localStorage.getItem('config_menu'));
     const configMenu = {
       guardar: true,
       guardarComo: false,
@@ -552,7 +554,7 @@ function informe(convertido, insertado, imagenes, enviado, miAlerta, objTrad, mo
     configMenu.guardarComo = true;
     configMenu.guardarCambios = true;
     configMenu.configFirma = { ...configMenu.configFirma, ...configMenuStorage.configFirma };
-    localStorage.setItem('config_menu', JSON.stringify(configMenu));
+    localStorage.setItem('config_menu', encriptar(configMenu));
 
     limpiaArrays();
     guardaNotas(convertido);
@@ -584,7 +586,7 @@ async function insert(nuevoObjeto, convertido, objEncabezados, miAlertaInforme, 
     // const imagenes = { success: true, message: 'ok', rutaImagen: '../../' };
     // console.log(imagenes);
 
-    const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
+    const enviaPorEmail = (localStorage.getItem('envia_por_email'));
     const encabezados = { ...objEncabezados };
     encabezados.documento = insertado.documento;
     let enviado = '';
@@ -698,7 +700,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
       firma: false,
       configFirma: 'x',
     };
-    localStorage.setItem('config_menu', JSON.stringify(nuevoConfigMenu));
+    localStorage.setItem('config_menu', encriptar(nuevoConfigMenu));
     elementosStyle = {
       element: ['idDivGuardar', 'idHrGuardar', 'idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idDivFirmado'],
       style: ['none', 'none', 'flex', 'flex', 'flex', 'flex', 'none'],
@@ -719,7 +721,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
       firma: false,
       configFirma: 'x',
     };
-    localStorage.setItem('config_menu', JSON.stringify(nuevoConfigMenu));
+    localStorage.setItem('config_menu', encriptar(nuevoConfigMenu));
     elementosStyle = {
       element: ['idDivGuardar', 'idHrGuardar', 'idDivGuardarCambio', 'idDivGuardarComoNuevo', 'idHrGuardarCambio', 'idHrGuardarComoNuevo', 'idDivFirmado', 'idMensajeFirmado', 'idDivFirmar'],
       style: ['none', 'none', 'flex', 'flex', 'flex', 'flex', 'flex', 'flex', 'none'],
@@ -793,7 +795,7 @@ class Alerta {
       procesoStyleDisplay(elementosStyle);
       limpiaArrays();
       const okGuardar = guardarNuevo(arrayGlobal.objetoControl, arrayGlobal.arrayControl);
-      const requerido = JSON.parse(localStorage.getItem('requerido'));
+      const requerido = desencriptar(localStorage.getItem('requerido'));
       if (requerido.requerido && okGuardar) {
         const miAlerta = new Alerta();
         const miAlertaInforme = new Alerta();
@@ -1043,9 +1045,9 @@ class Alerta {
 
   createModalMenu(objeto, objTranslate) {
     // eslint-disable-next-line no-unused-vars
-    const configFirma = JSON.parse(localStorage.getItem('firma'));
-    const configMenu = JSON.parse(localStorage.getItem('config_menu'));
-    const enviaPorEmail = JSON.parse(localStorage.getItem('envia_por_email'));
+    const configFirma = desencriptar(localStorage.getItem('firma'));
+    const configMenu = desencriptar(localStorage.getItem('config_menu'));
+    const enviaPorEmail = (localStorage.getItem('envia_por_email'));
     const obj = objeto;
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertM';
@@ -1203,7 +1205,7 @@ class Alerta {
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal);
     // let elementosStyle;
-    const doc = localStorage.getItem('doc');
+    const doc = (localStorage.getItem('doc'));
     // console.log(doc)
     formatarMenu(doc, configMenu, objTranslate);
     const enviaEmail = document.getElementById('idCheckBoxEmail');

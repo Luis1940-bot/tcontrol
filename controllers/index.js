@@ -1,8 +1,11 @@
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { encriptar, desencriptar } from '../controllers/cript.js';
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '';
 
 function configPHP() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const userDesencriptado = desencriptar(localStorage.getItem('user'));
+  const user = (userDesencriptado);
   const {
     developer, content, logo, by,
   } = user;
@@ -36,12 +39,13 @@ function session() {
 
       // Intentar analizar la respuesta como JSON
       try {
-        const parsedData = JSON.parse(data);
+        let parsedData = JSON.parse(data);
         // const {
         //   email, plant, lng, person, id, tipo,
         // } = parsedData;
-        localStorage.setItem('user', JSON.stringify(parsedData));
-        // console.log(parsedData);
+        parsedData = encriptar(parsedData);
+        localStorage.setItem('user', (parsedData));
+
         configPHP();
       } catch (error) {
         // Manejar errores al analizar JSON

@@ -14,6 +14,8 @@ import translate, {
 import personModal from '../../controllers/person.js';
 // eslint-disable-next-line import/extensions
 import { inicioPerformance, finPerformance } from '../../includes/Conection/conection.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { encriptar, desencriptar } from '../../controllers/cript.js';
 
 let translateOperativo = [];
 let espanolOperativo = [];
@@ -71,8 +73,20 @@ function asignarEventos() {
         } else {
           url = `../../Pages/${control}`;
         }
-        localStorage.setItem('history_pages', navegador.estadoAnteriorWhereUs);
-        window.location.href = url;
+        localStorage.setItem('history_pages', encriptar(navegador.estadoAnteriorWhereUs));
+
+        const [subcadena, parametros] = url.split('?');
+        const pares = parametros.split('&');
+        const objeto = pares.reduce((objs, par) => {
+          const obj = objs;
+          const [clave, valor] = par.split('=');
+          obj[clave] = decodeURIComponent(valor);
+          return obj;
+        }, {});
+        localStorage.setItem('contenido', encriptar(objeto));
+
+        const ruta = `${subcadena}?v=${Math.round(Math.random() * 10)}`;
+        window.location.href = ruta;
       }
       navegador.estadoAnteriorButton = e.target.name;
       navegador.estadoAnteriorWhereUs.push(e.target.name);
@@ -135,7 +149,7 @@ function dondeEstaEn() {
 }
 
 function configPHP() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = desencriptar(localStorage.getItem('user'));
   const {
     developer, content, by, rutaDeveloper, logo,
   } = user;
@@ -164,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible';
   const hamburguesa = document.querySelector('#hamburguesa');
   hamburguesa.style.display = 'none';
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   if (persona) {
     document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
     const data = await translate(persona.lng);
@@ -207,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     person.style.border = '3px solid #212121';
     person.style.background = '#212121';
     person.style.borderRadius = '10px 10px 0px 0px';
-    const persona = JSON.parse(localStorage.getItem('user'));
+    const persona = desencriptar(localStorage.getItem('user'));
     const user = {
       person: persona.person,
       salir: trO('Cerrar sesión'),

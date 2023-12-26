@@ -12,6 +12,8 @@ import translate, {
   arrayEspanolArchivo,
 // eslint-disable-next-line import/extensions
 } from '../../../controllers/translate.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { desencriptar } from '../../../controllers/cript.js';
 
 let data = {};
 let translateOperativo = [];
@@ -216,7 +218,7 @@ buscarModal.addEventListener('input', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   if (persona) {
     document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
     data = await translate(persona.lng);

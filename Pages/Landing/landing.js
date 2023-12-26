@@ -10,6 +10,8 @@ import createRadioButton from '../../includes/atoms/createRadioButton.js';
 import translate from '../../controllers/translate.js';
 // eslint-disable-next-line import/extensions
 import { inicioPerformance, finPerformance } from '../../includes/Conection/conection.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { encriptar, desencriptar } from '../../controllers/cript.js';
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
@@ -127,11 +129,11 @@ function completaButtons(obj) {
     div.addEventListener('click', () => {
       const radio = radios[i];
       // Obtener el objeto almacenado en localStorage
-      const userData = JSON.parse(localStorage.getItem('user'));
+      const userData = desencriptar(localStorage.getItem('user'));
       radio.checked = true;
       language = radios[i].getAttribute('data-custom');
       userData.lng = language.slice(0, 2);
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('user', encriptar(userData));
       document.querySelector('.custom-button').innerText = language.slice(0, 2).toUpperCase();
       // storage(language.slice(0, 2).toLowerCase());
       seguir.disabled = false;
@@ -146,7 +148,7 @@ function completaButtons(obj) {
       });
     });
 
-    const persona = JSON.parse(localStorage.getItem('user'));
+    const persona = desencriptar(localStorage.getItem('user'));
     const buttonSelector = div.childNodes[0].name.slice(0, 2);
     if (buttonSelector.slice(0, 2).toLowerCase() === persona.lng.toLowerCase()) {
       radios[index].checked = true;
@@ -169,7 +171,7 @@ function leeApp(json) {
 }
 
 function configPHP() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = desencriptar(localStorage.getItem('user'));
   const {
     developer, content, by, rutaDeveloper, logo,
   } = user;
@@ -197,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
   configPHP();
   spinner.style.visibility = 'visible';
   const customButton = document.getElementById('planta');
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   const personaLng = persona.lng;
   customButton.innerText = personaLng.toUpperCase();
   const person = document.querySelector('#person');
@@ -225,7 +227,7 @@ async function loadLenguages(leng) {
 
 const button = document.querySelector('.my-button');
 button.addEventListener('click', () => {
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   spinner.style.visibility = 'visible';
   loadLenguages(persona.lng);
 });

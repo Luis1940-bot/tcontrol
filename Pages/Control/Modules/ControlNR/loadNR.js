@@ -4,6 +4,8 @@ import traerSupervisor from '../Controladores/traerSupervisor.js';
 import { Alerta } from '../../../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
 import objVariables from '../../../../controllers/variables.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { encriptar } from '../../../../controllers/cript.js';
 
 function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
   // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos);
@@ -94,7 +96,7 @@ async function verSupervisor(idSupervisor) {
       firma: true,
       configFirma: supervisor,
     };
-    localStorage.setItem('config_menu', JSON.stringify(configMenu));
+    localStorage.setItem('config_menu', encriptar(configMenu));
   } else if (idSupervisor === '0') {
     const supervisor = {
       id: 0,
@@ -110,8 +112,8 @@ async function verSupervisor(idSupervisor) {
       firma: false,
       configFirma: supervisor,
     };
-    localStorage.setItem('firma', JSON.stringify('x'));
-    localStorage.setItem('config_menu', JSON.stringify('x'));
+    localStorage.setItem('firma', encriptar('x'));
+    localStorage.setItem('config_menu', encriptar('x'));
   }
 }
 

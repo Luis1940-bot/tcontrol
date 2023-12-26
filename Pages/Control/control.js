@@ -26,6 +26,8 @@ import { inicioPerformance, finPerformance } from '../../includes/Conection/cone
 import traerNR from '../Control/Modules/Controladores/traerNR.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import cargarNR from '../Control/Modules/ControlNR/loadNR.js';
+// eslint-disable-next-line import/extensions, import/no-useless-path-segments
+import { encriptar, desencriptar } from '../../controllers/cript.js';
 
 let data = {};
 let translateOperativo = [];
@@ -60,7 +62,7 @@ function leeVersion(json) {
 }
 
 function configPHP() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = desencriptar(localStorage.getItem('user'));
   const {
     developer, content, by, rutaDeveloper, logo,
   } = user;
@@ -85,11 +87,13 @@ function configPHP() {
 
 function configuracionLoad() {
   inicioPerformance();
-  const url = new URL(window.location.href);
-  controlN = url.searchParams.get('control_N');
+  const contenido = (localStorage.getItem('contenido'));
+  const url = desencriptar(contenido);
+  // const url = new URL(window.location.href);
+  controlN = url.control_N; // url.searchParams.get('control_N');
   // controlT = url.searchParams.get('control_T');
-  nr = url.searchParams.get('nr');
-  nr === '0' ? nr = '' : localStorage.setItem('doc', nr);
+  nr = url.nr; // url.searchParams.get('nr');
+  nr === '0' ? nr = '' : localStorage.setItem('doc', encriptar(nr));
   document.getElementById('doc').innerText = `Doc: ${nr}`;
   // document.getElementById('wichC').innerText = controlT;
   document.getElementById('wichC').style.display = 'inline';
@@ -199,7 +203,7 @@ async function mensajeDeCarga() {
 }
 
 async function arraysLoadTranslate() {
-  const persona = JSON.parse(localStorage.getItem('user'));
+  const persona = desencriptar(localStorage.getItem('user'));
   if (persona) {
     data = await translate(persona.lng);
     translateOperativo = data.arrayTranslateOperativo;
@@ -213,8 +217,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // eslint-disable-next-line no-console
   console.time('timeControl');
   arrayGlobal.habilitadoGuardar = false;
-  localStorage.setItem('firma', JSON.stringify('x'));
-  localStorage.setItem('config_menu', JSON.stringify('x'));
+  localStorage.setItem('firma', encriptar('x'));
+  localStorage.setItem('config_menu', encriptar('x'));
   localStorage.setItem('envia_por_email', false);
   localStorage.setItem('doc', null);
   const supervisor = {
@@ -224,9 +228,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     nombre: '',
     tipo: 0,
   };
-  localStorage.setItem('firmado', JSON.stringify(supervisor));
+  localStorage.setItem('firmado', encriptar(supervisor));
   try {
-    const persona = JSON.parse(localStorage.getItem('user'));
+    const persona = desencriptar(localStorage.getItem('user'));
     if (persona) {
       document.querySelector('.custom-button').innerText = persona.lng.toUpperCase();
       leeVersion('version');
@@ -262,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const person = document.getElementById('person');
   person.addEventListener('click', () => {
-    const persona = JSON.parse(localStorage.getItem('user'));
+    const persona = desencriptar(localStorage.getItem('user'));
     const user = {
       person: persona.person,
       salir: 'Cerrar sesión',
