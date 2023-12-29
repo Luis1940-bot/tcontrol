@@ -6,8 +6,8 @@
   },
   "apps": {
     "name": ["Especialidades", "FFL1", "FFL2", "Puré", "BOS - Reglas de Oro", "SGD"],
-    "type": ["btn", "btn", "btn", "btn", "btn", "btn"],
-    "ruta": ["", "", "", "", "", ""]
+    "type": ["btn", "btn", "btn", "btn", "btn", "ctrl"],
+    "ruta": ["", "", "", "", "", "Menu/index.php"]
   },
   "Especialidades": {
     "name": ["TONELADAS", "ROVE", "DWT"],
@@ -75,5 +75,15 @@
       "Control/index.php?control_N=273&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
       "Control/index.php?control_N=274&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0"
     ]
+  },
+  "Menu": {
+    "name": ["Controles", "Consultas"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", ""]
+  },
+  "Controles": {
+    "name": ["Controles", "Imprimir control"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", ""]
   }
 }

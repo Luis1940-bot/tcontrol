@@ -136,3 +136,7 @@ N º do documento
 Algo deu errado.
 O processo falhou porque nenhum dado inserido foi registrado. Verifique a conexão com a Internet e tente novamente.Se o problema persistir, entre em contato com o analista da sua área.
 Os e-mails foram enviados de acordo com a configuração do controle.
+Durar
+Primeiro
+Aguarde alguns instantes, os controles ativos estão sendo listados. Obrigado!
+Tipo de usuário:

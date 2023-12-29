@@ -15,10 +15,10 @@ body{
   height: auto;
   overflow-x: hidden;
 }
-main {
+/* main { */
   /* height: auto; */
   /* overflow-y: auto; */
-}
+/* } */
 header{
   display: block;
   top: 0;

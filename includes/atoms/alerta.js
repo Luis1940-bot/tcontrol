@@ -27,6 +27,8 @@ const SERVER = '../../';
 const objTraductor = {
   operativoES: [],
   operativoTR: [],
+  archivosES: [],
+  archivosTR: [],
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -35,8 +37,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await translate(persona.lng);
     const translateOperativo = data.arrayTranslateOperativo;
     const espanolOperativo = data.arrayEspanolOperativo;
+
+    const translateArchivos = data.arrayTranslateArchivo;
+    const espanolArchivos = data.arrayEspanolArchivo;
+
     objTraductor.operativoES = [...espanolOperativo];
     objTraductor.operativoTR = [...translateOperativo];
+
+    objTraductor.archivosES = [...espanolArchivos];
+    objTraductor.archivosTR = [...translateArchivos];
+
     return objTraductor;
   }
   return null;
@@ -270,6 +280,17 @@ function trO(palabra, objTranslate) {
   );
   if (index !== -1) {
     return objTranslate.operativoTR[index];
+  }
+  return palabra;
+}
+
+function trA(palabra, objTrad) {
+  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+  const index = objTrad.archivosES.findIndex(
+    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+  );
+  if (index !== -1) {
+    return objTrad.archivosTR[index];
   }
   return palabra;
 }
@@ -1210,6 +1231,93 @@ class Alerta {
     formatarMenu(doc, configMenu, objTranslate);
     const enviaEmail = document.getElementById('idCheckBoxEmail');
     enviaPorEmail ? enviaEmail.checked = true : enviaEmail.checked = false;
+  }
+
+  createViewer(objeto, array, objTrad) {
+    const obj = objeto;
+    this.modal = document.createElement('div');
+    this.modal.id = 'modalAlertView';
+    this.modal.className = 'modal';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent);
+
+    const span = createSpan(obj.close);
+    modalContent.appendChild(span);
+    let texto = array[0];
+    let typeAlert = 'viewer';
+    texto = trA(texto, objTrad) || texto;
+
+    obj.titulo.text[typeAlert] = `${array[1]} - ${texto}`;
+    const title = createH3(obj.titulo, typeAlert);
+    title.id = 'idTituloH3';
+    title.setAttribute('data-index', array[1]);
+    title.setAttribute('data-name', array[0]);
+    modalContent.appendChild(title);
+
+    // eslint-disable-next-line prefer-destructuring
+    texto = array[2];
+    texto = trA(texto, objTrad) || texto;
+    typeAlert = 'descripcion';
+    obj.span.text[typeAlert] = texto;
+    obj.span.marginTop = '10px';
+    let spanTexto = createSpan(obj.span, texto);
+    modalContent.appendChild(spanTexto);
+
+    texto = trO('Primera', objTrad) || 'Primera';
+    typeAlert = 'fechas';
+    let mensaje = `${texto} ${array[16]}`;
+    texto = trO('Última', objTrad) || 'Última';
+    mensaje = `${mensaje} - ${texto} ${array[3]}`;
+    obj.span.text[typeAlert] = mensaje;
+    obj.span.fontSize = '10px';
+    obj.span.fontColor = 'red';
+    obj.span.marginTop = '10px';
+    spanTexto = createSpan(obj.span, mensaje);
+    modalContent.appendChild(spanTexto);
+
+    texto = trO('Tipo de usuario:', objTrad) || 'Tipo de usuario:';
+    texto = `${texto} ${array[14]}-${array[19]}`;
+    typeAlert = 'nivelUsuario';
+    obj.span.text[typeAlert] = `${texto} ${array[14]}-${array[19]}`;
+    obj.span.fontSize = '12px';
+    obj.span.fontColor = '#212121';
+    obj.span.marginTop = '10px';
+    spanTexto = createSpan(obj.span, texto);
+    modalContent.appendChild(spanTexto);
+
+    const divButton = createDiv(obj.divButtons);
+
+    texto = trO(obj.btnNuevo.text, objTrad) || obj.btnNuevo.text;
+    obj.btnNuevo.text = texto;
+    const btnNuevo = createButton(obj.btnNuevo);
+
+    texto = trO(obj.btnVerCargados.text, objTrad) || obj.btnVerCargados.text;
+    obj.btnVerCargados.text = texto;
+    const btnVerCargados = createButton(obj.btnVerCargados);
+
+    texto = trO(obj.btnProcedimiento.text, objTrad) || obj.btnProcedimiento.text;
+    obj.btnVerCargados.text = texto;
+    const btnProcedimiento = createButton(obj.btnProcedimiento);
+
+    divButton.appendChild(btnNuevo);
+    divButton.appendChild(btnVerCargados);
+    divButton.appendChild(btnProcedimiento);
+
+    modalContent.appendChild(divButton);
+
+    this.modal.appendChild(modalContent);
+    document.body.appendChild(this.modal);
+
+    const idbtnNuevo = document.getElementById('idbtnNuevo');
+    idbtnNuevo.addEventListener('click', () => {
+      const idTituloH3 = document.getElementById('idTituloH3');
+      const cod = idTituloH3.getAttribute('data-index');
+      const name = idTituloH3.getAttribute('data-name');
+      const url = `${cod}`;
+      const ruta = `../../Pages/Control/index.php?v=${Math.round(Math.random() * 10)}`;
+      window.location.href = ruta;
+    });
   }
 
   destroyAlerta() {

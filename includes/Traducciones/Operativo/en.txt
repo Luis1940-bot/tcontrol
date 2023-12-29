@@ -103,6 +103,7 @@ A new control will be saved.
 Changes will be saved.
 Save as...
 A copy of the current one is made.
+The process may take a few moments as the inferred data is checked.
 Wait a few moments, the process is running. The controls are complex digital instruments, during loading it is controlled that everything happens as expected. Thank you!
 Report:
 New
@@ -120,6 +121,7 @@ The table did not populate as expected, please try again.
 Did not make any changes to those determined by configuration. You will not be able to save any controls.
 When signing, be sure of the data provided.
 Signed by
+Required data is missing and has not been completed. Close this message, complete the required information and accept again.
 Alert date:
 Alert time:
 Enter the system and access document number
@@ -134,3 +136,7 @@ Document no
 Something went wrong.
 The process failed as no inserted data is recorded. Check the internet connection and try again.If the problem persists, contact the analyst in your area.
 Emails have been sent according to the control configuration.
+Last
+First
+Please wait a few moments, the active controls are being listed. Thank you!
+Type of user:

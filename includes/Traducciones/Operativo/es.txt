@@ -136,3 +136,7 @@ Documento nº
 Algo salió mal.
 El proceso falló ya que no se registran datos insertados. Compruebe la conexión a internet y vuelva a intentarlo.Si el problema persiste comunique al analista de su área.
 Se ha enviado emails acorde a la configuración del control.
+Última
+Primera
+Aguarde unos instantes, se están listando los controles activos. Gracias!
+Tipo de usuario:

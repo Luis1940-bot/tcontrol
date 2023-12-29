@@ -15,7 +15,7 @@ import personModal from '../../controllers/person.js';
 // eslint-disable-next-line import/extensions
 import { inicioPerformance, finPerformance } from '../../includes/Conection/conection.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { encriptar, desencriptar } from '../../controllers/cript.js';
+import { desencriptar } from '../../controllers/cript.js';
 
 let translateOperativo = [];
 let espanolOperativo = [];
@@ -30,7 +30,6 @@ const navegador = {
   estadoAnteriorButton: '',
   estadoAnteriorWhereUs: [],
 };
-const espacio = ' > ';
 
 function leeVersion(json) {
   readJSON(json)
@@ -56,56 +55,19 @@ function trO(palabra) {
 
 /* eslint-disable no-use-before-define */
 function asignarEventos() {
-  const buttons = document.querySelectorAll('.button-selector-home');
+  const buttons = document.querySelectorAll('.button-selector-menu');
   buttons.forEach((button, index) => {
-    button.addEventListener('click', (e) => {
-      if (objButtons[navegador.estadoAnteriorButton].type[index] === 'btn') {
-        const lugar = trO(e.target.innerText) || e.target.innerText;
-        document.getElementById('whereUs').innerText += `${espacio}${lugar}`;
-        document.getElementById('volver').style.display = 'block';
-        document.getElementById('whereUs').style.display = 'inline';
-        completaButtons(e.target.name);
-      } else {
-        const control = `${objButtons[navegador.estadoAnteriorButton].ruta[index]}`;
-        let url = '';
-        let tipoUrl = true;
-
-        if (objButtons[navegador.estadoAnteriorButton].ruta[index] === '404') {
-          url = `../../${control}.php`;
-        } else {
-          url = `../../Pages/${control}`;
-        }
-        localStorage.setItem('history_pages', encriptar(navegador.estadoAnteriorWhereUs));
-        if (url.includes('?')) {
-          tipoUrl = true;
-        } else {
-          tipoUrl = false;
-        }
-        let ruta = '';
-        if (tipoUrl) {
-          const [subcadena, parametros] = url.split('?');
-          const pares = parametros.split('&');
-          const objeto = pares.reduce((objs, par) => {
-            const obj = objs;
-            const [clave, valor] = par.split('=');
-            obj[clave] = decodeURIComponent(valor);
-            return obj;
-          }, {});
-          localStorage.setItem('contenido', encriptar(objeto));
-          ruta = `${subcadena}?v=${Math.round(Math.random() * 10)}`;
-        } else {
-          ruta = `${url}?v=${Math.round(Math.random() * 10)}`;
-        }
-        window.location.href = ruta;
-      }
-      navegador.estadoAnteriorButton = e.target.name;
-      navegador.estadoAnteriorWhereUs.push(e.target.name);
+    button.addEventListener('click', () => {
+      const ruta = objButtons[navegador.estadoAnteriorButton].name[index];
+      window.location.href = `../${ruta}/index.php`;
     });
   });
 }
+
 /* eslint-enable no-use-before-define */
+
 function completaButtons(obj) {
-  const divButtons = document.querySelector('.div-home-buttons');
+  const divButtons = document.querySelector('.div-menu-buttons');
   divButtons.innerHTML = '';
   document.getElementById('spanUbicacion').innerText = objButtons.planta;
   // eslint-disable-next-line no-plusplus
@@ -115,7 +77,7 @@ function completaButtons(obj) {
     const params = {
       text: trO(element) || element,
       name: objButtons[obj].name[i],
-      class: 'button-selector-home',
+      class: 'button-selector-menu',
       innerHTML: null,
       height: null, // 35
       width: null, // 75%
@@ -142,9 +104,9 @@ function leeApp(json) {
   readJSON(json)
     .then((data) => {
       Object.assign(objButtons, data);
-      navegador.estadoAnteriorButton = 'apps';
-      navegador.estadoAnteriorWhereUs.push('apps');
-      completaButtons('apps');
+      navegador.estadoAnteriorButton = 'Menu';
+      navegador.estadoAnteriorWhereUs.push('Menu');
+      completaButtons('Menu');
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -153,8 +115,12 @@ function leeApp(json) {
 }
 
 function dondeEstaEn() {
-  const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
-  document.getElementById('whereUs').innerText = ustedEstaEn;
+  // const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
+  // document.getElementById('whereUs').innerText = ustedEstaEn;
+  let lugar = trO('Menú') || 'Menú';
+  lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`;
+  document.getElementById('whereUs').innerHTML = lugar;
+  document.getElementById('whereUs').style.display = 'inline';
 }
 
 function configPHP() {
@@ -205,31 +171,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   finPerformance();
 });
 
-function goBack() {
-  let quitarCadena = ` > ${navegador.estadoAnteriorWhereUs[navegador.estadoAnteriorWhereUs.length - 1]}`;
-  navegador.estadoAnteriorWhereUs.pop();
-  // eslint-disable-next-line max-len
-  navegador.estadoAnteriorButton = navegador.estadoAnteriorWhereUs[navegador.estadoAnteriorWhereUs.length - 1];
-  if (navegador.estadoAnteriorWhereUs[navegador.estadoAnteriorWhereUs.length - 1] === 'apps') {
-    const cadena = `${document.getElementById('whereUs').innerText}`;
-    const nuevaCadena = cadena.replace(quitarCadena, '');
-    document.getElementById('whereUs').innerText = `${nuevaCadena}`;
-    document.getElementById('volver').style.display = 'none';
-    document.getElementById('whereUs').style.display = 'none';
-  } else {
-    const cadena = `${document.getElementById('whereUs').innerText}`;
-    quitarCadena = quitarCadena.replace('>', '');
-    quitarCadena = trO(quitarCadena || quitarCadena);
-    let nuevaCadena = cadena.replace(quitarCadena, '');
-    const ultimoIndice = nuevaCadena.lastIndexOf('>');
-    if (ultimoIndice !== -1) {
-      nuevaCadena = nuevaCadena.slice(0, ultimoIndice) + nuevaCadena.slice(ultimoIndice + 1);
-    }
-    document.getElementById('whereUs').innerText = `${nuevaCadena}`;
-  }
-  completaButtons(navegador.estadoAnteriorWhereUs[navegador.estadoAnteriorWhereUs.length - 1]);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const person = document.getElementById('person');
   person.addEventListener('click', () => {
@@ -243,11 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     personModal(user, objTranslate);
   });
-});
-
-const volver = document.getElementById('volver');
-volver.addEventListener('click', () => {
-  goBack(null);
 });
 
 const goLanding = document.querySelector('.custom-button');
