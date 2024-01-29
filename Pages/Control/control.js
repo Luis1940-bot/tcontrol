@@ -38,7 +38,7 @@ const objTranslate = {
 };
 
 let controlN = '';
-// let controlT = '';
+let controlT = '';
 let nr = 0;
 const spinner = document.querySelector('.spinner');
 const encabezados = {
@@ -87,16 +87,17 @@ function configPHP() {
 
 function configuracionLoad() {
   inicioPerformance();
+  // configPHP();
   const contenido = (localStorage.getItem('contenido'));
   const url = desencriptar(contenido);
   // const url = new URL(window.location.href);
   controlN = url.control_N; // url.searchParams.get('control_N');
-  // controlT = url.searchParams.get('control_T');
+  controlT = url.control_T;// .get('control_T');
   nr = url.nr; // url.searchParams.get('nr');
   nr === '0' ? nr = '' : localStorage.setItem('doc', encriptar(nr));
   document.getElementById('doc').innerText = `Doc: ${nr}`;
-  // document.getElementById('wichC').innerText = controlT;
-  document.getElementById('wichC').style.display = 'inline';
+  document.getElementById('wichC').innerText = controlT;
+  // document.getElementById('wichC').style.display = 'inline';
   configPHP();
   finPerformance();
 }
@@ -150,6 +151,7 @@ async function cargaDeRegistros() {
     inicioPerformance();
     await actualizarProgreso('10%');
     const countSelect = await traerRegistros(`countSelect,${controlN}`);
+    localStorage.setItem('loadSystem', 2);
     localStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4);
 
     await actualizarProgreso('20%');
@@ -269,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const persona = desencriptar(localStorage.getItem('user'));
     const user = {
       person: persona.person,
+      home: 'Inicio',
       salir: 'Cerrar sesión',
     };
     personModal(user, objTranslate);

@@ -86,7 +86,7 @@ function estilosCell(
   arrayControl,
 ) {
   const cell = document.createElement('td');
-  cell.textContent = trA(datos) || datos;
+  cell.textContent = datos;
   cell.style.borderBottom = '1px solid #cecece';
   cell.style.zIndex = 2;
   cell.style.textAlign = alignCenter;
@@ -165,9 +165,11 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
 function completaTabla(arrayControl, objTranslate) {
   const tbody = document.querySelector('tbody');
   // const cantidadDeRegistros = arrayControl.length;
+  const arrayMapeado = arrayControl.map((fila) => [trA(fila[0]), ...fila.slice(1)]);
+  arrayMapeado.sort((a, b) => a[0].localeCompare(b[0]));
 
-  arrayControl.forEach((element, index) => {
-    const newRow = estilosTbodyCell(element, index, objTranslate, arrayControl);
+  arrayMapeado.forEach((element, index) => {
+    const newRow = estilosTbodyCell(element, index, objTranslate, arrayMapeado);
     tbody.appendChild(newRow);
   });
   const tableControlViews = document.getElementById('tableControlViews');

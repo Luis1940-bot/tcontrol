@@ -55,14 +55,21 @@ function trO(palabra) {
 }
 
 function trA(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
-  const index = espanolArchivo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
-  );
-  if (index !== -1) {
-    return translateArchivo[index];
+  try {
+    const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
+    const index = espanolArchivo.findIndex(
+      (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
+    );
+    if (index !== -1) {
+      return translateArchivo[index];
+    }
+    return palabra;
+  } catch (error) {
+  // eslint-disable-next-line indent, no-console
+  console.log(error);
+    return palabra;
   }
-  return palabra;
+  // return palabra;
 }
 
 function estilosTheadCell(element, index) {

@@ -43,6 +43,7 @@ function session() {
         // const {
         //   email, plant, lng, person, id, tipo,
         // } = parsedData;
+
         parsedData = encriptar(parsedData);
         localStorage.setItem('user', (parsedData));
 

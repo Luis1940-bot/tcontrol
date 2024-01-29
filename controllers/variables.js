@@ -132,6 +132,11 @@ const funcionLogOut = () => {
   window.location.href = url;
 };
 
+const funcionHome = () => {
+  const url = '/Pages/Home/';
+  window.location.href = url;
+};
+
 const enviaPorEmail = (event) => {
   const { checked } = event.target;
   localStorage.setItem('envia_por_email', checked);
@@ -915,6 +920,30 @@ const objPerson = {
     margin: null,
     fontStyle: null,
     onClick: funcionLogOut,
+  },
+  home: {
+    id: null,
+    text: '',
+    fontSize: '9px',
+    fontColor: '#212121',
+    marginTop: '0px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'flex-start',
+    className: 'comentarios',
+    fontWeight: '700',
+    cursor: 'pointer',
+    padding: '2px 15px 15px 1px',
+    position: null,
+    top: null,
+    right: null,
+    left: null,
+    hoverBackground: 'red',
+    hoverColor: 'blue',
+    innerHTML: null,
+    margin: null,
+    fontStyle: null,
+    onClick: funcionHome,
   },
   hr: {
     id: null,

@@ -1369,3 +1369,7 @@ usuario
 USUARIOS
 Variedad
 Variedad de Materia Prima.
+Faltan datos requeridos y no se han completado. Cierra este mensaje, completa la información requerida y acepta nuevamente.
+BOS ACTO SEGURO
+BOS ACTO NO SEGURO
+REGLAS DE ORO

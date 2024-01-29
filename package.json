@@ -1,6 +1,13 @@
 {
+  "scripts": {
+    "lint": "eslint ."
+  },
   "dependencies": {
     "eslint": "^8.48.0",
     "eslint-config-airbnb-base": "^15.0.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }

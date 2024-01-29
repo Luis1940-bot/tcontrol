@@ -18,6 +18,7 @@ function createButton(params) {
   params.paddingTop !== null ? nuevoBoton.style.paddingTop = params.paddingTop : null;
   params.paddingBotton !== null ? nuevoBoton.style.paddingBotton = params.paddingBotton : null;
   params.background !== null ? nuevoBoton.style.backgroundColor = params.background : null;
+  params.onClick !== null ? nuevoBoton.addEventListener('click', (params.onClick)) : null;
   return nuevoBoton;
 }
 

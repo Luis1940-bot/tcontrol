@@ -225,7 +225,7 @@ Behavior-based security control. Deviations from the golden rules.
 Control of Specialty Packaging Down Time records.
 Control of Specialty Down Time records.
 test control
-de facto test control.
+factum test control.
 factum test control.
 Behavior-based security control.
 Behavior-based security control. Deviations from the golden rules.
@@ -1370,3 +1370,6 @@ USERS
 Variety
 Variety of Raw Materials.
 Required data is missing and has not been completed. Close this message, complete the required information and accept again.
+BOS SAFE ACT
+BOS UNSAFE ACT
+GOLD RULES

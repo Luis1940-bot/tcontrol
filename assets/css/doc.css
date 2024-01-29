@@ -1,41 +1,50 @@
-.div-encabezado{
+.div-encabezado {
   margin-top: 5px;
-
 }
-.div-ubicacion{
+.div-ubicacionDoc {
   height: auto;
- text-align: center;
- margin-top: 5px;
- width: auto;
- 
+  text-align: center;
+  margin-top: 5px;
+  width: 217px;
+  position: relative;
+  background: #cecece;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 10px;
+  display: none;
 }
-/* .div-ubicacion #search{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-} */
 
-#doc{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#doc {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 10px;
-  color: #fff;
+  color: #393939;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  width: 70px;
+  width: 150px;
   height: 15px;
   flex-shrink: 0;
   border: none;
-  border-radius: 10px;
-  background: #000;
-  display: none;
+  background: transparent;
   text-align: center;
+  outline: none;
 }
 
-
-@media (min-width: 800px){
-
+.input-con-icono {
+  padding-right: 20px;
+  box-sizing: border-box;
 }
-@media only screen and  (min-width: 820px) and (orientation: landscape) {
 
+.icono-busqueda {
+  position: absolute;
+  margin-left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+@media (min-width: 800px) {
+}
+@media only screen and (min-width: 820px) and (orientation: landscape) {
 }

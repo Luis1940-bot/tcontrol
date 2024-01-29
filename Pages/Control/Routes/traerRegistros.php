@@ -74,6 +74,8 @@
                             AND (
                               (c.tipodato NOT IN (TRIM('cn'), TRIM('btnQwery')))
                               AND (c.tpdeobserva NOT IN (TRIM('cn'), TRIM('btnQwery')))
+                              AND (c.activo = 's')
+                              AND (c.visible = 's')
                             )
                             AND (
                               c.rutinasql LIKE 'SELECT%'

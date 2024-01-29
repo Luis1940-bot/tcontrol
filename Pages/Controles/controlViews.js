@@ -6,6 +6,8 @@ import tablaVacia from './Modules/armadoDeTabla.js';
 import arrayGlobal from '../../controllers/variables.js';
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../includes/atoms/alerta.js';
+// eslint-disable-next-line import/extensions
+import filtrarTabla from './Modules/Controladores/filtrarTabla.js';
 
 const encabezados = {
   title: [
@@ -76,5 +78,10 @@ function cargaTabla(objTranslate) {
     console.warn(error);
   }
 }
+
+document.getElementById('search').addEventListener('input', (e) => {
+  const searchTerm = e.target.value.trim().toLowerCase();
+  filtrarTabla('tableControlViews', searchTerm);
+});
 
 export default cargaTabla;

@@ -225,7 +225,7 @@ Controle de segurança baseado em comportamento. Desvios das regras de ouro.
 Controle de registros de Down Time de Embalagens Especiais.
 Controle de registros de Down Time de Especialidades.
 controle de teste
-controle de teste de fato.
+controle de teste factum.
 controle de teste factum.
 Controle de segurança baseado em comportamento.
 Controle de segurança baseado em comportamento. Desvios das regras de ouro.
@@ -1369,3 +1369,7 @@ do utilizador
 USUÁRIOS
 Variedade
 Variedade de matérias-primas.
+Os dados necessários estão faltando e não foram preenchidos. Feche esta mensagem, preencha as informações solicitadas e aceite novamente.
+ATO SEGURO BOS
+ATO INSEGURO DO BOS
+REGRAS DE OURO
