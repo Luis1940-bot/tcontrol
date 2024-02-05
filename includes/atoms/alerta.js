@@ -31,6 +31,12 @@ const objTraductor = {
   archivosTR: [],
 }
 
+const widthScreen = window.innerWidth
+const widthScreenAjustado = 360 / widthScreen
+let arrayWidthEncabezado
+let ID = 0
+let fila = 0
+
 document.addEventListener('DOMContentLoaded', async () => {
   const persona = desencriptar(localStorage.getItem('user'))
   if (persona) {
@@ -315,7 +321,7 @@ function createHR(config) {
 }
 
 function createIMG(config) {
-  // console.log(config);
+  // console.log(config)
   const img = document.createElement('img')
   config.id !== null ? (img.id = config.id) : null
   img.src = config.src
@@ -329,7 +335,7 @@ function createIMG(config) {
 }
 
 function trO(palabra, objTranslate) {
-  if (palabra === undefined) {
+  if (palabra === undefined || palabra === null) {
     return ''
   }
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
@@ -426,7 +432,9 @@ const funcionHacerFirmar = () => {
   }
   procesoStyleDisplay(elementosStyle)
 }
-const funcionSalir = () => {}
+const funcionSalir = () => {
+  window.close()
+}
 
 async function firmar(firmadoPor) {
   const pass = document.getElementById('idInputFirma').value
@@ -896,10 +904,152 @@ function formatarMenu(doc, configMenu, objTranslate) {
   procesoStyleDisplay(elementosStyle)
 }
 
-// function soloEnviaEmail(nuevoObjeto, encabezados) {
-//   subirImagenes(nuevoObjeto.objImagen);
-//   enviaMail(nuevoObjeto, encabezados);
-// }
+function estilosTheadCell(element, index, objTrad) {
+  const cell = document.createElement('th')
+  if (index < 5) {
+    cell.textContent =
+      trO(element.toUpperCase(), objTrad) || element.toUpperCase()
+    cell.style.background = '#000000'
+    cell.style.border = '1px solid #cecece'
+    cell.style.overflow = 'hidden'
+    const widthCell =
+      widthScreenAjustado * widthScreen * arrayWidthEncabezado[index]
+    cell.style.width = `${widthCell}px`
+  } else {
+    cell.style.display = 'none'
+  }
+  return cell
+}
+
+function estilosCell(
+  alignCenter,
+  paddingLeft,
+  type,
+  datos,
+  colSpan,
+  fontStyle,
+  fontWeight,
+  background,
+  colorText,
+  requerido,
+  display,
+  objTrad
+) {
+  const cell = document.createElement('td')
+  let dato = ''
+  typeof datos === 'string' && datos !== null
+    ? (dato = trA(datos, objTrad) || datos)
+    : (dato = datos)
+  if (dato !== null && type === null) {
+    cell.textContent = `${dato} ${requerido}` || `${dato} ${requerido}`
+  } else if (dato === null && type !== null) {
+    cell.appendChild(type)
+  }
+  cell.style.borderBottom = '1px solid #cecece'
+  // cell.style.background = background;
+  cell.style.zIndex = 2
+  cell.style.textAlign = alignCenter
+  cell.style.paddingLeft = paddingLeft
+  cell.style.fontStyle = fontStyle
+  cell.style.fontWeight = fontWeight
+  cell.style.color = colorText
+  colSpan === 1 ? (cell.colSpan = 4) : null
+  colSpan === 2 ? (cell.style.display = 'none') : null
+  colSpan === 3 ? (cell.colSpan = 3) : null
+  colSpan === 4 ? (cell.style.display = 'none') : null
+  colSpan === 5 ? (cell.colSpan = 3) : null
+  display !== null ? (cell.style.display = display) : null
+  return cell
+}
+
+function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
+  const newRow = document.createElement('tr')
+  for (let i = 0; i < 6; i++) {
+    const orden = [0, 3, 4, 6, 7, 1]
+    let dato = element[orden[i]]
+    const tipoDeDato = element[5]
+    const tipoDeObservacion = element[9]
+    let alignCenter = 'left'
+    let paddingLeft = '5px'
+    let colSpan = 0
+    let fontStyle = 'normal'
+    let fontWeight = 500
+    let background = '#ffffff'
+    let type = null
+    let colorText = '#000000'
+    let requerido = ''
+    let display = null
+    if (i === 0) {
+      ID += 1
+      dato = ID
+      alignCenter = 'center'
+    }
+    if (i === 5) {
+      display = 'none'
+    }
+
+    const cell = estilosCell(
+      alignCenter,
+      paddingLeft,
+      type,
+      dato,
+      colSpan,
+      fontStyle,
+      fontWeight,
+      background,
+      colorText,
+      requerido,
+      display,
+      objTrad
+    )
+    newRow.appendChild(cell)
+  }
+  return newRow
+}
+
+function printDiv() {
+  let objeto = document.getElementById('idDivTablas') // Obtén el objeto a imprimir
+  let ventana = window.open('', '_blank') // Abre una ventana vacía nueva
+  ventana.document.write(objeto.innerHTML) // Imprime el HTML del objeto en la nueva ventana
+  ventana.document.close() // Cierra el documento
+  let style = ventana.document.createElement('style')
+  style.innerHTML = `
+  @media print {
+    /* Estilos de impresión personalizados */
+    body {
+      margin: 10mm; /* Márgenes de impresión */
+      color: #333;
+      background-color: #fff; 
+    }
+    #idDivTablas {
+      border: 1px solid #ccc; /* Borde para el contenedor principal */
+      padding: 10px; /* Espaciado interno */
+    }
+    #idDivTablasEncabezado {
+      visibility: hidden;
+      display: none;
+    }
+    #idCloseModal {
+        visibility: hidden;
+        display: none;
+    }
+    h3 {
+       margin-top: 5mm;
+    }
+    #idTablaViewer {
+      width: 100%;
+      margin: 0 auto;
+    }
+    @page {
+      size: auto;
+      margin: 0;
+    }
+  }
+`
+  ventana.document.head.appendChild(style)
+  ventana.print() // Imprime la ventana
+  ventana.close() // Cierra la ventana
+}
 
 class Alerta {
   constructor() {
@@ -1464,7 +1614,7 @@ class Alerta {
 
         texto =
           trO(obj.btnProcedimiento.text, objTrad) || obj.btnProcedimiento.text
-        obj.btnVerCargados.text = texto
+        obj.btnProcedimiento.text = texto
         const btnProcedimiento = createButton(obj.btnProcedimiento)
         divButton.appendChild(btnNuevo)
         divButton.appendChild(btnVerCargados)
@@ -1487,6 +1637,24 @@ class Alerta {
             nr: '0',
           }
           localStorage.setItem('contenido', encriptar(objetoRuta))
+          // window.location.href = ruta
+          window.open(ruta, '_blank')
+        })
+        const idbtnCargados = document.getElementById('idVerCargados')
+        idbtnCargados.addEventListener('click', () => {
+          const idTituloH3 = document.getElementById('idTituloH3')
+          const cod = idTituloH3.getAttribute('data-index')
+          const name = idTituloH3.getAttribute('data-name')
+          const url = `${cod}`
+          const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
+            Math.random() * 10
+          )}`
+          const objetoRuta = {
+            control_N: url,
+            control_T: decodeURIComponent(name),
+            nr: '0',
+          }
+          localStorage.setItem('listadoCtrls', encriptar(objetoRuta))
           window.location.href = ruta
         })
       } else {
@@ -1506,6 +1674,77 @@ class Alerta {
         this.modal.appendChild(modalContent)
         document.body.appendChild(this.modal)
       }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  createMenuListControls(objeto, control, nuxpedido, traerControl, objTrad) {
+    try {
+      const obj = objeto
+      this.modal = document.createElement('div')
+      this.modal.id = 'modalTablaView'
+      this.modal.className = 'modal'
+      this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+      // Crear el contenido del modal
+      const modalContent = createDiv(obj.divContent)
+      const span = createSpan(obj.close)
+      modalContent.appendChild(span)
+
+      const divEncabezado = createDiv(obj.divEncabezado)
+      const buttonPDF = createButton(obj.btnPDF)
+      const imagenButton = createIMG(obj.imgPrint)
+      buttonPDF.appendChild(imagenButton)
+      buttonPDF.addEventListener('click', () => {
+        printDiv()
+      })
+      divEncabezado.appendChild(buttonPDF)
+      modalContent.appendChild(divEncabezado)
+
+      const texto = `${control.control_N} - ${control.control_T} - ${nuxpedido}`
+      // console.log(texto)
+      obj.titulo.text.control = texto
+      const title = createH3(obj.titulo, 'control')
+      modalContent.appendChild(title)
+
+      const table = document.createElement('table')
+      table.setAttribute('id', 'idTablaViewer')
+      const thead = document.createElement('thead')
+      const newRow = document.createElement('tr')
+      const encabezados = {
+        title: [
+          'id',
+          'concepto',
+          'relevamiento',
+          'detalle',
+          'observación',
+          'idControl',
+        ],
+        width: ['.05', '.15', '.25', '.25', '.25', '0'],
+      }
+      arrayWidthEncabezado = [...encabezados.width]
+      encabezados.title.forEach((element, index) => {
+        const cell = estilosTheadCell(element, index, objTrad)
+        newRow.appendChild(cell)
+      })
+      thead.appendChild(newRow)
+      table.appendChild(thead)
+      const tbody = document.createElement('tbody')
+      tbody.setAttribute('id', 'idTbodyModal')
+      const cantidadDeRegistros = traerControl.length
+      traerControl.forEach((element, index) => {
+        const newRow = estilosTbodyCell(
+          element,
+          index,
+          cantidadDeRegistros,
+          objTrad
+        )
+        tbody.appendChild(newRow)
+      })
+      table.appendChild(tbody)
+      modalContent.appendChild(table)
+      this.modal.appendChild(modalContent)
+      document.body.appendChild(this.modal)
     } catch (error) {
       console.log(error)
     }

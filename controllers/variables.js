@@ -1,8 +1,8 @@
 /* eslint-disable prefer-const */
 // eslint-disable-next-line prefer-const, import/no-mutable-exports
-let arraySelect = [];
-let arrayEmpresa = [];
-let arrayControl = [];
+let arraySelect = []
+let arrayEmpresa = []
+let arrayControl = []
 let objetoControl = {
   fecha: [],
   nuxpedido: [],
@@ -38,7 +38,7 @@ let objetoControl = {
   },
   detalle: [],
   objImagen: [],
-};
+}
 let objetoMemoria = {
   fecha: [],
   nuxpedido: [],
@@ -58,100 +58,109 @@ let objetoMemoria = {
   observacion: [],
   imagenes: [],
   displayRow: [],
-};
+}
 
-let habilitadoGuardar = false;
+let habilitadoGuardar = false
 
 function removeModal(mod) {
-  const modal = mod;
+  const modal = mod
   if (modal) {
-    modal.style.display = 'none';
-    modal.remove();
+    modal.style.display = 'none'
+    modal.remove()
   }
 }
 
 const funcionDeCancelar = () => {
-  const modal = document.getElementById('modalAlert');
-  removeModal(modal);
-};
+  const modal = document.getElementById('modalAlert')
+  removeModal(modal)
+}
 const funcionDeOk = () => {
-  const modal = document.getElementById('modalAlert');
-  removeModal(modal);
-};
+  const modal = document.getElementById('modalAlert')
+  removeModal(modal)
+}
 const funcionDeClose = () => {
-  const modal = document.getElementById('modalAlert');
-  removeModal(modal);
-};
+  const modal = document.getElementById('modalAlert')
+  removeModal(modal)
+}
 const funcionDeCloseP = () => {
-  const modal = document.getElementById('modalAlertP');
-  removeModal(modal);
-};
+  const modal = document.getElementById('modalAlertP')
+  removeModal(modal)
+}
 const funcionDeCloseM = () => {
-  const modal = document.getElementById('modalAlertM');
-  removeModal(modal);
-};
-
-const closeVentanaVerdeRoja = () => {
-  let modal = document.getElementById('modalAlertVerde');
-  removeModal(modal);
-  modal = document.getElementById('modalAlertM');
-  removeModal(modal);
-};
+  const modal = document.getElementById('modalAlertM')
+  removeModal(modal)
+}
+const cierraModalTabla = () => {
+  const modal = document.getElementById('modalTablaView')
+  removeModal(modal)
+}
+const closeVentanaVerdeRoja = (e) => {
+  let modal = document.getElementById('modalAlertVerde')
+  removeModal(modal)
+  modal = document.getElementById('modalAlertM')
+  removeModal(modal)
+  if (e.target.id === 'idCloseAvisoAmarillo') {
+    const url = '/Pages/Controles/index.php?simulateAsignarEventos=true'
+    window.location.href = url
+  }
+}
 
 const closeVentanaImagen = () => {
-  let modal = document.getElementById('modalAlert');
-  removeModal(modal);
-};
+  let modal = document.getElementById('modalAlert')
+  removeModal(modal)
+}
 
 const funcionDeCloseViewer = () => {
-  const modal = document.getElementById('modalAlertView');
-  removeModal(modal);
-};
+  const modal = document.getElementById('modalAlertView')
+  removeModal(modal)
+}
 
 const eliminaImagen = () => {
-  const visualizador = document.getElementById('idVisualizador');
-  const dataFilename = visualizador.getAttribute('data-filenamewithoutextension');
-  const liElement = document.getElementById(`li_${dataFilename}`);
-  liElement.parentNode.removeChild(liElement);
-  let modal = document.getElementById('modalAlert');
-  removeModal(modal);
-};
+  const visualizador = document.getElementById('idVisualizador')
+  const dataFilename = visualizador.getAttribute(
+    'data-filenamewithoutextension'
+  )
+  const liElement = document.getElementById(`li_${dataFilename}`)
+  liElement.parentNode.removeChild(liElement)
+  let modal = document.getElementById('modalAlert')
+  removeModal(modal)
+}
 
 const closeVentanaVerdeRojaImg = () => {
-  const modal = document.getElementById('modalAlertVerde');
-  removeModal(modal);
-};
+  const modal = document.getElementById('modalAlertVerde')
+  removeModal(modal)
+}
 
 const funcionLogOut = () => {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    localStorage.removeItem(key);
+    const key = localStorage.key(i)
+    localStorage.removeItem(key)
   }
-  const url = '../../../includes/molecules/logout.php';
-  window.location.href = url;
-};
+  const url = '../../../includes/molecules/logout.php'
+  window.location.href = url
+}
 
 const funcionHome = () => {
-  const url = '/Pages/Home/';
-  window.location.href = url;
-};
+  const url = '/Pages/Home/'
+  window.location.href = url
+}
 
 const enviaPorEmail = (event) => {
-  const { checked } = event.target;
-  localStorage.setItem('envia_por_email', checked);
-  const sobrecito = document.getElementById('wichCEmail');
+  const { checked } = event.target
+  localStorage.setItem('envia_por_email', checked)
+  const sobrecito = document.getElementById('wichCEmail')
   if (checked) {
-    sobrecito.style.display = 'inline-block';
+    sobrecito.style.display = 'inline-block'
   } else {
-    sobrecito.style.display = 'none';
+    sobrecito.style.display = 'none'
   }
-};
+}
 
 const arrayGlobal = {
   arraySelect,
   arrayEmpresa,
-};
+}
 
 const objAlertaAceptarCancelar = {
   titulo: {
@@ -412,7 +421,7 @@ const objAlertaAceptarCancelar = {
     innerHTML: null,
     cursor: null,
   },
-};
+}
 
 const avisoVerde = {
   close: {
@@ -486,7 +495,7 @@ const avisoVerde = {
     margin: null,
     fontStyle: null,
   },
-};
+}
 const avisoAmarillo = {
   close: {
     id: null,
@@ -559,7 +568,7 @@ const avisoAmarillo = {
     margin: null,
     fontStyle: null,
   },
-};
+}
 const avisoImagenes = {
   close: {
     id: null,
@@ -632,7 +641,7 @@ const avisoImagenes = {
     margin: null,
     fontStyle: null,
   },
-};
+}
 const avisoRojo = {
   close: {
     id: null,
@@ -705,7 +714,7 @@ const avisoRojo = {
     margin: null,
     fontStyle: null,
   },
-};
+}
 const avisoCargandoControl = {
   close: {
     id: null,
@@ -814,7 +823,7 @@ const avisoCargandoControl = {
     margin: null,
     fontStyle: null,
   },
-};
+}
 const objPerson = {
   titulo: {
     text: 'Ejemplo de Alerta',
@@ -953,7 +962,7 @@ const objPerson = {
     backgroundColor: '#cecece',
     marginTop: null,
   },
-};
+}
 const objMenu = {
   titulo: {
     text: 'Ejemplo de Alerta',
@@ -1361,12 +1370,15 @@ const objMenu = {
     backgroundColor: '#cecece',
     marginTop: null,
   },
-};
+}
 const mensajesVarios = {
   guardar: {
-    esperaAmarillo: 'El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.',
-    sinModificaciones: 'No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.',
-    faltanRequeridos: 'Están faltando datos requeridos que no se han completado. Cierre este mensaje, complete el dato requerido y acepte nuevamente.',
+    esperaAmarillo:
+      'El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.',
+    sinModificaciones:
+      'No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.',
+    faltanRequeridos:
+      'Están faltando datos requeridos que no se han completado. Cierre este mensaje, complete el dato requerido y acepte nuevamente.',
     success: 'El proceso de insertar resultó exitosamente.',
     cantidadRegistros: 'Se insertaron la cantidad de:',
     items: 'items.',
@@ -1376,11 +1388,14 @@ const mensajesVarios = {
     enviado: 'Se ha enviado emails acorde a la configuración del control.',
   },
   cargarControl: {
-    esperaVerde: 'Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!',
-    fallaCarga: 'La tabla no se completó según lo esperado, vuelva a intentarlo.',
+    esperaVerde:
+      'Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!',
+    fallaCarga:
+      'La tabla no se completó según lo esperado, vuelva a intentarlo.',
   },
   controlSinCambios: {
-    vacioDeDatos: 'No hay modificaciones en el control que requieran ser guardadas, verifique los datos inferidos ya que los datos presentes son los estándares.',
+    vacioDeDatos:
+      'No hay modificaciones en el control que requieran ser guardadas, verifique los datos inferidos ya que los datos presentes son los estándares.',
   },
   email: {
     fechaDeAlerta: 'Fecha de alerta:',
@@ -1395,7 +1410,7 @@ const mensajesVarios = {
     subject: 'Sistema de Alertas',
     titulo: 'Notificación del sistema de alerta',
   },
-};
+}
 const objInforme = {
   titulo: {
     text: 'Informe:',
@@ -1584,10 +1599,11 @@ const objInforme = {
     fontStyle: 'italic',
   },
   enviaPorEmail: {
-    envia: 'Este control se enviará por email de acuerdo a la configuración de correos.',
+    envia:
+      'Este control se enviará por email de acuerdo a la configuración de correos.',
     noEnvia: 'Este control NO se enviará por email.',
   },
-};
+}
 const procesoExitoso = {
   close: {
     id: null,
@@ -1704,7 +1720,7 @@ const procesoExitoso = {
     innerHTML: null,
     cursor: null,
   },
-};
+}
 const modalImagen = {
   close: {
     id: null,
@@ -1774,7 +1790,7 @@ const modalImagen = {
     marginLeft: null,
     onClick: eliminaImagen,
   },
-};
+}
 const avisoListandoControles = {
   close: {
     id: null,
@@ -1883,7 +1899,7 @@ const avisoListandoControles = {
     margin: null,
     fontStyle: null,
   },
-};
+}
 const objAlertaViewer = {
   titulo: {
     text: {
@@ -2058,7 +2074,147 @@ const objAlertaViewer = {
     fontStyle: null,
     onClick: funcionDeCloseViewer,
   },
-};
+}
+const tablaEnModal = {
+  close: {
+    id: 'idCloseModal',
+    text: 'x ',
+    fontSize: '18px',
+    fontColor: '#cecece',
+    marginTop: '0px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'center',
+    className: 'modal-close',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    padding: '10px 10px',
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    left: null,
+    hoverBackground: null,
+    hoverColor: 'red',
+    innerHTML: '&times',
+    margin: null,
+    fontStyle: null,
+    onClick: cierraModalTabla,
+  },
+  divEncabezado: {
+    id: 'idDivTablasEncabezado',
+    position: null,
+    borderRadius: null,
+    width: 'auto',
+    height: 'auto',
+    background: '#ffffff',
+    border: null,
+    boxShadow: null,
+    margin: null,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '1px',
+    overflow: 'hidden',
+    className: 'div-verde',
+    textAlign: '',
+    gap: '0px',
+    top: '5px',
+    alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    cursor: null,
+  },
+  divContent: {
+    id: 'idDivTablas',
+    position: 'relative',
+    borderRadius: '10px',
+    width: '320px',
+    height: 'auto',
+    background: '#ffffff',
+    border: '3px solid #000000',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+    margin: '10% auto',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '10px',
+    overflow: 'hidden',
+    className: 'div-verde',
+    textAlign: '',
+    gap: '0px',
+    top: '5px',
+    alignItems: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    cursor: null,
+  },
+  btnPDF: {
+    id: 'idbtnPDF',
+    text: null,
+    fontSize: null,
+    fontColor: null,
+    backColor: '#ececec',
+    marginTop: '1px',
+    display: 'block',
+    fontWeight: null,
+    width: '30px',
+    height: '30px',
+    border: 'none',
+    className: 'aceptar',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    hoverBackground: '#cecece',
+    hoverColor: '#000000',
+    marginLeft: null,
+    // onClick: funcionExportarPDF,
+  },
+  span: {
+    id: 'idSpanControl',
+    text: null,
+    fontSize: null,
+    fontColor: '#ECECEC',
+    marginTop: '0px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'center',
+    className: 'comentarios',
+    fontWeight: '500',
+    cursor: null,
+    padding: '15px 15px 15px 15px',
+    position: null,
+    top: null,
+    right: null,
+    left: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    margin: null,
+    fontStyle: null,
+  },
+  titulo: {
+    text: {
+      control: null,
+    },
+    fontSize: '10px',
+    fontColor: '#212121',
+    marginTop: '10px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: 'center',
+    className: 'titulo',
+    fontStyle: null,
+  },
+  imgPrint: {
+    id: null,
+    src: '../../assets/img/print.png',
+    className: 'img-print',
+    alt: '',
+    height: 20,
+    width: 20,
+    marginRigth: null,
+    filter: null,
+  },
+}
 
 export default {
   arrayGlobal,
@@ -2080,4 +2236,5 @@ export default {
   modalImagen,
   avisoListandoControles,
   objAlertaViewer,
-};
+  tablaEnModal,
+}

@@ -9,7 +9,7 @@ function eliminaNuxPedido($nux){
       $numFilasDeleteadas = 0;
       include_once '../../../Routes/datos_base.php';
       $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$chartset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-      $sql="DELETE FROM LTYregistrocontrol_copy WHERE nuxpedido = ?";
+      $sql="DELETE FROM LTYregistrocontrol WHERE nuxpedido = ?";
       $pdo->beginTransaction();
       $sentencia = $pdo->prepare($sql);
       $sentencia->execute([$decodificado]);    

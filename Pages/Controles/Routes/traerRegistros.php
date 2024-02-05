@@ -11,6 +11,7 @@
         ;
         
         $porciones = explode(",", $variable);
+        $consulta = $porciones[0];
         
         switch ($porciones[0]) {
 
@@ -26,6 +27,13 @@
                 LEFT JOIN tipousuario ON tipousuario.idtipousuario=LTYreporte.nivel  
                 WHERE LTYreporte.activo='s' ORDER BY LTYreporte.nombre ASC;";
             break;
+
+            case 'verificarControl':
+              $nuxpedido = $porciones[1];
+              $sql="SELECT SQL_NO_CACHE DISTINCT(c.idLTYreporte) AS reporte, LTYreporte.nombre 
+              FROM LTYregistrocontrol c 
+              INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=c.idLTYreporte
+              WHERE c.nuxpedido='".$nuxpedido."';";
 
             default:
                 # code...

@@ -32,6 +32,7 @@ export default function traerRegistros(sql) {
         console.timeEnd('traerRegistros')
       })
       .catch((error) => {
+        console.timeEnd('traerRegistros')
         reject(error)
       })
   })

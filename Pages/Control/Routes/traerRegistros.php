@@ -19,7 +19,7 @@
             break;
 
             case 'NuevoControl':
-                $sql="SELECT  'ID',LTYcontrol.idLTYcontrol AS id, LTYcontrol.control AS CONTROL_1, LTYcontrol.nombre AS NOMBRE,'RELEVAMIENTO', LTYcontrol.tipodato AS TIPO, 
+                $sql="SELECT  SQL_NO_CACHE 'ID',LTYcontrol.idLTYcontrol AS id, LTYcontrol.control AS CONTROL_1, LTYcontrol.nombre AS NOMBRE,'RELEVAMIENTO', LTYcontrol.tipodato AS TIPO, 
                 LTYcontrol.detalle AS DETALLE, 'OBSERVACION', LTYcontrol.visible AS VISIBLE, LTYcontrol.tpdeobserva AS TPDOBSV,'valorOBS','idselector1', LTYcontrol.selector AS SELECTOR, 'valorSEL','idselector2',
                 LTYcontrol.selector2 AS SELECTOR2,'valorSEL2', LTYcontrol.separador AS SEPARADOR, LTYreporte.botonesaccion, IFNULL(LTYcontrol.rutinasql,'') AS RUTINA, IFNULL(LTYcontrol.valor_defecto,'') AS VALOR_DEFECTO
                 ,LTYcontrol.requerido AS REQUERIDO,LTYreporte.envio_mail AS X_MAIL,LTYcontrol.valor_sql AS VALOR_SQL
@@ -41,21 +41,21 @@
 
             case 'ctrlCargado':
                 $control_cargado=$porciones[1];
-                $sql="SELECT SQL_NO_CACHE LTYregistrocontrol_copy.fecha AS FECHA, LTYregistrocontrol_copy.nuxpedido AS PEDIDO, LTYregistrocontrol_copy.desvio AS DESVIO, LTYregistrocontrol_copy.valor AS VALOR, 
-                    LTYregistrocontrol_copy.tipodedato AS TIPODEDATO, LTYregistrocontrol_copy.idLTYcontrol AS IDCONTROL, LTYregistrocontrol_copy.supervisor AS DISUPERVISOR, IF(LTYregistrocontrol_copy.supervisor=0,'',u.nombre) AS NOMBRE_SUPERVISOR,
-                    LTYregistrocontrol_copy.tpdeobserva AS TIPO_OBSERVA,LTYregistrocontrol_copy.observacion AS OBSERVACION,LTYregistrocontrol_copy.selector AS SELECTOR,LTYregistrocontrol_copy.selector2 AS SELECTOR_2,
-                    LTYregistrocontrol_copy.valorS,LTYregistrocontrol_copy.valorOBS,LTYregistrocontrol_copy.idusuario
+                $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha AS FECHA, LTYregistrocontrol.nuxpedido AS PEDIDO, LTYregistrocontrol.desvio AS DESVIO, LTYregistrocontrol.valor AS VALOR, 
+                    LTYregistrocontrol.tipodedato AS TIPODEDATO, LTYregistrocontrol.idLTYcontrol AS IDCONTROL, LTYregistrocontrol.supervisor AS DISUPERVISOR, IF(LTYregistrocontrol.supervisor=0,'',u.nombre) AS NOMBRE_SUPERVISOR,
+                    LTYregistrocontrol.tpdeobserva AS TIPO_OBSERVA,LTYregistrocontrol.observacion AS OBSERVACION,LTYregistrocontrol.selector AS SELECTOR,LTYregistrocontrol.selector2 AS SELECTOR_2,
+                    LTYregistrocontrol.valorS,LTYregistrocontrol.valorOBS,LTYregistrocontrol.idusuario
                     ,w.nombre AS NOMBRE_USUARIO
                   ,IFNULL(LTYcontrol.rutinasql,'') AS RUTINA, IFNULL(LTYcontrol.valor_defecto,'') AS VALOR_DEFECTO
                   ,LTYcontrol.requerido AS REQUERIDO,LTYreporte.envio_mail AS X_MAIL,LTYcontrol.valor_sql AS VALOR_SQL
-                  , LTYcontrol.tiene_hijo AS HIJO, LTYcontrol.rutina_hijo AS SQL_HIJO,LTYregistrocontrol_copy.imagenes AS IMG, LTYreporte.direcciones_mail AS DIR_MAIL
-                  , RAND(),NOW(), LTYregistrocontrol_copy.idLTYregistrocontrol AS ID
-                    FROM LTYregistrocontrol_copy
-                    LEFT JOIN usuarios u ON LTYregistrocontrol_copy.supervisor=u.idusuario 
-                    LEFT JOIN usuarios w ON LTYregistrocontrol_copy.idusuario=w.idusuario
-                    INNER JOIN LTYcontrol ON LTYcontrol.idLTYcontrol=LTYregistrocontrol_copy.idLTYcontrol
-                    INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=LTYregistrocontrol_copy.idLTYreporte
-                    WHERE LTYregistrocontrol_copy.nuxpedido=".$control_cargado." ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol_copy.idLTYcontrol ASC;";
+                  , LTYcontrol.tiene_hijo AS HIJO, LTYcontrol.rutina_hijo AS SQL_HIJO,LTYregistrocontrol.imagenes AS IMG, LTYreporte.direcciones_mail AS DIR_MAIL
+                  , RAND(),NOW(), LTYregistrocontrol.idLTYregistrocontrol AS ID
+                    FROM LTYregistrocontrol
+                    LEFT JOIN usuarios u ON LTYregistrocontrol.supervisor=u.idusuario 
+                    LEFT JOIN usuarios w ON LTYregistrocontrol.idusuario=w.idusuario
+                    INNER JOIN LTYcontrol ON LTYcontrol.idLTYcontrol=LTYregistrocontrol.idLTYcontrol
+                    INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=LTYregistrocontrol.idLTYreporte
+                    WHERE LTYregistrocontrol.nuxpedido=".$control_cargado." ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol.idLTYcontrol ASC;";
                 // echo $sql.'<br><br>';".$control_cargado."
             break;
 

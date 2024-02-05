@@ -31,7 +31,7 @@ function insertar_registro($objeto_json, $nuxpedido) {
 
   include_once '../../../Routes/datos_base.php';
   $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$chartset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-  $sql="INSERT INTO LTYregistrocontrol_copy (".$campos.") VALUES (".$interrogantes.");";
+  $sql="INSERT INTO LTYregistrocontrol (".$campos.") VALUES (".$interrogantes.");";
   $c=0;
   $d=0;
   $campos=explode(",",$campos);

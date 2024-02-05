@@ -192,3 +192,6 @@ DWT PROD WET RECEIVING PURÉ
 DWT PROD WASTE PURÉ
 Inicio
 No teine permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias
+No se encontraron registros para este control.
+Error. El código del documento debe ser un número.
+No se encontraron registros con el documento

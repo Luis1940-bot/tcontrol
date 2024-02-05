@@ -24,9 +24,15 @@ import {
   finPerformance,
 } from '../../includes/Conection/conection.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { desencriptar } from '../../controllers/cript.js'
+import { desencriptar, encriptar } from '../../controllers/cript.js'
 // eslint-disable-next-line import/extensions
 import cargaTabla from './controlViews.js'
+// eslint-disable-next-line import/extensions
+import traerRegistros from './Modules/Controladores/traerRegistros.js'
+// eslint-disable-next-line import/extensions
+import { Alerta } from '../../includes/atoms/alerta.js'
+// eslint-disable-next-line import/extensions
+import arrayGlobal from '../../controllers/variables.js'
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -58,9 +64,13 @@ function leeVersion(json) {
 }
 
 function trO(palabra) {
+  if (palabra === undefined || palabra === null) {
+    return ''
+  }
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
   const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
+    (item) =>
+      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
   )
   if (index !== -1) {
     return translateOperativo[index]
@@ -157,7 +167,7 @@ function dondeEstaEn() {
   // const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
   // document.getElementById('whereUs').innerText = ustedEstaEn;
   let lugar = trO('Menú') || 'Menú'
-  lugar = `${lugar} > ${trO('Controles') || 'Controles'}`
+  lugar = `${trO('Controles') || 'Controles'}`
   lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
@@ -232,6 +242,99 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     personModal(user, objTranslate)
   })
+})
+
+function segundaCargaListado() {
+  try {
+    const button = document.getElementsByName('Controles')
+    let lugar = document.getElementById('whereUs').innerText
+    const newLugar = trO(button.name || 'Controles')
+    lugar = `${lugar} > ${newLugar}`
+    const search = document.getElementById('search')
+    const placeholder = trO('Buscar...' || 'Buscar...')
+    search.placeholder = placeholder
+    search.style.display = 'inline'
+    const doc = document.getElementById('doc')
+    doc.placeholder = trO('Doc' || 'Doc')
+    const divUbicacionDoc = document.querySelector('.div-ubicacionDoc')
+    divUbicacionDoc.style.display = 'block'
+    const divButtons = document.querySelector('.div-controles-buttons')
+    divButtons.style.display = 'none'
+    document.getElementById('whereUs').innerHTML = lugar
+    cargaTabla(objTranslate)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const buscaDoc = document.getElementById('imgDoc')
+buscaDoc.addEventListener('click', async () => {
+  let documento = document.getElementById('doc').value
+  if (!isNaN(documento)) {
+    const array = await traerRegistros(`verificarControl,${documento.trim()}`)
+    if (array.length > 0) {
+      let contenido = {
+        control_N: array[0][0],
+        control_T: array[0][1],
+        nr: documento.trim(),
+      }
+      contenido = encriptar(contenido)
+      localStorage.setItem('contenido', contenido)
+      const url = '../Control/index.php'
+      // window.location.href = url
+      window.open(url, '_blank')
+    } else {
+      const miAlerta = new Alerta()
+      const aviso = `No se encontraron registros con el documento`
+      const mensaje = trO(aviso) || aviso
+      arrayGlobal.avisoRojo.div.top = '500px'
+      arrayGlobal.avisoRojo.close.id = 'idCloseAvisoAmarillo'
+      miAlerta.createVerde(
+        arrayGlobal.avisoRojo,
+        `${mensaje} ${documento}.`,
+        objTranslate
+      )
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
+    }
+  } else {
+    const miAlerta = new Alerta()
+    const aviso = 'Error. El código del documento debe ser un número.'
+    const mensaje = trO(aviso) || aviso
+    arrayGlobal.avisoRojo.div.top = '500px'
+    arrayGlobal.avisoRojo.close.id = 'idCloseAvisoAmarillo'
+    miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+    const modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    // console.log('El valor no es un número.')
+  }
+})
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const urlParams = new URLSearchParams(window.location.search)
+  const simulateAsignarEventos = urlParams.get('simulateAsignarEventos')
+  if (simulateAsignarEventos === 'true') {
+    const persona = desencriptar(localStorage.getItem('user'))
+    if (persona) {
+      document.querySelector('.custom-button').innerText =
+        persona.lng.toUpperCase()
+      const data = await translate(persona.lng)
+      translateOperativo = data.arrayTranslateOperativo
+      espanolOperativo = data.arrayEspanolOperativo
+
+      translateArchivos = data.arrayTranslateArchivo
+      espanolArchivos = data.arrayEspanolArchivo
+
+      objTranslate.operativoES = [...espanolOperativo]
+      objTranslate.operativoTR = [...translateOperativo]
+
+      objTranslate.archivosES = [...espanolArchivos]
+      objTranslate.archivosTR = [...translateArchivos]
+      setTimeout(() => {
+        segundaCargaListado()
+      }, 200)
+    }
+  }
 })
 
 const goLanding = document.querySelector('.custom-button')

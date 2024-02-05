@@ -1,12 +1,12 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../../..';
+const SERVER = '../../../..'
 
 export default function traerRegistros(sql) {
   // eslint-disable-next-line no-console
-  console.time('traerRegistros');
+  console.time('traerRegistros')
   return new Promise((resolve, reject) => {
-    const rax = `&new=${new Date()}`;
-    const ruta = `${SERVER}/Pages/Controles/Routes/traerRegistros.php?q=${sql}${rax}`;
+    const rax = `&new=${new Date()}`
+    const ruta = `${SERVER}/Pages/Controles/Routes/traerRegistros.php?q=${sql}${rax}`
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -17,15 +17,16 @@ export default function traerRegistros(sql) {
     })
       .then((res) => res.json())
       .then((data) => {
-        resolve(data);
-        const modal = document.getElementById('modalAlertCarga');
-        modal.style.display = 'none';
-        modal.remove();
+        resolve(data)
+        const modal = document.getElementById('modalAlertCarga')
+        modal.style.display = 'none'
+        modal.remove()
         // eslint-disable-next-line no-console
-        console.timeEnd('traerRegistros');
+        console.timeEnd('traerRegistros')
       })
       .catch((error) => {
-        reject(error);
-      });
-  });
+        console.timeEnd('traerRegistros')
+        reject(error)
+      })
+  })
 }
