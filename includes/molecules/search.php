@@ -14,8 +14,8 @@ header('Content-Type: text/html;charset=utf-8');
   <title>Factum</title>
 </head>
 <body>
-  <div class='div-encabezado'>
-    <div class='div-ubicacion'>
+  <div class='div-encabezadoSearch'>
+    <div class='div-ubicacionSearch'>
       <input type='text' id='search'></input>
     </div>
   </div>

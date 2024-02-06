@@ -14,7 +14,7 @@ header('Content-Type: text/html;charset=utf-8');
   <title>Factum</title>
 </head>
 <body>
-  <div class='div-encabezado'>
+  <div class='div-encabezadoDoc'>
     <div class='div-ubicacionDoc'>
       <input type='text' id='doc' class='input-con-icono'></input>
       <img id='imgDoc' src='/assets/img/glass.png' alt='' class='icono-busqueda'>

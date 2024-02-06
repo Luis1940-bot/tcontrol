@@ -1,13 +1,12 @@
-body{
+body {
   grid-area: body;
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: auto;
-  grid-template-areas: 
+  grid-template-areas:
     'header'
     'main'
-    'footer'
-  ;
+    'footer';
   grid-gap: 1px;
   margin: 0px;
   padding: 0px;
@@ -16,10 +15,10 @@ body{
   overflow-x: hidden;
 }
 /* main { */
-  /* height: auto; */
-  /* overflow-y: auto; */
+/* height: auto; */
+/* overflow-y: auto; */
 /* } */
-header{
+header {
   display: block;
   top: 0;
   width: 100%;
@@ -27,69 +26,68 @@ header{
   height: auto;
 }
 
-#doc, #numberDoc{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#doc,
+#numberDoc {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
   width: auto;
   margin-left: 10px;
 }
-#numberDoc{
+#numberDoc {
   font-weight: 700;
   background: #ececec;
 }
- hr {
+hr {
   width: 100%;
   color: #cecece;
 }
 
-table{
+table {
   width: 100%;
 }
 #tableControl {
-  margin-top: 0;
+  margin-top: 10px;
 }
-thead{
+thead {
   background: #000000;
   width: 100%;
   height: 20px;
   color: #ffffff;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 8px;
   font-style: normal;
   font-weight: 500;
-  
 }
 
-tbody{
+tbody {
   background: #ffffff;
   width: 100%;
   margin-bottom: 1px;
- 
 }
-tbody tr td{
+tbody tr td {
   height: 20px;
   color: #000000;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 7px;
   font-style: normal;
   font-weight: 500;
 }
 table tbody tr td input,
 table tbody tr td textarea,
-table tbody tr td button{
+table tbody tr td button {
   font-size: 9px;
   width: 90%;
   border: 1px solid #000;
 }
-table tbody tr td div{
+table tbody tr td div {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-table tbody tr td div input{
+table tbody tr td div input {
   font-size: 9px;
   width: 50%;
   height: 100%;
@@ -97,14 +95,14 @@ table tbody tr td div input{
   border: 1px solid #000;
 }
 
-table tbody tr td div button{
+table tbody tr td div button {
   font-size: 7px;
   width: 20%;
   height: 14px;
   margin-right: 10px;
   border-radius: 3px;
 }
-.InputButton-transparent{
+.InputButton-transparent {
   height: 70%;
   padding-left: 0px;
   padding-top: 0px;
@@ -113,16 +111,16 @@ table tbody tr td div button{
   font-size: 7px;
   border-radius: 3px;
   cursor: pointer;
-  background: #97B7E8;
+  background: #97b7e8;
 }
 .InputButton-transparent:hover {
-  background: #5588C7;
-  border: 1px solid #5588C7;
+  background: #5588c7;
+  border: 1px solid #5588c7;
   color: #fff;
 }
 .InputButton-transparent:active {
-  background: #5588C7;
-  border: 1px solid #5588C7;
+  background: #5588c7;
+  border: 1px solid #5588c7;
   color: #fff;
 }
 select {
@@ -146,7 +144,7 @@ select:focus {
   outline: none;
   border: 1px solid #000;
 }
-.transparent-button{
+.transparent-button {
   background: transparent;
   border: none;
   cursor: pointer;
@@ -154,46 +152,52 @@ select:focus {
   width: 50px;
   border-radius: 25px;
 }
-.transparent-button:hover{
+.transparent-button:hover {
   /* background: #cecece;
   border: 1px solid #000000; */
   font-size: 18px;
 }
-ul{
+ul {
   list-style: none;
   padding: 0px;
 }
-li{
+li {
   display: inline;
   margin-right: 5px;
 }
-.img-select{
+.img-select {
   width: 20px;
   height: 20px;
 }
-.img-select:hover{
+.img-select:hover {
   border: 1px solid #cecece;
 }
-canvas{
+canvas {
   display: none;
 }
-footer{
+footer {
   height: 20px;
   margin-top: 5px;
 }
-#idCarteles, #idDivVerde{
+#idCarteles,
+#idDivVerde {
   width: 305px;
   top: 250px;
 }
-#idDivAvisoRojo, #idDivAvisoImagenes{
+#idDivAvisoRojo,
+#idDivAvisoImagenes {
   width: 305px;
   top: 550px;
 }
-#idProcesoExitoso, #idDivAvisoVerde{
+#idProcesoExitoso,
+#idDivAvisoVerde {
   width: 305px;
   top: 450px;
 }
-#idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+#idSpanAvisoVerde,
+#idAguardeUnosInstantes,
+#idSpanAvisoImagenes,
+#idSpanAvisoRojo {
   font-size: 12px;
 }
 .comentarios {
@@ -214,27 +218,34 @@ footer{
   margin: 22px 0px 20px auto;
 }
 
-
 @media only screen and (min-width: 760px) and (orientation: landscape) {
-  body{
+  body {
     min-height: 95vh;
   }
-  main{
+  main {
     height: 200px;
   }
-  header{
+  header {
     height: 125px;
   }
-  table{
+  table {
     margin-bottom: 5px;
   }
-  footer{
+  footer {
     display: none;
   }
-  #idCarteles, #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo {
+  #idCarteles,
+  #idProcesoExitoso,
+  #idDivAvisoVerde,
+  #idDivVerde,
+  #idDivAvisoImagenes,
+  #idDivAvisoRojo {
     width: 600px;
   }
-  #idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+  #idSpanAvisoVerde,
+  #idAguardeUnosInstantes,
+  #idSpanAvisoImagenes,
+  #idSpanAvisoRojo {
     font-size: 16px;
     /* top: 50px */
   }
@@ -247,22 +258,22 @@ footer{
 }
 
 @media only screen and (min-width: 800px) {
-  table{
+  table {
     margin-top: 10px;
-  
   }
   table tbody tr td {
     font-size: 10px;
   }
-  tbody tr td{
+  tbody tr td {
     height: 30px;
     font-size: 14px;
   }
-  thead{
+  thead {
     height: 25px;
     font-size: 12px;
   }
-  table tbody tr td input, table tbody tr td div input {
+  table tbody tr td input,
+  table tbody tr td div input {
     font-size: 12px;
     height: 20px;
   }
@@ -270,23 +281,29 @@ footer{
     font-size: 12px;
     height: 20px;
   }
-  table tbody tr td textarea, table tbody tr td{
+  table tbody tr td textarea,
+  table tbody tr td {
     font-size: 12px;
   }
-  table tbody tr td select{
+  table tbody tr td select {
     font-size: 12px;
   }
-  table tbody tr td select option{
+  table tbody tr td select option {
     font-size: 12px;
   }
   table tbody tr td button {
     font-size: 12px;
     height: 20px;
   }
-  #doc, #numberDoc{
+  #doc,
+  #numberDoc {
     font-size: 14px;
   }
-  #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo{
+  #idProcesoExitoso,
+  #idDivAvisoVerde,
+  #idDivVerde,
+  #idDivAvisoImagenes,
+  #idDivAvisoRojo {
     width: 600px;
     top: 350px;
   }
@@ -294,7 +311,10 @@ footer{
     width: 600px;
     top: 0px;
   }
-  #idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+  #idSpanAvisoVerde,
+  #idAguardeUnosInstantes,
+  #idSpanAvisoImagenes,
+  #idSpanAvisoRojo {
     font-size: 16px;
   }
   .comentarios {
@@ -306,26 +326,26 @@ footer{
 }
 
 @media only screen and (min-width: 1200px) {
-   body{
+  body {
     height: auto;
-    padding:  20px 200px 20px 200px;
+    padding: 20px 200px 20px 200px;
   }
-  table{
+  table {
     margin-top: 10px;
-  
   }
   table tbody tr td {
     font-size: 10px;
   }
-  tbody tr td{
+  tbody tr td {
     height: 30px;
     font-size: 14px;
   }
-  thead{
+  thead {
     height: 25px;
     font-size: 12px;
   }
-  table tbody tr td input, table tbody tr td div input {
+  table tbody tr td input,
+  table tbody tr td div input {
     font-size: 12px;
     height: 20px;
   }
@@ -333,23 +353,29 @@ footer{
     font-size: 12px;
     height: 20px;
   }
-  table tbody tr td textarea, table tbody tr td{
+  table tbody tr td textarea,
+  table tbody tr td {
     font-size: 12px;
   }
-  table tbody tr td select{
+  table tbody tr td select {
     font-size: 12px;
   }
-  table tbody tr td select option{
+  table tbody tr td select option {
     font-size: 12px;
   }
   table tbody tr td button {
     font-size: 12px;
     height: 20px;
   }
-  #doc, #numberDoc{
+  #doc,
+  #numberDoc {
     font-size: 14px;
   }
-  #idProcesoExitoso, #idDivAvisoVerde, #idDivVerde, #idDivAvisoImagenes, #idDivAvisoRojo{
+  #idProcesoExitoso,
+  #idDivAvisoVerde,
+  #idDivVerde,
+  #idDivAvisoImagenes,
+  #idDivAvisoRojo {
     width: 600px;
     top: 350px;
   }
@@ -357,7 +383,10 @@ footer{
     width: 600px;
     top: 0px;
   }
-  #idSpanAvisoVerde, #idAguardeUnosInstantes, #idSpanAvisoImagenes, #idSpanAvisoRojo {
+  #idSpanAvisoVerde,
+  #idAguardeUnosInstantes,
+  #idSpanAvisoImagenes,
+  #idSpanAvisoRojo {
     font-size: 16px;
   }
   .comentarios {

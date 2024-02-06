@@ -170,7 +170,8 @@ function llamarCtrl(control) {
       localStorage.setItem('contenido', encriptar('x'))
     }
     // console.log(ruta);
-    window.location.href = ruta
+    // window.location.href = ruta
+    window.open(ruta, '_blank')
   } catch (error) {
     console.log(error)
   }

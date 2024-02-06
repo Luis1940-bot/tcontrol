@@ -78,6 +78,7 @@ function trO(palabra) {
   return palabra
 }
 
+//! no se usan las funciones de asignarEventos y completarButtons porque quitamos un segundo menu intermedio
 /* eslint-disable no-use-before-define */
 function asignarEventos() {
   const buttons = document.querySelectorAll('.button-controles-menu')
@@ -102,7 +103,6 @@ function asignarEventos() {
 }
 
 /* eslint-enable no-use-before-define */
-
 function completaButtons(obj) {
   const divButtons = document.querySelector('.div-controles-buttons')
   divButtons.innerHTML = ''
@@ -153,9 +153,20 @@ function leeApp(json) {
   readJSON(json)
     .then((data) => {
       Object.assign(objButtons, data)
-      navegador.estadoAnteriorButton = 'Menu'
-      navegador.estadoAnteriorWhereUs.push('Controles')
-      completaButtons('Controles')
+      const search = document.getElementById('search')
+      search.placeholder = trO('Buscar...' || 'Buscar...')
+      search.style.display = 'inline'
+      const doc = document.getElementById('doc')
+      doc.placeholder = trO('Doc' || 'Doc')
+      const divUbicacionDoc = document.querySelector('.div-ubicacionDoc')
+      divUbicacionDoc.style.display = 'block'
+      const planta = objButtons.planta
+      document.getElementById('spanUbicacion').textContent = planta
+
+      cargaTabla(objTranslate)
+      // navegador.estadoAnteriorButton = 'Menu'
+      // navegador.estadoAnteriorWhereUs.push('Controles')
+      // completaButtons('Controles')
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -175,6 +186,8 @@ function dondeEstaEn() {
 
 function configPHP() {
   const user = desencriptar(localStorage.getItem('user'))
+  const divVolver = document.querySelector('.div-volver')
+  divVolver.style.display = 'none'
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -313,8 +326,10 @@ buscaDoc.addEventListener('click', async () => {
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search)
   const simulateAsignarEventos = urlParams.get('simulateAsignarEventos')
+  console.log(simulateAsignarEventos)
   if (simulateAsignarEventos === 'true') {
     const persona = desencriptar(localStorage.getItem('user'))
+    console.log(persona)
     if (persona) {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()

@@ -1,54 +1,51 @@
-.div-wichControl{
-  margin-top: 5px;
-
+.div-wichControl {
+  margin-top: 50px;
 }
-.div-wich{
+.div-wich {
   height: auto;
- text-align: center;
- margin-top: 5px;
- width: auto;
- 
+  text-align: center;
+  margin-top: 5px;
+  width: auto;
 }
-.div-wich{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.div-wich {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 10px;
   font-weight: 700;
 }
 
-#wichC{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#wichC {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 10px;
   font-style: normal;
-  background: #ECECEC;
+  background: #ececec;
   display: none;
   width: auto;
 }
-#wichCEmail{
+#wichCEmail {
   /* border: 1px solid #0066ff; */
   /* border-radius: 2px 2px 2px 2px; */
   /* background: #5594f3; */
   display: none;
 }
 
-@media only screen and  (min-width: 760px) and (orientation: landscape) {
-
+@media only screen and (min-width: 760px) and (orientation: landscape) {
 }
 @media only screen and (min-width: 800px) {
-.div-wich {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-}
-.div-wich img{
-  height: 15px;
-  width: 15px;
-}
-#wichC {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-}
-#tableControl {
-  margin-top: 30px;
-}
+  .div-wich {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .div-wich img {
+    height: 15px;
+    width: 15px;
+  }
+  #wichC {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  #tableControl {
+    margin-top: 30px;
+  }
 }

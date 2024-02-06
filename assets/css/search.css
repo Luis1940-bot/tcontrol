@@ -1,7 +1,8 @@
-.div-encabezado {
-  margin-top: 5px;
+.div-encabezadoSearch {
+  height: auto;
+  margin-top: 4px;
 }
-.div-ubicacion {
+.div-ubicacionSearch {
   height: auto;
   text-align: center;
   margin-top: 5px;
