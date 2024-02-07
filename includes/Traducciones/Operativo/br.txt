@@ -195,3 +195,4 @@ Você não tem permissão para criar ou revisar este controle. Entre em contato 
 Não foram encontrados registros para esse controle.
 Erro. O código do documento deve ser um número.
 Nenhum registro encontrado com o documento
+Ver por data

@@ -195,3 +195,4 @@ You do not have permission to create or review this control. Contact your superv
 No records were found for this control.
 Mistake. The document code must be a number.
 No records found with the document
+View by date

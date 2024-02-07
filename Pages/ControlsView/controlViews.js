@@ -31,13 +31,22 @@ function trO(palabra) {
 
 async function cargaDeRegistros(objTranslate, control) {
   try {
-    const { control_N, control_T } = control
+    const { control_N, control_T, desde, hasta } = control
     const whereUs = document.getElementById('whereUs')
     const textoAdicional = document.createTextNode(
       `> ${control_N} - ${control_T}`
     )
     whereUs.appendChild(textoAdicional)
-    const reportes = await traerRegistros(`traerControles,${control_N}`)
+    let reportes
+    desde === undefined || hasta === undefined
+      ? (reportes = await traerRegistros(`traerControles,${control_N}`))
+      : null
+    desde !== undefined || hasta !== undefined
+      ? (reportes = await traerRegistros(
+          `traerControlesFechas,${control_N},${desde},${hasta}`
+        ))
+      : null
+
     if (reportes.length > 0) {
       // Finaliza la carga y realiza cualquier otra acción necesaria
       tablaVacia(reportes, encabezados, objTranslate)

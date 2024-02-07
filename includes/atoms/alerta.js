@@ -20,6 +20,7 @@ import insertarRegistro from '../../Pages/Control/Modules/Controladores/insertar
 import enviaMail from '../../Nodemailer/sendEmail.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../controllers/cript.js'
+import fechasGenerator from '../../controllers/fechas.js'
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../'
@@ -1616,9 +1617,17 @@ class Alerta {
           trO(obj.btnProcedimiento.text, objTrad) || obj.btnProcedimiento.text
         obj.btnProcedimiento.text = texto
         const btnProcedimiento = createButton(obj.btnProcedimiento)
+
+        texto =
+          trO(obj.btnVerCargadosPorFecha.text, objTrad) ||
+          obj.btnVerCargadosPorFecha.text
+        obj.btnVerCargadosPorFecha.text = texto
+        const btnVerCargadosPorFecha = createButton(obj.btnVerCargadosPorFecha)
+
         divButton.appendChild(btnNuevo)
         divButton.appendChild(btnVerCargados)
         divButton.appendChild(btnProcedimiento)
+        divButton.appendChild(btnVerCargadosPorFecha)
         modalContent.appendChild(divButton)
         this.modal.appendChild(modalContent)
         document.body.appendChild(this.modal)
@@ -1657,6 +1666,28 @@ class Alerta {
           localStorage.setItem('listadoCtrls', encriptar(objetoRuta))
           window.location.href = ruta
         })
+        const idbtnCargadosPorFecha = document.getElementById(
+          'idVerCargadosPorFecha'
+        )
+        idbtnCargadosPorFecha.addEventListener('click', () => {
+          const idTituloH3 = document.getElementById('idTituloH3')
+          const cod = idTituloH3.getAttribute('data-index')
+          const name = idTituloH3.getAttribute('data-name')
+          const url = `${cod}`
+          const datos = {
+            titulo: idTituloH3.textContent,
+            cod,
+            name,
+          }
+          const miAlerta = new Alerta()
+          miAlerta.createViewerPorFecha(
+            arrayGlobal.porFechaEnModal,
+            datos,
+            objTrad
+          )
+          const modal2 = document.getElementById('modalTablaViewFecha')
+          modal2.style.display = 'block'
+        })
       } else {
         texto =
           trO(
@@ -1674,6 +1705,121 @@ class Alerta {
         this.modal.appendChild(modalContent)
         document.body.appendChild(this.modal)
       }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  createViewerPorFecha(objeto, datos, objTrad) {
+    try {
+      const obj = objeto
+      this.modal = document.createElement('div')
+      this.modal.id = 'modalTablaViewFecha'
+      this.modal.className = 'modal'
+      this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+      // Crear el contenido del modal
+      const modalContent = createDiv(obj.divContent)
+      let span = createSpan(obj.close)
+      modalContent.appendChild(span)
+
+      let texto = trO(obj.span.text, objTrad) || obj.span.text
+      span = createSpan(obj.span, texto)
+      modalContent.appendChild(span)
+      obj.titulo.text['text'] = datos.titulo
+      const title = createH3(obj.titulo, 'text')
+      title.id = 'idTituloFechasH3'
+      title.setAttribute('data-index', datos.cod)
+      title.setAttribute('data-name', datos.name)
+      modalContent.appendChild(title)
+
+      const divEncabezado = createDiv(obj.divEncabezado)
+      obj.imgPrint.display = 'inline-block'
+      const imagenButton = createIMG(obj.imgPrint)
+      obj.span.alignSelf = 'left'
+      obj.span.passing = null
+      obj.span.className = null
+      obj.span.padding = null
+      obj.span.left = '10px'
+      obj.imgPrint.display = 'inline-block'
+      span = createSpan(obj.span, 'Fechas')
+      divEncabezado.appendChild(imagenButton)
+
+      divEncabezado.appendChild(span)
+      modalContent.appendChild(divEncabezado)
+      const hr = createHR(obj)
+      modalContent.appendChild(hr)
+      const fechaDeHoy = fechasGenerator.fecha_corta_yyyymmdd(new Date())
+      let divInput = createDiv(obj.divInput)
+      obj.input.id = 'idDesde'
+      obj.input.value = fechaDeHoy
+      let input = createInput(obj.input)
+      texto = trO('Desde:', objTrad) || 'Desde:'
+      obj.label.innerText = `${texto}: `
+      obj.label.margin = 'auto 10px'
+      let label = createLabel(obj.label)
+      divInput.appendChild(label)
+      divInput.appendChild(input)
+      modalContent.appendChild(divInput)
+      obj.divInput.id = 'idDivInputPorFechaHasta'
+      divInput = createDiv(obj.divInput)
+      obj.input.id = 'idHasta'
+      obj.input.value = fechaDeHoy
+      input = createInput(obj.input)
+      texto = trO('Hasta:', objTrad) || 'Hasta:'
+      obj.label.innerText = `${texto}: `
+      obj.label.margin = 'auto 10px'
+      label = createLabel(obj.label)
+      divInput.appendChild(label)
+      divInput.appendChild(input)
+      modalContent.appendChild(divInput)
+      texto = trO('Enviar', objTrad) || 'Enviar:'
+      obj.btnEnviar.text = texto
+      const btn = createButton(obj.btnEnviar)
+      modalContent.appendChild(btn)
+      // Agregar el contenido al modal
+      this.modal.appendChild(modalContent)
+
+      // Agregar el modal al body del documento
+      document.body.appendChild(this.modal)
+      const idbtnEnviar = document.getElementById('idbtnEnviar')
+      idbtnEnviar.addEventListener('click', () => {
+        const idTituloH3 = document.getElementById('idTituloH3')
+        const cod = idTituloH3.getAttribute('data-index')
+        const name = idTituloH3.getAttribute('data-name')
+        let inputDesde = document.getElementById('idDesde')
+        let inputHasta = document.getElementById('idHasta')
+        let desde = inputDesde.value
+        let hasta = inputHasta.value
+        const fechaDesde = new Date(desde)
+        const fechaHasta = new Date(hasta)
+        const soloFecha1 = new Date(
+          fechaDesde.getFullYear(),
+          fechaDesde.getMonth(),
+          fechaDesde.getDate()
+        )
+        const soloFecha2 = new Date(
+          fechaHasta.getFullYear(),
+          fechaHasta.getMonth(),
+          fechaHasta.getDate()
+        )
+        const comparaFechas = soloFecha1 <= soloFecha2
+        if (comparaFechas) {
+          const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
+            Math.random() * 10
+          )}`
+          const objetoRuta = {
+            control_N: cod,
+            control_T: decodeURIComponent(name),
+            nr: '0',
+            desde: inputDesde.value,
+            hasta: inputHasta.value,
+          }
+          localStorage.setItem('listadoCtrls', encriptar(objetoRuta))
+          window.location.href = ruta
+        } else {
+          inputDesde.style.background = 'red'
+        }
+      })
     } catch (error) {
       console.log(error)
     }

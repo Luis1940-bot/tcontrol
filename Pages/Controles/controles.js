@@ -162,6 +162,8 @@ function leeApp(json) {
       divUbicacionDoc.style.display = 'block'
       const planta = objButtons.planta
       document.getElementById('spanUbicacion').textContent = planta
+      const divButtons = document.querySelector('.div-controles-buttons')
+      divButtons.style.display = 'none'
 
       cargaTabla(objTranslate)
       // navegador.estadoAnteriorButton = 'Menu'
@@ -326,10 +328,8 @@ buscaDoc.addEventListener('click', async () => {
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search)
   const simulateAsignarEventos = urlParams.get('simulateAsignarEventos')
-  console.log(simulateAsignarEventos)
   if (simulateAsignarEventos === 'true') {
     const persona = desencriptar(localStorage.getItem('user'))
-    console.log(persona)
     if (persona) {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       objTranslate.archivosES = [...espanolArchivos]
       objTranslate.archivosTR = [...translateArchivos]
       setTimeout(() => {
-        segundaCargaListado()
+        // segundaCargaListado()
       }, 200)
     }
   }

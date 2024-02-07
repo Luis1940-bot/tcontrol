@@ -60,7 +60,7 @@ table {
   width: 100%;
 }
 #tableControlViews {
-  margin-top: 0;
+  margin-top: 5px;
   display: none;
   overflow-y: auto;
   width: 100%;
