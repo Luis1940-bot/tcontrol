@@ -11,7 +11,6 @@ body {
   margin: 0;
   padding: 0;
   flex-direction: column;
-  /* min-height: 90vh; */
   height: auto;
   background: #ececec;
 }
@@ -21,6 +20,7 @@ header {
 main {
   /* overflow-y: none; */
   height: auto;
+  min-width: 100%;
 }
 .div-controles-buttons {
   display: flex;
@@ -56,9 +56,6 @@ hr {
   color: #cecece;
 }
 
-table {
-  width: 100%;
-}
 #tableControlViews {
   margin-top: 5px;
   display: none;
@@ -67,7 +64,7 @@ table {
 }
 thead {
   background: #000000;
-  width: 100%;
+  width: 90%;
   height: 20px;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -76,20 +73,15 @@ thead {
   font-weight: 500;
 }
 
-#tableControlViews tbody {
-  overflow-y: auto;
-  width: 100%;
-}
-
 tbody {
   background: #ffffff;
-  width: 100%;
+  width: 90%;
   margin-bottom: 1px;
   /* overflow-y: auto; */
 }
 
 tbody tr {
-  width: 100%;
+  width: 90%;
 }
 
 tbody tr td {
@@ -108,7 +100,7 @@ table tbody tr td button {
   border: 1px solid #000;
 }
 table tbody tr td div {
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -131,10 +123,13 @@ table tbody tr td div button {
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
   body {
-    min-height: 50vh;
+    min-height: 100vh;
+    min-width: 100vh;
+    margin: 0;
   }
   main {
-    height: auto;
+    height: calc(100vh - 25px);
+    min-width: 100%;
   }
   .div-controles-buttons {
     margin-top: 5px;
@@ -144,12 +139,21 @@ table tbody tr td div button {
     height: 30px;
     margin-top: 2px;
   }
+  #tableControlViews {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #tableControlViews,
+  thead,
+  tbody,
+  th,
+  tr,
+  td {
+    width: 90%;
+  }
 }
 
 @media only screen and (min-width: 800px) {
-  /* .button-controles-menu{
-    width: 400px;
-  } */
   body {
     height: auto;
   }
@@ -162,15 +166,28 @@ table tbody tr td div button {
     font-size: 14px;
     width: 400px;
   }
+  #tableControlViews {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #tableControlViews,
+  thead,
+  tbody,
+  th,
+  tr,
+  td {
+    width: 90%;
+  }
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1000px) {
   body {
     height: auto;
     padding: 20px 200px 20px 200px;
   }
   main {
     height: auto;
+    min-width: 100vh;
   }
   .button-controles-menu {
     margin-top: 5px;
@@ -180,5 +197,15 @@ table tbody tr td div button {
   }
   #idDivPerson {
     margin: 45px 200px 20px auto;
+  }
+  #tableControlViews,
+  thead,
+  tbody,
+  th,
+  td {
+    width: 60%;
+  }
+  #tableControlViews thead tr th {
+    font-size: 10px;
   }
 }

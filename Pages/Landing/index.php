@@ -39,8 +39,9 @@ if (!isset($_SESSION['factum_validation']['email'] )) {
     <div class='div-landing-buttons'>
 
     </div>
+    <div class='div-my-button'><button class='my-button' disabled><img id='seguir'  src='../../assets/img/icons8-arrow-30.png' alt='' height='20px' width='20px'></button></div>
   </main>
-  <button class='my-button' disabled><img id='seguir'  src='../../assets/img/icons8-arrow-30.png' alt='' height='20px' width='20px'></button>
+  <!-- <div><button class='my-button' disabled><img id='seguir'  src='../../assets/img/icons8-arrow-30.png' alt='' height='20px' width='20px'></button></div> -->
   <footer>
     <?php
       include_once('../../includes/molecules/footer.php');

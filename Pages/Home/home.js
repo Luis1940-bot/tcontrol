@@ -99,7 +99,7 @@ function localizador(e) {
 }
 
 function completaButtons(obj) {
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   const { tipo } = persona
   const divButtons = document.querySelector('.div-home-buttons')
   divButtons.innerHTML = ''
@@ -144,7 +144,7 @@ function llamarCtrl(control) {
     } else {
       url = `../../Pages/${control}`
     }
-    localStorage.setItem(
+    sessionStorage.setItem(
       'history_pages',
       encriptar(navegador.estadoAnteriorWhereUs)
     )
@@ -163,11 +163,11 @@ function llamarCtrl(control) {
         obj[clave] = decodeURIComponent(valor)
         return obj
       }, {})
-      localStorage.setItem('contenido', encriptar(objeto))
+      sessionStorage.setItem('contenido', encriptar(objeto))
       ruta = `${subcadena}?v=${Math.round(Math.random() * 10)}`
     } else {
       ruta = `${url}?v=${Math.round(Math.random() * 10)}`
-      localStorage.setItem('contenido', encriptar('x'))
+      sessionStorage.setItem('contenido', encriptar('x'))
     }
     // console.log(ruta);
     // window.location.href = ruta
@@ -215,7 +215,7 @@ function dondeEstaEn() {
 }
 
 function configPHP() {
-  const user = desencriptar(localStorage.getItem('user'))
+  const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     person.style.border = '3px solid #212121'
     person.style.background = '#212121'
     person.style.borderRadius = '10px 10px 0px 0px'
-    const persona = desencriptar(localStorage.getItem('user'))
+    const persona = desencriptar(sessionStorage.getItem('user'))
     const user = {
       person: persona.person,
       home: 'Inicio',

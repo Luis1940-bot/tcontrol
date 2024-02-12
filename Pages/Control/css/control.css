@@ -220,16 +220,20 @@ footer {
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
   body {
-    min-height: 95vh;
+    min-height: 100vh;
+    margin: 0;
   }
   main {
-    height: 200px;
+    height: calc(100vh - 25px);
   }
   header {
     height: 125px;
   }
   table {
     margin-bottom: 5px;
+  }
+  #tableControl {
+    margin-top: 70px;
   }
   footer {
     display: none;
@@ -258,8 +262,18 @@ footer {
 }
 
 @media only screen and (min-width: 800px) {
+  body {
+    min-height: 100vh;
+    margin: 0;
+  }
+  main {
+    height: calc(100vh - 25px);
+  }
   table {
     margin-top: 10px;
+  }
+  #tableControl {
+    margin-top: 70px;
   }
   table tbody tr td {
     font-size: 10px;
@@ -332,6 +346,9 @@ footer {
   }
   table {
     margin-top: 10px;
+  }
+  #tableControl {
+    margin-top: 70px;
   }
   table tbody tr td {
     font-size: 10px;

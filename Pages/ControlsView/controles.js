@@ -82,7 +82,7 @@ function dondeEstaEn() {
 }
 
 function configPHP() {
-  const user = desencriptar(localStorage.getItem('user'))
+  const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => {
       dondeEstaEn()
       leeApp('app')
-      const control = desencriptar(localStorage.getItem('listadoCtrls'))
+      const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
       cargaTabla(objTranslate, control)
     }, 200)
   }
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     person.style.border = '3px solid #212121'
     person.style.background = '#212121'
     person.style.borderRadius = '10px 10px 0px 0px'
-    const persona = desencriptar(localStorage.getItem('user'))
+    const persona = desencriptar(sessionStorage.getItem('user'))
     const user = {
       person: persona.person,
       home: 'Inicio',

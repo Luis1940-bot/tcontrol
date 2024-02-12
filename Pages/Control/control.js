@@ -68,7 +68,7 @@ function leeVersion(json) {
 }
 
 function configPHP() {
-  const user = desencriptar(localStorage.getItem('user'))
+  const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -92,14 +92,14 @@ function configPHP() {
 function configuracionLoad() {
   inicioPerformance()
   // configPHP();
-  const contenido = localStorage.getItem('contenido')
+  const contenido = sessionStorage.getItem('contenido')
   const url = desencriptar(contenido)
   // console.log(url)
   // const url = new URL(window.location.href);
   controlN = url.control_N // url.searchParams.get('control_N');
   controlT = url.control_T // .get('control_T');
   nr = url.nr // url.searchParams.get('nr');
-  nr === '0' ? (nr = '') : localStorage.setItem('doc', encriptar(nr))
+  nr === '0' ? (nr = '') : sessionStorage.setItem('doc', encriptar(nr))
   document.getElementById('doc').innerText = `Doc: ${nr}`
   document.getElementById('wichC').innerText = controlT
   // document.getElementById('wichC').style.display = 'inline';
@@ -159,8 +159,8 @@ async function cargaDeRegistros() {
     inicioPerformance()
     await actualizarProgreso('10%')
     const countSelect = await traerRegistros(`countSelect,${controlN}`)
-    localStorage.setItem('loadSystem', 2)
-    localStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4)
+    sessionStorage.setItem('loadSystem', 2)
+    sessionStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4)
 
     await actualizarProgreso('20%')
     const empresaData = await traerRegistros('empresa')
@@ -208,7 +208,7 @@ async function mensajeDeCarga() {
   )
   const modal = document.getElementById('modalAlertCarga')
   modal.style.display = 'block'
-  localStorage.setItem('loadSystem', 1)
+  sessionStorage.setItem('loadSystem', 1)
 
   // Agrega un retraso antes de iniciar la carga de registros
   // eslint-disable-next-line no-promise-executor-return
@@ -218,7 +218,7 @@ async function mensajeDeCarga() {
 }
 
 async function arraysLoadTranslate() {
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     data = await translate(persona.lng)
     translateOperativo = data.arrayTranslateOperativo
@@ -232,10 +232,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   // eslint-disable-next-line no-console
   console.time('timeControl')
   arrayGlobal.habilitadoGuardar = false
-  localStorage.setItem('firma', encriptar('x'))
-  localStorage.setItem('config_menu', encriptar('x'))
-  localStorage.setItem('envia_por_email', false)
-  localStorage.setItem('doc', null)
+  sessionStorage.setItem('firma', encriptar('x'))
+  sessionStorage.setItem('config_menu', encriptar('x'))
+  sessionStorage.setItem('envia_por_email', false)
+  sessionStorage.setItem('doc', null)
   const supervisor = {
     id: 0,
     mail: '',
@@ -243,9 +243,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     nombre: '',
     tipo: 0,
   }
-  localStorage.setItem('firmado', encriptar(supervisor))
+  sessionStorage.setItem('firmado', encriptar(supervisor))
   try {
-    const persona = desencriptar(localStorage.getItem('user'))
+    const persona = desencriptar(sessionStorage.getItem('user'))
     if (persona) {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const person = document.getElementById('person')
   person.addEventListener('click', () => {
-    const persona = desencriptar(localStorage.getItem('user'))
+    const persona = desencriptar(sessionStorage.getItem('user'))
     const user = {
       person: persona.person,
       home: 'Inicio',

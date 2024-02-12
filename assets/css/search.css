@@ -36,3 +36,10 @@
 }
 @media only screen and (min-width: 820px) and (orientation: landscape) {
 }
+@media only screen and (min-width: 800px) {
+  #search {
+    font-size: 14px;
+    height: 20px;
+    width: 250px;
+  }
+}

@@ -39,7 +39,7 @@ let ID = 0
 let fila = 0
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     const data = await translate(persona.lng)
     const translateOperativo = data.arrayTranslateOperativo
@@ -189,6 +189,7 @@ function createInput(config) {
   input.type = config.type
   config.name !== null ? (input.name = config.id) : null
   config.value !== null ? (input.value = config.value) : null
+  config.checked !== null ? (input.style.checked = config.checked) : null
   config.className !== null ? (input.className = config.className) : null
   config.height !== null ? (input.style.height = config.height) : null
   config.width !== null ? (input.style.width = config.width) : null
@@ -453,7 +454,7 @@ async function firmar(firmadoPor) {
   }
   procesoStyleDisplay(elementosStyle)
 
-  localStorage.setItem('firmado', encriptar(supervisor))
+  sessionStorage.setItem('firmado', encriptar(supervisor))
   const configMenu = {
     guardar: true,
     guardarComo: false,
@@ -466,7 +467,7 @@ async function firmar(firmadoPor) {
     menu.style.display = 'none'
     menu.remove()
   }, 1000)
-  localStorage.setItem('config_menu', encriptar(configMenu))
+  sessionStorage.setItem('config_menu', encriptar(configMenu))
 }
 
 function limpiaArrays() {
@@ -653,8 +654,10 @@ function informe(
 
     const documento = document.getElementById('numberDoc')
     documento.innerText = insertado.documento
-    localStorage.setItem('doc', encriptar(insertado.documento))
-    const configMenuStorage = desencriptar(localStorage.getItem('config_menu'))
+    sessionStorage.setItem('doc', encriptar(insertado.documento))
+    const configMenuStorage = desencriptar(
+      sessionStorage.getItem('config_menu')
+    )
     const configMenu = {
       guardar: true,
       guardarComo: false,
@@ -669,7 +672,7 @@ function informe(
       ...configMenu.configFirma,
       ...configMenuStorage.configFirma,
     }
-    localStorage.setItem('config_menu', encriptar(configMenu))
+    sessionStorage.setItem('config_menu', encriptar(configMenu))
 
     limpiaArrays()
     guardaNotas(convertido)
@@ -708,7 +711,7 @@ async function insert(
     // const imagenes = { success: true, message: 'ok', rutaImagen: '../../' };
     // console.log(imagenes);
 
-    const enviaPorEmail = localStorage.getItem('envia_por_email')
+    const enviaPorEmail = sessionStorage.getItem('envia_por_email')
     const encabezados = { ...objEncabezados }
     encabezados.documento = insertado.documento
     let enviado = ''
@@ -846,7 +849,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
       firma: false,
       configFirma: 'x',
     }
-    localStorage.setItem('config_menu', encriptar(nuevoConfigMenu))
+    sessionStorage.setItem('config_menu', encriptar(nuevoConfigMenu))
     elementosStyle = {
       element: [
         'idDivGuardar',
@@ -875,7 +878,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
       firma: false,
       configFirma: 'x',
     }
-    localStorage.setItem('config_menu', encriptar(nuevoConfigMenu))
+    sessionStorage.setItem('config_menu', encriptar(nuevoConfigMenu))
     elementosStyle = {
       element: [
         'idDivGuardar',
@@ -905,20 +908,25 @@ function formatarMenu(doc, configMenu, objTranslate) {
   procesoStyleDisplay(elementosStyle)
 }
 
-function estilosTheadCell(element, index, objTrad) {
+function estilosTheadCell(element, index, objTrad, arrayWidthEncabezado) {
   const cell = document.createElement('th')
-  if (index < 5) {
-    cell.textContent =
-      trO(element.toUpperCase(), objTrad) || element.toUpperCase()
-    cell.style.background = '#000000'
-    cell.style.border = '1px solid #cecece'
-    cell.style.overflow = 'hidden'
-    const widthCell =
-      widthScreenAjustado * widthScreen * arrayWidthEncabezado[index]
-    cell.style.width = `${widthCell}px`
-  } else {
-    cell.style.display = 'none'
+  cell.textContent =
+    trO(element.toUpperCase(), objTrad) || element.toUpperCase()
+  cell.style.background = '#000000'
+  cell.style.border = '1px solid #cecece'
+  cell.style.overflow = 'hidden'
+
+  const widthCell =
+    widthScreenAjustado * widthScreen * arrayWidthEncabezado[index]
+
+  let size = '8px'
+  if (widthScreen >= 800) {
+    size = '10px'
   }
+  cell.style.fontSize = size
+  cell.style.width = `${widthCell}px`
+  widthCell === 0 ? (cell.style.display = 'none') : null
+
   return cell
 }
 
@@ -934,9 +942,13 @@ function estilosCell(
   colorText,
   requerido,
   display,
-  objTrad
+  objTrad,
+  arrayWidthEncabezado,
+  index
 ) {
   const cell = document.createElement('td')
+  const widthCell =
+    widthScreenAjustado * widthScreen * arrayWidthEncabezado[index]
   let dato = ''
   typeof datos === 'string' && datos !== null
     ? (dato = trA(datos, objTrad) || datos)
@@ -954,16 +966,24 @@ function estilosCell(
   cell.style.fontStyle = fontStyle
   cell.style.fontWeight = fontWeight
   cell.style.color = colorText
+
   colSpan === 1 ? (cell.colSpan = 4) : null
   colSpan === 2 ? (cell.style.display = 'none') : null
   colSpan === 3 ? (cell.colSpan = 3) : null
   colSpan === 4 ? (cell.style.display = 'none') : null
   colSpan === 5 ? (cell.colSpan = 3) : null
   display !== null ? (cell.style.display = display) : null
+  cell.style.width = `${widthCell}px`
   return cell
 }
 
-function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
+function estilosTbodyCell(
+  element,
+  index,
+  cantidadDeRegistros,
+  objTrad,
+  arrayWidthEncabezado
+) {
   const newRow = document.createElement('tr')
   for (let i = 0; i < 6; i++) {
     const orden = [0, 3, 4, 6, 7, 1]
@@ -1001,7 +1021,9 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       colorText,
       requerido,
       display,
-      objTrad
+      objTrad,
+      arrayWidthEncabezado,
+      i
     )
     newRow.appendChild(cell)
   }
@@ -1065,6 +1087,10 @@ class Alerta {
     this.modal.className = 'modal'
     this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
     // Crear el contenido del modal
+    if (typeAlert === 'guardar') {
+      obj.divContent.height = '210px'
+    }
+
     const modalContent = createDiv(obj.divContent)
 
     const span = createSpan(obj.close)
@@ -1115,7 +1141,7 @@ class Alerta {
         arrayGlobal.objetoControl,
         arrayGlobal.arrayControl
       )
-      const requerido = desencriptar(localStorage.getItem('requerido'))
+      const requerido = desencriptar(sessionStorage.getItem('requerido'))
       if (requerido.requerido && okGuardar) {
         const miAlerta = new Alerta()
         const miAlertaInforme = new Alerta()
@@ -1181,7 +1207,10 @@ class Alerta {
     this.modal.className = 'modal'
     this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
     // Crear el contenido del modal
-    obj.divContent.height = '260px'
+
+    if (typeAlert === 'firmar' && widthScreen !== 360) {
+      obj.divContent.height = '290px'
+    }
     const modalContent = createDiv(obj.divContent)
 
     const span = createSpan(obj.close)
@@ -1379,9 +1408,10 @@ class Alerta {
 
   createModalMenu(objeto, objTranslate) {
     // eslint-disable-next-line no-unused-vars
-    const configFirma = desencriptar(localStorage.getItem('firma'))
-    const configMenu = desencriptar(localStorage.getItem('config_menu'))
-    const enviaPorEmail = localStorage.getItem('envia_por_email')
+    const configFirma = desencriptar(sessionStorage.getItem('firma'))
+    const configMenu = desencriptar(sessionStorage.getItem('config_menu'))
+    const enviaPorEmail = sessionStorage.getItem('envia_por_email') === 'true'
+    console.log(enviaPorEmail)
     const obj = objeto
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
@@ -1534,13 +1564,12 @@ class Alerta {
     div.appendChild(labelEmail)
     modalContent.appendChild(div)
     //! fin checkbox
-
     this.modal.appendChild(modalContent)
 
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal)
     // let elementosStyle;
-    const doc = localStorage.getItem('doc')
+    const doc = sessionStorage.getItem('doc')
     // console.log(doc)
     formatarMenu(doc, configMenu, objTranslate)
     const enviaEmail = document.getElementById('idCheckBoxEmail')
@@ -1550,7 +1579,7 @@ class Alerta {
   createViewer(objeto, array, objTrad) {
     try {
       const nivelReporte = array[14]
-      const persona = desencriptar(localStorage.getItem('user'))
+      const persona = desencriptar(sessionStorage.getItem('user'))
       const { tipo } = persona
       const obj = objeto
       this.modal = document.createElement('div')
@@ -1645,7 +1674,7 @@ class Alerta {
             control_T: decodeURIComponent(name),
             nr: '0',
           }
-          localStorage.setItem('contenido', encriptar(objetoRuta))
+          sessionStorage.setItem('contenido', encriptar(objetoRuta))
           // window.location.href = ruta
           window.open(ruta, '_blank')
         })
@@ -1663,7 +1692,7 @@ class Alerta {
             control_T: decodeURIComponent(name),
             nr: '0',
           }
-          localStorage.setItem('listadoCtrls', encriptar(objetoRuta))
+          sessionStorage.setItem('listadoCtrls', encriptar(objetoRuta))
           window.location.href = ruta
         })
         const idbtnCargadosPorFecha = document.getElementById(
@@ -1814,7 +1843,7 @@ class Alerta {
             desde: inputDesde.value,
             hasta: inputHasta.value,
           }
-          localStorage.setItem('listadoCtrls', encriptar(objetoRuta))
+          sessionStorage.setItem('listadoCtrls', encriptar(objetoRuta))
           window.location.href = ruta
         } else {
           inputDesde.style.background = 'red'
@@ -1870,7 +1899,12 @@ class Alerta {
       }
       arrayWidthEncabezado = [...encabezados.width]
       encabezados.title.forEach((element, index) => {
-        const cell = estilosTheadCell(element, index, objTrad)
+        const cell = estilosTheadCell(
+          element,
+          index,
+          objTrad,
+          arrayWidthEncabezado
+        )
         newRow.appendChild(cell)
       })
       thead.appendChild(newRow)
@@ -1883,7 +1917,8 @@ class Alerta {
           element,
           index,
           cantidadDeRegistros,
-          objTrad
+          objTrad,
+          arrayWidthEncabezado
         )
         tbody.appendChild(newRow)
       })

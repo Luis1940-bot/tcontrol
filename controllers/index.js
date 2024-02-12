@@ -4,7 +4,7 @@ import { encriptar, desencriptar } from '../controllers/cript.js'
 const SERVER = ''
 
 function configPHP() {
-  const userDesencriptado = desencriptar(localStorage.getItem('user'))
+  const userDesencriptado = desencriptar(sessionStorage.getItem('user'))
   const user = userDesencriptado
   const { developer, content, logo, by } = user
   const metaDescription = document.querySelector('meta[name="description"]')
@@ -43,7 +43,7 @@ function session() {
         // } = parsedData;
 
         parsedData = encriptar(parsedData)
-        localStorage.setItem('user', parsedData)
+        sessionStorage.setItem('user', parsedData)
 
         configPHP()
       } catch (error) {
@@ -59,7 +59,7 @@ function session() {
 }
 
 function limpiezaDeCache() {
-  if (!localStorage.getItem('firstLoad')) {
+  if (!sessionStorage.getItem('firstLoad')) {
     // Limpiar la caché
     caches.keys().then((names) => {
       names.forEach((name) => {
@@ -68,7 +68,7 @@ function limpiezaDeCache() {
     })
 
     // Marcar que la aplicación ya se ha cargado
-    localStorage.setItem('firstLoad', true)
+    sessionStorage.setItem('firstLoad', true)
   }
 }
 

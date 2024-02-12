@@ -514,7 +514,10 @@ async function traerValorPorDefecto(sql, tipo, html) {
 function completaTabla(arrayControl) {
   const tbody = document.querySelector('tbody')
   const cantidadDeRegistros = arrayControl.length
-
+  const email = arrayControl[0][22]
+  email === '1'
+    ? sessionStorage.setItem('envia_por_email', true)
+    : sessionStorage.setItem('envia_por_email', false)
   arrayControl.forEach((element, index) => {
     const unidades = parseFloat(index + 1)
     const porcentaje = parseFloat(
@@ -573,7 +576,7 @@ function completaTabla(arrayControl) {
 }
 
 async function arraysLoadTranslate() {
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
@@ -582,7 +585,7 @@ async function arraysLoadTranslate() {
     espanolOperativo = data.arrayEspanolOperativo
     translateArchivo = data.arrayTranslateArchivo
     espanolArchivo = data.arrayEspanolArchivo
-    const contenido = localStorage.getItem('contenido')
+    const contenido = sessionStorage.getItem('contenido')
     const url = desencriptar(contenido)
     // const url = new URL(window.location.href);
     const controlT = url.control_T // url.searchParams.get('control_T');

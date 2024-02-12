@@ -35,7 +35,7 @@ function leeVersion(json) {
 //     lng: idioma,
 //   };
 //   const datosString = JSON.stringify(datos);
-//   localStorage.setItem('datosUser', datosString);
+//   sessionStorage.setItem('datosUser', datosString);
 // }
 
 function completaButtons(obj) {
@@ -131,12 +131,12 @@ function completaButtons(obj) {
     index = i
     div.addEventListener('click', () => {
       const radio = radios[i]
-      // Obtener el objeto almacenado en localStorage
-      const userData = desencriptar(localStorage.getItem('user'))
+      // Obtener el objeto almacenado en sessionStorage
+      const userData = desencriptar(sessionStorage.getItem('user'))
       radio.checked = true
       language = radios[i].getAttribute('data-custom')
       userData.lng = language.slice(0, 2)
-      localStorage.setItem('user', encriptar(userData))
+      sessionStorage.setItem('user', encriptar(userData))
       document.querySelector('.custom-button').innerText = language
         .slice(0, 2)
         .toUpperCase()
@@ -153,7 +153,7 @@ function completaButtons(obj) {
       })
     })
 
-    const persona = desencriptar(localStorage.getItem('user'))
+    const persona = desencriptar(sessionStorage.getItem('user'))
     const buttonSelector = div.childNodes[0].name.slice(0, 2)
     if (
       buttonSelector.slice(0, 2).toLowerCase() === persona.lng.toLowerCase()
@@ -178,7 +178,7 @@ function leeApp(json) {
 }
 
 function configPHP() {
-  const user = desencriptar(localStorage.getItem('user'))
+  const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   configPHP()
   spinner.style.visibility = 'visible'
   const customButton = document.getElementById('planta')
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   const personaLng = persona.lng
   customButton.innerText = personaLng.toUpperCase()
   const person = document.querySelector('#person')
@@ -233,7 +233,7 @@ async function loadLenguages(leng) {
 
 const button = document.querySelector('.my-button')
 button.addEventListener('click', () => {
-  const persona = desencriptar(localStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'))
   spinner.style.visibility = 'visible'
   loadLenguages(persona.lng)
 })

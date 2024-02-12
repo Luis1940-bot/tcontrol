@@ -18,10 +18,10 @@ export default function traerRegistros(sql) {
       .then((res) => res.json())
       .then((data) => {
         resolve(data)
-        let vecesLoad = localStorage.getItem('loadSystem')
-        const cantidadProcesos = localStorage.getItem('cantidadProcesos')
+        let vecesLoad = sessionStorage.getItem('loadSystem')
+        const cantidadProcesos = sessionStorage.getItem('cantidadProcesos')
         vecesLoad = Number(vecesLoad) + 1
-        localStorage.setItem('loadSystem', vecesLoad)
+        sessionStorage.setItem('loadSystem', vecesLoad)
         const modal = document.getElementById('modalAlertCarga')
         if (vecesLoad > Number(cantidadProcesos)) {
           modal.style.display = 'none'

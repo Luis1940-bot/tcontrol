@@ -18,6 +18,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon'>
   <link rel='stylesheet' type='text/css' href='../../Pages/ControlsView/css/controles.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='../../Pages/ControlsView/css/estiloImpresion.css?v=<?php echo(time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
   <title></title>
 </head>

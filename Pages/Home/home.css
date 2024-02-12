@@ -47,10 +47,13 @@ main {
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
   body {
-    min-height: 50vh;
+    min-height: 100vh;
+    margin: 0;
+    overflow-y: auto;
   }
   main {
-    height: auto;
+    height: calc(100vh - 25px);
+    overflow-y: auto;
   }
   .div-home-buttons {
     margin-top: 5px;
@@ -67,10 +70,13 @@ main {
     width: 400px;
   } */
   body {
-    height: auto;
+    min-height: 100vh;
+    margin: 0;
+    overflow-y: auto;
   }
   main {
-    height: auto;
+    height: calc(100vh - 25px);
+    overflow-y: auto;
   }
   .button-selector-home {
     margin-top: 5px;

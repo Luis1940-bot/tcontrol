@@ -1,1 +1,51 @@
+#idDivTablas {
+  width: 340px;
+  height: auto;
+  margin: 10px auto auto auto;
+  background-color: #ffffff;
+}
+#idTablaViewer {
+  width: 95%;
+}
+#idTablaViewer tr th {
+  font-size: 10px;
+}
 
+@media only screen and (min-width: 760px) and (orientation: landscape) {
+  body {
+    overflow: hidden;
+  }
+  #idDivTablas {
+    width: 95%;
+    margin: 5px auto auto auto;
+    overflow-y: auto;
+  }
+  #idTablaViewer thead tr th {
+    font-size: 12px;
+    overflow-y: auto;
+  }
+  #idTablaViewer tbody tr td {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  #idDivTablas {
+    width: 700px;
+    height: auto;
+    margin: 10px auto auto auto;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  #idDivTablas {
+    width: 700px;
+    height: auto;
+    margin: 10px auto auto auto;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+}

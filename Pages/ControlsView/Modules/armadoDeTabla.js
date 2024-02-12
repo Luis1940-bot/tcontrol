@@ -3,7 +3,7 @@ import arrayGlobal from '../../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { desencriptar } from '../../../controllers/cript.js'
+import { desencriptar, encriptar } from '../../../controllers/cript.js'
 // eslint-disable-next-line import/extensions
 import traerRegistros from './Controladores/traerRegistros.js'
 
@@ -13,7 +13,7 @@ let translateArchivos = []
 let espanolArchivos = []
 
 const widthScreen = window.innerWidth
-const widthScreenAjustado = 360 / widthScreen
+const widthScreenAjustado = 1 // 360 / widthScreen
 let arrayWidthEncabezado
 
 function trO(palabra) {
@@ -356,7 +356,7 @@ function completamosTablaModal(array) {
 }
 
 async function viewer(array, objTranslate) {
-  const control = desencriptar(localStorage.getItem('listadoCtrls'))
+  const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
   const { control_N, control_T } = control
   const nuxpedido = array[1]
   const traerControl = await traerRegistros(`NuevoControl,${control_N}`)
@@ -374,6 +374,25 @@ async function viewer(array, objTranslate) {
   modal.style.display = 'block'
 }
 
+function abrirControl(nr) {
+  try {
+    const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
+    const { control_N, control_T } = control
+    let contenido = {
+      control_N,
+      control_T,
+      nr,
+    }
+    contenido = encriptar(contenido)
+    sessionStorage.setItem('contenido', contenido)
+    const url = '../../../Pages/Control/index.php'
+    // window.location.href = url
+    window.open(url, '_blank')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 function estilosCell(
   alignCenter,
   paddingLeft,
@@ -387,7 +406,6 @@ function estilosCell(
   objTranslate
 ) {
   const cell = document.createElement('td')
-  cell.textContent = `${element[0]} - ${element[1]} - ${element[2]}  -  ${element[4]}`
   cell.style.borderBottom = '1px solid #cecece'
   cell.style.zIndex = 2
   cell.style.textAlign = alignCenter
@@ -397,6 +415,29 @@ function estilosCell(
   cell.style.fontSize = fontSize
   cell.style.color = colorText
 
+  // Crear el contenido de texto
+  const content = document.createElement('span')
+  content.textContent = `${element[0]} - nº ${element[1]} - ${element[2]}  -  ${element[4]}`
+
+  // Estilos para el texto normal
+  content.style.cursor = 'pointer'
+
+  // Agregar estilos para el efecto de hover
+  content.addEventListener('mouseenter', () => {
+    content.style.textDecoration = 'underline'
+    content.style.color = 'blue'
+  })
+
+  // Restablecer estilos cuando se quita el mouse
+  content.addEventListener('mouseleave', () => {
+    content.style.textDecoration = 'none'
+    content.style.color = '' // Restablecer a color original
+  })
+
+  // Agregar el contenido de texto a la celda
+  cell.appendChild(content)
+
+  // Crear y agregar la imagen
   const imagen = document.createElement('img')
   imagen.setAttribute('class', 'img-view')
   imagen.setAttribute('name', 'viewer')
@@ -411,8 +452,18 @@ function estilosCell(
     const i = e.target.getAttribute('data-index')
     viewer(arrayControl[i], objTranslate)
   })
+
+  // Agregar el evento de clic al contenido de la celda
+  content.addEventListener('click', () => {
+    content.style.color = 'blue'
+    const nr = element[1].trim()
+    abrirControl(nr)
+  })
+
+  // Agregar la imagen a la celda
   cell.appendChild(imagen)
 
+  // Retornar la celda
   return cell
 }
 
@@ -425,7 +476,11 @@ function estilosTbodyCell(element, index, arrayControl, objTranslate) {
   const fontWeight = 500
   const background = '#ffffff'
   const colorText = '#000000'
-  const fontSize = '10px'
+  let size = '10px'
+  if (widthScreen > 1000) {
+    size = '10px'
+  }
+  const fontSize = size
   const cell = estilosCell(
     alignCenter,
     paddingLeft,

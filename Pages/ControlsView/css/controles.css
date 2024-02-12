@@ -21,6 +21,7 @@ header {
 main {
   /* overflow-y: none; */
   height: auto;
+  min-width: 100%;
 }
 
 #idDivPerson {
@@ -31,40 +32,33 @@ hr {
   color: #cecece;
 }
 
-table {
-  width: 100%;
-}
 #tableControlViews {
-  margin-top: 0;
+  margin-top: 5px;
   display: none;
   overflow-y: auto;
   width: 100%;
 }
+
 thead {
   background: #000000;
-  width: 100%;
+  width: 90%;
   height: 20px;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 8px;
+  /* font-size: 8px; */
   font-style: normal;
   font-weight: 500;
 }
 
-#tableControlViews tbody {
-  overflow-y: auto;
-  width: 100%;
-}
-
 tbody {
   background: #ffffff;
-  width: 100%;
+  width: 90%;
   margin-bottom: 1px;
   /* overflow-y: auto; */
 }
 
 tbody tr {
-  width: 100%;
+  width: 90%;
 }
 
 tbody tr td {
@@ -83,7 +77,7 @@ table tbody tr td button {
   border: 1px solid #000;
 }
 table tbody tr td div {
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -111,40 +105,65 @@ table tbody tr td div button {
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
   body {
-    min-height: 50vh;
+    min-height: 100vh;
+    min-width: 100vh;
+    margin: 0;
   }
   main {
-    height: auto;
+    height: calc(100vh - 25px);
+    min-width: 100%;
+  }
+
+  #tableControlViews {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  thead,
+  tbody,
+  th,
+  tr,
+  td {
+    width: 90%;
   }
 }
 
 @media only screen and (min-width: 800px) {
-  /* .button-controles-menu{
-    width: 400px;
-  } */
   body {
     height: auto;
   }
   main {
     height: auto;
   }
+  #tableControlViews {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #tableControlViews,
+  thead,
+  tbody,
+  th,
+  tr,
+  td {
+    width: 90%;
+  }
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1000px) {
   body {
     height: auto;
     padding: 20px 200px 20px 200px;
   }
   main {
     height: auto;
+    min-width: 100vh;
   }
-  .button-controles-menu {
-    margin-top: 5px;
-    height: 40px;
-    font-size: 14px;
-    width: 400px;
+
+  #tableControlViews {
+    width: 60%;
   }
-  #idDivPerson {
-    margin: 45px 200px 20px auto;
+  #tableControlViews thead tr th {
+    font-size: 10px;
   }
 }

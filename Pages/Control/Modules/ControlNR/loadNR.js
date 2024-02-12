@@ -111,7 +111,7 @@ async function verSupervisor(idSupervisor) {
       firma: true,
       configFirma: supervisor,
     }
-    localStorage.setItem('config_menu', encriptar(configMenu))
+    sessionStorage.setItem('config_menu', encriptar(configMenu))
   } else if (idSupervisor === '0') {
     const supervisor = {
       id: 0,
@@ -127,13 +127,12 @@ async function verSupervisor(idSupervisor) {
       firma: false,
       configFirma: supervisor,
     }
-    localStorage.setItem('firma', encriptar('x'))
-    localStorage.setItem('config_menu', encriptar('x'))
+    sessionStorage.setItem('firma', encriptar('x'))
+    sessionStorage.setItem('config_menu', encriptar('x'))
   }
 }
 
 function cargarNR(datos) {
-  // console.log(datos)
   try {
     const idSupervisor = datos[0][6]
     const tbody = document.querySelector('tbody')
