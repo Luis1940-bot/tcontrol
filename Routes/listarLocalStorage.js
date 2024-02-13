@@ -1,5 +1,3 @@
-// listarsessionStorage.js
-
 console.log('Script cargado correctamente')
 
 function listarLocalStorage() {

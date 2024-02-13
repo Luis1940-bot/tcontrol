@@ -17,6 +17,8 @@ import guardaNotas from '../../Pages/Control/Modules/Controladores/guardaNotas.j
 // eslint-disable-next-line import/extensions
 import insertarRegistro from '../../Pages/Control/Modules/Controladores/insertarRegistro.js'
 // eslint-disable-next-line import/extensions
+import updateRegistro from '../../Pages/Control/Modules/Controladores/updateRegistro.js'
+// eslint-disable-next-line import/extensions
 import enviaMail from '../../Nodemailer/sendEmail.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../controllers/cript.js'
@@ -372,6 +374,9 @@ function trA(palabra, objTrad) {
 }
 
 function procesoStyleDisplay(elementosStyle) {
+  if (!elementosStyle) {
+    return
+  }
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < elementosStyle.element.length; i++) {
     const elemento = document.getElementById(elementosStyle.element[i])
@@ -413,7 +418,31 @@ const funcionGuardar = () => {
   }
 }
 const funcionGuardarCambio = () => {
-  // funciones.GuardarCambio();
+  const { habilitadoGuardar } = arrayGlobal
+  if (habilitadoGuardar) {
+    // eslint-disable-next-line no-use-before-define
+    const miAlerta = new Alerta()
+    const obj = arrayGlobal.objAlertaAceptarCancelar
+    miAlerta.createAlerta(obj, objTraductor, 'guardarCambio')
+    const elementosStyle = {
+      element: ['modalAlert'],
+      style: ['block'],
+      remove: [null],
+    }
+    procesoStyleDisplay(elementosStyle)
+  } else {
+    // eslint-disable-next-line no-use-before-define
+    const miAlerta = new Alerta()
+    const obj = arrayGlobal.avisoRojo
+    const texto = arrayGlobal.mensajesVarios.guardar.sinModificaciones
+    miAlerta.createVerde(obj, texto, objTraductor)
+    const elementosStyle = {
+      element: ['modalAlertVerde'],
+      style: ['block'],
+      remove: [null],
+    }
+    procesoStyleDisplay(elementosStyle)
+  }
 }
 const funcionGuardarComoNuevo = () => {
   // funciones.GuardarComoNuevo();
@@ -550,10 +579,11 @@ function cartelVerdeInsertado(
   obj.span.fontColor = '#ececec'
   obj.span.fontWeight = '700'
   obj.span.marginTop = '10px'
-  const spanTitulo = createSpan(obj.span, texto)
-  modalContent.appendChild(spanTitulo)
   span = createSpan(obj.close)
   modalContent.appendChild(span)
+  const spanTitulo = createSpan(obj.span, texto)
+  modalContent.appendChild(spanTitulo)
+
   let frase = ''
   texto = trO(mensaje.cantidadRegistros, objTrad) || mensaje.cantidadRegistros
   frase = `${texto} ${insertado.registros}`
@@ -652,8 +682,11 @@ function informe(
       enviado.success
     )
 
-    const documento = document.getElementById('numberDoc')
-    documento.innerText = insertado.documento
+    const documento = document.getElementById('doc').textContent
+    if (documento.trim() === 'Doc:') {
+      document.getElementById('doc').innerText = `Doc: ${insertado.documento}`
+    }
+
     sessionStorage.setItem('doc', encriptar(insertado.documento))
     const configMenuStorage = desencriptar(
       sessionStorage.getItem('config_menu')
@@ -672,6 +705,7 @@ function informe(
       ...configMenu.configFirma,
       ...configMenuStorage.configFirma,
     }
+
     sessionStorage.setItem('config_menu', encriptar(configMenu))
 
     limpiaArrays()
@@ -693,7 +727,8 @@ async function insert(
   objEncabezados,
   miAlertaInforme,
   objTrad,
-  modal
+  modal,
+  docStorage
 ) {
   try {
     const nuevoObjetoControl = { ...nuevoObjeto }
@@ -702,13 +737,16 @@ async function insert(
     delete nuevoObjetoControl.detalle
     delete nuevoObjetoControl.objImagen
 
-    const insertado = await insertarRegistro(nuevoObjetoControl)
-    // eslint-disable-next-line max-len
-    // const insertado = { success: true, message: 'ok', registros: '18', documento: '22222222222' };
+    let insertado
+    if (docStorage === false) {
+      insertado = await insertarRegistro(nuevoObjetoControl)
+    } else {
+      insertado = await updateRegistro(nuevoObjetoControl, docStorage)
+    }
+
     // console.log(insertado);
 
     const imagenes = await subirImagenes(nuevoObjeto.objImagen)
-    // const imagenes = { success: true, message: 'ok', rutaImagen: '../../' };
     // console.log(imagenes);
 
     const enviaPorEmail = sessionStorage.getItem('envia_por_email')
@@ -717,7 +755,6 @@ async function insert(
     let enviado = ''
     if (enviaPorEmail) {
       enviado = await enviaMail(nuevoObjeto, encabezados)
-      // enviado = { success: true, message: 'ok', reporte: 'DWT', documento: '22222222222' };
       // console.log(enviado);
     }
     const amarillo = document.getElementById('idDivAvisoVerde')
@@ -737,7 +774,7 @@ async function insert(
   }
 }
 
-function armaEncabezado(arrayMensajes, objTrad) {
+function armaEncabezado(arrayMensajes, objTrad, docStorage) {
   const encabezadosEmail = arrayMensajes.objetoControl.email
   let mensaje = arrayMensajes.mensajesVarios.email.fechaDeAlerta
   const fechaDeAlerta = trO(mensaje, objTrad) || mensaje
@@ -762,7 +799,7 @@ function armaEncabezado(arrayMensajes, objTrad) {
   mensaje = arrayMensajes.mensajesVarios.email.titulo
   const titulo = trO(mensaje, objTrad) || mensaje
   const encabezados = {
-    documento: '3333333333333',
+    documento: docStorage,
     address: encabezadosEmail.address,
     fecha: encabezadosEmail.fecha,
     hora: encabezadosEmail.hora,
@@ -782,6 +819,7 @@ function armaEncabezado(arrayMensajes, objTrad) {
     observacion,
     subject,
   }
+
   return encabezados
 }
 
@@ -866,17 +904,18 @@ function formatarMenu(doc, configMenu, objTranslate) {
   }
   if (doc !== 'null' && firmado === true) {
     //! console.log('menú guardado con firma');
+    const nombreFirma = configMenu.configFirma['nombre']
     const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text
     const firmadoPor = trO(textFirmado, objTranslate) || textFirmado
     const idMensajeFirmado = document.getElementById('idMensajeFirmado')
-    idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma.nombre}`
+    idMensajeFirmado.innerText = `${firmadoPor}: ${nombreFirma}`
     idMensajeFirmado.style.display = 'flex'
     nuevoConfigMenu = {
       guardar: false,
       guardarComo: true,
       guardarCambios: true,
       firma: false,
-      configFirma: 'x',
+      configFirma: configMenu.configFirma,
     }
     sessionStorage.setItem('config_menu', encriptar(nuevoConfigMenu))
     elementosStyle = {
@@ -1090,6 +1129,9 @@ class Alerta {
     if (typeAlert === 'guardar') {
       obj.divContent.height = '210px'
     }
+    if (typeAlert === 'guardarCambio') {
+      obj.divContent.height = '210px'
+    }
 
     const modalContent = createDiv(obj.divContent)
 
@@ -1135,12 +1177,18 @@ class Alerta {
         style: ['none', 'none'],
         remove: ['remove', 'remove'],
       }
+      let docStorage = sessionStorage.getItem('doc') !== 'null'
+      docStorage === true
+        ? (docStorage = desencriptar(sessionStorage.getItem('doc')))
+        : null
       procesoStyleDisplay(elementosStyle)
       limpiaArrays()
       const okGuardar = guardarNuevo(
         arrayGlobal.objetoControl,
-        arrayGlobal.arrayControl
+        arrayGlobal.arrayControl,
+        docStorage
       )
+
       const requerido = desencriptar(sessionStorage.getItem('requerido'))
       if (requerido.requerido && okGuardar) {
         const miAlerta = new Alerta()
@@ -1151,6 +1199,9 @@ class Alerta {
         miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, null)
         const modal = document.getElementById('modalAlertVerde')
         modal.style.display = 'block'
+        if (docStorage !== false) {
+          arrayGlobal.objetoControl.nuxpedido.fill(docStorage)
+        }
         const convertido = convertirObjATextPlano(arrayGlobal.objetoControl)
         const nuevoObjeto = {
           ...arrayGlobal.objetoControl,
@@ -1159,16 +1210,17 @@ class Alerta {
             .fill(null)
             .map((_, index) => (index === 0 ? convertido : null)),
         }
-        const encabezados = armaEncabezado(arrayGlobal, objTrad)
-        // soloEnviaEmail(nuevoObjeto, encabezados);
-        // console.log(encabezados);
+        const encabezados = armaEncabezado(arrayGlobal, objTrad, docStorage)
+        // soloEnviaEmail(nuevoObjeto, encabezados)
+        // console.log(encabezados, ' >>>nuevo objeto: ', nuevoObjeto)
         insert(
           nuevoObjeto,
           convertido,
           encabezados,
           miAlertaInforme,
           objTrad,
-          modal
+          modal,
+          docStorage
         )
       }
       if (!requerido.requerido || !okGuardar) {
@@ -1411,7 +1463,7 @@ class Alerta {
     const configFirma = desencriptar(sessionStorage.getItem('firma'))
     const configMenu = desencriptar(sessionStorage.getItem('config_menu'))
     const enviaPorEmail = sessionStorage.getItem('envia_por_email') === 'true'
-    console.log(enviaPorEmail)
+
     const obj = objeto
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
@@ -1571,6 +1623,7 @@ class Alerta {
     // let elementosStyle;
     const doc = sessionStorage.getItem('doc')
     // console.log(doc)
+
     formatarMenu(doc, configMenu, objTranslate)
     const enviaEmail = document.getElementById('idCheckBoxEmail')
     enviaPorEmail ? (enviaEmail.checked = true) : (enviaEmail.checked = false)

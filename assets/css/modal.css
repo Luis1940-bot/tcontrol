@@ -265,8 +265,8 @@ hr {
   #idDivAvisoImagenes {
     margin-top: 500px;
   }
-  .verde-close {
-    /* margin-left: 290px; */
+  .modal-close {
+    margin-left: 550px;
   }
   #idDivImagen {
     margin: 100px auto auto auto;

@@ -68,7 +68,7 @@ function tuFuncion(
   return objetoControlCopia
 }
 
-function recorroTable(objetoControl, arrayControl) {
+function recorroTable(objetoControl, arrayControl, nux) {
   try {
     const person = desencriptar(sessionStorage.getItem('user'))
     const idPerson = person.id
@@ -94,6 +94,12 @@ function recorroTable(objetoControl, arrayControl) {
     let founded
     let fechaActual = ''
     let horaActual = ''
+    let nuxpedido
+    if (nux === false) {
+      nuxpedido = 0
+    } else {
+      nuxpedido = nux
+    }
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length; i++) {
       let valor
@@ -102,9 +108,11 @@ function recorroTable(objetoControl, arrayControl) {
       let valorS
       let valorOBS
       let familiaselector
+
       // let imagenes;
       let observacion
       let respuesta
+
       const td = tr[i].querySelectorAll('td')
       // eslint-disable-next-line no-unused-vars
       const displayRow = window.getComputedStyle(tr[i]).display
@@ -274,9 +282,9 @@ function recorroTable(objetoControl, arrayControl) {
   }
   return true
 }
-function guardarNuevo(objetoControl, arrayControl) {
-  // console.log(objetoControl, arrayControl);
-  return recorroTable(objetoControl, arrayControl)
+function guardarNuevo(objetoControl, arrayControl, nuxpedido) {
+  // console.log(objetoControl, arrayControl, nuxpedido)
+  return recorroTable(objetoControl, arrayControl, nuxpedido)
 }
 
 export default guardarNuevo

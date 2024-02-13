@@ -1,23 +1,36 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
-$nux=$_POST['nux'];
-// $nux = '231206215202113';
-eliminaNuxPedido($nux);
-
-function eliminaNuxPedido($nux){
+function eliminaNuxPedido($nux, $pdo){
+      $result = array(
+            'numFilasDeleteadas' => 0
+        );
       $decodificado =urldecode($nux);
       $numFilasDeleteadas = 0;
-      include_once '../../../Routes/datos_base.php';
-      $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$chartset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
       $sql="DELETE FROM LTYregistrocontrol WHERE nuxpedido = ?";
-      $pdo->beginTransaction();
-      $sentencia = $pdo->prepare($sql);
-      $sentencia->execute([$decodificado]);    
-      $numFilasDeleteadas = $sentencia->rowCount();
-      // echo $numFilasDeleteadas.'<br>';
-       $pdo->commit(); 
-      return $numFilasDeleteadas;
+      try {
+        $pdo->beginTransaction();
+        $sentencia = $pdo->prepare($sql);
+        $sentencia->execute([$decodificado]);    
+        $numFilasDeleteadas = $sentencia->rowCount();
+        $pdo->commit(); 
+      } catch (PDOException $e) {
+          // Manejar errores de PDO aquí si es necesario
+          $pdo->rollBack();
+          die("Error en la ejecución de la consulta: " . $e->getMessage());
+      } finally {
+          $result['numFilasDeleteadas'] = $numFilasDeleteadas;
+      }
+      return $result;
       
 
+}
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+    // Si es así, realiza las operaciones deseadas
+
+    header("Content-Type: text/html;charset=utf-8");
+    $nux = $_POST['nux'];
+    
+    if (isset($nux) && is_string($nux)) {
+        eliminaNuxPedido($nux, $pdo);
+    }
 }
 ?>

@@ -101,7 +101,7 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
 
 async function verSupervisor(idSupervisor) {
   let configMenu
-  // console.log(idSupervisor)
+  // console.log(idSupervisor, typeof idSupervisor)
   if (idSupervisor !== '0') {
     const supervisor = await traerSupervisor(idSupervisor)
     configMenu = {

@@ -1,24 +1,33 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
-$datos=$_POST['datos'];
+$datos=isset($_POST['nuevoObjeto']) ? $_POST['nuevoObjeto'] : '';
+$nux=isset($_POST['nux']) ? $_POST['nux'] : '';
+
+if (empty($datos) || empty($nux)) {
+    $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
+    echo json_encode($response);
+    exit;
+}
 
 include('elimina.php');
 // include('datos.php');
 // $datos = $datox;
-eliminaRegistros($datos);
+// $nux = $nuxux;
+include_once '../../../Routes/datos_base.php';
+$pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$chartset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+eliminaRegistros($datos, $nux, $pdo);
 
-function eliminaRegistros($datos) {
-  $dato_decodificado =urldecode($datos);
-  $objeto_json = json_decode($dato_decodificado);
-  $nuxpedido = 0;
-  $nuxpedido = $objeto_json -> nuxpedido[0];
-  $deletes = eliminaNuxPedido($nuxpedido);
-  if ($deletes > 0 && $nuxpedido !== 0) {
-    insertar_registro($objeto_json, $nuxpedido);
+function eliminaRegistros($datos, $nux, $pdo) {
+  $resultadoEliminacion = eliminaNuxPedido($nux, $pdo);
+  $deletes = $resultadoEliminacion['numFilasDeleteadas'];
+  if ($deletes > 0 && $nux !== 0) {
+    insertar_registro($datos, $nux, $pdo);
   }
 }
 
-function insertar_registro($objeto_json, $nuxpedido) {
+function insertar_registro($datos, $nuxpedido, $pdo) {
+  $dato_decodificado =urldecode($datos);
+  $objeto_json = json_decode($dato_decodificado);
   $i=0;
   $campos='';
   $interrogantes='';
@@ -29,8 +38,6 @@ function insertar_registro($objeto_json, $nuxpedido) {
       $i++;
   }
 
-  include_once '../../../Routes/datos_base.php';
-  $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$chartset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
   $sql="INSERT INTO LTYregistrocontrol (".$campos.") VALUES (".$interrogantes.");";
   $c=0;
   $d=0;
@@ -40,7 +47,6 @@ function insertar_registro($objeto_json, $nuxpedido) {
 
   $pdo->beginTransaction();
   $sentencia = $pdo->prepare($sql);
-  // $nuxpedido=generaNuxPedido();
   for ($i=0; $i <$cantidad_registros ; $i++){
       foreach ($objeto_json as $clave => $valor){
         $tipodedato="PDO::PARAM_STR";
@@ -55,10 +61,9 @@ function insertar_registro($objeto_json, $nuxpedido) {
         
       }
       $c=0;
-      
       foreach ($objeto_json as $clave => $valor){
         $valor_ingresar=$valor[$i];
-        $clave==='nuxpedido'?$valor_ingresar=$nuxpedido:null;
+        // $clave==='nuxpedido'?$valor_ingresar=$nuxpedido:null;
         $campos[$d]=$valor_ingresar;
         $d++;
       }
@@ -74,7 +79,7 @@ function insertar_registro($objeto_json, $nuxpedido) {
     // echo json_encode($response);
   } else {
     // echo "No se insertó ningún registro";
-    $response = array('success' => false, 'message' => 'Algo salió mal no hay registros insertados');
+    $response = array('success' => false, 'message' => 'Algo salió mal.');
     // echo json_encode($response);
   }
   $pdo=null; 
