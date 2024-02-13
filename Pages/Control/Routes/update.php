@@ -8,7 +8,6 @@ if (empty($datos) || empty($nux)) {
     echo json_encode($response);
     exit;
 }
-
 include('elimina.php');
 // include('datos.php');
 // $datos = $datox;

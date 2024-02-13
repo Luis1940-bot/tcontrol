@@ -13,7 +13,7 @@
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
   body {
-    overflow: hidden;
+    overflow: auto;
   }
   #idDivTablas {
     width: 95%;

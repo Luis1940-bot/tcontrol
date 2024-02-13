@@ -418,6 +418,7 @@ const funcionGuardar = () => {
   }
 }
 const funcionGuardarCambio = () => {
+  arrayGlobal.habilitadoGuardar = true
   const { habilitadoGuardar } = arrayGlobal
   if (habilitadoGuardar) {
     // eslint-disable-next-line no-use-before-define
@@ -445,7 +446,34 @@ const funcionGuardarCambio = () => {
   }
 }
 const funcionGuardarComoNuevo = () => {
-  // funciones.GuardarComoNuevo();
+  arrayGlobal.habilitadoGuardar = true
+  sessionStorage.setItem('doc', null)
+  const { habilitadoGuardar } = arrayGlobal
+  if (habilitadoGuardar) {
+    // eslint-disable-next-line no-use-before-define
+    const miAlerta = new Alerta()
+    const obj = arrayGlobal.objAlertaAceptarCancelar
+    miAlerta.createAlerta(obj, objTraductor, 'guardarComoNuevo')
+    const elementosStyle = {
+      element: ['modalAlert'],
+      style: ['block'],
+      remove: [null],
+    }
+    procesoStyleDisplay(elementosStyle)
+    arrayGlobal.habilitadoGuardar = false
+  } else {
+    // eslint-disable-next-line no-use-before-define
+    const miAlerta = new Alerta()
+    const obj = arrayGlobal.avisoRojo
+    const texto = arrayGlobal.mensajesVarios.guardar.sinModificaciones
+    miAlerta.createVerde(obj, texto, objTraductor)
+    const elementosStyle = {
+      element: ['modalAlertVerde'],
+      style: ['block'],
+      remove: [null],
+    }
+    procesoStyleDisplay(elementosStyle)
+  }
 }
 const funcionRefrescar = () => {
   const url = new URL(window.location.href)
@@ -686,17 +714,33 @@ function informe(
     if (documento.trim() === 'Doc:') {
       document.getElementById('doc').innerText = `Doc: ${insertado.documento}`
     }
+    const resultado = documento.match(/Doc:\s*(\d+)/)
+    if (resultado) {
+      const numeroExtraido = resultado[1]
+      if (insertado.documento.trim() !== numeroExtraido.trim()) {
+        document.getElementById('doc').innerText = `Doc: ${insertado.documento}`
+      }
+    }
 
     sessionStorage.setItem('doc', encriptar(insertado.documento))
     const configMenuStorage = desencriptar(
       sessionStorage.getItem('config_menu')
     )
+    let datoDeFirma = 'x'
+    if (configMenuStorage !== false) {
+      if (
+        Object.prototype.toString.call(configMenuStorage.configFirma) ===
+        '[object Object]'
+      ) {
+        datoDeFirma = configMenuStorage
+      }
+    }
     const configMenu = {
       guardar: true,
       guardarComo: false,
       guardarCambios: false,
       firma: false,
-      configFirma: {},
+      configFirma: datoDeFirma,
     }
     configMenu.guardar = false
     configMenu.guardarComo = true
@@ -824,11 +868,30 @@ function armaEncabezado(arrayMensajes, objTrad, docStorage) {
 }
 
 function formatarMenu(doc, configMenu, objTranslate) {
-  const firmado =
-    configMenu.configFirma && Object.keys(configMenu.configFirma).length !== 0
+  let firmado = undefined
+  let count = 0
+  if (
+    configMenu &&
+    configMenu.configFirma &&
+    typeof configMenu.configFirma === 'object'
+  ) {
+    // Verificar si configFirma es un objeto y no un string
+    if (
+      Object.prototype.toString.call(configMenu.configFirma) ===
+      '[object Object]'
+    ) {
+      for (let key in configMenu.configFirma) {
+        if (configMenu.configFirma.hasOwnProperty(key)) {
+          count++
+        }
+      }
+      count > 1 ? (firmado = true) : (firmado = false)
+    }
+  }
+
   let elementosStyle
   let nuevoConfigMenu
-  if (doc === 'null' && firmado === undefined) {
+  if ((doc === 'null' && firmado === undefined) || firmado === false) {
     //! console.log('menu básico sin doc');
     nuevoConfigMenu = {
       guardar: true,
@@ -854,7 +917,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
     const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text
     const firmadoPor = trO(textFirmado, objTranslate) || textFirmado
     const idMensajeFirmado = document.getElementById('idMensajeFirmado')
-    idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma.nombre}`
+    idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma['nombre']}`
     idMensajeFirmado.style.display = 'flex'
     nuevoConfigMenu = {
       guardar: configMenu.guardar,
@@ -878,7 +941,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
       remove: [null, null, null, null, null, null, null, null],
     }
   }
-  if (doc !== 'null' && firmado === undefined) {
+  if ((doc !== 'null' && firmado === undefined) || firmado === false) {
     //! console.log('menú guardado con doc y  sin firma');
     nuevoConfigMenu = {
       guardar: false,
@@ -897,9 +960,21 @@ function formatarMenu(doc, configMenu, objTranslate) {
         'idHrGuardarCambio',
         'idHrGuardarComoNuevo',
         'idDivFirmado',
+        'idMensajeFirmado',
+        'idDivFirmar',
       ],
-      style: ['none', 'none', 'flex', 'flex', 'flex', 'flex', 'none'],
-      remove: [null, null, null, null, null, null, null],
+      style: [
+        'none',
+        'none',
+        'flex',
+        'flex',
+        'flex',
+        'flex',
+        'none',
+        'flex',
+        'flex',
+      ],
+      remove: [null, null, null, null, null, null, null, null, null],
     }
   }
   if (doc !== 'null' && firmado === true) {
@@ -1463,7 +1538,6 @@ class Alerta {
     const configFirma = desencriptar(sessionStorage.getItem('firma'))
     const configMenu = desencriptar(sessionStorage.getItem('config_menu'))
     const enviaPorEmail = sessionStorage.getItem('envia_por_email') === 'true'
-
     const obj = objeto
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
