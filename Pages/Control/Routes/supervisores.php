@@ -17,7 +17,7 @@ function verifica(){
   $hash=hash('ripemd160',$pass);
 
   include_once '../../../Routes/datos_base.php';
-  $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$chartset}",$user,$password);
+  $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
   try {
 
     $sql="SELECT u.idusuario, u.nombre, u.mail, u.idtipousuario, u.mi_cfg  FROM usuarios u WHERE u.pass=?";

@@ -196,3 +196,7 @@ No records were found for this control.
 Mistake. The document code must be a number.
 No records found with the document
 View by date
+Attention
+You are about to delete the registry
+La operacion fue exitosa con la eliminacion del registro
+Something went wrong with there being deleted records

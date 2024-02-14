@@ -8,5 +8,5 @@
          $dbname=$Array[0];
          $conexion= null;
          $port=3306;
-         $chartset="utf-8";
+         $charset="utf-8";
 ?>

@@ -102,6 +102,11 @@ table tbody tr td div button {
   box-shadow: 1px 1px 1px #888888;
   border-radius: 10px;
 }
+.img-trash:hover {
+  background-color: #b0b0b0;
+  box-shadow: 2px 2px 2px #e90505;
+  border-radius: 10px;
+}
 
 @media only screen and (min-width: 760px) and (orientation: landscape) {
   body {

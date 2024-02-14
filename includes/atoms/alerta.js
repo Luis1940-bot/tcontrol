@@ -23,6 +23,7 @@ import enviaMail from '../../Nodemailer/sendEmail.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../controllers/cript.js'
 import fechasGenerator from '../../controllers/fechas.js'
+import eliminarRegistro from '../../Pages/ControlsView/Modules/Controladores/eliminaRegistro.js'
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../'
@@ -1188,6 +1189,31 @@ function printDiv() {
   ventana.close() // Cierra la ventana
 }
 
+async function eliminarR(objTraductor) {
+  const nux = document.getElementById('idEliminaRegistro')
+  let registro = nux.textContent
+  const matches = registro.match(/\d+/)
+  registro = matches ? parseInt(matches[0], 10) : null
+  const deleteados = await eliminarRegistro(registro)
+  let modal = document.getElementById('modalAlert')
+  modal.style.display = 'none'
+  modal.remove()
+  const miAlerta = new Alerta()
+  let obj = arrayGlobal.avisoRojo
+  obj.div.width = '80%'
+  obj.close.id = 'idCloseDeleteado'
+  let texto = trO(deleteados.message, objTraductor) || deleteados.message
+  texto = `${texto}: ${registro}`
+  miAlerta.createVerde(obj, texto, null)
+  modal = document.getElementById('modalAlertVerde')
+  modal.style.display = 'block'
+  const closeModalButton = document.getElementById('idCloseDeleteado')
+  closeModalButton.addEventListener('click', () => {
+    // Se ejecutará después de que se haga clic en el botón de cierre del modal
+    window.location.reload()
+  })
+}
+
 class Alerta {
   constructor() {
     this.modal = null
@@ -2056,6 +2082,65 @@ class Alerta {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  createEliminaRegistro(objeto, nuxpedido, objTrad, control) {
+    const { control_N, control_T } = control
+    const obj = objeto
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlert'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.7)'
+
+    obj.divContent.background = 'rgba(230, 32, 32, 1)'
+    obj.divContent.height = '290px'
+    const modalContent = createDiv(obj.divContent)
+    const span = createSpan(obj.close)
+    modalContent.appendChild(span)
+
+    let texto =
+      trO(obj.titulo.text['eliminar'], objTrad) || obj.titulo.text['eliminar']
+    obj.titulo.text['eliminar'] = `${texto}!!!`
+    const title = createH3(obj.titulo, 'eliminar')
+    modalContent.appendChild(title)
+
+    texto =
+      trO(obj.titulo.text['eliminar'], objTrad) || obj.titulo.text['eliminar']
+    obj.titulo.text['eliminar'] = `${control_N} - ${control_T}`
+    obj.titulo.marginTop = '0px'
+    const ctrl = createH3(obj.titulo, 'eliminar')
+    modalContent.appendChild(ctrl)
+
+    texto = trO(obj.span.text['eliminar'], objTrad) || obj.span.text['eliminar']
+    const registro = `${texto}: ${nuxpedido}`
+    obj.span.id = 'idEliminaRegistro'
+    obj.span.text['eliminar'] = registro
+    const spanTexto = createSpan(obj.span, registro)
+    modalContent.appendChild(spanTexto)
+
+    obj.divButtons.background = 'rgba(230, 32, 32, 1)'
+    const divButton = createDiv(obj.divButtons)
+
+    texto = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text
+    obj.btnaccept.text = texto
+    const buttonAceptar = createButton(obj.btnaccept)
+
+    texto = trO(obj.btncancel.text, objTrad) || obj.btncancel.text
+    obj.btncancel.text = texto
+    const buttonCancelar = createButton(obj.btncancel)
+
+    divButton.appendChild(buttonAceptar)
+    divButton.appendChild(buttonCancelar)
+
+    modalContent.appendChild(divButton)
+    // Agregar el contenido al modal
+    this.modal.appendChild(modalContent)
+    document.body.appendChild(this.modal)
+
+    const idAceptar = document.getElementById('idAceptar')
+    idAceptar.addEventListener('click', () => {
+      eliminarR(objTrad)
+    })
   }
 
   destroyAlerta() {

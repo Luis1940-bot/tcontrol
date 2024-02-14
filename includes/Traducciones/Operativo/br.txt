@@ -196,3 +196,7 @@ Não foram encontrados registros para esse controle.
 Erro. O código do documento deve ser um número.
 Nenhum registro encontrado com o documento
 Ver por data
+Atenção
+Você está prestes a excluir o registro
+A operação foi exitosa com a eliminação do registro
+Algo salió mal no hay registros deletados

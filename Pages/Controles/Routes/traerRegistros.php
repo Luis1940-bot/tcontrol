@@ -42,7 +42,7 @@
 
         
         include_once '../../../Routes/datos_base.php';
-        $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$chartset}",$user,$password);
+        $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
         try {
       

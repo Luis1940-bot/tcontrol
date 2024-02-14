@@ -355,6 +355,20 @@ function completamosTablaModal(array) {
   }
 }
 
+function eliminarRegistro(array, objTranslate) {
+  const nuxpedido = array[1]
+  const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
+  const miAlerta = new Alerta()
+  miAlerta.createEliminaRegistro(
+    arrayGlobal.objAlertaAceptarCancelar,
+    nuxpedido,
+    objTranslate,
+    control
+  )
+  const modal = document.getElementById('modalAlert')
+  modal.style.display = 'block'
+}
+
 async function viewer(array, objTranslate) {
   const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
   const { control_N, control_T } = control
@@ -403,9 +417,11 @@ function estilosCell(
   element,
   index,
   arrayControl,
-  objTranslate
+  objTranslate,
+  tipo
 ) {
   const cell = document.createElement('td')
+
   cell.style.borderBottom = '1px solid #cecece'
   cell.style.zIndex = 2
   cell.style.textAlign = alignCenter
@@ -462,12 +478,29 @@ function estilosCell(
 
   // Agregar la imagen a la celda
   cell.appendChild(imagen)
+  if (tipo >= 7) {
+    const trash = document.createElement('img')
+    trash.setAttribute('class', 'img-trash')
+    trash.setAttribute('name', 'trash')
+    trash.style.float = 'right'
+    trash.src = '../../../assets/img/icons8-trash-48.png'
+    trash.style.height = '12px'
+    trash.style.width = '12px'
+    trash.style.margin = 'auto 15px auto auto'
+    trash.style.cursor = 'pointer'
+    trash.setAttribute('trash-index', index)
+    trash.addEventListener('click', (e) => {
+      const i = e.target.getAttribute('trash-index')
+      eliminarRegistro(arrayControl[i], objTranslate)
+    })
+    cell.appendChild(trash)
+  }
 
   // Retornar la celda
   return cell
 }
 
-function estilosTbodyCell(element, index, arrayControl, objTranslate) {
+function estilosTbodyCell(element, index, arrayControl, objTranslate, tipo) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   const alignCenter = 'left'
@@ -491,7 +524,8 @@ function estilosTbodyCell(element, index, arrayControl, objTranslate) {
     element,
     index,
     arrayControl,
-    objTranslate
+    objTranslate,
+    tipo
   )
   newRow.appendChild(cell)
   return newRow
@@ -500,9 +534,16 @@ function estilosTbodyCell(element, index, arrayControl, objTranslate) {
 function completaTabla(arrayControl, objTranslate) {
   const tbody = document.querySelector('tbody')
   // const cantidadDeRegistros = arrayControl.length;
-
+  let { tipo } = desencriptar(sessionStorage.getItem('user'))
+  tipo = parseInt(tipo, 10)
   arrayControl.forEach((element, index) => {
-    const newRow = estilosTbodyCell(element, index, arrayControl, objTranslate)
+    const newRow = estilosTbodyCell(
+      element,
+      index,
+      arrayControl,
+      objTranslate,
+      tipo
+    )
     tbody.appendChild(newRow)
   })
   const tableControlViews = document.getElementById('tableControlViews')
