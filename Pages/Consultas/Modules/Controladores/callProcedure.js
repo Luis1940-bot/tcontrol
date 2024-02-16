@@ -1,0 +1,39 @@
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '../../../..'
+
+export default function traerRegistros(sql) {
+  // eslint-disable-next-line no-console
+  console.time('callProcedure')
+  return new Promise((resolve, reject) => {
+    const rax = `&new=${new Date()}`
+    const ruta = `${SERVER}/Pages/Consultas/Routes/callProcedure.php?q=${sql}${rax}`
+    fetch(ruta, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        resolve(data)
+        let vecesLoad = sessionStorage.getItem('loadSystem')
+        const cantidadProcesos = sessionStorage.getItem('cantidadProcesos')
+        vecesLoad = Number(vecesLoad) + 1
+        sessionStorage.setItem('loadSystem', vecesLoad)
+        const modal = document.getElementById('modalAlertCarga')
+        if (vecesLoad > Number(cantidadProcesos)) {
+          modal.style.display = 'none'
+          modal.remove()
+          document.getElementById('wichC').style.display = 'inline'
+        }
+        // eslint-disable-next-line no-console
+        console.timeEnd('callProcedure')
+      })
+      .catch((error) => {
+        console.timeEnd('callProcedure')
+        reject(error)
+      })
+  })
+}

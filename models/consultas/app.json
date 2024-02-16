@@ -1,0 +1,160 @@
+{
+  "Consultas": {
+    "name": [
+      "Especialidades",
+      "BOS",
+      "DWT",
+      "Fritas",
+      "Puré",
+      "Planta",
+      "Producción",
+      "Receiving",
+      "Seguridad"
+    ],
+    "active": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "button": [1, 1, 1, 1, 1, 1, 1, 1, 1]
+  },
+  "Receiving": {
+    "name": ["Ingreso de MP", "Salida de MP", "Stock de MP"],
+    "confecha": [1, 1, 0],
+    "archivo": ["IngresodeMP", "SalidadeMP", "StockdeMP"],
+    "active": [1, 1, 1],
+    "button": [0, 0, 0],
+    "procedure": ["proc_IngresoDeMP", null, null],
+    "in": [{ "fechas": ["desdeI", "hastaI"] }, null, null],
+    "out": [null, null, null]
+  },
+  "Seguridad": {
+    "name": [
+      "Listado de Reportes de Incidentes",
+      "Listado de Investigaciones",
+      "Listado de Actividades"
+    ],
+    "confecha": [0, 0, 0],
+    "archivo": [
+      "ListadodeReportesdeincidentes",
+      "ListadodeInvestigaciones",
+      "listadoactividades"
+    ],
+    "active": [1, 1, 1],
+    "button": [0, 0, 0],
+    "procedure": [null, null, null],
+    "in": [null, null, null],
+    "out": [null, null, null]
+  },
+  "Especialidades": {
+    "name": [
+      "Listado de Productos",
+      "Batch Cargados",
+      "Batch Cargados por fechas",
+      "Toneladas de Especialidades"
+    ],
+    "confecha": [0, 0, 1, 1],
+    "archivo": [
+      "ProductoEspecialidades",
+      "lotes_especialidades",
+      "lotes_especialidades_fechas",
+      "tn_especialidades"
+    ],
+    "active": [1, 1, 1, 1],
+    "button": [0, 0, 0, 0],
+    "procedure": [null, null, null, null],
+    "in": [null, null, null, null],
+    "out": [null, null, null, null],
+    "operation": [null, null, null, null]
+  },
+  "Producción": {
+    "name": ["Unidades Técnicas", "Estándares"],
+    "confecha": [0, 0],
+    "archivo": ["unidadtecnica", "estandares"],
+    "active": [0, 0],
+    "button": [0, 0],
+    "procedure": [null, null],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null]
+  },
+  "Fritas": {
+    "name": ["Toneladas de Fritas 1", "Toneladas de Fritas 2"],
+    "confecha": [1, 1],
+    "archivo": ["tn_fritas1", "tn_fritas2"],
+    "active": [1, 1],
+    "button": [0, 0],
+    "procedure": [null, null],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null]
+  },
+  "Puré": {
+    "name": ["Toneladas de Puré"],
+    "confecha": [1],
+    "archivo": ["tn_pure"],
+    "active": [1],
+    "button": [0],
+    "procedure": [null],
+    "in": [null],
+    "out": [null],
+    "operation": [null]
+  },
+  "DWT": {
+    "name": [
+      "DWT",
+      "*DWT Fritas L1",
+      "DWT Fritas L1",
+      "DWT General L1",
+      "*DWT Fritas L2",
+      "DWT Fritas L2",
+      "DWT General L2"
+    ],
+    "confecha": [1, 1, 1, 1, 1, 1, 1],
+    "archivo": [
+      "DWT",
+      "DWT_fritas_L1",
+      "DWT_fritas_L1",
+      "DW_TOTALES_gral_L1",
+      "DWT_fritas_L2",
+      "DWT_fritas_L2",
+      "DW_TOTALES_gral_L2"
+    ],
+    "active": [1, 1, 1, 1, 1, 1, 1],
+    "button": [0, 0, 0, 0, 0, 0, 0],
+    "procedure": ["proc_dwt", null, null, null, null, null, null],
+    "in": [null, null, null, null, null, null, null],
+    "out": [null, null, null, null, null, null, null],
+    "operation": [null, null, null, null, null, null, null]
+  },
+  "Planta": {
+    "name": ["Listado de Contratistas", "Listado de Transportistas"],
+    "confecha": [0, 0],
+    "archivo": ["listadocontratostas", "listadotransportista"],
+    "active": [1, 1],
+    "button": [0, 0],
+    "procedure": [null, null],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null]
+  },
+  "BOS": {
+    "name": [
+      "Bos General",
+      "Bos Calidad",
+      "Bos Seguridad",
+      "Bos Medio Ambiente",
+      "Bos Reglas de Oro"
+    ],
+    "confecha": [1, 1, 1, 1, 1],
+    "archivo": [
+      "bos_general",
+      "bos_qualidade",
+      "bos_seguransa",
+      "bos_ambiente",
+      "bos_regrasdeouro"
+    ],
+    "active": [1, 1, 1, 1, 1],
+    "button": [0, 0, 0, 0, 0],
+    "procedure": [null, null, null, null, null],
+    "in": [null, null, null, null, null],
+    "out": [null, null, null, null, null],
+    "operation": [null, null, null, null, null]
+  }
+}

@@ -200,3 +200,8 @@ Atenção
 Você está prestes a excluir o registro
 A operação foi exitosa com a eliminação do registro
 Algo salió mal no hay registros deletados
+Consultas
+Recebendo
+Segurança
+Produção
+Plantar

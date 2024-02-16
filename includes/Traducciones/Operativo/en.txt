@@ -200,3 +200,8 @@ Attention
 You are about to delete the registry
 La operacion fue exitosa con la eliminacion del registro
 Something went wrong with there being deleted records
+Consultations
+Receiving
+Security
+Production
+Plant

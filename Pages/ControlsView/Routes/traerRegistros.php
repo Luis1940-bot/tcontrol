@@ -86,16 +86,19 @@
 
             $result = mysqli_query($con,$sql);
             $arr_customers = array();
-            $cantidadcampos = mysqli_num_fields($result);
-            $contador = 0;
-            while($row=mysqli_fetch_array($result)) {
+            // $cantidadcampos = mysqli_num_fields($result);
+            // $contador = 0;
+            // while($row=mysqli_fetch_array($result)) {
                 
-                //******************************************** */
-                for ($x = 0; $x <= $cantidadcampos-1; $x++) {
-                    $sincorchetes=$row[$x];
-                    $arr_customers[$contador][$x] = $row[$x];
-                }
-                $contador++;
+            //     //******************************************** */
+            //     for ($x = 0; $x <= $cantidadcampos-1; $x++) {
+            //         $sincorchetes=$row[$x];
+            //         $arr_customers[$contador][$x] = $row[$x];
+            //     }
+            //     $contador++;
+            // }
+            while ($row = mysqli_fetch_assoc($result)) {
+                $arr_customers[] = array_values($row);
             }
             $json = json_encode($arr_customers);
             echo $json;

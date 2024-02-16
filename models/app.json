@@ -7,7 +7,7 @@
   "Menu": {
     "name": ["Controles", "Consultas"],
     "type": ["", ""],
-    "ruta": ["Controles/index.php", ""]
+    "ruta": ["Controles/index.php", "Consultas/index.php"]
   },
   "Controles": {
     "name": ["Controles", "Imprimir control"],
