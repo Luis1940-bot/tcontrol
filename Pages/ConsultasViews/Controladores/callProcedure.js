@@ -1,12 +1,19 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..'
 
-export default function traerRegistros(sql) {
+export default function callProcedure(sql, desde, hasta) {
   // eslint-disable-next-line no-console
   console.time('callProcedure')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
-    const ruta = `${SERVER}/Pages/Consultas/Routes/callProcedure.php?q=${sql}${rax}`
+    const ruta = `${SERVER}/Pages/ConsultasViews/Routes/callProcedure.php?${rax}`
+    const requestBody = {
+      q: sql,
+      desde,
+      hasta,
+    }
+
+    const datos = JSON.stringify(requestBody)
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -14,20 +21,11 @@ export default function traerRegistros(sql) {
         Accept: 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
+      body: datos,
     })
       .then((res) => res.json())
       .then((data) => {
         resolve(data)
-        let vecesLoad = sessionStorage.getItem('loadSystem')
-        const cantidadProcesos = sessionStorage.getItem('cantidadProcesos')
-        vecesLoad = Number(vecesLoad) + 1
-        sessionStorage.setItem('loadSystem', vecesLoad)
-        const modal = document.getElementById('modalAlertCarga')
-        if (vecesLoad > Number(cantidadProcesos)) {
-          modal.style.display = 'none'
-          modal.remove()
-          document.getElementById('wichC').style.display = 'inline'
-        }
         // eslint-disable-next-line no-console
         console.timeEnd('callProcedure')
       })

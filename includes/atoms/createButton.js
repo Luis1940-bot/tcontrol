@@ -7,6 +7,11 @@ function createButton(params) {
   params.procedure !== null
     ? nuevoBoton.setAttribute('procedure', params.procedure)
     : null
+  params.confecha !== null
+    ? nuevoBoton.setAttribute('confecha', params.confecha)
+    : null
+  params.ini !== null ? nuevoBoton.setAttribute('ini', params.ini) : null
+  params.outi !== null ? nuevoBoton.setAttribute('outi', params.outi) : null
   params.innerHTML !== null ? (nuevoBoton.innerHTML = params.innerHTML) : null
   params.height !== null ? (nuevoBoton.style.height = params.height) : null
   params.width !== null ? (nuevoBoton.style.width = params.width) : null

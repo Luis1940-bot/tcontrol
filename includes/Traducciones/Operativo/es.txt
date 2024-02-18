@@ -191,7 +191,7 @@ DWT PROD DRY RECEIVING PURÉ
 DWT PROD WET RECEIVING PURÉ
 DWT PROD WASTE PURÉ
 Inicio
-No teine permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias
+No tiene permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias
 No se encontraron registros para este control.
 Error. El código del documento debe ser un número.
 No se encontraron registros con el documento
@@ -205,3 +205,6 @@ Receiving
 Seguridad
 Producción
 Planta
+Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.
+Seleccione el intervalo de fechas para la consulta:
+No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.

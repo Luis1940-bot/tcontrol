@@ -24,6 +24,8 @@ import enviaMail from '../../Nodemailer/sendEmail.js'
 import { encriptar, desencriptar } from '../../controllers/cript.js'
 import fechasGenerator from '../../controllers/fechas.js'
 import eliminarRegistro from '../../Pages/ControlsView/Modules/Controladores/eliminaRegistro.js'
+// eslint-disable-next-line import/extensions
+import callProcedure from '../../Pages/ConsultasViews/Controladores/callProcedure.js'
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../'
@@ -356,6 +358,9 @@ function trO(palabra, objTranslate) {
 
 function trA(palabra, objTrad) {
   try {
+    if (palabra === undefined || palabra === null || objTrad === null) {
+      return ''
+    }
     const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
     const index = objTrad.archivosES.findIndex(
       (item) =>
@@ -1145,6 +1150,47 @@ function estilosTbodyCell(
   return newRow
 }
 
+function estilosTbodyCellConsulta(
+  element,
+  index,
+  cantidadDeRegistros,
+  objTranslate,
+  arrayWidthEncabezado
+) {
+  const newRow = document.createElement('tr')
+  for (let i = 0; i < cantidadDeRegistros; i++) {
+    let dato = element[i]
+    let alignCenter = 'left'
+    let paddingLeft = '5px'
+    let colSpan = 0
+    let fontStyle = 'normal'
+    let fontWeight = 500
+    let background = '#ffffff'
+    let type = null
+    let colorText = '#000000'
+    let requerido = ''
+    let display = null
+    const cell = estilosCell(
+      alignCenter,
+      paddingLeft,
+      type,
+      dato,
+      colSpan,
+      fontStyle,
+      fontWeight,
+      background,
+      colorText,
+      requerido,
+      display,
+      null,
+      arrayWidthEncabezado,
+      i
+    )
+    newRow.appendChild(cell)
+  }
+  return newRow
+}
+
 function printDiv() {
   let objeto = document.getElementById('idDivTablas') // Obtén el objeto a imprimir
   let ventana = window.open('', '_blank') // Abre una ventana vacía nueva
@@ -1876,7 +1922,7 @@ class Alerta {
             'No teine permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias',
             objTrad
           ) ||
-          'No teine permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias'
+          'No tiene permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias'
         typeAlert = 'descripcion'
         obj.span.text[typeAlert] = texto
         obj.span.marginTop = '10px'
@@ -2002,6 +2048,220 @@ class Alerta {
           inputDesde.style.background = 'red'
         }
       })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  createCalendar(objeto, objTranslate, procedure) {
+    try {
+      const obj = objeto
+      this.modal = document.createElement('div')
+      this.modal.id = 'modalTablaViewFecha'
+      this.modal.className = 'modal'
+      this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+      // Crear el contenido del modal
+      const modalContent = createDiv(obj.divContent)
+      let span = createSpan(obj.close)
+      modalContent.appendChild(span)
+
+      let texto = 'Seleccione el intervalo de fechas para la consulta:'
+      texto = trO(texto, objTranslate) || texto
+      obj.span.text = texto
+      span = createSpan(obj.span, texto)
+      modalContent.appendChild(span)
+      obj.titulo.text.text = procedure.name
+      const title = createH3(obj.titulo, 'text')
+      title.id = 'idTituloFechasH3'
+      title.setAttribute('data-name', procedure.procedure)
+      modalContent.appendChild(title)
+
+      const divEncabezado = createDiv(obj.divEncabezado)
+      obj.imgPrint.display = 'inline-block'
+      const imagenButton = createIMG(obj.imgPrint)
+      obj.span.alignSelf = 'left'
+      obj.span.passing = null
+      obj.span.className = null
+      obj.span.padding = null
+      obj.span.left = '10px'
+      obj.imgPrint.display = 'inline-block'
+      span = createSpan(obj.span, 'Fechas')
+      divEncabezado.appendChild(imagenButton)
+
+      divEncabezado.appendChild(span)
+      modalContent.appendChild(divEncabezado)
+      const hr = createHR(obj)
+      modalContent.appendChild(hr)
+      const fechaDeHoy = fechasGenerator.fecha_corta_yyyymmdd(new Date())
+      let divInput = createDiv(obj.divInput)
+      obj.input.id = 'idDesde'
+      obj.input.value = fechaDeHoy
+      let input = createInput(obj.input)
+      texto = trO('Desde:', objTranslate) || 'Desde:'
+      obj.label.innerText = `${texto}: `
+      obj.label.margin = 'auto 10px'
+      let label = createLabel(obj.label)
+      divInput.appendChild(label)
+      divInput.appendChild(input)
+      modalContent.appendChild(divInput)
+      obj.divInput.id = 'idDivInputPorFechaHasta'
+      divInput = createDiv(obj.divInput)
+      obj.input.id = 'idHasta'
+      obj.input.value = fechaDeHoy
+      input = createInput(obj.input)
+      texto = trO('Hasta:', objTranslate) || 'Hasta:'
+      obj.label.innerText = `${texto}: `
+      obj.label.margin = 'auto 10px'
+      label = createLabel(obj.label)
+      divInput.appendChild(label)
+      divInput.appendChild(input)
+      modalContent.appendChild(divInput)
+      texto = trO('Enviar', objTranslate) || 'Enviar:'
+      obj.btnEnviar.text = texto
+      const btn = createButton(obj.btnEnviar)
+      btn.setAttribute('data-procedure', procedure.procedure)
+      modalContent.appendChild(btn)
+      // Agregar el contenido al modal
+      this.modal.appendChild(modalContent)
+
+      // Agregar el modal al body del documento
+      document.body.appendChild(this.modal)
+      const idbtnEnviar = document.getElementById('idbtnEnviar')
+      idbtnEnviar.addEventListener('click', async (e) => {
+        const name = e.target.attributes[3].value
+        let inputDesde = document.getElementById('idDesde')
+        let inputHasta = document.getElementById('idHasta')
+        let desde = inputDesde.value
+        let hasta = inputHasta.value
+        const fechaDesde = new Date(desde)
+        const fechaHasta = new Date(hasta)
+        const soloFecha1 = new Date(
+          fechaDesde.getFullYear(),
+          fechaDesde.getMonth(),
+          fechaDesde.getDate()
+        )
+        const soloFecha2 = new Date(
+          fechaHasta.getFullYear(),
+          fechaHasta.getMonth(),
+          fechaHasta.getDate()
+        )
+        const comparaFechas = soloFecha1 <= soloFecha2
+        if (comparaFechas) {
+          const miAlerta = new Alerta()
+          const aviso =
+            'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
+          const mensaje = trO(aviso, objTranslate) || aviso
+          arrayGlobal.avisoListandoControles.div.height = '200px'
+          arrayGlobal.avisoListandoControles.div.top = '70px'
+          miAlerta.createControl(
+            arrayGlobal.avisoListandoControles,
+            mensaje,
+            objTranslate
+          )
+          const modal = document.getElementById('modalAlertCarga')
+          modal.style.display = 'block'
+          await new Promise((resolve) => setTimeout(() => resolve(), 200))
+          let consulta = await callProcedure(
+            procedure.procedure,
+            '1900-01-01',
+            hasta
+          )
+          if (consulta.length <= 1) {
+            const miAlerta = new Alerta()
+            const aviso =
+              'No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.'
+            const mensaje = trO(aviso, objTranslate) || aviso
+            arrayGlobal.avisoRojo.span.text = mensaje
+            arrayGlobal.avisoRojo.span.padding = '0px 0px 0px 0px'
+            arrayGlobal.avisoRojo.div.height = '110px'
+            arrayGlobal.avisoRojo.div.margin = '200px auto auto auto'
+            miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+            let modal = document.getElementById('modalAlertCarga')
+            modal.remove()
+            modal = document.getElementById('modalAlertVerde')
+            modal.style.display = 'block'
+          }
+          if (consulta.length > 1) {
+            let modal = document.getElementById('modalAlertCarga')
+            modal.remove()
+            modal = document.getElementById('modalTablaViewFecha')
+            modal.remove()
+            const table = document.getElementById('tableConsultaViews')
+            table.style.display = 'block'
+            const encabezados = {
+              title: consulta[0],
+            }
+            const arrayWidth = []
+            consulta[0].forEach(() => {
+              arrayWidth.push(1)
+            })
+            const thead = document.createElement('thead')
+            const newRow = document.createElement('tr')
+            encabezados.title.forEach((element, index) => {
+              const cell = estilosTheadCell(
+                element,
+                index,
+                objTranslate,
+                arrayWidth
+              )
+              newRow.appendChild(cell)
+            })
+            thead.appendChild(newRow)
+            table.appendChild(thead)
+            consulta.shift()
+            const nuevoArray = [...consulta]
+            const cantidadDeRegistros = nuevoArray[0].length
+            const tbody = document.createElement('tbody')
+            nuevoArray.forEach((element, index) => {
+              const newRow = estilosTbodyCellConsulta(
+                element,
+                index,
+                cantidadDeRegistros,
+                objTranslate,
+                arrayWidth
+              )
+              tbody.appendChild(newRow)
+            })
+            table.appendChild(tbody)
+          }
+        } else {
+          inputDesde.style.background = 'red'
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async createControlConsultas(objeto, texto, objTrad, procedure) {
+    try {
+      const obj = objeto
+      this.modal = document.createElement('div')
+      this.modal.id = 'modalAlertCarga'
+      this.modal.className = 'modal'
+      this.modal.style.background = 'rgba(224, 220, 220, 0.7)'
+      const modalContent = createDiv(obj.div)
+      const span = createSpan(obj.close)
+      modalContent.appendChild(span)
+
+      const spanCarga = createSpan(obj.spanCarga)
+      this.modal.appendChild(spanCarga)
+
+      let frase = ''
+      if (objTrad === null) {
+        frase = texto
+      } else {
+        frase = trO(texto, objTrad) || texto
+      }
+      const spanTexto = createSpan(obj.span, frase)
+      modalContent.appendChild(spanTexto)
+
+      this.modal.appendChild(modalContent)
+
+      // Agregar el modal al body del documento
+      document.body.appendChild(this.modal)
+      let consulta = await callProcedure(procedure.procedure, null, null)
+      console.log(consulta)
     } catch (error) {
       console.log(error)
     }

@@ -205,3 +205,6 @@ Receiving
 Security
 Production
 Plant
+The query is being performed, it will take a few seconds, it can be very complex depending on the files involved and the time interval requested. Secure the internet connection.
+Select the date range for the query:
+No record was found that matches the dates provided. Review the dates in Loaded Controls.

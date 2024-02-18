@@ -18,8 +18,7 @@ import {
   finPerformance,
 } from '../../includes/Conection/conection.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { desencriptar } from '../../controllers/cript.js'
-import callProcedure from './Modules/Controladores/callProcedure.js'
+import { desencriptar, encriptar } from '../../controllers/cript.js'
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -76,11 +75,25 @@ function dondeEstaEn() {
   document.getElementById('volver').style.display = 'none'
 }
 
-async function llamarProcedure(params) {
+function llamarProcedure(name, confecha, ini, outi, procedure) {
   try {
-    if (params) {
-      const procedure = await callProcedure(encodeURIComponent(params))
-      console.log(procedure)
+    if (procedure) {
+      // const procedure = await callProcedure(encodeURIComponent(params))
+      // console.log(procedure)
+      console.log(name, confecha, ini, outi, procedure)
+      const ruta = `../../Pages/ConsultasViews/viewsGral.php?v=${Math.round(
+        Math.random() * 10
+      )}`
+      let contenido = {
+        name,
+        confecha,
+        ini,
+        outi,
+        procedure,
+      }
+      contenido = encriptar(contenido)
+      sessionStorage.setItem('procedure', contenido)
+      window.open(ruta, '_blank')
     }
   } catch (error) {
     console.log(error)
@@ -95,7 +108,11 @@ const funcionDeClick = (e) => {
     completaButtons(claveBuscada)
   } else if (tipoValue === '0') {
     const procedure = e.target.getAttribute('procedure')
-    llamarProcedure(procedure)
+    const name = e.target.getAttribute('name')
+    const ini = e.target.getAttribute('ini')
+    const outi = e.target.getAttribute('outi')
+    const confecha = e.target.getAttribute('confecha')
+    llamarProcedure(name, confecha, ini, outi, procedure)
   }
 }
 
@@ -108,14 +125,22 @@ function completaButtons(obj) {
   for (let i = 0; i < objButtons[obj].name.length; i++) {
     const element = objButtons[obj].name[i]
     const active = objButtons[obj].active[i]
-    let procedure = null
+    let procedure,
+      ini,
+      outi,
+      confecha = null
+
     const boton = objButtons[obj].button[i]
     if (boton === 0) {
       procedure = objButtons[obj].procedure[i]
+      ini = JSON.stringify(objButtons[obj].in[i])
+      outi = JSON.stringify(objButtons[obj].out[i])
+      confecha = objButtons[obj].confecha[i]
     }
+    const name = objButtons[obj].name[i]
     const params = {
       text: trO(element) || element,
-      name: objButtons[obj].name[i],
+      name,
       class: 'button-selector-consultas',
       innerHTML: null,
       height: null, // 35
@@ -134,6 +159,9 @@ function completaButtons(obj) {
       background: null,
       tipo: objButtons[obj].button[i],
       procedure,
+      confecha,
+      ini,
+      outi,
       onClick: funcionDeClick,
     }
     if (active === 1) {

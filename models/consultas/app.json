@@ -11,7 +11,7 @@
       "Receiving",
       "Seguridad"
     ],
-    "active": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "active": [1, 1, 1, 1, 1, 1, 1, 1, 0],
     "button": [1, 1, 1, 1, 1, 1, 1, 1, 1]
   },
   "Receiving": {
@@ -20,8 +20,8 @@
     "archivo": ["IngresodeMP", "SalidadeMP", "StockdeMP"],
     "active": [1, 1, 1],
     "button": [0, 0, 0],
-    "procedure": ["proc_IngresoDeMP", null, null],
-    "in": [{ "fechas": ["desdeI", "hastaI"] }, null, null],
+    "procedure": ["proc_IngresoDeMP", "proc_SalidaDeMP", "proc_StockMP"],
+    "in": [null, null, null],
     "out": [null, null, null]
   },
   "Seguridad": {
@@ -56,9 +56,9 @@
       "lotes_especialidades_fechas",
       "tn_especialidades"
     ],
-    "active": [1, 1, 1, 1],
+    "active": [0, 0, 1, 0],
     "button": [0, 0, 0, 0],
-    "procedure": [null, null, null, null],
+    "procedure": [null, null, "proc_lotesEspecialidadesFechas", null],
     "in": [null, null, null, null],
     "out": [null, null, null, null],
     "operation": [null, null, null, null]

@@ -1,27 +1,16 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
-session_start();
-if (!isset($_SESSION['factum_validation']['email'])) {
-    unset($_SESSION['factum_validation']['email']);
-}
-
-$q = $_GET['q'];
-$new = $_GET['new'];
-
-verifica();
-
-function verifica()
+function consultar($call, $desde, $hasta)
 {
-    global $q;
 
     include_once '../../../Routes/datos_base.php';
-    $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
-
-    $call = urldecode($q);
+    // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
     try {
         // Llamada al procedimiento almacenado con parámetros
-        $sql = "CALL ".$call."('2024-01-01', '2024-02-16')";
+        $sql = "CALL ".$call."('".$desde."', '".$hasta."')";
+        if ($desde === null || $hasta === null) {
+          $sql = "CALL ".$call."()";
+        }
         $con = mysqli_connect($host,$user,$password,$dbname);
             if (!$con) {
                 // die('Could not connect: ' . mysqli_error($con));
@@ -41,14 +30,35 @@ function verifica()
             while ($row = mysqli_fetch_assoc($result)) {
                 $arr_customers[] = array_values($row);
             }
-
             $json = json_encode($arr_customers);
             echo $json;
             mysqli_close($con);
-            $pdo=null;
+            // $pdo=null;
     } catch (\PDOException $e) {
        print "Error!: ".$e->getMessage()."<br>";
       die();
     }
 }
+
+header("Content-Type: application/json; charset=utf-8");
+$datos = file_get_contents("php://input");
+
+if (empty($datos)) {
+    $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
+    echo json_encode($response);
+    exit;
+}
+    
+    $data = json_decode($datos, true);
+    error_log('JSON response: ' . json_encode($data));
+    // Verifica si la decodificación fue exitosa
+    if ($data !== null) {
+      // Accede a los valores
+      $q = $data['q'];
+      $desde = $data['desde'];
+      $hasta = $data['hasta'];
+      consultar($q, $desde, $hasta);
+    } else {
+      echo "Error al decodificar la cadena JSON";
+    }
 ?>
