@@ -26,6 +26,7 @@ import fechasGenerator from '../../controllers/fechas.js'
 import eliminarRegistro from '../../Pages/ControlsView/Modules/Controladores/eliminaRegistro.js'
 // eslint-disable-next-line import/extensions
 import callProcedure from '../../Pages/ConsultasViews/Controladores/callProcedure.js'
+import traerRegistros from '../../Pages/ControlsView/Modules/Controladores/traerRegistros.js'
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../'
@@ -1155,10 +1156,35 @@ function estilosTbodyCell(
   return newRow
 }
 
+async function handleClickEnlace(dato) {
+  const control = await traerRegistros(`controlNT,${dato}`)
+  const control_N = control[0][0]
+  const control_T = control[0][1]
+  let contenido = {
+    control_N,
+    control_T,
+    nr: dato,
+  }
+  contenido = encriptar(contenido)
+  sessionStorage.setItem('contenido', contenido)
+
+  const url = '../../Pages/Control/index.php'
+  const ruta = `${url}?v=${Math.round(Math.random() * 10)}`
+  window.open(ruta, '_blank')
+}
+
 function generarUrlParaEnlace(dato) {
-  // Aquí debes proporcionar la lógica real para generar la URL del enlace
-  // Puedes basarte en el valor de 'dato' u otras variables según tus necesidades
-  return 'https://google.com' // Modifica esta lógica según tus necesidades
+  const link = document.createElement('a')
+  link.href = '#' // Reemplaza con la lógica real para generar la URL del enlace
+  link.textContent = dato
+  link.style.color = 'blue' // Establece el color del enlace, puedes personalizar según tus necesidades
+  link.style.textDecoration = 'underline' // Subraya el enlace
+  // link.target = '_blank'
+  link.addEventListener('click', function (event) {
+    event.preventDefault()
+    handleClickEnlace(dato)
+  })
+  return link
 }
 
 function estilosTbodyCellConsulta(
@@ -1173,12 +1199,8 @@ function estilosTbodyCellConsulta(
   for (let i = 0; i < cantidadDeRegistros; i++) {
     let dato = element[i]
     let type = null
-    if (!isNaN(filaDoc)) {
-      const link = document.createElement('a')
-      link.href = generarUrlParaEnlace(dato) // Reemplaza con la lógica real para generar la URL del enlace
-      link.textContent = dato
-      link.style.color = 'blue' // Establece el color del enlace, puedes personalizar según tus necesidades
-      link.style.textDecoration = 'underline' // Subraya el enlace
+    if (!isNaN(filaDoc) && filaDoc === i) {
+      dato = generarUrlParaEnlace(dato)
       type = 'link'
     }
     let alignCenter = 'left'

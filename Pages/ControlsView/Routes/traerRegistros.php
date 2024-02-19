@@ -64,7 +64,14 @@
                     INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=LTYregistrocontrol.idLTYreporte
                     WHERE LTYregistrocontrol.nuxpedido=".$reporte."   ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol.idLTYcontrol ASC";
             break;
-          
+
+            case 'controlNT':
+              $reporte = $porciones[1];
+              $sql = "SELECT DISTINCT r.idLTYreporte, r.nombre
+                          FROM LTYregistrocontrol c
+                          INNER JOIN LTYreporte r ON r.idLTYreporte = c.idLTYreporte
+                          WHERE c.nuxpedido = ".$reporte.";";
+            break;
           default:
             # code...
             break;

@@ -9,6 +9,7 @@ import { encriptar } from '../../../../controllers/cript.js'
 
 function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
   // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos)
+
   const td = tds
   if (
     (tagName === 'INPUT' && type === 'date') ||
@@ -134,6 +135,7 @@ async function verSupervisor(idSupervisor) {
 
 function cargarNR(datos) {
   try {
+    // console.log(datos)
     const idSupervisor = datos[0][6]
     const tbody = document.querySelector('tbody')
     const tr = tbody.querySelectorAll('tr')
@@ -147,13 +149,20 @@ function cargarNR(datos) {
       const { tagName } = td[2].childNodes[0]
       const { type } = td[2].childNodes[0]
       // const { value } = td[2].childNodes[0];
-      const valor = datos[i][3]
+      // const valor = datos[i][3]
       const tagNameObservaciones = td[4].childNodes[0].tagName
       const typeObservaciones = td[4].childNodes[0].type
       // const valueObservaciones = td[4].childNodes[0].value;
-      const valorObservaciones = datos[i][9]
-
-      if (codigo.trim() === datos[i][5].trim()) {
+      // const valorObservaciones = datos[i][9]
+      const elementoEncontrado = datos.find((subarray) => {
+        return subarray.some(
+          (element, i) => i === 5 && element === codigo.trim()
+        )
+      })
+      // codigo.trim() === datos[i][5].trim()
+      if (elementoEncontrado) {
+        const valor = elementoEncontrado[3]
+        const valorObservaciones = elementoEncontrado[9]
         columna2(tagName, type, td, valor, datos, i, 2, 12)
         columna2(
           tagNameObservaciones,

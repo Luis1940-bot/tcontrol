@@ -22,7 +22,8 @@
     "button": [0, 0, 0],
     "procedure": ["proc_IngresoDeMP", "proc_SalidaDeMP", "proc_StockMP"],
     "in": [null, null, null],
-    "out": [null, null, null]
+    "out": [null, null, null],
+    "operation": [null, null, null]
   },
   "Seguridad": {
     "name": [
@@ -40,7 +41,8 @@
     "button": [0, 0, 0],
     "procedure": [null, null, null],
     "in": [null, null, null],
-    "out": [null, null, null]
+    "out": [null, null, null],
+    "operation": [null, null, null]
   },
   "Especialidades": {
     "name": [
@@ -56,23 +58,32 @@
       "lotes_especialidades_fechas",
       "tn_especialidades"
     ],
-    "active": [0, 0, 1, 0],
+    "active": [0, 0, 1, 1],
     "button": [0, 0, 0, 0],
-    "procedure": [null, null, "proc_lotesEspecialidadesFechas", null],
+    "procedure": [
+      null,
+      null,
+      "proc_lotesEspecialidadesFechas",
+      "proc_TnEspecialidades"
+    ],
     "in": [null, null, null, null],
     "out": [null, null, null, null],
     "operation": [null, null, "sum", null]
   },
   "Producción": {
-    "name": ["Unidades Técnicas", "Estándares"],
-    "confecha": [0, 0],
-    "archivo": ["unidadtecnica", "estandares"],
-    "active": [1, 1],
-    "button": [0, 0],
-    "procedure": [null, null],
-    "in": [null, null],
-    "out": [null, null],
-    "operation": [null, null]
+    "name": ["Unidades Técnicas", "Componentes", "Estándares"],
+    "confecha": [0, 0, 0],
+    "archivo": ["unidadtecnica", "componentes", "estandares"],
+    "active": [1, 1, 1],
+    "button": [0, 0, 0],
+    "procedure": [
+      "proc_unidadesTecnicas",
+      "proc_componentes",
+      "proc_estandares"
+    ],
+    "in": [null, null, null],
+    "out": [null, null, null],
+    "operation": [null, null, null]
   },
   "Fritas": {
     "name": ["Toneladas de Fritas 1", "Toneladas de Fritas 2"],
@@ -80,7 +91,7 @@
     "archivo": ["tn_fritas1", "tn_fritas2"],
     "active": [1, 1],
     "button": [0, 0],
-    "procedure": ["proc_TnFritas1", null],
+    "procedure": ["proc_TnFritas1", "proc_TnFritas2"],
     "in": [null, null],
     "out": [null, null],
     "operation": [null, null]
@@ -91,7 +102,7 @@
     "archivo": ["tn_pure"],
     "active": [1],
     "button": [0],
-    "procedure": [null],
+    "procedure": ["proc_TnPure"],
     "in": [null],
     "out": [null],
     "operation": [null]
@@ -152,7 +163,7 @@
     ],
     "active": [1, 1, 1, 1, 1],
     "button": [0, 0, 0, 0, 0],
-    "procedure": [null, null, null, null, null],
+    "procedure": ["proc_bosGeneral", "proc_bosQualidade", null, null, null],
     "in": [null, null, null, null, null],
     "out": [null, null, null, null, null],
     "operation": [null, null, null, null, null]

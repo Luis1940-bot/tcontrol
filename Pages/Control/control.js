@@ -91,18 +91,15 @@ function configPHP() {
 
 function configuracionLoad() {
   inicioPerformance()
-  // configPHP();
   const contenido = sessionStorage.getItem('contenido')
   const url = desencriptar(contenido)
-  // console.log(url)
-  // const url = new URL(window.location.href);
-  controlN = url.control_N // url.searchParams.get('control_N');
-  controlT = url.control_T // .get('control_T');
-  nr = url.nr // url.searchParams.get('nr');
+  controlN = url.control_N
+  controlT = url.control_T
+  nr = url.nr
   nr === '0' ? (nr = '') : sessionStorage.setItem('doc', encriptar(nr))
   document.getElementById('doc').innerText = `Doc: ${nr}`
   document.getElementById('wichC').innerText = controlT
-  // document.getElementById('wichC').style.display = 'inline';
+
   configPHP()
   finPerformance()
 }
@@ -178,6 +175,7 @@ async function cargaDeRegistros() {
     tablaVacia(nuevoControlData, encabezados)
     finPerformance()
     // Ajustar el porcentaje a 100%
+
     if (nr) {
       // console.log(nr)
       const controlNr = await traerNR(nr)

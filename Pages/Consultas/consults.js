@@ -78,9 +78,6 @@ function dondeEstaEn() {
 function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
   try {
     if (procedure) {
-      // const procedure = await callProcedure(encodeURIComponent(params))
-      // console.log(procedure)
-      console.log(name, confecha, ini, outi, procedure, operation)
       const ruta = `../../Pages/ConsultasViews/viewsGral.php?v=${Math.round(
         Math.random() * 10
       )}`
@@ -132,7 +129,6 @@ function completaButtons(obj) {
       outi,
       confecha = null,
       operation = null
-    console.log(objButtons, obj)
     const boton = objButtons[obj].button[i]
     if (boton === 0) {
       procedure = objButtons[obj].procedure[i]

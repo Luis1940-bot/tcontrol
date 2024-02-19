@@ -164,12 +164,12 @@ function llamarCtrl(control) {
         return obj
       }, {})
       sessionStorage.setItem('contenido', encriptar(objeto))
+      console.log(objeto)
       ruta = `${subcadena}?v=${Math.round(Math.random() * 10)}`
     } else {
       ruta = `${url}?v=${Math.round(Math.random() * 10)}`
       sessionStorage.setItem('contenido', encriptar('x'))
     }
-    // console.log(ruta);
     // window.location.href = ruta
     window.open(ruta, '_blank')
   } catch (error) {
