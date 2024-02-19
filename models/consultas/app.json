@@ -61,13 +61,13 @@
     "procedure": [null, null, "proc_lotesEspecialidadesFechas", null],
     "in": [null, null, null, null],
     "out": [null, null, null, null],
-    "operation": [null, null, null, null]
+    "operation": [null, null, "sum", null]
   },
   "Producción": {
     "name": ["Unidades Técnicas", "Estándares"],
     "confecha": [0, 0],
     "archivo": ["unidadtecnica", "estandares"],
-    "active": [0, 0],
+    "active": [1, 1],
     "button": [0, 0],
     "procedure": [null, null],
     "in": [null, null],
@@ -80,7 +80,7 @@
     "archivo": ["tn_fritas1", "tn_fritas2"],
     "active": [1, 1],
     "button": [0, 0],
-    "procedure": [null, null],
+    "procedure": ["proc_TnFritas1", null],
     "in": [null, null],
     "out": [null, null],
     "operation": [null, null]

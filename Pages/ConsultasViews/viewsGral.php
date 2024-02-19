@@ -36,8 +36,6 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
     <div class='div-views-buttons'>
     </div>
     <table id='tableConsultaViews'>
-        <!-- <thead></thead>
-        <tbody></tbody> -->
     </table>
   </main>
   <footer>

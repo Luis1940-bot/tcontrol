@@ -1,5 +1,5 @@
 <?php
-function consultar($call, $desde, $hasta)
+function consultar($call, $desde, $hasta, $operation)
 {
 
     include_once '../../../Routes/datos_base.php';
@@ -30,6 +30,11 @@ function consultar($call, $desde, $hasta)
             while ($row = mysqli_fetch_assoc($result)) {
                 $arr_customers[] = array_values($row);
             }
+
+            if ($operation !== null && count($arr_customers) > 1) {
+              include('sumaSimple.php');
+              $arr_customers = sumaSimple($arr_customers, $operation);
+            }
             $json = json_encode($arr_customers);
             echo $json;
             mysqli_close($con);
@@ -42,7 +47,7 @@ function consultar($call, $desde, $hasta)
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-
+// $datos = '{"q":"proc_lotesEspecialidadesFechas","desde":"1900-01-01","hasta":"2024-02-18","operation":"sum"}';
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
     echo json_encode($response);
@@ -57,7 +62,8 @@ if (empty($datos)) {
       $q = $data['q'];
       $desde = $data['desde'];
       $hasta = $data['hasta'];
-      consultar($q, $desde, $hasta);
+      $operation = $data['operation'];
+      consultar($q, $desde, $hasta, $operation);
     } else {
       echo "Error al decodificar la cadena JSON";
     }

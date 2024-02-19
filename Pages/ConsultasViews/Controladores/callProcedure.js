@@ -1,7 +1,7 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..'
 
-export default function callProcedure(sql, desde, hasta) {
+export default function callProcedure(sql, desde, hasta, operation) {
   // eslint-disable-next-line no-console
   console.time('callProcedure')
   return new Promise((resolve, reject) => {
@@ -11,8 +11,8 @@ export default function callProcedure(sql, desde, hasta) {
       q: sql,
       desde,
       hasta,
+      operation,
     }
-
     const datos = JSON.stringify(requestBody)
     fetch(ruta, {
       method: 'POST',
@@ -25,6 +25,7 @@ export default function callProcedure(sql, desde, hasta) {
     })
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data)
         resolve(data)
         // eslint-disable-next-line no-console
         console.timeEnd('callProcedure')

@@ -75,12 +75,12 @@ function dondeEstaEn() {
   document.getElementById('volver').style.display = 'none'
 }
 
-function llamarProcedure(name, confecha, ini, outi, procedure) {
+function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
   try {
     if (procedure) {
       // const procedure = await callProcedure(encodeURIComponent(params))
       // console.log(procedure)
-      console.log(name, confecha, ini, outi, procedure)
+      console.log(name, confecha, ini, outi, procedure, operation)
       const ruta = `../../Pages/ConsultasViews/viewsGral.php?v=${Math.round(
         Math.random() * 10
       )}`
@@ -90,6 +90,7 @@ function llamarProcedure(name, confecha, ini, outi, procedure) {
         ini,
         outi,
         procedure,
+        operation,
       }
       contenido = encriptar(contenido)
       sessionStorage.setItem('procedure', contenido)
@@ -112,7 +113,8 @@ const funcionDeClick = (e) => {
     const ini = e.target.getAttribute('ini')
     const outi = e.target.getAttribute('outi')
     const confecha = e.target.getAttribute('confecha')
-    llamarProcedure(name, confecha, ini, outi, procedure)
+    const operation = e.target.getAttribute('operation')
+    llamarProcedure(name, confecha, ini, outi, procedure, operation)
   }
 }
 
@@ -128,14 +130,16 @@ function completaButtons(obj) {
     let procedure,
       ini,
       outi,
-      confecha = null
-
+      confecha = null,
+      operation = null
+    console.log(objButtons, obj)
     const boton = objButtons[obj].button[i]
     if (boton === 0) {
       procedure = objButtons[obj].procedure[i]
       ini = JSON.stringify(objButtons[obj].in[i])
       outi = JSON.stringify(objButtons[obj].out[i])
       confecha = objButtons[obj].confecha[i]
+      operation = objButtons[obj].operation[i]
     }
     const name = objButtons[obj].name[i]
     const params = {
@@ -162,6 +166,7 @@ function completaButtons(obj) {
       confecha,
       ini,
       outi,
+      operation,
       onClick: funcionDeClick,
     }
     if (active === 1) {

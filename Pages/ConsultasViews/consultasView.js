@@ -73,7 +73,7 @@ async function mensajeDeCarga(objTranslate, procedure) {
   const mensaje = trO(aviso) || aviso
   arrayGlobal.avisoListandoControles.div.height = '200px'
   arrayGlobal.avisoListandoControles.div.top = '70px'
-  miAlerta.createControlConsultas(
+  miAlerta.createSinCalendar(
     arrayGlobal.avisoListandoControles,
     mensaje,
     objTranslate,

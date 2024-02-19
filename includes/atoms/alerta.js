@@ -1070,14 +1070,19 @@ function estilosCell(
   const widthCell =
     widthScreenAjustado * widthScreen * arrayWidthEncabezado[index]
   let dato = ''
-  typeof datos === 'string' && datos !== null
-    ? (dato = trA(datos, objTrad) || datos)
-    : (dato = datos)
-  if (dato !== null && type === null) {
-    cell.textContent = `${dato} ${requerido}` || `${dato} ${requerido}`
-  } else if (dato === null && type !== null) {
-    cell.appendChild(type)
+  if (type === 'link' && datos instanceof HTMLAnchorElement) {
+    cell.appendChild(datos)
+  } else {
+    typeof datos === 'string' && datos !== null
+      ? (dato = trA(datos, objTrad) || datos)
+      : (dato = datos)
+    if (dato !== null && type === null) {
+      cell.textContent = `${dato} ${requerido}` || `${dato} ${requerido}`
+    } else if (dato === null && type !== null) {
+      cell.appendChild(type)
+    }
   }
+
   cell.style.borderBottom = '1px solid #cecece'
   // cell.style.background = background;
   cell.style.zIndex = 2
@@ -1150,23 +1155,39 @@ function estilosTbodyCell(
   return newRow
 }
 
+function generarUrlParaEnlace(dato) {
+  // Aquí debes proporcionar la lógica real para generar la URL del enlace
+  // Puedes basarte en el valor de 'dato' u otras variables según tus necesidades
+  return 'https://google.com' // Modifica esta lógica según tus necesidades
+}
+
 function estilosTbodyCellConsulta(
   element,
   index,
   cantidadDeRegistros,
   objTranslate,
-  arrayWidthEncabezado
+  arrayWidthEncabezado,
+  filaDoc
 ) {
   const newRow = document.createElement('tr')
   for (let i = 0; i < cantidadDeRegistros; i++) {
     let dato = element[i]
+    let type = null
+    if (!isNaN(filaDoc)) {
+      const link = document.createElement('a')
+      link.href = generarUrlParaEnlace(dato) // Reemplaza con la lógica real para generar la URL del enlace
+      link.textContent = dato
+      link.style.color = 'blue' // Establece el color del enlace, puedes personalizar según tus necesidades
+      link.style.textDecoration = 'underline' // Subraya el enlace
+      type = 'link'
+    }
     let alignCenter = 'left'
     let paddingLeft = '5px'
     let colSpan = 0
     let fontStyle = 'normal'
     let fontWeight = 500
     let background = '#ffffff'
-    let type = null
+    // let type = null
     let colorText = '#000000'
     let requerido = ''
     let display = null
@@ -2163,8 +2184,9 @@ class Alerta {
           await new Promise((resolve) => setTimeout(() => resolve(), 200))
           let consulta = await callProcedure(
             procedure.procedure,
-            '1900-01-01',
-            hasta
+            desde,
+            hasta,
+            procedure.operation
           )
           if (consulta.length <= 1) {
             const miAlerta = new Alerta()
@@ -2197,7 +2219,11 @@ class Alerta {
             })
             const thead = document.createElement('thead')
             const newRow = document.createElement('tr')
+            let filaDoc = null
             encabezados.title.forEach((element, index) => {
+              if (element.toLowerCase() === 'doc') {
+                filaDoc = index
+              }
               const cell = estilosTheadCell(
                 element,
                 index,
@@ -2218,7 +2244,8 @@ class Alerta {
                 index,
                 cantidadDeRegistros,
                 objTranslate,
-                arrayWidth
+                arrayWidth,
+                filaDoc
               )
               tbody.appendChild(newRow)
             })
@@ -2233,7 +2260,7 @@ class Alerta {
     }
   }
 
-  async createControlConsultas(objeto, texto, objTrad, procedure) {
+  async createSinCalendar(objeto, texto, objTranslate, procedure) {
     try {
       const obj = objeto
       this.modal = document.createElement('div')
@@ -2248,10 +2275,10 @@ class Alerta {
       this.modal.appendChild(spanCarga)
 
       let frase = ''
-      if (objTrad === null) {
+      if (objTranslate === null) {
         frase = texto
       } else {
-        frase = trO(texto, objTrad) || texto
+        frase = trO(texto, objTranslate) || texto
       }
       const spanTexto = createSpan(obj.span, frase)
       modalContent.appendChild(spanTexto)
@@ -2260,8 +2287,73 @@ class Alerta {
 
       // Agregar el modal al body del documento
       document.body.appendChild(this.modal)
-      let consulta = await callProcedure(procedure.procedure, null, null)
-      console.log(consulta)
+      let consulta = await callProcedure(
+        procedure.procedure,
+        null,
+        null,
+        procedure.operation
+      )
+      if (consulta.length <= 1) {
+        const miAlerta = new Alerta()
+        const aviso =
+          'No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.'
+        const mensaje = trO(aviso, objTranslate) || aviso
+        arrayGlobal.avisoRojo.span.text = mensaje
+        arrayGlobal.avisoRojo.span.padding = '0px 0px 0px 0px'
+        arrayGlobal.avisoRojo.div.height = '110px'
+        arrayGlobal.avisoRojo.div.margin = '200px auto auto auto'
+        miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+        let modal = document.getElementById('modalAlertCarga')
+        modal.remove()
+        modal = document.getElementById('modalAlertVerde')
+        modal.style.display = 'block'
+      }
+      if (consulta.length > 1) {
+        let modal = document.getElementById('modalAlertCarga')
+        modal.remove()
+        const table = document.getElementById('tableConsultaViews')
+        table.style.display = 'block'
+        const encabezados = {
+          title: consulta[0],
+        }
+        const arrayWidth = []
+        consulta[0].forEach(() => {
+          arrayWidth.push(1)
+        })
+        const thead = document.createElement('thead')
+        const newRow = document.createElement('tr')
+        let filaDoc = null
+        encabezados.title.forEach((element, index) => {
+          if (element.toLowerCase() === 'doc') {
+            filaDoc = index
+          }
+          const cell = estilosTheadCell(
+            element,
+            index,
+            objTranslate,
+            arrayWidth
+          )
+          newRow.appendChild(cell)
+        })
+        thead.appendChild(newRow)
+        table.appendChild(thead)
+        consulta.shift()
+        const nuevoArray = [...consulta]
+        const cantidadDeRegistros = nuevoArray[0].length
+        const tbody = document.createElement('tbody')
+        nuevoArray.forEach((element, index) => {
+          const newRow = estilosTbodyCellConsulta(
+            element,
+            index,
+            cantidadDeRegistros,
+            objTranslate,
+            arrayWidth,
+            filaDoc
+          )
+          tbody.appendChild(newRow)
+        })
+        table.appendChild(tbody)
+      }
     } catch (error) {
       console.log(error)
     }
