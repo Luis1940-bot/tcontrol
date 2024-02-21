@@ -32,8 +32,18 @@ function consultar($call, $desde, $hasta, $operation)
             }
 
             if ($operation !== null && count($arr_customers) > 1) {
-              include('sumaSimple.php');
-              $arr_customers = sumaSimple($arr_customers, $operation);
+              switch ($operation) {
+                case 'sum':
+                  include('sumaSimple.php');
+                  break;
+                case 'DWT':
+                   include('sumaDWT.php');
+                break;
+                default:
+                  # code...
+                  break;
+              }
+              $arr_customers = sumaSimple($arr_customers);
             }
             $json = json_encode($arr_customers);
             echo $json;
@@ -47,7 +57,7 @@ function consultar($call, $desde, $hasta, $operation)
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"q":"proc_lotesEspecialidadesFechas","desde":"1900-01-01","hasta":"2024-02-18","operation":"sum"}';
+// $datos = '{"q":"proc_dwt","desde":"2023-01-01","hasta":"2023-01-05","operation":"DWT"}';
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
     echo json_encode($response);

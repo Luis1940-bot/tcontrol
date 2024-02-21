@@ -132,7 +132,7 @@
     "procedure": ["proc_dwt", null, null, null, null, null, null],
     "in": [null, null, null, null, null, null, null],
     "out": [null, null, null, null, null, null, null],
-    "operation": [null, null, null, null, null, null, null]
+    "operation": ["DWT", null, null, null, null, null, null]
   },
   "Planta": {
     "name": ["Listado de Contratistas", "Listado de Transportistas"],
@@ -163,7 +163,13 @@
     ],
     "active": [1, 1, 1, 1, 1],
     "button": [0, 0, 0, 0, 0],
-    "procedure": ["proc_bosGeneral", "proc_bosQualidade", null, null, null],
+    "procedure": [
+      "proc_bosGeneral",
+      "proc_bosQualidade",
+      "proc_bosSeguransa",
+      "proc_bosAmbiente",
+      "proc_regrasDeOuro"
+    ],
     "in": [null, null, null, null, null],
     "out": [null, null, null, null, null],
     "operation": [null, null, null, null, null]

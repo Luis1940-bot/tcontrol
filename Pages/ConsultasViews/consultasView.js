@@ -130,7 +130,7 @@ function configPHP() {
 function verificaTipoDeConsulta(objTranslate) {
   try {
     const procedure = desencriptar(sessionStorage.getItem('procedure'))
-    console.log(procedure)
+    // console.log(procedure)
     if (procedure.confecha === '1') {
       abrirCalendar(objTranslate, procedure)
     }

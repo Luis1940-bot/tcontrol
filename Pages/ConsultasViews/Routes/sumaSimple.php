@@ -1,5 +1,5 @@
 <?php
-function sumaSimple($arr_customers, $operation) {
+function sumaSimple($arr_customers) {
     try {
         $arrayPHP = $arr_customers;
         $posicionesCaracteresEspeciales = array();
@@ -68,9 +68,8 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     header("Content-Type: application/json; charset=utf-8");
 
     $arr_customers = $_POST['arr_customers'];
-    $operation = $_POST['operation'];
 
-    $result = sumaSimple($arr_customers, $operation);
+    $result = sumaSimple($arr_customers);
     echo json_encode($result);
 }
 ?>
