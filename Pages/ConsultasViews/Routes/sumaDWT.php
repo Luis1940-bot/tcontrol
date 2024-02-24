@@ -112,7 +112,7 @@ function sumaSimple($arr_customers) {
                 );
             }
            $arrayNuevo[] = $nuevaFila;
-           
+         
         }
         // print_r($arrayNuevo);
         return $arrayNuevo;

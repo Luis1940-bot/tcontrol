@@ -1,4 +1,6 @@
 <?php
+mb_internal_encoding('UTF-8');
+
 function consultar($call, $desde, $hasta, $operation)
 {
 
@@ -21,6 +23,7 @@ function consultar($call, $desde, $hasta, $operation)
 
             $result = mysqli_query($con,$sql);
             $arr_customers = array();
+            $arrayResultdo = array();
             $column_names = array();
             while ($column = mysqli_fetch_field($result)) {
                 $column_names[] = $column->name;
@@ -31,21 +34,27 @@ function consultar($call, $desde, $hasta, $operation)
                 $arr_customers[] = array_values($row);
             }
 
+          // echo "Antes de la inclusión: " . json_encode($arr_customers) . PHP_EOL;
             if ($operation !== null && count($arr_customers) > 1) {
               switch ($operation) {
                 case 'sum':
                   include('sumaSimple.php');
                   break;
                 case 'DWT':
-                   include('sumaDWT.php');
-                break;
+                  include('sumaDWT.php');
+                  break;
+                case 'DWTFritas':
+                  include('sumaDWTFritas.php');
+                  break;
                 default:
                   # code...
                   break;
               }
-              $arr_customers = sumaSimple($arr_customers);
+              $arrayResultdo = sumaSimple($arr_customers);
+             
             }
-            $json = json_encode($arr_customers);
+            // echo "Después de la inclusión: " . json_encode($arrayResultdo) . PHP_EOL;
+            $json = json_encode($arrayResultdo);
             echo $json;
             mysqli_close($con);
             // $pdo=null;
@@ -57,7 +66,7 @@ function consultar($call, $desde, $hasta, $operation)
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"q":"proc_dwt","desde":"2023-01-01","hasta":"2023-01-05","operation":"DWT"}';
+$datos = '{"q":"proc_DWTFritasL1","desde":"2024-01-01","hasta":"2024-01-03","operation":"DWTFritas"}';
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
     echo json_encode($response);
@@ -77,4 +86,5 @@ if (empty($datos)) {
     } else {
       echo "Error al decodificar la cadena JSON";
     }
+
 ?>

@@ -127,12 +127,20 @@
       "DWT_fritas_L2",
       "DW_TOTALES_gral_L2"
     ],
-    "active": [1, 1, 1, 1, 1, 1, 1],
+    "active": [1, 1, 0, 1, 1, 0, 1],
     "button": [0, 0, 0, 0, 0, 0, 0],
-    "procedure": ["proc_dwt", null, null, null, null, null, null],
+    "procedure": [
+      "proc_dwt",
+      "proc_DWTFritasL1",
+      null,
+      null,
+      "proc_DWTFritasL2",
+      null,
+      null
+    ],
     "in": [null, null, null, null, null, null, null],
     "out": [null, null, null, null, null, null, null],
-    "operation": ["DWT", null, null, null, null, null, null]
+    "operation": ["DWT", "DWTFritas", null, null, "DWTFritas", null, null]
   },
   "Planta": {
     "name": ["Listado de Contratistas", "Listado de Transportistas"],
