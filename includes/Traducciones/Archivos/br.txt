@@ -1322,7 +1322,7 @@ prazo
 TAREFA DE TEXTO
 TextoTask
 TEXTO DA TAREFA
-bilhete
+BILHETE
 BILHETE CONSUMIDO
 Ticket consumido, modificado pelo controle 103
 Ticket consumido, modificar controle 103
@@ -1347,7 +1347,7 @@ Tipo de MP
 tipo de usuário
 TIPOS DE MANUTENÇÃO
 toneladas
-TONELADAS DE ESPECIALIDADES
+Toneladas de Especialidades
 TONELADAS FRITAS L1
 TONELADAS FRITAS L2
 TONELADAS DE MASSA
@@ -1373,3 +1373,80 @@ Os dados necessários estão faltando e não foram preenchidos. Feche esta mensa
 ATO SEGURO BOS
 ATO INSEGURO DO BOS
 REGRAS DE OURO
+Lote carregado por datas
+Bos Geral
+Bos Qualidade
+Bos Segurança
+Bos Meio Ambiente
+DWT Frito L1
+DWT Frito L2
+Toneladas de batatas fritas L1
+Toneladas de batatas fritas L2
+Toneladas de purê
+Lista de empreiteiros
+Lista de transportadoras
+Componentes
+Unidades Técnicas
+Renda do MP
+Saída MP
+Estoque de MP
+DOC
+RELATÓRIO
+DO UTILIZADOR
+MUDANÇA
+ÁREA
+ATO SEGURO
+ATO INSEGURO
+COMPORTAMENTO
+EMPREITEIRA
+TRANSPORTE
+IMINENTE
+RISCO
+ASPECTOS
+CAUSAS
+PROCEDIMENTOS
+UNID
+FERRAMENTAS
+AÇÕES
+ÁREA DO USUÁRIO
+RAZÃO SOCIAL
+ITEM
+CONTATO
+TELEFONE
+E-MAIL
+SITUAÇÃO
+ATIVO
+INATIVO
+LINHA
+PLANO
+LOCALIZAÇÃO
+EQUIPAMENTO
+COMPONENTE
+OBSERVAÇÃO
+PARADA TOTAL
+LRR
+BAIXA VELOCIDADE
+PLANEJADO
+NÃO PLANEJADO
+AO CONTROLE
+PADRÃO
+MAGNITUDE
+UNIDADE
+Tonelada
+EXTENSÃO
+CARA
+LIXO
+BILHETE
+#ESPECIALIDADE
+RH
+PESSOA
+GOVERNANTE
+ÁREA
+DESTINO
+INGRESSOS
+PARTIDAS
+DATA E HORA ATUAL
+OPERADOR
+Técnica U
+COMUM
+LINHA

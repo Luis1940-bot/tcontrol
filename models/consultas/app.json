@@ -86,7 +86,7 @@
     "operation": [null, null, null]
   },
   "Fritas": {
-    "name": ["Toneladas de Fritas 1", "Toneladas de Fritas 2"],
+    "name": ["Toneladas de Fritas L1", "Toneladas de Fritas L2"],
     "confecha": [1, 1],
     "archivo": ["tn_fritas1", "tn_fritas2"],
     "active": [1, 1],
@@ -110,10 +110,10 @@
   "DWT": {
     "name": [
       "DWT",
-      "*DWT Fritas L1",
+      "DWT Fritas L1",
       "DWT Fritas L1",
       "DWT General L1",
-      "*DWT Fritas L2",
+      "DWT Fritas L2",
       "DWT Fritas L2",
       "DWT General L2"
     ],
@@ -127,7 +127,7 @@
       "DWT_fritas_L2",
       "DW_TOTALES_gral_L2"
     ],
-    "active": [1, 1, 0, 1, 1, 0, 1],
+    "active": [1, 1, 0, 0, 1, 0, 0],
     "button": [0, 0, 0, 0, 0, 0, 0],
     "procedure": [
       "proc_dwt",
@@ -148,7 +148,7 @@
     "archivo": ["listadocontratostas", "listadotransportista"],
     "active": [1, 1],
     "button": [0, 0],
-    "procedure": [null, null],
+    "procedure": ["proc_Contratistas", "proc_Transportistas"],
     "in": [null, null],
     "out": [null, null],
     "operation": [null, null]

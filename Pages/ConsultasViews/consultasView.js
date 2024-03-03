@@ -26,9 +26,13 @@ import arrayGlobal from '../../controllers/variables.js'
 
 let translateOperativo = []
 let espanolOperativo = []
+let translateArchivos = []
+let espanolArchivos = []
 const objTranslate = {
   operativoES: [],
   operativoTR: [],
+  archivosES: [],
+  archivosTR: [],
 }
 
 const spinner = document.querySelector('.spinner')
@@ -155,8 +159,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await translate(persona.lng)
     translateOperativo = data.arrayTranslateOperativo
     espanolOperativo = data.arrayEspanolOperativo
+    translateArchivos = data.arrayTranslateArchivo
+    espanolArchivos = data.arrayEspanolArchivo
     objTranslate.operativoES = [...espanolOperativo]
     objTranslate.operativoTR = [...translateOperativo]
+    objTranslate.archivosES = [...espanolArchivos]
+    objTranslate.archivosTR = [...translateArchivos]
     leeVersion('version')
     setTimeout(() => {
       // dondeEstaEn()

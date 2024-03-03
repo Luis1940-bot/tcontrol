@@ -363,6 +363,7 @@ function trA(palabra, objTrad) {
       return ''
     }
     const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
+
     const index = objTrad.archivosES.findIndex(
       (item) =>
         item.replace(/\s/g, '').toLowerCase().trim() ===
@@ -1029,10 +1030,10 @@ function formatarMenu(doc, configMenu, objTranslate) {
   procesoStyleDisplay(elementosStyle)
 }
 
-function estilosTheadCell(element, index, objTrad, arrayWidthEncabezado) {
+function estilosTheadCell(element, index, arrayWidthEncabezado) {
   const cell = document.createElement('th')
-  cell.textContent =
-    trO(element.toUpperCase(), objTrad) || element.toUpperCase()
+  cell.textContent = element
+  // trO(element.toUpperCase(), objTrad) || element.toUpperCase()
   cell.style.background = '#000000'
   cell.style.border = '1px solid #cecece'
   cell.style.overflow = 'hidden'
@@ -2246,10 +2247,12 @@ class Alerta {
               if (element.toLowerCase() === 'doc') {
                 filaDoc = index
               }
+              const elementoTranslate =
+                trA(element.toUpperCase(), objTranslate) ||
+                element.toUpperCase()
               const cell = estilosTheadCell(
-                element,
+                elementoTranslate,
                 index,
-                objTranslate,
                 arrayWidth
               )
               newRow.appendChild(cell)
@@ -2349,12 +2352,9 @@ class Alerta {
           if (element.toLowerCase() === 'doc') {
             filaDoc = index
           }
-          const cell = estilosTheadCell(
-            element,
-            index,
-            objTranslate,
-            arrayWidth
-          )
+          const elementoTranslate =
+            trA(element.toUpperCase(), objTranslate) || element.toUpperCase()
+          const cell = estilosTheadCell(elementoTranslate, index, arrayWidth)
           newRow.appendChild(cell)
         })
         thead.appendChild(newRow)
@@ -2426,10 +2426,11 @@ class Alerta {
       }
       arrayWidthEncabezado = [...encabezados.width]
       encabezados.title.forEach((element, index) => {
+        const elementoTranslate =
+          trO(element.toUpperCase(), objTrad) || element.toUpperCase()
         const cell = estilosTheadCell(
-          element,
+          elementoTranslate,
           index,
-          objTrad,
           arrayWidthEncabezado
         )
         newRow.appendChild(cell)

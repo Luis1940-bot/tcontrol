@@ -26,7 +26,7 @@ export default function callProcedure(sql, desde, hasta, operation) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         resolve(data)
         // eslint-disable-next-line no-console
         console.timeEnd('callProcedure')

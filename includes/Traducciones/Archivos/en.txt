@@ -1322,7 +1322,7 @@ term
 TEXT TASK
 TexTask
 TASK TEXT
-ticket
+TICKET
 TICKET CONSUMED
 Ticket consumed, modified by control 103
 Ticket consumed, modify control 103
@@ -1347,7 +1347,7 @@ MP Type
 type of user
 TYPES OF MAINTENANCE
 tons
-TONS OF SPECIALTIES
+Tons of Specialties
 FRIED TONS L1
 FRIED TONS L2
 TONS MASH
@@ -1373,3 +1373,80 @@ Required data is missing and has not been completed. Close this message, complet
 BOS SAFE ACT
 BOS UNSAFE ACT
 GOLD RULES
+Batch Loaded by Dates
+Bos General
+Bos Quality
+Bos Security
+Bos Environment
+DWT Fried L1
+DWT Fried L2
+Tons of Fries L1
+Tons of Fries L2
+Tons of Puree
+List of Contractors
+List of Carriers
+Components
+Technical Units
+MP Income
+MP output
+MP Stock
+DOC
+REPORT
+USER
+SHIFT
+AREA
+SAFE ACT
+UNSAFE ACT
+BEHAVIOR
+CONTRACTOR
+TRANSPORT
+IMMINENT
+RISK
+ASPECTS
+CAUSES
+PROCEDURES
+ITEMS
+TOOLS
+ACTIONS
+USER AREA
+BUSINESS NAME
+ITEM
+CONTACT
+PHONE
+EMAIL
+SITUATION
+ASSET
+INACTIVE
+LINE
+PLAN
+LOCATION
+EQUIPMENT
+COMPONENT
+OBSERVATION
+TOTAL STOP
+LRR
+LOW SPEED
+PLANNED
+NON-PLANNED
+CONTROL
+STANDARD
+MAGNITUDE
+UNIT
+Ton
+EXTENT
+GUY
+BIN
+TICKET
+#SPECIALTY
+HR
+PERSON
+RULER
+AREA
+DESTINATION
+TICKETS
+DEPARTURES
+CURRENT DATE AND TIME
+OPERATOR
+UTechnique
+COMMON
+LINE

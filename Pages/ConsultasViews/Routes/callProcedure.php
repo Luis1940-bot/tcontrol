@@ -33,7 +33,7 @@ function consultar($call, $desde, $hasta, $operation)
             while ($row = mysqli_fetch_assoc($result)) {
                 $arr_customers[] = array_values($row);
             }
-
+    
           // echo "Antes de la inclusión: " . json_encode($arr_customers) . PHP_EOL;
             if ($operation !== null && count($arr_customers) > 1) {
               switch ($operation) {
@@ -46,13 +46,16 @@ function consultar($call, $desde, $hasta, $operation)
                 case 'DWTFritas':
                   include('sumaDWTFritas.php');
                   break;
+
                 default:
-                  # code...
+                  
                   break;
               }
               $arrayResultdo = sumaSimple($arr_customers);
-             
             }
+            if ($operation === NULL) {
+                  $arrayResultdo = $arr_customers;
+             }
             // echo "Después de la inclusión: " . json_encode($arrayResultdo) . PHP_EOL;
             $json = json_encode($arrayResultdo);
             echo $json;
@@ -66,7 +69,8 @@ function consultar($call, $desde, $hasta, $operation)
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-$datos = '{"q":"proc_DWTFritasL1","desde":"2024-01-01","hasta":"2024-01-03","operation":"DWTFritas"}';
+// $datos = '{"q":"proc_DWTFritasL1","desde":"2024-01-01","hasta":"2024-01-03","operation":"DWTFritas"}';
+// $datos = '{"q":"proc_TnEspecialidades","desde":"2024-01-01","hasta":"2024-01-03","operation": null}';
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
     echo json_encode($response);

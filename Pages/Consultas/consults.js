@@ -22,9 +22,13 @@ import { desencriptar, encriptar } from '../../controllers/cript.js'
 
 let translateOperativo = []
 let espanolOperativo = []
+let translateArchivos = []
+let espanolArchivos = []
 const objTranslate = {
   operativoES: [],
   operativoTR: [],
+  archivosES: [],
+  archivosTR: [],
 }
 
 const spinner = document.querySelector('.spinner')
@@ -48,6 +52,9 @@ function leeVersion(json) {
 }
 
 function trO(palabra) {
+  if (palabra === undefined || palabra === null) {
+    return ''
+  }
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
   const index = espanolOperativo.findIndex(
     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
@@ -56,6 +63,29 @@ function trO(palabra) {
     return translateOperativo[index]
   }
   return palabra
+}
+
+function trA(palabra, objTrad) {
+  try {
+    if (palabra === undefined || palabra === null || objTrad === null) {
+      return ''
+    }
+    const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
+    const index = objTrad.archivosES.findIndex(
+      (item) =>
+        item.replace(/\s/g, '').toLowerCase().trim() ===
+        palabraNormalizada.trim()
+    )
+    if (index !== -1) {
+      return objTrad.archivosTR[index]
+    }
+    return palabra
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error)
+    return palabra
+  }
+  // return palabra;
 }
 
 function localizador(e) {
@@ -98,23 +128,6 @@ function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
   }
 }
 
-const funcionDeClick = (e) => {
-  const claveBuscada = e.target.name
-  const tipoValue = e.target.getAttribute('tipo')
-  localizador(e)
-  if (tipoValue === '1') {
-    completaButtons(claveBuscada)
-  } else if (tipoValue === '0') {
-    const procedure = e.target.getAttribute('procedure')
-    const name = e.target.getAttribute('name')
-    const ini = e.target.getAttribute('ini')
-    const outi = e.target.getAttribute('outi')
-    const confecha = e.target.getAttribute('confecha')
-    const operation = e.target.getAttribute('operation')
-    llamarProcedure(name, confecha, ini, outi, procedure, operation)
-  }
-}
-
 /* eslint-enable no-use-before-define */
 function completaButtons(obj) {
   const divButtons = document.querySelector('.div-consultas-buttons')
@@ -139,7 +152,7 @@ function completaButtons(obj) {
     }
     const name = objButtons[obj].name[i]
     const params = {
-      text: trO(element) || element,
+      text: trA(element, objTranslate) || element,
       name,
       class: 'button-selector-consultas',
       innerHTML: null,
@@ -169,6 +182,23 @@ function completaButtons(obj) {
       const newButton = createButton(params)
       divButtons.appendChild(newButton)
     }
+  }
+}
+
+const funcionDeClick = (e) => {
+  const claveBuscada = e.target.name
+  const tipoValue = e.target.getAttribute('tipo')
+  localizador(e)
+  if (tipoValue === '1') {
+    completaButtons(claveBuscada)
+  } else if (tipoValue === '0') {
+    const procedure = e.target.getAttribute('procedure')
+    const name = e.target.getAttribute('name')
+    const ini = e.target.getAttribute('ini')
+    const outi = e.target.getAttribute('outi')
+    const confecha = e.target.getAttribute('confecha')
+    const operation = e.target.getAttribute('operation')
+    llamarProcedure(name, confecha, ini, outi, procedure, operation)
   }
 }
 
@@ -222,8 +252,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await translate(persona.lng)
     translateOperativo = data.arrayTranslateOperativo
     espanolOperativo = data.arrayEspanolOperativo
+    translateArchivos = data.arrayTranslateArchivo
+    espanolArchivos = data.arrayEspanolArchivo
     objTranslate.operativoES = [...espanolOperativo]
     objTranslate.operativoTR = [...translateOperativo]
+    objTranslate.archivosES = [...espanolArchivos]
+    objTranslate.archivosTR = [...translateArchivos]
     leeVersion('version')
     setTimeout(() => {
       dondeEstaEn()

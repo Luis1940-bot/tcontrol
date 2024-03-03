@@ -8,6 +8,8 @@ function paradaPorManteniemiento($cantidadDeFilas, $indice, $originalArr) {
     $arrayUbicacionTecnica = array();
     $arrayEquipo = array();
     $arrayComponente = array();
+    $arrayParadaTotal = array();
+    $arrayBajaVelocidad= array();
 
     $inicioDeParada = '0:00';
     $finDeParada = '0:00';
@@ -26,7 +28,11 @@ function paradaPorManteniemiento($cantidadDeFilas, $indice, $originalArr) {
     $componente = '';
     $valorComponente = '';
     $nombreComponente = '';
-    for ($i=$indice; $i < $indice + $cantidadDeFilas - 1; $i++) { 
+    $nombreParadaTotal = '';
+    $valorParadaTotal = '';
+    $nombreBajaVelocidad = '';
+    $valorBajaVelocidad = '';
+    for ($i=$indice; $i < $indice + $cantidadDeFilas; $i++) { 
       $ini = preg_replace('/[^a-z0-9]+/i', '_', $originalArr[$i][6]);
       $fin = preg_replace('/[^a-z0-9]+/i', '_', $originalArr[$i][6]);
       if (strtolower($ini) === 'inicio_de_parada') {
@@ -46,7 +52,7 @@ function paradaPorManteniemiento($cantidadDeFilas, $indice, $originalArr) {
           }
         }
       }
-   echo $originalArr[$i][6]."\n";
+  //  echo $originalArr[$i][6]."   ----- ".$i."\n";
       $ubicacionTecnica  = mb_substr($originalArr[$i][6], 0, 7);
       $ubicacionTecnica = preg_replace('/[^\p{L}0-9]+/u', '_', $ubicacionTecnica);
       if (mb_strtolower($ubicacionTecnica) === 'ubicaci') {
@@ -68,6 +74,20 @@ function paradaPorManteniemiento($cantidadDeFilas, $indice, $originalArr) {
       if (mb_strtolower($componente) === 'componente') {
         $valorComponente = $originalArr[$i][3];
         $nombreComponente = ucfirst($originalArr[$i][6]);
+      }
+
+      $paradaTotal = mb_substr($originalArr[$i][6], 0, 12);
+      $paradaTotal = preg_replace('/[^\p{L}0-9]+/u', '_', $paradaTotal);
+      if (mb_strtolower($paradaTotal) === 'parada_total') {
+        $valorParadaTotal = 'Si';
+        $nombreParadaTotal = ucfirst($originalArr[$i][6]);
+      }
+
+      $bajaVelocidad = $originalArr[$i][6];
+      $bajaVelocidad = preg_replace('/[^\p{L}0-9]+/u', '_', $bajaVelocidad);
+      if (mb_strtolower($bajaVelocidad) === 'baja_en_la_velocidad') {
+        $valorBajaVelocidad = 'Si';
+        $nombreBajaVelocidad = ucfirst($originalArr[$i][6]);
       }
 
     }
@@ -125,8 +145,30 @@ function paradaPorManteniemiento($cantidadDeFilas, $indice, $originalArr) {
         );
         
         $nombreComponente !== '' ? array_push($arrayResultado, $arrayComponente): null;
+
+        $arrayParadaTotal = array(
+              '',
+              '',
+              '', 
+              $nombreParadaTotal,
+              $valorParadaTotal,
+              '',
+        );
         
-   
+        $nombreParadaTotal !== '' ? array_push($arrayResultado, $arrayParadaTotal): null;
+        
+        $arrayBajaVelocidad = array(
+              '',
+              '',
+              '', 
+              $nombreBajaVelocidad,
+              $valorBajaVelocidad,
+              '',
+        );
+        
+        $nombreBajaVelocidad !== '' ? array_push($arrayResultado, $arrayBajaVelocidad): null;
+
+
         return $arrayResultado;
 
   } catch (\Throwable $e) {
@@ -140,7 +182,6 @@ function sumaSimple($arr_customers) {
         $arrayNuevo = array();
         $primerElemento = $arr_customers[0];
         array_pop($primerElemento);
-        // array_shift($arr_customers);
         $docsUnicos = [];
         foreach ($arr_customers as $key => $row) {
           if ($key === 0) {
@@ -162,7 +203,7 @@ function sumaSimple($arr_customers) {
              foreach ($filasDocUnico as $index => $fila) {
                 $filas = count($filasDocUnico);
                 $con = preg_replace('/[^a-z0-9]+/i', '_', $fila[6]);
-                if (strtolower($con) === 'parada_por_mantenimiento') {
+                if (strtolower($con) === 'parada_por_mantenimiento' || strtolower($con) === 'tipos_de_mantenimiento') {
                   $originalArr = $arr_customers;
                   $nuevaFila = paradaPorManteniemiento($filas, $index, $originalArr);
                   if (is_array($nuevaFila)) {
@@ -186,8 +227,8 @@ function sumaSimple($arr_customers) {
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     header("Content-Type: application/json; charset=utf-8");
     $primeraFila = true;
-    // $arr_customers = $_POST['arr_customers'];
-    $arr_customers = [["FECHA","DOC","REPORTE","VALOR","-","USUARIO","CONTROL"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","MARCELO GABRIEL MOULIA CAP SAINT JEAN","Parada por MANTENIMIENTO"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","MEC\u00c1NICO","7","MARCELO GABRIEL MOULIA CAP SAINT JEAN","Tipo de MANTENIMIENTO"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","15:00","8","MARCELO GABRIEL MOULIA CAP SAINT JEAN","inicio de parada"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","15:00","9","MARCELO GABRIEL MOULIA CAP SAINT JEAN","fin de parada"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","BLC FRITAS L1 FREIDORA","0","MARCELO GABRIEL MOULIA CAP SAINT JEAN","ubicaci\u00f3n t\u00e9cnica"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","126-005_FRYER CIRCULATING PUMP","1","MARCELO GABRIEL MOULIA CAP SAINT JEAN","denominaci\u00f3n de equipo"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","MARCELO GABRIEL MOULIA CAP SAINT JEAN","impacto en la l\u00ednea"],["2024-01-02","240102213749104","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","5","MARCELO GABRIEL MOULIA CAP SAINT JEAN","parada total"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","MARIA ELVIRA CUCULICH","Parada por MANTENIMIENTO"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","MEC\u00c1NICO","7","MARIA ELVIRA CUCULICH","Tipo de MANTENIMIENTO"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","22:00","8","MARIA ELVIRA CUCULICH","inicio de parada"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","22:00","9","MARIA ELVIRA CUCULICH","fin de parada"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","BLC FRITAS L#1 FREIDORA","0","MARIA ELVIRA CUCULICH","ubicaci\u00f3n t\u00e9cnica"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","126-005_FRYER CIRCULATING PUMP","1","MARIA ELVIRA CUCULICH","denominaci\u00f3n de equipo"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","CA\u00d1O","2","MARIA ELVIRA CUCULICH","componente"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","MARIA ELVIRA CUCULICH","impacto en la l\u00ednea"],["2024-01-02","240103011549383","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","5","MARIA ELVIRA CUCULICH","parada total"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","MARIA ELVIRA CUCULICH","Parada por MANTENIMIENTO"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","MEC\u00c1NICO","7","MARIA ELVIRA CUCULICH","Tipo de MANTENIMIENTO"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","00:00","8","MARIA ELVIRA CUCULICH","inicio de parada"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","00:00","9","MARIA ELVIRA CUCULICH","fin de parada"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","126-005_FRYER CIRCULATING PUMP","1","MARIA ELVIRA CUCULICH","denominaci\u00f3n de equipo"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","CA\u00d1O","2","MARIA ELVIRA CUCULICH","componente"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","MARIA ELVIRA CUCULICH","impacto en la l\u00ednea"],["2024-01-03","240103054535147","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","5","MARIA ELVIRA CUCULICH","parada total"],["2024-01-03","240103122404837","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","CLAUDIA CACERES","Parada por MANTENIMIENTO"],["2024-01-03","240103122404837","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","MEC\u00c1NICO","7","CLAUDIA CACERES","Tipo de MANTENIMIENTO"],["2024-01-03","240103122404837","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","12:00","8","CLAUDIA CACERES","inicio de parada"],["2024-01-03","240103122404837","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","12:00","9","CLAUDIA CACERES","fin de parada"],["2024-01-03","240103122404837","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","126-005_FRYER CIRCULATING PUMP","1","CLAUDIA CACERES","denominaci\u00f3n de equipo"],["2024-01-03","240103122404837","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","CLAUDIA CACERES","impacto en la l\u00ednea"],["2024-01-03","240103122404837","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","5","CLAUDIA CACERES","parada total"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","MARIA BEATRIZ FOLINI","Parada por MANTENIMIENTO"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","MEC\u00c1NICO","7","MARIA BEATRIZ FOLINI","Tipo de MANTENIMIENTO"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","14:15","8","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","14:15","9","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","BLC FRITAS L#1 FREEZER","0","MARIA BEATRIZ FOLINI","ubicaci\u00f3n t\u00e9cnica"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","128-019_Precool Belt Dryer No.1","1","MARIA BEATRIZ FOLINI","denominaci\u00f3n de equipo"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","MARIA BEATRIZ FOLINI","impacto en la l\u00ednea"],["2024-01-03","240103175049006","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","5","MARIA BEATRIZ FOLINI","parada total"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","MARIA BEATRIZ FOLINI","Parada por MANTENIMIENTO"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","MEC\u00c1NICO","7","MARIA BEATRIZ FOLINI","Tipo de MANTENIMIENTO"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","14:40","8","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","14:40","9","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","BLC FRITAS L#1 FREEZER","0","MARIA BEATRIZ FOLINI","ubicaci\u00f3n t\u00e9cnica"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","128-001_Precool Fan No.1","1","MARIA BEATRIZ FOLINI","denominaci\u00f3n de equipo"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","MARIA BEATRIZ FOLINI","impacto en la l\u00ednea"],["2024-01-03","240103175151981","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","5","MARIA BEATRIZ FOLINI","parada total"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","MARIA BEATRIZ FOLINI","Parada por MANTENIMIENTO"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","EL\u00c9CTRICO","7","MARIA BEATRIZ FOLINI","Tipo de MANTENIMIENTO"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","16:00","8","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","16:35","9","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","BLC FRITAS L#1 SAPP","0","MARIA BEATRIZ FOLINI","ubicaci\u00f3n t\u00e9cnica"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","SAPP-TANK","1","MARIA BEATRIZ FOLINI","denominaci\u00f3n de equipo"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","MARIA BEATRIZ FOLINI","impacto en la l\u00ednea"],["2024-01-03","240103181735113","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","5","MARIA BEATRIZ FOLINI","parada total"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","subt","6","MARIA BEATRIZ FOLINI","Parada por BUENAS PR\u00c1CTICAS DE MANUFACTURA"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","7","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","8","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","subt","0","MARIA BEATRIZ FOLINI","Parada por FALTA DE MATERIA PRIMA"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","1","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","2","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","subt","4","MARIA BEATRIZ FOLINI","Parada por FALLAS OPERATIVAS"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","16:35","5","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","17:00","6","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","BLC FRITAS L#1 FREEZER","7","MARIA BEATRIZ FOLINI","ubicaci\u00f3n t\u00e9cnica"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","subt","8","MARIA BEATRIZ FOLINI","Parada por BOMBA DE CORTE TRABADA"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","9","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","0","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","subt","2","MARIA BEATRIZ FOLINI","Parada por MANEJO DE LR"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","3","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","4","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","subt","4","MARIA BEATRIZ FOLINI","Parada por CINTA TEGRA"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","5","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","18:19","6","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","subt","8","MARIA BEATRIZ FOLINI","IMPACTO EN LA L\u00cdNEA"],["2024-01-03","240103182029468","DWT FRITAS L1 NO PLANEADO PRODUCCI\u00d3N PROCESO","1","0","MARIA BEATRIZ FOLINI","parada total"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","6","MARIA BEATRIZ FOLINI","Parada por MANTENIMIENTO"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","MEC\u00c1NICO","7","MARIA BEATRIZ FOLINI","Tipo de MANTENIMIENTO"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","18:05","8","MARIA BEATRIZ FOLINI","inicio de parada"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","18:35","9","MARIA BEATRIZ FOLINI","fin de parada"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","BLC FRITAS L#1 PELAD Y EVENFLOW","0","MARIA BEATRIZ FOLINI","ubicaci\u00f3n t\u00e9cnica"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","2 VANMARK","1","MARIA BEATRIZ FOLINI","denominaci\u00f3n de equipo"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","subt","3","MARIA BEATRIZ FOLINI","impacto en la l\u00ednea"],["2024-01-03","240103184943891","DWT FRITAS L1 NO PLANEADO MANTENIMIENTO","1","4","MARIA BEATRIZ FOLINI","baja en la velocidad"]];
+    $arr_customers = $_POST['arr_customers'];
+    
     
 
     $result = sumaSimple($arr_customers);
