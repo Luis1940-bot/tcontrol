@@ -674,7 +674,7 @@ Indique um e-mail de contato.
 Indique um telefone de contato,
 Indique um telefone de contato.
 Por favor indique.
-relatório
+RELATÓRIO
 relatório de abordagem
 RELATÓRIO DOS AFETADOS SOBRE O EVENTO
 RELATÓRIO DE TESTEMUNHA
@@ -1181,7 +1181,7 @@ REGRAS DE OURO - Marca quebrada -
 REGRAS DE OURO DO BOS
 RELATO DA PESSOA AFETADA SOBRE O EVENTO
 CONTA DE TESTEMUNHA
-relatório
+RELATÓRIO
 RELATÓRIO DE INCIDENTE
 remarcado
 Reservado para comentários dos observados.
@@ -1365,7 +1365,7 @@ unidade técnica
 unidade técnica
 UNIDADES TÉCNICAS ABM
 Unidades Técnicas ABM.
-do utilizador
+Usuário
 USUÁRIOS
 Variedade
 Variedade de matérias-primas.

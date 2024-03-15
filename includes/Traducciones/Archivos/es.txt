@@ -1365,7 +1365,7 @@ unidad técnica
 unidad téctnica
 UNIDADES TÉCNICAS ABM
 Unidades Técnicas ABM.
-usuario
+Usuario
 USUARIOS
 Variedad
 Variedad de Materia Prima.

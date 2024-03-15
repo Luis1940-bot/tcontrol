@@ -1819,6 +1819,152 @@ class Alerta {
     enviaPorEmail ? (enviaEmail.checked = true) : (enviaEmail.checked = false)
   }
 
+  createModalConsultaView(objeto, objTranslate) {
+    // eslint-disable-next-line no-unused-vars
+    const obj = objeto
+    // console.log(obj)
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    modalContent.appendChild(span)
+
+    //! excel
+    obj.divCajita.id = 'idExcel'
+    obj.divCajita.onClick = funcionGuardar
+    let div = createDiv(obj.divCajita)
+    const imgExcel = createIMG(obj.imgExcel)
+    let texto = trO(obj.excel.text, objTranslate) || obj.excel.text
+    const spanExcel = createSpan(obj.excel, texto)
+    div.appendChild(imgExcel)
+    div.appendChild(spanExcel)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    obj.hr.id = 'idHrExcel'
+    let hr = createHR(obj.hr)
+    modalContent.appendChild(hr)
+    //! fin excel
+
+    //! pdf
+    obj.divCajita.id = 'idPDF'
+    obj.divCajita.onClick = funcionGuardarCambio
+    div = createDiv(obj.divCajita)
+    const imgPdf = createIMG(obj.imgPdf)
+    texto = trO(obj.pdf.text, objTranslate) || obj.pdf.text
+    const spanPdf = createSpan(obj.pdf, texto)
+    div.appendChild(imgPdf)
+    div.appendChild(spanPdf)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    obj.hr.id = 'idHrPdf'
+    hr = createHR(obj.hr)
+    modalContent.appendChild(hr)
+    //! fin pdf
+
+    //! json
+    obj.divCajita.id = 'idJson'
+    obj.divCajita.onClick = funcionGuardarComoNuevo
+    div = createDiv(obj.divCajita)
+    const imgJson = createIMG(obj.imgJson)
+    texto = trO(obj.json.text, objTranslate) || obj.json.text
+    const spanJson = createSpan(obj.json, texto)
+    div.appendChild(imgJson)
+    div.appendChild(spanJson)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    obj.hr.id = 'idHrJson'
+    hr = createHR(obj.hr)
+    modalContent.appendChild(hr)
+    //! fin json
+
+    //! api
+    obj.divCajita.id = 'idApi'
+    obj.divCajita.onClick = funcionHacerFirmar
+    div = createDiv(obj.divCajita)
+    const imgApi = createIMG(obj.imgApi)
+    texto = trO(obj.api.text, objTranslate) || obj.api.text
+    const spanApi = createSpan(obj.api, texto)
+    div.appendChild(imgApi)
+    div.appendChild(spanApi)
+
+    modalContent.appendChild(span)
+    modalContent.appendChild(div)
+
+    // obj.divCajita.id = 'idDivFirmado'
+    // obj.divCajita.hoverBackground = null
+    // obj.divCajita.hoverColor = null
+    // obj.divCajita.cursor = null
+    // div = createDiv(obj.divCajita)
+
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    obj.hr.id = 'idHrApi'
+    hr = createHR(obj.hr)
+    modalContent.appendChild(hr)
+    obj.divCajita.hoverBackground = '#cecece'
+    obj.divCajita.hoverColor = '#cecece'
+    obj.divCajita.cursor = 'pointer'
+    //! fin api
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    obj.hr.id = 'idHrRefresh'
+    hr = createHR(obj.hr)
+    modalContent.appendChild(hr)
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    obj.hr.id = 'idHrSalir'
+    hr = createHR(obj.hr)
+    modalContent.appendChild(hr)
+    //! fin salir
+
+    // texto = trO(obj.mensaje1.text, objTranslate) || obj.mensaje1.text
+    // const spanMensaje1 = createSpan(obj.mensaje1, texto)
+    // modalContent.appendChild(spanMensaje1)
+
+    // texto = trO(obj.mensaje2.text, objTranslate) || obj.mensaje2.text
+    // const spanMensaje2 = createSpan(obj.mensaje2, texto)
+    // modalContent.appendChild(spanMensaje2)
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+    // let elementosStyle;
+
+    // formatarMenu(doc, configMenu, objTranslate)
+  }
+
   createViewer(objeto, array, objTrad) {
     try {
       const nivelReporte = array[14]

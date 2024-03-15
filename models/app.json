@@ -134,7 +134,8 @@
           "Control/index.php?control_N=121&control_T=BOS%20CALIDAD%20AS&nr=0",
           "Control/index.php?control_N=123&control_T=BOS%20MEDIO%20AMBIENTE%20AS&nr=0",
           "Control/index.php?control_N=119&control_T=BOS%20SEGURIDAD%20AS&nr=0"
-        ]
+        ],
+        "nivel": [1, 1, 1]
       },
       "BOS ACTO NO SEGURO": {
         "name": [

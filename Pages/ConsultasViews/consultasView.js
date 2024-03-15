@@ -23,6 +23,8 @@ import callProcedure from '../ConsultasViews/Controladores/callProcedure.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../controllers/variables.js'
+// eslint-disable-next-line import/extensions
+import menuModalConsultasView from '../../controllers/menuConsultasView.js'
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -145,6 +147,13 @@ function verificaTipoDeConsulta(objTranslate) {
     console.log(error)
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburguesa = document.getElementById('hamburguesa')
+  hamburguesa.addEventListener('click', () => {
+    menuModalConsultasView(objTranslate)
+  })
+})
 
 document.addEventListener('DOMContentLoaded', async () => {
   inicioPerformance()
