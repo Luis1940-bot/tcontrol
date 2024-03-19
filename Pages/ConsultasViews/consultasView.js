@@ -111,6 +111,14 @@ function leeApp(json, complit) {
     })
 }
 
+function dondeEstaEn() {
+  const contenido = sessionStorage.getItem('procedure')
+  const url = desencriptar(contenido)
+  const name = url.name
+  document.getElementById('whereUs').innerHTML = name
+  document.getElementById('whereUs').style.display = 'inline'
+}
+
 function configPHP() {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
@@ -129,6 +137,7 @@ function configPHP() {
   const footer = document.getElementById('footer')
   footer.innerText = by
   footer.href = rutaDeveloper
+
   // const linkInstitucional = document.getElementById('linkInstitucional');
   // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
@@ -176,7 +185,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     objTranslate.archivosTR = [...translateArchivos]
     leeVersion('version')
     setTimeout(() => {
-      // dondeEstaEn()
+      dondeEstaEn()
       leeApp('app', false)
       verificaTipoDeConsulta(objTranslate)
     }, 200)

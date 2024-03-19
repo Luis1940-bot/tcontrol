@@ -503,6 +503,108 @@ const funcionSalir = () => {
   window.close()
 }
 
+const funcionExportarExcel = () => {
+  try {
+    const tabla = document.getElementById('tableConsultaViews')
+    const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Sheet JS' })
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
+    const blob = new Blob([wbout], { type: 'application/octet-stream' })
+    const nameConsulta = document.getElementById('whereUs').textContent
+    // Crear un enlace y simular un clic en él
+    const a = document.createElement('a')
+    const url = URL.createObjectURL(blob)
+    a.href = url
+    const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date())
+    a.download = `${nameConsulta} ${fechaDeHoy}.xlsx` // Nombre predeterminado
+
+    // Abrir una ventana emergente para que el usuario elija la ubicación y el nombre del archivo
+    a.addEventListener('click', () => {
+      setTimeout(() => {
+        URL.revokeObjectURL(url)
+      }, 100)
+    })
+
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const funcionExportarPDF = () => {
+  try {
+    // Obtener la tabla
+    const tabla = document.getElementById('tableConsultaViews')
+    html2canvas(tabla)
+      .then((canvas) => {
+        const nameConsulta = document.getElementById('whereUs').textContent
+        const imgData = canvas.toDataURL('image/png', 1.0)
+        const pdf = new jsPDF('p', 'pt', 'a4')
+        const pdfWidth = pdf.internal.pageSize.getWidth()
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width // Calcular la altura en función de la relación de aspecto de la imagen
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+        // pdf.addImage(imgData, 'PNG', 0, 0)
+        const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date())
+        pdf.save(`${nameConsulta} ${fechaDeHoy}.pdf`)
+      })
+      .catch((error) => {
+        console.error('Error en html2canvas:', error)
+      })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const funcionExportarJSON = () => {
+  try {
+    const tbody = document
+      .getElementById('tableConsultaViews')
+      .getElementsByTagName('tbody')[0]
+    const thead = document
+      .getElementById('tableConsultaViews')
+      .getElementsByTagName('thead')[0]
+    const columnNames = Array.from(thead.getElementsByTagName('th')).map(
+      (th) => th.innerText
+    )
+    const rows = tbody.getElementsByTagName('tr')
+    const jsonData = []
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].getElementsByTagName('td')
+      const rowData = {}
+
+      for (let j = 0; j < cells.length; j++) {
+        rowData[columnNames[j]] = cells[j].innerText
+      }
+
+      jsonData.push(rowData)
+    }
+    // Crear un formulario dinámicamente
+    const form = document.createElement('form')
+    form.method = 'POST'
+    form.action = '../../Routes/viewJson.php'
+    form.target = '_blank'
+
+    // Adjuntar los datos al formulario
+    const input = document.createElement('input')
+    input.type = 'hidden'
+    input.name = 'data'
+    input.value = JSON.stringify(jsonData)
+    form.appendChild(input)
+
+    // Adjuntar el formulario al cuerpo del documento
+    document.body.appendChild(form)
+
+    // Enviar el formulario
+    form.submit()
+
+    // Remover el formulario del cuerpo del documento (opcional)
+    document.body.removeChild(form)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 async function firmar(firmadoPor) {
   const pass = document.getElementById('idInputFirma').value
   const supervisor = await traerFirma(pass)
@@ -1835,7 +1937,7 @@ class Alerta {
 
     //! excel
     obj.divCajita.id = 'idExcel'
-    obj.divCajita.onClick = funcionGuardar
+    obj.divCajita.onClick = funcionExportarExcel
     let div = createDiv(obj.divCajita)
     const imgExcel = createIMG(obj.imgExcel)
     let texto = trO(obj.excel.text, objTranslate) || obj.excel.text
@@ -1852,7 +1954,7 @@ class Alerta {
 
     //! pdf
     obj.divCajita.id = 'idPDF'
-    obj.divCajita.onClick = funcionGuardarCambio
+    obj.divCajita.onClick = funcionExportarPDF
     div = createDiv(obj.divCajita)
     const imgPdf = createIMG(obj.imgPdf)
     texto = trO(obj.pdf.text, objTranslate) || obj.pdf.text
@@ -1869,7 +1971,7 @@ class Alerta {
 
     //! json
     obj.divCajita.id = 'idJson'
-    obj.divCajita.onClick = funcionGuardarComoNuevo
+    obj.divCajita.onClick = funcionExportarJSON
     div = createDiv(obj.divCajita)
     const imgJson = createIMG(obj.imgJson)
     texto = trO(obj.json.text, objTranslate) || obj.json.text
