@@ -527,6 +527,11 @@ const funcionExportarExcel = () => {
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
+    setTimeout(() => {
+      const menu = document.getElementById('modalAlertM')
+      menu.style.display = 'none'
+      menu.remove()
+    }, 100)
   } catch (error) {
     console.log(error)
   }
@@ -551,6 +556,11 @@ const funcionExportarPDF = () => {
       .catch((error) => {
         console.error('Error en html2canvas:', error)
       })
+    setTimeout(() => {
+      const menu = document.getElementById('modalAlertM')
+      menu.style.display = 'none'
+      menu.remove()
+    }, 100)
   } catch (error) {
     console.log(error)
   }
@@ -600,6 +610,50 @@ const funcionExportarJSON = () => {
 
     // Remover el formulario del cuerpo del documento (opcional)
     document.body.removeChild(form)
+    setTimeout(() => {
+      const menu = document.getElementById('modalAlertM')
+      menu.style.display = 'none'
+      menu.remove()
+    }, 100)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const funcionApi = () => {
+  try {
+    const { procedure, desde, hasta } = desencriptar(
+      sessionStorage.getItem('api')
+    )
+
+    console.log(desencriptar(sessionStorage.getItem('api')))
+    const url = window.location.host
+    let ruta = ''
+    if (desde === null || hasta === null) {
+      ruta = `${url}/Pages/Api/${procedure}*`
+    } else {
+      ruta = `${url}/Pages/Api/${procedure}/${desde}/${hasta}`
+    }
+    const mensaje0 = document.getElementById('idMensajeInstructivo')
+    mensaje0.style.display = 'block'
+    const mensajeCopiado = document.getElementById('idMensajeCopiado')
+    mensajeCopiado.textContent = ruta
+    const elementoTemporal = document.createElement('textarea')
+    elementoTemporal.value = ruta
+    document.body.appendChild(elementoTemporal)
+    elementoTemporal.select()
+    navigator.clipboard
+      .writeText(ruta)
+      .then(() => {
+        // console.log('Ruta copiada al portapapeles:', ruta)
+      })
+      .catch((err) => {
+        console.error('Error al copiar la ruta al portapapeles:', err)
+      })
+      .finally(() => {
+        // Eliminar el elemento temporal
+        document.body.removeChild(elementoTemporal)
+      })
   } catch (error) {
     console.log(error)
   }
@@ -1935,6 +1989,9 @@ class Alerta {
     const span = createSpan(obj.close)
     modalContent.appendChild(span)
 
+    const user = desencriptar(sessionStorage.getItem('user'))
+    const { tipo } = user
+
     //! excel
     obj.divCajita.id = 'idExcel'
     obj.divCajita.onClick = funcionExportarExcel
@@ -1972,6 +2029,7 @@ class Alerta {
     //! json
     obj.divCajita.id = 'idJson'
     obj.divCajita.onClick = funcionExportarJSON
+
     div = createDiv(obj.divCajita)
     const imgJson = createIMG(obj.imgJson)
     texto = trO(obj.json.text, objTranslate) || obj.json.text
@@ -1987,8 +2045,10 @@ class Alerta {
     //! fin json
 
     //! api
-    obj.divCajita.id = 'idApi'
-    obj.divCajita.onClick = funcionHacerFirmar
+    obj.divCajita.id = 'idDivApi'
+    if (parseInt(tipo) >= 3) {
+      obj.divCajita.onClick = funcionApi
+    }
     div = createDiv(obj.divCajita)
     const imgApi = createIMG(obj.imgApi)
     texto = trO(obj.api.text, objTranslate) || obj.api.text
@@ -1996,24 +2056,23 @@ class Alerta {
     div.appendChild(imgApi)
     div.appendChild(spanApi)
 
-    modalContent.appendChild(span)
-    modalContent.appendChild(div)
-
-    // obj.divCajita.id = 'idDivFirmado'
-    // obj.divCajita.hoverBackground = null
-    // obj.divCajita.hoverColor = null
-    // obj.divCajita.cursor = null
-    // div = createDiv(obj.divCajita)
-
     modalContent.appendChild(div)
     obj.divCajita.onClick = null
+
+    obj.mensaje0.id = 'idMensajeInstructivo'
+    obj.mensaje0.display = 'none'
+    texto = trO(obj.mensaje0.text, objTranslate) || obj.mensaje0.text
+    const spanMensaje0 = createSpan(obj.mensaje0, texto)
+    modalContent.appendChild(spanMensaje0)
+
+    obj.mensaje1.id = 'idMensajeCopiado'
+    texto = trO(obj.mensaje1.text, objTranslate) || obj.mensaje1.text
+    const spanMensaje1 = createSpan(obj.mensaje1, texto)
+    modalContent.appendChild(spanMensaje1)
 
     obj.hr.id = 'idHrApi'
     hr = createHR(obj.hr)
     modalContent.appendChild(hr)
-    obj.divCajita.hoverBackground = '#cecece'
-    obj.divCajita.hoverColor = '#cecece'
-    obj.divCajita.cursor = 'pointer'
     //! fin api
 
     //! refrescar
@@ -2047,24 +2106,13 @@ class Alerta {
 
     obj.hr.id = 'idHrSalir'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin salir
-
-    // texto = trO(obj.mensaje1.text, objTranslate) || obj.mensaje1.text
-    // const spanMensaje1 = createSpan(obj.mensaje1, texto)
-    // modalContent.appendChild(spanMensaje1)
-
-    // texto = trO(obj.mensaje2.text, objTranslate) || obj.mensaje2.text
-    // const spanMensaje2 = createSpan(obj.mensaje2, texto)
-    // modalContent.appendChild(spanMensaje2)
 
     this.modal.appendChild(modalContent)
 
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal)
-    // let elementosStyle;
-
-    // formatarMenu(doc, configMenu, objTranslate)
   }
 
   createViewer(objeto, array, objTrad) {
@@ -2459,6 +2507,12 @@ class Alerta {
             hasta,
             procedure.operation
           )
+          const api = {
+            procedure: procedure.procedure,
+            desde,
+            hasta,
+          }
+
           if (consulta.length <= 1) {
             const miAlerta = new Alerta()
             const aviso =
@@ -2475,6 +2529,7 @@ class Alerta {
             modal.style.display = 'block'
           }
           if (consulta.length > 1) {
+            sessionStorage.setItem('api', encriptar(api))
             let modal = document.getElementById('modalAlertCarga')
             modal.remove()
             modal = document.getElementById('modalTablaViewFecha')
@@ -2566,6 +2621,11 @@ class Alerta {
         null,
         procedure.operation
       )
+      const api = {
+        procedure: procedure.procedure,
+        desde: null,
+        hasta: null,
+      }
       if (consulta.length <= 1) {
         const miAlerta = new Alerta()
         const aviso =
@@ -2582,6 +2642,7 @@ class Alerta {
         modal.style.display = 'block'
       }
       if (consulta.length > 1) {
+        sessionStorage.setItem('api', encriptar(api))
         let modal = document.getElementById('modalAlertCarga')
         modal.remove()
         const table = document.getElementById('tableConsultaViews')
