@@ -18,7 +18,7 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <meta name='description' content=''>
   <meta name='author' content='Luis1940-bot'>
 
-  <link rel='shortcut icon' type='image/x-icon'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='./assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='./assets/css/index.css?v=<?php echo(time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='./assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
   <title></title>
