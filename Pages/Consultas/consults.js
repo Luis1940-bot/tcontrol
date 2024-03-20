@@ -188,8 +188,9 @@ function completaButtons(obj) {
 const funcionDeClick = (e) => {
   const claveBuscada = e.target.name
   const tipoValue = e.target.getAttribute('tipo')
-  localizador(e)
+
   if (tipoValue === '1') {
+    localizador(e)
     completaButtons(claveBuscada)
   } else if (tipoValue === '0') {
     const procedure = e.target.getAttribute('procedure')

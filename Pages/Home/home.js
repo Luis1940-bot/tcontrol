@@ -28,12 +28,13 @@ const objTranslate = {
 }
 
 const spinner = document.querySelector('.spinner')
-const objButtons = {}
+const appJSON = {}
 const navegador = {
   estadoAnteriorButton: '',
   estadoAnteriorWhereUs: [],
   estadoNavButton: {},
 }
+
 const espacio = ' > '
 
 function leeVersion(json) {
@@ -47,6 +48,9 @@ function leeVersion(json) {
 }
 
 function trO(palabra) {
+  if (palabra === undefined || palabra === null) {
+    return ''
+  }
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
   const index = espanolOperativo.findIndex(
     (item) =>
@@ -61,10 +65,10 @@ function trO(palabra) {
 function obtenerNombres(objeto, clave) {
   if (objeto.hasOwnProperty(clave) && objeto[clave].hasOwnProperty('name')) {
     return {
-      name: objeto[clave].name,
-      type: objeto[clave].type,
-      ruta: objeto[clave].ruta,
-      nivel: objeto[clave].nivel,
+      name: objeto[clave].name || null,
+      type: objeto[clave].type || null,
+      ruta: objeto[clave].ruta || null,
+      nivel: objeto[clave].nivel || null,
     }
   } else {
     for (const prop in objeto) {
@@ -91,6 +95,7 @@ function extraeIndice(array, clave) {
 
 function localizador(e) {
   const lugar = trO(e.target.innerText) || e.target.innerText
+
   document.getElementById('whereUs').innerText += `${espacio}${lugar}`
   document.getElementById('volver').style.display = 'block'
   document.getElementById('whereUs').style.display = 'inline'
@@ -103,7 +108,7 @@ function completaButtons(obj) {
   const { tipo } = persona
   const divButtons = document.querySelector('.div-home-buttons')
   divButtons.innerHTML = ''
-  document.getElementById('spanUbicacion').innerText = objButtons.planta
+  document.getElementById('spanUbicacion').innerText = appJSON.planta
   for (let i = 0; i < obj.name.length; i++) {
     const { nivel } = obj
     if (nivel[i] <= parseInt(tipo)) {
@@ -127,6 +132,13 @@ function completaButtons(obj) {
         paddingTop: null,
         paddingBotton: null,
         background: null,
+        confecha: null,
+        operation: null,
+        ini: null,
+        outi: null,
+        tipo: null,
+        procedure: null,
+
         onClick: funcionDeClick,
       }
       const newButton = createButton(params)
@@ -181,8 +193,8 @@ const funcionDeClick = (e) => {
   const claveBuscada = e.target.name
   const indice = extraeIndice(navegador.estadoNavButton.name, claveBuscada)
   const btnCtrl = navegador.estadoNavButton.type[indice]
-  const nuevoObjeto = obtenerNombres(objButtons, claveBuscada)
-  localizador(e)
+  const nuevoObjeto = obtenerNombres(appJSON, claveBuscada)
+
   if (nuevoObjeto === null) {
     const control = navegador.estadoNavButton.ruta[indice]
     llamarCtrl(control)
@@ -192,15 +204,16 @@ const funcionDeClick = (e) => {
   if (btnCtrl === 'btn') {
     completaButtons(nuevoObjeto)
   }
+  localizador(e)
 }
 
 function leeApp(json) {
   readJSON(json)
     .then((data) => {
-      Object.assign(objButtons, data)
+      Object.assign(appJSON, data)
       navegador.estadoAnteriorButton = 'apps'
       navegador.estadoAnteriorWhereUs.push('apps')
-      const nuevoObjeto = obtenerNombres(objButtons, 'apps')
+      const nuevoObjeto = obtenerNombres(appJSON, 'apps')
       navegador.estadoNavButton = nuevoObjeto
       completaButtons(nuevoObjeto)
     })
@@ -209,9 +222,18 @@ function leeApp(json) {
     })
 }
 
-function dondeEstaEn() {
+function dondeEstaEn(array) {
   const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en '
-  document.getElementById('whereUs').innerText = ustedEstaEn
+  let nuevaCadena = ''
+  array.forEach((element, index) => {
+    index > 0 ? (nuevaCadena += ` > ${element}`) : null
+    if (array.length === 1) {
+      nuevaCadena = ''
+      document.getElementById('whereUs').style.display = 'none'
+      document.getElementById('volver').style.display = 'none'
+    }
+  })
+  document.getElementById('whereUs').innerText = `${ustedEstaEn}${nuevaCadena}`
 }
 
 function configPHP() {
@@ -253,7 +275,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     objTranslate.operativoTR = [...translateOperativo]
     leeVersion('version')
     setTimeout(() => {
-      dondeEstaEn()
+      dondeEstaEn(navegador.estadoAnteriorWhereUs)
       leeApp('app')
     }, 200)
   }
@@ -263,11 +285,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function goBack() {
   try {
-    let quitarCadena = ` > ${
-      navegador.estadoAnteriorWhereUs[
-        navegador.estadoAnteriorWhereUs.length - 1
-      ]
-    }`
     navegador.estadoAnteriorWhereUs.pop()
     navegador.estadoAnteriorButton =
       navegador.estadoAnteriorWhereUs[
@@ -277,22 +294,11 @@ function goBack() {
       navegador.estadoAnteriorWhereUs[
         navegador.estadoAnteriorWhereUs.length - 1
       ]
-    const nuevoObjeto = obtenerNombres(objButtons, clave)
+    // console.log('clave>>> ', clave)
+    const nuevoObjeto = obtenerNombres(appJSON, clave)
     navegador.estadoNavButton = nuevoObjeto
     completaButtons(nuevoObjeto)
-    const cadena = `${document.getElementById('whereUs').innerText}`
-    quitarCadena = quitarCadena.replace('>', '')
-    quitarCadena = trO(quitarCadena || quitarCadena)
-    let nuevaCadena = cadena.replace(quitarCadena, '')
-    const ultimoIndice = nuevaCadena.lastIndexOf('>')
-    nuevaCadena =
-      nuevaCadena.slice(0, ultimoIndice) + nuevaCadena.slice(ultimoIndice + 1)
-    if (clave === 'apps') {
-      nuevaCadena = trO('Usted está en' || 'Usted está en')
-      document.getElementById('whereUs').style.display = 'none'
-      document.getElementById('volver').style.display = 'none'
-    }
-    document.getElementById('whereUs').innerText = `${nuevaCadena}`
+    dondeEstaEn(navegador.estadoAnteriorWhereUs)
   } catch (error) {
     console.log(error)
   }

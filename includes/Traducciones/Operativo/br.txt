@@ -208,3 +208,5 @@ Plantar
 A consulta está sendo realizada, levará alguns segundos, pode ser muito complexa dependendo dos arquivos envolvidos e do intervalo de tempo solicitado. Proteja a conexão com a Internet.
 Selecione o período da consulta:
 Não foi encontrado nenhum registro que corresponda às datas fornecidas. Revise as datas em Controles carregados.
+Autorizado pela Sede da Área.
+Copiado para a área de transferência.

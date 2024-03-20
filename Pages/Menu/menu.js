@@ -46,6 +46,9 @@ function leeVersion(json) {
 }
 
 function trO(palabra) {
+  if (palabra === undefined || palabra === null) {
+    return ''
+  }
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
   const index = espanolOperativo.findIndex(
     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
@@ -96,6 +99,12 @@ function completaButtons(obj) {
       paddingTop: null,
       paddingBotton: null,
       background: null,
+      confecha: null,
+      operation: null,
+      ini: null,
+      outi: null,
+      tipo: null,
+      procedure: null,
     }
     const newButton = createButton(params)
     divButtons.appendChild(newButton)

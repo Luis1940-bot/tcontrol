@@ -1,4 +1,5 @@
 function createButton(params) {
+  // console.log(params)
   const nuevoBoton = document.createElement('button')
   params.text !== null ? (nuevoBoton.textContent = params.text) : null
   nuevoBoton.setAttribute('class', params.class)
