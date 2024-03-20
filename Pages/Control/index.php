@@ -1,17 +1,12 @@
  <?php
 ob_start();
 header('Content-Type: text/html;charset=utf-8');
-session_start();
-if (!isset($_SESSION['factum_validation']['email'] )) {
-
+// session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 if (!isset($_SESSION['factum_validation'])) {
-    // $_SESSION['factum_validation'] = array(); // Inicializar el array si no existe
-    // $_SESSION['factum_validation']['email'] = 'luisglogista@gmail.com';
-    // $_SESSION['factum_validation']['plant'] = '1';
-    // $_SESSION['factum_validation']['lng'] = 'es';
-    // $_SESSION['factum_validation']['person'] = 'Luis Gimenez';
-    // $_SESSION['factum_validation']['id'] = '6';
+    include_once "./Pages/Session/session.php";
 }
 
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);

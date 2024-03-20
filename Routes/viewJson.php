@@ -1,4 +1,10 @@
 <?php
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+    }
+    if (!isset($_SESSION['factum_validation'])) {
+        include_once "./Pages/Session/session.php";
+    }
   $jsonData = $_POST['data']; // El nombre del campo oculto en el formulario es 'data'
   
   if ($jsonData) {

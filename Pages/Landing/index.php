@@ -4,13 +4,14 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 header('Content-Type: text/html;charset=utf-8');
-session_start();
-if (!isset($_SESSION['factum_validation']['email'] )) {
-    unset($_SESSION['factum_validation']['email'] ); 
-    
-    // header('Location: ../../../../404.php');
-    // exit;
+// session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
+if (!isset($_SESSION['factum_validation'])) {
+    include_once "./Pages/Session/session.php";
+}
+
 ?>
 
 <!DOCTYPE html>

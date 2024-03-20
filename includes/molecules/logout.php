@@ -16,6 +16,9 @@ if (ini_get("session.use_cookies")) {
 session_regenerate_id(true);
 // Finalmente, destruye la sesión.
 session_destroy();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 // Redirige a la página de inicio de sesión o a donde desees.
 header("Location: ../../../../index.php"); // Cambia "login.php" al nombre de tu página de inicio de sesión

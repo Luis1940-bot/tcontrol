@@ -1,10 +1,13 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
-session_start();
+// session_start();
 
-if (!isset($_SESSION['factum_validation'])) {
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
+if (!isset($_SESSION['factum_validation'])) {
+    include_once "./Pages/Session/session.php";
+} 
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 define('INCLUDES', ROOT_PATH.'/includes/molecules');
 ?>
