@@ -184,11 +184,12 @@ class ElementGenerator {
     }
   }
 
-  static generateImg(src, alt, dim, extension) {
+  static generateImg(src, alt, dim, extension, plant) {
     // console.log(src, alt, dim, extension)
+
     const dimensiones = dim
     const img = document.createElement('img')
-    img.src = `../../../assets/img/planos/${src}`
+    img.src = `../../../assets/img/planos/${plant}/${src}`
     img.alt = alt
     img.dataset.extension = extension
 

@@ -81,8 +81,8 @@ function dondeEstaEn() {
   document.getElementById('whereUs').style.display = 'inline'
 }
 
-function configPHP() {
-  const user = desencriptar(sessionStorage.getItem('user'))
+function configPHP(user) {
+  // const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -104,8 +104,10 @@ function configPHP() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
   inicioPerformance()
-  configPHP()
+  configPHP(user)
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
@@ -129,7 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeVersion('version')
     setTimeout(() => {
       dondeEstaEn()
-      leeApp('app')
+      leeApp(`App/${plant}/app`)
       const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
       cargaTabla(objTranslate, control)
     }, 200)

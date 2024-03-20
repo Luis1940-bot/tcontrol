@@ -16,6 +16,7 @@ if (isset($datos)) {
     $srcArray = $imgJson['src'];
     $fileNameArray = $imgJson['fileName'];
     $extensionArray = $imgJson['extension'];
+    $plant = $imgJson['plant'];
 
     $numImages = count($srcArray);
 
@@ -73,7 +74,7 @@ if (isset($datos)) {
 
                 // Construir la ruta de la imagen
                
-                $directorioImagenes = $SERVER;
+                $directorioImagenes = $SERVER . '/' . $plant . '/';
 
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);
@@ -100,7 +101,7 @@ if (isset($datos)) {
 
                 // Construir la ruta de la imagen
                 
-                $directorioImagenes = $SERVER;
+                $directorioImagenes = $SERVER . '/' . $plant . '/';
 
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);

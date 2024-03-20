@@ -84,11 +84,11 @@ function leyendaSubtituloTitulo(
   return null
 }
 
-function generatePhoto(src, alt, dim, extension) {
+function generatePhoto(src, alt, dim, extension, plant) {
   // console.log(src, alt, dim, extension)
   const dimensiones = dim
   const img = document.createElement('img')
-  img.src = `../../../assets/img/planos/${src}`
+  img.src = `../../../assets/img/planos/${plant}/${src}`
   img.alt = alt
   img.dataset.extension = extension
 
@@ -124,13 +124,14 @@ function generatePhoto(src, alt, dim, extension) {
 
 function detectarPhoto(valor, nombreControl, fila) {
   try {
+    const { plant } = desencriptar(sessionStorage.getItem('user'))
     valor = JSON.parse(valor)
     const src = valor.img
     const alt = src.replace(/\.[^/.]+$/, '')
     const parte = valor.img.split('.')
     const extension = parte.pop()
     const dimensiones = ` { width: ${valor.width}, height: ${valor.height} }`
-    const img = generatePhoto(src, alt, dimensiones, extension)
+    const img = generatePhoto(src, alt, dimensiones, extension, plant)
     var texto = nombreControl.charAt(0).toUpperCase() + nombreControl.slice(1)
     var contenidoFilaUnido = texto
     for (let i = 1; i <= 5; i++) {
@@ -163,6 +164,8 @@ function detectarPhoto(valor, nombreControl, fila) {
 
 function detectarImagenes(fila, imagenes) {
   try {
+    const { plant } = desencriptar(sessionStorage.getItem('user'))
+
     let cadenaJSON = imagenes
     cadenaJSON = cadenaJSON.replace(/fileName/g, '"fileName"')
     cadenaJSON = cadenaJSON.replace(/extension/g, '"extension"')
@@ -173,7 +176,7 @@ function detectarImagenes(fila, imagenes) {
     cadenaJSON = cadenaJSON.replace(/(\w+):/g, '"$1":')
     const objeto = JSON.parse(`{${cadenaJSON}}`)
     const cantidadDeImagenes = objeto.fileName.length
-    const rutaBase = '../../../../assets/Imagenes/'
+    const rutaBase = `../../../../assets/Imagenes/${plant}/`
     const ul = document.createElement('ul')
     ul.style.listStyle = 'none'
     ul.style.display = 'flex'

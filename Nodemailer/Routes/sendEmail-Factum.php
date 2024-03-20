@@ -30,6 +30,7 @@ require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 try {
    $datos =json_decode($_POST['datos'], true);
    $encabezados =json_decode($_POST['encabezados'], true);
+   $plant =json_decode($_POST['plant'], true);
   
   // $datos =json_decode($datox, true);
   // $encabezados =json_decode($encabezadox, true);
@@ -90,7 +91,7 @@ try {
    $html  = str_replace('{relevamiento}', $relevamiento, $html);
    $html  = str_replace('{detalle}', $detalle, $html);
    $html  = str_replace('{observacion}', $observacion , $html);
-   $html  = str_replace('{contenido_dinamico}', generarContenidoDinamico($datos), $html);
+   $html  = str_replace('{contenido_dinamico}', generarContenidoDinamico($datos, $plant), $html);
    // echo 'html>>>> '.$html;
     $mail = new PHPMailer(true);
   // Configura el servidor SMTP
@@ -173,8 +174,8 @@ function utf8_to_iso8859_1(string $string): string {
 
     return substr($s, 0, $j);
 }
-//$directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/Imagenes/';
-function generarContenidoDinamico($datos) {
+//$directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/Imagenes/' . $plant . '/';
+function generarContenidoDinamico($datos, $plant) {
     $contenido = ''; 
     foreach ($datos as $elemento) {
         $contenido .= '<tr style="background:#fff; width:100%; height:20px;">';
@@ -210,7 +211,7 @@ function generarContenidoDinamico($datos) {
         if ($valor === 'photo' ) {
           $display = 'none';
           $colSpan = 'colspan="3"';
-          $directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/img/planos/';
+          $directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/img/planos/' . $plant . '/';
           $array = json_decode($elemento['displayDetalle'], true);
           $img = $array['img'];
           $width = $array['width'];
@@ -243,7 +244,7 @@ function generarContenidoDinamico($datos) {
         if ($valor === 'img' && $fileName) {
             foreach ($fileNameArray as &$fileName) {
                 $fileName = trim($fileName, ' "[]');
-                $directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/Imagenes/';
+                $directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/Imagenes/' . $plant . '/';
                 $filePath = $directorioImagenes . $fileName;
                 $valor = '<img src="' . $filePath . '" alt="img" width="50px" height="50px">';
                $imagenes = $imagenes .' '. $valor;

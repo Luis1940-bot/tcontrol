@@ -5,7 +5,7 @@ import { Alerta } from '../../../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
 import objVariables from '../../../../controllers/variables.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { encriptar } from '../../../../controllers/cript.js'
+import { encriptar, desencriptar } from '../../../../controllers/cript.js'
 
 function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
   // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos)
@@ -49,6 +49,8 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
     valor === '1' ? (checkbox.checked = true) : (checkbox.checked = false)
   }
   if (tagName === 'BUTTON' && type === 'submit' && datos[i][23] !== '') {
+    const { plant } = desencriptar(sessionStorage.getItem('user'))
+
     let cadenaJSON = datos[i][23]
     cadenaJSON = cadenaJSON.replace(/fileName/g, '"fileName"')
     cadenaJSON = cadenaJSON.replace(/extension/g, '"extension"')
@@ -59,7 +61,7 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
     cadenaJSON = cadenaJSON.replace(/(\w+):/g, '"$1":')
     const objeto = JSON.parse(`{${cadenaJSON}}`)
     const cantidadDeImagenes = objeto.fileName.length
-    const rutaBase = '../../../../assets/Imagenes/'
+    const rutaBase = `../../../../assets/Imagenes/${plant}/`
     const ul = td[3].childNodes[0]
 
     // eslint-disable-next-line no-plusplus

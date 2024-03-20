@@ -724,14 +724,16 @@ function convertirObjATextPlano(obj) {
   return plainText
 }
 
-function subirImagenes(img) {
+function subirImagenes(img, plant) {
   if (img.length === 0) {
     return null
   }
   if (img[0].extension.length === 0) {
     return null
   }
-  // console.log(img)
+
+  img[0].plant = plant
+
   const formData = new FormData()
   formData.append('imgBase64', JSON.stringify(img[0])) // encodeURIComponent
   // console.log(formData);
@@ -939,6 +941,7 @@ async function insert(
   docStorage
 ) {
   try {
+    const { plant } = desencriptar(sessionStorage.getItem('user'))
     const nuevoObjetoControl = { ...nuevoObjeto }
     delete nuevoObjetoControl.name
     delete nuevoObjetoControl.email
@@ -954,7 +957,7 @@ async function insert(
 
     // console.log(insertado);
 
-    const imagenes = await subirImagenes(nuevoObjeto.objImagen)
+    const imagenes = await subirImagenes(nuevoObjeto.objImagen, plant)
     // console.log(imagenes);
 
     const enviaPorEmail = sessionStorage.getItem('envia_por_email')
@@ -962,7 +965,7 @@ async function insert(
     encabezados.documento = insertado.documento
     let enviado = ''
     if (enviaPorEmail) {
-      enviado = await enviaMail(nuevoObjeto, encabezados)
+      enviado = await enviaMail(nuevoObjeto, encabezados, plant)
       // console.log(enviado);
     }
     const amarillo = document.getElementById('idDivAvisoVerde')
@@ -2259,7 +2262,7 @@ class Alerta {
       } else {
         texto =
           trO(
-            'No teine permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias',
+            'No tiene permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias',
             objTrad
           ) ||
           'No tiene permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias'
@@ -2692,6 +2695,7 @@ class Alerta {
 
   createMenuListControls(objeto, control, nuxpedido, traerControl, objTrad) {
     try {
+      //! viewer para print
       const obj = objeto
       this.modal = document.createElement('div')
       this.modal.id = 'modalTablaView'

@@ -236,8 +236,8 @@ function dondeEstaEn(array) {
   document.getElementById('whereUs').innerText = `${ustedEstaEn}${nuevaCadena}`
 }
 
-function configPHP() {
-  const user = desencriptar(sessionStorage.getItem('user'))
+function configPHP(user) {
+  // const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -259,8 +259,10 @@ function configPHP() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
   inicioPerformance()
-  configPHP()
+  configPHP(user)
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
@@ -276,7 +278,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeVersion('version')
     setTimeout(() => {
       dondeEstaEn(navegador.estadoAnteriorWhereUs)
-      leeApp('app')
+      leeApp(`App/${plant}/app`)
     }, 200)
   }
   spinner.style.visibility = 'hidden'

@@ -344,7 +344,14 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       const partes = element[20].split('.')
       const extension = partes.pop()
       const dimensiones = element[17]
-      const img = ElementGenerator.generateImg(src, alt, dimensiones, extension)
+      const { plant } = desencriptar(sessionStorage.getItem('user'))
+      const img = ElementGenerator.generateImg(
+        src,
+        alt,
+        dimensiones,
+        extension,
+        plant
+      )
       type = img
     }
     if (i > 2 && tipoDeDato === 'tx') {
