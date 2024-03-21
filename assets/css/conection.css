@@ -1,26 +1,42 @@
-#idSignal {
-  width: 13px;
-  height: 13px;
-  margin: 7px auto auto 10px;
-}
-@media only screen and (min-width: 760px) and (orientation: landscape) {
+@media only screen and (min-width: 200px) and (orientation: portrait) {
   #idSignal {
-    width: 15px;
-    height: 15px;
-    margin: 5px auto auto 10px;
+    width: 25px;
+    height: 25px;
+
+    margin-left: 10px;
+    margin-top: 10px;
   }
 }
-@media only screen and (min-width: 800px) {
+
+@media only screen and (min-width: 800px) and (orientation: landscape) {
   #idSignal {
-    width: 15px;
-    height: 15px;
-    margin: 5px auto auto 10px;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    margin-top: 10px;
   }
 }
-@media only screen and (min-width: 1200px) {
+/* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
+@media only screen and (min-width: 800px) and (orientation: portrait) {
+  /* Estilos para tablets en orientación vertical */
+}
+
+/* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
+@media only screen and (min-width: 1000px) and (orientation: landscape) {
+  /* Estilos para tablets en orientación landscape */
+}
+
+/* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1000px) and (orientation: portrait) {
+}
+
+/* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1080px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación landscape */
   #idSignal {
-    width: 15px;
-    height: 15px;
-    margin: 5px auto auto 10px;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
   }
 }

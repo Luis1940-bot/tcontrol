@@ -30,14 +30,6 @@ function leeVersion(json) {
     })
 }
 
-// function storage(idioma) {
-//   const datos = {
-//     lng: idioma,
-//   };
-//   const datosString = JSON.stringify(datos);
-//   sessionStorage.setItem('datosUser', datosString);
-// }
-
 function completaButtons(obj) {
   const divButtons = document.querySelector('.div-landing-buttons')
   divButtons.innerHTML = ''
@@ -143,6 +135,7 @@ function completaButtons(obj) {
       // storage(language.slice(0, 2).toLowerCase());
       seguir.disabled = false
       seguir.style.background = '#212121'
+
       seguir.addEventListener('mouseover', () => {
         if (!seguir.disabled) {
           seguir.style.background = '#cecece'

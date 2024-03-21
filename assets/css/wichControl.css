@@ -1,51 +1,83 @@
-.div-wichControl {
-  margin-top: 50px;
-}
-.div-wich {
-  height: auto;
-  text-align: center;
-  margin-top: 5px;
-  width: auto;
-}
-.div-wich {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-#wichC {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
-  font-style: normal;
-  background: #ececec;
-  display: none;
-  width: auto;
-}
-#wichCEmail {
-  /* border: 1px solid #0066ff; */
-  /* border-radius: 2px 2px 2px 2px; */
-  /* background: #5594f3; */
-  display: none;
-}
-
-@media only screen and (min-width: 760px) and (orientation: landscape) {
-}
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  .div-wichControl {
+    margin-top: 15px;
+  }
+  .div-wich {
+    height: auto;
+    text-align: center;
+    margin-top: 5px;
+    width: auto;
+  }
   .div-wich {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
+    font-size: 10px;
     font-weight: 700;
+  }
+
+  #wichC {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    background: #ececec;
+    display: none;
+    width: auto;
+  }
+  #wichCEmail {
+    /* border: 1px solid #0066ff; */
+    /* border-radius: 2px 2px 2px 2px; */
+    /* background: #5594f3; */
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 800px) and (orientation: landscape) {
+  .div-wichControl {
+    margin-top: 15px;
+  }
+  .div-wich {
+    height: auto;
+    text-align: center;
+    margin-top: 5px;
+    width: auto;
   }
   .div-wich img {
     height: 15px;
     width: 15px;
   }
+
   #wichC {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 18px;
+    font-style: normal;
     font-weight: 700;
+    background: #ececec;
+    display: none;
+    width: auto;
   }
-  /* #tableControl {
-    margin-top: 30px;
-  } */
+  #wichCEmail {
+    /* border: 1px solid #0066ff; */
+    /* border-radius: 2px 2px 2px 2px; */
+    /* background: #5594f3; */
+    display: none;
+  }
+}
+
+/* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
+@media only screen and (min-width: 800px) and (orientation: portrait) {
+  /* Estilos para tablets en orientación vertical */
+}
+
+/* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
+@media only screen and (min-width: 1000px) and (orientation: landscape) {
+  /* Estilos para tablets en orientación landscape */
+}
+
+/* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1000px) and (orientation: portrait) {
+  /* Estilos para dispositivos de escritorio en orientación vertical */
+}
+
+/* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1080px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación landscape */
 }

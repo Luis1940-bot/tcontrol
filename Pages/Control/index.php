@@ -33,6 +33,7 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   <header>
     <?php
       include('../../includes/molecules/header.php');
+      // include('../../includes/molecules/encabezado.php');
       include('../../includes/molecules/wichControl.php');
     ?>
     </div>

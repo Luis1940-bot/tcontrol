@@ -254,6 +254,7 @@ function configPHP(user) {
   const footer = document.getElementById('footer')
   footer.innerText = by
   footer.href = rutaDeveloper
+  document.querySelector('.header-McCain').style.display = 'none'
   // const linkInstitucional = document.getElementById('linkInstitucional');
   // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
