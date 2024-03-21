@@ -65,7 +65,7 @@ function asignarEventos() {
   buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
       const ruta = objButtons[navegador.estadoAnteriorButton].name[index]
-      window.location.href = `../${ruta}/index.php`
+      window.location.href = `../../Pages/${ruta}/index.php`
     })
   })
 }

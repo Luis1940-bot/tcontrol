@@ -102,7 +102,7 @@ function dondeEstaEn() {
   lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
-  document.getElementById('volver').style.display = 'none'
+  document.getElementById('volver').style.display = 'block'
 }
 
 function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
@@ -295,6 +295,7 @@ function goBack() {
         navegador.estadoAnteriorWhereUs.length - 1
       ]
     }`
+
     navegador.estadoAnteriorWhereUs.pop()
     navegador.estadoAnteriorButton =
       navegador.estadoAnteriorWhereUs[
@@ -304,12 +305,19 @@ function goBack() {
       navegador.estadoAnteriorWhereUs[
         navegador.estadoAnteriorWhereUs.length - 1
       ]
+
+    console.log(navegador.estadoAnteriorButton)
+    console.log(navegador.estadoAnteriorWhereUs)
+    console.log(navegador.estadoAnteriorWhereUs.length)
     completaButtons(clave)
     const cadena = `${document.getElementById('whereUs').innerText}`
     quitarCadena = quitarCadena.replace('>', '')
     quitarCadena = trO(quitarCadena || quitarCadena)
     let nuevaCadena = cadena.replace(quitarCadena, '')
     const ultimoIndice = nuevaCadena.lastIndexOf('>')
+    if (ultimoIndice === -1) {
+      goMenu()
+    }
     nuevaCadena =
       nuevaCadena.slice(0, ultimoIndice) + nuevaCadena.slice(ultimoIndice + 1)
     if (clave === 'Consultas') {
@@ -332,3 +340,9 @@ goLanding.addEventListener('click', () => {
   const url = '../../Pages/Landing'
   window.location.href = url
 })
+
+function goMenu() {
+  const url = '../../Pages/Menu'
+  window.location.href = url
+  return
+}

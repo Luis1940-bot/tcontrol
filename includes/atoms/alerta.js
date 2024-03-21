@@ -1234,7 +1234,9 @@ function estilosCell(
   if (type === 'link' && datos instanceof HTMLAnchorElement) {
     cell.appendChild(datos)
   } else {
-    typeof datos === 'string' && datos !== null
+    typeof datos === 'string' &&
+    datos !== null &&
+    datos.toLocaleLowerCase() !== 'observacion'
       ? (dato = trA(datos, objTrad) || datos)
       : (dato = datos)
     if (dato !== null && type === null) {

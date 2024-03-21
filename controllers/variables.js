@@ -2533,7 +2533,7 @@ const tablaEnModal = {
     display: 'flex',
     flexDirection: 'column',
     padding: null,
-    overflow: 'hidden',
+    overflow: null,
     className: 'div-verde',
     textAlign: '',
     gap: '2px',

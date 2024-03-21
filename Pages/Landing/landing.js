@@ -177,8 +177,8 @@ function leeApp(json) {
     })
 }
 
-function configPHP() {
-  const user = desencriptar(sessionStorage.getItem('user'))
+function configPHP(user) {
+  // const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -200,8 +200,10 @@ function configPHP() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
   inicioPerformance()
-  configPHP()
+  configPHP(user)
   spinner.style.visibility = 'visible'
   const customButton = document.getElementById('planta')
   const persona = desencriptar(sessionStorage.getItem('user'))
@@ -212,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
   leeVersion('version')
-  leeApp('app')
+  leeApp(`App/${plant}/app`)
   spinner.style.visibility = 'hidden'
   finPerformance()
 })

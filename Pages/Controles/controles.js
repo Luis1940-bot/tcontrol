@@ -187,9 +187,9 @@ function dondeEstaEn() {
 }
 
 function configPHP(user) {
-  // const user = desencriptar(sessionStorage.getItem('user'))
   const divVolver = document.querySelector('.div-volver')
-  divVolver.style.display = 'none'
+  divVolver.style.display = 'block'
+  document.getElementById('volver').style.display = 'block'
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -357,5 +357,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
   const url = '../../Pages/Landing'
+  window.location.href = url
+})
+
+const volver = document.getElementById('volver')
+volver.addEventListener('click', () => {
+  const url = '../../Pages/Menu'
   window.location.href = url
 })
