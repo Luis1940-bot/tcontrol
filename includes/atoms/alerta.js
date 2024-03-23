@@ -769,7 +769,7 @@ function cartelVerdeInsertado(
   span.style.display = 'none'
   let texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert]
   obj.span.text = texto
-  obj.span.fontSize = '16px'
+  // obj.span.fontSize = '16px'
   obj.span.fontColor = '#ececec'
   obj.span.fontWeight = '700'
   obj.span.marginTop = '10px'
@@ -784,19 +784,21 @@ function cartelVerdeInsertado(
   texto = trO(mensaje.items, objTrad) || mensaje.items
   frase = `${frase} ${texto}`
   obj.span.text = frase
-  obj.span.fontSize = '14px'
+  // obj.span.fontSize = '14px'
   obj.span.fontColor = '#ececec'
   obj.span.fontWeight = '500'
   obj.span.marginTop = '0px'
+  obj.span.id = 'idSpanAvisoVerde2'
   let spanTexto = createSpan(obj.span, frase)
   modalContent.appendChild(spanTexto)
   texto = trO(mensaje.documento, objTrad) || mensaje.documento
   frase = `${texto} ${insertado.documento}.`
   obj.span.text = frase
-  obj.span.fontSize = '14px'
+  // obj.span.fontSize = '14px'
   obj.span.fontColor = '#ececec'
   obj.span.fontWeight = '500'
   obj.span.marginTop = '0px'
+  obj.span.id = 'idSpanAvisoVerde3'
   spanTexto = createSpan(obj.span, frase)
   modalContent.appendChild(spanTexto)
   modal.appendChild(modalContent)
@@ -804,10 +806,11 @@ function cartelVerdeInsertado(
     texto = trO(mensaje.enviado, objTrad) || mensaje.enviado
     frase = `${texto}`
     obj.span.text = frase
-    obj.span.fontSize = '14px'
+    // obj.span.fontSize = '14px'
     obj.span.fontColor = '#ececec'
     obj.span.fontWeight = '500'
     obj.span.marginTop = '0px'
+    obj.span.id = 'idSpanAvisoVerde4'
     spanTexto = createSpan(obj.span, frase)
     modalContent.appendChild(spanTexto)
     modal.appendChild(modalContent)
@@ -828,7 +831,7 @@ function cartelRojoInsertado(
   span.style.display = 'none'
   const texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert]
   obj.span.text = texto
-  obj.span.fontSize = '16px'
+  // obj.span.fontSize = '16px'
   obj.span.fontColor = '#ececec'
   obj.span.fontWeight = '700'
   obj.span.marginTop = '10px'
@@ -838,10 +841,11 @@ function cartelRojoInsertado(
   modalContent.appendChild(span)
   const frase = trO(mensaje.fail, objTrad) || mensaje.fail
   obj.span.text = frase
-  obj.span.fontSize = '14px'
+  // obj.span.fontSize = '14px'
   obj.span.fontColor = '#ececec'
   obj.span.fontWeight = '500'
   obj.span.marginTop = '0px'
+  obj.span.id = 'idSpanAvisoVerde2'
   const spanTexto = createSpan(obj.span, frase)
   modalContent.appendChild(spanTexto)
   modal.appendChild(modalContent)
@@ -1200,11 +1204,11 @@ function estilosTheadCell(element, index, arrayWidthEncabezado) {
   const widthCell =
     widthScreenAjustado * widthScreen * arrayWidthEncabezado[index]
 
-  let size = '8px'
-  if (widthScreen >= 800) {
-    size = '10px'
-  }
-  cell.style.fontSize = size
+  // let size = '8px'
+  // if (widthScreen >= 800) {
+  //   size = '10px'
+  // }
+  // cell.style.fontSize = size
   cell.style.width = `${widthCell}px`
   widthCell === 0 ? (cell.style.display = 'none') : null
 

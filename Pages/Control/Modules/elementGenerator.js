@@ -192,6 +192,7 @@ class ElementGenerator {
     img.src = `../../../assets/img/planos/${plant}/${src}`
     img.alt = alt
     img.dataset.extension = extension
+    img.classList.add('planos')
 
     // Verificar si las dimensiones están presentes y no vacías
     if (dimensiones && dimensiones.trim() !== '') {
@@ -204,8 +205,8 @@ class ElementGenerator {
         const objeto = JSON.parse(ajustada)
         // Verificar si el objeto tiene propiedades width y height
         if (objeto.width && objeto.height) {
-          img.style.width = `${objeto.width}px`
-          img.style.height = `${objeto.height}px`
+          // img.style.width = `${objeto.width}px`
+          // img.style.height = `${objeto.height}px`
         } else {
           // eslint-disable-next-line no-console
           console.error(

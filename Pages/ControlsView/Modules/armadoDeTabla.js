@@ -414,9 +414,9 @@ function estilosCell(
   alignCenter,
   paddingLeft,
   fontStyle,
-  fontWeight,
+  // fontWeight,
   colorText,
-  fontSize,
+  // fontSize,
   element,
   index,
   arrayControl,
@@ -430,8 +430,8 @@ function estilosCell(
   cell.style.textAlign = alignCenter
   cell.style.paddingLeft = paddingLeft
   cell.style.fontStyle = fontStyle
-  cell.style.fontWeight = fontWeight
-  cell.style.fontSize = fontSize
+  // cell.style.fontWeight = fontWeight
+  // cell.style.fontSize = fontSize
   cell.style.color = colorText
 
   // Crear el contenido de texto
@@ -462,9 +462,9 @@ function estilosCell(
   imagen.setAttribute('name', 'viewer')
   imagen.style.float = 'right'
   imagen.src = '../../../assets/img/icons8-view-30.png'
-  imagen.style.height = '12px'
-  imagen.style.width = '12px'
-  imagen.style.margin = 'auto 5px auto auto'
+  // imagen.style.height = '12px'
+  // imagen.style.width = '12px'
+  // imagen.style.margin = 'auto 5px auto auto'
   imagen.style.cursor = 'pointer'
   imagen.setAttribute('data-index', index)
   imagen.addEventListener('click', (e) => {
@@ -487,9 +487,9 @@ function estilosCell(
     trash.setAttribute('name', 'trash')
     trash.style.float = 'right'
     trash.src = '../../../assets/img/icons8-trash-48.png'
-    trash.style.height = '12px'
-    trash.style.width = '12px'
-    trash.style.margin = 'auto 15px auto auto'
+    // trash.style.height = '12px'
+    // trash.style.width = '12px'
+    // trash.style.margin = 'auto 15px auto auto'
     trash.style.cursor = 'pointer'
     trash.setAttribute('trash-index', index)
     trash.addEventListener('click', (e) => {
@@ -509,21 +509,17 @@ function estilosTbodyCell(element, index, arrayControl, objTranslate, tipo) {
   const alignCenter = 'left'
   const paddingLeft = '10px'
   const fontStyle = 'normal'
-  const fontWeight = 500
+  // const fontWeight = 500
   const background = '#ffffff'
   const colorText = '#000000'
-  let size = '10px'
-  if (widthScreen > 1000) {
-    size = '10px'
-  }
-  const fontSize = size
+
   const cell = estilosCell(
     alignCenter,
     paddingLeft,
     fontStyle,
-    fontWeight,
+    // fontWeight,
     colorText,
-    fontSize,
+    // fontSize,
     element,
     index,
     arrayControl,

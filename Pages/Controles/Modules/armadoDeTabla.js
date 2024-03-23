@@ -81,7 +81,7 @@ function estilosCell(
   colorText,
   ultimo,
   primero,
-  fontSize,
+  // fontSize,
   indice,
   objTranslate,
   arrayControl
@@ -94,7 +94,7 @@ function estilosCell(
   cell.style.paddingLeft = paddingLeft
   cell.style.fontStyle = fontStyle
   cell.style.fontWeight = fontWeight
-  cell.style.fontSize = fontSize
+  // cell.style.fontSize = fontSize
   cell.style.color = colorText
 
   const ultima = trO('Última') || 'Última'
@@ -102,11 +102,11 @@ function estilosCell(
   const fechas = `${ultima} ${ultimo} - ${primera} ${primero}`
   const span = document.createElement('span')
   span.style.color = 'red'
-  let size = '8px'
-  if (widthScreen > 1000) {
-    size = '10px'
-  }
-  span.style.fontSize = size
+  // let size = '8px'
+  // if (widthScreen > 1000) {
+  //   size = '10px'
+  // }
+  // span.style.fontSize = size
   span.style.fontStyle = 'Italic'
   span.style.marginLeft = '10px'
   span.textContent = fechas
@@ -118,8 +118,8 @@ function estilosCell(
   imagen.setAttribute('name', 'viewer')
   imagen.style.float = 'right'
   imagen.src = '../../../assets/img/icons8-view-30.png'
-  imagen.style.height = '12px'
-  imagen.style.width = '12px'
+  // imagen.style.height = '12px'
+  // imagen.style.width = '12px'
   imagen.style.margin = 'auto 5px auto auto'
   imagen.style.cursor = 'pointer'
   imagen.setAttribute('data-index', indice)
@@ -144,11 +144,11 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
     const fontWeight = 700
     const background = '#ffffff'
     const colorText = '#000000'
-    let size = '8px'
-    if (widthScreen > 1000) {
-      size = '10px'
-    }
-    const fontSize = size
+    // let size = '10px'
+    // if (widthScreen > 1000) {
+    //   size = '10px'
+    // }
+    // const fontSize = size
     const indice = index
 
     const cell = estilosCell(
@@ -161,7 +161,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
       colorText,
       ultimo,
       primero,
-      fontSize,
+      // fontSize,
       indice,
       objTranslate,
       arrayControl

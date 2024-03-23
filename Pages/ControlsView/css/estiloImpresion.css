@@ -1,55 +1,181 @@
-#idDivTablas {
-  width: 320px;
-  height: auto;
-  max-height: 500px;
-  margin: 10px auto auto auto;
-  background-color: #ffffff;
-  overflow-y: auto;
-}
-#idTablaViewer {
-  width: 95%;
-}
-#idTablaViewer tr th {
-  font-size: 10px;
-}
-
-@media only screen and (min-width: 760px) and (orientation: landscape) {
-  body {
-    overflow: auto;
-  }
+@media only screen and (min-width: 200px) and (orientation: portrait) {
   #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
     width: 95%;
-    margin: 5px auto auto auto;
-    overflow-y: auto;
   }
-  #idTablaViewer thead tr th {
-    font-size: 12px;
-    overflow-y: auto;
+  #idTablaViewer thead {
+    font-size: 9px;
   }
-  #idTablaViewer tbody tr td {
-    font-size: 12px;
+  #idTablaViewer tr th {
+    font-size: 9px;
+  }
+  #idTablaViewer tr td {
+    font-size: 9px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
   }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 800px) and (orientation: landscape) {
   #idDivTablas {
-    width: 700px;
+    width: 90%;
     height: auto;
-    margin: 10px auto auto auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
     overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
   }
   #idTablaViewer tr th {
     font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
   }
 }
-@media only screen and (min-width: 1000px) {
+
+/* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
+@media only screen and (min-width: 800px) and (orientation: portrait) {
+  /* Estilos para tablets en orientación vertical */
   #idDivTablas {
-    width: 700px;
+    width: 90%;
     height: auto;
-    margin: 10px auto auto auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
     overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
   }
   #idTablaViewer tr th {
     font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
+@media only screen and (min-width: 1000px) and (orientation: landscape) {
+  /* Estilos para tablets en orientación landscape */
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1000px) and (orientation: portrait) {
+  /* Estilos para dispositivos de escritorio en orientación vertical */
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1080px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación landscape */
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
   }
 }

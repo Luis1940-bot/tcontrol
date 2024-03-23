@@ -1,246 +1,98 @@
 /* Estilos para el modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 
-.modal-content {
-  background-color: #fff;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-}
-
-#searchInput {
-  padding: 10px;
-  width: 90%;
-  height: 5px;
-  border: 1px solid #333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Estilos para el botón de cierre del modal */
-#closeModalButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-#closeModalButton:hover {
-  color: red;
-}
-
-.modal-content thead tr th {
-  padding-left: 10px;
-}
-.modal-content tbody {
-  max-height: 600px;
-  display: block;
-  overflow-y: auto;
-}
-.modal-content tbody td {
-  cursor: pointer;
-}
-.modal-content tbody td:hover {
-  background: #cecece;
-}
-.modal-content table {
-  width: 100%;
-}
-.modal-content tbody tr td {
-  padding-left: 10px;
-}
-.modal-content table tbody {
-  max-height: 400px;
-}
-hr {
-  border: none;
-  height: 1px;
-  background-color: #bababa;
-  margin: 0;
-}
-#idTituloH3 {
-  font-size: 20px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
-.modal-content h3 + span {
-  font-size: 18px;
-}
-.div-button {
-  margin: 2px 2px 2px 2px;
-}
-#idbtnNuevo,
-#idVerCargados,
-#idProcedimiento,
-#idVerCargadosPorFecha {
-  margin-top: 10px;
-  height: 40px;
-  font-size: 14px;
-}
-
-#idDivPorFecha {
-  margin-top: 80px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#idDivAvisoVerde,
-#idDivAvisoRojo {
-  margin: 500px auto auto auto;
-}
-#idDivAvisoImagenes {
-  margin: 500px auto auto auto;
-}
-.verde-close {
-  margin-left: 290px;
-}
-#idDivImagen {
-  margin: 100px auto auto auto;
-}
-#idDivGuardar {
-  margin: 100px auto auto auto;
-  height: 290px;
-}
-#idProcesoExitoso {
-  margin: 450px auto auto auto;
-}
-
-@media only screen and (min-width: 760px) and (orientation: landscape) {
   .modal-content {
-    margin-top: 20px;
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
   }
-  #idTituloH3 {
-    font-size: 18px;
-    margin-top: 15px;
-    margin-bottom: 5px;
+
+  #searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  .modal-content h3 + span {
-    font-size: 14px;
-    margin-top: 0px;
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  .div-button {
+  .close:hover {
+    color: red;
+  }
+
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+  }
+  .modal-content table tbody {
+    max-height: 400px;
+  }
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #bababa;
     margin: 0;
   }
-  #idbtnNuevo,
-  #idVerCargados,
-  #idProcedimiento,
-  #idVerCargadosPorFecha {
-    margin-top: 6px;
-    height: 30px;
-    font-size: 12px;
-  }
-  #idDivPorFecha {
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idDivAvisoVerde,
-  #idDivAvisoRojo {
-    margin: 180px auto auto auto;
-  }
-  #idDivAvisoImagenes {
-    margin-top: 100px;
-  }
-  .verde-close {
-    margin-left: 550px;
-  }
-  #idDivImagen {
-    margin: 10px auto auto auto;
-  }
-  #idDivGuardar {
-    margin: 10px auto auto auto;
-  }
-  #idProcesoExitoso {
-    margin: 150px auto auto auto;
-  }
-}
-
-@media only screen and (min-width: 800px) {
-  .modal-content {
-    margin-top: 20px;
-  }
   #idTituloH3 {
-    font-size: 18px;
-    margin-top: 15px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
   }
   .modal-content h3 + span {
-    font-size: 14px;
-    margin-top: 0px;
-  }
-  .div-button {
-    margin: 0;
-  }
-  #idbtnNuevo,
-  #idVerCargados,
-  #idProcedimiento,
-  #idVerCargadosPorFecha {
-    margin-top: 6px;
-    height: 30px;
-    font-size: 12px;
-  }
-  #idDivPorFecha {
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idDivAvisoVerde,
-  #idDivAvisoRojo {
-    margin: 180px auto auto auto;
-  }
-  #idDivAvisoImagenes {
-    margin-top: 100px;
-  }
-  .verde-close {
-    margin-left: 550px;
-  }
-  #idDivImagen {
-    margin: 10px auto auto auto;
-  }
-  #idDivGuardar {
-    margin: 10px auto auto auto;
-  }
-  #idProcesoExitoso {
-    margin: 150px auto auto auto;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  .modal-content {
-    margin-top: 20px;
-  }
-  #idTituloH3 {
     font-size: 18px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-  }
-  .modal-content h3 + span {
-    font-size: 14px;
-    margin-top: 0px;
   }
   .div-button {
     margin: 2px 2px 2px 2px;
@@ -253,29 +105,249 @@ hr {
     height: 40px;
     font-size: 14px;
   }
+
   #idDivPorFecha {
     margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
   }
+
   #idDivAvisoVerde,
   #idDivAvisoRojo {
-    margin: 500px auto auto auto;
+    margin: 200px auto auto auto;
   }
   #idDivAvisoImagenes {
-    margin-top: 500px;
-  }
-  .modal-close {
-    margin-left: 550px;
+    margin: 500px auto auto auto;
   }
   #idDivImagen {
     margin: 100px auto auto auto;
   }
   #idDivGuardar {
     margin: 100px auto auto auto;
-    height: 260px;
+    height: 290px;
   }
   #idProcesoExitoso {
     margin: 450px auto auto auto;
   }
+  #idSpanCarga {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .div-verde {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (min-width: 800px) and (orientation: landscape) {
+  .modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    margin-top: 5px;
+  }
+
+  #idTituloH3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+  }
+  .modal-content table tbody {
+    max-height: 400px;
+  }
+  .modal-content h3 + span {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+  .div-button {
+    margin: 0;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha {
+    margin-top: 6px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #idDivPorFecha {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivAvisoVerde,
+  #idDivAvisoRojo {
+    margin: 180px auto auto auto;
+  }
+  #idDivAvisoImagenes {
+    margin-top: 100px;
+  }
+  #idDivImagen {
+    margin: 10px auto auto auto;
+  }
+  #idDivGuardar {
+    margin: 10px auto auto auto;
+  }
+  #idProcesoExitoso {
+    margin: 150px auto auto auto;
+  }
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+  .div-verde {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
+@media only screen and (min-width: 800px) and (orientation: portrait) {
+  /* Estilos para tablets en orientación vertical */
+  .modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    margin-top: 5px;
+  }
+
+  #idTituloH3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+  }
+  .modal-content table tbody {
+    max-height: 400px;
+  }
+  .modal-content h3 + span {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+  .div-button {
+    margin: 0;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha {
+    margin-top: 6px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #idDivPorFecha {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivAvisoVerde,
+  #idDivAvisoRojo {
+    margin: 180px auto auto auto;
+  }
+  #idDivAvisoImagenes {
+    margin-top: 100px;
+  }
+  .verde-close {
+    /* margin-left: 550px; */
+  }
+  #idDivImagen {
+    margin: 10px auto auto auto;
+  }
+  #idDivGuardar {
+    margin: 10px auto auto auto;
+  }
+  #idProcesoExitoso {
+    margin: 150px auto auto auto;
+  }
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+}
+
+/* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
+@media only screen and (min-width: 1000px) and (orientation: landscape) {
+  /* Estilos para tablets en orientación landscape */
+}
+
+/* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1000px) and (orientation: portrait) {
+  /* Estilos para dispositivos de escritorio en orientación vertical */
+}
+
+/* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1080px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación landscape */
 }
