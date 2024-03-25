@@ -25,9 +25,9 @@
     min-width: 100%;
   }
 
-  #idDivPerson {
+  /* #idDivPerson {
     margin: 22px 0px 20px auto;
-  }
+  } */
   hr {
     width: 100%;
     color: #cecece;
@@ -120,7 +120,7 @@
   }
 }
 
-@media only screen and (min-width: 800px) and (orientation: landscape) {
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
   body {
     grid-area: body;
     display: grid;
@@ -147,9 +147,9 @@
     min-width: 100%;
   }
 
-  #idDivPerson {
+  /* #idDivPerson {
     margin: 22px 0px 20px auto;
-  }
+  } */
   hr {
     width: 100%;
     color: #cecece;
@@ -245,7 +245,7 @@
 }
 
 /* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
-@media only screen and (min-width: 800px) and (orientation: portrait) {
+@media only screen and (min-width: 768px) and (max-width: 834px) and (min-height: 1024px) and (max-height: 1126px) and (orientation: portrait) {
   /* Estilos para tablets en orientación vertical */
   body {
     grid-area: body;
@@ -273,9 +273,9 @@
     min-width: 100%;
   }
 
-  #idDivPerson {
+  /* #idDivPerson {
     margin: 22px 0px 20px auto;
-  }
+  } */
   hr {
     width: 100%;
     color: #cecece;
@@ -371,7 +371,7 @@
 }
 
 /* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
-@media only screen and (min-width: 1000px) and (orientation: landscape) {
+@media only screen and (min-width: 1024px) and (max-width: 1126px) and (min-height: 768px) and (max-height: 834px) and (orientation: landscape) {
   /* Estilos para tablets en orientación landscape */
   body {
     grid-area: body;
@@ -399,9 +399,9 @@
     min-width: 100%;
   }
 
-  #idDivPerson {
+  /* #idDivPerson {
     margin: 22px 0px 20px auto;
-  }
+  } */
   hr {
     width: 100%;
     color: #cecece;
@@ -497,7 +497,7 @@
 }
 
 /* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1000px) and (orientation: portrait) {
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
   /* Estilos para dispositivos de escritorio en orientación vertical */
   body {
     grid-area: body;
@@ -525,9 +525,9 @@
     min-width: 100%;
   }
 
-  #idDivPerson {
+  /* #idDivPerson {
     margin: 22px 0px 20px auto;
-  }
+  } */
   hr {
     width: 100%;
     color: #cecece;
@@ -623,7 +623,7 @@
 }
 
 /* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1080px) and (orientation: landscape) {
+@media only screen and (min-width: 1900px) and (orientation: landscape) {
   /* Estilos para dispositivos de escritorio en orientación landscape */
   body {
     grid-area: body;
@@ -651,9 +651,9 @@
     min-width: 100%;
   }
 
-  #idDivPerson {
+  /* #idDivPerson {
     margin: 22px 0px 20px auto;
-  }
+  } */
   hr {
     width: 100%;
     color: #cecece;

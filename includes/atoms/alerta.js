@@ -1345,6 +1345,7 @@ function generarUrlParaEnlace(dato) {
   link.textContent = dato
   link.style.color = 'blue' // Establece el color del enlace, puedes personalizar según tus necesidades
   link.style.textDecoration = 'underline' // Subraya el enlace
+  link.classList.add('nr')
   // link.target = '_blank'
   link.addEventListener('click', function (event) {
     event.preventDefault()
@@ -1800,6 +1801,10 @@ class Alerta {
     let texto = trO(user.home, objTranslate) || user.home
     const spanHome = createSpan(obj.home, texto)
     modalContent.appendChild(spanHome)
+
+    const screen = `Screen: ${widthScreen}`
+    const spanScreen = createSpan(obj.screen, screen)
+    modalContent.appendChild(spanScreen)
 
     const hr = createHR(obj.hr)
     modalContent.appendChild(hr)
@@ -2478,6 +2483,7 @@ class Alerta {
       const idbtnEnviar = document.getElementById('idbtnEnviar')
       idbtnEnviar.addEventListener('click', async (e) => {
         const name = e.target.attributes[3].value
+        // console.log(name)
         let inputDesde = document.getElementById('idDesde')
         let inputHasta = document.getElementById('idHasta')
         let desde = inputDesde.value
@@ -2500,8 +2506,8 @@ class Alerta {
           const aviso =
             'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
           const mensaje = trO(aviso, objTranslate) || aviso
-          arrayGlobal.avisoListandoControles.div.height = '200px'
-          arrayGlobal.avisoListandoControles.div.top = '70px'
+          // arrayGlobal.avisoListandoControles.div.height = '200px'
+          // arrayGlobal.avisoListandoControles.div.top = '70px'
           miAlerta.createControl(
             arrayGlobal.avisoListandoControles,
             mensaje,

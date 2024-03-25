@@ -1,49 +1,93 @@
-.div-wichConsult{
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
-.div-wichCn{
-height: auto;
- text-align: left;
- margin-top: 5px;
- width: auto;
- display: flex;
- align-items: center;
-}
-.div-wichCn img {
-  width: 10px;
-  height: 10px;
-  margin-right: 5px; 
-}
-.div-wichCn #wichCn{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  .div-wichConsult {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .div-wichCn {
+    height: auto;
+    text-align: left;
+    margin-top: 5px;
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+  .div-wichCn img {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+  }
+  .div-wichCn #wichCn {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  #wichCn {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    background: #ececec;
+    display: none;
+    width: auto;
+  }
+  #wichConsultContainer {
+    display: none;
+  }
 }
 
-#wichCn{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
-  font-style: normal;
-  background: #ECECEC;
-  display: none;
-  width: auto;
-}
-#wichConsultContainer{
-  display: none;
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  .div-wichConsult {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .div-wichCn {
+    height: auto;
+    text-align: left;
+    margin-top: 5px;
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+  .div-wichCn img {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+  }
+  .div-wichCn #wichCn {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  #wichCn {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    background: #ececec;
+    display: none;
+    width: auto;
+  }
+  #wichConsultContainer {
+    display: none;
+  }
 }
 
-@media only screen and  (min-width: 760px) and (orientation: landscape) {
+/* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
+@media only screen and (min-width: 768px) and (max-width: 834px) and (min-height: 1024px) and (max-height: 1126px) and (orientation: portrait) {
+  /* Estilos para tablets en orientación vertical */
+}
 
+/* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
+@media only screen and (min-width: 1024px) and (max-width: 1126px) and (min-height: 768px) and (max-height: 834px) and (orientation: landscape) {
+  /* Estilos para tablets en orientación landscape */
 }
-@media only screen and (min-width: 800px) {
-.div-wichCn #wichCn{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
+
+/* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación vertical */
 }
-.div-wichCn img{
-  height: 15px;
-  width: 15px;
-}
+
+/* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
+@media only screen and (min-width: 1900px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación landscape */
 }

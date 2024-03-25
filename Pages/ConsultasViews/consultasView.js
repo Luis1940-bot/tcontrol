@@ -77,8 +77,8 @@ async function mensajeDeCarga(objTranslate, procedure) {
   const aviso =
     'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
   const mensaje = trO(aviso) || aviso
-  arrayGlobal.avisoListandoControles.div.height = '200px'
-  arrayGlobal.avisoListandoControles.div.top = '70px'
+  // arrayGlobal.avisoListandoControles.div.height = '200px'
+  // arrayGlobal.avisoListandoControles.div.top = '70px'
   miAlerta.createSinCalendar(
     arrayGlobal.avisoListandoControles,
     mensaje,
@@ -119,8 +119,8 @@ function dondeEstaEn() {
   document.getElementById('whereUs').style.display = 'inline'
 }
 
-function configPHP() {
-  const user = desencriptar(sessionStorage.getItem('user'))
+function configPHP(user) {
+  // const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
@@ -137,7 +137,8 @@ function configPHP() {
   const footer = document.getElementById('footer')
   footer.innerText = by
   footer.href = rutaDeveloper
-
+  document.querySelector('.header-McCain').style.display = 'none'
+  document.querySelector('.div-encabezado').style.marginTop = '5px'
   // const linkInstitucional = document.getElementById('linkInstitucional');
   // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
@@ -165,8 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
   inicioPerformance()
-  configPHP()
+  configPHP(user)
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   // hamburguesa.style.display = 'none'
@@ -186,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeVersion('version')
     setTimeout(() => {
       dondeEstaEn()
-      leeApp('app', false)
+      leeApp(`App/${plant}/app`, false)
       verificaTipoDeConsulta(objTranslate)
     }, 200)
   }

@@ -1,38 +1,34 @@
-body{
+body {
   grid-area: body;
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: auto;
-  grid-template-areas: 
+  grid-template-areas:
     'header'
     'main'
-    'footer'
-  ;
+    'footer';
   grid-gap: 1px;
   margin: 0;
   padding: 0;
   flex-direction: column;
   min-height: 90vh;
 }
-header{
+header {
   display: block;
 }
-main{
+main {
   overflow-y: scroll;
-   height: 500px;
+  height: 500px;
 }
 
-
-@media only screen and (min-width: 800px) and (orientation: landscape) {
-  body{
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  body {
     min-height: 95vh;
   }
-  main{
+  main {
     height: 200px;
   }
-
 }
 
 @media screen and (min-width: 800px) {
-
 }

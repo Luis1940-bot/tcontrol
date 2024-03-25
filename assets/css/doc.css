@@ -49,7 +49,7 @@
   }
 }
 
-@media only screen and (min-width: 800px) and (orientation: landscape) {
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
   .div-encabezadoDoc {
     height: auto;
     margin-top: 4px;
@@ -101,7 +101,7 @@
 }
 
 /* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
-@media only screen and (min-width: 800px) and (orientation: portrait) {
+@media only screen and (min-width: 768px) and (max-width: 834px) and (min-height: 1024px) and (max-height: 1126px) and (orientation: portrait) {
   /* Estilos para tablets en orientación vertical */
   .div-encabezadoDoc {
     height: auto;
@@ -154,7 +154,7 @@
 }
 
 /* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
-@media only screen and (min-width: 1000px) and (orientation: landscape) {
+@media only screen and (min-width: 1024px) and (max-width: 1126px) and (min-height: 768px) and (max-height: 834px) and (orientation: landscape) {
   /* Estilos para tablets en orientación landscape */
   .div-encabezadoDoc {
     height: auto;
@@ -207,11 +207,107 @@
 }
 
 /* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1000px) and (orientation: portrait) {
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
   /* Estilos para dispositivos de escritorio en orientación vertical */
+  .div-encabezadoDoc {
+    height: auto;
+    margin-top: 4px;
+  }
+  .div-ubicacionDoc {
+    display: flex;
+    height: auto;
+    text-align: center;
+    margin-top: 5px;
+    width: 84%;
+    position: relative;
+    background: #cecece;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 10px;
+    display: none;
+  }
+
+  #doc {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    color: #393939;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+    height: 30px;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    text-align: left;
+    outline: none;
+    padding-left: 10px;
+  }
+
+  .input-con-icono {
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  .icono-busqueda {
+    position: absolute;
+    margin-left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
 }
 
 /* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1080px) and (orientation: landscape) {
+@media only screen and (min-width: 1900px) and (orientation: landscape) {
   /* Estilos para dispositivos de escritorio en orientación landscape */
+  .div-encabezadoDoc {
+    height: auto;
+    margin-top: 4px;
+  }
+  .div-ubicacionDoc {
+    display: flex;
+    height: auto;
+    text-align: center;
+    margin-top: 5px;
+    width: 84%;
+    position: relative;
+    background: #cecece;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 10px;
+    display: none;
+  }
+
+  #doc {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    color: #393939;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+    height: 30px;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    text-align: left;
+    outline: none;
+    padding-left: 10px;
+  }
+
+  .input-con-icono {
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  .icono-busqueda {
+    position: absolute;
+    margin-left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
 }
