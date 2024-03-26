@@ -1761,7 +1761,8 @@ class Alerta {
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertCarga'
     this.modal.className = 'modal'
-    this.modal.style.background = 'rgba(224, 220, 220, 0.7)'
+    // this.modal.style.background = 'rgba(224, 220, 220, 0.7)'
+    this.modal.style.background = 'rgba(45, 45, 45, 0.97)'
     const modalContent = createDiv(obj.div)
     const span = createSpan(obj.close)
     modalContent.appendChild(span)

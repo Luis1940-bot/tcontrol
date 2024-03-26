@@ -226,6 +226,7 @@ class ElementGenerator {
 
   static generateInputButton(text, name, consulta, clase) {
     const div = document.createElement('div')
+    div.setAttribute('class', 'button-cn')
     const inputText = document.createElement('input')
     inputText.setAttribute('type', 'text')
     div.appendChild(inputText)

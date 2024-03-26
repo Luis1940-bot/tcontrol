@@ -67,6 +67,17 @@ function leeVersion(json) {
     })
 }
 
+function leeApp(json) {
+  readJSON(json)
+    .then((data) => {
+      document.getElementById('spanUbicacion').innerText = data.planta
+      document.querySelector('.div-encabezado').style.marginTop = '0px'
+    })
+    .catch((error) => {
+      console.error('Error al cargar el archivo:', error)
+    })
+}
+
 function configPHP() {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { developer, content, by, rutaDeveloper, logo } = user
@@ -248,6 +259,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   sessionStorage.setItem('firmado', encriptar(supervisor))
   try {
     const persona = desencriptar(sessionStorage.getItem('user'))
+    const { plant } = persona
     if (persona) {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
@@ -261,6 +273,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       setTimeout(() => {
         configuracionLoad()
         arraysLoadTranslate()
+        leeApp(`App/${plant}/app`)
         spinner.style.visibility = 'hidden'
         // eslint-disable-next-line no-console
         console.timeEnd('timeControl')
@@ -295,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const tableControl = document.getElementById('tableControl')
+
   tableControl.addEventListener('change', () => {
     arrayGlobal.habilitadoGuardar = true
   })

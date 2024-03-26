@@ -115,7 +115,7 @@ function completaButtons(obj) {
   }
   const divs = document.querySelectorAll('.div-selector')
   const radios = document.querySelectorAll('.radio-selector')
-  const seguir = document.querySelector('.my-button')
+  // const seguir = document.querySelector('.my-button')
   let language = ''
   let index = 0
   divs.forEach((div, i) => {
@@ -123,7 +123,7 @@ function completaButtons(obj) {
     index = i
     div.addEventListener('click', () => {
       const radio = radios[i]
-      // Obtener el objeto almacenado en sessionStorage
+      // // Obtener el objeto almacenado en sessionStorage
       const userData = desencriptar(sessionStorage.getItem('user'))
       radio.checked = true
       language = radios[i].getAttribute('data-custom')
@@ -132,28 +132,32 @@ function completaButtons(obj) {
       document.querySelector('.custom-button').innerText = language
         .slice(0, 2)
         .toUpperCase()
-      // storage(language.slice(0, 2).toLowerCase());
-      seguir.disabled = false
-      seguir.style.background = '#212121'
+      // // storage(language.slice(0, 2).toLowerCase());
+      // seguir.disabled = false
+      // seguir.style.background = '#212121'
 
-      seguir.addEventListener('mouseover', () => {
-        if (!seguir.disabled) {
-          seguir.style.background = '#cecece'
-        }
-      })
-      seguir.addEventListener('mouseout', () => {
-        seguir.style.background = '#212121'
-      })
+      // seguir.addEventListener('mouseover', () => {
+      //   if (!seguir.disabled) {
+      //     seguir.style.background = '#cecece'
+      //   }
+      // })
+      // seguir.addEventListener('mouseout', () => {
+      //   seguir.style.background = '#212121'
+      // })
+      const persona = desencriptar(sessionStorage.getItem('user'))
+      spinner.style.visibility = 'visible'
+      loadLenguages(persona.lng)
     })
 
     const persona = desencriptar(sessionStorage.getItem('user'))
     const buttonSelector = div.childNodes[0].name.slice(0, 2)
+
     if (
       buttonSelector.slice(0, 2).toLowerCase() === persona.lng.toLowerCase()
     ) {
       radios[index].checked = true
-      seguir.disabled = false
-      seguir.style.background = '#212121'
+      // seguir.disabled = false
+      // seguir.style.background = '#212121'
     }
   })
 }
@@ -226,9 +230,9 @@ async function loadLenguages(leng) {
   }
 }
 
-const button = document.querySelector('.my-button')
-button.addEventListener('click', () => {
-  const persona = desencriptar(sessionStorage.getItem('user'))
-  spinner.style.visibility = 'visible'
-  loadLenguages(persona.lng)
-})
+// const button = document.querySelector('.my-button')
+// button.addEventListener('click', () => {
+//   const persona = desencriptar(sessionStorage.getItem('user'))
+//   spinner.style.visibility = 'visible'
+//   loadLenguages(persona.lng)
+// })

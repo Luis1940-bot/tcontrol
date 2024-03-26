@@ -26,6 +26,7 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   <link rel='stylesheet' type='text/css' href='../../Pages/Control/css/control.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/alerta.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='../../assets/css/modal.css' media='screen'>
   <title>Factum</title>
 </head>
 <body>
@@ -33,7 +34,7 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   <header>
     <?php
       include('../../includes/molecules/header.php');
-      // include('../../includes/molecules/encabezado.php');
+      include('../../includes/molecules/encabezado.php');
       include('../../includes/molecules/wichControl.php');
     ?>
     </div>

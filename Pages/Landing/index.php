@@ -40,7 +40,7 @@ if (!isset($_SESSION['factum_validation'])) {
     <div class='div-landing-buttons'>
 
     </div>
-    <div class='div-my-button'><button class='my-button' disabled><img id='seguir'  src='../../assets/img/icons8-arrow-30.png' alt='' height='20px' width='20px'></button></div>
+    <!-- <div class='div-my-button'><button class='my-button' disabled><img id='seguir'  src='../../assets/img/icons8-arrow-30.png' alt='' height='20px' width='20px'></button></div> -->
   </main>
   <!-- <div><button class='my-button' disabled><img id='seguir'  src='../../assets/img/icons8-arrow-30.png' alt='' height='20px' width='20px'></button></div> -->
   <footer>

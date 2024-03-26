@@ -1,338 +1,250 @@
+:root {
+  --font-size-doc: 12px;
+  --font-size-header: 9px;
+  --font-size-table-head: 9px;
+  --font-size-table-body: 9px;
+  --font-size-input: 9px;
+  --font-size-button: 7px;
+}
+
+/* Estilos generales */
+body {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-gap: 1px;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  height: auto;
+  overflow-x: hidden;
+}
+
+/* Encabezado */
+header {
+  display: block;
+  top: 0;
+  width: 100%;
+  background: #ffffff;
+  height: auto;
+}
+
+/* Estilos para los documentos */
+#doc,
+#numberDoc {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: var(--font-size-doc);
+  font-style: normal;
+  font-weight: 600;
+  width: auto;
+  margin-left: 10px;
+}
+
+#numberDoc {
+  font-weight: 700;
+  background: #ececec;
+}
+
+/* Línea divisoria */
+hr {
+  width: 100%;
+  color: #cecece;
+}
+
+/* Control de tabla */
+#tableControl {
+  margin-top: 10px;
+}
+.transparent-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  width: 50px;
+  border-radius: 25px;
+}
+
+.planos {
+  height: 50px;
+  width: 200px;
+}
+.transparent-button:hover {
+  font-size: 18px;
+}
+.InputButton-transparent {
+  height: 70%;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  font-size: 12px;
+  border-radius: 1px;
+  cursor: pointer;
+  background: #000;
+  color: #cecece;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.InputButton-transparent:hover {
+  background: #cecece;
+  border: 1px solid #000;
+  color: #000;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.InputButton-transparent:active {
+  background: #5588c7;
+  border: 1px solid #cece;
+  color: #fff;
+}
+.button-cn {
+  gap: 2px;
+}
+
+/* Estilos para dispositivos móviles */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
-  body {
-    grid-area: body;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: auto;
-    grid-template-areas:
-      'header'
-      'main'
-      'footer';
-    grid-gap: 1px;
-    margin: 0px;
-    padding: 0px;
-    flex-direction: column;
-    height: auto;
-    overflow-x: hidden;
-  }
-  /* main { */
-  /* height: auto; */
-  /* overflow-y: auto; */
-  /* } */
-  header {
-    display: block;
-    top: 0;
-    width: 100%;
-    background: #ffffff;
-    height: auto;
-  }
-
-  #doc,
-  #numberDoc {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 600;
-    width: auto;
-    margin-left: 10px;
-  }
-  #numberDoc {
-    font-weight: 700;
-    background: #ececec;
-  }
-  hr {
-    width: 100%;
-    color: #cecece;
-  }
-
+  /* Agrega estilos para dispositivos móviles aquí */
+  /* Tabla */
   table {
     width: 100%;
   }
-  #tableControl {
-    margin-top: 10px;
-  }
+
+  /* Encabezado de tabla */
   thead {
     background: #000000;
     width: 100%;
-    height: 20px;
+    height: 25px;
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 8px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 500;
   }
 
+  /* Cuerpo de tabla */
   tbody {
     background: #ffffff;
     width: 100%;
     margin-bottom: 1px;
   }
+
+  /* Celdas de tabla */
   tbody tr td {
     height: 25px;
     color: #000000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 9px;
+    font-size: var(--font-size-table-body);
     font-style: normal;
     font-weight: 500;
   }
+
+  /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
   table tbody tr td textarea,
-  table tbody tr td button {
-    font-size: 9px;
+  table tbody tr td button,
+  table tbody tr td select {
+    font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
   }
+
+  /* Estilos para los contenedores en las celdas de tabla */
   table tbody tr td div {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  table tbody tr td div input {
-    font-size: 9px;
+
+  /* Estilos para los campos de entrada dentro de los contenedores */
+  table tbody tr td div input,
+  table tbody tr td div select {
+    font-size: var(--font-size-input);
     width: 50%;
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
   }
 
-  table tbody tr td div button {
-    font-size: 7px;
-    width: 20%;
-    height: 14px;
-    margin-right: 10px;
-    border-radius: 3px;
-  }
-  .InputButton-transparent {
-    height: 70%;
-    padding-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    font-size: 7px;
-    border-radius: 3px;
-    cursor: pointer;
-    background: #97b7e8;
-  }
-  .InputButton-transparent:hover {
-    background: #5588c7;
-    border: 1px solid #5588c7;
+  /* Estilos para los botones */
+  button {
+    font-size: var(--font-size-button);
+    padding: 5px 10px;
+    background-color: #000;
     color: #fff;
-  }
-  .InputButton-transparent:active {
-    background: #5588c7;
-    border: 1px solid #5588c7;
-    color: #fff;
-  }
-  select {
-    border: 1px solid #000;
-    /* padding: 0.5rem; */
-    background-color: transparent;
-    color: #000;
-    font-size: 7px;
-    height: 100%;
-    cursor: pointer;
-    width: 90%;
-  }
-  select option {
-    background-color: #fff;
-    color: #000;
-    padding: 0.5rem;
-    font-size: 10px;
-    border: none;
-  }
-  select:focus {
-    outline: none;
-    border: 1px solid #000;
-  }
-  .transparent-button {
-    background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 14px;
-    width: 50px;
-    border-radius: 25px;
   }
-  .transparent-button:hover {
-    /* background: #cecece;
-  border: 1px solid #000000; */
-    font-size: 18px;
-  }
-  ul {
-    list-style: none;
-    padding: 0px;
-  }
-  li {
-    display: inline;
-    margin-right: 5px;
-  }
-  .img-select {
-    width: 20px;
-    height: 20px;
-  }
-  .img-select:hover {
-    border: 1px solid #cecece;
-  }
-  canvas {
-    display: none;
-  }
-  footer {
-    height: 20px;
-    margin-top: 5px;
-  }
-  #idCarteles,
-  #idDivVerde {
-    width: 90%;
-    margin-top: 100px;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    height: auto;
-  }
-  #idDivAvisoRojo,
-  #idDivAvisoImagenes {
-    width: 90%;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idProcesoExitoso,
-  #idDivAvisoVerde {
-    width: 90%;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idSpanAvisoVerde,
-  #idAguardeUnosInstantes,
-  #idSpanAvisoImagenes,
-  #idSpanAvisoRojo {
-    font-size: 16px;
-  }
-  .comentarios,
-  .comentariosPerson {
-    font-size: 9px;
-  }
-  @keyframes spinner {
-    0% {
-      left: -100%; /* Inicio de la animación */
-    }
-    100% {
-      left: 100%; /* Fin de la animación */
-    }
-  }
-  #idDivMenu {
-    margin: 22px 0px 0px 10px;
-    width: 200px;
-    padding: 10px;
-  }
-  /* #idDivPerson {
-    height: auto;
-    margin: 22px 20px 20px auto;
-    width: 100px;
-  } */
-  .planos {
-    height: 50px;
-    width: 200px;
+  .button-cn {
+    gap: 2px;
   }
 }
 
-@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
-  body {
-    grid-area: body;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: auto;
-    grid-template-areas:
-      'header'
-      'main'
-      'footer';
-    grid-gap: 1px;
-    margin: 0px;
-    padding: 0px;
-    flex-direction: column;
-    height: auto;
-    overflow-x: hidden;
-  }
-  /* main { */
-  /* height: auto; */
-  /* overflow-y: auto; */
-  /* } */
-  header {
-    display: block;
-    top: 0;
-    width: 100%;
-    background: #ffffff;
-    height: auto;
-  }
-
+/* Estilos para dispositivos móviles landscape*/
+@media only screen and (min-width: 480px) and (max-width: 900px) and (orientation: landscape) {
+  /* Agrega estilos para dispositivos móviles aquí */
   #doc,
   #numberDoc {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    width: auto;
-    margin-left: 10px;
+    font-size: 14px;
   }
-  #numberDoc {
-    font-weight: 700;
-    background: #ececec;
-  }
-  hr {
-    width: 100%;
-    color: #cecece;
-  }
-
+  /* Tabla */
   table {
     width: 100%;
   }
-  #tableControl {
-    margin-top: 10px;
-  }
+
+  /* Encabezado de tabla */
   thead {
     background: #000000;
     width: 100%;
-    height: 30px;
+    height: 25px;
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
   }
 
+  /* Cuerpo de tabla */
   tbody {
     background: #ffffff;
     width: 100%;
     margin-bottom: 1px;
-    height: 30px;
-    font-size: 12px;
   }
+
+  /* Celdas de tabla */
   tbody tr td {
-    height: 30px;
+    height: 25px;
     color: #000000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
   }
+
+  /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
   table tbody tr td textarea,
-  table tbody tr td button {
+  table tbody tr td button,
+  table tbody tr td select {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
   }
+
+  /* Estilos para los contenedores en las celdas de tabla */
   table tbody tr td div {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  table tbody tr td div input {
+
+  /* Estilos para los campos de entrada dentro de los contenedores */
+  table tbody tr td div input,
+  table tbody tr td div select {
     font-size: 12px;
     width: 50%;
     height: 100%;
@@ -340,256 +252,30 @@
     border: 1px solid #000;
   }
 
-  table tbody tr td div button {
+  /* Estilos para los botones */
+  button {
     font-size: 12px;
-    width: 20%;
-    height: 14px;
-    margin-right: 10px;
-    border-radius: 3px;
-  }
-  .InputButton-transparent {
-    height: 70%;
-    padding-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    font-size: 12px;
-    border-radius: 3px;
-    cursor: pointer;
-    background: #97b7e8;
-  }
-  .InputButton-transparent:hover {
-    background: #5588c7;
-    border: 1px solid #5588c7;
+    padding: 5px 10px;
+    background-color: #000;
     color: #fff;
-  }
-  .InputButton-transparent:active {
-    background: #5588c7;
-    border: 1px solid #5588c7;
-    color: #fff;
-  }
-  select {
-    border: 1px solid #000;
-    /* padding: 0.5rem; */
-    background-color: transparent;
-    color: #000;
-    font-size: 12px;
-    height: 100%;
-    cursor: pointer;
-    width: 90%;
-  }
-  select option {
-    background-color: #fff;
-    color: #000;
-    padding: 0.5rem;
-    font-size: 12px;
-    border: none;
-  }
-  select:focus {
-    outline: none;
-    border: 1px solid #000;
-  }
-  .transparent-button {
-    background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 30px;
-    width: 50px;
-    border-radius: 25px;
   }
-  .transparent-button:hover {
-    /* background: #cecece;
-  border: 1px solid #000000; */
-    font-size: 18px;
-  }
-  ul {
-    list-style: none;
-    padding: 0px;
-  }
-  li {
-    display: inline;
-    margin-right: 5px;
-  }
-  .img-select {
-    width: 30px;
-    height: 30px;
-  }
-  .img-select:hover {
-    border: 1px solid #cecece;
-  }
-  canvas {
-    display: none;
-  }
-  footer {
-    height: 20px;
-    margin-top: 5px;
-  }
-  #idCarteles,
-  #idDivVerde {
-    width: 90%;
-    margin-top: 100px;
-    display: flex;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idDivAvisoRojo,
-  #idDivAvisoImagenes {
-    width: 90%;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idProcesoExitoso,
-  #idDivAvisoVerde {
-    width: 90%;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idSpanAvisoVerde,
-  #idAguardeUnosInstantes,
-  #idSpanAvisoImagenes,
-  #idSpanAvisoRojo {
-    font-size: 20px;
-  }
-  .comentarios,
-  .comentariosPerson {
-    font-size: 12px;
-  }
-  @keyframes spinner {
-    0% {
-      left: -100%; /* Inicio de la animación */
-    }
-    100% {
-      left: 100%; /* Fin de la animación */
-    }
-  }
-  #idDivMenu {
-    margin: 22px 0px 0px 10px;
+
+  .planos {
+    height: 100px;
     width: 300px;
-    font-size: 10px;
-    padding: 10px 10px 0px 10px;
   }
-  /* #idDivPerson {
-    height: auto;
-    margin: 22px 20px 20px auto;
-    width: 150px;
-  } */
-  .planos {
-    height: 200px;
-    width: 500px;
+  .transparent-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    width: 50px;
+    border-radius: 25px;
   }
-}
-
-/* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
-@media only screen and (min-width: 768px) and (max-width: 834px) and (min-height: 1024px) and (max-height: 1126px) and (orientation: portrait) {
-  /* Estilos para tablets en orientación vertical */
-  body {
-    grid-area: body;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: auto;
-    grid-template-areas:
-      'header'
-      'main'
-      'footer';
-    grid-gap: 1px;
-    margin: 0px;
-    padding: 0px;
-    flex-direction: column;
-    height: auto;
-    overflow-x: hidden;
-  }
-  /* main { */
-  /* height: auto; */
-  /* overflow-y: auto; */
-  /* } */
-  header {
-    display: block;
-    top: 0;
-    width: 100%;
-    background: #ffffff;
-    height: auto;
-  }
-
-  #doc,
-  #numberDoc {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    width: auto;
-    margin-left: 10px;
-  }
-  #numberDoc {
-    font-weight: 700;
-    background: #ececec;
-  }
-  hr {
-    width: 100%;
-    color: #cecece;
-  }
-
-  table {
-    width: 100%;
-  }
-  #tableControl {
-    margin-top: 10px;
-  }
-  thead {
-    background: #000000;
-    width: 100%;
-    height: 30px;
-    color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  tbody {
-    background: #ffffff;
-    width: 100%;
-    margin-bottom: 1px;
-    height: 30px;
-    font-size: 12px;
-  }
-  tbody tr td {
-    height: 30px;
-    color: #000000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-  }
-  table tbody tr td input,
-  table tbody tr td textarea,
-  table tbody tr td button {
-    font-size: 12px;
-    width: 90%;
-    border: 1px solid #000;
-  }
-  table tbody tr td div {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  table tbody tr td div input {
-    font-size: 12px;
-    width: 50%;
-    height: 100%;
-    margin-left: 10px;
-    border: 1px solid #000;
-  }
-
-  table tbody tr td div button {
-    font-size: 12px;
-    width: 20%;
-    height: 14px;
-    margin-right: 10px;
-    border-radius: 3px;
+  .transparent-button:hover {
+    font-size: 18px;
   }
   .InputButton-transparent {
     height: 70%;
@@ -598,478 +284,542 @@
     padding-right: 0px;
     padding-bottom: 0px;
     font-size: 12px;
-    border-radius: 3px;
+    border-radius: 1px;
     cursor: pointer;
-    background: #97b7e8;
+    background: #000;
+    color: #cecece;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   .InputButton-transparent:hover {
-    background: #5588c7;
-    border: 1px solid #5588c7;
-    color: #fff;
+    background: #cecece;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   .InputButton-transparent:active {
     background: #5588c7;
-    border: 1px solid #5588c7;
+    border: 1px solid #cece;
     color: #fff;
   }
-  select {
-    border: 1px solid #000;
-    /* padding: 0.5rem; */
-    background-color: transparent;
-    color: #000;
-    font-size: 12px;
-    height: 100%;
-    cursor: pointer;
-    width: 90%;
-  }
-  select option {
-    background-color: #fff;
-    color: #000;
-    padding: 0.5rem;
-    font-size: 12px;
-    border: none;
-  }
-  select:focus {
-    outline: none;
-    border: 1px solid #000;
-  }
-  .transparent-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 30px;
-    width: 50px;
-    border-radius: 25px;
-  }
-  .transparent-button:hover {
-    /* background: #cecece;
-  border: 1px solid #000000; */
-    font-size: 40px;
-  }
-  ul {
-    list-style: none;
-    padding: 0px;
-  }
-  li {
-    display: inline;
-    margin-right: 5px;
-  }
-  .img-select {
-    width: 40px;
-    height: 40px;
-  }
-  .img-select:hover {
-    border: 1px solid #cecece;
-  }
-  canvas {
-    display: none;
-  }
-  footer {
-    height: 20px;
-    margin-top: 5px;
-  }
-  #idCarteles,
-  #idDivVerde {
-    width: 90%;
-    margin-top: 100px;
-    display: flex;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idDivAvisoRojo,
-  #idDivAvisoImagenes {
-    width: 90%;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idProcesoExitoso,
-  #idDivAvisoVerde {
-    width: 90%;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idSpanAvisoVerde,
-  #idAguardeUnosInstantes,
-  #idSpanAvisoImagenes,
-  #idSpanAvisoRojo {
-    font-size: 16px;
-  }
-  .comentarios,
-  .comentariosPerson {
-    font-size: 12px;
-  }
-  @keyframes spinner {
-    0% {
-      left: -100%; /* Inicio de la animación */
-    }
-    100% {
-      left: 100%; /* Fin de la animación */
-    }
-  }
-  #idDivMenu {
-    margin: 22px 0px 0px 10px;
-  }
-  /* #idDivPerson {
-    height: auto;
-    margin: 22px 20px 20px auto;
-  } */
-  .planos {
-    height: 200px;
-    width: 500px;
+  .button-cn {
+    gap: 2px;
   }
 }
 
-/* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
-@media only screen and (min-width: 1024px) and (max-width: 1126px) and (min-height: 768px) and (max-height: 834px) and (orientation: landscape) {
-  /* Estilos para tablets en orientación landscape */
-  body {
-    grid-area: body;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: auto;
-    grid-template-areas:
-      'header'
-      'main'
-      'footer';
-    grid-gap: 1px;
-    margin: 0px;
-    padding: 0px;
-    flex-direction: column;
-    height: auto;
-    overflow-x: hidden;
-  }
-  /* main { */
-  /* height: auto; */
-  /* overflow-y: auto; */
-  /* } */
-  header {
-    display: block;
-    top: 0;
-    width: 100%;
-    background: #ffffff;
-    height: auto;
-  }
-
+/* Estilos para tabletas en formato portrait */
+@media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  /* Agrega estilos para tabletas en formato portrait aquí */
   #doc,
   #numberDoc {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    width: auto;
-    margin-left: 10px;
+    font-size: 14px;
   }
-  #numberDoc {
-    font-weight: 700;
-    background: #ececec;
-  }
-  hr {
-    width: 100%;
-    color: #cecece;
-  }
-
+  /* Tabla */
   table {
     width: 100%;
   }
-  #tableControl {
-    margin-top: 10px;
-  }
+
+  /* Encabezado de tabla */
   thead {
     background: #000000;
     width: 100%;
-    height: 30px;
-    color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  tbody {
-    background: #ffffff;
-    width: 100%;
-    margin-bottom: 1px;
-    height: 30px;
-    font-size: 12px;
-  }
-  tbody tr td {
-    height: 30px;
-    color: #000000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-  }
-  table tbody tr td input,
-  table tbody tr td textarea,
-  table tbody tr td button {
-    font-size: 12px;
-    width: 90%;
-    border: 1px solid #000;
-  }
-  table tbody tr td div {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  table tbody tr td div input {
-    font-size: 12px;
-    width: 50%;
-    height: 100%;
-    margin-left: 10px;
-    border: 1px solid #000;
-  }
-
-  table tbody tr td div button {
-    font-size: 12px;
-    width: 20%;
-    height: 14px;
-    margin-right: 10px;
-    border-radius: 3px;
-  }
-  .InputButton-transparent {
-    height: 70%;
-    padding-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    font-size: 12px;
-    border-radius: 3px;
-    cursor: pointer;
-    background: #97b7e8;
-  }
-  .InputButton-transparent:hover {
-    background: #5588c7;
-    border: 1px solid #5588c7;
-    color: #fff;
-  }
-  .InputButton-transparent:active {
-    background: #5588c7;
-    border: 1px solid #5588c7;
-    color: #fff;
-  }
-  select {
-    border: 1px solid #000;
-    /* padding: 0.5rem; */
-    background-color: transparent;
-    color: #000;
-    font-size: 12px;
-    height: 100%;
-    cursor: pointer;
-    width: 90%;
-  }
-  select option {
-    background-color: #fff;
-    color: #000;
-    padding: 0.5rem;
-    font-size: 12px;
-    border: none;
-  }
-  select:focus {
-    outline: none;
-    border: 1px solid #000;
-  }
-  .transparent-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 30px;
-    width: 50px;
-    border-radius: 25px;
-  }
-  .transparent-button:hover {
-    /* background: #cecece;
-  border: 1px solid #000000; */
-    font-size: 40px;
-  }
-  ul {
-    list-style: none;
-    padding: 0px;
-  }
-  li {
-    display: inline;
-    margin-right: 5px;
-  }
-  .img-select {
-    width: 40px;
-    height: 40px;
-  }
-  .img-select:hover {
-    border: 1px solid #cecece;
-  }
-  canvas {
-    display: none;
-  }
-  footer {
-    height: 20px;
-    margin-top: 5px;
-  }
-  #idCarteles,
-  #idDivVerde {
-    width: 90%;
-    margin-top: 100px;
-    display: flex;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idDivAvisoRojo,
-  #idDivAvisoImagenes {
-    width: 90%;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idProcesoExitoso,
-  #idDivAvisoVerde {
-    width: 90%;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #idSpanAvisoVerde,
-  #idAguardeUnosInstantes,
-  #idSpanAvisoImagenes,
-  #idSpanAvisoRojo {
-    font-size: 16px;
-  }
-  .comentarios,
-  .comentariosPerson {
-    font-size: 12px;
-  }
-  @keyframes spinner {
-    0% {
-      left: -100%; /* Inicio de la animación */
-    }
-    100% {
-      left: 100%; /* Fin de la animación */
-    }
-  }
-  #idDivMenu {
-    margin: 22px 0px 0px 10px;
-  }
-  /* #idDivPerson {
-    height: auto;
-    margin: 22px 20px 20px auto;
-  } */
-  .planos {
-    height: 200px;
-    width: 500px;
-  }
-}
-
-/* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
-  /* Estilos para dispositivos de escritorio en orientación vertical */
-  #doc,
-  #numberDoc {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    width: auto;
-    margin-left: 10px;
-  }
-  #numberDoc {
-    font-weight: 700;
-    background: #ececec;
-  }
-  .comentarios {
-    font-size: 20px;
-  }
-  .comentariosPerson {
-    font-size: 12px;
-  }
-  /* #idDivPerson {
-    height: auto;
-    margin: 22px 20px 20px auto;
-  } */
-  table {
-    width: 100%;
-  }
-  select {
-    border: 1px solid #000;
-    /* padding: 0.5rem; */
-    background-color: transparent;
-    color: #000;
-    font-size: 12px;
-    height: 100%;
-    cursor: pointer;
-    width: 90%;
-  }
-  #idCarteles,
-  #idDivVerde {
-    width: 90%;
-    margin-top: 200px;
-    display: flex;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1900px) and (orientation: landscape) {
-  /* Estilos para dispositivos de escritorio en orientación landscape */
-  #doc,
-  #numberDoc {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    width: auto;
-    margin-left: 10px;
-  }
-  #numberDoc {
-    font-weight: 700;
-    background: #ececec;
-  }
-  .comentarios {
-    font-size: 20px;
-  }
-  .comentariosPerson {
-    font-size: 12px;
-  }
-  /* #idDivPerson {
-    height: auto;
-    margin: 22px 20px 20px auto;
-  } */
-  table {
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  thead {
-    height: 35px;
-    font-size: 14px;
-  }
-  tbody tr td {
-    height: 35px;
-    font-size: 14px;
-  }
-  input {
     height: 25px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
-    width: 100%;
+    font-style: normal;
+    font-weight: 500;
   }
-  textarea {
+
+  /* Cuerpo de tabla */
+  tbody {
+    background: #ffffff;
+    width: 100%;
+    margin-bottom: 1px;
+  }
+
+  /* Celdas de tabla */
+  tbody tr td {
+    height: 25px;
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Estilos para los campos de entrada en la tabla */
+  table tbody tr td input,
+  table tbody tr td textarea,
+  table tbody tr td button,
+  table tbody tr td select {
+    font-size: 12px;
+    width: 90%;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los contenedores en las celdas de tabla */
+  table tbody tr td div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Estilos para los campos de entrada dentro de los contenedores */
+  table tbody tr td div input,
+  table tbody tr td div select {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los botones */
+  button {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  .planos {
+    height: 100px;
+    width: 300px;
+  }
+  .transparent-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    width: 50px;
+    border-radius: 25px;
+  }
+  .transparent-button:hover {
+    font-size: 18px;
+  }
+  .InputButton-transparent {
+    height: 70%;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    border-radius: 1px;
+    cursor: pointer;
+    background: #000;
+    color: #cecece;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:hover {
+    background: #cecece;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:active {
+    background: #5588c7;
+    border: 1px solid #cece;
+    color: #fff;
+  }
+  .button-cn {
+    gap: 2px;
+  }
+}
+
+/* Estilos para tabletas en formato landscape */
+@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
+  /* Agrega estilos para tabletas en formato landscape aquí */
+  #doc,
+  #numberDoc {
     font-size: 14px;
+  }
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .div-span {
-    margin-left: 30px;
-    margin-right: 30px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  #idCarteles,
-  #idDivVerde {
+  /* Tabla */
+  table {
+    width: 100%;
+  }
+
+  /* Encabezado de tabla */
+  thead {
+    background: #000000;
+    width: 100%;
+    height: 30px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Cuerpo de tabla */
+  tbody {
+    background: #ffffff;
+    width: 100%;
+    margin-bottom: 1px;
+  }
+
+  /* Celdas de tabla */
+  tbody tr td {
+    height: 30px;
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Estilos para los campos de entrada en la tabla */
+  table tbody tr td input,
+  table tbody tr td textarea,
+  table tbody tr td button,
+  table tbody tr td select {
+    font-size: 14px;
     width: 90%;
-    margin-top: 200px;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los contenedores en las celdas de tabla */
+  table tbody tr td div {
+    width: 100%;
     display: flex;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Estilos para los campos de entrada dentro de los contenedores */
+  table tbody tr td div input,
+  table tbody tr td div select {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los botones */
+  button {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  .planos {
+    height: 150px;
+    width: 350px;
+  }
+  .transparent-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    width: 50px;
+    border-radius: 25px;
+  }
+  .transparent-button:hover {
+    font-size: 18px;
+  }
+  .InputButton-transparent {
+    height: 70%;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    border-radius: 1px;
+    cursor: pointer;
+    background: #000;
+    color: #cecece;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:hover {
+    background: #cecece;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:active {
+    background: #5588c7;
+    border: 1px solid #cece;
+    color: #fff;
+  }
+  .button-cn {
+    gap: 2px;
+  }
+}
+
+/* Estilos para pantallas grandes en formato portrait */
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  /* Agrega estilos para pantallas grandes en formato portrait aquí */
+  #doc,
+  #numberDoc {
+    font-size: 18px;
+  }
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .div-span {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  /* Tabla */
+  table {
+    width: 100%;
+  }
+
+  /* Encabezado de tabla */
+  thead {
+    background: #000000;
+    width: 100%;
+    height: 30px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Cuerpo de tabla */
+  tbody {
+    background: #ffffff;
+    width: 100%;
+    margin-bottom: 1px;
+  }
+
+  /* Celdas de tabla */
+  tbody tr td {
+    height: 30px;
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Estilos para los campos de entrada en la tabla */
+  table tbody tr td input,
+  table tbody tr td textarea,
+  table tbody tr td button,
+  table tbody tr td select {
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los contenedores en las celdas de tabla */
+  table tbody tr td div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Estilos para los campos de entrada dentro de los contenedores */
+  table tbody tr td div input,
+  table tbody tr td div select {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los botones */
+  button {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  .planos {
+    height: 200px;
+    width: 400px;
+  }
+  .transparent-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    width: 50px;
+    border-radius: 25px;
+  }
+  .transparent-button:hover {
+    font-size: 18px;
+  }
+  .InputButton-transparent {
+    height: 70%;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    border-radius: 1px;
+    cursor: pointer;
+    background: #000;
+    color: #cecece;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:hover {
+    background: #cecece;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:active {
+    background: #5588c7;
+    border: 1px solid #cece;
+    color: #fff;
+  }
+  .button-cn {
+    gap: 2px;
+  }
+}
+
+/* Estilos para pantallas grandes en formato landscape */
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
+  /* Agrega estilos para pantallas grandes en formato landscape aquí */
+  #doc,
+  #numberDoc {
+    font-size: 18px;
+  }
+
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .div-span {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  /* Tabla */
+  table {
+    width: 100%;
+  }
+
+  /* Encabezado de tabla */
+  thead {
+    background: #000000;
+    width: 100%;
+    height: 30px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Cuerpo de tabla */
+  tbody {
+    background: #ffffff;
+    width: 100%;
+    margin-bottom: 1px;
+  }
+
+  /* Celdas de tabla */
+  tbody tr td {
+    height: 30px;
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Estilos para los campos de entrada en la tabla */
+  table tbody tr td input,
+  table tbody tr td textarea,
+  table tbody tr td button,
+  table tbody tr td select {
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los contenedores en las celdas de tabla */
+  table tbody tr td div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Estilos para los campos de entrada dentro de los contenedores */
+  table tbody tr td div input,
+  table tbody tr td div select {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+  }
+
+  /* Estilos para los botones */
+  button {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  .planos {
+    height: 300px;
+    width: 400px;
+  }
+  .transparent-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    width: 50px;
+    border-radius: 25px;
+  }
+  .transparent-button:hover {
+    font-size: 18px;
+  }
+  .InputButton-transparent {
+    height: 70%;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    border-radius: 1px;
+    cursor: pointer;
+    background: #000;
+    color: #cecece;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:hover {
+    background: #cecece;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:active {
+    background: #5588c7;
+    border: 1px solid #cece;
+    color: #fff;
+  }
+  .button-cn {
+    gap: 2px;
   }
 }

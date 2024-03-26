@@ -1,3 +1,28 @@
+/* Estilos comunes para todas las resoluciones */
+.div-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-selector-menu {
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  background: #cecece;
+  border: 2px solid black;
+  height: 45px;
+  width: 80%;
+  cursor: pointer;
+}
+
+.button-selector-menu:hover {
+  background: #ececec;
+  cursor: pointer;
+}
+
+/* Media Queries */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   body {
     grid-area: body;
@@ -12,7 +37,6 @@
     margin: 0;
     padding: 0;
     flex-direction: column;
-    /* min-height: 90vh; */
     height: auto;
   }
   header {
@@ -23,29 +47,8 @@
     height: auto;
   }
   .div-menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
   }
-  .button-selector-menu {
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    background: #cecece;
-    border: 2px solid black;
-    height: 45px;
-    width: 80%;
-    cursor: pointer;
-  }
-  .button-selector-menu:hover {
-    background: #ececec;
-    cursor: pointer;
-  }
-  /* #idDivPerson {
-    margin: 22px 0px 20px auto;
-  } */
 }
 
 @media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
@@ -62,7 +65,6 @@
     margin: 0;
     padding: 0;
     flex-direction: column;
-    /* min-height: 90vh; */
     height: auto;
   }
   header {
@@ -74,27 +76,15 @@
     height: auto;
   }
   .div-menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-top: 70px;
   }
   .button-selector-menu {
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    background: #cecece;
-    border: 2px solid black;
-    height: 45px;
-    width: 80%;
-    cursor: pointer;
+    width: 40%;
   }
 }
 
-/* Estilos para tablets en orientación vertical (ancho mínimo de 800px) */
-@media only screen and (min-width: 768px) and (max-width: 834px) and (min-height: 1024px) and (max-height: 1126px) and (orientation: portrait) {
-  /* Estilos para tablets en orientación vertical */
+/* Estilos para tabletas en formato portrait */
+@media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
   body {
     grid-area: body;
     display: grid;
@@ -108,7 +98,6 @@
     margin: 0;
     padding: 0;
     flex-direction: column;
-    /* min-height: 90vh; */
     height: auto;
   }
   header {
@@ -120,90 +109,47 @@
     height: auto;
   }
   .div-menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: 140px;
+  }
+  .button-selector-menu {
+    width: 40%;
+  }
+}
+
+/* Estilos para tabletas en formato landscape */
+@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
+  .div-menu-buttons {
     margin-top: 70px;
   }
   .button-selector-menu {
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    background: #cecece;
-    border: 2px solid black;
-    height: 45px;
-    width: 80%;
-    cursor: pointer;
-  }
-}
-
-/* Estilos para tablets en orientación landscape (ancho mínimo de 800px) */
-@media only screen and (min-width: 1024px) and (max-width: 1126px) and (min-height: 768px) and (max-height: 834px) and (orientation: landscape) {
-  /* Estilos para tablets en orientación landscape */
-  .div-menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 150px;
-  }
-  .button-selector-menu {
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    background: #cecece;
-    border: 2px solid black;
-    height: 45px;
-    width: 80%;
-    cursor: pointer;
-  }
-}
-
-/* Estilos para dispositivos de escritorio en orientación vertical (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
-  /* Estilos para dispositivos de escritorio en orientación vertical */
-  .div-menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 150px;
-  }
-  .button-selector-menu {
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    background: #cecece;
-    border: 2px solid black;
-    height: 50px;
     width: 40%;
-    cursor: pointer;
+  }
+}
+
+/* Estilos para pantallas grandes en formato portrait */
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  .div-menu-buttons {
+    margin-top: 70px;
+  }
+  .button-selector-menu {
+    font-size: 18px;
+    height: 50px;
+    width: 30%;
   }
   .button-selector-menu:hover {
     background: #9d9d9d;
   }
 }
 
-/* Estilos para dispositivos de escritorio en orientación landscape (ancho mínimo de 1000px) */
-@media only screen and (min-width: 1900px) and (orientation: landscape) {
-  /* Estilos para dispositivos de escritorio en orientación landscape */
+/* Estilos para pantallas grandes en formato landscape */
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
   .div-menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 150px;
+    margin-top: 70px;
   }
   .button-selector-menu {
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 18px;
-    font-weight: 700;
-    background: #cecece;
-    border: 2px solid black;
     height: 50px;
-    width: 40%;
-    cursor: pointer;
+    width: 30%;
   }
   .button-selector-menu:hover {
     background: #9d9d9d;
