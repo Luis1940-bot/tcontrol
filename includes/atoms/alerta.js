@@ -666,29 +666,32 @@ async function firmar(firmadoPor) {
   const modal = document.getElementById('modalAlert')
   modal.style.display = 'none'
   modal.remove()
-  const idMensajeFirmado = document.getElementById('idMensajeFirmado')
-  idMensajeFirmado.innerText = `${firmadoPor}: ${supervisor.nombre}`
-  const elementosStyle = {
-    element: ['idMensajeFirmado', 'idDivFirmar', 'idDivFirmado'],
-    style: ['block', 'none', 'block'],
-    remove: [null, null, null],
-  }
-  procesoStyleDisplay(elementosStyle)
+  if (supervisor.id !== null) {
+    const idMensajeFirmado = document.getElementById('idMensajeFirmado')
+    idMensajeFirmado.innerText = `${firmadoPor}: ${supervisor.nombre}`
+    const elementosStyle = {
+      element: ['idMensajeFirmado', 'idDivFirmar', 'idDivFirmado'],
+      style: ['block', 'none', 'block'],
+      remove: [null, null, null],
+    }
+    procesoStyleDisplay(elementosStyle)
 
-  sessionStorage.setItem('firmado', encriptar(supervisor))
-  const configMenu = {
-    guardar: true,
-    guardarComo: false,
-    guardarCambios: false,
-    firma: false,
-    configFirma: supervisor,
+    sessionStorage.setItem('firmado', encriptar(supervisor))
+    const configMenu = {
+      guardar: true,
+      guardarComo: false,
+      guardarCambios: false,
+      firma: false,
+      configFirma: supervisor,
+    }
+
+    sessionStorage.setItem('config_menu', encriptar(configMenu))
   }
   setTimeout(() => {
     const menu = document.getElementById('modalAlertM')
     menu.style.display = 'none'
     menu.remove()
   }, 1000)
-  sessionStorage.setItem('config_menu', encriptar(configMenu))
 }
 
 function limpiaArrays() {

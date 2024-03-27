@@ -408,7 +408,7 @@ const objAlertaAceptarCancelar = {
     position: 'relative',
     borderRadius: null,
     width: '100%',
-    height: '95px',
+    height: '100px',
     background: '#ffffff',
     border: null,
     boxShadow: null,
