@@ -76,13 +76,13 @@ hr {
   font-size: 18px;
 }
 .InputButton-transparent {
-  height: 70%;
+  height: 80%;
   padding-left: 0px;
   padding-top: 0px;
   padding-right: 0px;
   padding-bottom: 0px;
   font-size: 12px;
-  border-radius: 1px;
+  border-radius: 3px;
   cursor: pointer;
   background: #000;
   color: #cecece;
@@ -102,6 +102,22 @@ hr {
 }
 .button-cn {
   gap: 2px;
+  height: 80%;
+}
+ul {
+  list-style: none;
+  padding: 0px;
+}
+li {
+  display: inline;
+  margin-right: 5px;
+}
+
+.img-select {
+  height: 30px;
+}
+.img-select:hover {
+  border: 1px solid #cecece;
 }
 
 /* Estilos para dispositivos móviles */
@@ -143,12 +159,18 @@ hr {
 
   /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
-  table tbody tr td textarea,
+  table tbody tr td textarea {
+    font-size: var(--font-size-input);
+    width: 90%;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td button,
   table tbody tr td select {
     font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */
@@ -160,15 +182,22 @@ hr {
   }
 
   /* Estilos para los campos de entrada dentro de los contenedores */
-  table tbody tr td div input,
+  table tbody tr td div input {
+    font-size: var(--font-size-input);
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td div select {
     font-size: var(--font-size-input);
     width: 50%;
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
+    height: 80%;
   }
-
   /* Estilos para los botones */
   button {
     font-size: var(--font-size-button);
@@ -177,9 +206,52 @@ hr {
     color: #fff;
     border: none;
     cursor: pointer;
+    height: 70%;
+  }
+  .transparent-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    width: 50px;
+    border-radius: 25px;
+  }
+
+  .planos {
+    height: 50px;
+    width: 200px;
+  }
+  .transparent-button:hover {
+    font-size: 18px;
+  }
+  .InputButton-transparent {
+    height: 80%;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    background: #000;
+    color: #cecece;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:hover {
+    background: #cecece;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .InputButton-transparent:active {
+    background: #5588c7;
+    border: 1px solid #cece;
+    color: #fff;
   }
   .button-cn {
     gap: 2px;
+    height: 80%;
   }
 }
 
@@ -226,14 +298,19 @@ hr {
 
   /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
-  table tbody tr td textarea,
+  table tbody tr td textarea {
+    font-size: 12px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td button,
   table tbody tr td select {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
+    height: 80%;
   }
-
   /* Estilos para los contenedores en las celdas de tabla */
   table tbody tr td div {
     width: 100%;
@@ -243,15 +320,22 @@ hr {
   }
 
   /* Estilos para los campos de entrada dentro de los contenedores */
-  table tbody tr td div input,
+  table tbody tr td div input {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td div select {
     font-size: 12px;
     width: 50%;
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
+    height: 80%;
   }
-
   /* Estilos para los botones */
   button {
     font-size: 12px;
@@ -260,6 +344,7 @@ hr {
     color: #fff;
     border: none;
     cursor: pointer;
+    height: 70%;
   }
 
   .planos {
@@ -270,7 +355,7 @@ hr {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 24px;
     width: 50px;
     border-radius: 25px;
   }
@@ -278,13 +363,13 @@ hr {
     font-size: 18px;
   }
   .InputButton-transparent {
-    height: 70%;
+    height: 80%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
     padding-bottom: 0px;
     font-size: 12px;
-    border-radius: 1px;
+    border-radius: 3px;
     cursor: pointer;
     background: #000;
     color: #cecece;
@@ -304,6 +389,10 @@ hr {
   }
   .button-cn {
     gap: 2px;
+    height: 80%;
+  }
+  .img-select {
+    height: 50px;
   }
 }
 
@@ -350,12 +439,18 @@ hr {
 
   /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
-  table tbody tr td textarea,
+  table tbody tr td textarea {
+    font-size: 12px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td button,
   table tbody tr td select {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */
@@ -367,13 +462,21 @@ hr {
   }
 
   /* Estilos para los campos de entrada dentro de los contenedores */
-  table tbody tr td div input,
+  table tbody tr td div input {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td div select {
     font-size: 12px;
     width: 50%;
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los botones */
@@ -384,6 +487,7 @@ hr {
     color: #fff;
     border: none;
     cursor: pointer;
+    height: 70%;
   }
   .planos {
     height: 100px;
@@ -401,13 +505,13 @@ hr {
     font-size: 18px;
   }
   .InputButton-transparent {
-    height: 70%;
+    height: 80%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
     padding-bottom: 0px;
     font-size: 12px;
-    border-radius: 1px;
+    border-radius: 3px;
     cursor: pointer;
     background: #000;
     color: #cecece;
@@ -427,6 +531,10 @@ hr {
   }
   .button-cn {
     gap: 2px;
+    height: 80%;
+  }
+  .img-select {
+    height: 50px;
   }
 }
 
@@ -481,14 +589,19 @@ hr {
 
   /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
-  table tbody tr td textarea,
+  table tbody tr td textarea {
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td button,
   table tbody tr td select {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
+    height: 80%;
   }
-
   /* Estilos para los contenedores en las celdas de tabla */
   table tbody tr td div {
     width: 100%;
@@ -498,13 +611,21 @@ hr {
   }
 
   /* Estilos para los campos de entrada dentro de los contenedores */
-  table tbody tr td div input,
+  table tbody tr td div input {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td div select {
     font-size: 12px;
     width: 50%;
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los botones */
@@ -515,7 +636,9 @@ hr {
     color: #fff;
     border: none;
     cursor: pointer;
+    height: 70%;
   }
+
   .planos {
     height: 150px;
     width: 350px;
@@ -532,13 +655,13 @@ hr {
     font-size: 18px;
   }
   .InputButton-transparent {
-    height: 70%;
+    height: 80%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
     padding-bottom: 0px;
     font-size: 12px;
-    border-radius: 1px;
+    border-radius: 3px;
     cursor: pointer;
     background: #000;
     color: #cecece;
@@ -558,6 +681,10 @@ hr {
   }
   .button-cn {
     gap: 2px;
+    height: 80%;
+  }
+  .img-select {
+    height: 50px;
   }
 }
 
@@ -612,12 +739,18 @@ hr {
 
   /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
-  table tbody tr td textarea,
+  table tbody tr td textarea {
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td button,
   table tbody tr td select {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */
@@ -629,13 +762,21 @@ hr {
   }
 
   /* Estilos para los campos de entrada dentro de los contenedores */
-  table tbody tr td div input,
+  table tbody tr td div input {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td div select {
     font-size: 12px;
     width: 50%;
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los botones */
@@ -646,6 +787,7 @@ hr {
     color: #fff;
     border: none;
     cursor: pointer;
+    height: 70%;
   }
   .planos {
     height: 200px;
@@ -660,16 +802,16 @@ hr {
     border-radius: 25px;
   }
   .transparent-button:hover {
-    font-size: 18px;
+    font-size: 32px;
   }
   .InputButton-transparent {
-    height: 70%;
+    height: 80%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
     padding-bottom: 0px;
     font-size: 12px;
-    border-radius: 1px;
+    border-radius: 3px;
     cursor: pointer;
     background: #000;
     color: #cecece;
@@ -689,6 +831,10 @@ hr {
   }
   .button-cn {
     gap: 2px;
+    height: 80%;
+  }
+  .img-select {
+    height: 80px;
   }
 }
 
@@ -744,12 +890,19 @@ hr {
 
   /* Estilos para los campos de entrada en la tabla */
   table tbody tr td input,
-  table tbody tr td textarea,
+  table tbody tr td textarea {
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 70%;
+  }
+
   table tbody tr td button,
   table tbody tr td select {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */
@@ -761,13 +914,21 @@ hr {
   }
 
   /* Estilos para los campos de entrada dentro de los contenedores */
-  table tbody tr td div input,
+  table tbody tr td div input {
+    font-size: 12px;
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    border: 1px solid #000;
+    height: 70%;
+  }
   table tbody tr td div select {
     font-size: 12px;
     width: 50%;
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
+    height: 80%;
   }
 
   /* Estilos para los botones */
@@ -778,6 +939,7 @@ hr {
     color: #fff;
     border: none;
     cursor: pointer;
+    height: 80%;
   }
   .planos {
     height: 300px;
@@ -792,16 +954,16 @@ hr {
     border-radius: 25px;
   }
   .transparent-button:hover {
-    font-size: 18px;
+    font-size: 32px;
   }
   .InputButton-transparent {
-    height: 70%;
+    height: 80%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
     padding-bottom: 0px;
     font-size: 12px;
-    border-radius: 1px;
+    border-radius: 3px;
     cursor: pointer;
     background: #000;
     color: #cecece;
@@ -821,5 +983,9 @@ hr {
   }
   .button-cn {
     gap: 2px;
+    height: 80%;
+  }
+  .img-select {
+    height: 80px;
   }
 }

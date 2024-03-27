@@ -139,6 +139,7 @@ function configPHP(user) {
   footer.href = rutaDeveloper
   document.querySelector('.header-McCain').style.display = 'none'
   document.querySelector('.div-encabezado').style.marginTop = '5px'
+
   // const linkInstitucional = document.getElementById('linkInstitucional');
   // linkInstitucional.href = 'https://www.factumconsultora.com';
 }

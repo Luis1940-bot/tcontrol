@@ -2116,7 +2116,7 @@ const modalImagen = {
     id: 'idDivImagen',
     position: 'relative',
     borderRadius: '10px',
-    width: '300px',
+    width: null,
     height: '300px',
     background: '#ffffff',
     border: 'none',

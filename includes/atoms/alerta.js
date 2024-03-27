@@ -1700,14 +1700,14 @@ class Alerta {
     const trash = document.createElement('img')
     const ruta = '../../assets/img/icons8-trash-48.png'
     trash.style.height = '20px'
-    trash.style.width = '20px'
+    // trash.style.width = '20px'
     trash.src = `${ruta}`
     buttonAceptar.appendChild(trash)
     modalContent.appendChild(buttonAceptar)
     const img = imgCopy.cloneNode(true)
     img.id = 'idVisualizador'
     img.style.height = '250px'
-    img.style.width = '250px'
+    // img.style.width = '250px'
     img.style.margin = 'auto auto auto auto'
     modalContent.appendChild(img)
     this.modal.appendChild(modalContent)
@@ -2516,6 +2516,7 @@ class Alerta {
           )
           const modal = document.getElementById('modalAlertCarga')
           modal.style.display = 'block'
+          document.getElementById('idSpanCarga').style.display = 'none'
           await new Promise((resolve) => setTimeout(() => resolve(), 200))
           let consulta = await callProcedure(
             procedure.procedure,
@@ -2551,6 +2552,7 @@ class Alerta {
             modal = document.getElementById('modalTablaViewFecha')
             modal.remove()
             const table = document.getElementById('tableConsultaViews')
+
             table.style.display = 'block'
             const encabezados = {
               title: consulta[0],

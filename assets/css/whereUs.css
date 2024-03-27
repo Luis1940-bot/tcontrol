@@ -6,11 +6,11 @@
   text-align: center;
 }
 
-.div-ubicacionUs #whereUs {
+/* .div-ubicacionUs #whereUs {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
   font-weight: 700;
-}
+} */
 
 #whereUs {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,6 +19,7 @@
   background: #ececec;
   display: none;
   width: auto;
+  font-weight: 700;
 }
 
 /* Media Queries */
@@ -27,11 +28,7 @@
   only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape),
   only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape),
   only screen and (min-width: 1800px) and (orientation: landscape) {
-  .div-ubicacionUs #whereUs {
-    font-size: 14px;
-  }
-
   #whereUs {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
