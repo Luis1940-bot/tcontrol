@@ -149,6 +149,7 @@ function completaButtons(obj) {
 
 function llamarCtrl(control) {
   try {
+    // console.log(control)
     let url = ''
     let tipoUrl = true
     if (!control) {
@@ -176,7 +177,7 @@ function llamarCtrl(control) {
         return obj
       }, {})
       sessionStorage.setItem('contenido', encriptar(objeto))
-      console.log(objeto)
+      // console.log(objeto)
       ruta = `${subcadena}?v=${Math.round(Math.random() * 10)}`
     } else {
       ruta = `${url}?v=${Math.round(Math.random() * 10)}`

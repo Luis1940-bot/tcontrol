@@ -1,0 +1,52 @@
+SELECT 
+    SQL_NO_CACHE
+    num_reporte,
+    'PURÉ',
+    name_reporte,
+    num_control,
+    name_control,
+    horas,
+    obs,
+    nux,
+    orden_control
+    -- ,IFNULL(TIPO_MANTTO,'') AS TIPO_MANTTO
+FROM
+    (
+    SELECT 
+        m.idLTYreporte AS num_reporte,
+        m1.valor AS horas,
+        m1.idLTYcontrol AS num_control,
+        LTYC.nombre AS name_control,
+        LTYC.orden AS orden_control,
+        m1.observacion AS obs,
+        m.nuxpedido AS nux,
+        LTYR.nombre AS name_reporte
+        -- ,(SELECT m2.valor
+        --   FROM LTYregistrocontrol m2
+        --   WHERE m2.nuxpedido = m1.nuxpedido 
+        --   AND m2.valor IN ('MECÁNICO','ELÉCTRICO','SERVICIOS','EMPAQUE')) AS TIPO_MANTTO
+    FROM 
+        LTYregistrocontrol m 
+        INNER JOIN LTYregistrocontrol m1 ON m1.nuxpedido = m.nuxpedido
+        LEFT JOIN LTYcontrol LTYC ON LTYC.idLTYcontrol = m1.idLTYcontrol
+        INNER JOIN LTYreporte LTYR ON LTYR.idLTYreporte = m.idLTYreporte
+    WHERE 
+        (
+            (m.idLTYreporte BETWEEN 216 AND 219) 
+            OR (m.idLTYreporte BETWEEN 286 AND 293) 
+            OR m.idLTYreporte = 271
+        ) 
+        AND (
+            (m1.idLTYreporte BETWEEN 216 AND 219) 
+            OR (m1.idLTYreporte BETWEEN 286 AND 293) 
+            OR m1.idLTYreporte = 271
+        )
+        AND m.tipodedato = 'd' 
+        AND m.valor >= '".$desde."' 
+        AND m.valor <= '".$hasta."'
+        AND m1.tipodedato IN ('h', 'subt', 'r', 's', 'sd')
+    ORDER BY 
+        num_reporte ASC, 
+        nux ASC,
+        orden_control ASC  
+) AS SUBQ;

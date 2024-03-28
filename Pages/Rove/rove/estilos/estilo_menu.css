@@ -1,0 +1,115 @@
+
+
+.contenedor-menu ul li{
+  list-style: none;
+  /* color: lightgrey; */
+  overflow: hidden; /* Limpiamos errores de float */
+  font-family: 'Roboto', sans-serif;
+}
+
+.contenedor-menu ul li a{
+  color: #494949;
+  display:block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
+  padding: 15px 20px;
+  /* background: lightgray; */
+}
+
+
+.contenedor-menu .menu .icono.izquierda{
+  font-size: 20px;
+  line-height:18px;
+  margin-right: 10px;
+}
+
+.contenedor-menu .menu .icono.derecha{
+  font-size: 12px;
+  line-height:18px;
+  margin-left: 5px;
+}
+
+.contenedor-menu .menu ul{
+  display: none;
+}
+
+.contenedor-menu .menu ol{
+  display: none;
+}
+
+
+
+.contenedor-menu .menu .activado > a{
+  background: #1a95d5;
+  color: #fff;
+}
+
+/* Por debajo de 700px */
+@media screen and (max-width: 780px){
+  /* .cover-container{
+  font-size:12px;
+  } */
+    .titulo{
+      font-size:14px;
+    }
+    .vers{
+      font-size:8px;
+    }
+    .frase1{
+      font-size:12px;
+    }
+    .frase2{
+      font-size:24px;
+    }
+    .icono{
+      height: 40px;
+    }
+  }
+  /* Por debajo de 400px */
+  @media screen and (max-width: 400px){
+  /* .cover-container{
+  font-size:18px;
+  } */
+  .titulo{
+  font-size:10px;
+  }
+  .vers{
+    font-size:8px;
+    }
+  .frase1{
+      font-size:10px;
+    }
+  .frase2{
+      font-size:18px;
+    }
+  .icono{
+      height: 10px;
+    }
+  }
+
+  #tabla1{
+    border: 1px solid hsl(220, 2%, 71%);
+    border-radius: 15px;
+ }
+ #tabla2{
+  border: 1px solid hsl(220, 2%, 71%);
+  border-radius: 15px;
+}
+#tabla3{
+  border: 1px solid hsl(220, 2%, 71%);
+  border-radius: 15px;
+}
+  #avatar{
+    width: 2em;
+    height: 2em;
+    margin-left: 100px;
+  }
+
+@media screen {
+  /* Contenido del fichero home.css */
+}
+
+@media print {
+  /* Contenido del fichero print.css */
+}
+/* Luis */
+
+

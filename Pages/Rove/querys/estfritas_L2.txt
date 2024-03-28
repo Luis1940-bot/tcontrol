@@ -1,0 +1,37 @@
+SELECT 
+    SQL_NO_CACHE fecha,
+    mp,
+    ROUND(hrum, 0) AS hrum,
+    ROUND(cap, 1) AS cap,
+    ROUND(lr, 0) AS lr,
+    ROUND(fc, 1) AS fc,
+    ROUND(kg, 0) AS kg,
+    ROUND(HOUR(hora), 0) AS hora
+FROM 
+    ( 
+    SELECT
+        c.valor AS fecha,
+        c1.valor AS hora,
+        c2.valor AS kg,
+        AVG(c3.valor) AS hrum,
+        AVG(c4.valor) AS cap,
+        AVG(c5.valor) AS lr,
+        AVG(c6.valor) AS fc,
+        IF(LTYregistrocontrol.idLTYreporte = 193 AND LTYregistrocontrol.desvio = 'tonfir5', LTYregistrocontrol.valor, '-') AS mp
+    FROM 
+        LTYregistrocontrol c
+        INNER JOIN LTYregistrocontrol c1 ON c1.nuxpedido = c.nuxpedido AND c1.desvio = 'tonfir2'
+        INNER JOIN LTYregistrocontrol c2 ON c2.nuxpedido = c.nuxpedido AND c2.desvio = 'tonfir13'
+        INNER JOIN LTYregistrocontrol c3 ON c3.nuxpedido = c.nuxpedido AND c3.desvio = 'tonfir9'
+        INNER JOIN LTYregistrocontrol c4 ON c4.nuxpedido = c.nuxpedido AND c4.desvio = 'tonfir10'
+        INNER JOIN LTYregistrocontrol c5 ON c5.nuxpedido = c.nuxpedido AND c5.desvio = 'tonfir11'
+        INNER JOIN LTYregistrocontrol c6 ON c6.nuxpedido = c.nuxpedido AND c6.desvio = 'tonfir12'
+        LEFT JOIN LTYregistrocontrol ON LTYregistrocontrol.nuxpedido = c6.nuxpedido 
+    WHERE 
+        c.idLTYreporte = 193 
+        AND c.desvio = 'tonfir1' 
+        AND c.valor >= '".$desde."' 
+        AND c.valor <= '".$hasta."'
+    GROUP BY c1.valor
+    ORDER BY c1.valor ASC 
+    ) AS SUBQ;

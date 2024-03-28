@@ -27,6 +27,8 @@ import eliminarRegistro from '../../Pages/ControlsView/Modules/Controladores/eli
 // eslint-disable-next-line import/extensions
 import callProcedure from '../../Pages/ConsultasViews/Controladores/callProcedure.js'
 import traerRegistros from '../../Pages/ControlsView/Modules/Controladores/traerRegistros.js'
+import callRove from '../../Pages/Rove/Controladores/callRove.js'
+import primerRender from '../../Pages/Rove/Controladores/primerRender.js'
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../'
@@ -2847,6 +2849,153 @@ class Alerta {
     idAceptar.addEventListener('click', () => {
       eliminarR(objTrad)
     })
+  }
+
+  createCalendarROVE(objeto, objTranslate, rove) {
+    try {
+      console.log(objeto, rove)
+      const obj = objeto
+      this.modal = document.createElement('div')
+      this.modal.id = 'modalTablaViewFecha'
+      this.modal.className = 'modal'
+      this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+      // Crear el contenido del modal
+      const modalContent = createDiv(obj.divContent)
+      let span = createSpan(obj.close)
+      modalContent.appendChild(span)
+
+      let texto = 'Seleccione el intervalo de fechas para la consulta:'
+      texto = trO(texto, objTranslate) || texto
+      obj.span.text = texto
+      span = createSpan(obj.span, texto)
+      modalContent.appendChild(span)
+      obj.titulo.text.text = `ROVE: ${rove.toUpperCase()}`
+      const title = createH3(obj.titulo, 'text')
+      title.id = 'idTituloFechasH3'
+      title.setAttribute('data-name', rove)
+      modalContent.appendChild(title)
+
+      const divEncabezado = createDiv(obj.divEncabezado)
+      obj.imgPrint.display = 'inline-block'
+      const imagenButton = createIMG(obj.imgPrint)
+      obj.span.alignSelf = 'left'
+      obj.span.passing = null
+      obj.span.className = null
+      obj.span.padding = null
+      obj.span.left = '10px'
+      obj.imgPrint.display = 'inline-block'
+      span = createSpan(obj.span, 'Fechas')
+      divEncabezado.appendChild(imagenButton)
+
+      divEncabezado.appendChild(span)
+      modalContent.appendChild(divEncabezado)
+      const hr = createHR(obj)
+      modalContent.appendChild(hr)
+      const fechaDeHoy = fechasGenerator.fecha_corta_yyyymmdd(new Date())
+      let divInput = createDiv(obj.divInput)
+      obj.input.id = 'idDesde'
+      obj.input.value = fechaDeHoy
+      let input = createInput(obj.input)
+      texto = trO('Desde:', objTranslate) || 'Desde:'
+      obj.label.innerText = `${texto}: `
+      obj.label.margin = 'auto 10px'
+      let label = createLabel(obj.label)
+      divInput.appendChild(label)
+      divInput.appendChild(input)
+      modalContent.appendChild(divInput)
+      obj.divInput.id = 'idDivInputPorFechaHasta'
+      divInput = createDiv(obj.divInput)
+      obj.input.id = 'idHasta'
+      obj.input.value = fechaDeHoy
+      input = createInput(obj.input)
+      texto = trO('Hasta:', objTranslate) || 'Hasta:'
+      obj.label.innerText = `${texto}: `
+      obj.label.margin = 'auto 10px'
+      label = createLabel(obj.label)
+      divInput.appendChild(label)
+      divInput.appendChild(input)
+      modalContent.appendChild(divInput)
+      texto = trO('Enviar', objTranslate) || 'Enviar:'
+      obj.btnEnviar.text = texto
+      const btn = createButton(obj.btnEnviar)
+      btn.setAttribute('data-procedure', rove)
+      modalContent.appendChild(btn)
+      // Agregar el contenido al modal
+      this.modal.appendChild(modalContent)
+
+      // Agregar el modal al body del documento
+      document.body.appendChild(this.modal)
+      const idbtnEnviar = document.getElementById('idbtnEnviar')
+      idbtnEnviar.addEventListener('click', async (e) => {
+        const name = e.target.attributes[3].value
+        // console.log(name)
+        let inputDesde = document.getElementById('idDesde')
+        let inputHasta = document.getElementById('idHasta')
+        let desde = inputDesde.value
+        let hasta = inputHasta.value
+        const fechaDesde = new Date(desde)
+        const fechaHasta = new Date(hasta)
+        const soloFecha1 = new Date(
+          fechaDesde.getFullYear(),
+          fechaDesde.getMonth(),
+          fechaDesde.getDate()
+        )
+        const soloFecha2 = new Date(
+          fechaHasta.getFullYear(),
+          fechaHasta.getMonth(),
+          fechaHasta.getDate()
+        )
+        const comparaFechas = soloFecha1 <= soloFecha2
+        if (comparaFechas) {
+          const miAlerta = new Alerta()
+          const aviso =
+            'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
+          const mensaje = trO(aviso, objTranslate) || aviso
+          // arrayGlobal.avisoListandoControles.div.height = '200px'
+          // arrayGlobal.avisoListandoControles.div.top = '70px'
+          miAlerta.createControl(
+            arrayGlobal.avisoListandoControles,
+            mensaje,
+            objTranslate
+          )
+          let modal = document.getElementById('modalAlertCarga')
+          modal.style.display = 'block'
+          document.getElementById('idSpanCarga').style.display = 'none'
+          await new Promise((resolve) => setTimeout(() => resolve(), 200))
+          //! comienza la busqueda del rove
+          let estandaresRove = await callRove(`est${rove}`, desde, hasta)
+          console.log(estandaresRove)
+          if (estandaresRove.success === false) {
+            const miAlerta = new Alerta()
+            const aviso =
+              'No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.'
+            const mensaje = trO(aviso, objTranslate) || aviso
+            arrayGlobal.avisoRojo.span.text = mensaje
+            arrayGlobal.avisoRojo.span.padding = '0px 0px 0px 0px'
+            arrayGlobal.avisoRojo.div.height = '110px'
+            arrayGlobal.avisoRojo.div.margin = '200px auto auto auto'
+            miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+            let modal = document.getElementById('modalAlertCarga')
+            modal.remove()
+            modal = document.getElementById('modalAlertVerde')
+            modal.style.display = 'block'
+          }
+          if (estandaresRove.success !== false) {
+            modal = document.getElementById('modalAlertCarga')
+            modal.remove()
+            modal = document.getElementById('modalTablaViewFecha')
+            modal.remove()
+            primerRender(rove, objTranslate)
+            const table = document.getElementById('tableRove')
+            table.style.display = 'block'
+          }
+        } else {
+          inputDesde.style.background = 'red'
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   destroyAlerta() {
