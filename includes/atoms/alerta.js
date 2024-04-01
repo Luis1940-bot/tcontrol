@@ -29,6 +29,9 @@ import callProcedure from '../../Pages/ConsultasViews/Controladores/callProcedur
 import traerRegistros from '../../Pages/ControlsView/Modules/Controladores/traerRegistros.js'
 import callRove from '../../Pages/Rove/Controladores/callRove.js'
 import primerRender from '../../Pages/Rove/Controladores/primerRender.js'
+import cargarStandares from '../../Pages/Rove/Controladores/cargaStandares.js'
+import pintaBarras from '../../Pages/Rove/Controladores/pintaBarras.js'
+import dwt from '../../Pages/Rove/Controladores/dwt.js'
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../'
@@ -2378,8 +2381,10 @@ class Alerta {
         let inputHasta = document.getElementById('idHasta')
         let desde = inputDesde.value
         let hasta = inputHasta.value
-        const fechaDesde = new Date(desde)
-        const fechaHasta = new Date(hasta)
+        const fechaDesde = new Date(`${desde}T00:00:00-03:00`)
+        const fechaHasta = new Date(`${hasta}T00:00:00-03:00`)
+        // const fechaDesde = new Date(desde)
+        // const fechaHasta = new Date(hasta)
         const soloFecha1 = new Date(
           fechaDesde.getFullYear(),
           fechaDesde.getMonth(),
@@ -2494,8 +2499,10 @@ class Alerta {
         let inputHasta = document.getElementById('idHasta')
         let desde = inputDesde.value
         let hasta = inputHasta.value
-        const fechaDesde = new Date(desde)
-        const fechaHasta = new Date(hasta)
+        const fechaDesde = new Date(`${desde}T00:00:00-03:00`)
+        const fechaHasta = new Date(`${hasta}T00:00:00-03:00`)
+        // const fechaDesde = new Date(desde)
+        // const fechaHasta = new Date(hasta)
         const soloFecha1 = new Date(
           fechaDesde.getFullYear(),
           fechaDesde.getMonth(),
@@ -2853,7 +2860,6 @@ class Alerta {
 
   createCalendarROVE(objeto, objTranslate, rove) {
     try {
-      console.log(objeto, rove)
       const obj = objeto
       this.modal = document.createElement('div')
       this.modal.id = 'modalTablaViewFecha'
@@ -2905,16 +2911,7 @@ class Alerta {
       modalContent.appendChild(divInput)
       obj.divInput.id = 'idDivInputPorFechaHasta'
       divInput = createDiv(obj.divInput)
-      obj.input.id = 'idHasta'
-      obj.input.value = fechaDeHoy
-      input = createInput(obj.input)
-      texto = trO('Hasta:', objTranslate) || 'Hasta:'
-      obj.label.innerText = `${texto}: `
-      obj.label.margin = 'auto 10px'
-      label = createLabel(obj.label)
-      divInput.appendChild(label)
-      divInput.appendChild(input)
-      modalContent.appendChild(divInput)
+
       texto = trO('Enviar', objTranslate) || 'Enviar:'
       obj.btnEnviar.text = texto
       const btn = createButton(obj.btnEnviar)
@@ -2930,67 +2927,61 @@ class Alerta {
         const name = e.target.attributes[3].value
         // console.log(name)
         let inputDesde = document.getElementById('idDesde')
-        let inputHasta = document.getElementById('idHasta')
         let desde = inputDesde.value
-        let hasta = inputHasta.value
-        const fechaDesde = new Date(desde)
-        const fechaHasta = new Date(hasta)
-        const soloFecha1 = new Date(
-          fechaDesde.getFullYear(),
-          fechaDesde.getMonth(),
-          fechaDesde.getDate()
+        // const fechaDesde = new Date(desde)
+        const fechaDesde = new Date(`${desde}T00:00:00-03:00`)
+        let fechaCorta = fechasGenerator.fecha_corta_ddmmyyyy(fechaDesde)
+        document.getElementById('whereUs').innerText += ` [${fechaCorta}]`
+        const miAlerta = new Alerta()
+        const aviso =
+          'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
+        const mensaje = trO(aviso, objTranslate) || aviso
+        // arrayGlobal.avisoListandoControles.div.height = '200px'
+        // arrayGlobal.avisoListandoControles.div.top = '70px'
+        miAlerta.createControl(
+          arrayGlobal.avisoListandoControles,
+          mensaje,
+          objTranslate
         )
-        const soloFecha2 = new Date(
-          fechaHasta.getFullYear(),
-          fechaHasta.getMonth(),
-          fechaHasta.getDate()
-        )
-        const comparaFechas = soloFecha1 <= soloFecha2
-        if (comparaFechas) {
+        let modal = document.getElementById('modalAlertCarga')
+        modal.style.display = 'block'
+        document.getElementById('idSpanCarga').style.display = 'none'
+        await new Promise((resolve) => setTimeout(() => resolve(), 200))
+        //! comienza la busqueda del rove
+        const estandaresRove = await callRove(`est${rove}`, desde, desde)
+
+        if (estandaresRove.success === false) {
           const miAlerta = new Alerta()
           const aviso =
-            'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
+            'No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.'
           const mensaje = trO(aviso, objTranslate) || aviso
-          // arrayGlobal.avisoListandoControles.div.height = '200px'
-          // arrayGlobal.avisoListandoControles.div.top = '70px'
-          miAlerta.createControl(
-            arrayGlobal.avisoListandoControles,
-            mensaje,
-            objTranslate
-          )
+          arrayGlobal.avisoRojo.span.text = mensaje
+          arrayGlobal.avisoRojo.span.padding = '0px 0px 0px 0px'
+          arrayGlobal.avisoRojo.div.height = '110px'
+          arrayGlobal.avisoRojo.div.margin = '200px auto auto auto'
+          miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
           let modal = document.getElementById('modalAlertCarga')
+          modal.remove()
+          modal = document.getElementById('modalAlertVerde')
           modal.style.display = 'block'
-          document.getElementById('idSpanCarga').style.display = 'none'
-          await new Promise((resolve) => setTimeout(() => resolve(), 200))
-          //! comienza la busqueda del rove
-          let estandaresRove = await callRove(`est${rove}`, desde, hasta)
-          console.log(estandaresRove)
-          if (estandaresRove.success === false) {
-            const miAlerta = new Alerta()
-            const aviso =
-              'No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.'
-            const mensaje = trO(aviso, objTranslate) || aviso
-            arrayGlobal.avisoRojo.span.text = mensaje
-            arrayGlobal.avisoRojo.span.padding = '0px 0px 0px 0px'
-            arrayGlobal.avisoRojo.div.height = '110px'
-            arrayGlobal.avisoRojo.div.margin = '200px auto auto auto'
-            miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
-            let modal = document.getElementById('modalAlertCarga')
-            modal.remove()
-            modal = document.getElementById('modalAlertVerde')
-            modal.style.display = 'block'
-          }
-          if (estandaresRove.success !== false) {
-            modal = document.getElementById('modalAlertCarga')
-            modal.remove()
-            modal = document.getElementById('modalTablaViewFecha')
-            modal.remove()
-            primerRender(rove, objTranslate)
-            const table = document.getElementById('tableRove')
-            table.style.display = 'block'
-          }
-        } else {
-          inputDesde.style.background = 'red'
+        }
+        if (estandaresRove.success !== false) {
+          modal = document.getElementById('modalAlertCarga')
+          modal.remove()
+          modal = document.getElementById('modalTablaViewFecha')
+          modal.remove()
+          primerRender(rove, objTranslate)
+          cargarStandares(estandaresRove, objTranslate)
+          const documentos = await callRove(`doc${rove}`, desde, desde)
+          setTimeout(() => {
+            pintaBarras(documentos, objTranslate)
+          }, 100)
+          const downtimes = await callRove(`dwt${rove}`, desde, desde)
+          setTimeout(() => {
+            dwt(downtimes, objTranslate)
+          }, 100)
+          const table = document.getElementById('tableRove')
+          table.style.display = 'block'
         }
       })
     } catch (error) {

@@ -1,7 +1,4 @@
-const widthScreen = window.innerWidth
-
 function trO(palabra, objTranslate) {
-  console.log(objTranslate)
   if (palabra === undefined || palabra === null) {
     return ''
   }
@@ -40,42 +37,49 @@ function trA(palabra, objTrad) {
   // return palabra;
 }
 
-function TbodyCell(c, r) {
-  const cell = document.createElement('td')
-  cell.setAttribute('class', 'col-barra')
-  if (c < 3 && r < 19) {
-    cell.setAttribute('class', 'col-estandar')
+function createSpan(dato, clase) {
+  const span = document.createElement('span')
+  clase ? span.setAttribute('class', clase) : null
+  span.innerText = dato
+  return span
+}
+
+function agregaHoras(table, fila) {
+  let tr = table.getElementsByTagName('tr')
+  for (let hora = 0; hora < 24; hora++) {
+    const horaFormateada = hora.toString().padStart(2, '0')
+    let td = tr[fila].getElementsByTagName('td')[hora + 3]
+    td.appendChild(createSpan(`${horaFormateada}:00`, null))
   }
-  if (r === 19) {
-    cell.setAttribute('class', 'fila-19')
+}
+
+function porcentajes(table, objTrad, filas) {
+  let tr = table.getElementsByTagName('tr')
+  let porciento = 100
+  for (let r = 6; r < filas; r++) {
+    let td = tr[r].getElementsByTagName('td')[2]
+    td.appendChild(createSpan(`${porciento}%`, null))
+    porciento = porciento - 10
   }
-  cell.innerText = ''
-  return cell
+  let td = tr[filas].getElementsByTagName('td')[2]
+  let span = trO('Hora', objTrad) || 'Hora'
+  td.appendChild(createSpan(span, null))
 }
 
 function titulos(table, rove, objTrad) {
   let tr = table.getElementsByTagName('tr')
 
-  let td1 = tr[0].getElementsByTagName('td')[2]
-  let td2 = tr[1].getElementsByTagName('td')[2]
-  let td3 = tr[2].getElementsByTagName('td')[2]
-  let td4 = tr[3].getElementsByTagName('td')[2]
-  let td17 = ''
-  let fila_0 = ''
-  let fila_1 = ''
-  let fila_2 = ''
-  let fila_3 = ''
-  let fila_4 = ''
-  let fila_16 = ''
-  let tot = []
+  let fila = Array()
+  let tot = Array()
+  // let fila_16 = ''
   switch (rove) {
     case 'especialidades':
-      fila_0 = trO('Producto', objTrad) || 'Producto'
-      fila_1 = '[Kg/h]'
-      fila_2 = trO('Meta', objTrad) || 'Meta'
-      fila_3 = 'Target'
-      fila_4 = 'Tn Emp.'
-      fila_16 = trO('Hora', objTrad) || 'Hora'
+      fila[0] = trO('Producto', objTrad) || 'Producto'
+      fila[1] = '[Kg/h]'
+      fila[2] = trO('Meta', objTrad) || 'Meta'
+      fila[3] = 'Target'
+      fila[4] = 'Tn Emp.'
+      // fila_16 = trO('Hora', objTrad) || 'Hora'
 
       tot[0] = 'Hs Rum:'
       tot[1] = 'Cump. Plan:'
@@ -86,12 +90,12 @@ function titulos(table, rove, objTrad) {
       tot[6] = 'DWT NoAsig.:'
       break
     case 'fritas_L2':
-      fila_0 = 'MP'
-      fila_1 = 'hRum'
-      fila_2 = 'LR c/DWT'
-      fila_3 = 'LR Nominal'
-      fila_4 = 'Tn/hr'
-      fila_16 = trO('Hora', objTrad) || 'Hora'
+      fila[0] = 'MP'
+      fila[1] = 'hRum'
+      fila[2] = 'LR c/DWT'
+      fila[3] = 'LR Nominal'
+      fila[4] = 'Tn/hr'
+      // fila_16 = trO('Hora', objTrad) || 'Hora'
 
       tot[0] = 'Hs Rum:'
       tot[1] = 'Cump. Plan:'
@@ -102,12 +106,12 @@ function titulos(table, rove, objTrad) {
       tot[6] = 'DWT NoAsig.:'
       break
     case 'fritas_L1':
-      fila_0 = 'MP'
-      fila_1 = 'hRum'
-      fila_2 = 'LR c/DWT'
-      fila_3 = 'LR Nominal'
-      fila_4 = 'Tn/hr'
-      fila_16 = trO('Hora', objTrad) || 'Hora'
+      fila[0] = 'MP'
+      fila[1] = 'hRum'
+      fila[2] = 'LR c/DWT'
+      fila[3] = 'LR Nominal'
+      fila[4] = 'Tn/hr'
+      // fila_16 = trO('Hora', objTrad) || 'Hora'
 
       tot[0] = 'Hs Rum:'
       tot[1] = 'Cump. Plan:'
@@ -118,12 +122,12 @@ function titulos(table, rove, objTrad) {
       tot[6] = 'DWT NoAsig.:'
       break
     case 'pure':
-      fila_0 = 'MP'
-      fila_1 = 'hRum'
-      fila_2 = 'LR c/DWT'
-      fila_3 = 'LR Nominal'
-      fila_4 = 'Tn/hr'
-      fila_16 = trO('Hora', objTrad) || 'Hora'
+      fila[0] = 'MP'
+      fila[1] = 'hRum'
+      fila[2] = 'LR c/DWT'
+      fila[3] = 'LR Nominal'
+      fila[4] = 'Tn/hr'
+      // fila_16 = trO('Hora', objTrad) || 'Hora'
 
       tot[0] = 'Hs Rum:'
       tot[1] = 'Cump. Plan:'
@@ -136,26 +140,60 @@ function titulos(table, rove, objTrad) {
     default:
       break
   }
-  let span = document.createElement('span')
-  span.innerText = fila_0
-  td1.appendChild(span)
-  span.innerText = fila_1
-  td2.appendChild(span)
+
+  for (let c = 0; c < fila.length; c++) {
+    let td = tr[c].getElementsByTagName('td')[2]
+    td.appendChild(createSpan(fila[c], null))
+  }
+  for (let t = 0; t < tot.length; t++) {
+    let td = tr[t + 1].getElementsByTagName('td')[0]
+    td.appendChild(createSpan(tot[t], null))
+  }
+}
+
+function TbodyCell(c, r) {
+  const cell = document.createElement('td')
+  cell.setAttribute('class', 'col-barra')
+  if (c === 0 && r < 18) {
+    cell.setAttribute('class', 'col-estandar-0')
+  }
+  if (c === 1 && r < 18) {
+    cell.setAttribute('class', 'col-estandar-1')
+  }
+  if (c === 2 && r < 18) {
+    cell.setAttribute('class', 'col-estandar-2')
+  }
+  if (r === 16) {
+    cell.setAttribute('class', 'fila-16')
+  }
+  if (r === 18) {
+    cell.setAttribute('class', 'fila-19')
+  }
+  cell.innerText = ''
+  return cell
 }
 
 export default function primerRender(rove, objTrad) {
-  const table = document.getElementById('tableRove')
-  const tbody = document.createElement('tbody')
-  for (let r = 0; r < 20; r++) {
-    const newRow = document.createElement('tr')
-    for (let c = 0; c < 27; c++) {
-      //generar celda vacía
-      const celda = TbodyCell(c, r)
-      newRow.appendChild(celda)
+  try {
+    const table = document.getElementById('tableRove')
+    const tbody = document.createElement('tbody')
+    tbody.setAttribute('id', 'primerTbody')
+    for (let r = 0; r < 19; r++) {
+      const newRow = document.createElement('tr')
+      for (let c = 0; c < 27; c++) {
+        //generar celda vacía
+        const celda = TbodyCell(c, r)
+        newRow.appendChild(celda)
+      }
+      tbody.appendChild(newRow)
     }
-    tbody.appendChild(newRow)
-  }
 
-  table.appendChild(tbody)
-  titulos(table, rove, objTrad)
+    table.appendChild(tbody)
+    titulos(table, rove, objTrad)
+    porcentajes(table, objTrad, 16)
+    agregaHoras(table, 16)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(error)
+  }
 }

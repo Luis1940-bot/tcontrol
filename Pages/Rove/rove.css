@@ -57,18 +57,81 @@ tbody tr td {
   font-style: normal;
   font-weight: 500;
 }
-
-.col-estandar {
+.col-estandar-0 {
   width: 50px;
+  font-weight: 700;
+  text-align: right;
+  padding-right: 2px;
+}
+.col-estandar-1 {
+  width: 50px;
+  font-weight: 700;
+}
+.col-estandar-2 {
+  width: 30px;
+  font-weight: 700;
+  padding-left: 1rem;
+  color: #9d9d9d;
 }
 .col-barra {
   width: 20px;
 }
 .fila-19 {
-  background-color: #b9b9b9;
+  background-color: #9d9d9d;
   font-weight: 700;
+  text-align: center;
 }
-
+.fila-16 {
+  color: #9d9d9d;
+  font-weight: 700;
+  text-align: center;
+}
+.row-producto,
+.row-hrum,
+.row-cap,
+.row-lr,
+.row-ton {
+  color: #212121;
+  font-weight: 500;
+  text-align: center;
+  font-size: 9px;
+}
+.row-fc {
+  color: #ffffff;
+  text-align: center;
+}
+.celda-DWT {
+  font-weight: 600;
+  text-align: center;
+  background-color: #ff2626;
+}
+.celda-LRR {
+  font-weight: 600;
+  text-align: center;
+  background-color: rgb(210, 167, 250);
+}
+.celda-dwt-DWT {
+  background-color: #cecece;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+.dwt-lrr {
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+.columna2 {
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+.div-doc {
+  text-align: center;
+}
+.docu {
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 /* Estilos para dispositivos móviles */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
 }
@@ -83,8 +146,21 @@ tbody tr td {
 
 /* Estilos para tabletas en formato landscape */
 @media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
-  .col-estandar {
-    width: 100px;
+  .col-estandar-0 {
+    width: 50px;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 1px;
+  }
+  .col-estandar-1 {
+    width: 50px;
+    font-weight: 700;
+  }
+  .col-estandar-2 {
+    width: 30px;
+    font-weight: 700;
+    padding-left: 1rem;
+    color: #9d9d9d;
   }
   .col-barra {
     width: 40px;
@@ -93,18 +169,56 @@ tbody tr td {
 
 /* Estilos para pantallas grandes en formato portrait */
 @media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
-  .col-estandar {
+  .col-estandar-0 {
     width: 100px;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 5px;
+  }
+  .col-estandar-1 {
+    width: 100px;
+    font-weight: 700;
+  }
+  .col-estandar-2 {
+    width: 50px;
+    font-weight: 700;
+    padding-left: 1rem;
+    color: #9d9d9d;
   }
   .col-barra {
     width: 40px;
+  }
+  .celda-verde {
+    background-color: #03e046;
+    text-align: center;
+  }
+  .celda-verde:hover,
+  .celda-roja:hover {
+    cursor: pointer;
+  }
+  .celda-roja {
+    background-color: #ff2626;
+    text-align: center;
   }
 }
 
 /* Estilos para pantallas grandes en formato landscape */
 @media only screen and (min-width: 1800px) and (orientation: landscape) {
-  .col-estandar {
-    width: 120px;
+  .col-estandar-0 {
+    width: 100px;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 5px;
+  }
+  .col-estandar-1 {
+    width: 100px;
+    font-weight: 700;
+  }
+  .col-estandar-2 {
+    width: 50px;
+    font-weight: 700;
+    padding-left: 1rem;
+    color: #9d9d9d;
   }
   .col-barra {
     width: 60px;
