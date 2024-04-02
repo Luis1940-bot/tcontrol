@@ -1,20 +1,12 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..'
 
-export default function callProcedure(sql, desde, hasta, operation) {
+export default function traerRegistros(sql) {
   // eslint-disable-next-line no-console
-  console.time('callProcedure')
+  console.time('traerRegistros')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
-    const ruta = `${SERVER}/Pages/ConsultasViews/Routes/callProcedure.php?${rax}`
-    const requestBody = {
-      q: sql,
-      desde,
-      hasta,
-      operation,
-    }
-    const datos = JSON.stringify(requestBody)
-    console.log(datos)
+    const ruta = `${SERVER}/Pages/ControlsView/Routes/traerRegistros.php?q=${sql}${rax}`
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -22,17 +14,15 @@ export default function callProcedure(sql, desde, hasta, operation) {
         Accept: 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
-      body: datos,
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data)
         resolve(data)
         // eslint-disable-next-line no-console
-        console.timeEnd('callProcedure')
+        console.timeEnd('traerRegistros')
       })
       .catch((error) => {
-        console.timeEnd('callProcedure')
+        console.timeEnd('traerRegistros')
         console.error('Error en la solicitud:', error)
         reject(error)
         alert('No se pudo establecer conexión con el servidor')

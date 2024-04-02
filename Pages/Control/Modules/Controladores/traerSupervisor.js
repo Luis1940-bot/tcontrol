@@ -1,12 +1,12 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../../..';
+const SERVER = '../../../..'
 
 export default function traerSupervisor(idSupervisor) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
-    const rax = `&new=${new Date()}`;
-    const id = encodeURIComponent(idSupervisor);
-    const ruta = `${SERVER}/Pages/Control/Routes/traerSupervisor.php?q=${id}${rax}`;
+    const rax = `&new=${new Date()}`
+    const id = encodeURIComponent(idSupervisor)
+    const ruta = `${SERVER}/Pages/Control/Routes/traerSupervisor.php?q=${id}${rax}`
 
     fetch(ruta, {
       method: 'POST',
@@ -17,9 +17,11 @@ export default function traerSupervisor(idSupervisor) {
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error(`Error en la solicitud: ${res.status} ${res.statusText}`);
+          throw new Error(
+            `Error en la solicitud: ${res.status} ${res.statusText}`
+          )
         }
-        return res.json();
+        return res.json()
       })
       .then((data) => {
         const objeto = {
@@ -28,11 +30,13 @@ export default function traerSupervisor(idSupervisor) {
           mail: data.mail || null,
           tipo: data.tipo || null,
           mi_cfg: data.mi_cfg || null,
-        };
-        resolve(objeto);
+        }
+        resolve(objeto)
       })
       .catch((error) => {
-        reject(error);
-      });
-  });
+        console.error('Error en la solicitud:', error)
+        reject(error)
+        alert('No se pudo establecer conexión con el servidor')
+      })
+  })
 }

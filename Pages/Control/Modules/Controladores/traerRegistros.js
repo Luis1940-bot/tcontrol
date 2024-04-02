@@ -33,7 +33,9 @@ export default function traerRegistros(sql) {
       })
       .catch((error) => {
         console.timeEnd('traerRegistros')
+        console.error('Error en la solicitud:', error)
         reject(error)
+        alert('No se pudo establecer conexión con el servidor')
       })
   })
 }

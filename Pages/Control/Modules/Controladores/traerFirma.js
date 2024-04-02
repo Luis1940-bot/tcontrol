@@ -33,7 +33,9 @@ export default function traerFirma(pss) {
         resolve(objeto)
       })
       .catch((error) => {
+        console.error('Error en la solicitud:', error)
         reject(error)
+        alert('No se pudo establecer conexión con el servidor')
       })
   })
 }

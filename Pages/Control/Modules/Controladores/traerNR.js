@@ -1,13 +1,13 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../../..';
+const SERVER = '../../../..'
 
 export default function traerNR(nr) {
   // eslint-disable-next-line no-console
-  console.time('traerNR');
-  const sql = `ctrlCargado,${nr}`;
+  console.time('traerNR')
+  const sql = `ctrlCargado,${nr}`
   return new Promise((resolve, reject) => {
-    const rax = `&new=${new Date()}`;
-    const ruta = `${SERVER}/Pages/Control/Routes/traerRegistros.php?q=${sql}${rax}`;
+    const rax = `&new=${new Date()}`
+    const ruta = `${SERVER}/Pages/Control/Routes/traerRegistros.php?q=${sql}${rax}`
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -18,12 +18,14 @@ export default function traerNR(nr) {
     })
       .then((res) => res.json())
       .then((data) => {
-        resolve(data);
+        resolve(data)
         // eslint-disable-next-line no-console
-        console.timeEnd('traerNR');
+        console.timeEnd('traerNR')
       })
       .catch((error) => {
-        reject(error);
-      });
-  });
+        console.error('Error en la solicitud:', error)
+        reject(error)
+        alert('No se pudo establecer conexión con el servidor')
+      })
+  })
 }

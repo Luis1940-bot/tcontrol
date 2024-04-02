@@ -1,5 +1,5 @@
-import { encriptar } from '../../../controllers/cript.js'
-import traerRegistros from '../../ControlsView/Modules/Controladores/traerRegistros.js'
+import { encriptar, desencriptar } from '../../../controllers/cript.js'
+import traerRegistros from '../../Rove/Controladores/traerRegistros.js'
 
 function trO(palabra, objTranslate) {
   if (palabra === undefined || palabra === null) {
@@ -103,6 +103,7 @@ function createSpan(config, text) {
 }
 
 async function handleClickEnlace(dato) {
+  const { rove } = desencriptar(sessionStorage.getItem('contenido'))
   const control = await traerRegistros(`controlNT,${dato}`)
   const control_N = control[0][0]
   const control_T = control[0][1]
@@ -117,6 +118,7 @@ async function handleClickEnlace(dato) {
   const url = '../../Pages/Control/index.php'
   const ruta = `${url}?v=${Math.round(Math.random() * 10)}`
   window.open(ruta, '_blank')
+  sessionStorage.setItem('contenido', encriptar({ rove: rove }))
 }
 
 function generarUrlParaEnlace(dato) {

@@ -114,6 +114,7 @@ tbody tr td {
   background-color: #cecece;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
+  text-align: center;
 }
 .dwt-lrr {
   font-weight: 600;
@@ -132,38 +133,157 @@ tbody tr td {
   font-weight: 700;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.celda-verde {
+  background-color: #03e046;
+  text-align: center;
+}
+.celda-verde:hover,
+.celda-roja:hover {
+  cursor: pointer;
+}
+.celda-roja {
+  background-color: #ff2626;
+  text-align: center;
+}
 /* Estilos para dispositivos móviles */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
+  .dwt-tbody,
+  .col-estandar-0,
+  .col-estandar-1,
+  .col-estandar-2,
+  .fila-19 {
+    display: none;
+  }
+  .dwt-lrr,
+  .fila-16 {
+    display: none;
+  }
+  #tableRove,
+  #primerTbody,
+  #dwtTbody {
+    width: 100%;
+  }
+
+  .celda-verde,
+  .celda-roja,
+  .col-barra {
+    font-size: 8px;
+    width: 2px;
+  }
+  .producto,
+  .hrum,
+  .row-cap,
+  .row-lr,
+  .row-ton,
+  .row-hrum,
+  .row-producto {
+    display: none;
+  }
 }
 
 /* Estilos para dispositivos móviles landscape*/
 @media only screen and (min-width: 480px) and (max-width: 900px) and (orientation: landscape) {
+  .dwt-tbody,
+  .col-estandar-0,
+  .col-estandar-1,
+  .col-estandar-2,
+  .fila-19 {
+    display: none;
+  }
+  .dwt-lrr,
+  .fila-16 {
+    display: none;
+  }
+  #tableRove,
+  #primerTbody,
+  #dwtTbody {
+    width: 100%;
+  }
+
+  .celda-verde,
+  .celda-roja,
+  .col-barra {
+    font-size: 8px;
+    width: 50px;
+  }
+  .producto,
+  .hrum,
+  .row-cap,
+  .row-lr,
+  .row-ton,
+  .row-hrum,
+  .row-producto {
+    display: none;
+  }
 }
 
 /* Estilos para tabletas en formato portrait */
 @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
-}
-
-/* Estilos para tabletas en formato landscape */
-@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
   .col-estandar-0 {
-    width: 50px;
+    width: 100px;
     font-weight: 700;
     text-align: right;
-    padding-right: 1px;
+    padding-right: 5px;
   }
   .col-estandar-1 {
-    width: 50px;
+    width: 100px;
     font-weight: 700;
   }
   .col-estandar-2 {
-    width: 30px;
+    width: 50px;
     font-weight: 700;
     padding-left: 1rem;
     color: #9d9d9d;
   }
   .col-barra {
-    width: 40px;
+    width: 60px;
+  }
+  .celda-verde {
+    background-color: #03e046;
+    text-align: center;
+  }
+  .celda-verde:hover,
+  .celda-roja:hover {
+    cursor: pointer;
+  }
+  .celda-roja {
+    background-color: #ff2626;
+    text-align: center;
+  }
+}
+
+/* Estilos para tabletas en formato landscape */
+@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
+  .col-estandar-0 {
+    width: 100px;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 5px;
+  }
+  .col-estandar-1 {
+    width: 100px;
+    font-weight: 700;
+  }
+  .col-estandar-2 {
+    width: 50px;
+    font-weight: 700;
+    padding-left: 1rem;
+    color: #9d9d9d;
+  }
+  .col-barra {
+    width: 60px;
+  }
+  .celda-verde {
+    background-color: #03e046;
+    text-align: center;
+  }
+  .celda-verde:hover,
+  .celda-roja:hover {
+    cursor: pointer;
+  }
+  .celda-roja {
+    background-color: #ff2626;
+    text-align: center;
   }
 }
 
@@ -222,5 +342,17 @@ tbody tr td {
   }
   .col-barra {
     width: 60px;
+  }
+  .celda-verde {
+    background-color: #03e046;
+    text-align: center;
+  }
+  .celda-verde:hover,
+  .celda-roja:hover {
+    cursor: pointer;
+  }
+  .celda-roja {
+    background-color: #ff2626;
+    text-align: center;
   }
 }

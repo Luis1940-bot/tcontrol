@@ -2989,6 +2989,53 @@ class Alerta {
     }
   }
 
+  createModalMenuRove(objeto, objTranslate) {
+    // eslint-disable-next-line no-unused-vars
+
+    const obj = objeto
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    modalContent.appendChild(span)
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    let div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    let texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+    //! fin salir
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+  }
+
   destroyAlerta() {
     if (this.modal) {
       // Elimina el elemento modal del DOM

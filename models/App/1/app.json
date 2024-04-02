@@ -155,7 +155,7 @@
     "FFL1": {
       "name": ["ROVE FFL1", "DWT FFL1"],
       "type": ["ctrl", "btn"],
-      "ruta": ["Rove/index.php?rove=ffl1", ""],
+      "ruta": ["Rove/index.php?rove=fritas_L1", ""],
       "nivel": [1, 1],
       "DWT FFL1": {
         "name": ["DWT PLANEADO FFL1", "DWT NO PLANEADO FFL1"],
@@ -236,7 +236,7 @@
     "FFL2": {
       "name": ["ROVE FFL2", "DWT FFL2"],
       "type": ["ctrl", "btn"],
-      "ruta": ["", ""],
+      "ruta": ["Rove/index.php?rove=fritas_L2", ""],
       "nivel": [1, 1],
       "DWT FFL2": {
         "name": ["DWT PLANEADO FFL2", "DWT NO PLANEADO FFL2"],

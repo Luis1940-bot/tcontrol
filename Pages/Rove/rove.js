@@ -87,6 +87,7 @@ function leeApp(json, complit) {
 function dondeEstaEn() {
   const contenido = sessionStorage.getItem('contenido')
   const url = desencriptar(contenido)
+  console.log(url)
   const name = url.rove
   document.getElementById('whereUs').innerHTML = `ROVE: ${name.toUpperCase()}`
   document.getElementById('whereUs').style.display = 'inline'
@@ -171,5 +172,17 @@ document.addEventListener('DOMContentLoaded', () => {
       salir: trO('Cerrar sesión'),
     }
     personModal(user, objTranslate)
+  })
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburguesa = document.getElementById('hamburguesa')
+  hamburguesa.addEventListener('click', () => {
+    const miAlertaM = new Alerta()
+    miAlertaM.createModalMenuRove(arrayGlobal.objMenuRove, objTranslate)
+    const modal = document.getElementById('modalAlertM')
+    // const closeButton = document.querySelector('.modal-close')
+    // closeButton.addEventListener('click', closeModal)
+    modal.style.display = 'block'
   })
 })
