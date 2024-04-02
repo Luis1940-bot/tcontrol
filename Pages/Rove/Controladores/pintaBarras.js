@@ -63,8 +63,9 @@ function productividad(doc, table, fila, objTrad) {
       const horaEstandar = parseInt(element[1])
       if (horaEstandar === hora) {
         const tdTonEmpacadas = tr[4].getElementsByTagName('td')[hora + 3]
-        const tonEmpacadas =
-          parseFloat(tdTonEmpacadas.querySelector('span').innerText) / 1000
+        const tonEmpacadas = parseFloat(
+          tdTonEmpacadas.querySelector('span').innerText
+        ) // / 1000
 
         const tdTonTarget = tr[3].getElementsByTagName('td')[hora + 3]
         const tonTarget = parseFloat(

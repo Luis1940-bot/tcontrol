@@ -69,7 +69,8 @@ function carga(table, objTrad, fila, estandares) {
 
         td = tr[fila + 4].getElementsByTagName('td')[hora + 3]
         span = td.querySelector('span')
-        span.innerText = element[6]
+        const ton = parseFloat(element[6]) / 1000
+        span.innerText = ton.toFixed(2)
 
         td = tr[fila + 5].getElementsByTagName('td')[hora + 3]
         span = td.querySelector('span')

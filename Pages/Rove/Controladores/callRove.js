@@ -13,7 +13,7 @@ export default function callRove(sql, desde, hasta) {
       hasta,
     }
     const datos = JSON.stringify(requestBody)
-    console.log(datos)
+    // console.log(datos)
     fetch(ruta, {
       method: 'POST',
       headers: {

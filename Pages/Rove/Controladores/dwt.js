@@ -227,7 +227,6 @@ function calculos(diferenciaMinutos, tr, hora1, lrr) {
 function agruparTotales(valoresFilaReporte, valoresReporte) {
   const tbody = document.getElementById('dwtTbody')
   const cantidadTR = tbody.childElementCount
-  const indice = Array.from(tbody.parentNode.children).indexOf(tbody)
   const arrayAplanado = valoresReporte.flat()
   const valoresColumnasReporte = Array.from(new Set(arrayAplanado))
   const cantidadDeFilas = valoresFilaReporte.length
@@ -275,6 +274,28 @@ function agruparTotales(valoresFilaReporte, valoresReporte) {
             suma = 0
           }
         }
+      }
+    }
+  }
+  for (let f = 0; f < valoresFilaReporte.length; f++) {
+    const fila = valoresFilaReporte[f] - 19
+    const element = 2
+    for (let r = fila + 1; r < cantidadTR; r++) {
+      const tr = tbody.getElementsByTagName('tr')[r]
+      const celdaPisada = tr.cells[element]
+      const clase = celdaPisada.classList[0]
+      const valorCeldaPisada = parseInt(celdaPisada.textContent) || 0
+      suma += valorCeldaPisada
+      if (clase === 'celda-dwt-DWT' || r === cantidadTR - 1) {
+        const trEncabezado = tbody.getElementsByTagName('tr')[fila]
+        const celdaEncabezado = trEncabezado.cells[element]
+        let valorEncabezado = parseInt(celdaEncabezado.textContent) || 0
+        valorEncabezado += suma
+        valorEncabezado > 0
+          ? (celdaEncabezado.innerText = valorEncabezado)
+          : (celdaEncabezado.innerText = '')
+        r = cantidadTR
+        suma = 0
       }
     }
   }
