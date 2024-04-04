@@ -5,14 +5,17 @@ export default function enviarLogin(obj) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
-    const pass = encodeURIComponent(pss)
-    const ruta = `${SERVER}/Pages/Control/Routes/supervisores.php?q=${pass}${rax}`
+    const datos = JSON.stringify(obj)
+    console.log(datos)
+    // const ruta = `${SERVER}/Pages/Login/Routes/login.php?${rax}`
+    const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
+      body: datos,
     })
       .then((res) => {
         if (!res.ok) {
@@ -23,14 +26,15 @@ export default function enviarLogin(obj) {
         return res.json()
       })
       .then((data) => {
-        const objeto = {
-          id: data.id || null,
-          nombre: data.nombre || null,
-          mail: data.mail || null,
-          tipo: data.tipo || null,
-          mi_cfg: data.mi_cfg || null,
-        }
-        resolve(objeto)
+        console.log(data)
+        // const objeto = {
+        //   id: data.id || null,
+        //   nombre: data.nombre || null,
+        //   mail: data.mail || null,
+        //   tipo: data.tipo || null,
+        //   mi_cfg: data.mi_cfg || null,
+        // }
+        resolve(data)
       })
       .catch((error) => {
         console.error('Error en la solicitud:', error)

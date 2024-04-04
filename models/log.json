@@ -13,7 +13,7 @@
   "elements": {
     "select": [{ "type": "select", "name": "Plants" }],
     "input": [
-      { "type": "text", "name": "Email" },
+      { "type": "email", "name": "Email" },
       { "type": "password", "name": "Password" }
     ],
     "button": [{ "type": "button", "name": "Login" }]

@@ -79,8 +79,50 @@ function leeApp(json) {
     })
 }
 
-function enviarFormulario() {
-  // enviarLogin()
+function validarEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return regex.test(email)
+}
+
+async function enviarFormulario() {
+  try {
+    const select = document.getElementById('idSelectLogin')
+    const email = document.getElementById('idInput0')
+    const password = document.getElementById('idInput1')
+    let objeto = {
+      planta: '',
+      email: '',
+      password: '',
+      ruta: '/login',
+    }
+    if (!select.value) {
+      alert('complete la planta')
+      return
+    } else {
+      objeto.planta = select.value
+    }
+    if (!email.value) {
+      alert('complete el email')
+      return
+    } else {
+      objeto.email = email.value
+    }
+    if (!password.value) {
+      alert('complete el pass')
+      return
+    } else {
+      objeto.password = password.value
+    }
+    if (validarEmail(email.value)) {
+      console.log('El email es válido.')
+    } else {
+      console.log('El email no es válido.')
+    }
+    const login = await enviarLogin(objeto)
+    console.log(login)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 function objParams(
