@@ -1,15 +1,15 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..'
 
-export default function enviarLogin(objeto) {
-  let obj = { ...objeto }
+function actualizarLenguaje(objeto) {
   // eslint-disable-next-line no-console
+  let obj = { ...objeto }
   return new Promise((resolve, reject) => {
+    // Realiza el fetch y maneja la lógica de la respuesta
     const rax = `&new=${new Date()}`
     obj.rax = rax
     const datos = JSON.stringify(obj)
-    // console.log(datos)
-    // const ruta = `${SERVER}/Pages/Login/Routes/login.php?${rax}`
+    console.log(datos)
     const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {
       method: 'POST',
@@ -38,3 +38,5 @@ export default function enviarLogin(objeto) {
       })
   })
 }
+
+export default actualizarLenguaje

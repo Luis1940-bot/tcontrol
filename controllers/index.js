@@ -33,7 +33,7 @@ function session() {
     })
     .then((data) => {
       // Imprimir la respuesta del servidor en la consola
-      // console.log('Server response:', data);
+      console.log('Server response:', data)
 
       // Intentar analizar la respuesta como JSON
       try {
@@ -76,8 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const spinner = document.querySelector('.spinner')
   spinner.style.visibility = 'visible'
   limpiezaDeCache()
-  session()
+  // session()
   setTimeout(() => {
-    window.location.href = `${SERVER}/Pages/Home/`
+    // window.location.href = `${SERVER}/Pages/Home/`
+    window.location.href = `${SERVER}/Pages/Login/`
   }, 1000)
 })

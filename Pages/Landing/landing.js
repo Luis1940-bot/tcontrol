@@ -15,6 +15,7 @@ import {
 } from '../../includes/Conection/conection.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../controllers/cript.js'
+import actualizarLenguaje from '../../includes/Traducciones/Lenguajes/fijarLenguaje.js'
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -132,21 +133,10 @@ function completaButtons(obj) {
       document.querySelector('.custom-button').innerText = language
         .slice(0, 2)
         .toUpperCase()
-      // // storage(language.slice(0, 2).toLowerCase());
-      // seguir.disabled = false
-      // seguir.style.background = '#212121'
-
-      // seguir.addEventListener('mouseover', () => {
-      //   if (!seguir.disabled) {
-      //     seguir.style.background = '#cecece'
-      //   }
-      // })
-      // seguir.addEventListener('mouseout', () => {
-      //   seguir.style.background = '#212121'
-      // })
       const persona = desencriptar(sessionStorage.getItem('user'))
+
       spinner.style.visibility = 'visible'
-      loadLenguages(persona.lng)
+      loadLenguages(persona)
     })
 
     const persona = desencriptar(sessionStorage.getItem('user'))
@@ -216,8 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
   finPerformance()
 })
 
-async function loadLenguages(leng) {
+async function loadLenguages(persona) {
   try {
+    const leng = persona.lng
+    const id = persona.id
+    const objetoLng = {
+      leng,
+      id,
+      ruta: '/mi_cfg',
+    }
+    const lenguaje = await actualizarLenguaje(objetoLng)
     await translate(leng)
     setTimeout(() => {
       const url = '../../Pages/Home'

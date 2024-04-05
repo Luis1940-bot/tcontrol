@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Content-Type: application/json; charset=utf-8");
     $datos = file_get_contents("php://input");
     
-  // $datos = '{"planta":"1","email":"luisglogista@gmail.com","pass":"4488","ruta":"/login"}';
+  // $datos = '{"leng":"es","id":"6","ruta":"/mi_cfg","rax":"&new=Fri Apr 05 2024 19:02:11 GMT-0300 (hora estándar de Argentina)"}';
 
     $data = json_decode($datos, true);
    
@@ -72,10 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $ruta = $_SERVER['REQUEST_URI'];
     switch ($ruta) {
         case '/login':
-            include_once('../Pages/Login/Routes/login.php');
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Login/Routes/login.php';
             break;
-        case '/perfil':
-            include_once('perfil.php');
+        case '/mi_cfg':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/includes/Traducciones/Lenguajes/fijarLenguaje.php';
             break;
         // Agrega más casos según las rutas de tu aplicación
         default:

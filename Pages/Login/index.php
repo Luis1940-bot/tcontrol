@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['factum_validation'])) {
-    include_once "./Pages/Session/session.php";
+    // include_once "./Pages/Session/session.php";
 }
 header('Content-Type: text/html;charset=utf-8');
 
