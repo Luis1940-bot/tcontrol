@@ -488,28 +488,24 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
   return newRow
 }
 
-async function traerRutina(sql, selDinamico) {
+async function traerRutina(sqli, selDinamico) {
   try {
-    const arraySelectDinamico = await traerRegistros(
-      `traer_LTYsql&sql=${encodeURIComponent(sql)}`
-    )
+    const sql = encodeURIComponent(sqli)
+    const arraySelectDinamico = await traerRegistros(`traer_LTYsql`, `${sql}`) //encodeURIComponent
     ElementGenerator.generateOptions(arraySelectDinamico, selDinamico)
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error)
   }
 }
-async function traerValorPorDefecto(sql, tipo, html) {
+async function traerValorPorDefecto(sqli, tipo, html) {
   try {
+    const sql = encodeURIComponent(sqli)
     if (tipo === 'n') {
-      const arrayValor = await traerRegistros(
-        `traer_LTYsql&sql=${encodeURIComponent(sql)}`
-      )
+      const arrayValor = await traerRegistros(`traer_LTYsql`, `${sql}`) //encodeURIComponent
       ElementGenerator.generateInputNumberQuery(arrayValor, html)
     } else if (tipo === 't' || tipo === 'tx') {
-      const arrayValor = await traerRegistros(
-        `traer_LTYsql&sql=${encodeURIComponent(sql)}`
-      )
+      const arrayValor = await traerRegistros(`traer_LTYsql`, `${sql}`) //encodeURIComponent
       ElementGenerator.generateInputTextQuery(arrayValor, html)
     }
   } catch (error) {

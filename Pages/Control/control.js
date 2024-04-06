@@ -170,20 +170,23 @@ async function cargaDeRegistros() {
   try {
     inicioPerformance()
     await actualizarProgreso('10%')
-    const countSelect = await traerRegistros(`countSelect,${controlN}`)
+    const countSelect = await traerRegistros(`countSelect,${controlN}`, null)
     sessionStorage.setItem('loadSystem', 2)
     sessionStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4)
 
     await actualizarProgreso('20%')
-    const empresaData = await traerRegistros('empresa')
+    const empresaData = await traerRegistros('empresa', null)
     arrayGlobal.arrayEmpresa = [...empresaData]
 
     await actualizarProgreso('30%')
-    const selectoresData = await traerRegistros(`Selectores,${controlN}`)
+    const selectoresData = await traerRegistros(`Selectores,${controlN}`, null)
     arrayGlobal.arraySelect = [...selectoresData]
 
     await actualizarProgreso('40%')
-    const nuevoControlData = await traerRegistros(`NuevoControl,${controlN}`)
+    const nuevoControlData = await traerRegistros(
+      `NuevoControl,${controlN}`,
+      null
+    )
     arrayGlobal.arrayControl = [...nuevoControlData]
 
     // Finaliza la carga y realiza cualquier otra acción necesaria
@@ -193,7 +196,7 @@ async function cargaDeRegistros() {
 
     if (nr) {
       // console.log(nr)
-      const controlNr = await traerNR(nr)
+      const controlNr = await traerNR(nr, null)
       setTimeout(() => {
         cargarNR(controlNr)
         // eslint-disable-next-line no-console

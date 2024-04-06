@@ -99,7 +99,8 @@ async function consultaCN(event, consulta) {
   const modal = document.getElementById('myModal')
   modal.style.display = 'inline-block'
   const resultado = await traerRegistros(
-    `traer_LTYsql&sql=${encodeURIComponent(consulta)}`
+    `traer_LTYsql`,
+    `${encodeURIComponent(consulta)}`
   )
   resultado.length > 0 ? cargaModal(resultado, input, true) : null
 }
@@ -111,7 +112,8 @@ async function consultaQuery(event, consulta) {
   const modal = document.getElementById('myModal')
   modal.style.display = 'inline-block'
   const resultado = await traerRegistros(
-    `traer_LTYsql&sql=${encodeURIComponent(consulta)}`
+    `traer_LTYsql`,
+    `${encodeURIComponent(consulta)}`
   )
   resultado.length > 0 ? cargaModal(resultado, '', false) : null
 }
@@ -129,7 +131,8 @@ async function traerHijo(sql, array) {
     const resultado = sql.substring(21, sql.length)
     const textoDespuesDelDolar = resultado.replace(/\?/g, () => array.shift())
     objTraerHijo.res = await traerRegistros(
-      `traer_LTYsql&sql=${encodeURIComponent(textoDespuesDelDolar)}`
+      `traer_LTYsql`,
+      `${encodeURIComponent(textoDespuesDelDolar)}`
     )
     return objTraerHijo
   } catch (error) {
