@@ -1778,6 +1778,13 @@ const mensajesVarios = {
     subject: 'Sistema de Alertas',
     titulo: 'Notificación del sistema de alerta',
   },
+  json: {
+    formato:
+      'El archivo no tiene el formato JSON adecuado. Comuníquese con el desarrollador.',
+    no_existe: 'El archivo JSON no existe. Comuníquese con el desarrollador.',
+    no_carga:
+      'Error al cargar el archivo JSON. Comuníquese con el desarrollador.',
+  },
 }
 const objInforme = {
   titulo: {

@@ -119,6 +119,11 @@ function session(session) {
   const idiomaPreferido = navigator.language || navigator.languages[0]
   const partesIdioma = idiomaPreferido.split('-')
   const idioma = partesIdioma[0]
+  var spanLogin = document.querySelector('.span-login')
+  if (spanLogin) {
+    // Eliminar el elemento
+    spanLogin.parentNode.removeChild(spanLogin)
+  }
   if (session.success === false) {
     const div = document.querySelector('.div-login-buttons')
     let span = document.createElement('span')

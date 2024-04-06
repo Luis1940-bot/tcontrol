@@ -12,7 +12,7 @@
   // }
  
 // Iniciar sesión
-session_start();
+// session_start();
 
 // Verificar si la sesión está establecida y si existe el índice 'login_sso' y 'plant'
 if (isset($_SESSION['login_sso']['plant'])) {

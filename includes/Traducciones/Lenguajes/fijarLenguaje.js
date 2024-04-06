@@ -9,7 +9,7 @@ function actualizarLenguaje(objeto) {
     const rax = `&new=${new Date()}`
     obj.rax = rax
     const datos = JSON.stringify(obj)
-    console.log(datos)
+    // console.log(datos)
     const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {
       method: 'POST',

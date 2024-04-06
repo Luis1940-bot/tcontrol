@@ -19,6 +19,8 @@ import {
 } from '../../includes/Conection/conection.js'
 // eslint-disable-next-line import/extensions
 import { encriptar, desencriptar } from '../../controllers/cript.js'
+import { Alerta } from '../../includes/atoms/alerta.js'
+import arrayGlobal from '../../controllers/variables.js'
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -208,6 +210,15 @@ const funcionDeClick = (e) => {
   localizador(e)
 }
 
+function alertar(men) {
+  const miAlerta = new Alerta()
+  const mensaje = trO(arrayGlobal.mensajesVarios.json[men])
+  arrayGlobal.avisoRojo.close.display = 'none'
+  miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+  const modal = document.getElementById('modalAlertVerde')
+  modal.style.display = 'block'
+}
+
 function leeApp(json) {
   readJSON(json)
     .then((data) => {
@@ -219,7 +230,19 @@ function leeApp(json) {
       completaButtons(nuevoObjeto)
     })
     .catch((error) => {
-      console.error('Error al cargar el archivo:', error)
+      if (error.name === 'SyntaxError') {
+        console.error('El archivo no tiene el formato JSON adecuado')
+        alertar('formato')
+        // Aquí puedes ejecutar acciones específicas para este tipo de error
+      } else if (error.code === 'ENOENT') {
+        console.error('El archivo no existe')
+        alertar('no_existe')
+        // Aquí puedes ejecutar acciones específicas para este tipo de error
+      } else {
+        console.error('Error al cargar el archivo:', error)
+        alertar('no_carga')
+        // Aquí puedes manejar otros tipos de errores
+      }
     })
 }
 

@@ -77,6 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/mi_cfg':
             include_once $_SERVER['DOCUMENT_ROOT'].'/includes/Traducciones/Lenguajes/fijarLenguaje.php';
             break;
+        case '/traerRegistros':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/traerRegistros.php';
+            break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada

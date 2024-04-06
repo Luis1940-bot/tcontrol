@@ -85,10 +85,8 @@ function consultar($planta, $email, $pass) {
 
 
 header("Content-Type: application/json; charset=utf-8");
-// session_start();
-// session_regenerate_id(true);
 $datos = file_get_contents("php://input");
-$datos = '{"planta":"1","email":"luisglogista@gmail.com","password":"4488","ruta":"/login","rax":"&new=Fri Apr 05 2024 09:12:00 GMT-0300 (hora estándar de Argentina)"}';
+// $datos = '{"planta":"1","email":"luisglogista@gmail.com","password":"4488","ruta":"/login","rax":"&new=Fri Apr 05 2024 09:12:00 GMT-0300 (hora estándar de Argentina)"}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
