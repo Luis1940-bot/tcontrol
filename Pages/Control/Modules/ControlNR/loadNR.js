@@ -142,7 +142,7 @@ function cargarNR(datos) {
     const tbody = document.querySelector('tbody')
     const tr = tbody.querySelectorAll('tr')
     // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < tr.length - 1; i++) {
+    for (let i = 0; i < tr.length - 0; i++) {
       const row = tr[i]
       // console.log(row);
       const td = row.querySelectorAll('td')

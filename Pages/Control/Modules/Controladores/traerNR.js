@@ -28,6 +28,7 @@ export default function traerNR(nr, sql_i) {
     })
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data)
         resolve(data)
         // eslint-disable-next-line no-console
         console.timeEnd('traerNR')
