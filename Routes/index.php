@@ -110,6 +110,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           case '/traerCargados':
             include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ControlsView/Routes/traerRegistros.php';
             break;
+          case '/ix2024':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/ix.php';
+            break;
+          case '/ux2024':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/ux.php';
+            break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada

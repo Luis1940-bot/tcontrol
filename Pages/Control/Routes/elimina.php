@@ -23,12 +23,14 @@ function eliminaNuxPedido($nux, $pdo){
       
 
 }
-if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+
+
+
+if (isset($_POST['elimina']) && $_POST['elimina'] === true) {
     // Si es así, realiza las operaciones deseadas
 
     header("Content-Type: text/html;charset=utf-8");
-    $nux = $_POST['nux'];
-    
+
     if (isset($nux) && is_string($nux)) {
         eliminaNuxPedido($nux, $pdo);
     }

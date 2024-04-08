@@ -158,12 +158,18 @@ li {
   }
 
   /* Estilos para los campos de entrada en la tabla */
-  table tbody tr td input,
-  table tbody tr td textarea {
+  table tbody tr td input {
     font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
     height: 70%;
+  }
+
+  table tbody tr td textarea {
+    font-size: var(--font-size-input);
+    width: 90%;
+    border: 1px solid #000;
+    height: 50px;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -297,12 +303,17 @@ li {
   }
 
   /* Estilos para los campos de entrada en la tabla */
-  table tbody tr td input,
-  table tbody tr td textarea {
+  table tbody tr td input {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
     height: 70%;
+  }
+  table tbody tr td textarea {
+    font-size: 12px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 50px;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -438,12 +449,17 @@ li {
   }
 
   /* Estilos para los campos de entrada en la tabla */
-  table tbody tr td input,
-  table tbody tr td textarea {
+  table tbody tr td input {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
     height: 70%;
+  }
+  table tbody tr td textarea {
+    font-size: 12px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 50px;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -588,12 +604,17 @@ li {
   }
 
   /* Estilos para los campos de entrada en la tabla */
-  table tbody tr td input,
-  table tbody tr td textarea {
+  table tbody tr td input {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
     height: 70%;
+  }
+  table tbody tr td textarea {
+    font-size: 12px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 50px;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -738,19 +759,26 @@ li {
   }
 
   /* Estilos para los campos de entrada en la tabla */
-  table tbody tr td input,
-  table tbody tr td textarea {
+  table tbody tr td input {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
     height: 70%;
   }
+
+  table tbody tr td textarea {
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 50px;
+  }
+
   table tbody tr td button,
   table tbody tr td select {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
-    height: 80%;
+    height: 90%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */
@@ -889,20 +917,24 @@ li {
   }
 
   /* Estilos para los campos de entrada en la tabla */
-  table tbody tr td input,
-  table tbody tr td textarea {
+  table tbody tr td input {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
     height: 70%;
   }
-
+  table tbody tr td textarea {
+    font-size: 12px;
+    width: 90%;
+    border: 1px solid #000;
+    height: 50px;
+  }
   table tbody tr td button,
   table tbody tr td select {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
-    height: 80%;
+    height: 90%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */

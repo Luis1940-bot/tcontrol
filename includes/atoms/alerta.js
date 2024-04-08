@@ -15,9 +15,9 @@ import traerFirma from '../../Pages/Control/Modules/Controladores/traerFirma.js'
 // eslint-disable-next-line import/extensions
 import guardaNotas from '../../Pages/Control/Modules/Controladores/guardaNotas.js'
 // eslint-disable-next-line import/extensions
-import insertarRegistro from '../../Pages/Control/Modules/Controladores/insertarRegistro.js'
+import insertarRegistro from '../../Pages/Control/Modules/Controladores/ix.js'
 // eslint-disable-next-line import/extensions
-import updateRegistro from '../../Pages/Control/Modules/Controladores/updateRegistro.js'
+import updateRegistro from '../../Pages/Control/Modules/Controladores/ux.js'
 // eslint-disable-next-line import/extensions
 import enviaMail from '../../Nodemailer/sendEmail.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
