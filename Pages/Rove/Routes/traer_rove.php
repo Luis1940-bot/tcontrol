@@ -1,8 +1,12 @@
 <?php
 mb_internal_encoding('UTF-8');
+  if (!isset($_SESSION['login_sso']['email'] )) {
+      unset($_SESSION['login_sso']['email'] ); 
+  }
 
 function consultar($query, $desde, $hasta) {
-  include_once '../../../Routes/datos_base.php';
+  // include_once '../../../Routes/datos_base.php';
+   include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
   try {
         $con = mysqli_connect($host,$user,$password,$dbname);
         if (!$con) {

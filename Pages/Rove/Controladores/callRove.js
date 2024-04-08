@@ -1,16 +1,18 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..'
 
-export default function callRove(sql, desde, hasta) {
+export default function callRove(q, desde, hasta) {
   // eslint-disable-next-line no-console
   console.time('callRove')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
-    const ruta = `${SERVER}/Pages/Rove/Routes/traer_rove.php?${rax}`
+    const ruta = `${SERVER}/Routes/index.php`
     const requestBody = {
-      q: sql,
+      q,
       desde,
       hasta,
+      rax,
+      ruta: '/callRove',
     }
     const datos = JSON.stringify(requestBody)
     // console.log(datos)
@@ -19,7 +21,7 @@ export default function callRove(sql, desde, hasta) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Origin': '*',
       },
       body: datos,
     })

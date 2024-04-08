@@ -165,54 +165,55 @@ function detectarPhoto(valor, nombreControl, fila) {
 function detectarImagenes(fila, imagenes) {
   try {
     const { plant } = desencriptar(sessionStorage.getItem('user'))
+    if (imagenes) {
+      let cadenaJSON = imagenes
+      cadenaJSON = cadenaJSON.replace(/fileName/g, '"fileName"')
+      cadenaJSON = cadenaJSON.replace(/extension/g, '"extension"')
+      cadenaJSON = cadenaJSON.replace(
+        /("fileName": \[.*?\])\s?("extension": \[.*?\])/,
+        '$1, $2'
+      )
+      cadenaJSON = cadenaJSON.replace(/(\w+):/g, '"$1":')
+      const objeto = JSON.parse(`{${cadenaJSON}}`)
+      const cantidadDeImagenes = objeto.fileName.length
+      const rutaBase = `../../../../assets/Imagenes/${plant}/`
+      const ul = document.createElement('ul')
+      ul.style.listStyle = 'none'
+      ul.style.display = 'flex'
+      var contenidoFilaUnido = 'oooo'
+      for (let i = 1; i <= 5; i++) {
+        contenidoFilaUnido += ''
+      }
+      var nuevaCelda = document.createElement('td')
+      const div = document.createElement('div')
+      div.style.display = 'flex'
+      div.style.alignItems = 'center'
+      div.style.justifyContent = 'center'
+      div.style.flexDirection = 'row'
+      nuevaCelda.colSpan = 5
+      for (let i = 1; i <= 5; i++) {
+        fila.deleteCell(0)
+      }
+      // eslint-disable-next-line no-plusplus
+      for (let n = 0; n < cantidadDeImagenes; n++) {
+        const src = objeto.fileName[n]
+        const extension = objeto.extension[n]
+        const li = document.createElement('li')
+        const img = document.createElement('img')
+        img.src = `${rutaBase}${src}`
+        img.alt = ''
+        img.width = 20
+        img.height = 20
+        li.style.marginRight = '5px'
+        li.appendChild(img)
+        ul.appendChild(li)
+      }
+      div.appendChild(ul)
+      nuevaCelda.appendChild(div)
+      fila.insertBefore(nuevaCelda, fila.cells[0])
 
-    let cadenaJSON = imagenes
-    cadenaJSON = cadenaJSON.replace(/fileName/g, '"fileName"')
-    cadenaJSON = cadenaJSON.replace(/extension/g, '"extension"')
-    cadenaJSON = cadenaJSON.replace(
-      /("fileName": \[.*?\])\s?("extension": \[.*?\])/,
-      '$1, $2'
-    )
-    cadenaJSON = cadenaJSON.replace(/(\w+):/g, '"$1":')
-    const objeto = JSON.parse(`{${cadenaJSON}}`)
-    const cantidadDeImagenes = objeto.fileName.length
-    const rutaBase = `../../../../assets/Imagenes/${plant}/`
-    const ul = document.createElement('ul')
-    ul.style.listStyle = 'none'
-    ul.style.display = 'flex'
-    var contenidoFilaUnido = 'oooo'
-    for (let i = 1; i <= 5; i++) {
-      contenidoFilaUnido += ''
+      nuevaCelda.style.borderBottom = '1px solid #cecece'
     }
-    var nuevaCelda = document.createElement('td')
-    const div = document.createElement('div')
-    div.style.display = 'flex'
-    div.style.alignItems = 'center'
-    div.style.justifyContent = 'center'
-    div.style.flexDirection = 'row'
-    nuevaCelda.colSpan = 5
-    for (let i = 1; i <= 5; i++) {
-      fila.deleteCell(0)
-    }
-    // eslint-disable-next-line no-plusplus
-    for (let n = 0; n < cantidadDeImagenes; n++) {
-      const src = objeto.fileName[n]
-      const extension = objeto.extension[n]
-      const li = document.createElement('li')
-      const img = document.createElement('img')
-      img.src = `${rutaBase}${src}`
-      img.alt = ''
-      img.width = 20
-      img.height = 20
-      li.style.marginRight = '5px'
-      li.appendChild(img)
-      ul.appendChild(li)
-    }
-    div.appendChild(ul)
-    nuevaCelda.appendChild(div)
-    fila.insertBefore(nuevaCelda, fila.cells[0])
-
-    nuevaCelda.style.borderBottom = '1px solid #cecece'
   } catch (error) {
     console.log(error)
   }
@@ -376,8 +377,8 @@ async function viewer(array, objTranslate) {
   const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
   const { control_N, control_T } = control
   const nuxpedido = array[1]
-  const traerControl = await traerRegistros(`NuevoControl,${control_N}`)
-  const traerNuxpedido = await traerRegistros(`ctrlCargado,${nuxpedido}`)
+  const traerControl = await traerRegistros(`NuevoControl,${control_N}`, null)
+  const traerNuxpedido = await traerRegistros(`ctrlCargado,${nuxpedido}`, null)
   const miAlerta = new Alerta()
   miAlerta.createMenuListControls(
     arrayGlobal.tablaEnModal,

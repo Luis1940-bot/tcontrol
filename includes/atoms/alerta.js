@@ -1331,7 +1331,7 @@ function estilosTbodyCell(
 }
 
 async function handleClickEnlace(dato) {
-  const control = await traerRegistros(`controlNT,${dato}`)
+  const control = await traerRegistros(`controlNT,${dato}`, null)
   const control_N = control[0][0]
   const control_T = control[0][1]
   let contenido = {

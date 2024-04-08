@@ -22,6 +22,12 @@ session_set_cookie_params(
 // Inicia la sesión de PHP
 session_start();
 
+  // if (!isset($_SESSION['login_sso']['email'] )) {
+  //     header("Location: login.php");
+  //     exit; 
+  // }
+
+
 
 // Verifica si la solicitud se está realizando en localhost
 $host = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
@@ -80,11 +86,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/traerRegistros':
             include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/traerRegistros.php';
             break;
+        case '/traerControles':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Controles/Routes/traerRegistros.php';
+            break;
+        case '/callProcedure':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ConsultasViews/Routes/callProcedure.php';
+            break;
+        case '/callRove':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Rove/Routes/traer_rove.php';
+            break;
+        case '/alertaRove':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ControlsView/Routes/traerRegistros.php';
+            break;
+        case '/traerFirma':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/supervisores.php';
+            break;
+        case '/traerFirma':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/traerSupervisor.php';
+            break;
+         case '/ex2024':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ControlsView/Routes/eliminaRegistro.php';
+            break;
+          case '/traerCargados':
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ControlsView/Routes/traerRegistros.php';
+            break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada
             http_response_code(404); // No encontrado
             echo 'Página no encontrada';
+            break;
     }
 } else {
     // Ruta no permitida

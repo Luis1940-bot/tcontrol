@@ -1,20 +1,23 @@
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = '../../../..'
 
-export default function callProcedure(sql, desde, hasta, operation) {
+export default function callProcedure(q, desde, hasta, operation) {
   // eslint-disable-next-line no-console
   console.time('callProcedure')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
-    const ruta = `${SERVER}/Pages/ConsultasViews/Routes/callProcedure.php?${rax}`
+    // const ruta = `${SERVER}/Pages/ConsultasViews/Routes/callProcedure.php?${rax}`
+    const ruta = `${SERVER}/Routes/index.php`
     const requestBody = {
-      q: sql,
+      q,
       desde,
       hasta,
       operation,
+      ruta: '/callProcedure',
+      rax,
     }
     const datos = JSON.stringify(requestBody)
-    console.log(datos)
+    // console.log(datos)
     fetch(ruta, {
       method: 'POST',
       headers: {

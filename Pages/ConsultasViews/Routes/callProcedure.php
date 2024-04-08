@@ -1,10 +1,13 @@
 <?php
 mb_internal_encoding('UTF-8');
+// if (!isset($_SESSION['login_sso']['email'] )) {
+//     unset($_SESSION['login_sso']['email'] ); 
+// }
 
 function consultar($call, $desde, $hasta, $operation)
 {
-
-    include_once '../../../Routes/datos_base.php';
+     include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+    // include_once '../../../Routes/datos_base.php';
     // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
     try {

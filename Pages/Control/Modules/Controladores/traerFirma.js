@@ -5,14 +5,22 @@ export default function traerFirma(pss) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
-    const pass = encodeURIComponent(pss)
-    const ruta = `${SERVER}/Pages/Control/Routes/supervisores.php?q=${pass}${rax}`
+    let obj = {
+      q: pss,
+      ruta: '/traerFirma',
+      rax,
+    }
+    const datos = JSON.stringify(obj)
+    // const pass = encodeURIComponent(pss)
+    // const ruta = `${SERVER}/Pages/Control/Routes/supervisores.php?q=${pass}${rax}`
+    const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
+      body: datos,
     })
       .then((res) => {
         if (!res.ok) {

@@ -39,11 +39,12 @@ async function cargaDeRegistros(objTranslate, control) {
     whereUs.appendChild(textoAdicional)
     let reportes
     desde === undefined || hasta === undefined
-      ? (reportes = await traerRegistros(`traerControles,${control_N}`))
+      ? (reportes = await traerRegistros(`traerControles,${control_N}`, null))
       : null
     desde !== undefined || hasta !== undefined
       ? (reportes = await traerRegistros(
-          `traerControlesFechas,${control_N},${desde},${hasta}`
+          `traerControlesFechas,${control_N},${desde},${hasta}`,
+          null
         ))
       : null
 

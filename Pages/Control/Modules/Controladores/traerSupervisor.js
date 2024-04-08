@@ -5,15 +5,23 @@ export default function traerSupervisor(idSupervisor) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
-    const id = encodeURIComponent(idSupervisor)
-    const ruta = `${SERVER}/Pages/Control/Routes/traerSupervisor.php?q=${id}${rax}`
-
+    // const id = encodeURIComponent(idSupervisor)
+    let obj = {
+      q: idSupervisor,
+      ruta: '/traerSupervisor',
+      rax,
+      sql_i: null,
+    }
+    const datos = JSON.stringify(obj)
+    // const ruta = `${SERVER}/Pages/Control/Routes/traerSupervisor.php?q=${id}${rax}`
+    const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
+      body: datos,
     })
       .then((res) => {
         if (!res.ok) {

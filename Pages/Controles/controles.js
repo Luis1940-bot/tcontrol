@@ -290,7 +290,10 @@ const buscaDoc = document.getElementById('imgDoc')
 buscaDoc.addEventListener('click', async () => {
   let documento = document.getElementById('doc').value
   if (!isNaN(documento)) {
-    const array = await traerRegistros(`verificarControl,${documento.trim()}`)
+    const array = await traerRegistros(
+      `verificarControl,${documento.trim()}`,
+      null
+    )
     if (array.length > 0) {
       let contenido = {
         control_N: array[0][0],

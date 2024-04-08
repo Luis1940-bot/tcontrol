@@ -1,12 +1,10 @@
 <?php
   // header('Content-Type: text/html;charset=utf-8');
   // session_start();
-  if (!isset($_SESSION['factum_validation']['email'] )) {
-      unset($_SESSION['factum_validation']['email'] ); 
-  }
+  // if (!isset($_SESSION['login_sso']['email'] )) {
+  //     unset($_SESSION['login_sso']['email'] ); 
+  // }
 
-        // $variable=$_GET['q'];
-        // $new=$_GET['new'];   
         $sql='';
         
         function traer($q, $sql_i) {
@@ -102,7 +100,7 @@
                   
                   // include_once '../../../Routes/datos_base.php';
                   include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
-                  $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
+                  // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
                   try {
                 

@@ -104,7 +104,7 @@ function createSpan(config, text) {
 
 async function handleClickEnlace(dato) {
   const { rove } = desencriptar(sessionStorage.getItem('contenido'))
-  const control = await traerRegistros(`controlNT,${dato}`)
+  const control = await traerRegistros(`controlNT,${dato}`, null)
   const control_N = control[0][0]
   const control_T = control[0][1]
   let contenido = {
