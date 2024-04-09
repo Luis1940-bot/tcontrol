@@ -1,10 +1,10 @@
-# Habilita el seguimiento de enlaces simbólicos
+# Habilita el seguimiento de enlaces simbï¿½licos
 Options +FollowSymLinks
 
 # Habilita el motor de reescritura
 RewriteEngine On
 
-# Redirige las solicitudes a datos.php, pasando la parte de la URL como el parámetro urlUser
+# Redirige las solicitudes a datos.php, pasando la parte de la URL como el parï¿½metro urlUser
 RewriteRule ^([a-z0-9\-_]+)$ datos.php?urlUser=$1 [QSA]
 
 # Si el archivo o directorio solicitado no existe, redirige a page404.php
@@ -15,7 +15,7 @@ RewriteRule ^([a-z0-9\-_]+)$ page404.php [L]
 # Redirige cualquier otra solicitud a index.php
 RewriteRule ^(.*)$ index.php [L,QSA]
 
-# Establece index.php como el archivo de índice predeterminado
+# Establece index.php como el archivo de ï¿½ndice predeterminado
 DirectoryIndex index.php
 
 # Si la solicitud se hace por HTTP, redirige a HTTPS

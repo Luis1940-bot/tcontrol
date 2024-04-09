@@ -142,6 +142,7 @@ function session(session) {
     div.appendChild(span)
     let input = document.getElementById('idInput0')
     input.style.color = '#f81212'
+    input.setAttribute('autocomplete ', 'email')
     input = document.getElementById('idInput1')
     input.style.color = '#f81212'
     let select = document.getElementById('idSelectLogin')
@@ -150,7 +151,7 @@ function session(session) {
     let parsedData = encriptar(session)
     sessionStorage.setItem('user', parsedData)
     setTimeout(() => {
-      window.location.href = `${SERVER}/Pages/Home/`
+      window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=home`
     }, 1000)
   }
 }
@@ -256,6 +257,7 @@ function configPHP(json, idioma) {
           )
           let label = createLabel(params)
           div.appendChild(label)
+          //*----------------------------------
           const nombresPlantas = plantas.map((planta) => [
             planta.num,
             planta.name,
@@ -272,6 +274,7 @@ function configPHP(json, idioma) {
           )
           const select = createSelect(nombresPlantas, params)
           div.appendChild(select)
+          //*------------------------------------
         }
         if (key === 'input') {
           elements.input.forEach((element, index) => {

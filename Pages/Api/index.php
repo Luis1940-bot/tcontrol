@@ -46,12 +46,12 @@ function consultar($call, $desde, $hasta)
 }
 
 header("Content-Type: application/json; charset=utf-8");
-session_start();
+// session_start();
 
-if (!isset($_SESSION['login_sso']['email'])) {
-    header("Location: login.php");
-    exit;
-}
+// if (!isset($_SESSION['login_sso']['email'])) {
+//     header("Location: login.php");
+//     exit;
+// }
 $http_host = $_SERVER['HTTP_HOST'];
 $url = htmlentities($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], ENT_QUOTES, 'UTF-8');
 $read_url = explode('/', $url);

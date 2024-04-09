@@ -326,7 +326,7 @@ const objAlertaAceptarCancelar = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -435,7 +435,7 @@ const avisoVerde = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#ffffff',
     marginTop: '0px',
     display: 'block',
@@ -508,7 +508,7 @@ const avisoAmarillo = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#ffffff',
     marginTop: '0px',
     display: 'block',
@@ -581,7 +581,7 @@ const avisoImagenes = {
   close: {
     id: 'idClose',
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#ffffff',
     marginTop: '0px',
     display: 'block',
@@ -654,7 +654,7 @@ const avisoRojo = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#ffffff',
     marginTop: null, // '0px',
     display: 'block',
@@ -727,7 +727,7 @@ const avisoCargandoControl = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#ffffff',
     marginTop: '0px',
     display: 'none',
@@ -846,7 +846,7 @@ const objPerson = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -1009,7 +1009,7 @@ const objMenu = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -1147,7 +1147,7 @@ const objMenu = {
     fontStyle: null,
   },
   salir: {
-    text: 'Salir',
+    text: 'Volver',
     id: 'idSalir',
     fontSize: '14px',
     fontColor: '#212121',
@@ -1417,7 +1417,7 @@ const objMenuCView = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -1813,7 +1813,7 @@ const objInforme = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -1983,7 +1983,7 @@ const procesoExitoso = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#ffffff',
     marginTop: '0px',
     display: 'block',
@@ -2100,7 +2100,7 @@ const modalImagen = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -2170,7 +2170,7 @@ const avisoListandoControles = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#ffffff',
     marginTop: '0px',
     display: 'none',
@@ -2448,7 +2448,7 @@ const objAlertaViewer = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -2474,7 +2474,7 @@ const tablaEnModal = {
   close: {
     id: 'idCloseModal',
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -2622,7 +2622,7 @@ const porFechaEnModal = {
   close: {
     id: 'idCloseModalFecha',
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',
@@ -2863,7 +2863,7 @@ const objMenuRove = {
   close: {
     id: null,
     text: 'x ',
-    fontSize: '18px',
+    fontSize: '24px',
     fontColor: '#cecece',
     marginTop: '0px',
     display: 'block',

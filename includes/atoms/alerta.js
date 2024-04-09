@@ -505,7 +505,8 @@ const funcionHacerFirmar = () => {
   procesoStyleDisplay(elementosStyle)
 }
 const funcionSalir = () => {
-  window.close()
+  // window.close()
+  window.history.back()
 }
 
 const funcionExportarExcel = () => {
@@ -1858,7 +1859,7 @@ class Alerta {
 
     obj.hr.id = 'idHrGuardar'
     let hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin guardar
 
     //! guardar cambio
@@ -1875,7 +1876,7 @@ class Alerta {
 
     obj.hr.id = 'idHrGuardarCambio'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin guardar cambio
 
     //! guardar como nuevo
@@ -1893,7 +1894,7 @@ class Alerta {
 
     obj.hr.id = 'idHrGuardarComoNuevo'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin guaradr como nuevo
 
     //! firmar
@@ -1922,7 +1923,7 @@ class Alerta {
 
     obj.hr.id = 'idHrFirmar'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     obj.divCajita.hoverBackground = '#cecece'
     obj.divCajita.hoverColor = '#cecece'
     obj.divCajita.cursor = 'pointer'
@@ -1942,7 +1943,7 @@ class Alerta {
 
     obj.hr.id = 'idHrRefresh'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin refrescar
 
     //! salir
@@ -1959,7 +1960,7 @@ class Alerta {
 
     obj.hr.id = 'idHrSalir'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin salir
 
     texto = trO(obj.mensaje1.text, objTranslate) || obj.mensaje1.text

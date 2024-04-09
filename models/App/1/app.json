@@ -30,8 +30,8 @@
       "name": ["TONELADAS", "ROVE", "DWT"],
       "type": ["ctrl", "ctrl", "btn"],
       "ruta": [
-        "Control/index.php?control_N=268&control_T=TONELADAS%20ESPECIALIDADES&nr=0",
-        "Rove/index.php?rove=especialidades",
+        "control_N=268&control_T=TONELADAS%20ESPECIALIDADES&nr=0",
+        "rove/especialidades",
         ""
       ],
       "nivel": [1, 1, 1],
@@ -44,9 +44,9 @@
           "name": ["DWT CHANGE OVER", "DWT DEFROST", "DWT ESTRATEGIA LR"],
           "type": ["ctrl", "ctrl", "ctrl"],
           "ruta": [
-            "Control/index.php?control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0",
-            "Control/index.php?control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0",
-            "Control/index.php?control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0"
+            "control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0",
+            "control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0",
+            "control_N=141&control_T=DWT%20ESPECIALIDADES%20PLANEADO&nr=0"
           ],
           "nivel": [1, 1, 1]
         },
@@ -61,10 +61,10 @@
           "type": ["btn", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "",
-            "Control/index.php?control_N=281&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20MANTENIMIENTO%20MECÁNICO&nr=0",
-            "Control/index.php?control_N=269&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20AGRO&nr=0",
-            "Control/index.php?control_N=270&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20CORRELACIÓN %20RAW%20VS%20LÍNEA&nr=0",
-            "Control/index.php?control_N=160&control_T=DWT%20ESPECIALIDAD%20NO%20PLANIFICADO%20OTROS&nr=0"
+            "control_N=281&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20MANTENIMIENTO%20MECÁNICO&nr=0",
+            "control_N=269&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20AGRO&nr=0",
+            "control_N=270&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20CORRELACIÓN %20RAW%20VS%20LÍNEA&nr=0",
+            "control_N=160&control_T=DWT%20ESPECIALIDAD%20NO%20PLANIFICADO%20OTROS&nr=0"
           ],
           "nivel": [1, 1, 1, 1, 1],
           "DWT PRODUCCIÓN": {
@@ -99,19 +99,19 @@
               "ctrl"
             ],
             "ruta": [
-              "Control/index.php?control_N=142&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN&nr=0",
-              "Control/index.php?control_N=275&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0",
-              "Control/index.php?control_N=146&control_T=DWT%20ESPECIALIDADES%20NO%20PLANIFICADO%20PRODUCCIÓN%20COOLER&nr=0",
-              "Control/index.php?control_N=145&control_T=DWT%20ESPECIALIDADES%20NO%20PLANIFICADO%20PRODUCCIÓN%20BLANCHER&nr=0",
-              "Control/index.php?control_N=276&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
-              "Control/index.php?control_N=277&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
-              "Control/index.php?control_N=278&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
-              "Control/index.php?control_N=279&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
-              "Control/index.php?control_N=280&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
-              "Control/index.php?control_N=225&control_T=DWT%20NO%20PLANEADO%20PRODUCCIÓN%20COLDSTORE&nr=0",
-              "Control/index.php?control_N=272&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
-              "Control/index.php?control_N=273&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
-              "Control/index.php?control_N=274&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0"
+              "control_N=142&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN&nr=0",
+              "control_N=275&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0",
+              "control_N=146&control_T=DWT%20ESPECIALIDADES%20NO%20PLANIFICADO%20PRODUCCIÓN%20COOLER&nr=0",
+              "control_N=145&control_T=DWT%20ESPECIALIDADES%20NO%20PLANIFICADO%20PRODUCCIÓN%20BLANCHER&nr=0",
+              "control_N=276&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
+              "control_N=277&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
+              "control_N=278&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
+              "control_N=279&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
+              "control_N=280&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
+              "control_N=225&control_T=DWT%20NO%20PLANEADO%20PRODUCCIÓN%20COLDSTORE&nr=0",
+              "control_N=272&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
+              "control_N=273&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
+              "control_N=274&control_T=DWT%20ESPECIALIDADES%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0"
             ],
             "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
           }
@@ -121,19 +121,15 @@
     "BOS - Reglas de Oro": {
       "name": ["BOS ACTO SEGURO", "BOS ACTO NO SEGURO", "REGLAS DE ORO"],
       "type": ["btn", "btn", "ctrl"],
-      "ruta": [
-        "",
-        "",
-        "Control/index.php?control_N=124&control_T=BOS%20REGLAS%20DE%20ORO&nr=0"
-      ],
+      "ruta": ["", "", "control_N=124&control_T=BOS%20REGLAS%20DE%20ORO&nr=0"],
       "nivel": [1, 1, 1],
       "BOS ACTO SEGURO": {
         "name": ["BOS CALIDAD", "BOS MEDIO AMBIENTE", "BOS SEGURIDAD"],
         "type": ["ctrl", "ctrl", "ctrl"],
         "ruta": [
-          "Control/index.php?control_N=121&control_T=BOS%20CALIDAD%20AS&nr=0",
-          "Control/index.php?control_N=123&control_T=BOS%20MEDIO%20AMBIENTE%20AS&nr=0",
-          "Control/index.php?control_N=119&control_T=BOS%20SEGURIDAD%20AS&nr=0"
+          "control_N=121&control_T=BOS%20CALIDAD%20AS&nr=0",
+          "control_N=123&control_T=BOS%20MEDIO%20AMBIENTE%20AS&nr=0",
+          "control_N=119&control_T=BOS%20SEGURIDAD%20AS&nr=0"
         ],
         "nivel": [1, 1, 1]
       },
@@ -145,9 +141,9 @@
         ],
         "type": ["ctrl", "ctrl", "ctrl"],
         "ruta": [
-          "Control/index.php?control_N=300&control_T=BOS%20CALIDAD%20ANS&nr=0",
-          "Control/index.php?control_N=301&control_T=BOS%20MEDIO%20AMBIENTE%20ANS&nr=0",
-          "Control/index.php?control_N=302&control_T=BOS%20SEGURIDAD%20ANS&nr=0"
+          "control_N=300&control_T=BOS%20CALIDAD%20ANS&nr=0",
+          "control_N=301&control_T=BOS%20MEDIO%20AMBIENTE%20ANS&nr=0",
+          "control_N=302&control_T=BOS%20SEGURIDAD%20ANS&nr=0"
         ],
         "nivel": [1, 1, 1]
       }
@@ -155,13 +151,13 @@
     "FFL1": {
       "name": ["ROVE FFL1", "DWT FFL1"],
       "type": ["ctrl", "btn"],
-      "ruta": ["Rove/index.php?rove=fritas_L1", ""],
+      "ruta": ["rove/fritas_L1", ""],
       "nivel": [1, 1],
       "DWT FFL1": {
         "name": ["DWT PLANEADO FFL1", "DWT NO PLANEADO FFL1"],
         "type": ["ctrl", "btn"],
         "ruta": [
-          "Control/index.php?control_N=232&control_T=DWT%20FRITAS%20L1%20PLANEADO&nr=0",
+          "control_N=232&control_T=DWT%20FRITAS%20L1%20PLANEADO&nr=0",
           ""
         ],
         "nivel": [1, 1],
@@ -175,11 +171,11 @@
           ],
           "type": ["ctrl", "ctrl", "ctrl", "btn", "ctrl"],
           "ruta": [
-            "Control/index.php?control_N=233&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20AGRO&nr=0",
-            "Control/index.php?control_N=234&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20CORRELACIÓN%20RAW%20vs%20LÍNEA&nr=0",
-            "Control/index.php?control_N=235&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20OTROS&nr=0",
+            "control_N=233&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20AGRO&nr=0",
+            "control_N=234&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20CORRELACIÓN%20RAW%20vs%20LÍNEA&nr=0",
+            "control_N=235&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20OTROS&nr=0",
             "",
-            "Control/index.php?control_N=263&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20MANTENIMIENTO%20MECÁNICO&nr=0"
+            "control_N=263&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20MANTENIMIENTO%20MECÁNICO&nr=0"
           ],
           "nivel": [1, 1, 1, 1, 1],
           "DWT PRODUCCIÓN FFL1": {
@@ -214,19 +210,19 @@
               "ctrl"
             ],
             "ruta": [
-              "Control/index.php?control_N=236&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
-              "Control/index.php?control_N=237&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
-              "Control/index.php?control_N=238&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0",
-              "Control/index.php?control_N=239&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PELADORAS&nr=0",
-              "Control/index.php?control_N=240&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0",
-              "Control/index.php?control_N=241&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20SORTER&nr=0",
-              "Control/index.php?control_N=242&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
-              "Control/index.php?control_N=257&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
-              "Control/index.php?control_N=258&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
-              "Control/index.php?control_N=259&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
-              "Control/index.php?control_N=260&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
+              "control_N=236&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
+              "control_N=237&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
+              "control_N=238&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0",
+              "control_N=239&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PELADORAS&nr=0",
+              "control_N=240&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0",
+              "control_N=241&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20SORTER&nr=0",
+              "control_N=242&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
+              "control_N=257&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
+              "control_N=258&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
+              "control_N=259&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
+              "control_N=260&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
               "Control/index.php?control_N=261&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20RECLAIM&nr=0",
-              "Control/index.php?control_N=225&control_T=DWT%20FRITAS%20NO%20PLANEADO%20PRODUCCIÓN%20COLDSTORE&nr=0"
+              "control_N=225&control_T=DWT%20FRITAS%20NO%20PLANEADO%20PRODUCCIÓN%20COLDSTORE&nr=0"
             ],
             "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
           }
@@ -236,13 +232,13 @@
     "FFL2": {
       "name": ["ROVE FFL2", "DWT FFL2"],
       "type": ["ctrl", "btn"],
-      "ruta": ["Rove/index.php?rove=fritas_L2", ""],
+      "ruta": ["rove/fritas_L2", ""],
       "nivel": [1, 1],
       "DWT FFL2": {
         "name": ["DWT PLANEADO FFL2", "DWT NO PLANEADO FFL2"],
         "type": ["ctrl", "btn"],
         "ruta": [
-          "Control/index.php?control_N=195&control_T=DWT%20FRITAS%20L2%20PLANEADO&nr=0",
+          "control_N=195&control_T=DWT%20FRITAS%20L2%20PLANEADO&nr=0",
           ""
         ],
         "nivel": [1, 1],
@@ -256,11 +252,11 @@
           ],
           "type": ["ctrl", "ctrl", "ctrl", "btn", "ctrl"],
           "ruta": [
-            "Control/index.php?control_N=196&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20AGRO&nr=0",
-            "Control/index.php?control_N=197&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20CORRELACIÓN%20RAW%20vs%20LÍNEA&nr=0",
-            "Control/index.php?control_N=198&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20OTROS&nr=0",
+            "control_N=196&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20AGRO&nr=0",
+            "control_N=197&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20CORRELACIÓN%20RAW%20vs%20LÍNEA&nr=0",
+            "control_N=198&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20OTROS&nr=0",
             "",
-            "Control/index.php?control_N=226&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20MANTENIMIENTO%20MECÁNICO&nr=0"
+            "control_N=226&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20MANTENIMIENTO%20MECÁNICO&nr=0"
           ],
           "nivel": [1, 1, 1, 1, 1],
           "DWT PRODUCCIÓN FFL2": {
@@ -299,23 +295,23 @@
               "ctrl"
             ],
             "ruta": [
-              "Control/index.php?control_N=199&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
-              "Control/index.php?control_N=200&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
-              "Control/index.php?control_N=201&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0",
-              "Control/index.php?control_N=206&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PELADORAS&nr=0",
-              "Control/index.php?control_N=207&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0",
-              "Control/index.php?control_N=208&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20SORTER&nr=0",
-              "Control/index.php?control_N=209&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
-              "Control/index.php?control_N=210&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20DEPÓSITO%20BATTER&nr=0",
-              "Control/index.php?control_N=211&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PLANTA%20DE%20ALMIDÓN&nr=0",
-              "Control/index.php?control_N=212&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20SALA%20DE%20TANQUES%20DE%20ACEITE&nr=0",
-              "Control/index.php?control_N=213&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20ECOLAB&nr=0",
-              "Control/index.php?control_N=220&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
-              "Control/index.php?control_N=221&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
-              "Control/index.php?control_N=222&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
-              "Control/index.php?control_N=223&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
-              "Control/index.php?control_N=224&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20RECLAIM&nr=0",
-              "Control/index.php?control_N=225&control_T=DWT%20FRITAS%20NO%20PLANEADO%20PRODUCCIÓN%20COLDSTORE&nr=0"
+              "control_N=199&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
+              "control_N=200&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
+              "control_N=201&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0",
+              "control_N=206&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PELADORAS&nr=0",
+              "control_N=207&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0",
+              "control_N=208&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20SORTER&nr=0",
+              "control_N=209&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
+              "control_N=210&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20DEPÓSITO%20BATTER&nr=0",
+              "control_N=211&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PLANTA%20DE%20ALMIDÓN&nr=0",
+              "control_N=212&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20SALA%20DE%20TANQUES%20DE%20ACEITE&nr=0",
+              "control_N=213&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20ECOLAB&nr=0",
+              "control_N=220&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
+              "control_N=221&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
+              "control_N=222&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
+              "control_N=223&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
+              "control_N=224&control_T=DWT%20FRITAS%20L2%20NO%20PLANEADO%20PRODUCCIÓN%20RECLAIM&nr=0",
+              "control_N=225&control_T=DWT%20FRITAS%20NO%20PLANEADO%20PRODUCCIÓN%20COLDSTORE&nr=0"
             ],
             "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
           }
@@ -325,15 +321,12 @@
     "Puré": {
       "name": ["ROVE PURÉ", "DWT PURÉ"],
       "type": ["ctrl", "btn"],
-      "ruta": ["Rove/index.php?rove=pure", ""],
+      "ruta": ["rove/pure", ""],
       "nivel": [1, 1],
       "DWT PURÉ": {
         "name": ["DWT PLANEADO PURÉ", "DWT NO PLANEADO PURÉ"],
         "type": ["ctrl", "btn"],
-        "ruta": [
-          "Control/index.php?control_N=268&control_T=DWT%20PURÉ%20PLANEADO&nr=0",
-          ""
-        ],
+        "ruta": ["control_N=268&control_T=DWT%20PURÉ%20PLANEADO&nr=0", ""],
         "nivel": [1, 1],
         "DWT NO PLANEADO PURÉ": {
           "name": [
@@ -345,9 +338,9 @@
           "type": ["btn", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "",
-            "Control/index.php?control_N=291&control_T=DWT%20PURÉ%20NO%20PLANEADO%20MANTENIMIENTO&nr=0",
-            "Control/index.php?control_N=287&control_T=DWT%20PURÉ%20NO%20PLANEADO%20CORTE&nr=0",
-            "Control/index.php?control_N=271&control_T=DWT%20PURÉ%20NO%20PLANEADO%20OTROS&nr=0"
+            "control_N=291&control_T=DWT%20PURÉ%20NO%20PLANEADO%20MANTENIMIENTO&nr=0",
+            "control_N=287&control_T=DWT%20PURÉ%20NO%20PLANEADO%20CORTE&nr=0",
+            "control_N=271&control_T=DWT%20PURÉ%20NO%20PLANEADO%20OTROS&nr=0"
           ],
           "nivel": [1, 1, 1, 1],
           "DWT PRODUCCIÓN PURÉ": {
@@ -362,13 +355,13 @@
             ],
             "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
             "ruta": [
-              "Control/index.php?control_N=216&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20PELADO%20Y%20CORTE&nr=0",
-              "Control/index.php?control_N=275&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
-              "Control/index.php?control_N=146&control_T=DWT%20PURÉ%20NO%20PLANIFICADO%20PRODUCCIÓN%20EMPAQUE%20E%20INSPECCIÓN&nr=0",
-              "Control/index.php?control_N=145&control_T=DWT%20PURÉ%20NO%20PLANIFICADO%20PRODUCCIÓN%20EX%20MATA/INSUMOS&nr=0",
-              "Control/index.php?control_N=276&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
-              "Control/index.php?control_N=277&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
-              "Control/index.php?control_N=278&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0"
+              "control_N=216&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20PELADO%20Y%20CORTE&nr=0",
+              "control_N=275&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20PROCESO&nr=0",
+              "control_N=146&control_T=DWT%20PURÉ%20NO%20PLANIFICADO%20PRODUCCIÓN%20EMPAQUE%20E%20INSPECCIÓN&nr=0",
+              "control_N=145&control_T=DWT%20PURÉ%20NO%20PLANIFICADO%20PRODUCCIÓN%20EX%20MATA/INSUMOS&nr=0",
+              "control_N=276&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
+              "control_N=277&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20WET%20RECEIVING&nr=0",
+              "control_N=278&control_T=DWT%20PURÉ%20NO%20PLANEADO%20PRODUCCIÓN%20WASTE&nr=0"
             ],
             "nivel": [1, 1, 1, 1, 1, 1, 1]
           }

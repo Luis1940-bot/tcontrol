@@ -8,9 +8,13 @@ header('Content-Type: text/html;charset=utf-8');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-if (!isset($_SESSION['factum_validation'])) {
-    include_once "./Pages/Session/session.php";
-}
+
+
+ if (!isset($_SESSION['login_sso']['email'] )) {
+      unset($_SESSION['login_sso']['email'] ); 
+      header("Location: /");
+    exit;
+  }
 
 ?>
 

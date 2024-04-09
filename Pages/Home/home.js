@@ -22,6 +22,9 @@ import { encriptar, desencriptar } from '../../controllers/cript.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
 
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '../..'
+
 let translateOperativo = []
 let espanolOperativo = []
 const objTranslate = {
@@ -151,24 +154,38 @@ function completaButtons(obj) {
 
 function llamarCtrl(control) {
   try {
-    // console.log(control)
+    const primeraBarraIndex = control.indexOf('/')
+    let tipoDeArchivo = control.substring(0, primeraBarraIndex)
+    let tipoDeRove = control.substring(primeraBarraIndex + 1)
+    let timestamp = new Date().getTime()
     let url = ''
+    let ruta = ''
     let tipoUrl = true
     if (!control) {
-      url = `../../404.php`
-    } else {
-      url = `../../Pages/${control}`
+      url = '404'
+      tipoUrl = false
     }
+
+    if (control && !tipoDeArchivo) {
+      url = `${SERVER}/Pages/Router/rutas.php?${control}`
+      tipoUrl = true
+    }
+    if (control && tipoDeArchivo !== '' && tipoDeArchivo === 'rove') {
+      url = `${SERVER}/Pages/Router/rutas.php?`
+      ruta = `${url}ruta=rove&rove=${tipoDeRove}?v=${timestamp}`
+      tipoUrl = false
+    }
+    if (control && tipoDeArchivo !== '' && tipoDeArchivo !== 'rove') {
+      url = `${SERVER}/Pages/Router/rutas.php?`
+      ruta = `${url}ruta=${control}?v=${timestamp}`
+      tipoUrl = false
+    }
+
     sessionStorage.setItem(
       'history_pages',
       encriptar(navegador.estadoAnteriorWhereUs)
     )
-    if (url.includes('?')) {
-      tipoUrl = true
-    } else {
-      tipoUrl = false
-    }
-    let ruta = ''
+
     if (tipoUrl) {
       const [subcadena, parametros] = url.split('?')
       const pares = parametros.split('&')
@@ -178,15 +195,15 @@ function llamarCtrl(control) {
         obj[clave] = decodeURIComponent(valor)
         return obj
       }, {})
+
       sessionStorage.setItem('contenido', encriptar(objeto))
-      // console.log(objeto)
-      ruta = `${subcadena}?v=${Math.round(Math.random() * 10)}`
+      ruta = `${subcadena}?ruta=control&${control}?v=${timestamp}`
     } else {
-      ruta = `${url}?v=${Math.round(Math.random() * 10)}`
       sessionStorage.setItem('contenido', encriptar('x'))
     }
-    // window.location.href = ruta
-    window.open(ruta, '_blank')
+    console.log(ruta)
+    window.location.href = ruta
+    // window.open(ruta, '_blank')
   } catch (error) {
     console.log(error)
   }

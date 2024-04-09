@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // session()
   setTimeout(() => {
     // window.location.href = `${SERVER}/Pages/Home/`
-    window.location.href = `${SERVER}/Pages/Login/`
+    // window.location.href = `${SERVER}/Pages/Login/`
+    window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=login`
   }, 1000)
 })
