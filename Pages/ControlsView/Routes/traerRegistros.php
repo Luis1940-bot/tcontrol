@@ -1,9 +1,5 @@
 <?php
-  // header('Content-Type: text/html;charset=utf-8');
-  // session_start();
-  // if (!isset($_SESSION['factum_validation']['email'] )) {
-  //     unset($_SESSION['factum_validation']['email'] ); 
-  // }
+
         $sql='';
         function traer($q, $sql_i) {
             // $variable=$_GET['q'];

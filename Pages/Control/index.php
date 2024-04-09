@@ -1,13 +1,13 @@
  <?php
 ob_start();
 header('Content-Type: text/html;charset=utf-8');
-// session_start();
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-if (!isset($_SESSION['factum_validation'])) {
-    include_once "./Pages/Session/session.php";
-}
+session_start();
+ if (!isset($_SESSION['login_sso']['email'] )) {
+      unset($_SESSION['login_sso']['email'] ); 
+      header("Location: /");
+    exit;
+  }
+
 
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 define('MODALS', ROOT_PATH.'/includes/molecules/modales');

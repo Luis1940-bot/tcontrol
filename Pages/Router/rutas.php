@@ -5,8 +5,9 @@ mb_internal_encoding('UTF-8');
 session_start();
  if (!isset($_SESSION['login_sso']['email'] )) {
       unset($_SESSION['login_sso']['email'] ); 
-  }
+      header("Location: /");
 
+  }
 // Verifica si la solicitud se está realizando en localhost
 $host = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
 

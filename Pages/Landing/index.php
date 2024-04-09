@@ -4,11 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 header('Content-Type: text/html;charset=utf-8');
-// session_start();
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
+session_start();
 
  if (!isset($_SESSION['login_sso']['email'] )) {
       unset($_SESSION['login_sso']['email'] ); 

@@ -3,9 +3,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-// if (!isset($_SESSION['factum_validation'])) {
-//     include_once "./Pages/Session/session.php";
-// }
+
 
 header('Content-Type: text/html;charset=utf-8');
 

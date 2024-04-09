@@ -1,15 +1,5 @@
 <?php
-  // header('Content-Type: text/html;charset=utf-8');
-  // session_start();
-  // mb_internal_encoding('UTF-8');
-  // if (!isset($_SESSION['login_sso']['email'] )) {
-  //     unset($_SESSION['login_sso']['email'] ); 
-  //     header("Location: /");
-  //   exit;
-  // }
 
-        // $variable=$_GET['q'];
-        // $new=$_GET['new'];   
         $sql='';
 
         function traer($q, $sql_i) {
