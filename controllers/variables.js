@@ -2932,7 +2932,7 @@ const objMenuRove = {
     fontStyle: null,
   },
   salir: {
-    text: 'Salir',
+    text: 'Volver',
     id: 'idSalir',
     fontSize: '14px',
     fontColor: '#212121',

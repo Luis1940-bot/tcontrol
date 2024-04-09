@@ -69,14 +69,14 @@
   }
   header {
     display: block;
-    height: 100px;
+    height: auto;
   }
   main {
     overflow-y: auto;
     height: auto;
   }
   .div-menu-buttons {
-    margin-top: 70px;
+    margin-top: 40px;
   }
   .button-selector-menu {
     width: 40%;

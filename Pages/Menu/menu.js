@@ -133,6 +133,7 @@ function dondeEstaEn() {
   lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
+  document.getElementById('volver').style.display = 'block'
 }
 
 function configPHP(user) {
@@ -205,4 +206,14 @@ const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
   const url = '../../Pages/Landing'
   window.location.href = url
+})
+
+function goBack() {
+  const url = '../../Pages/Home'
+  window.location.href = url
+}
+
+const volver = document.getElementById('volver')
+volver.addEventListener('click', () => {
+  goBack()
 })

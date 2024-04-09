@@ -7,6 +7,8 @@ import { desencriptar, encriptar } from '../../../controllers/cript.js'
 // eslint-disable-next-line import/extensions
 import traerRegistros from './Controladores/traerRegistros.js'
 
+const SERVER = '../../'
+
 let translateOperativo = []
 let espanolOperativo = []
 let translateArchivos = []
@@ -403,9 +405,11 @@ function abrirControl(nr) {
     }
     contenido = encriptar(contenido)
     sessionStorage.setItem('contenido', contenido)
-    const url = '../../../Pages/Control/index.php'
-    // window.location.href = url
-    window.open(url, '_blank')
+    // const url = '../../../Pages/Control/index.php'
+    let timestamp = new Date().getTime()
+    const url = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`
+    window.location.href = url
+    // window.open(url, '_blank')
   } catch (error) {
     console.log(error)
   }

@@ -1343,9 +1343,12 @@ async function handleClickEnlace(dato) {
   contenido = encriptar(contenido)
   sessionStorage.setItem('contenido', contenido)
 
-  const url = '../../Pages/Control/index.php'
-  const ruta = `${url}?v=${Math.round(Math.random() * 10)}`
-  window.open(ruta, '_blank')
+  // const url = '../../Pages/Control/index.php'
+  // const ruta = `${url}?v=${Math.round(Math.random() * 10)}`
+  // window.open(ruta, '_blank')
+  let timestamp = new Date().getTime()
+  const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`
+  window.location.href = ruta
 }
 
 function generarUrlParaEnlace(dato) {
@@ -2030,7 +2033,7 @@ class Alerta {
 
     obj.hr.id = 'idHrExcel'
     let hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin excel
 
     //! pdf
@@ -2047,7 +2050,7 @@ class Alerta {
 
     obj.hr.id = 'idHrPdf'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin pdf
 
     //! json
@@ -2065,7 +2068,7 @@ class Alerta {
 
     obj.hr.id = 'idHrJson'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin json
 
     //! api
@@ -2113,7 +2116,7 @@ class Alerta {
 
     obj.hr.id = 'idHrRefresh'
     hr = createHR(obj.hr)
-    modalContent.appendChild(hr)
+    // modalContent.appendChild(hr)
     //! fin refrescar
 
     //! salir
@@ -2229,17 +2232,18 @@ class Alerta {
           const cod = idTituloH3.getAttribute('data-index')
           const name = idTituloH3.getAttribute('data-name')
           const url = `${cod}`
-          const ruta = `../../Pages/Control/index.php?v=${Math.round(
-            Math.random() * 10
-          )}`
+
           const objetoRuta = {
             control_N: url,
             control_T: decodeURIComponent(name),
             nr: '0',
           }
           sessionStorage.setItem('contenido', encriptar(objetoRuta))
-          // window.location.href = ruta
-          window.open(ruta, '_blank')
+
+          let timestamp = new Date().getTime()
+          const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`
+          window.location.href = ruta
+          // window.open(ruta, '_blank')
         })
         const idbtnCargados = document.getElementById('idVerCargados')
         idbtnCargados.addEventListener('click', () => {
@@ -2247,15 +2251,18 @@ class Alerta {
           const cod = idTituloH3.getAttribute('data-index')
           const name = idTituloH3.getAttribute('data-name')
           const url = `${cod}`
-          const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
-            Math.random() * 10
-          )}`
+          let timestamp = new Date().getTime()
+          const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=controlView&v=${timestamp}`
+          // const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
+          //   Math.random() * 10
+          // )}`
           const objetoRuta = {
             control_N: url,
             control_T: decodeURIComponent(name),
             nr: '0',
           }
           sessionStorage.setItem('listadoCtrls', encriptar(objetoRuta))
+          // console.log(ruta)
           window.location.href = ruta
         })
         const idbtnCargadosPorFecha = document.getElementById(

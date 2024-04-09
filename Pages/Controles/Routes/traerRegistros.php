@@ -1,9 +1,11 @@
 <?php
   // header('Content-Type: text/html;charset=utf-8');
   // session_start();
-  mb_internal_encoding('UTF-8');
+  // mb_internal_encoding('UTF-8');
   // if (!isset($_SESSION['login_sso']['email'] )) {
   //     unset($_SESSION['login_sso']['email'] ); 
+  //     header("Location: /");
+  //   exit;
   // }
 
         // $variable=$_GET['q'];
@@ -87,6 +89,7 @@
         header("Content-Type: application/json; charset=utf-8");
         $datos = file_get_contents("php://input");
         // $datos = '{"q":"traerReportes","ruta":"/traerControles","rax":"&new=Sun Apr 07 2024 20:13:49 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
+        // $datos = '{"q":"verificarControl,240408142616477","ruta":"/traerControles","rax":"&new=Tue Apr 09 2024 17:06:49 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

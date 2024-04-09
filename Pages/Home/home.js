@@ -160,48 +160,43 @@ function llamarCtrl(control) {
     let timestamp = new Date().getTime()
     let url = ''
     let ruta = ''
-    let tipoUrl = true
-    if (!control) {
-      url = '404'
-      tipoUrl = false
-    }
-
-    if (control && !tipoDeArchivo) {
-      url = `${SERVER}/Pages/Router/rutas.php?${control}`
-      tipoUrl = true
-    }
-    if (control && tipoDeArchivo !== '' && tipoDeArchivo === 'rove') {
-      url = `${SERVER}/Pages/Router/rutas.php?`
-      ruta = `${url}ruta=rove&rove=${tipoDeRove}?v=${timestamp}`
-      tipoUrl = false
-    }
-    if (control && tipoDeArchivo !== '' && tipoDeArchivo !== 'rove') {
-      url = `${SERVER}/Pages/Router/rutas.php?`
-      ruta = `${url}ruta=${control}?v=${timestamp}`
-      tipoUrl = false
-    }
 
     sessionStorage.setItem(
       'history_pages',
       encriptar(navegador.estadoAnteriorWhereUs)
     )
 
-    if (tipoUrl) {
-      const [subcadena, parametros] = url.split('?')
-      const pares = parametros.split('&')
-      const objeto = pares.reduce((objs, par) => {
-        const obj = objs
-        const [clave, valor] = par.split('=')
-        obj[clave] = decodeURIComponent(valor)
-        return obj
-      }, {})
-
-      sessionStorage.setItem('contenido', encriptar(objeto))
-      ruta = `${subcadena}?ruta=control&${control}?v=${timestamp}`
+    if (!control) {
+      url = '404'
     } else {
-      sessionStorage.setItem('contenido', encriptar('x'))
+      url = `?${control}`
+
+      if (tipoDeArchivo === '') {
+        const [subcadena, parametros] = url.split('?')
+        const pares = parametros.split('&')
+        const objeto = pares.reduce((objs, par) => {
+          const obj = objs
+          const [clave, valor] = par.split('=')
+          obj[clave] = decodeURIComponent(valor)
+          return obj
+        }, {})
+        sessionStorage.setItem('contenido', encriptar(objeto))
+        ruta = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`
+      }
+      if (tipoDeArchivo !== '' && tipoDeArchivo.toLowerCase() === 'rove') {
+        const objeto = {
+          rove: tipoDeRove,
+        }
+        sessionStorage.setItem('contenido', encriptar(objeto))
+        ruta = `${SERVER}/Pages/Router/rutas.php?ruta=rove&v=${timestamp}`
+      }
+      if (tipoDeArchivo !== '' && tipoDeArchivo.toLowerCase() === 'menu') {
+        ruta = `${SERVER}/Pages/Router/rutas.php?ruta=menu&v=${timestamp}`
+      }
     }
-    console.log(ruta)
+
+    // console.log(url)
+    // console.log(ruta)
     window.location.href = ruta
     // window.open(ruta, '_blank')
   } catch (error) {

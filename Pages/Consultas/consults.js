@@ -20,6 +20,8 @@ import {
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar, encriptar } from '../../controllers/cript.js'
 
+const SERVER = '../..'
+
 let translateOperativo = []
 let espanolOperativo = []
 let translateArchivos = []
@@ -108,9 +110,11 @@ function dondeEstaEn() {
 function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
   try {
     if (procedure) {
-      const ruta = `../../Pages/ConsultasViews/viewsGral.php?v=${Math.round(
-        Math.random() * 10
-      )}`
+      let timestamp = new Date().getTime()
+      // const ruta = `../../Pages/ConsultasViews/viewsGral.php?v=${Math.round(
+      //   Math.random() * 10
+      // )}`
+      const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=consultasViews&v=${timestamp}`
       let contenido = {
         name,
         confecha,
@@ -121,7 +125,8 @@ function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
       }
       contenido = encriptar(contenido)
       sessionStorage.setItem('procedure', contenido)
-      window.open(ruta, '_blank')
+      // window.open(ruta, '_blank')
+      window.location.href = ruta
     }
   } catch (error) {
     console.log(error)

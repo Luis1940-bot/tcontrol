@@ -52,20 +52,20 @@ main {
 
 @media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
   header {
-    height: 100px;
+    height: auto;
   }
   .div-home-buttons {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 }
 
 /* Estilos para tabletas en formato portrait */
 @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
   header {
-    height: 100px;
+    height: auto;
   }
   .div-home-buttons {
-    margin-top: 70px;
+    margin-top: 40px;
   }
 }
 

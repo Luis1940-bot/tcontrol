@@ -83,7 +83,7 @@
   .div-volver {
     height: var(--div-volver-height);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 20px;
+    margin-left: 2px;
   }
 
   .div-volver img {

@@ -18,7 +18,7 @@ import {
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar } from '../../controllers/cript.js'
 // eslint-disable-next-line import/extensions
-import callProcedure from '../ConsultasViews/Controladores/callProcedure.js'
+// import callProcedure from '../ConsultasViews/Controladores/callProcedure.js'
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
@@ -117,6 +117,7 @@ function dondeEstaEn() {
   const name = url.name
   document.getElementById('whereUs').innerHTML = name
   document.getElementById('whereUs').style.display = 'inline'
+  document.getElementById('volver').style.display = 'block'
 }
 
 function configPHP(user) {
@@ -212,4 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     personModal(user, objTranslate)
   })
+})
+
+function goBack() {
+  const url = '../../Pages/Consultas/index.php'
+  window.location.href = url
+}
+
+const volver = document.getElementById('volver')
+volver.addEventListener('click', () => {
+  goBack()
 })

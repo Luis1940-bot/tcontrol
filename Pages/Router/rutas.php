@@ -23,7 +23,15 @@ if ($host === 'localhost' || $host === '127.0.0.1') {
     }
 }
 
+// Genera una cadena aleatoria basada en el tiempo y un número aleatorio
+$randomString = microtime() . rand();
 
+// Elimina los caracteres no deseados de la cadena aleatoria
+$randomString = str_replace('.', '', $randomString);
+$randomString = str_replace(' ', '', $randomString);
+
+// Obtiene el valor actual del tiempo en milisegundos
+$time = time();
 
 // Verificar si se ha proporcionado un valor para 'ruta'
 if(isset($_GET['ruta'])) {
@@ -46,27 +54,32 @@ if(isset($_GET['ruta'])) {
         break;
 
       case 'control':
-        $control_N = $_GET['control_N'];
-        $control_T = $_GET['control_T'];
-        $nr = $_GET['nr'];
-        // Genera una cadena aleatoria basada en el tiempo y un número aleatorio
-        $randomString = microtime() . rand();
-
-        // Elimina los caracteres no deseados de la cadena aleatoria
-        $randomString = str_replace('.', '', $randomString);
-        $randomString = str_replace(' ', '', $randomString);
-
-        // Obtiene el valor actual del tiempo en milisegundos
-        $time = time();
-        $url = '//'.$_SERVER['HTTP_HOST'] . '/Pages/Control/index.php?'.'control_N='.$control_N.'&control_T='.$control_T.'&nr='.$nr.'v='.$randomString.'&t='.$time;
+        $url = '//'.$_SERVER['HTTP_HOST'] . '/Pages/Control/index.php?t='.$time;
         header("Location: $url");
         break;
 
       case 'rove':
         $rove = $_GET['rove'];
-        $url = '//'.$_SERVER['HTTP_HOST'] . '/Pages/Rove/index.php?rove='.$rove;
+        $url = '//'.$_SERVER['HTTP_HOST'] . '/Pages/Rove/index.php?rove='.$rove.'t='.$time;
         header("Location: $url");
         break;
+
+      case 'menu':
+        $rove = $_GET['menu'];
+        $url = '//'.$_SERVER['HTTP_HOST'] . '/Pages/Menu/index.php?t='.$time;
+        header("Location: $url");
+        break;
+
+      case 'controlView':
+        $url = '//'.$_SERVER['HTTP_HOST'] . '/Pages/ControlsView/index.php?t='.$time;
+        header("Location: $url");
+        break;
+
+      case 'consultasViews':
+        $url = '//'.$_SERVER['HTTP_HOST'] . '/Pages/ConsultasViews/viewsGral.php?t='.$time;
+        header("Location: $url");
+        break;
+
       
       default:
         # code...

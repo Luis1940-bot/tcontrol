@@ -34,6 +34,9 @@ import { Alerta } from '../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../controllers/variables.js'
 
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = '../..'
+
 let translateOperativo = []
 let espanolOperativo = []
 let translateArchivos = []
@@ -76,77 +79,6 @@ function trO(palabra) {
     return translateOperativo[index]
   }
   return palabra
-}
-
-//! no se usan las funciones de asignarEventos y completarButtons porque quitamos un segundo menu intermedio
-/* eslint-disable no-use-before-define */
-function asignarEventos() {
-  const buttons = document.querySelectorAll('.button-controles-menu')
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      let lugar = document.getElementById('whereUs').innerText
-      const newLugar = trO(button.name || button.name)
-      lugar = `${lugar} > ${newLugar}`
-      const search = document.getElementById('search')
-      search.placeholder = trO('Buscar...' || 'Buscar...')
-      search.style.display = 'inline'
-      const doc = document.getElementById('doc')
-      doc.placeholder = trO('Doc' || 'Doc')
-      const divUbicacionDoc = document.querySelector('.div-ubicacionDoc')
-      divUbicacionDoc.style.display = 'block'
-      const divButtons = document.querySelector('.div-controles-buttons')
-      divButtons.style.display = 'none'
-      document.getElementById('whereUs').innerHTML = lugar
-      cargaTabla(objTranslate)
-    })
-  })
-}
-
-/* eslint-enable no-use-before-define */
-function completaButtons(obj) {
-  const divButtons = document.querySelector('.div-controles-buttons')
-  divButtons.innerHTML = ''
-  document.getElementById('spanUbicacion').innerText = objButtons.planta
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < objButtons[obj].name.length; i++) {
-    const element = objButtons[obj].name[i]
-    // const ruta = objButtons[obj].ruta[i];
-    let params = {
-      text: trO(element) || element,
-      name: objButtons[obj].name[i],
-      class: 'button-controles-menu',
-      innerHTML: null,
-      height: null, // 35
-      width: null, // 75%
-      borderRadius: '1px',
-      border: null,
-      textAlign: 'left',
-      marginLeft: null,
-      marginRight: null,
-      marginTop: null,
-      marginBotton: null,
-      paddingLeft: null,
-      paddingRight: null,
-      paddingTop: null,
-      paddingBotton: null,
-      background: null,
-    }
-    const newButton = createButton(params)
-    params = {
-      class: 'img-selector-menu',
-      name: null,
-      float: 'right',
-      src: '../../assets/img/icons8-arrow-30.png',
-      alt: null,
-      height: '20px',
-      width: '20px',
-      margin: 'auto 10px auto auto',
-    }
-    const newImg = createImg(params)
-    newButton.appendChild(newImg)
-    divButtons.appendChild(newButton)
-  }
-  asignarEventos()
 }
 
 function leeApp(json) {
@@ -302,9 +234,12 @@ buscaDoc.addEventListener('click', async () => {
       }
       contenido = encriptar(contenido)
       sessionStorage.setItem('contenido', contenido)
-      const url = '../Control/index.php'
-      // window.location.href = url
-      window.open(url, '_blank')
+      // const url = '../Control/index.php'
+      let timestamp = new Date().getTime()
+      const url = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`
+      // console.log(url)
+      window.location.href = url
+      // window.open(url, '_blank')
     } else {
       const miAlerta = new Alerta()
       const aviso = `No se encontraron registros con el documento`
