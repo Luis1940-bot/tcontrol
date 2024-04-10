@@ -5,9 +5,9 @@ header("Content-Type: text/html;charset=utf-8");
 //       unset($_SESSION['factum_validation']['email'] ); 
 //   }
 
-function verifica($q){
+function verifica($q, $sql_i){
   // global $q;
-  // $idSupervisor=urldecode($q);
+  $idSupervisor=$q; //urldecode($q);
 
   // include_once '../../../Routes/datos_base.php';
   include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";

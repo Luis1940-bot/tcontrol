@@ -210,3 +210,4 @@ Selecione o período da consulta:
 Não foi encontrado nenhum registro que corresponda às datas fornecidas. Revise as datas em Controles carregados.
 Autorizado pela Sede da Área.
 Copiado para a área de transferência.
+Não foi possível concluir sua assinatura digital, há um erro em sua chave. Verifique e tente novamente. Obrigado

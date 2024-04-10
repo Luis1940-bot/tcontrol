@@ -1023,8 +1023,8 @@
   #closeModalButton {
     color: #aaa;
     float: right;
-    font-size: 20px;
-    margin-right: 2px;
+    font-size: 34px;
+    margin-right: 10px;
     font-weight: bold;
     cursor: pointer;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1229,8 +1229,8 @@
   #closeModalButton {
     color: #aaa;
     float: right;
-    font-size: 20px;
-    margin-right: 2px;
+    font-size: 34px;
+    margin-right: 10px;
     font-weight: bold;
     cursor: pointer;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

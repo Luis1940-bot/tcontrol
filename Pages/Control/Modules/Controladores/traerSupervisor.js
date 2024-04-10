@@ -13,6 +13,7 @@ export default function traerSupervisor(idSupervisor) {
       sql_i: null,
     }
     const datos = JSON.stringify(obj)
+    // console.log(datos)
     // const ruta = `${SERVER}/Pages/Control/Routes/traerSupervisor.php?q=${id}${rax}`
     const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {

@@ -353,3 +353,10 @@ function goMenu() {
   window.location.href = url
   return
 }
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    goMenu()
+  }
+})

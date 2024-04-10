@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/traerFirma':
             include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/supervisores.php';
             break;
-        case '/traerFirma':
+        case '/traerSupervisor':
             include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/traerSupervisor.php';
             break;
          case '/ex2024':

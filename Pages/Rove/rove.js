@@ -87,7 +87,7 @@ function leeApp(json, complit) {
 function dondeEstaEn() {
   const contenido = sessionStorage.getItem('contenido')
   const url = desencriptar(contenido)
-  console.log(url)
+  // console.log(url)
   const name = url.rove
   document.getElementById('whereUs').innerHTML = `ROVE: ${name.toUpperCase()}`
   document.getElementById('whereUs').style.display = 'inline'

@@ -83,7 +83,7 @@
   .div-volver {
     height: var(--div-volver-height);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 2px;
+    margin-left: 55px;
   }
 
   .div-volver img {
@@ -108,8 +108,8 @@
   }
 
   #volver {
-    height: var(--volver-height);
-    width: var(--volver-width);
+    height: 20px;
+    width: 20px;
     cursor: pointer;
   }
 
@@ -142,7 +142,7 @@
 
   .div-volver img {
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 50px;
     display: var(--div-volver-img-display);
   }
 
@@ -162,8 +162,8 @@
   }
 
   #volver {
-    height: var(--volver-height);
-    width: var(--volver-width);
+    height: 25px;
+    width: 25px;
     cursor: pointer;
   }
 
@@ -192,13 +192,13 @@
 
   .div-volver img {
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 100px;
     display: var(--div-volver-img-display);
   }
 
   #volver {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
     cursor: pointer;
   }
 

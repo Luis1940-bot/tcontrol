@@ -217,3 +217,10 @@ const volver = document.getElementById('volver')
 volver.addEventListener('click', () => {
   goBack()
 })
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    goBack()
+  }
+})

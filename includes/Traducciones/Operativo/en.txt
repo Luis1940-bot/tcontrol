@@ -210,3 +210,4 @@ Select the date range for the query:
 No record was found that matches the dates provided. Review the dates in Loaded Controls.
 Authorized from Area Headquarters.
 Copied to clipboard.
+Your digital signature could not be completed, there is an error in your key. Please verify and try again. Thank you

@@ -210,3 +210,4 @@ Seleccione el intervalo de fechas para la consulta:
 No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.
 Autorizado desde Jefatura de Área.
 Copiado al portapapeles.
+No se pudo completar su firma digital, hay un error en su clave. Verifique por favor y vuelva a intentarlo. Gracias

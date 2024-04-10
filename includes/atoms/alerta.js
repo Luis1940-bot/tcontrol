@@ -665,11 +665,11 @@ const funcionApi = () => {
   }
 }
 
-async function firmar(firmadoPor) {
+async function firmar(firmadoPor, objTrad) {
   const pass = document.getElementById('idInputFirma').value
   const supervisor = await traerFirma(pass)
 
-  const modal = document.getElementById('modalAlert')
+  let modal = document.getElementById('modalAlert')
   modal.style.display = 'none'
   modal.remove()
   if (supervisor.id !== null) {
@@ -692,6 +692,13 @@ async function firmar(firmadoPor) {
     }
 
     sessionStorage.setItem('config_menu', encriptar(configMenu))
+  } else {
+    const miAlerta = new Alerta()
+    const obj = arrayGlobal.avisoRojo
+    const texto = arrayGlobal.mensajesVarios.firma.no_encontrado
+    miAlerta.createVerde(obj, texto, objTrad)
+    let modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
   }
   setTimeout(() => {
     const menu = document.getElementById('modalAlertM')
@@ -1482,6 +1489,16 @@ async function eliminarR(objTraductor) {
   })
 }
 
+function cerrarModal(modal) {
+  try {
+    const menu = document.getElementById(modal)
+    menu.style.display = 'none'
+    menu.remove()
+  } catch (error) {
+    // console.log(error);
+  }
+}
+
 class Alerta {
   constructor() {
     this.modal = null
@@ -1504,12 +1521,20 @@ class Alerta {
 
     const modalContent = createDiv(obj.divContent)
 
+    // const span = createSpan(obj.close)
+    // modalContent.appendChild(span)
     const span = createSpan(obj.close)
-    modalContent.appendChild(span)
-
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    obj.divCajita.height = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+    obj.divCajita.height = '100px'
     let texto =
       trO(obj.titulo.text[typeAlert], objTrad) || obj.titulo.text[typeAlert]
     obj.titulo.text[typeAlert] = texto
+    obj.titulo.marginTop = null
     const title = createH3(obj.titulo, typeAlert)
     modalContent.appendChild(title)
 
@@ -1634,9 +1659,17 @@ class Alerta {
     }
     const modalContent = createDiv(obj.divContent)
 
+    // const span = createSpan(obj.close)
+    // modalContent.appendChild(span)
     const span = createSpan(obj.close)
-    modalContent.appendChild(span)
-
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    obj.divCajita.height = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+    obj.divCajita.height = '100px'
+    obj.titulo.marginTop = null
     let texto =
       trO(obj.titulo.text[typeAlert], objTrad) || obj.titulo.text[typeAlert]
     obj.titulo.text[typeAlert] = texto
@@ -1685,13 +1718,18 @@ class Alerta {
     document.body.appendChild(this.modal)
     const idAceptar = document.getElementById('idAceptar')
     idAceptar.addEventListener('click', () => {
-      firmar(firmadoPor)
+      firmar(firmadoPor, objTrad)
       //! colocar la firma en el menu
     })
     const idInputFirma = document.getElementById('idInputFirma')
     idInputFirma.addEventListener('keypress', (event) => {
       if (event.key === 'Enter') {
-        firmar(firmadoPor)
+        firmar(firmadoPor, objTrad)
+      }
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        cerrarModal('modalAlert')
       }
     })
   }
@@ -1724,6 +1762,12 @@ class Alerta {
     modalContent.appendChild(img)
     this.modal.appendChild(modalContent)
     document.body.appendChild(this.modal)
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlert')
+      }
+    })
   }
 
   createVerde(obj, texto, objTrad) {
@@ -1830,6 +1874,12 @@ class Alerta {
 
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal)
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlertP')
+      }
+    })
   }
 
   createModalMenu(objeto, objTranslate) {
@@ -1846,7 +1896,10 @@ class Alerta {
     const modalContent = createDiv(obj.divContent)
 
     const span = createSpan(obj.close)
-    modalContent.appendChild(span)
+    obj.divCajita.hoverColor = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
 
     //! guardar
     obj.divCajita.id = 'idDivGuardar'
@@ -2000,12 +2053,19 @@ class Alerta {
     formatarMenu(doc, configMenu, objTranslate)
     const enviaEmail = document.getElementById('idCheckBoxEmail')
     enviaPorEmail ? (enviaEmail.checked = true) : (enviaEmail.checked = false)
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlertM')
+      }
+    })
   }
 
   createModalConsultaView(objeto, objTranslate) {
     // eslint-disable-next-line no-unused-vars
     const obj = objeto
-    // console.log(obj)
+
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -2014,7 +2074,11 @@ class Alerta {
     const modalContent = createDiv(obj.divContent)
 
     const span = createSpan(obj.close)
-    modalContent.appendChild(span)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
 
     const user = desencriptar(sessionStorage.getItem('user'))
     const { tipo } = user
@@ -2140,6 +2204,13 @@ class Alerta {
 
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal)
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlertM')
+      }
+    })
   }
 
   createViewer(objeto, array, objTrad) {
@@ -2154,8 +2225,16 @@ class Alerta {
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent)
+      // const span = createSpan(obj.close)
+      // modalContent.appendChild(span)
+
       const span = createSpan(obj.close)
-      modalContent.appendChild(span)
+      obj.divCajita.hoverColor = null
+      obj.divCajita.position = null
+      const divClose = createDiv(obj.divCajita)
+      divClose.appendChild(span)
+      modalContent.appendChild(divClose)
+
       let texto = array[0]
       let typeAlert = 'viewer'
       // texto = trA(texto, objTrad) || texto;
@@ -2304,6 +2383,12 @@ class Alerta {
         this.modal.appendChild(modalContent)
         document.body.appendChild(this.modal)
       }
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          cerrarModal('modalAlertView')
+        }
+      })
     } catch (error) {
       console.log(error)
     }
@@ -2318,8 +2403,15 @@ class Alerta {
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent)
+      // let span = createSpan(obj.close)
+      // modalContent.appendChild(span)
+
       let span = createSpan(obj.close)
-      modalContent.appendChild(span)
+      obj.divCajita.hoverColor = null
+      obj.divCajita.position = null
+      const divClose = createDiv(obj.divCajita)
+      divClose.appendChild(span)
+      modalContent.appendChild(divClose)
 
       let texto = trO(obj.span.text, objTrad) || obj.span.text
       span = createSpan(obj.span, texto)
@@ -2420,6 +2512,12 @@ class Alerta {
         } else {
           inputDesde.style.background = 'red'
         }
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            event.preventDefault()
+            cerrarModal('modalTablaViewFecha')
+          }
+        })
       })
     } catch (error) {
       console.log(error)
@@ -2435,9 +2533,14 @@ class Alerta {
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent)
+      // let span = createSpan(obj.close)
+      // modalContent.appendChild(span)
       let span = createSpan(obj.close)
-      modalContent.appendChild(span)
-
+      obj.divCajita.hoverColor = null
+      obj.divCajita.position = null
+      const divClose = createDiv(obj.divCajita)
+      divClose.appendChild(span)
+      modalContent.appendChild(divClose)
       let texto = 'Seleccione el intervalo de fechas para la consulta:'
       texto = trO(texto, objTranslate) || texto
       obj.span.text = texto
@@ -2619,6 +2722,12 @@ class Alerta {
           }
         } else {
           inputDesde.style.background = 'red'
+        }
+      })
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          cerrarModal('modalTablaViewFecha')
         }
       })
     } catch (error) {
@@ -2864,6 +2973,13 @@ class Alerta {
     idAceptar.addEventListener('click', () => {
       eliminarR(objTrad)
     })
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlert')
+      }
+    })
   }
 
   createCalendarROVE(objeto, objTranslate, rove) {
@@ -2875,8 +2991,14 @@ class Alerta {
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent)
+      // let span = createSpan(obj.close)
+      // modalContent.appendChild(span)
       let span = createSpan(obj.close)
-      modalContent.appendChild(span)
+      obj.divCajita.hoverColor = null
+      obj.divCajita.position = null
+      const divClose = createDiv(obj.divCajita)
+      divClose.appendChild(span)
+      modalContent.appendChild(divClose)
 
       let texto = 'Seleccione el intervalo de fechas para la consulta:'
       texto = trO(texto, objTranslate) || texto
@@ -2992,6 +3114,12 @@ class Alerta {
           table.style.display = 'block'
         }
       })
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          cerrarModal('modalTablaViewFecha')
+        }
+      })
     } catch (error) {
       console.log(error)
     }
@@ -3009,7 +3137,11 @@ class Alerta {
     const modalContent = createDiv(obj.divContent)
 
     const span = createSpan(obj.close)
-    modalContent.appendChild(span)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
 
     //! refrescar
     obj.divCajita.id = 'idDivRefrescar'

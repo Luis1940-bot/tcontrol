@@ -369,3 +369,12 @@ goLanding.addEventListener('click', () => {
   const url = '../../Pages/Landing'
   window.location.href = url
 })
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    if (navegador.estadoAnteriorWhereUs.length > 1) {
+      goBack(null)
+    }
+  }
+})
