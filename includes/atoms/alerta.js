@@ -628,7 +628,7 @@ const funcionExportarJSON = () => {
 
 const funcionApi = () => {
   try {
-    const { procedure, desde, hasta } = desencriptar(
+    const { procedure, desde, hasta, plant } = desencriptar(
       sessionStorage.getItem('api')
     )
 
@@ -636,9 +636,9 @@ const funcionApi = () => {
     const url = window.location.host
     let ruta = ''
     if (desde === null || hasta === null) {
-      ruta = `${url}/Pages/Api/${procedure}*`
+      ruta = `${url}/Pages/Api/${procedure}/${plant}/*`
     } else {
-      ruta = `${url}/Pages/Api/${procedure}/${desde}/${hasta}`
+      ruta = `${url}/Pages/Api/${procedure}/${desde}/${hasta}/${plant}`
     }
     const mensaje0 = document.getElementById('idMensajeInstructivo')
     mensaje0.style.display = 'block'
@@ -2524,7 +2524,7 @@ class Alerta {
     }
   }
 
-  createCalendar(objeto, objTranslate, procedure) {
+  createCalendar(objeto, objTranslate, procedure, plant) {
     try {
       const obj = objeto
       this.modal = document.createElement('div')
@@ -2651,6 +2651,7 @@ class Alerta {
             procedure: procedure.procedure,
             desde,
             hasta,
+            plant,
           }
 
           if (consulta.length <= 1) {
@@ -2735,7 +2736,7 @@ class Alerta {
     }
   }
 
-  async createSinCalendar(objeto, texto, objTranslate, procedure) {
+  async createSinCalendar(objeto, texto, objTranslate, procedure, plant) {
     try {
       const obj = objeto
       this.modal = document.createElement('div')
@@ -2772,6 +2773,7 @@ class Alerta {
         procedure: procedure.procedure,
         desde: null,
         hasta: null,
+        plant,
       }
       if (consulta.length <= 1) {
         const miAlerta = new Alerta()

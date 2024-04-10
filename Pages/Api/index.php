@@ -1,104 +1,107 @@
-<?php
-mb_internal_encoding('UTF-8');
+<?php 
 
-function consultar($call, $desde, $hasta)
-{
-    include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
-    // include_once '../../Routes/datos_base.php';
-    // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
-
-    try {
-        // Llamada al procedimiento almacenado con parámetros
-        $sql = "CALL ".$call."('".$desde."', '".$hasta."')";
-        if ($desde === null || $hasta === null) {
-          $sql = "CALL ".$call."()";
-        }
-        $con = mysqli_connect($host,$user,$password,$dbname);
-            if (!$con) {
-                // die('Could not connect: ' . mysqli_error($con));
-            };
-            
-            mysqli_query ($con,"SET NAMES 'utf8'");
-            mysqli_select_db($con,$dbname);
-
-            $result = mysqli_query($con,$sql);
-            $arr_customers = array();
-            $arrayResultdo = array();
-            $column_names = array();
-            while ($column = mysqli_fetch_field($result)) {
-                $column_names[] = $column->name;
-            }
-            $arr_customers[] = $column_names;
-
-            while ($row = mysqli_fetch_assoc($result)) {
-                $arr_customers[] = array_values($row);
-            }
-    
-            // echo "Después de la inclusión: " . json_encode($arrayResultdo) . PHP_EOL;
-            $json = json_encode($arr_customers);
-            echo $json;
-            mysqli_close($con);
-            // $pdo=null;
-    } catch (\PDOException $e) {
-       print "Error!: ".$e->getMessage()."<br>";
-      die();
+function procesar($call, $desde, $hasta, $planta) {
+  try {
+    $host = "190.228.29.59"; 
+    $user = "fmc_oper2023";
+    $password = "0uC6jos0bnC8";
+    $number = "";
+    $desired_length = 4;
+    while(strlen($number) + strlen($planta) < $desired_length) {
+        $number .= "0"; // Agregar un cero a la cadena
     }
+    $dbname = "mc" . $planta . $number;
+    $port = 3306;
+
+    $sql = "CALL ".$call."('".$desde."', '".$hasta."')";
+    if ($desde === null || $hasta === null) {
+      $sql = "CALL ".$call."()";
+    }
+    $con = mysqli_connect($host,$user,$password,$dbname);
+        if (!$con) {
+            // die('Could not connect: ' . mysqli_error($con));
+        };
+        
+        mysqli_query ($con,"SET NAMES 'utf8'");
+        mysqli_select_db($con,$dbname);
+
+        $result = mysqli_query($con,$sql);
+        $arr_customers = array();
+        $arrayResultdo = array();
+        $column_names = array();
+        while ($column = mysqli_fetch_field($result)) {
+            $column_names[] = $column->name;
+        }
+        $arr_customers[] = $column_names;
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $arr_customers[] = array_values($row);
+        }
+
+        // echo "Después de la inclusión: " . json_encode($arrayResultdo) . PHP_EOL;
+        $json = json_encode($arr_customers);
+        echo $json;
+        mysqli_close($con);
+  } catch (\Throwable $e) {
+    print "Error!: ".$e->getMessage()."<br>";
+    die();
+  }
+}
+
+function preparaDatos($path){
+  try {
+    
+    $path_parts = explode('/', $path);
+    $largo = sizeof($path_parts);
+    if ($path_parts[$largo -1] === '*') {
+      $call = $path_parts[$largo -3]; // proc_TnEspecialidades
+      $planta = $path_parts[$largo -2]; // 1
+      $desde = null;
+      $hasta = null;
+    }
+    if ($path_parts[$largo -1] !== '*') {
+      $call = $path_parts[$largo -4]; // proc_TnEspecialidades
+      $desde = $path_parts[$largo -3]; // 2024-04-01
+      $hasta = $path_parts[$largo -2]; // 2024-04-10
+      $planta = $path_parts[$largo -1]; // 1
+
+      $fecha_actual = date("Y/m/d");
+      $fecha_formateada = date("Y-m-d", strtotime($fecha_actual));
+      // Verificar si $desde es mayor que $hasta y, en ese caso, intercambiar los valores
+      if ($desde > $fecha_formateada) {
+        $desde = $fecha_formateada;
+      }
+      if ($desde > $hasta) {
+          $temp = $desde;
+          $desde = $hasta;
+          // $hasta = $temp;
+      }
+    }
+    
+
+    procesar($call, $desde, $hasta, $planta);
+  } catch (\Throwable $e) {
+    print "Error!: ".$e->getMessage()."<br>";
+    die();
+  }
 }
 
 header("Content-Type: application/json; charset=utf-8");
-// session_start();
-
-// if (!isset($_SESSION['login_sso']['email'])) {
-//     header("Location: login.php");
-//     exit;
-// }
+// $http_host = 'http://localhost:8080/Pages/Api/proc_TnEspecialidades/2024-04-01/2024-04-10/1';
 $http_host = $_SERVER['HTTP_HOST'];
 $url = htmlentities($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], ENT_QUOTES, 'UTF-8');
-$read_url = explode('/', $url);
+// echo $url;
 $url_parts = parse_url($url);
-
-if (empty($read_url)) {
-    $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
-    echo json_encode($response);
-    exit;
+$path = $url_parts['path'];
+if (empty($path)) {
+  $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
+  echo json_encode($response);
+  exit;
 }
-$largo = sizeof($read_url);
-$last_part = end($read_url);
-if (substr($last_part, -1) === '*') {
-    $desdeI = null;
-    $hastaI = null;
-    $url_sin_ultimo_caracter = substr($url, 0, -1);
-    $posicion_ultima_barra = strrpos($url_sin_ultimo_caracter, '/');
-    $q = substr($url_sin_ultimo_caracter, $posicion_ultima_barra + 1);
+if ($path !== null) {
+  preparaDatos($path);
 } else {
-  $q = trim($read_url[$largo - 3]);
-  if (empty($q)) {
-      $response = array('success' => false, 'message' => 'Falta el Call.');
-      echo json_encode($response);
-      exit;
-  }
-  $desdeI = trim($read_url[$largo - 2]);
-  $hastaI = trim($read_url[$largo - 1]);
-  if ($hastaI < $desdeI) {
-    $response = array('success' => false, 'message' => 'La fecha HASTA es anterior a la fecha DESDE');
-    echo json_encode($response);
-    exit;
-  } 
-  //FORMAT VALIDATION 
-  $alphaNumericPattern = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}+$/';
-  $inputInitial = preg_match($alphaNumericPattern, $desdeI);
-  $inputHasta = preg_match($alphaNumericPattern, $hastaI);
-
-
-  if (!$inputInitial or !$inputHasta) {
-    $modifiedUrl = preg_replace('/\/\d{4}-\d{1,2}-\d{1,2}(\/|$)/', '/', $url);
-    $modifiedUrl = preg_replace('/\/\d{4}-0?(\d{1,2})-0?(\d{1,2})(\/|$)/', '/', $modifiedUrl);
-    $response = array('success' => false, 'message' => 'Fecha Formato invalido. El formato a utilizar es 1900-01-01, no olvide completar ambas fechas separasdas por / y controle la url '.$modifiedUrl.'/1900-01-01/1900-01-02');
-    echo json_encode($response);
-    exit;
-  }
+  echo "Error al decodificar la cadena JSON";
 }
-
-consultar($q, $desdeI, $hastaI);
 
 ?>

@@ -72,7 +72,7 @@ function trO(palabra) {
   return palabra
 }
 
-async function mensajeDeCarga(objTranslate, procedure) {
+async function mensajeDeCarga(objTranslate, procedure, plant) {
   const miAlerta = new Alerta()
   const aviso =
     'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
@@ -83,16 +83,22 @@ async function mensajeDeCarga(objTranslate, procedure) {
     arrayGlobal.avisoListandoControles,
     mensaje,
     objTranslate,
-    procedure
+    procedure,
+    plant
   )
   const modal = document.getElementById('modalAlertCarga')
   modal.style.display = 'block'
 }
 
-function abrirCalendar(objTrad, procedure) {
+function abrirCalendar(objTrad, procedure, plant) {
   const miAlerta = new Alerta()
   arrayGlobal.porFechaEnModal.titulo.text.text = procedure.name
-  miAlerta.createCalendar(arrayGlobal.porFechaEnModal, objTrad, procedure)
+  miAlerta.createCalendar(
+    arrayGlobal.porFechaEnModal,
+    objTrad,
+    procedure,
+    plant
+  )
   const modal2 = document.getElementById('modalTablaViewFecha')
   modal2.style.display = 'block'
 }
@@ -145,15 +151,15 @@ function configPHP(user) {
   // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
 
-function verificaTipoDeConsulta(objTranslate) {
+function verificaTipoDeConsulta(objTranslate, plant) {
   try {
     const procedure = desencriptar(sessionStorage.getItem('procedure'))
     // console.log(procedure)
     if (procedure.confecha === '1') {
-      abrirCalendar(objTranslate, procedure)
+      abrirCalendar(objTranslate, procedure, plant)
     }
     if (procedure.confecha === '0') {
-      mensajeDeCarga(objTranslate, procedure)
+      mensajeDeCarga(objTranslate, procedure, plant)
     }
   } catch (error) {
     console.log(error)
@@ -192,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => {
       dondeEstaEn()
       leeApp(`App/${plant}/app`, false)
-      verificaTipoDeConsulta(objTranslate)
+      verificaTipoDeConsulta(objTranslate, plant)
     }, 200)
   }
   spinner.style.visibility = 'hidden'
