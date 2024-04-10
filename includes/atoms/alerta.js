@@ -643,13 +643,13 @@ const funcionApi = () => {
     const mensaje0 = document.getElementById('idMensajeInstructivo')
     mensaje0.style.display = 'block'
     const mensajeCopiado = document.getElementById('idMensajeCopiado')
-    mensajeCopiado.textContent = ruta
+    mensajeCopiado.textContent = `${ruta}?token=TOKEN&data=DATA`
     const elementoTemporal = document.createElement('textarea')
-    elementoTemporal.value = ruta
+    elementoTemporal.value = `${ruta}?token=TOKEN&data=DATA`
     document.body.appendChild(elementoTemporal)
     elementoTemporal.select()
     navigator.clipboard
-      .writeText(ruta)
+      .writeText(`${ruta}?token=TOKEN&data=DATA`)
       .then(() => {
         // console.log('Ruta copiada al portapapeles:', ruta)
       })
