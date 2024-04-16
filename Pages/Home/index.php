@@ -3,7 +3,8 @@ session_start();
 
  if (!isset($_SESSION['login_sso']['email'] )) {
       unset($_SESSION['login_sso']['email'] ); 
-      header("Location: /");
+      require_once dirname(dirname(__DIR__)) . '/config.php';
+      header("Location: " . BASE_URL);
     exit;
   }
 header('Content-Type: text/html;charset=utf-8');

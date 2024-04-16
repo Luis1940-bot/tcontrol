@@ -4,6 +4,7 @@
   header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   header ("MIME-Version: 1.0\r\n");
   require_once dirname(dirname(__DIR__)) . '/config.php';
+
   define('EMAIL', BASE_URL .'/Nodemailer/emailFactum');
 
   ini_set('display_errors', 1);
@@ -15,10 +16,17 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+// include('datos.php');
 
-require BASE_URL   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php' ;
-require BASE_URL   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
-require BASE_URL   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
+
+require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php';
+require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
+require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
+
+
+  // $datos =json_decode($datox, true);
+  // $encabezados =json_decode($encabezadox, true);
+  // $plant = '1';
 
 
 try {
@@ -51,7 +59,10 @@ try {
     $subject = $encabezados['subject'];
     
 ob_start();
-include(EMAIL . '/email.html');
+
+include(BASE_DIR . '/Nodemailer/emailFactum/email.html');
+
+
 $html = ob_get_clean();
 
    
@@ -73,7 +84,7 @@ $html = ob_get_clean();
    $html  = str_replace('{detalle}', $detalle, $html);
    $html  = str_replace('{observacion}', $observacion , $html);
    $html  = str_replace('{contenido_dinamico}', generarContenidoDinamico($datos, $plant), $html);
-   // echo 'html>>>> '.$html;
+  //  echo 'html>>>> '.$html;
     $mail = new PHPMailer(true);
   // Configura el servidor SMTP
     $mail->isSMTP();
