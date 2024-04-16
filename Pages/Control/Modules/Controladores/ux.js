@@ -1,5 +1,5 @@
-// const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../../..'
+import baseUrl from '../../../../config.js'
+const SERVER = baseUrl
 
 // eslint-disable-next-line quotes
 function limpiarObjeto(objeto) {

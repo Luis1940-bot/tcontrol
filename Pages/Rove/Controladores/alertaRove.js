@@ -1,6 +1,9 @@
 import { encriptar, desencriptar } from '../../../controllers/cript.js'
 import traerRegistros from '../../Rove/Controladores/traerRegistros.js'
 
+import baseUrl from '../../../config.js'
+const SERVER = baseUrl
+
 function trO(palabra, objTranslate) {
   if (palabra === undefined || palabra === null) {
     return ''
@@ -103,7 +106,8 @@ function createSpan(config, text) {
 }
 
 async function handleClickEnlace(dato) {
-  const { rove } = desencriptar(sessionStorage.getItem('contenido'))
+  const { rove } = desencriptar(sessionStorage.getItem('rove'))
+
   const control = await traerRegistros(`controlNT,${dato}`, null)
   const control_N = control[0][0]
   const control_T = control[0][1]
@@ -115,10 +119,14 @@ async function handleClickEnlace(dato) {
   contenido = encriptar(contenido)
   sessionStorage.setItem('contenido', contenido)
 
-  const url = '../../Pages/Control/index.php'
-  const ruta = `${url}?v=${Math.round(Math.random() * 10)}`
-  window.open(ruta, '_blank')
-  sessionStorage.setItem('contenido', encriptar({ rove: rove }))
+  // const url = `${SERVER}/Pages/Control/index.php`
+  // const ruta = `${url}?v=${Math.round(Math.random() * 10)}`
+  // window.open(ruta, '_blank')
+
+  let timestamp = new Date().getTime()
+  const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`
+  window.location.href = ruta
+  sessionStorage.setItem('rove', encriptar({ rove: rove }))
 }
 
 function generarUrlParaEnlace(dato) {

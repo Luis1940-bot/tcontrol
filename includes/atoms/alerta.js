@@ -33,8 +33,8 @@ import cargarStandares from '../../Pages/Rove/Controladores/cargaStandares.js'
 import pintaBarras from '../../Pages/Rove/Controladores/pintaBarras.js'
 import dwt from '../../Pages/Rove/Controladores/dwt.js'
 
-// const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../'
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
 
 const objTraductor = {
   operativoES: [],
@@ -598,7 +598,7 @@ const funcionExportarJSON = () => {
     // Crear un formulario dinámicamente
     const form = document.createElement('form')
     form.method = 'POST'
-    form.action = '../../Routes/viewJson.php'
+    form.action = `${SERVER}/Routes/viewJson.php`
     form.target = '_blank'
 
     // Adjuntar los datos al formulario
@@ -636,9 +636,9 @@ const funcionApi = () => {
     const url = window.location.host
     let ruta = ''
     if (desde === null || hasta === null) {
-      ruta = `${url}/Pages/Api/${procedure}/${plant}/*`
+      ruta = `${url}/Pages/Api/api.php/${procedure}/${plant}/*`
     } else {
-      ruta = `${url}/Pages/Api/${procedure}/${desde}/${hasta}/${plant}`
+      ruta = `${url}/Pages/Api/api.php/${procedure}/${desde}/${hasta}/${plant}`
     }
     const mensaje0 = document.getElementById('idMensajeInstructivo')
     mensaje0.style.display = 'block'
@@ -760,7 +760,7 @@ function subirImagenes(img, plant) {
     .then((response) => response.json())
     .then((data) => {
       // eslint-disable-next-line no-console
-      console.log('Respuesta del servidor:', data)
+      // console.log('Respuesta del servidor:', data)
       return data
     })
     .catch((error) => {
@@ -1748,7 +1748,7 @@ class Alerta {
     const buttonAceptar = createButton(obj.btntrash)
     buttonAceptar.style.padding = '0px'
     const trash = document.createElement('img')
-    const ruta = '../../assets/img/icons8-trash-48.png'
+    const ruta = `${SERVER}/assets/img/icons8-trash-48.png`
     trash.style.height = '20px'
     // trash.style.width = '20px'
     trash.src = `${ruta}`
@@ -2497,7 +2497,7 @@ class Alerta {
         )
         const comparaFechas = soloFecha1 <= soloFecha2
         if (comparaFechas) {
-          const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
+          const ruta = `${SERVER}/Pages/ControlsView/index.php?v=${Math.round(
             Math.random() * 10
           )}`
           const objetoRuta = {

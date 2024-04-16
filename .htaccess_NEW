@@ -1,0 +1,41 @@
+# Establece los tipos MIME para los archivos JavaScript, CSS e iconos
+AddType application/javascript .js
+AddType text/css .css
+AddType image/x-icon .ico
+
+# Habilita el seguimiento de enlaces simbólicos
+Options +FollowSymLinks
+
+# Habilita el motor de reescritura
+RewriteEngine On
+
+# Redirige las solicitudes a datos.php, pasando la parte de la URL como el parámetro urlUser
+RewriteRule ^([a-z0-9\-_]+)$ datos.php?urlUser=$1 [QSA]
+
+# Si el archivo o directorio solicitado no existe, redirige a page404.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-z0-9\-_]+)$ page404.php [L]
+
+# Redirige cualquier otra solicitud a index.php
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Establece index.php como el archivo de índice predeterminado
+DirectoryIndex index.php
+
+# Si la solicitud se hace por HTTP, redirige a HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Bloquear acceso a archivos sensibles
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar|rar|sql|html?|js|css|ico)$">
+    Require all denied
+</FilesMatch>
+
+# Cacheo de archivos estáticos por un año
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>

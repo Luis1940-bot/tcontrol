@@ -12,6 +12,8 @@ session_start();
     exit;
   }
 
+
+require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +24,9 @@ session_start();
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='../../Pages/Landing/landing.css' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/Landing/landing.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css' media='screen'>
   <title></title>
 </head>
 <body>
@@ -48,6 +50,6 @@ session_start();
       include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='../../Pages/Landing/landing.js?v=<?php echo(time()); ?>'></script>
+<script type='module' src='<?php echo BASE_URL ?>/Pages/Landing/landing.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

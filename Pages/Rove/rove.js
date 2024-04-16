@@ -22,6 +22,9 @@ import { Alerta } from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
 
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
+
 let translateOperativo = []
 let espanolOperativo = []
 let translateArchivos = []
@@ -85,9 +88,8 @@ function leeApp(json, complit) {
 }
 
 function dondeEstaEn() {
-  const contenido = sessionStorage.getItem('contenido')
+  const contenido = sessionStorage.getItem('rove')
   const url = desencriptar(contenido)
-  // console.log(url)
   const name = url.rove
   document.getElementById('whereUs').innerHTML = `ROVE: ${name.toUpperCase()}`
   document.getElementById('whereUs').style.display = 'inline'
@@ -99,10 +101,10 @@ function configPHP(user) {
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
   const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = './../../assets/img/favicon.ico'
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
   document.title = developer
   const logoi = document.getElementById('logo_factum')
-  const srcValue = `./../../assets/img/${logo}.png`
+  const srcValue = `${SERVER}/assets/img/${logo}.png`
   const altValue = 'Tenki Web'
   logoi.src = srcValue
   logoi.alt = altValue
@@ -120,7 +122,7 @@ function configPHP(user) {
 
 function verificaTipoDeConsulta(objTranslate) {
   try {
-    const { rove } = desencriptar(sessionStorage.getItem('contenido'))
+    const { rove } = desencriptar(sessionStorage.getItem('rove'))
     abrirCalendar(objTranslate, rove)
   } catch (error) {
     console.log(error)
@@ -185,4 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // closeButton.addEventListener('click', closeModal)
     modal.style.display = 'block'
   })
+})
+
+const goLanding = document.querySelector('.custom-button')
+goLanding.addEventListener('click', () => {
+  const url = `${SERVER}/Pages/Landing`
+  window.location.href = url
 })

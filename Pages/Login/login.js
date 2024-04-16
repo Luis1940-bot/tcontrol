@@ -20,8 +20,10 @@ import createDiv from '../../includes/atoms/createDiv.js'
 
 const spinner = document.querySelector('.spinner')
 const appJSON = {}
-// const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = ''
+
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
+
 const espanolOperativo = {
   error: {
     es: 'Hay un dato que no es correcto.',
@@ -89,10 +91,10 @@ function leeApp(json) {
       const metaDescription = document.querySelector('meta[name="description"]')
       metaDescription.setAttribute('content', content)
       const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-      faviconLink.href = './../../assets/img/favicon.ico'
+      faviconLink.href = `${SERVER}/assets/img/favicon.ico`
       document.title = developer
       const logoi = document.getElementById('logo_factum')
-      const srcValue = `./../../assets/img/${logo}.png`
+      const srcValue = `${SERVER}/assets/img/${logo}.png`
       const altValue = 'Tenki Web'
       logoi.src = srcValue
       logoi.alt = altValue
@@ -116,6 +118,7 @@ function leeApp(json) {
 }
 
 function session(session) {
+  // console.log(session)
   const idiomaPreferido = navigator.language || navigator.languages[0]
   const partesIdioma = idiomaPreferido.split('-')
   const idioma = partesIdioma[0]
@@ -142,7 +145,6 @@ function session(session) {
     div.appendChild(span)
     let input = document.getElementById('idInput0')
     input.style.color = '#f81212'
-    input.setAttribute('autocomplete ', 'email')
     input = document.getElementById('idInput1')
     input.style.color = '#f81212'
     let select = document.getElementById('idSelectLogin')

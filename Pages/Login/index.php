@@ -1,14 +1,7 @@
 <?php
-// session_start();
-//  if (!isset($_SESSION['login_sso']['email'] )) {
-//       unset($_SESSION['login_sso']['email'] ); 
-//       header("Location: /");
-//     exit;
-//   }
-header('Content-Type: text/html;charset=utf-8');
 
-define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
-define('INCLUDES', ROOT_PATH.'/includes/molecules');
+header('Content-Type: text/html;charset=utf-8');
+require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -18,9 +11,9 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='../../Pages/Login/login.css?v=<?php echo(time()); ?>' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/Login/login.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
   <title></title>
 </head>
 <body>
@@ -29,8 +22,6 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
     
     <?php
       include_once('../../includes/molecules/header.php');
-
-      
     ?>
   </header>
   <main>
@@ -43,8 +34,6 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
       include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='../../Pages/Login/login.js?v=<?php echo(time()); ?>'></script>
-<!-- <script type='module' src='../../Pages/Login/Controllers/crypto-js.min.js?v=<?php echo(time()); ?>'></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type='module' src='<?php echo BASE_URL ?>/Pages/Login/login.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

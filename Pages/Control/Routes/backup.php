@@ -1,6 +1,9 @@
 <?php
+require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+$file_path = BASE_DIR . '/Pages/Control/TXT/bckup.txt';
+// echo $file_path . '<br>';
+// include('datos.php');
 
-$file_path = '../../../Pages/Control/TXT/bckup.txt';
 
 // Obtener el objeto desde la solicitud POST
 $data = json_decode(file_get_contents('php://input'), true);
@@ -35,3 +38,5 @@ if (file_put_contents($file_path, $data_string . PHP_EOL, FILE_APPEND | LOCK_EX 
 // Respuesta al cliente
 header('Content-Type: application/json');
 echo json_encode(array('message' => 'Archivo actualizado correctamente'));
+
+?>

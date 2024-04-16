@@ -20,7 +20,8 @@ import {
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar, encriptar } from '../../controllers/cript.js'
 
-const SERVER = '../..'
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -101,7 +102,7 @@ function localizador(e) {
 
 function dondeEstaEn() {
   let lugar = trO('Consultas') || 'Consultas'
-  lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
+  lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
   document.getElementById('volver').style.display = 'block'
@@ -229,10 +230,10 @@ function configPHP(user) {
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
   const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = './../../assets/img/favicon.ico'
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
   document.title = developer
   const logoi = document.getElementById('logo_factum')
-  const srcValue = `./../../assets/img/${logo}.png`
+  const srcValue = `${SERVER}/assets/img/${logo}.png`
   const altValue = 'Tenki Web'
   logoi.src = srcValue
   logoi.alt = altValue
@@ -344,12 +345,12 @@ volver.addEventListener('click', () => {
 
 const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
-  const url = '../../Pages/Landing'
+  const url = `${SERVER}/Pages/Landing`
   window.location.href = url
 })
 
 function goMenu() {
-  const url = '../../Pages/Menu'
+  const url = `${SERVER}/Pages/Menu`
   window.location.href = url
   return
 }

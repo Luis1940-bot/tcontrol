@@ -4,13 +4,13 @@ header("Content-Type: text/html;charset=utf-8");
 //   if (!isset($_SESSION['factum_validation']['email'] )) {
 //       unset($_SESSION['factum_validation']['email'] ); 
 //   }
-
+require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 function verifica($q, $sql_i){
   // global $q;
   $idSupervisor=$q; //urldecode($q);
 
-  // include_once '../../../Routes/datos_base.php';
-  include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+    include_once BASE_DIR . "/Routes/datos_base.php";
+  // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
   $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
   try {
 

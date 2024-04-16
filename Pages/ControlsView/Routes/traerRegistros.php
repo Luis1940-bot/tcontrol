@@ -74,7 +74,8 @@
                 break;
             }
             
-            include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+            include_once BASE_DIR . "/Routes/datos_base.php";
+            // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
             // include_once '../../../Routes/datos_base.php';
             // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
@@ -118,6 +119,7 @@
 
 
         header("Content-Type: application/json; charset=utf-8");
+        require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
 
         if (empty($datos)) {

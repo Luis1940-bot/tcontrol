@@ -32,6 +32,9 @@ import cargarNR from '../Control/Modules/ControlNR/loadNR.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../controllers/cript.js'
 
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
+
 let data = {}
 let translateOperativo = []
 let espanolOperativo = []
@@ -84,10 +87,10 @@ function configPHP() {
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
   const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = './../../assets/img/favicon.ico'
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
   document.title = developer
   const logoi = document.getElementById('logo_factum')
-  const srcValue = `./../../assets/img/${logo}.png`
+  const srcValue = `${SERVER}/assets/img/${logo}.png`
   const altValue = 'Tenki Web'
   logoi.src = srcValue
   logoi.alt = altValue
@@ -319,6 +322,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
-  const url = '../Landing'
+  const url = `${SERVER}/Pages/Landing`
   window.location.href = url
 })

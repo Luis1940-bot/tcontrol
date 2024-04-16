@@ -1,5 +1,5 @@
-// const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../../..'
+import baseUrl from '../../../../config.js'
+const SERVER = baseUrl
 
 export default function traerNR(nr, sql_i) {
   // eslint-disable-next-line no-console

@@ -1,5 +1,6 @@
 <?php
 mb_internal_encoding('UTF-8');
+require_once  dirname(__DIR__) . '/config.php';
 
 // Define las opciones de sesión segura
 $sessionOptions = [
@@ -20,12 +21,9 @@ session_set_cookie_params(
     true // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
 );
 // Inicia la sesión de PHP
-session_start();
-
-  // if (!isset($_SESSION['login_sso']['email'] )) {
-  //     header("Location: login.php");
-  //     exit; 
-  // }
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 
 
@@ -57,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datos = file_get_contents("php://input");
     
   // $datos = '{"leng":"es","id":"6","ruta":"/mi_cfg","rax":"&new=Fri Apr 05 2024 19:02:11 GMT-0300 (hora estándar de Argentina)"}';
-
+    // $datos = '{"planta":"1","email":"luisglogista@gmail.com","password":"4488","ruta":"/login","rax":"&new=Sun Apr 14 2024 11:35:48 GMT-0300 (hora estándar de Argentina)"}';
     $data = json_decode($datos, true);
    
     if ($data === null && json_last_error() === JSON_ERROR_NONE) {
@@ -76,45 +74,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // $ruta = $_SERVER['REQUEST_URI'];
+
     switch ($ruta) {
         case '/login':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Login/Routes/login.php';
+            include_once dirname(__DIR__) .'/Pages/Login/Routes/login.php';
             break;
         case '/mi_cfg':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/includes/Traducciones/Lenguajes/fijarLenguaje.php';
+            include_once dirname(__DIR__) . '/includes/Traducciones/Lenguajes/fijarLenguaje.php';
             break;
         case '/traerRegistros':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/traerRegistros.php';
+            include_once dirname(__DIR__) . '/Pages/Control/Routes/traerRegistros.php';
             break;
         case '/traerControles':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Controles/Routes/traerRegistros.php';
+            include_once dirname(__DIR__) . '/Pages/Controles/Routes/traerRegistros.php';
             break;
         case '/callProcedure':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ConsultasViews/Routes/callProcedure.php';
+            include_once dirname(__DIR__) . '/Pages/ConsultasViews/Routes/callProcedure.php';
             break;
         case '/callRove':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Rove/Routes/traer_rove.php';
+            include_once dirname(__DIR__) . '/Pages/Rove/Routes/traer_rove.php';
             break;
         case '/alertaRove':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ControlsView/Routes/traerRegistros.php';
+            include_once dirname(__DIR__) . '/Pages/ControlsView/Routes/traerRegistros.php';
             break;
         case '/traerFirma':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/supervisores.php';
+            include_once dirname(__DIR__) . '/Pages/Control/Routes/supervisores.php';
             break;
         case '/traerSupervisor':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/traerSupervisor.php';
+            include_once dirname(__DIR__) . '/Pages/Control/Routes/traerSupervisor.php';
             break;
          case '/ex2024':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ControlsView/Routes/eliminaRegistro.php';
+            include_once dirname(__DIR__) . '/Pages/ControlsView/Routes/eliminaRegistro.php';
             break;
           case '/traerCargados':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/ControlsView/Routes/traerRegistros.php';
+            include_once dirname(__DIR__) . '/Pages/ControlsView/Routes/traerRegistros.php';
             break;
           case '/ix2024':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/ix.php';
+            include_once dirname(__DIR__) . '/Pages/Control/Routes/ix.php';
             break;
           case '/ux2024':
-            include_once $_SERVER['DOCUMENT_ROOT'].'/Pages/Control/Routes/ux.php';
+            include_once dirname(__DIR__) . '/Pages/Control/Routes/ux.php';
             break;
         // Agrega más casos según las rutas de tu aplicación
         default:

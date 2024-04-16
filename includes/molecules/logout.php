@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once dirname(dirname(__DIR__)) . '/config.php';
 // Elimina todas las variables de sesión
 $_SESSION = array();
 
@@ -21,7 +21,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 // Redirige a la página de inicio de sesión o a donde desees.
-header("Location: ../../../../Pages/Login/"); // Cambia "login.php" al nombre de tu página de inicio de sesión
+header("Location: " . BASE_URL . "/Pages/Login/"); // Cambia "login.php" al nombre de tu página de inicio de sesión
 exit;
 
 ?>

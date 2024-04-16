@@ -7,6 +7,9 @@ import respuestaColumna from './armadoDeObjetos.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../../../controllers/cript.js'
 
+import baseUrl from '../../../../config.js'
+const SERVER = baseUrl
+
 function buscarEnArray(id, array) {
   const idStr = id.toString().trim()
   const resultado = array.find((registro) => registro[1] === idStr)

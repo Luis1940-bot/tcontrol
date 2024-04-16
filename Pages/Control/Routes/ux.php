@@ -73,9 +73,9 @@ function eliminaRegistros($datos, $nux, $pdo) {
 
 function actualizar($datos, $nux){
   try {
-    
-    // include_once '../../../Routes/datos_base.php';
-    include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+    require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+    include_once BASE_DIR . "/Routes/datos_base.php";
+    // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
     $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     eliminaRegistros($datos, $nux, $pdo);
 

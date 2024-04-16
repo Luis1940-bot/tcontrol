@@ -34,8 +34,9 @@ import { Alerta } from '../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../controllers/variables.js'
 
+import baseUrl from '../../config.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../..'
+const SERVER = baseUrl
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -113,7 +114,7 @@ function dondeEstaEn() {
   // document.getElementById('whereUs').innerText = ustedEstaEn;
   let lugar = trO('Menú') || 'Menú'
   lugar = `${trO('Controles') || 'Controles'}`
-  lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
+  lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
 }
@@ -126,10 +127,10 @@ function configPHP(user) {
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
   const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = './../../assets/img/favicon.ico'
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
   document.title = developer
   const logoi = document.getElementById('logo_factum')
-  const srcValue = `./../../assets/img/${logo}.png`
+  const srcValue = `${SERVER}/assets/img/${logo}.png`
   const altValue = 'Tenki Web'
   logoi.src = srcValue
   logoi.alt = altValue
@@ -296,12 +297,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
-  const url = '../../Pages/Landing'
+  const url = `${SERVER}/Pages/Landing`
   window.location.href = url
 })
 
 const volver = document.getElementById('volver')
 volver.addEventListener('click', () => {
-  const url = '../../Pages/Menu'
+  const url = `${SERVER}/Pages/Menu`
   window.location.href = url
 })

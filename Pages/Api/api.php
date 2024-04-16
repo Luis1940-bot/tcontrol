@@ -1,9 +1,10 @@
 <?php 
 
 $clave_secreta = "qV8qI3oT3'lZ7$";
-$fecha_actual = date("Y/m/d");
+//$fecha_actual = date("Y/m/d");
+$fecha_actual = 'valor.data.bueno';
 // echo hash_hmac('sha256', $fecha_actual, $clave_secreta);
-// token=e94c8189a97a76c011311181919f519145d7796d450c3c37abf912026b10ceea
+// token=d96188a658f11da082b06679eda358a07f068f083b17539cf139a9bbb7bd262e
 function generarToken($data, $clave_secreta) {
   // Generar un token HMAC utilizando la clave secreta
   return hash_hmac('sha256', $data, $clave_secreta);

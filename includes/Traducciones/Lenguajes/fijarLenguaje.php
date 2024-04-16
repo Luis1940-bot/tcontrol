@@ -2,7 +2,8 @@
 mb_internal_encoding('UTF-8');
 function fijarLenguaje($id, $mi_cfg) {
   try {
-    include_once $_SERVER['DOCUMENT_ROOT'].'/Routes/datos_base.php';
+    include_once BASE_DIR . "/Routes/datos_base.php";
+    // include_once $_SERVER['DOCUMENT_ROOT'].'/Routes/datos_base.php';
     $conn = mysqli_connect($host,$user,$password,$dbname);
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
@@ -34,6 +35,7 @@ function fijarLenguaje($id, $mi_cfg) {
 }
 
 header("Content-Type: application/json; charset=utf-8");
+require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 $datos = file_get_contents("php://input");
 // $datos = '{"leng":"br","id":6,"ruta":"/mi_cfg","rax":"&new=Fri Apr 05 2024 19:00:01 GMT-0300 (hora estándar de Argentina)"}';
 

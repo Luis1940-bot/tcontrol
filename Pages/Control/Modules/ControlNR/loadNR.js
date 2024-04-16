@@ -7,6 +7,9 @@ import objVariables from '../../../../controllers/variables.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../../../controllers/cript.js'
 
+import baseUrl from '../../../../config.js'
+const SERVER = baseUrl
+
 function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
   // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos)
 
@@ -61,7 +64,7 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
     cadenaJSON = cadenaJSON.replace(/(\w+):/g, '"$1":')
     const objeto = JSON.parse(`{${cadenaJSON}}`)
     const cantidadDeImagenes = objeto.fileName.length
-    const rutaBase = `../../../../assets/Imagenes/${plant}/`
+    const rutaBase = `${SERVER}/assets/Imagenes/${plant}/`
     const ul = td[3].childNodes[0]
 
     // eslint-disable-next-line no-plusplus

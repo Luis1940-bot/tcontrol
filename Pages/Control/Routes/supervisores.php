@@ -4,15 +4,15 @@
   // if (!isset($_SESSION['factum_validation']['email'] )) {
   //     unset($_SESSION['factum_validation']['email'] ); 
   // }
-
+require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 function verifica($q){
   global $q;
   $pass=urldecode($q);
   
   $hash=hash('ripemd160',$pass);
 
-  // include_once '../../../Routes/datos_base.php';
-  include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+  include_once BASE_DIR . "/Routes/datos_base.php";
+  // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
   $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
   try {
 

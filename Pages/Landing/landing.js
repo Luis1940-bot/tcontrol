@@ -17,6 +17,10 @@ import {
 import { encriptar, desencriptar } from '../../controllers/cript.js'
 import actualizarLenguaje from '../../includes/Traducciones/Lenguajes/fijarLenguaje.js'
 
+import baseUrl from '../../config.js'
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = baseUrl
+
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
 
@@ -170,10 +174,10 @@ function configPHP(user) {
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
   const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = '../../assets/img/favicon.ico'
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
   document.title = developer
   const logoi = document.getElementById('logo_factum')
-  const srcValue = `./../../assets/img/${logo}.png`
+  const srcValue = `${SERVER}/assets/img/${logo}.png`
   const altValue = 'Tenki Web'
   logoi.src = srcValue
   logoi.alt = altValue
@@ -218,7 +222,7 @@ async function loadLenguages(persona) {
     const lenguaje = await actualizarLenguaje(objetoLng)
     await translate(leng)
     setTimeout(() => {
-      const url = '../../Pages/Home'
+      const url = `${SERVER}/Pages/Home`
       window.location.href = url
       // window.open(url, '_blank')
     }, 1000)

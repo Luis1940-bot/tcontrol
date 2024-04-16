@@ -3,29 +3,42 @@
   header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
   header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   header ("MIME-Version: 1.0\r\n");
-  require_once dirname(dirname(__DIR__)) . '/config.php';
-  define('EMAIL', BASE_URL .'/Nodemailer/emailFactum');
-
+  define('ROOT_PATHP', $_SERVER['DOCUMENT_ROOT']);
+  define('EMAIL', ROOT_PATHP.'/Nodemailer/emailFactum');
+  define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] . '/iControl-Vanilla/icontrol/Nodemailer');
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 
 
+  // $SERVER = '/iControl-Vanilla/icontrol/Nodemailer/emailFactum';
+ $SERVER = EMAIL;
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+$basePath =  realpath(__DIR__ . '/../../Nodemailer');
+// $basePath =  ROOT_PATH;
 
-require BASE_URL   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php' ;
-require BASE_URL   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
-require BASE_URL   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
+require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php' ;
+require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
+require $basePath   .  '/PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
+// require $basePath   .  '/PHPMailer-master/src/Exception.php' ;
+// require $basePath   .  '/PHPMailer-master/src/PHPMailer.php';
+// require $basePath   .  '/PHPMailer-master/src/SMTP.php';
+
+// include('..//Routes/datos.php');
 
 try {
    $datos =json_decode($_POST['datos'], true);
    $encabezados =json_decode($_POST['encabezados'], true);
    $plant =json_decode($_POST['plant'], true);
   
+  // $datos =json_decode($datox, true);
+  // $encabezados =json_decode($encabezadox, true);
+
 
    if ($datos === null && json_last_error() !== JSON_ERROR_NONE) {
     die('Error al decodificar JSON');
@@ -49,11 +62,13 @@ try {
     $detalle = $encabezados['detalle'];
     $observacion = $encabezados['observacion'];
     $subject = $encabezados['subject'];
-    
+    //echo $SERVER . '/email.html<br>';
 ob_start();
-include(EMAIL . '/email.html');
+include($SERVER . '/email.html');
 $html = ob_get_clean();
 
+  //  $html  = file_get_contents($SERVER . '/email.html');
+  //  $html  = file_get_contents(ROOT_PATH . '/emailFactum/email.html');
    
    $html  = str_replace('{planta}', $planta, $html);
    $html  = str_replace('{notificacion}', $titulo, $html);
@@ -80,9 +95,9 @@ $html = ob_get_clean();
     $mail->CharSet = 'UTF-8';
     $mail->Encoding = "quoted-printable";
     $mail->SMTPAuth = true;
-    $mail->Host = HOST;
-    $mail->Username = USERNAME;
-    $mail->Password = PASS;
+    $mail->Host ="smtp.factumconsultora.com";
+    $mail->Username = "alerta.factum@factumconsultora.com";
+    $mail->Password = "Factum2017admin";
     // $mail->SMTPSecure = 'tls';
     $mail->Port = 25;
     $mail->SMTPOptions = array(
@@ -94,9 +109,9 @@ $html = ob_get_clean();
     );
     $mail->isHTML(true);
     // Configura los destinatarios
-    $mail->SetFrom(SET_FROM);
+    $mail->SetFrom("alerta.factum@factumconsultora.com");
     // $mail->addAddress('destinatario@example.com', 'Destinatario');
-    $mail->addBCC(ADD_BCC);
+    $mail->addBCC('luisfactum@gmail.com');
     // Configura el asunto y el cuerpo del correo electrónico
     $mail->Subject = $subject; 
     $mail->Body    = $html;
@@ -192,7 +207,7 @@ function generarContenidoDinamico($datos, $plant) {
         if ($valor === 'photo' ) {
           $display = 'none';
           $colSpan = 'colspan="3"';
-          $directorioImagenes = BASE_PLANOS . $plant . '/';
+          $directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/img/planos/' . $plant . '/';
           $array = json_decode($elemento['displayDetalle'], true);
           $img = $array['img'];
           $width = $array['width'];
@@ -225,7 +240,7 @@ function generarContenidoDinamico($datos, $plant) {
         if ($valor === 'img' && $fileName) {
             foreach ($fileNameArray as &$fileName) {
                 $fileName = trim($fileName, ' "[]');
-                $directorioImagenes = BASE_IMAGENES . $plant . '/';
+                $directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/Imagenes/' . $plant . '/';
                 $filePath = $directorioImagenes . $fileName;
                 $valor = '<img src="' . $filePath . '" alt="img" width="50px" height="50px">';
                $imagenes = $imagenes .' '. $valor;

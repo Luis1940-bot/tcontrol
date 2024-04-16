@@ -7,7 +7,8 @@ import { desencriptar, encriptar } from '../../../controllers/cript.js'
 // eslint-disable-next-line import/extensions
 import traerRegistros from './Controladores/traerRegistros.js'
 
-const SERVER = '../../'
+import baseUrl from '../../../config.js'
+const SERVER = baseUrl
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -90,7 +91,7 @@ function generatePhoto(src, alt, dim, extension, plant) {
   // console.log(src, alt, dim, extension)
   const dimensiones = dim
   const img = document.createElement('img')
-  img.src = `../../../assets/img/planos/${plant}/${src}`
+  img.src = `${SERVER}/assets/img/planos/${plant}/${src}`
   img.alt = alt
   img.dataset.extension = extension
 
@@ -178,7 +179,7 @@ function detectarImagenes(fila, imagenes) {
       cadenaJSON = cadenaJSON.replace(/(\w+):/g, '"$1":')
       const objeto = JSON.parse(`{${cadenaJSON}}`)
       const cantidadDeImagenes = objeto.fileName.length
-      const rutaBase = `../../../../assets/Imagenes/${plant}/`
+      const rutaBase = `${SERVER}/assets/Imagenes/${plant}/`
       const ul = document.createElement('ul')
       ul.style.listStyle = 'none'
       ul.style.display = 'flex'
@@ -466,7 +467,7 @@ function estilosCell(
   imagen.setAttribute('class', 'img-view')
   imagen.setAttribute('name', 'viewer')
   imagen.style.float = 'right'
-  imagen.src = '../../../assets/img/icons8-view-30.png'
+  imagen.src = `${SERVER}/assets/img/icons8-view-30.png`
   // imagen.style.height = '12px'
   // imagen.style.width = '12px'
   // imagen.style.margin = 'auto 5px auto auto'
@@ -491,7 +492,7 @@ function estilosCell(
     trash.setAttribute('class', 'img-trash')
     trash.setAttribute('name', 'trash')
     trash.style.float = 'right'
-    trash.src = '../../../assets/img/icons8-trash-48.png'
+    trash.src = `${SERVER}/assets/img/icons8-trash-48.png`
     // trash.style.height = '12px'
     // trash.style.width = '12px'
     // trash.style.margin = 'auto 15px auto auto'

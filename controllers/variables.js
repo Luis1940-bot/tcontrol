@@ -1,3 +1,5 @@
+import baseUrl from '../config.js'
+const SERVER = baseUrl
 /* eslint-disable prefer-const */
 // eslint-disable-next-line prefer-const, import/no-mutable-exports
 let arraySelect = []
@@ -104,7 +106,7 @@ const closeVentanaVerdeRoja = (e) => {
   modal = document.getElementById('modalAlertM')
   removeModal(modal)
   if (e.target.id === 'idCloseAvisoAmarillo') {
-    const url = '/Pages/Controles/index.php?simulateAsignarEventos=true'
+    const url = `${SERVER}/Pages/Controles/index.php?simulateAsignarEventos=true`
     window.location.href = url
   }
 }
@@ -141,12 +143,12 @@ const funcionLogOut = () => {
     const key = sessionStorage.key(i)
     sessionStorage.removeItem(key)
   }
-  const url = '../../../includes/molecules/logout.php'
+  const url = `${SERVER}/includes/molecules/logout.php`
   window.location.href = url
 }
 
 const funcionHome = () => {
-  const url = '/Pages/Home/'
+  const url = `${SERVER}/Pages/Home/`
   window.location.href = url
 }
 

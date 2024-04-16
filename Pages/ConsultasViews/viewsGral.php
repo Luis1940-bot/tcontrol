@@ -7,8 +7,7 @@ session_start();
     exit;
   }
 
-define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
-define('INCLUDES', ROOT_PATH.'/includes/molecules');
+require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -18,9 +17,9 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='../../Pages/ConsultasViews/vistas.css?v=<?php echo(time()); ?>' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/ConsultasViews/vistas.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
 
   <title></title>
 </head>
@@ -29,9 +28,9 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <header>
     
     <?php
-      include_once(INCLUDES . '/header.php');
-      include_once(INCLUDES . '/encabezado.php');
-      include_once(INCLUDES . '/whereUs.php');
+      include_once('../../includes/molecules/header.php');
+      include_once('../../includes/molecules/encabezado.php');
+      include_once('../../includes/molecules/whereUs.php');
 
  
     ?>
@@ -44,13 +43,13 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   </main>
   <footer>
     <?php
-      include_once(INCLUDES . '/footer.php');
+       include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='../../Pages/ConsultasViews/consultasView.js?v=<?php echo(time()); ?>'></script>
-<script src='../../includes/atoms/cdnjs/xlsx.full.min.js'></script>
-<script src='../../includes/atoms/html2canvas/html2canvas.min.js'></script>
-<script src='../../includes/atoms/jspdf/jspdf.min.js'></script>
+<script type='module' src='<?php echo BASE_URL ?>/Pages/ConsultasViews/consultasView.js?v=<?php echo(time()); ?>'></script>
+<script src='<?php echo BASE_URL ?>/includes/atoms/cdnjs/xlsx.full.min.js'></script>
+<script src='<?php echo BASE_URL ?>/includes/atoms/html2canvas/html2canvas.min.js'></script>
+<script src='<?php echo BASE_URL ?>/includes/atoms/jspdf/jspdf.min.js'></script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@ mb_internal_encoding('UTF-8');
 
 function consultar($call, $desde, $hasta)
 {
-    include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base_api.php";
+      include_once BASE_DIR . "/Routes/datos_base.php";
     // include_once '../../Routes/datos_base.php';
     // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
@@ -46,6 +46,7 @@ function consultar($call, $desde, $hasta)
 }
 
 header("Content-Type: application/json; charset=utf-8");
+require_once dirname(dirname(__DIR__)) . '/config.php';
 // session_start();
 
 // if (!isset($_SESSION['login_sso']['email'])) {

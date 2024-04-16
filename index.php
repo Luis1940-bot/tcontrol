@@ -1,15 +1,8 @@
 <?php
-// session_start();
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 
 header('Content-Type: text/html;charset=utf-8');
+require_once './config.php';
 
-
-define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
-define('INCLUDES', ROOT_PATH.'/includes/molecules');
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -20,9 +13,9 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
   <meta name='description' content=''>
   <meta name='author' content='Luis1940-bot'>
 
-  <link rel='shortcut icon' type = 'image / x-icon' href='./assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='./assets/css/index.css?v=<?php echo(time()); ?>' media='screen'>
-  <link rel='stylesheet' type='text/css' href='./assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/style.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
   <title></title>
 </head>
 <body>
@@ -34,6 +27,6 @@ define('INCLUDES', ROOT_PATH.'/includes/molecules');
         </a>
         </div>
     </div>
-<script type='module' src='./controllers/index.js?v=<?php echo(time()); ?>'></script>
+<script type='module' src='<?php echo BASE_URL ?>/controllers/index.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

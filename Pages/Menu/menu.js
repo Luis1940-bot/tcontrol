@@ -20,6 +20,10 @@ import {
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar } from '../../controllers/cript.js'
 
+import baseUrl from '../../config.js'
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = baseUrl
+
 let translateOperativo = []
 let espanolOperativo = []
 const objTranslate = {
@@ -65,7 +69,7 @@ function asignarEventos() {
   buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
       const ruta = objButtons[navegador.estadoAnteriorButton].name[index]
-      window.location.href = `../../Pages/${ruta}/index.php`
+      window.location.href = `${SERVER}/Pages/${ruta}/index.php`
     })
   })
 }
@@ -130,7 +134,7 @@ function dondeEstaEn() {
   // const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
   // document.getElementById('whereUs').innerText = ustedEstaEn;
   let lugar = trO('Menú') || 'Menú'
-  lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
+  lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
   document.getElementById('volver').style.display = 'block'
@@ -142,10 +146,10 @@ function configPHP(user) {
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
   const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = './../../assets/img/favicon.ico'
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
   document.title = developer
   const logoi = document.getElementById('logo_factum')
-  const srcValue = `./../../assets/img/${logo}.png`
+  const srcValue = `${SERVER}/assets/img/${logo}.png`
   const altValue = 'Tenki Web'
   logoi.src = srcValue
   logoi.alt = altValue
@@ -204,12 +208,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
-  const url = '../../Pages/Landing'
+  const url = `${SERVER}/Pages/Landing`
   window.location.href = url
 })
 
 function goBack() {
-  const url = '../../Pages/Home'
+  const url = `${SERVER}/Pages/Home`
   window.location.href = url
 }
 

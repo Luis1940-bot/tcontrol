@@ -7,6 +7,9 @@ import arrayGlobal from '../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../includes/atoms/alerta.js'
 
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
+
 const encabezados = {
   title: ['controles'],
   width: ['1'],
@@ -106,7 +109,7 @@ function cargaTabla(objTranslate, control) {
 }
 
 function goBack(e) {
-  const url = '../../Pages/Controles/index.php?simulateAsignarEventos=true'
+  const url = `${SERVER}/Pages/Controles/index.php?simulateAsignarEventos=true`
   window.location.href = url
 }
 

@@ -12,7 +12,9 @@ const widthScreen = window.innerWidth
 const widthScreenAjustado = 1 //360 / widthScreen;
 let arrayWidthEncabezado
 
-// let array = [];
+import baseUrl from '../../../config.js'
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = baseUrl
 
 function trO(palabra) {
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
@@ -117,7 +119,7 @@ function estilosCell(
   imagen.setAttribute('class', 'img-view')
   imagen.setAttribute('name', 'viewer')
   imagen.style.float = 'right'
-  imagen.src = '../../../assets/img/icons8-view-30.png'
+  imagen.src = `${SERVER}/assets/img/icons8-view-30.png`
   // imagen.style.height = '12px'
   // imagen.style.width = '12px'
   imagen.style.margin = 'auto 5px auto auto'

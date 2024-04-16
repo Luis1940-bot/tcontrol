@@ -6,8 +6,9 @@ mb_internal_encoding('UTF-8');
 
 function consultar($call, $desde, $hasta, $operation)
 {
-     include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
-    // include_once '../../../Routes/datos_base.php';
+      include_once BASE_DIR . "/Routes/datos_base.php";
+    //  include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+   
     // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
     try {
@@ -71,6 +72,7 @@ function consultar($call, $desde, $hasta, $operation)
 }
 
 header("Content-Type: application/json; charset=utf-8");
+require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 $datos = file_get_contents("php://input");
 // $datos = '{"q":"proc_DWTFritasL1","desde":"2024-01-01","hasta":"2024-01-03","operation":"DWTFritas"}';
 // $datos = '{"q":"proc_TnEspecialidades","desde":"2024-01-01","hasta":"2024-01-03","operation": null}';

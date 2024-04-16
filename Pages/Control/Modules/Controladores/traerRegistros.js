@@ -1,5 +1,5 @@
-// const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../../..'
+import baseUrl from '../../../../config.js'
+const SERVER = baseUrl
 
 export default function traerRegistros(q, sql_i) {
   // eslint-disable-next-line no-console
@@ -13,9 +13,8 @@ export default function traerRegistros(q, sql_i) {
       sql_i,
     }
     const datos = JSON.stringify(obj)
-    // console.log(datos)
-    // const ruta = `${SERVER}/Pages/Control/Routes/traerRegistros.php?q=${sql}${rax}`
     const ruta = `${SERVER}/Routes/index.php`
+    // console.log(ruta)
     fetch(ruta, {
       method: 'POST',
       headers: {

@@ -21,7 +21,7 @@
       "FFL2",
       "Puré",
       "BOS - Reglas de Oro",
-      "SGD"
+      "SCG"
     ],
     "type": ["btn", "btn", "btn", "btn", "btn", "ctrl"],
     "ruta": ["", "", "", "", "", "Menu/index.php"],

@@ -1,3 +1,6 @@
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
+
 function inicioPerformance() {
   const inicio = performance.now()
   sessionStorage.setItem('performance', inicio)
@@ -9,7 +12,7 @@ function finPerformance() {
   const signal = document.getElementById('idSignal')
   // signal.style.height = '12px';
   // signal.style.width = '12px';
-  const ruta = '../../assets/img/'
+  const ruta = `${SERVER}/assets/img/`
   if (velocidadMbps > 5) {
     signal.src = `${ruta}caracol.png`
     signal.alt = 'No connetc'

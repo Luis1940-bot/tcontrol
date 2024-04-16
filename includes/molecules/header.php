@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
+require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -9,10 +10,10 @@ header('Content-Type: text/html;charset=utf-8');
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='./../../assets/css/header.css' media='screen'>
-  <link rel='stylesheet' type='text/css' href='./../../assets/css/conection.css' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/alerta.css' media='screen'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/header.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/conection.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/alerta.css' media='screen'>
   <title>Factum</title>
 </head>
 <body>
@@ -22,7 +23,7 @@ header('Content-Type: text/html;charset=utf-8');
   ?>
   <div class='div-header'>
     <div class='headerMenu'>
-      <div class='div-menu'><img id='hamburguesa'  src='./../../assets/img/hamburguesa.png' alt='Menu'></div>
+      <div class='div-menu'><img id='hamburguesa'  src='<?php echo BASE_URL ?>/assets/img/hamburguesa.png' alt='Menu'></div>
     </div>
     <div class='headerVersion'>
       <span class="version">V1.0</span><img id='idSignal' src='' alt=''>
@@ -35,11 +36,11 @@ header('Content-Type: text/html;charset=utf-8');
         </div>
     </div>
     <div class='headerLenguaje'><button class='custom-button' id='planta'></button></div>
-    <div class='headerPerson'><img id='person' src='./../../assets/img/person.png' alt='Person'></div>
+    <div class='headerPerson'><img id='person' src='<?php echo BASE_URL ?>/assets/img/person.png' alt='Person'></div>
   </div>
   <div class='header-McCain'>
     <div class='div-McCain'>
-      <img id='logo_mccain' src='./../../assets/img/logo.png' alt='McCain'>
+      <img id='logo_mccain' src='<?php echo BASE_URL ?>/assets/img/logo.png' alt='McCain'>
     </div>
   </div>
 </body>

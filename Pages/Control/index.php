@@ -8,11 +8,7 @@ session_start();
     exit;
   }
 
-
-define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
-define('MODALS', ROOT_PATH.'/includes/molecules/modales');
-define('INCLUDES', ROOT_PATH.'/includes/molecules');
-define('PAGES', ROOT_PATH.'/Pages/Control');
+require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
@@ -22,11 +18,11 @@ define('PAGES', ROOT_PATH.'/Pages/Control');
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type = 'image / x-icon' href='./../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='../../Pages/Control/css/control.css' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/alerta.css' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/modal.css' media='screen'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/Control/css/control.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/alerta.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/modal.css?v=<?php echo(time()); ?>' media='screen'>
   <title>Factum</title>
 </head>
 <body>

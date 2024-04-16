@@ -3,8 +3,8 @@
 
 function eliminaNuxPedido($nux, $sql_i){
       $numFilasDeleteadas = 0;
-      // include_once '../../../Routes/datos_base.php';
-      include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+        include_once BASE_DIR . "/Routes/datos_base.php";
+      // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
       $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
       $sql="DELETE FROM LTYregistrocontrol WHERE nuxpedido = ?";
       try {
@@ -25,6 +25,7 @@ function eliminaNuxPedido($nux, $sql_i){
 }
 
   header("Content-Type: application/json; charset=utf-8");
+  require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
   $datos = file_get_contents("php://input");
   // $datos = '{"q":240327134607826,"ruta":"/ex2024","rax":"&new=Mon Apr 08 2024 07:10:03 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
   // echo $datos;

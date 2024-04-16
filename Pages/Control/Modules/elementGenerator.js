@@ -8,6 +8,10 @@ import {
 // eslint-disable-next-line import/extensions
 import buttonImage from './imagenes.js'
 
+import baseUrl from '../../../config.js'
+// const SERVER = '/iControl-Vanilla/icontrol';
+const SERVER = baseUrl
+
 class ElementGenerator {
   static generateInputDate(date, width, valorPorDefecto) {
     const inputDate = document.createElement('input')
@@ -189,7 +193,7 @@ class ElementGenerator {
 
     const dimensiones = dim
     const img = document.createElement('img')
-    img.src = `../../../assets/img/planos/${plant}/${src}`
+    img.src = `${SERVER}/assets/img/planos/${plant}/${src}`
     img.alt = alt
     img.dataset.extension = extension
     img.classList.add('planos')

@@ -1,5 +1,5 @@
-// const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = '../../../..'
+import baseUrl from '../../../config.js'
+const SERVER = baseUrl
 
 export default function callProcedure(q, desde, hasta, operation) {
   // eslint-disable-next-line no-console

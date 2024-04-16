@@ -3,10 +3,10 @@ mb_internal_encoding('UTF-8');
   if (!isset($_SESSION['login_sso']['email'] )) {
       unset($_SESSION['login_sso']['email'] ); 
   }
-
+require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 function consultar($query, $desde, $hasta) {
-  // include_once '../../../Routes/datos_base.php';
-   include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+    include_once BASE_DIR . "/Routes/datos_base.php";
+  //  include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
   try {
         $con = mysqli_connect($host,$user,$password,$dbname);
         if (!$con) {

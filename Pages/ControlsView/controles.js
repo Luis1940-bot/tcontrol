@@ -24,6 +24,9 @@ import { desencriptar } from '../../controllers/cript.js'
 // eslint-disable-next-line import/extensions
 import cargaTabla from './controlViews.js'
 
+import baseUrl from '../../config.js'
+const SERVER = baseUrl
+
 let translateOperativo = []
 let espanolOperativo = []
 let translateArchivos = []
@@ -76,7 +79,7 @@ function dondeEstaEn() {
   // const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
   // document.getElementById('whereUs').innerText = ustedEstaEn;
   let lugar = `${trO('Controles') || 'Controles'}`
-  lugar = `<img src='../../assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
+  lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
 }
@@ -87,10 +90,10 @@ function configPHP(user) {
   const metaDescription = document.querySelector('meta[name="description"]')
   metaDescription.setAttribute('content', content)
   const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = './../../assets/img/favicon.ico'
+  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
   document.title = developer
   const logoi = document.getElementById('logo_factum')
-  const srcValue = `./../../assets/img/${logo}.png`
+  const srcValue = `${SERVER}/assets/img/${logo}.png`
   const altValue = 'Tenki Web'
   logoi.src = srcValue
   logoi.alt = altValue
@@ -160,6 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
-  const url = '../../Pages/Landing'
+  const url = `${SERVER}/Pages/Landing`
   window.location.href = url
 })
