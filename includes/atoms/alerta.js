@@ -632,7 +632,6 @@ const funcionApi = () => {
       sessionStorage.getItem('api')
     )
 
-    console.log(desencriptar(sessionStorage.getItem('api')))
     const url = window.location.host
     let ruta = ''
     if (desde === null || hasta === null) {
@@ -2841,6 +2840,7 @@ class Alerta {
 
   createMenuListControls(objeto, control, nuxpedido, traerControl, objTrad) {
     try {
+      let firma = document.getElementById('spanUbicacion').textContent
       //! viewer para print
       const obj = objeto
       this.modal = document.createElement('div')
@@ -2862,9 +2862,16 @@ class Alerta {
       divEncabezado.appendChild(buttonPDF)
       modalContent.appendChild(divEncabezado)
 
+      obj.titulo.text.control = firma
+      obj.titulo.fontSize = '20px'
+      obj.titulo.marginTop = '0px'
+      firma = createH3(obj.titulo, 'control')
+      modalContent.appendChild(firma)
+
       const texto = `${control.control_N} - ${control.control_T} - ${nuxpedido}`
       // console.log(texto)
       obj.titulo.text.control = texto
+      obj.titulo.fontSize = '14px'
       const title = createH3(obj.titulo, 'control')
       modalContent.appendChild(title)
 

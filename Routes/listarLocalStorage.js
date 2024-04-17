@@ -1,6 +1,6 @@
 console.log('Script cargado correctamente')
 
-function listarLocalStorage() {
+function listarSessionStorage() {
   const keys = Object.keys(sessionStorage)
 
   keys.forEach((key) => {
@@ -9,4 +9,4 @@ function listarLocalStorage() {
   })
 }
 
-listarLocalStorage() // Llama a la función al cargar el script
+listarSessionStorage() // Llama a la función al cargar el script

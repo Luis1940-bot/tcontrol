@@ -1,0 +1,144 @@
+{
+  "planta": "McCain Apatita-Araxá-Brasil",
+  "idiomas": {
+    "bienvenido": ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
+    "abreviatura": ["es", "bra", "en"]
+  },
+  "Menu": {
+    "name": ["Controles", "Consultas"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", "Consultas/index.php"]
+  },
+  "Controles": {
+    "name": ["Controles", "Imprimir control"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", ""]
+  },
+  "apps": {
+    "name": ["Performance", "BOS - Reglas de Oro", "SCG"],
+    "type": ["btn", "btn", "ctrl"],
+    "ruta": ["", "", "Menu/index.php"],
+    "nivel": [1, 1, 5],
+    "BOS - Reglas de Oro": {
+      "name": ["BOS ACTO SEGURO", "BOS ACTO NO SEGURO", "REGLAS DE ORO"],
+      "type": ["btn", "btn", "ctrl"],
+      "ruta": ["", "", "control_N=124&control_T=BOS%20REGLAS%20DE%20ORO&nr=0"],
+      "nivel": [1, 1, 1],
+      "BOS ACTO SEGURO": {
+        "name": ["BOS CALIDAD", "BOS MEDIO AMBIENTE", "BOS SEGURIDAD"],
+        "type": ["ctrl", "ctrl", "ctrl"],
+        "ruta": [
+          "control_N=121&control_T=BOS%20CALIDAD%20AS&nr=0",
+          "control_N=123&control_T=BOS%20MEDIO%20AMBIENTE%20AS&nr=0",
+          "control_N=119&control_T=BOS%20SEGURIDAD%20AS&nr=0"
+        ],
+        "nivel": [1, 1, 1]
+      },
+      "BOS ACTO NO SEGURO": {
+        "name": [
+          "BOS CALIDAD ANS",
+          "BOS MEDIO AMBIENTE ANS",
+          "BOS SEGURIDAD ANS"
+        ],
+        "type": ["ctrl", "ctrl", "ctrl"],
+        "ruta": [
+          "control_N=275&control_T=BOS%20CALIDAD%20AI&nr=0",
+          "control_N=277&control_T=BOS%20MEDIO%20AMBIENTE%20AI&nr=0",
+          "control_N=276&control_T=BOS%20SEGURIDAD%20AI&nr=0"
+        ],
+        "nivel": [1, 1, 1]
+      }
+    },
+    "Performance": {
+      "name": ["TONELADAS", "ROVE FRITAS", "DWT FRITAS"],
+      "type": ["ctrl", "ctrl", "btn"],
+      "ruta": [
+        "control_N=231&control_T=TONELADAS%20FRITAS%20L1&nr=0",
+        "rove/fritas_L1",
+        ""
+      ],
+      "nivel": [1, 1, 1],
+      "DWT FRITAS": {
+        "name": ["DWT PLANEADO FRITAS", "DWT NO PLANEADO FRITAS"],
+        "type": ["ctrl", "btn"],
+        "ruta": [
+          "control_N=232&control_T=DWT%20FRITAS%20L1%20PLANEADO&nr=0",
+          ""
+        ],
+        "nivel": [1, 1],
+        "DWT NO PLANEADO FRITAS": {
+          "name": [
+            "DWT MATERIA PRIMA",
+            "DWT OPERACIONAL",
+            "DWT OTROS",
+            "DWT PRODUCCIÓN",
+            "DWT MANTENIMIENTO"
+          ],
+          "type": ["ctrl", "ctrl", "ctrl", "btn", "ctrl"],
+          "ruta": [
+            "control_N=233&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20AGRO&nr=0",
+            "control_N=264&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20OPERACIONAL&nr=0",
+            "control_N=235&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20OTROS&nr=0",
+            "",
+            "control_N=263&control_T=DWT%20FRITAS%20L1%20NO%20PLANEADO%20MANTENIMIENTO&nr=0"
+          ],
+          "nivel": [1, 1, 1, 1, 1],
+          "DWT PRODUCCIÓN": {
+            "name": [
+              "DWT RECEBIMENTO",
+              "DWT PELADOR",
+              "DWT CORTE",
+              "DWT  SORTING",
+              "DWT TOTE ROOM",
+              "DWT GRADING",
+              "DWT EMBALAGEM",
+              "DWT PALETIZADO",
+              "DWT BLANCHER",
+              "DWT SECADOR",
+              "DWT BATTER",
+              "DWT FRITADOR",
+              "DWT FREEZER",
+              "DWT UTILIDADES",
+              "DWT EMPACOTAMENTO"
+            ],
+            "type": [
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl"
+            ],
+            "ruta": [
+              "control_N=236&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20DRY%20RECEIVING&nr=0",
+              "control_N=239&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PELADORAS&nr=0",
+              "control_N=240&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20CORTE&nr=0",
+              "control_N=241&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20SORTER&nr=0",
+              "control_N=257&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20TOTE%20ROOM&nr=0",
+              "control_N=258&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20GRADING&nr=0",
+              "control_N=259&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20EMPAQUE&nr=0",
+              "control_N=260&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20PRODUCCIÓN%20PALETIZADO&nr=0",
+              "control_N=268&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20BLANCHER&nr=0",
+              "control_N=269&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20SECADOR&nr=0",
+              "control_N=270&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20BATTER&nr=0",
+              "control_N=271&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20FRITADOR&nr=0",
+              "control_N=271&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20FRITADOR&nr=0",
+              "control_N=273&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20UTILIDADES&nr=0",
+              "control_N=274&control_T=DWT FRITAS%20L1%20NO%20PLANEADO%20EMPACOTAMENTO&nr=0"
+            ],
+            "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+          }
+        }
+      }
+    }
+  }
+}
