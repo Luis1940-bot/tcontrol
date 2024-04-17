@@ -19,7 +19,8 @@ if (isLocalhost()) {
     define('PASS', 'Factum2017admin');
     define('SET_FROM', 'alerta.factum@factumconsultora.com');
     define('ADD_BCC', 'luisfactum@gmail.com');
-    
+    define('IMAGE', $baseDir . '/assets/imagenes/');
+    define('PLANOS', $base . '/assets/img/planos/');
 } else {
     // En producción
     if ($_SERVER['HTTP_HOST'] === 'tenkiweb.com') {
@@ -34,6 +35,8 @@ if (isLocalhost()) {
       define('PASS', ']SDGGL}#p.Ba');
       define('SET_FROM', 'alerta.tenki@tenkiweb.com');
       define('ADD_BCC', 'luisglogista@gmail.com');
+      define('IMAGE', $base . '/assets/imagenes/');
+      define('PLANOS', $base . '/assets/img/planos/');
     }
     if ($_SERVER['HTTP_HOST'] === 'factumconsultora.com') {
       $base = 'https://factumconsultora.com/scg-mccain';
@@ -47,6 +50,8 @@ if (isLocalhost()) {
       define('PASS', 'Factum2017admin');
       define('SET_FROM', 'alerta.factum@factumconsultora.com');
       define('ADD_BCC', 'luisfactum@gmail.com');
+      define('IMAGE', $_SERVER['DOCUMENT_ROOT'] . '/scg-mccain/assets/Imagenes/');
+      define('PLANOS', $_SERVER['DOCUMENT_ROOT'] . '/scg-mccain/assets/img/planos/');
     }
     
     $baseDir = __DIR__; 
@@ -54,6 +59,7 @@ if (isLocalhost()) {
     define('BASE_DIR', str_replace('\\', '/', $baseDir));
     define('BASE_PLANOS', $base . '/assets/img/planos/');
     define('BASE_IMAGENES', $base . '/assets/Imagenes/');
+
 }
 
 

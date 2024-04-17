@@ -70,7 +70,7 @@ main {
 }
 
 /* Estilos para tabletas en formato landscape */
-@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
   .div-home-buttons {
     margin-top: 20px;
   }

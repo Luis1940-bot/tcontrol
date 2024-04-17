@@ -124,7 +124,7 @@
 }
 
 /* Estilos para tabletas en formato landscape */
-@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
   /* Estilos para tablets en orientación landscape */
   .div-wichConsult {
     margin-top: 30px;

@@ -148,7 +148,7 @@ table tbody tr td div button {
   }
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
   /* Cambios para tablets en orientación landscape */
   #tableConsultaViews {
     width: 95%;

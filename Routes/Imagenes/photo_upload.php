@@ -1,10 +1,7 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
-// header('Content-Type: application/json');
-define('ROOT_PATHP', $_SERVER['DOCUMENT_ROOT']);
-define('IMAGE', ROOT_PATHP.'/assets/Imagenes/');
-// $SERVER = ROOT_PATHP.'/iControl-Vanilla/icontrol/assets/Imagenes/';
-$SERVER = IMAGE;
+
+require_once dirname(dirname(__DIR__)) . '/config.php';
 // include('datos.php');
 $datos = $_POST['imgBase64'];
 // $datos = $datox;
@@ -74,8 +71,9 @@ if (isset($datos)) {
 
                 // Construir la ruta de la imagen
                
-                $directorioImagenes = $SERVER . '/' . $plant . '/';
-
+               
+                // $directorioImagenes = dirname(dirname(__DIR__)) . '/assets/imagenes/' . $plant[$i] . '/';
+                 $directorioImagenes = IMAGE  . $plant[$i] . '/';
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);
                 }
@@ -100,9 +98,10 @@ if (isset($datos)) {
                 // $imageName = 'imagen_' . uniqid() . '.' . $extension;
 
                 // Construir la ruta de la imagen
-                
-                $directorioImagenes = $SERVER . '/' . $plant . '/';
-
+               
+              
+                // $directorioImagenes = dirname(dirname(__DIR__)) . '/assets/imagenes/' . $plant[$i] . '/';
+                $directorioImagenes = IMAGE . $plant[$i] . '/';
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);
                 }

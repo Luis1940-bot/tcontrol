@@ -136,7 +136,7 @@ main {
   }
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1126px) and (orientation: landscape) {
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
   .div-landing-buttons {
     padding-top: 20px;
   }
