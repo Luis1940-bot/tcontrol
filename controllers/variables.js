@@ -2100,6 +2100,7 @@ const procesoExitoso = {
     hoverColor: null,
     innerHTML: null,
     cursor: null,
+    marginRight: null,
   },
 }
 const modalImagen = {

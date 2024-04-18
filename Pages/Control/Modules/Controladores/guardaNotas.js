@@ -1,11 +1,15 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-function guardaNotas(obj) {
+function guardaNotas(obj, plant) {
   // console.log(obj)
   const urlGuardar = `${SERVER}/Pages/Control/Routes/backup.php`
   const objetoFormateado = JSON.stringify(obj, null, 2)
   const objetoFormateadoConSaltos = objetoFormateado.replace(/\],/g, '],\n')
+  const dataToSend = {
+    plant: plant,
+    notes: objetoFormateadoConSaltos,
+  }
 
   // Configuración de la solicitud Fetch
   const opcionesSolicitud = {
@@ -13,7 +17,7 @@ function guardaNotas(obj) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: objetoFormateadoConSaltos,
+    body: JSON.stringify(dataToSend),
   }
 
   // Realizar la solicitud Fetch al archivo PHP

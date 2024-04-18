@@ -85,6 +85,9 @@ function createButton(config) {
   config.marginLeft !== null
     ? (button.style.marginLeft = config.marginLeft)
     : null
+  config.marginRight !== null
+    ? (button.style.marginRight = config.marginRight)
+    : null
   config.fontWeight !== null
     ? (button.style.fontWeight = config.fontWeight)
     : null
@@ -830,6 +833,15 @@ function cartelVerdeInsertado(
     modalContent.appendChild(spanTexto)
     modal.appendChild(modalContent)
   }
+
+  obj.divButtons.alignItems = 'center'
+  const divButtons = createDiv(obj.divButtons)
+  obj.btnaccept.marginLeft = 'auto'
+  obj.btnaccept.marginRight = 'auto'
+  const button = createButton(obj.btnaccept)
+  divButtons.appendChild(button)
+  modalContent.appendChild(divButtons)
+
   document.body.appendChild(modal)
 }
 
@@ -874,7 +886,8 @@ function informe(
   enviado,
   miAlerta,
   objTrad,
-  mod
+  mod,
+  plant
 ) {
   const modal = mod
   const mensaje = arrayGlobal.mensajesVarios.guardar
@@ -938,7 +951,7 @@ function informe(
     sessionStorage.setItem('config_menu', encriptar(configMenu))
 
     limpiaArrays()
-    guardaNotas(convertido)
+    guardaNotas(convertido, plant)
   } else {
     obj.div.background = '#D82137'
     const modalContent = createDiv(obj.div)
@@ -980,10 +993,11 @@ async function insert(
     // console.log(imagenes);
 
     const enviaPorEmail = sessionStorage.getItem('envia_por_email')
+    const enviaPorEmailBooleano = enviaPorEmail === 'true'
     const encabezados = { ...objEncabezados }
     encabezados.documento = insertado.documento
     let enviado = ''
-    if (enviaPorEmail) {
+    if (enviaPorEmailBooleano) {
       enviado = await enviaMail(nuevoObjeto, encabezados, plant)
       // console.log(enviado);
     }
@@ -996,7 +1010,8 @@ async function insert(
       enviado,
       miAlertaInforme,
       objTrad,
-      modal
+      modal,
+      plant
     )
   } catch (error) {
     // eslint-disable-next-line no-console

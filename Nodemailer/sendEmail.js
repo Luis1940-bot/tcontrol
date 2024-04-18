@@ -7,7 +7,7 @@ async function send(nuevoObjeto, encabezados, plant) {
     formData.append('datos', JSON.stringify(nuevoObjeto))
     formData.append('encabezados', JSON.stringify(encabezados))
     formData.append('plant', JSON.stringify(plant))
-    // console.log(formData);
+    // console.log(formData)
     const response = await fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
       method: 'POST',
       body: formData,
@@ -27,7 +27,6 @@ async function send(nuevoObjeto, encabezados, plant) {
 
 function enviaMail(datos, encabezados, plant) {
   try {
-    // console.log(datos);
     const filtrados = datos.displayRow
       .map((valor, indice) => {
         const tipoDeDato = datos.tipodedato[indice]

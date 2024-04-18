@@ -27,7 +27,7 @@ function insertarRegistro(objeto) {
   }
   const datos = JSON.stringify(obj)
   const ruta = `${SERVER}/Routes/index.php`
-
+  // console.log(datos)
   return new Promise((resolve, reject) => {
     // Realiza el fetch y maneja la lógica de la respuesta
     fetch(ruta, {

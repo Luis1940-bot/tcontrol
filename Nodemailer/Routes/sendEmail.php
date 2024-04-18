@@ -26,7 +26,7 @@ require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
   // $datos =json_decode($datox, true);
   // $encabezados =json_decode($encabezadox, true);
-  // $plant = '1';
+  // $plant = '2';
 
 
 try {
@@ -114,7 +114,8 @@ $html = ob_get_clean();
     
 
     if (strlen($address)>0) {
-      $dirs = explode(",", $address);
+      $dirs = explode("/", $address);
+    
       $cantidad_emails=count($dirs);
       for ($i=0; $i < $cantidad_emails; $i++) { 
         $mail->AddAddress($dirs[$i]);

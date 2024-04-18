@@ -7,6 +7,7 @@ include('generatorNuxPedido.php');
 function insertar_registro($datos) {
   $dato_decodificado =urldecode($datos);
   $objeto_json = json_decode($dato_decodificado);
+
   $i=0;
   $campos='';
   $interrogantes='';
@@ -72,7 +73,7 @@ function insertar_registro($datos) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-
+// $datos = $datox;
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
   echo json_encode($response);

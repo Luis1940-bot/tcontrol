@@ -161,6 +161,12 @@ function generateOptions(array, select) {
   }
 }
 
+function removeAllOptions(select) {
+  while (select.firstChild) {
+    select.removeChild(select.firstChild)
+  }
+}
+
 function insertarDatoEnFila(obj) {
   try {
     const posicion = Number(obj.filaInserta) + 1
@@ -168,7 +174,11 @@ function insertarDatoEnFila(obj) {
     const select = fila.querySelector('td:nth-child(3) select')
     select.setAttribute('selector', 'select-hijo')
     const nuevoArray = obj.res
-    generateOptions(nuevoArray, select)
+    if (nuevoArray[0][0] !== '') {
+      generateOptions(nuevoArray, select)
+    } else {
+      removeAllOptions(select)
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error)
@@ -177,16 +187,22 @@ function insertarDatoEnFila(obj) {
 
 async function eventSelect(event, hijo, sqlHijo) {
   const select = event.target
-  // eslint-disable-next-line prefer-destructuring
   const selectedOptions = select.selectedOptions
-  const columnValues = Array.from(selectedOptions).map((option) => option.value)
+
+  const indexTextPairs = []
+
+  for (let i = 0; i < selectedOptions.length; i++) {
+    const option = selectedOptions[i]
+    indexTextPairs.push([option.value, option.textContent])
+  }
+
   let obj
-  if (hijo === '1' && columnValues[0]) {
+  if (hijo === '1' && indexTextPairs.length > 0) {
     try {
-      obj = await traerHijo(sqlHijo, columnValues)
+      // Aquí puedes usar indexTextPairs para acceder a los índices y textos
+      obj = await traerHijo(sqlHijo, indexTextPairs[0])
       insertarDatoEnFila(obj)
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error al llamar a traerHijo:', error)
     }
   }

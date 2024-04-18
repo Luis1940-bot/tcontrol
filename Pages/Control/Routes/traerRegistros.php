@@ -89,7 +89,7 @@
                           $sql=$sql_i; //$_GET['sql'];
                           $sql = str_replace("+","%2B",$sql);
                           $sql = urldecode($sql);
-                        
+                        // echo $sql.'<br>';
                       break;
 
                       default:
@@ -153,7 +153,7 @@
 
         if ($data !== null) {
           $q = $data['q'];
-          $sql_i = $data['sql_i'];
+          $sql_i = urldecode($data['sql_i']);
           traer($q, $sql_i);
         } else {
           echo "Error al decodificar la cadena JSON";
