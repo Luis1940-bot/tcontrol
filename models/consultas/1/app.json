@@ -71,19 +71,20 @@
     "operation": [null, null, "sum", null]
   },
   "Producción": {
-    "name": ["Unidades Técnicas", "Componentes", "Estándares"],
-    "confecha": [0, 0, 0],
-    "archivo": ["unidadtecnica", "componentes", "estandares"],
-    "active": [1, 1, 1],
-    "button": [0, 0, 0],
+    "name": ["Unidades Técnicas", "Componentes", "Equipos", "Estándares"],
+    "confecha": [0, 0, 0, 0],
+    "archivo": ["unidadtecnica", "componentes", "", "estandares"],
+    "active": [1, 1, 1, 1],
+    "button": [0, 0, 0, 0],
     "procedure": [
       "proc_unidadesTecnicas",
       "proc_componentes",
+      "proc_equipo",
       "proc_estandares"
     ],
-    "in": [null, null, null],
-    "out": [null, null, null],
-    "operation": [null, null, null]
+    "in": [null, null, null, null],
+    "out": [null, null, null, null],
+    "operation": [null, null, null, null]
   },
   "Fritas": {
     "name": ["Toneladas de Fritas L1", "Toneladas de Fritas L2"],
