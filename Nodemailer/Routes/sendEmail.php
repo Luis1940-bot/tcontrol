@@ -26,13 +26,13 @@ require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
   // $datos =json_decode($datox, true);
   // $encabezados =json_decode($encabezadox, true);
-  // $plant = '2';
+  // $plant = json_decode($plantx, true);
 
 
 try {
    $datos =json_decode($_POST['datos'], true);
    $encabezados =json_decode($_POST['encabezados'], true);
-   $plant =json_decode($_POST['plant'], true);
+   $plant =$_POST['plant'];
   
 
    if ($datos === null && json_last_error() !== JSON_ERROR_NONE) {

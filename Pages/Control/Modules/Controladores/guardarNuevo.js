@@ -53,7 +53,7 @@ function tuFuncion(
   // Crea una copia del objeto para evitar modificar el parámetro directamente
   let emailSupervisor = ''
   if (supervisor) {
-    emailSupervisor = `,${supervisor}`
+    emailSupervisor = `/${supervisor}`
   }
   const objetoControlCopia = { ...objetoControl }
   // eslint-disable-next-line prefer-destructuring
@@ -87,6 +87,7 @@ function recorroTable(objetoControl, arrayControl, nux) {
     let estanTodosLosRequeridos = true
     let emailSupervisor = null
     let supervisor = desencriptar(sessionStorage.getItem('firmado'))
+
     // eslint-disable-next-line max-len
     supervisor.id === 0
       ? (supervisor = 0)
@@ -94,6 +95,7 @@ function recorroTable(objetoControl, arrayControl, nux) {
         (emailSupervisor = desencriptar(
           sessionStorage.getItem('firmado')
         ).mail))
+
     let founded
     let fechaActual = ''
     let horaActual = ''

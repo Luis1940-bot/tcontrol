@@ -6,7 +6,7 @@ async function send(nuevoObjeto, encabezados, plant) {
     const formData = new FormData()
     formData.append('datos', JSON.stringify(nuevoObjeto))
     formData.append('encabezados', JSON.stringify(encabezados))
-    formData.append('plant', JSON.stringify(plant))
+    formData.append('plant', plant)
     // console.log(formData)
     const response = await fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
       method: 'POST',
