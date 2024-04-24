@@ -22,7 +22,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
     <div class='div-ubicacion'>
       <span id='spanUbicacion'>.</span>
     </div>
-    <div class='div-person'>
+    <div class='div-person' style='display: none;'>
       <span id='spanPerson'>Luis Gimenez</span>
     </div>
   </div>
