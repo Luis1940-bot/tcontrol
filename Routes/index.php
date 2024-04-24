@@ -115,6 +115,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           case '/ux2024':
             include_once dirname(__DIR__) . '/Pages/Control/Routes/ux.php';
             break;
+          case '/traerReportes':
+            include_once dirname(__DIR__) . '/Pages/ListReportes/Routes/traerRegistros.php';
+            break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada
