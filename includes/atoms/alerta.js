@@ -2538,6 +2538,159 @@ class Alerta {
     }
   }
 
+  createViewerReportes(objeto, array, objTrad) {
+    try {
+      const nivelReporte = array[14]
+      const persona = desencriptar(sessionStorage.getItem('user'))
+      const { tipo } = persona
+      const obj = objeto
+      this.modal = document.createElement('div')
+      this.modal.id = 'modalAlertView'
+      this.modal.className = 'modal'
+      this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+      // Crear el contenido del modal
+      const modalContent = createDiv(obj.divContent)
+      // const span = createSpan(obj.close)
+      // modalContent.appendChild(span)
+
+      const span = createSpan(obj.close)
+      obj.divCajita.hoverColor = null
+      obj.divCajita.position = null
+      const divClose = createDiv(obj.divCajita)
+      divClose.appendChild(span)
+      modalContent.appendChild(divClose)
+
+      let texto = array[0]
+      let typeAlert = 'viewer'
+      // texto = trA(texto, objTrad) || texto;
+
+      obj.titulo.text[typeAlert] = `${array[1]} - ${texto}`
+      const title = createH3(obj.titulo, typeAlert)
+      title.id = 'idTituloH3'
+      title.setAttribute('data-index', array[1])
+      title.setAttribute('data-name', array[0])
+      modalContent.appendChild(title)
+
+      // eslint-disable-next-line prefer-destructuring
+      texto = array[2]
+      texto = trA(texto, objTrad) || texto
+      typeAlert = 'descripcion'
+      obj.span.text[typeAlert] = texto
+      obj.span.marginTop = '10px'
+      let spanTexto = createSpan(obj.span, texto)
+      modalContent.appendChild(spanTexto)
+
+      texto = trO('Primera', objTrad) || 'Primera'
+      typeAlert = 'fechas'
+      let mensaje = `${texto} ${array[16]}`
+      texto = trO('Última', objTrad) || 'Última'
+      mensaje = `${mensaje} - ${texto} ${array[3]}`
+      obj.span.text[typeAlert] = mensaje
+      obj.span.fontSize = '10px'
+      obj.span.fontColor = 'red'
+      obj.span.marginTop = '10px'
+      spanTexto = createSpan(obj.span, mensaje)
+      modalContent.appendChild(spanTexto)
+
+      texto = trO('Tipo de usuario:', objTrad) || 'Tipo de usuario:'
+      texto = `${texto} ${array[14]}-${array[19]}`
+      typeAlert = 'nivelUsuario'
+      obj.span.text[typeAlert] = `${texto} ${array[14]}-${array[19]}`
+      obj.span.fontSize = '12px'
+      obj.span.fontColor = '#212121'
+      obj.span.marginTop = '10px'
+      spanTexto = createSpan(obj.span, texto)
+      modalContent.appendChild(spanTexto)
+
+      if (nivelReporte <= parseInt(tipo)) {
+        const divButton = createDiv(obj.divButtons)
+        texto = trO('Editar', objTrad) || 'Editar'
+        obj.btnNuevo.text = texto
+        const btnNuevo = createButton(obj.btnNuevo)
+
+        texto = trO('Clonar', objTrad) || 'Clonar'
+        obj.btnVerCargados.text = texto
+        const btnVerCargados = createButton(obj.btnVerCargados)
+
+        texto =
+          trO(obj.btnProcedimiento.text, objTrad) || obj.btnProcedimiento.text
+        obj.btnProcedimiento.text = texto
+        const btnProcedimiento = createButton(obj.btnProcedimiento)
+
+        divButton.appendChild(btnNuevo)
+        divButton.appendChild(btnVerCargados)
+        divButton.appendChild(btnProcedimiento)
+
+        modalContent.appendChild(divButton)
+        this.modal.appendChild(modalContent)
+        document.body.appendChild(this.modal)
+        const idbtnNuevo = document.getElementById('idbtnNuevo')
+        idbtnNuevo.addEventListener('click', () => {
+          //!editar
+          const idTituloH3 = document.getElementById('idTituloH3')
+          const cod = idTituloH3.getAttribute('data-index')
+          const name = idTituloH3.getAttribute('data-name')
+          const url = `${cod}`
+
+          const objetoRuta = {
+            control_N: url,
+            control_T: decodeURIComponent(name),
+            nr: '0',
+          }
+          sessionStorage.setItem('contenido', encriptar(objetoRuta))
+
+          let timestamp = new Date().getTime()
+          const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
+          window.location.href = ruta
+          // window.open(ruta, '_blank')
+        })
+        const idbtnCargados = document.getElementById('idVerCargados')
+        idbtnCargados.addEventListener('click', () => {
+          //! clonar
+          const idTituloH3 = document.getElementById('idTituloH3')
+          const cod = idTituloH3.getAttribute('data-index')
+          const name = idTituloH3.getAttribute('data-name')
+          const url = `${cod}`
+          let timestamp = new Date().getTime()
+          const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
+
+          const objetoRuta = {
+            control_N: url,
+            control_T: decodeURIComponent(name),
+            nr: '0',
+          }
+          sessionStorage.setItem('listadoCtrls', encriptar(objetoRuta))
+          // console.log(ruta)
+          window.location.href = ruta
+        })
+      } else {
+        texto =
+          trO(
+            'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias',
+            objTrad
+          ) ||
+          'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias'
+        typeAlert = 'descripcion'
+        obj.span.text[typeAlert] = texto
+        obj.span.marginTop = '10px'
+        obj.span.fontSize = '18px'
+        obj.span.fontColor = 'red'
+        let spanTexto = createSpan(obj.span, texto)
+        modalContent.appendChild(spanTexto)
+        this.modal.appendChild(modalContent)
+        document.body.appendChild(this.modal)
+      }
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          cerrarModal('modalAlertView')
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   createCalendar(objeto, objTranslate, procedure, plant) {
     try {
       const obj = objeto

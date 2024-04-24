@@ -71,6 +71,15 @@ if(isset($_GET['ruta'])) {
         header("Location: $url");
         break;
 
+      case 'admin':
+        $url = $url_base . '/Pages/Admin/index.php?t='.$time;
+        header("Location: $url");
+        break;
+
+      case 'reporte':
+        $url = $url_base . '/Pages/ListReportes/Reporte/index.php?t='.$time;
+        header("Location: $url");
+        break;
       
       default:
         # code...

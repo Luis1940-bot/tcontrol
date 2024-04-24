@@ -194,6 +194,9 @@ function llamarCtrl(control) {
       if (tipoDeArchivo !== '' && tipoDeArchivo.toLowerCase() === 'menu') {
         ruta = `${SERVER}/Pages/Router/rutas.php?ruta=menu&v=${timestamp}`
       }
+      if (tipoDeArchivo !== '' && tipoDeArchivo.toLowerCase() === 'admin') {
+        ruta = `${SERVER}/Pages/Router/rutas.php?ruta=admin&v=${timestamp}`
+      }
     }
 
     // console.log(url)
@@ -210,7 +213,6 @@ const funcionDeClick = (e) => {
   const indice = extraeIndice(navegador.estadoNavButton.name, claveBuscada)
   const btnCtrl = navegador.estadoNavButton.type[indice]
   const nuevoObjeto = obtenerNombres(appJSON, claveBuscada)
-
   if (nuevoObjeto === null) {
     const control = navegador.estadoNavButton.ruta[indice]
     llamarCtrl(control)

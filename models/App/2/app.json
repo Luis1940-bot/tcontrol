@@ -15,10 +15,10 @@
     "ruta": ["Controles/index.php", ""]
   },
   "apps": {
-    "name": ["Performance", "BOS - Reglas de Oro", "SCG"],
-    "type": ["btn", "btn", "ctrl"],
-    "ruta": ["", "", "Menu/index.php"],
-    "nivel": [1, 1, 5],
+    "name": ["Performance", "BOS - Reglas de Oro", "SCG", "Admin"],
+    "type": ["btn", "btn", "ctrl", "ctrl"],
+    "ruta": ["", "", "Menu/index.php", "Admin/index.php"],
+    "nivel": [1, 1, 5, 4],
     "BOS - Reglas de Oro": {
       "name": ["BOS ACTO SEGURO", "BOS ACTO NO SEGURO", "REGLAS DE ORO"],
       "type": ["btn", "btn", "ctrl"],

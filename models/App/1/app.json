@@ -14,6 +14,15 @@
     "type": ["", ""],
     "ruta": ["Controles/index.php", ""]
   },
+  "Ad": {
+    "name": ["Reportes", "Controles", "Variables"],
+    "type": ["", "", ""],
+    "ruta": [
+      "ListReportes/index.php",
+      "ListControles/index.php",
+      "ListVariables/index.php"
+    ]
+  },
   "apps": {
     "name": [
       "Especialidades",
@@ -21,11 +30,12 @@
       "FFL2",
       "Puré",
       "BOS - Reglas de Oro",
-      "SCG"
+      "SCG",
+      "Admin"
     ],
-    "type": ["btn", "btn", "btn", "btn", "btn", "ctrl"],
-    "ruta": ["", "", "", "", "", "Menu/index.php"],
-    "nivel": [1, 1, 1, 1, 1, 5],
+    "type": ["btn", "btn", "btn", "btn", "btn", "ctrl", "ctrl"],
+    "ruta": ["", "", "", "", "", "Menu/index.php", "Admin/index.php"],
+    "nivel": [1, 1, 1, 1, 1, 5, 4],
     "Especialidades": {
       "name": ["TONELADAS", "ROVE", "DWT"],
       "type": ["ctrl", "ctrl", "btn"],
