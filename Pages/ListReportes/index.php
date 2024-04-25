@@ -32,6 +32,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
       include_once('../../includes/molecules/encabezado.php');
       include_once('../../includes/molecules/whereUs.php');
       include_once('../../includes/molecules/search.php');
+      include_once('../../includes/molecules/pastillas.php');
     ?>
   </header>
   <main>
