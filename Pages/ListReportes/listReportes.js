@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   configPHP(user)
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
-  hamburguesa.style.display = 'none'
+  hamburguesa.style.display = 'block'
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
