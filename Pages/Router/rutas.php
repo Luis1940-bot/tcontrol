@@ -77,7 +77,11 @@ if(isset($_GET['ruta'])) {
         break;
 
       case 'reporte':
+<<<<<<< HEAD
         $url = $url_base . '/Pages/ListReportes/reporte.php?t='.$time;
+=======
+        $url = $url_base . '/Pages/ListReportes/Reporte/index.php?t='.$time;
+>>>>>>> f39b46ace79b733abe283a8918b8ad43163daf80
         header("Location: $url");
         break;
       
