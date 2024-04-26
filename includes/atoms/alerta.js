@@ -32,7 +32,7 @@ import primerRender from '../../Pages/Rove/Controladores/primerRender.js'
 import cargarStandares from '../../Pages/Rove/Controladores/cargaStandares.js'
 import pintaBarras from '../../Pages/Rove/Controladores/pintaBarras.js'
 import dwt from '../../Pages/Rove/Controladores/dwt.js'
-
+import onOff from '../../Pages/ListReportes/Modules/Controladores/reporteOnOff.js'
 import baseUrl from '../../config.js'
 const SERVER = baseUrl
 
@@ -665,6 +665,18 @@ const funcionApi = () => {
   } catch (error) {
     console.log(error)
   }
+}
+
+const funcionNuevoReporte = () => {
+  const objetoRuta = {
+    control_N: 0,
+    control_T: '',
+    nr: '0',
+  }
+  sessionStorage.setItem('contenido', encriptar(objetoRuta))
+  let timestamp = new Date().getTime()
+  const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
+  window.location.href = ruta
 }
 
 async function firmar(firmadoPor, objTrad) {
@@ -2569,6 +2581,7 @@ class Alerta {
       title.id = 'idTituloH3'
       title.setAttribute('data-index', array[1])
       title.setAttribute('data-name', array[0])
+      title.setAttribute('data-status', array[20])
       modalContent.appendChild(title)
 
       // eslint-disable-next-line prefer-destructuring
@@ -2579,6 +2592,21 @@ class Alerta {
       obj.span.marginTop = '10px'
       let spanTexto = createSpan(obj.span, texto)
       modalContent.appendChild(spanTexto)
+
+      let on_of = 'ON'
+      let colorOnOff = 'green'
+      if (array[20] === 'n') {
+        on_of = 'OFF'
+        colorOnOff = 'red'
+      }
+
+      texto = `Status: ${on_of}`
+      typeAlert = 'status'
+      obj.span.text[typeAlert] = texto
+      obj.span.marginTop = '2px'
+      obj.span.fontColor = colorOnOff
+      let spanStatus = createSpan(obj.span, texto)
+      modalContent.appendChild(spanStatus)
 
       texto = trO('Primera', objTrad) || 'Primera'
       typeAlert = 'fechas'
@@ -2608,7 +2636,7 @@ class Alerta {
         obj.btnNuevo.text = texto
         const btnNuevo = createButton(obj.btnNuevo)
 
-        texto = trO('Clonar', objTrad) || 'Clonar'
+        texto = trO('ON/OFF', objTrad) || 'ON/OFF'
         obj.btnVerCargados.text = texto
         const btnVerCargados = createButton(obj.btnVerCargados)
 
@@ -2646,22 +2674,16 @@ class Alerta {
         })
         const idbtnCargados = document.getElementById('idVerCargados')
         idbtnCargados.addEventListener('click', () => {
-          //! clonar
+          //! ON/OFF
           const idTituloH3 = document.getElementById('idTituloH3')
           const cod = idTituloH3.getAttribute('data-index')
           const name = idTituloH3.getAttribute('data-name')
-          const url = `${cod}`
-          let timestamp = new Date().getTime()
-          const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
-
-          const objetoRuta = {
-            control_N: url,
-            control_T: decodeURIComponent(name),
-            nr: '0',
-          }
-          sessionStorage.setItem('listadoCtrls', encriptar(objetoRuta))
-          // console.log(ruta)
-          window.location.href = ruta
+          const status = idTituloH3.getAttribute('data-status')
+          onOff(cod, status)
+          setTimeout(() => {
+            const url = new URL(window.location.href)
+            window.location.href = url.href
+          }, 200)
         })
       } else {
         texto =
@@ -3326,6 +3348,71 @@ class Alerta {
     let div = createDiv(obj.divCajita)
     const imgRefresh = createIMG(obj.imgRefresh)
     let texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+    //! fin salir
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+  }
+
+  createModalMenuReportes(objeto, objTranslate) {
+    // eslint-disable-next-line no-unused-vars
+
+    const obj = objeto
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+
+    //! nuevo reporte
+    obj.divCajita.id = 'idDivNuevoReporte'
+    obj.divCajita.onClick = funcionNuevoReporte
+    let div = createDiv(obj.divCajita)
+    const imgNuevoReporte = createIMG(obj.imgNuevoReporte)
+    let texto = trO(obj.nuevo.text, objTranslate) || obj.nuevo.text
+    const spanNuevoReporte = createSpan(obj.nuevo, texto)
+    div.appendChild(imgNuevoReporte)
+    div.appendChild(spanNuevoReporte)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin nuevo reporte
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
     const spanRefresh = createSpan(obj.refresh, texto)
     div.appendChild(imgRefresh)
     div.appendChild(spanRefresh)

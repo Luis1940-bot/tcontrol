@@ -61,6 +61,7 @@ let objetoMemoria = {
   imagenes: [],
   displayRow: [],
 }
+let arrayReportes = []
 
 let habilitadoGuardar = false
 
@@ -166,6 +167,7 @@ const enviaPorEmail = (event) => {
 const arrayGlobal = {
   arraySelect,
   arrayEmpresa,
+  arrayReportes,
 }
 
 const objAlertaAceptarCancelar = {
@@ -2303,6 +2305,7 @@ const objAlertaViewer = {
       descripcion: null,
       fechas: null,
       nivelUsuario: null,
+      status: null,
     },
     fontSize: null,
     fontColor: '#212121',
@@ -2986,6 +2989,29 @@ const objMenuRove = {
     margin: null,
     fontStyle: null,
   },
+  nuevo: {
+    text: 'Reporte nuevo',
+    id: 'idNuevoReporte',
+    fontSize: '14px',
+    fontColor: '#212121',
+    marginTop: '0px',
+    display: 'block',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    alignSelf: null,
+    className: 'comentarios',
+    fontWeight: '700',
+    cursor: 'pointer',
+    padding: null,
+    position: null,
+    top: null,
+    right: null,
+    left: null,
+    hoverBackground: null,
+    hoverColor: null,
+    innerHTML: null,
+    margin: null,
+    fontStyle: null,
+  },
   salir: {
     text: 'Volver',
     id: 'idSalir',
@@ -3022,6 +3048,16 @@ const objMenuRove = {
   imgRefresh: {
     id: null,
     src: '../../assets/img/icons8-refresh-50.png',
+    className: 'img-menu',
+    alt: '',
+    height: 20,
+    width: 20,
+    marginRigth: '2px',
+    filter: null,
+  },
+  imgNuevoReporte: {
+    id: null,
+    src: '../../assets/img/new.png',
     className: 'img-menu',
     alt: '',
     height: 20,

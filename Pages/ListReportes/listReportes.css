@@ -166,8 +166,8 @@ table tbody tr td img {
   }
 
   .img-view {
-    height: 12px;
-    width: 12px;
+    height: 20px;
+    width: 20px;
   }
 }
 
@@ -188,8 +188,8 @@ table tbody tr td img {
     font-size: 11px;
   }
   .img-view {
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
   }
 }
 
@@ -204,8 +204,8 @@ table tbody tr td img {
     font-size: 11px;
   }
   .img-view {
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
   }
 }
 

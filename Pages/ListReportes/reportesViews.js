@@ -33,7 +33,7 @@ function trO(palabra) {
 async function cargaDeRegistros(objTranslate) {
   try {
     const reportes = await traerRegistros('traerReportes', null)
-
+    arrayGlobal.arrayReportes = [...reportes]
     // Finaliza la carga y realiza cualquier otra acción necesaria
     tablaVacia(reportes, encabezados, objTranslate)
   } catch (error) {

@@ -15,10 +15,10 @@
                   ,LTYreporte.modificacion, LTYreporte.version,LTYreporte.rotulo3,LTYreporte.nivel,LTYreporte.envio_mail
                   ,IFNULL((SELECT MIN(LTYregistrocontrol.fecha) FROM LTYregistrocontrol WHERE  LTYregistrocontrol.idLTYreporte=LTYreporte.idLTYreporte),'.')  AS PRIMERA_FECHA
                   , RAND(),NOW()
-                  , tipousuario.tipo AS nivel
+                  , tipousuario.tipo AS nivel, LTYreporte.activo AS situacion
                   FROM LTYreporte
                   LEFT JOIN tipousuario ON tipousuario.idtipousuario=LTYreporte.nivel  
-                  WHERE LTYreporte.activo='s' ORDER BY LTYreporte.nombre ASC;";
+                  ORDER BY LTYreporte.nombre ASC;";
               break;
 
               default:

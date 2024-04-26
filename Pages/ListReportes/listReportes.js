@@ -24,11 +24,16 @@ import {
 import { desencriptar, encriptar } from '../../controllers/cript.js'
 // eslint-disable-next-line import/extensions
 import cargaTabla from './reportesViews.js'
-
+// eslint-disable-next-line import/extensions
+import arrayGlobal from '../../controllers/variables.js'
+// eslint-disable-next-line import/extensions
+import tablaVacia from './Modules/armadoDeTabla.js'
 import baseUrl from '../../config.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = baseUrl
+import { Alerta } from '../../includes/atoms/alerta.js'
 
+const SERVER = baseUrl
+let arrayReportes = []
 let translateOperativo = []
 let espanolOperativo = []
 let translateArchivos = []
@@ -45,6 +50,11 @@ const objButtons = {}
 const navegador = {
   estadoAnteriorButton: '',
   estadoAnteriorWhereUs: [],
+}
+
+const encabezados = {
+  title: ['reportes'],
+  width: ['1'],
 }
 
 function leeVersion(json) {
@@ -107,6 +117,67 @@ function dondeEstaEn() {
   document.getElementById('whereUs').style.display = 'inline'
 }
 
+function cambiaColorPastillas(button) {
+  const pastillas = document.querySelectorAll('.pastilla')
+  pastillas.forEach((pastilla) => {
+    pastilla.style.color = '#393939'
+    pastilla.style.background = '#d9d9d9'
+  })
+  button.target.style.color = '#cecece'
+  button.target.style.background = '#212121'
+}
+
+function verTodos(e) {
+  cambiaColorPastillas(e)
+  const tabla = document.getElementById('tableControlViews')
+  const thead = tabla.querySelector('thead')
+  const tbody = tabla.querySelector('tbody')
+  thead.innerHTML = ''
+  tbody.innerHTML = ''
+  tablaVacia(arrayGlobal.arrayReportes, encabezados, objTranslate)
+}
+function verActivos(e) {
+  cambiaColorPastillas(e)
+  const tabla = document.getElementById('tableControlViews')
+  const thead = tabla.querySelector('thead')
+  const tbody = tabla.querySelector('tbody')
+  thead.innerHTML = ''
+  tbody.innerHTML = ''
+  const filteredArray = arrayGlobal.arrayReportes.filter(
+    (subArray) => subArray[20] === 's'
+  )
+  tablaVacia(filteredArray, encabezados, objTranslate)
+}
+function verApagados(e) {
+  cambiaColorPastillas(e)
+  const tabla = document.getElementById('tableControlViews')
+  const thead = tabla.querySelector('thead')
+  const tbody = tabla.querySelector('tbody')
+  thead.innerHTML = ''
+  tbody.innerHTML = ''
+  const filteredArray = arrayGlobal.arrayReportes.filter(
+    (subArray) => subArray[20] === 'n'
+  )
+  tablaVacia(filteredArray, encabezados, objTranslate)
+}
+
+function cargaPastillas(pastillas) {
+  try {
+    const divPastillas = document.querySelector('.div-pastillas')
+    for (let i = 0; i < pastillas.clase.length; i++) {
+      let button = document.createElement('button')
+      button.setAttribute('class', pastillas.clase[i])
+      button.textContent = trO(pastillas.text[i]) || pastillas.text[i]
+      button.style.color = pastillas.color[i]
+      button.style.background = pastillas.background[i]
+      button.onclick = pastillas.funcion[i]
+      divPastillas.appendChild(button)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 function configPHP(user) {
   const divVolver = document.querySelector('.div-volver')
   divVolver.style.display = 'block'
@@ -129,6 +200,14 @@ function configPHP(user) {
   footer.href = rutaDeveloper
   document.querySelector('.header-McCain').style.display = 'none'
   document.querySelector('.div-encabezado').style.marginTop = '5px'
+  const pastillas = {
+    clase: ['pastilla', 'pastilla', 'pastilla'],
+    text: ['Todos', 'Activos', 'Apagados'],
+    funcion: [verTodos, verActivos, verApagados],
+    color: ['#cecece', '#393939', '#393939'],
+    background: ['#212121', '#d9d9d9', '#d9d9d9'],
+  }
+  cargaPastillas(pastillas)
   // const linkInstitucional = document.getElementById('linkInstitucional');
   // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
@@ -210,6 +289,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       }, 200)
     }
   }
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburguesa = document.getElementById('hamburguesa')
+  hamburguesa.addEventListener('click', () => {
+    const miAlertaM = new Alerta()
+    miAlertaM.createModalMenuReportes(arrayGlobal.objMenuRove, objTranslate)
+    const modal = document.getElementById('modalAlertM')
+    // const closeButton = document.querySelector('.modal-close')
+    // closeButton.addEventListener('click', closeModal)
+    modal.style.display = 'block'
+  })
 })
 
 const goLanding = document.querySelector('.custom-button')

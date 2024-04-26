@@ -87,6 +87,7 @@ function estilosCell(
   colorText,
   ultimo,
   primero,
+  status,
   // fontSize,
   indice,
   objTranslate,
@@ -101,29 +102,46 @@ function estilosCell(
   cell.style.fontStyle = fontStyle
   cell.style.fontWeight = fontWeight
   // cell.style.fontSize = fontSize
-  cell.style.color = colorText
+  let colorDelTexto = colorText
+  let onOff = ''
+  let colorOnOff = 'green'
+  if (status === 'n') {
+    colorDelTexto = '#818181'
+    onOff = 'OFF'
+    colorOnOff = 'red'
+  }
+  cell.style.color = colorDelTexto
 
   const ultima = trO('Última') || 'Última'
   const primera = trO('Primera') || 'Primera'
   const fechas = `${ultima} ${ultimo} - ${primera} ${primero}`
-  const span = document.createElement('span')
+  let span = document.createElement('span')
   span.style.color = 'red'
-  // let size = '8px'
-  // if (widthScreen > 1000) {
-  //   size = '10px'
-  // }
-  // span.style.fontSize = size
   span.style.fontStyle = 'Italic'
   span.style.marginLeft = '10px'
-  span.textContent = fechas
+  span.textContent = `${fechas}`
   span.style.fontWeight = 500
+
   cell.appendChild(span)
+
+  let spanOnOff = document.createElement('span')
+  spanOnOff.style.color = colorOnOff
+  spanOnOff.style.fontStyle = 'normal'
+  spanOnOff.style.marginLeft = '14px'
+  spanOnOff.textContent = `${onOff}`
+  spanOnOff.style.fontWeight = 700
+  spanOnOff.style.border = `1px solid ${colorOnOff}`
+  spanOnOff.style.borderRadius = '5px'
+  spanOnOff.style.padding = '3px'
+  spanOnOff.style.display = 'inline-block'
+
+  cell.appendChild(spanOnOff)
 
   const imagen = document.createElement('img')
   imagen.setAttribute('class', 'img-view')
   imagen.setAttribute('name', 'viewer')
   imagen.style.float = 'right'
-  imagen.src = `${SERVER}/assets/img/icons8-view-30.png`
+  imagen.src = `${SERVER}/assets/img/icons8-sign-30.png`
   // imagen.style.height = '12px'
   // imagen.style.width = '12px'
   imagen.style.margin = 'auto 5px auto auto'
@@ -144,6 +162,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
     const dato = element[0]
     const ultimo = element[3]
     const primero = element[16]
+    const status = element[20]
     const alignCenter = 'left'
     const paddingLeft = '10px'
     const fontStyle = 'normal'
@@ -167,6 +186,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
       colorText,
       ultimo,
       primero,
+      status,
       // fontSize,
       indice,
       objTranslate,

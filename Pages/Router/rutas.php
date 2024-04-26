@@ -80,6 +80,11 @@ if(isset($_GET['ruta'])) {
         $url = $url_base . '/Pages/ListReportes/reporte.php?t='.$time;
         header("Location: $url");
         break;
+
+      case 'reporteOnOff':
+        $url = $url_base . '/Pages/ListReportes/Routes/reporteOnOff.php?t='.$time;
+        header("Location: $url");
+        break;
       
       default:
         # code...
