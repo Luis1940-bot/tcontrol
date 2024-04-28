@@ -2,14 +2,14 @@ import baseUrl from '../../../../config.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
 
-export default function traerRegistros(q, sql_i) {
+export default function traerRegistros(q, rut, sql_i) {
   // eslint-disable-next-line no-console
   console.time('traerRegistros')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
     let obj = {
       q,
-      ruta: '/traerReportes',
+      ruta: rut,
       rax,
       sql_i,
     }
@@ -37,10 +37,10 @@ export default function traerRegistros(q, sql_i) {
 
         resolve(data)
         // eslint-disable-next-line no-console
-        console.timeEnd('traerReportes')
+        console.timeEnd('traerRegistros')
       })
       .catch((error) => {
-        console.timeEnd('traerReportes')
+        console.timeEnd('traerRegistros')
         console.error('Error en la solicitud:', error)
         reject(error)
         alert('No se pudo establecer conexión con el servidor')

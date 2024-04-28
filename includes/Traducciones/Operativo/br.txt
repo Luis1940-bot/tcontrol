@@ -211,3 +211,46 @@ Não foi encontrado nenhum registro que corresponda às datas fornecidas. Revise
 Autorizado pela Sede da Área.
 Copiado para a área de transferência.
 Não foi possível concluir sua assinatura digital, há um erro em sua chave. Verifique e tente novamente. Obrigado
+Nome do relatório
+DETALHE
+Estabelecimento ou planta
+Área de controle
+Setor controlado
+Cadastro no Sistema de Gestão da Qualidade
+Rodapé do relatório
+Elaborado
+Revisado
+aprovado
+Validade
+Modificação de data
+Versão
+Situação
+Selecione a entrega por e-mail, se aplicável
+Escreva endereços de e-mail separados por /
+Indique a frequência de conclusão
+Tempo estimado
+Tipo ou nível de usuário na organização
+Controles
+Variáveis
+Todos
+Ativos
+Desligado
+Todos os dias
+Uma vez por semana
+Uma vez a cada duas semanas
+Uma vez por mês
+Uma vez por trimestre
+Uma vez por semestre
+Uma vez ao ano
+Sim
+Não
+SOBRE
+DESLIGADO
+Colaborador
+Supervisor
+Chefe
+Administrador
+Gerente
+Patrocinador
+Desenvolvedor
+Indeterminado

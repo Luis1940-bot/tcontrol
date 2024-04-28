@@ -39,6 +39,11 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
       <form id='formReporte'>
         <div class="form-group">
             <!-- nombre -->
+            <input type="text" id="idControl" name="idControl" disabled> 
+            <label for="idControl">ID</label>
+        </div>
+        <div class="form-group">
+            <!-- nombre -->
             <input type="text" id="firstName" name="firstName"> 
             <label for="firstName">Nombre del Reporte</label>
         </div>
@@ -49,7 +54,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
         </div>
         <div class="form-group">
             <!-- rotulo1 -->
-            <select id="establecimiento" name="establecimiento"></select>
+            <input type="text" id="establecimiento" name="establecimiento">
             <label for="establecimiento">Establecimiento o planta</label>
         </div>
         <div class="form-group">
@@ -115,8 +120,14 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
         </div>
         <div class="form-group">
             <!-- direcciones_mail -->
-            <textarea id="direccionesEmails" name="direccionesEmails" placeholder="email1@mail.com/email2@mail.com"></textarea>
-            <label for="direccionesEmails">Escriba las direcciones de emails separadas por /</label>
+            <div class="input-button">
+              <input id="direccionesEmails" name="direccionesEmails" class="input-field"><button class="add-button" id="buttonAgregar">+</button>
+            </div>
+            <label for="direccionesEmails">Agregue email</label>
+            
+        </div>
+        <div class="email-group">
+            
         </div>
         <br>
         <div class="form-group">
@@ -126,7 +137,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
         </div>
         <div class="form-group">
             <!-- tiempo estimado-->
-            <input type="text" id="testimado" name="testimado">
+            <input type="number" id="testimado" name="testimado">
             <label for="testimado">Tiempo estimado</label>
         </div>
         <div class="form-group">

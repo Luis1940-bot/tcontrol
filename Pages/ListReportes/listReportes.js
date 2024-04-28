@@ -33,7 +33,7 @@ import baseUrl from '../../config.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
 
 const SERVER = baseUrl
-let arrayReportes = []
+
 let translateOperativo = []
 let espanolOperativo = []
 let translateArchivos = []
@@ -262,33 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     personModal(user, objTranslate)
   })
-})
-
-document.addEventListener('DOMContentLoaded', async () => {
-  const urlParams = new URLSearchParams(window.location.search)
-  const simulateAsignarEventos = urlParams.get('simulateAsignarEventos')
-  if (simulateAsignarEventos === 'true') {
-    const persona = desencriptar(sessionStorage.getItem('user'))
-    if (persona) {
-      document.querySelector('.custom-button').innerText =
-        persona.lng.toUpperCase()
-      const data = await translate(persona.lng)
-      translateOperativo = data.arrayTranslateOperativo
-      espanolOperativo = data.arrayEspanolOperativo
-
-      translateArchivos = data.arrayTranslateArchivo
-      espanolArchivos = data.arrayEspanolArchivo
-
-      objTranslate.operativoES = [...espanolOperativo]
-      objTranslate.operativoTR = [...translateOperativo]
-
-      objTranslate.archivosES = [...espanolArchivos]
-      objTranslate.archivosTR = [...translateArchivos]
-      setTimeout(() => {
-        // segundaCargaListado()
-      }, 200)
-    }
-  }
 })
 
 document.addEventListener('DOMContentLoaded', () => {

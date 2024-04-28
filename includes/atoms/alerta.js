@@ -672,8 +672,9 @@ const funcionNuevoReporte = () => {
     control_N: 0,
     control_T: '',
     nr: '0',
+    filtrado: [],
   }
-  sessionStorage.setItem('contenido', encriptar(objetoRuta))
+  sessionStorage.setItem('reporte', encriptar(objetoRuta))
   let timestamp = new Date().getTime()
   const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
   window.location.href = ruta
@@ -2659,18 +2660,20 @@ class Alerta {
           const cod = idTituloH3.getAttribute('data-index')
           const name = idTituloH3.getAttribute('data-name')
           const url = `${cod}`
-
+          const filtrado = arrayGlobal.arrayReportes.filter(
+            (subArray) => subArray[1] === cod
+          )
           const objetoRuta = {
             control_N: url,
             control_T: decodeURIComponent(name),
             nr: '0',
+            filtrado,
           }
-          sessionStorage.setItem('contenido', encriptar(objetoRuta))
+          sessionStorage.setItem('reporte', encriptar(objetoRuta))
 
           let timestamp = new Date().getTime()
           const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
           window.location.href = ruta
-          // window.open(ruta, '_blank')
         })
         const idbtnCargados = document.getElementById('idVerCargados')
         idbtnCargados.addEventListener('click', () => {

@@ -12,13 +12,21 @@
                   $sql="SELECT  SQL_NO_CACHE LTYreporte.nombre, LTYreporte.idLTYreporte, LTYreporte.detalle 
                   ,IFNULL((SELECT MAX(LTYregistrocontrol.fecha) FROM LTYregistrocontrol WHERE  LTYregistrocontrol.idLTYreporte=LTYreporte.idLTYreporte),'.')  AS ULTIMA_FECHA
                   ,LTYreporte.rotulo1 AS CIA, LTYreporte.elaboro, LTYreporte.reviso, LTYreporte.aprobo, LTYreporte.regdc, LTYreporte.vigencia, LTYreporte.cambio
-                  ,LTYreporte.modificacion, LTYreporte.version,LTYreporte.rotulo3,LTYreporte.nivel,LTYreporte.envio_mail
+                  ,LTYreporte.modificacion, LTYreporte.version, LTYreporte.rotulo3, LTYreporte.nivel, LTYreporte.envio_mail
                   ,IFNULL((SELECT MIN(LTYregistrocontrol.fecha) FROM LTYregistrocontrol WHERE  LTYregistrocontrol.idLTYreporte=LTYreporte.idLTYreporte),'.')  AS PRIMERA_FECHA
                   , RAND(),NOW()
-                  , tipousuario.tipo AS nivel, LTYreporte.activo AS situacion
+                  , tipousuario.tipo AS nivel, LTYreporte.activo AS situacion, LTYreporte.rotulo2, LTYreporte.piedeinforme, LTYreporte.frecuencia, LTYreporte.direcciones_mail
                   FROM LTYreporte
                   LEFT JOIN tipousuario ON tipousuario.idtipousuario=LTYreporte.nivel  
                   ORDER BY LTYreporte.nombre ASC;";
+              break;
+
+              case 'traerTipoDeUsuario':
+                $sql = "SELECT c.idtipousuario AS 'ID', c.tipo AS 'TIPO', c.detalle AS 'DETALLE' FROM tipousuario c ORDER BY c.idtipousuario ASC;";
+              break;
+
+              case 'traerAreas':
+                $sql = "SELECT c.idLTYarea AS 'ID', c.areax AS 'AREA' FROM LTYarea c WHERE c.activo='s' ORDER BY c.areax ASC;";
               break;
 
               default:

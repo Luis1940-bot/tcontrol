@@ -211,3 +211,46 @@ No record was found that matches the dates provided. Review the dates in Loaded 
 Authorized from Area Headquarters.
 Copied to clipboard.
 Your digital signature could not be completed, there is an error in your key. Please verify and try again. Thank you
+Report Name
+DETAIL
+Establishment or plant
+Controlling area
+Controlled sector
+Registration in the Quality Management System
+Report Footer
+Elaborated
+Revised
+approved
+Validity
+Modification date
+Version
+Situation
+Select delivery by email if applicable
+Write email addresses separated by /
+Indicate the frequency of completion
+Estimated time
+User type or level in the organization
+Controls
+Variables
+All
+Assets
+Off
+Every day
+Once a week
+Once a fortnight
+Once a month
+Once a quarter
+Once a semester
+Once per year
+Yeah
+No
+ON
+OFF
+Collaborator
+Supervisor
+Boss
+Admin
+Manager
+Sponsor
+Developer
+Indeterminate

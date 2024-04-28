@@ -211,3 +211,46 @@ No se encotró algún registro que coincida con la fechas proporcionadas. Revise
 Autorizado desde Jefatura de Área.
 Copiado al portapapeles.
 No se pudo completar su firma digital, hay un error en su clave. Verifique por favor y vuelva a intentarlo. Gracias
+Nombre del Reporte
+DETALLE
+Establecimiento o planta
+Área controladora
+Sector controlado
+Registro en el Sistema de Gestión de la Calidad
+Pie de informe
+Elaboró
+Revisó
+Aprobó
+Vigencia
+Fecha de modificación
+Versión
+Situación
+Seleccione envío por email si corresponde
+Escriba las direcciones de emails separadas por /
+Indique la frecuencia de completado
+Tiempo estimado
+Tipo de usuario o nivel en la organización
+Controles
+Variables
+Todos
+Activos
+Apagados
+Todos los días
+Una vez por semana
+Una vez por quincena
+Una vez por mes
+Una vez por trimestre
+Una vez por semestre
+Una vez por año
+Si
+No
+ON
+OFF
+Colaborador
+Supervisor
+Jefe
+Admin
+Gerente
+Sponsor
+Desarrollador
+Indeterminado
