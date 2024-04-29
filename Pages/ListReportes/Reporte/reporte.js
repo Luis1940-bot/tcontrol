@@ -27,6 +27,9 @@ import baseUrl from '../../../config.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
 // eslint-disable-next-line import/extensions
 import traerRegistros from '../Modules/Controladores/traerRegistros.js'
+// eslint-disable-next-line import/extensions
+import arrayGlobal from '../../../controllers/variables.js'
+import { Alerta } from '../../../includes/atoms/alerta.js'
 
 const SERVER = baseUrl
 
@@ -43,10 +46,6 @@ const objTranslate = {
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
-const navegador = {
-  estadoAnteriorButton: '',
-  estadoAnteriorWhereUs: [],
-}
 
 function leeVersion(json) {
   readJSON(json)
@@ -109,6 +108,7 @@ function limpiarInputs() {
   dates.forEach((date) => {
     date.value = fechasGenerator.fecha_corta_yyyymmdd(new Date())
   })
+  document.getElementById('version').value = '01'
   document.getElementById('firstName').focus()
 }
 
@@ -152,50 +152,167 @@ function convertirFecha(fechaOriginal) {
   return fechaConvertida
 }
 
+function findAndLogLabels(emailGroup, email) {
+  const labels = emailGroup.querySelectorAll('.div-pastillita label')
+  let existe = false
+  // Verificar si encontramos labels
+  if (labels.length > 0) {
+    labels.forEach((label) => {
+      if (label.textContent === email) {
+        existe = true
+      }
+    })
+  }
+  return existe
+}
+
+function agregaPastillaEmail(email) {
+  const group = document.querySelector('.email-group')
+  const existe = findAndLogLabels(group, email)
+
+  if (!existe) {
+    const div = document.createElement('div')
+    div.setAttribute('class', 'div-pastillita')
+    const label = document.createElement('label')
+    const button = document.createElement('button')
+    label.innerText = email
+    label.setAttribute('class', 'label-email')
+    button.innerText = 'x'
+    button.setAttribute('class', 'button-email')
+    button.addEventListener('click', handleButtonEmailClick)
+    div.appendChild(label)
+    div.appendChild(button)
+    group.appendChild(div)
+  }
+}
+
 function cargaInputs(array) {
   console.log(array)
   try {
     const idControl = document.getElementById('idControl')
     idControl.value = array[1]
+
     const firstName = document.getElementById('firstName')
     firstName.value = trA(array[0]) || array[0]
+    const controlReporte = document.getElementById('controlReporte')
+    controlReporte.innerText = trA(array[0]) || array[0]
+
+    const titulo = document.getElementById('titulo')
+    titulo.value = trA(array[25]) || array[25]
+
     const detalle = document.getElementById('detalle')
     detalle.value = trO(array[2]) || array[2]
+
     const establecimiento = document.getElementById('establecimiento')
     establecimiento.value = trO(array[4]) || array[4]
+    const areaReporte = document.getElementById('areaReporte')
+    areaReporte.innerText = `${trO('Área') || 'Área'}: ${
+      trO(array[4]) || array[4]
+    }`
+
+    const empresaReporte = document.getElementById('empresaReporte')
+    empresaReporte.innerText = trO(array[4]) || array[4]
+
     const sectorControlado = document.getElementById('sectorControlado')
     sectorControlado.value = trO(array[21]) || array[21]
+
     const regdc = document.getElementById('regdc')
     regdc.value = trO(array[8]) || array[8]
+    const regdcReporte = document.getElementById('regdcReporte')
+    regdcReporte.innerText = trO(array[8]) || array[8]
+
     const pieDeInforme = document.getElementById('pieDeInforme')
     pieDeInforme.value = trO(array[22]) || array[22]
+
     const elaboro = document.getElementById('elaboro')
     elaboro.value = trO(array[5]) || array[5]
+    const elaboroReporte = document.getElementById('elaboroReporte')
+    elaboroReporte.innerText = `${trO('Elaboró') || 'Elaboró'}: ${
+      trO(array[5]) || array[5]
+    }`
+
     const reviso = document.getElementById('reviso')
     reviso.value = trO(array[6]) || array[6]
+    const revisoReporte = document.getElementById('revisoReporte')
+    revisoReporte.innerText = `${trO('Revisó') || 'Revisó'}: ${
+      trO(array[6]) || array[6]
+    }`
+
     const aprobo = document.getElementById('aprobo')
     aprobo.value = trO(array[7]) || array[7]
+    const aproboReporte = document.getElementById('aproboReporte')
+    aproboReporte.innerText = `${trO('Aprobó') || 'Aprobó'}: ${
+      trO(array[7]) || array[7]
+    }`
+
     let fecha = convertirFecha(array[9])
     const vigencia = document.getElementById('vigencia')
     vigencia.value = fecha
+    const vigenciaReporte = document.getElementById('vigenciaReporte')
+    vigenciaReporte.innerText = `${trO('Vigencia') || 'Vigencia'}: ${fecha}`
+
     fecha = convertirFecha(array[11])
+
     const modificacion = document.getElementById('modificacion')
     modificacion.value = fecha
+    const modificacionReporte = document.getElementById('modificacionReporte')
+    modificacionReporte.innerText = `${
+      trO('Modificación') || 'Modificación'
+    } ${fecha}`
+
     const version = document.getElementById('version')
     version.value = array[12]
+    const versionReporte = document.getElementById('versionReporte')
+    versionReporte.innerText = `${trO('Versión') || 'Versión'} ${array[12]}`
+
     const testimado = document.getElementById('testimado')
     testimado.value = parseInt(array[23])
+
+    let envioEmail = array[15]
+    const emails = array[24]
+    if (envioEmail === '1' && emails !== '') {
+      const arrayEmails = emails.split('/')
+      arrayEmails.forEach((element) => {
+        agregaPastillaEmail(element)
+      })
+      envioEmail = '2'
+    } else if (envioEmail === '0') {
+      envioEmail = '1'
+    }
 
     const areaControladora = document.getElementById('areaControladora')
     const situacion = document.getElementById('situacion')
     const frecuencia = document.getElementById('frecuencia')
     const tipodeusuario = document.getElementById('tipodeusuario')
+    const emailSiNo = document.getElementById('email')
     setTimeout(() => {
       fijarTextoSelect(areaControladora, trO(array[13]) || array[13])
       fijarTextoSelect(situacion, trO(array[20]) || array[20])
       fijarValorSelect(frecuencia, array[23])
       fijarTextoSelect(tipodeusuario, trO(array[19]) || array[19])
+      fijarValorSelect(emailSiNo, envioEmail)
     }, 500)
+
+    const fechaReporte = document.getElementById('fechaReporte')
+    fechaReporte.innerText = `${
+      trO('Fecha actual') || 'Fecha actual'
+    }: ${fechasGenerator.fecha_corta_ddmmyyyy(new Date())}`
+
+    const docReporte = document.getElementById('docReporte')
+    docReporte.innerText = `${trO('Doc') || 'Doc'}: `
+
+    const firma1 = document.getElementById('firma1')
+    firma1.innerText = `${trO('Firma control') || 'Firma control'}: ${
+      trO(array[26]) || array[26]
+    }`
+
+    const firma2 = document.getElementById('firma2')
+    firma2.innerText = `${trO('Firma supervisa') || 'Firma supervisa'}: ${
+      trO(array[27]) || array[27]
+    }`
+
+    const controlCambios = document.getElementById('controlCambios')
+    controlCambios.innerText = trO('Control de cambios') || 'Control de cambios'
   } catch (error) {
     console.log(error)
   }
@@ -264,10 +381,10 @@ function leeApp(json) {
     })
 }
 
-function dondeEstaEn(control_T) {
+function dondeEstaEn(lugar, control_T) {
   // const { control_T } = desencriptar(sessionStorage.getItem('contenido'))
 
-  let lugar = trO('EDITAR: ') || 'EDITAR: '
+  // let lugar = trO('EDITAR: ') || 'EDITAR: '
   lugar = `${lugar} ${trO(control_T) || control_T}`
   lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
@@ -334,9 +451,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       limpiarInputs()
       if (typeof reporte.control_N === 'number') {
         document.getElementById('whereUs').style.display = 'none'
+        dondeEstaEn('', trO('Reporte nuevo') || 'Reporte nuevo')
       }
       if (typeof reporte.control_N === 'string') {
-        dondeEstaEn(reporte.control_T)
+        let lugar = trO('EDITAR: ') || 'EDITAR: '
+        dondeEstaEn(lugar, reporte.control_T)
         cargaInputs(reporte.filtrado[0])
       }
       traerInfoSelects()
@@ -391,34 +510,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function handleButtonEmailClick(event) {
   event.preventDefault()
+
   // `event.target` es el botón que fue clickeado
   const buttonClicked = event.target
+
+  // Obtener el contenedor más grande que incluye todos los divs 'div-pastillita'
+  const emailGroup = buttonClicked.closest('.email-group')
 
   // Navegar al contenedor padre, que es el `div` con la clase 'div-pastillita'
   const parentDiv = buttonClicked.parentNode
 
-  // Dentro de este `div`, encuentra el `label` correspondiente
-  const label = parentDiv.querySelector('label')
-
-  // Ahora puedes hacer lo que necesites con el texto del label
-  console.log('Email asociado al botón:', label.innerText)
-
   // Si deseas eliminar el `div` al hacer click en el botón, puedes hacerlo así:
   parentDiv.remove()
-}
 
-function findAndLogLabels(emailGroup, email) {
-  const labels = emailGroup.querySelectorAll('.div-pastillita label')
-  let existe = false
-  // Verificar si encontramos labels
-  if (labels.length > 0) {
-    labels.forEach((label) => {
-      if (label.textContent === email) {
-        existe = true
-      }
-    })
+  // Opcional: verificar cuántos quedan después de la eliminación
+  const remainingPastillitas = emailGroup.querySelectorAll('.div-pastillita')
+  if (remainingPastillitas.length === 0) {
+    const emailSiNo = document.getElementById('email')
+    fijarValorSelect(emailSiNo, '1')
   }
-  return existe
+  // console.log(
+  //   'Número de divs .div-pastillita después de remover:',
+  //   remainingPastillitas.length
+  // )
 }
 
 function validateEmail(email) {
@@ -427,26 +541,6 @@ function validateEmail(email) {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(String(email).toLowerCase())
-}
-
-function agregaPastillaEmail(email) {
-  const group = document.querySelector('.email-group')
-  const existe = findAndLogLabels(group, email)
-
-  if (!existe) {
-    const div = document.createElement('div')
-    div.setAttribute('class', 'div-pastillita')
-    const label = document.createElement('label')
-    const button = document.createElement('button')
-    label.innerText = email
-    label.setAttribute('class', 'label-email')
-    button.innerText = 'x'
-    button.setAttribute('class', 'button-email')
-    button.addEventListener('click', handleButtonEmailClick)
-    div.appendChild(label)
-    div.appendChild(button)
-    group.appendChild(div)
-  }
 }
 
 function handleButtonClick(event) {
@@ -480,6 +574,105 @@ function handleChangeEmail(event) {
     div.style.display = 'flex'
   }
 }
+
+const firstName = document.getElementById('firstName')
+firstName.addEventListener('change', () => {
+  const titulo = document.getElementById('titulo')
+  titulo.value = firstName.value
+  const controlReporte = document.getElementById('controlReporte')
+  controlReporte.innerText = firstName.value.toUpperCase()
+})
+firstName.addEventListener('keypress', () => {
+  const titulo = document.getElementById('titulo')
+  titulo.value = firstName.value
+})
+
+const establecimiento = document.getElementById('establecimiento')
+establecimiento.addEventListener('change', () => {
+  const empresaReporte = document.getElementById('empresaReporte')
+  empresaReporte.innerText = establecimiento.value.toUpperCase()
+})
+
+const titulo = document.getElementById('titulo')
+titulo.addEventListener('change', () => {
+  const controlReporte = document.getElementById('controlReporte')
+  controlReporte.innerText = titulo.value.toUpperCase()
+})
+
+const sectorControlado = document.getElementById('sectorControlado')
+sectorControlado.addEventListener('change', () => {
+  const areaReporte = document.getElementById('areaReporte')
+  areaReporte.innerText = `${
+    trO('Área') || 'Área'
+  }: ${sectorControlado.value.toUpperCase()}`
+})
+
+const regdc = document.getElementById('regdc')
+regdc.addEventListener('change', () => {
+  const regdcReporte = document.getElementById('regdcReporte')
+  regdcReporte.innerText = regdc.value.toUpperCase()
+})
+
+const elaboro = document.getElementById('elaboro')
+elaboro.addEventListener('change', () => {
+  const elaboroReporte = document.getElementById('elaboroReporte')
+  elaboroReporte.innerText = `${
+    trO('Elaboró') || 'Elaboró'
+  }: ${elaboro.value.toUpperCase()}`
+})
+
+const reviso = document.getElementById('reviso')
+reviso.addEventListener('change', () => {
+  const revisoReporte = document.getElementById('revisoReporte')
+  revisoReporte.innerText = `${
+    trO('Revisó') || 'Revisó'
+  }: ${reviso.value.toUpperCase()}`
+})
+
+const aprobo = document.getElementById('aprobo')
+aprobo.addEventListener('change', () => {
+  const aproboReporte = document.getElementById('aproboReporte')
+  aproboReporte.innerText = `${
+    trO('Aprobó') || 'Aprobó'
+  }: ${aprobo.value.toUpperCase()}`
+})
+
+const vigencia = document.getElementById('vigencia')
+vigencia.addEventListener('change', () => {
+  const vigenciaReporte = document.getElementById('vigenciaReporte')
+  vigenciaReporte.innerText = `${
+    trO('Vigencia') || 'Vigencia'
+  }: ${vigencia.value.toUpperCase()}`
+})
+
+const version = document.getElementById('version')
+version.addEventListener('change', () => {
+  const versionReporte = document.getElementById('versionReporte')
+  versionReporte.innerText = `${
+    trO('Versión') || 'Versión'
+  }: ${version.value.toUpperCase()}`
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburguesa = document.getElementById('hamburguesa')
+  hamburguesa.addEventListener('click', () => {
+    const reporte = desencriptar(sessionStorage.getItem('reporte'))
+    let guardarComo = false
+    if (typeof reporte.control_N === 'string') {
+      guardarComo = true
+    }
+    const miAlertaM = new Alerta()
+    miAlertaM.createModalMenuCRUDReporte(
+      arrayGlobal.objMenu,
+      objTranslate,
+      guardarComo
+    )
+    const modal = document.getElementById('modalAlertM')
+    // const closeButton = document.querySelector('.modal-close')
+    // closeButton.addEventListener('click', closeModal)
+    modal.style.display = 'block'
+  })
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   const addButton = document.querySelector('.add-button')

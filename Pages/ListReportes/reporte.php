@@ -48,6 +48,11 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
             <label for="firstName">Nombre del Reporte</label>
         </div>
         <div class="form-group">
+            <!-- nombre -->
+            <input type="text" id="titulo" name="titulo"> 
+            <label for="titulo">Título en el informe</label>
+        </div>
+        <div class="form-group">
             <!-- detalle -->
             <textarea id="detalle" name="detalle" ></textarea>
             <label for="detalle">Detalle</label>
@@ -98,7 +103,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
             <input type="date" id="vigencia" name="vigencia">
             <label for="vigencia">Vigencia</label>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             <!-- modificacion -->
             <input type="date" id="modificacion" name="modificacion">
             <label for="modificacion">Fecha de modificación</label>
@@ -147,7 +152,76 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
         </div>
       </form>
     </div>
-    <div class='div2'>div 2</div>
+    <div class='div2'>
+      <table class="table-reporte">
+        <thead class="thead-reporte" >
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="tbody-reporte-encabezado">
+          <tr>
+            <td colspan="2" rowspan="4" id="logoReporte"><img id="imgLogoReporte" src='<?php echo BASE_URL ?>/assets/img/logo.png' alt="Logo"></td>
+            <td colspan="8" id="empresaReporte">Empresa</td>
+            <td colspan="2" id="regdcReporte">REGDC</td>
+          </tr>
+          <tr>
+            <td colspan="8" rowspan="3" id="controlReporte">Control</td>
+            <td colspan="2" rowspan="3" id="vigenciaReporte">Vigencia</td>
+          </tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr>
+            <td colspan="4" id="elaboroReporte">Elaboró</td>
+            <td colspan="4" id="revisoReporte">Revisó</td>
+            <td colspan="4" id="aproboReporte">Aprobó</td>
+          </tr>
+          <tr>
+            <td colspan="6" id="fechaReporte">Fecha</td>
+            <td colspan="6" id="areaReporte">Área</td>
+          </tr>
+          <tr>
+            <td colspan="12" id="docReporte">Doc</td>
+          </tr>
+        </tbody>
+        <table class="table-reporte-cuerpo">
+          <tbody class="tbody-reporte-cuerpo">
+          </tbody>
+        </table>
+        <table class="table-reporte-pie">
+          <tbody class="tbody-reporte-pie">
+          <tr id="firmas">
+            <td colspan="6">---</td>
+            <td colspan="6">---</td>
+          </tr>
+          <tr>
+            <td colspan="6" id="firma1">Firma control</td>
+            <td colspan="6" id="firma2">Firma supervisa</td>
+          </tr>
+          <tr>
+            <td colspan="12" id="controlCambios">Control de cambios</td>
+          </tr>
+          <tr id="filaVersion">
+            <td colspan="4" id="reporteFecha">Fecha</td>
+            <td colspan="4" id="modificacionReporte">Modificación</td>
+            <td colspan="4" id="versionReporte">Versión</td>
+          </tr>
+        </tbody>
+        </table>
+      </table>
+    </div>
   </main>
   <footer>
     <?php

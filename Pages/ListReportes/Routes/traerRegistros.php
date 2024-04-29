@@ -15,7 +15,7 @@
                   ,LTYreporte.modificacion, LTYreporte.version, LTYreporte.rotulo3, LTYreporte.nivel, LTYreporte.envio_mail
                   ,IFNULL((SELECT MIN(LTYregistrocontrol.fecha) FROM LTYregistrocontrol WHERE  LTYregistrocontrol.idLTYreporte=LTYreporte.idLTYreporte),'.')  AS PRIMERA_FECHA
                   , RAND(),NOW()
-                  , tipousuario.tipo AS nivel, LTYreporte.activo AS situacion, LTYreporte.rotulo2, LTYreporte.piedeinforme, LTYreporte.frecuencia, LTYreporte.direcciones_mail
+                  , tipousuario.tipo AS nivel, LTYreporte.activo AS situacion, LTYreporte.rotulo2, LTYreporte.piedeinforme, LTYreporte.frecuencia, LTYreporte.direcciones_mail, LTYreporte.titulo, LTYreporte.firma1, LTYreporte.firma2
                   FROM LTYreporte
                   LEFT JOIN tipousuario ON tipousuario.idtipousuario=LTYreporte.nivel  
                   ORDER BY LTYreporte.nombre ASC;";

@@ -29,7 +29,6 @@ import arrayGlobal from '../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
 import tablaVacia from './Modules/armadoDeTabla.js'
 import baseUrl from '../../config.js'
-// const SERVER = '/iControl-Vanilla/icontrol';
 import { Alerta } from '../../includes/atoms/alerta.js'
 
 const SERVER = baseUrl

@@ -212,6 +212,7 @@ Authorized from Area Headquarters.
 Copied to clipboard.
 Your digital signature could not be completed, there is an error in your key. Please verify and try again. Thank you
 Report Name
+Title in the report
 DETAIL
 Establishment or plant
 Controlling area

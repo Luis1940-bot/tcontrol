@@ -153,6 +153,68 @@ hr {
   cursor: pointer;
 }
 
+.table-reporte,
+.table-reporte-pie,
+.table-reporte-cuerpo {
+  width: 96%;
+  border-collapse: collapse;
+  border: 1px solid #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.table-reporte th,
+td {
+  width: 8%;
+  border: 1px solid #000;
+  padding: 0.3em;
+  background: #fff;
+  /* border-spacing: 0; */
+}
+
+#logoReporte {
+  height: 60px;
+}
+
+.tbody-reporte-pie {
+  border: 1px solid #000;
+  padding: 0.3em;
+  background: #fff;
+}
+
+.thead-reporte th {
+  color: transparent; /* Hace el texto transparente */
+  border: none; /* Elimina los bordes */
+  background-color: transparent; /* Fondo transparente */
+}
+
+#logoReporte,
+#empresaReporte,
+#controlReporte,
+#regdcReporte,
+#vigenciaReporte,
+#firma1,
+#firma2,
+#controlCambios,
+#filaVersion {
+  text-align: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+#firmas {
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+#imgLogoReporte {
+  height: 30px;
+  width: 30px;
+}
+
 /* Media Queries */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
 }

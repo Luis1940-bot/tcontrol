@@ -680,6 +680,168 @@ const funcionNuevoReporte = () => {
   window.location.href = ruta
 }
 
+function checaCamposReporte(elemento) {
+  if (elemento.value === '') {
+    elemento.style.background = 'rgb(254, 4, 4)'
+  }
+  return
+}
+
+function completaObjetoReporte() {
+  const inputs = document.querySelectorAll('input')
+  inputs.forEach((input) => {
+    input.style.background = '#fff' // Establece el fondo a blanco
+  })
+  const selects = document.querySelectorAll('select')
+  selects.forEach((select) => {
+    select.style.background = '#fff'
+  })
+  const objetoReporte = {
+    nombre: '',
+    detalle: '',
+    idLTYcliente: 1,
+    idLTYarea: 0,
+    titulo: '',
+    rotulo1: '',
+    rotulo2: '',
+    rotulo3: '',
+    rotulo4: '',
+    piedeinforme: '',
+    firma1: '',
+    firma2: '',
+    firma3: '',
+    foto: 'n',
+    activo: '',
+    elaboro: '',
+    reviso: '',
+    aprobo: '',
+    regdc: '',
+    vigencia: '',
+    cambio: '',
+    modificacion: '',
+    version: '',
+    frecuencia: 1,
+    testimado: 1,
+    asignado: 0,
+    nivel: 1,
+    envio_mail: 0,
+    direcciones_mail: '',
+  }
+
+  const firstName = document.getElementById('firstName')
+  objetoReporte.nombre = firstName.value
+  checaCamposReporte(firstName)
+
+  const titulo = document.getElementById('titulo')
+  if (titulo === '') {
+    objetoReporte.titulo = firstName.value
+  } else {
+    objetoReporte.titulo = titulo.value
+  }
+
+  const detalle = document.getElementById('detalle')
+  objetoReporte.detalle = detalle.value
+
+  const establecimiento = document.getElementById('establecimiento')
+  objetoReporte.rotulo1 = establecimiento.value
+  checaCamposReporte(establecimiento)
+
+  const areaControladora = document.getElementById('areaControladora')
+  objetoReporte.idLTYarea = parseInt(areaControladora.value)
+  checaCamposReporte(areaControladora)
+
+  const sectorControlado = document.getElementById('sectorControlado')
+  objetoReporte.firma1 = sectorControlado.value
+  checaCamposReporte(sectorControlado)
+
+  const regdc = document.getElementById('regdc')
+  objetoReporte.regdc = regdc.value
+  checaCamposReporte(regdc)
+
+  const pieDeInforme = document.getElementById('pieDeInforme')
+  objetoReporte.piedeinforme = pieDeInforme.value
+
+  const elaboro = document.getElementById('elaboro')
+  objetoReporte.elaboro = elaboro.value
+  checaCamposReporte(elaboro)
+
+  const reviso = document.getElementById('reviso')
+  objetoReporte.reviso = reviso.value
+  checaCamposReporte(reviso)
+
+  const aprobo = document.getElementById('aprobo')
+  objetoReporte.aprobo = aprobo.value
+  checaCamposReporte(aprobo)
+
+  const vigencia = document.getElementById('vigencia')
+  objetoReporte.vigencia = vigencia.value
+
+  const modificacion = document.getElementById('modificacion')
+  objetoReporte.modificacion = modificacion.value
+
+  const version = document.getElementById('version')
+  let version_ = '01'
+  version.value !== '' ? (version_ = version.value) : null
+  objetoReporte.version = version_
+
+  const situacion = document.getElementById('situacion')
+  let activo = 's'
+  situacion.value === '2' ? (activo = 'n') : null
+  objetoReporte.activo = activo
+
+  const email = document.getElementById('email')
+  let email_ = 0
+  email.value === '2' ? (email_ = 1) : null
+  objetoReporte.envio_mail = email_
+  if (email_ === 1) {
+    const emailGroup = document.querySelector('.email-group')
+    const remainingPastillitas = emailGroup.querySelectorAll(
+      '.div-pastillita > label'
+    )
+    let direcciones_emails = ''
+    for (let i = 0; i < remainingPastillitas.length; i++) {
+      const element = remainingPastillitas[i]
+      direcciones_emails += `/${element.textContent}`
+    }
+    direcciones_emails = direcciones_emails.substr(1)
+    objetoReporte.direcciones_mail = direcciones_emails
+  }
+
+  const frecuencia = document.getElementById('frecuencia')
+  objetoReporte.frecuencia = parseInt(frecuencia.value)
+
+  const number = document.getElementById('testimado')
+  objetoReporte.testimado = parseFloat(number.value)
+
+  const tipodeusuario = document.getElementById('tipodeusuario')
+  objetoReporte.nivel = tipodeusuario.value
+
+  return objetoReporte
+}
+
+const funcionReporteGuardarNuevo = () => {
+  try {
+    const objetoGuardarReporte = completaObjetoReporte()
+    console.log(objetoGuardarReporte)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const funcionReporteGuardarCambios = () => {
+  try {
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const funcionReporteGuardarComo = () => {
+  try {
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 async function firmar(firmadoPor, objTrad) {
   const pass = document.getElementById('idInputFirma').value
   const supervisor = await traerFirma(pass)
@@ -3416,6 +3578,104 @@ class Alerta {
     div = createDiv(obj.divCajita)
     const imgRefresh = createIMG(obj.imgRefresh)
     texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+    //! fin salir
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+  }
+
+  createModalMenuCRUDReporte(objeto, objTranslate, guardarComo) {
+    // eslint-disable-next-line no-unused-vars
+
+    const obj = objeto
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+
+    if (!guardarComo) {
+      //! guardar nuevo reporte
+      obj.divCajita.id = 'idDivCRUDReporte'
+      obj.divCajita.onClick = funcionReporteGuardarNuevo
+      let div = createDiv(obj.divCajita)
+      const imgGuardar = createIMG(obj.imgGuardar)
+      let texto = trO(obj.guardar.text, objTranslate) || obj.guardar.text
+      const spanGuardar = createSpan(obj.guardarCambio, texto)
+      div.appendChild(imgGuardar)
+      div.appendChild(spanGuardar)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar nuevo reporte
+    } else {
+      //! guardar cambios
+      obj.divCajita.id = 'idDivCRUDReporte'
+      obj.divCajita.onClick = funcionReporteGuardarCambios
+      let div = createDiv(obj.divCajita)
+      const imgGuardarCambios = createIMG(obj.imgGuardarComo)
+      let texto =
+        trO(obj.guardarCambio.text, objTranslate) || obj.guardarCambio.text
+      const spanGuardarCambios = createSpan(obj.guardarCambio, texto)
+      div.appendChild(imgGuardarCambios)
+      div.appendChild(spanGuardarCambios)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar cambios
+
+      //! guardar como nuevo
+      obj.divCajita.id = 'idDivGuardarComoReporte'
+      obj.divCajita.onClick = funcionReporteGuardarComo
+      div = createDiv(obj.divCajita)
+      const imgGuardarComo = createIMG(obj.imgGuardarComo)
+      texto =
+        trO(obj.guardarComoNuevo.text, objTranslate) ||
+        obj.guardarComoNuevo.text
+      const spanGuardarComo = createSpan(obj.guardarComoNuevo, texto)
+      div.appendChild(imgGuardarComo)
+      div.appendChild(spanGuardarComo)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar como nuevo
+    }
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    let div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    let texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
     const spanRefresh = createSpan(obj.refresh, texto)
     div.appendChild(imgRefresh)
     div.appendChild(spanRefresh)

@@ -212,6 +212,7 @@ Autorizado desde Jefatura de Área.
 Copiado al portapapeles.
 No se pudo completar su firma digital, hay un error en su clave. Verifique por favor y vuelva a intentarlo. Gracias
 Nombre del Reporte
+Título en el informe
 DETALLE
 Establecimiento o planta
 Área controladora

@@ -212,6 +212,7 @@ Autorizado pela Sede da Área.
 Copiado para a área de transferência.
 Não foi possível concluir sua assinatura digital, há um erro em sua chave. Verifique e tente novamente. Obrigado
 Nome do relatório
+Título no relatório
 DETALHE
 Estabelecimento ou planta
 Área de controle
