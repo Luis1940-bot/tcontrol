@@ -141,6 +141,9 @@ function fijarValorSelect(selectElement, valor) {
 }
 
 function convertirFecha(fechaOriginal) {
+  if (fechaOriginal === '' || fechaOriginal === '-') {
+    return
+  }
   const [dia, mes, año] = fechaOriginal.split('/')
 
   // Asegurarse de que el día y el mes tengan dos dígitos
@@ -207,14 +210,14 @@ function cargaInputs(array) {
     establecimiento.value = trO(array[4]) || array[4]
     const areaReporte = document.getElementById('areaReporte')
     areaReporte.innerText = `${trO('Área') || 'Área'}: ${
-      trO(array[4]) || array[4]
+      trO(array[13]) || array[13]
     }`
 
     const empresaReporte = document.getElementById('empresaReporte')
     empresaReporte.innerText = trO(array[4]) || array[4]
 
     const sectorControlado = document.getElementById('sectorControlado')
-    sectorControlado.value = trO(array[21]) || array[21]
+    sectorControlado.value = trO(array[26]) || array[26]
 
     const regdc = document.getElementById('regdc')
     regdc.value = trO(array[8]) || array[8]
@@ -286,7 +289,7 @@ function cargaInputs(array) {
     const tipodeusuario = document.getElementById('tipodeusuario')
     const emailSiNo = document.getElementById('email')
     setTimeout(() => {
-      fijarTextoSelect(areaControladora, trO(array[13]) || array[13])
+      fijarValorSelect(areaControladora, array[28])
       fijarTextoSelect(situacion, trO(array[20]) || array[20])
       fijarValorSelect(frecuencia, array[23])
       fijarTextoSelect(tipodeusuario, trO(array[19]) || array[19])

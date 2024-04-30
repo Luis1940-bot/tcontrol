@@ -34,6 +34,8 @@ import pintaBarras from '../../Pages/Rove/Controladores/pintaBarras.js'
 import dwt from '../../Pages/Rove/Controladores/dwt.js'
 import onOff from '../../Pages/ListReportes/Modules/Controladores/reporteOnOff.js'
 import baseUrl from '../../config.js'
+import guardarNuevoReporte from '../../Pages/ListReportes/Modules/Controladores/guardarReporte.js'
+
 const SERVER = baseUrl
 
 const objTraductor = {
@@ -697,6 +699,7 @@ function completaObjetoReporte() {
     select.style.background = '#fff'
   })
   const objetoReporte = {
+    id: '',
     nombre: '',
     detalle: '',
     idLTYcliente: 1,
@@ -728,13 +731,16 @@ function completaObjetoReporte() {
     direcciones_mail: '',
   }
 
+  const idControl = document.getElementById('idControl')
+  objetoReporte.id = idControl.value
+
   const firstName = document.getElementById('firstName')
-  objetoReporte.nombre = firstName.value
+  objetoReporte.nombre = firstName.value.toUpperCase()
   checaCamposReporte(firstName)
 
   const titulo = document.getElementById('titulo')
   if (titulo === '') {
-    objetoReporte.titulo = firstName.value
+    objetoReporte.titulo = firstName.value.toUpperCase()
   } else {
     objetoReporte.titulo = titulo.value
   }
@@ -743,15 +749,18 @@ function completaObjetoReporte() {
   objetoReporte.detalle = detalle.value
 
   const establecimiento = document.getElementById('establecimiento')
-  objetoReporte.rotulo1 = establecimiento.value
+  objetoReporte.rotulo1 = establecimiento.value.toUpperCase()
   checaCamposReporte(establecimiento)
 
   const areaControladora = document.getElementById('areaControladora')
   objetoReporte.idLTYarea = parseInt(areaControladora.value)
+  const selectedOption =
+    areaControladora.options[areaControladora.selectedIndex]
+  objetoReporte.rotulo3 = selectedOption.textContent.toUpperCase()
   checaCamposReporte(areaControladora)
 
   const sectorControlado = document.getElementById('sectorControlado')
-  objetoReporte.firma1 = sectorControlado.value
+  objetoReporte.firma1 = sectorControlado.value.toUpperCase()
   checaCamposReporte(sectorControlado)
 
   const regdc = document.getElementById('regdc')
@@ -774,10 +783,20 @@ function completaObjetoReporte() {
   checaCamposReporte(aprobo)
 
   const vigencia = document.getElementById('vigencia')
-  objetoReporte.vigencia = vigencia.value
+  let fechaObj = new Date(vigencia.value)
+  let dia = fechaObj.getUTCDate().toString().padStart(2, '0')
+  let mes = (fechaObj.getUTCMonth() + 1).toString().padStart(2, '0')
+  let año = fechaObj.getUTCFullYear()
+  let nuevaFecha = `${dia}/${mes}/${año}`
+  objetoReporte.vigencia = nuevaFecha
 
   const modificacion = document.getElementById('modificacion')
-  objetoReporte.modificacion = modificacion.value
+  fechaObj = new Date(modificacion.value)
+  dia = fechaObj.getUTCDate().toString().padStart(2, '0')
+  mes = (fechaObj.getUTCMonth() + 1).toString().padStart(2, '0')
+  año = fechaObj.getUTCFullYear()
+  nuevaFecha = `${dia}/${mes}/${año}`
+  objetoReporte.modificacion = nuevaFecha
 
   const version = document.getElementById('version')
   let version_ = '01'
@@ -819,17 +838,106 @@ function completaObjetoReporte() {
   return objetoReporte
 }
 
-const funcionReporteGuardarNuevo = () => {
+const funcionReporteGuardarNuevo = async () => {
   try {
+    const miAlerta = new Alerta()
+    let aviso = 'Se dará de alta un nuevo reporte.'
+    let mensaje = trO(aviso, objTraductor) || aviso
+    miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, objTraductor)
+    let modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
     const objetoGuardarReporte = completaObjetoReporte()
-    console.log(objetoGuardarReporte)
+    delete objetoGuardarReporte.id
+
+    const guardar = await guardarNuevoReporte(
+      objetoGuardarReporte,
+      '/guardarReporteNuevo'
+    )
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    modal.style.display = 'none'
+    modal.remove()
+
+    if (guardar.success === true) {
+      //colocar el numero de id del nuevo reporte idControl
+      const id = guardar.last_insert_id
+      aviso = `El reporte nuevo se generó correctamente con el id: ${id}`
+      const idControl = document.getElementById('idControl')
+      idControl.value = id
+      idControl.style.background = '#a8eea8'
+      // Acceder al elemento span
+      const spanElement = document.getElementById('whereUs')
+
+      // Crear un nuevo elemento img para preservarlo
+      const newImg = document.createElement('img')
+      newImg.src = `${SERVER}/assets/img/icons8-brick-wall-50.png`
+      newImg.height = '10' // Asegúrate de usar string para atributos que no son de estilo
+      newImg.width = '10'
+
+      // Remover todos los nodos hijos del span (esto incluye el texto y la imagen)
+      while (spanElement.firstChild) {
+        spanElement.removeChild(spanElement.firstChild)
+      }
+
+      // Añadir de nuevo la imagen y el nuevo texto
+      spanElement.appendChild(newImg)
+      spanElement.append(objetoGuardarReporte.nombre.toLocaleUpperCase()) // Usa append para añadir texto directamente
+
+      mensaje = trO(aviso, objTraductor) || aviso
+      arrayGlobal.avisoVerde.span.fontSize = '20px'
+      miAlerta.createVerde(arrayGlobal.avisoVerde, mensaje, objTraductor)
+    }
+    if (guardar.success === false) {
+      aviso = 'Algo salió mal y no se guardó el nuevo reporte!'
+      mensaje = trO(aviso, objTraductor) || aviso
+      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTraductor)
+    }
+
+    modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    modal = document.getElementById('modalAlertM')
+    modal.style.display = 'none'
+    modal.remove()
   } catch (error) {
     console.log(error)
   }
 }
 
-const funcionReporteGuardarCambios = () => {
+const funcionReporteGuardarCambios = async () => {
   try {
+    const miAlerta = new Alerta()
+    let aviso = 'Se modificarán los datos del reporte.'
+    let mensaje = trO(aviso, objTraductor) || aviso
+    miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, objTraductor)
+    let modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    const objetoGuardarReporte = completaObjetoReporte()
+    const guardar = await guardarNuevoReporte(
+      objetoGuardarReporte,
+      '/guardarReporteCambios'
+    )
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    modal.style.display = 'none'
+    modal.remove()
+
+    if (guardar.success === true) {
+      aviso = `Se guardaron las modificaciones al reporte.`
+      mensaje = trO(aviso, objTraductor) || aviso
+      arrayGlobal.avisoVerde.span.fontSize = '20px'
+      miAlerta.createVerde(arrayGlobal.avisoVerde, mensaje, objTraductor)
+    }
+    if (guardar.success === false) {
+      aviso = 'Algo salió mal y no se guardaron las modificaciones!'
+      mensaje = trO(aviso, objTraductor) || aviso
+      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTraductor)
+    }
+
+    modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    modal = document.getElementById('modalAlertM')
+    modal.style.display = 'none'
+    modal.remove()
   } catch (error) {
     console.log(error)
   }

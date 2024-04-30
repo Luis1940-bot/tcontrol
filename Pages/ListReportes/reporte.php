@@ -79,7 +79,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
         </div>
         <div class="form-group">
             <!-- pie -->
-            <input type="text" id="pieDeInforme" name="pieDeInforme">
+            <textarea id="pieDeInforme" name="pieDeInforme"></textarea>
             <label for="pieDeInforme">Pie de informe</label>
         </div>
         <br>
