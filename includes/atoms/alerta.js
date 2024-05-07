@@ -35,6 +35,8 @@ import dwt from '../../Pages/Rove/Controladores/dwt.js'
 import onOff from '../../Pages/ListReportes/Modules/Controladores/reporteOnOff.js'
 import baseUrl from '../../config.js'
 import guardarNuevoReporte from '../../Pages/ListReportes/Modules/Controladores/guardarReporte.js'
+import addSelector from '../../Pages/ListVariables/Modules/Controladores/addSelector.js'
+import addVariable from '../../Pages/ListVariables/Modules/Controladores/aceptarVariable.js'
 
 const SERVER = baseUrl
 
@@ -682,6 +684,19 @@ const funcionNuevoReporte = () => {
   window.location.href = ruta
 }
 
+const funcionNuevoSelect = () => {
+  const objetoRuta = {
+    control_N: 0,
+    control_T: 'Nueva variable',
+    nr: '0',
+    filtrado: [],
+  }
+  sessionStorage.setItem('variable', encriptar(objetoRuta))
+  let timestamp = new Date().getTime()
+  const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=variables&v=${timestamp}`
+  window.location.href = ruta
+}
+
 function checaCamposReporte(elemento) {
   if (elemento.value === '') {
     elemento.style.background = 'rgb(254, 4, 4)'
@@ -943,10 +958,160 @@ const funcionReporteGuardarCambios = async () => {
   }
 }
 
-const funcionReporteGuardarComo = () => {
+const funcionReporteGuardarComo = async () => {
   try {
+    const miAlerta = new Alerta()
+    let aviso = 'Se dará de alta una copia del reporte actual.'
+    let mensaje = trO(aviso, objTraductor) || aviso
+    miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, objTraductor)
+    let modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    const objetoGuardarReporte = completaObjetoReporte()
+    delete objetoGuardarReporte.id
+
+    const guardar = await guardarNuevoReporte(
+      objetoGuardarReporte,
+      '/guardarReporteNuevo'
+    )
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    modal.style.display = 'none'
+    modal.remove()
+
+    if (guardar.success === true) {
+      //colocar el numero de id del nuevo reporte idControl
+      const id = guardar.last_insert_id
+      aviso = `La copia del reporte se generó correctamente con el id: ${id}`
+      const idControl = document.getElementById('idControl')
+      idControl.value = id
+      idControl.style.background = '#a8eea8'
+      // Acceder al elemento span
+      const spanElement = document.getElementById('whereUs')
+
+      // Crear un nuevo elemento img para preservarlo
+      const newImg = document.createElement('img')
+      newImg.src = `${SERVER}/assets/img/icons8-brick-wall-50.png`
+      newImg.height = '10' // Asegúrate de usar string para atributos que no son de estilo
+      newImg.width = '10'
+
+      // Remover todos los nodos hijos del span (esto incluye el texto y la imagen)
+      while (spanElement.firstChild) {
+        spanElement.removeChild(spanElement.firstChild)
+      }
+
+      // Añadir de nuevo la imagen y el nuevo texto
+      spanElement.appendChild(newImg)
+      spanElement.append(objetoGuardarReporte.nombre.toLocaleUpperCase()) // Usa append para añadir texto directamente
+
+      mensaje = trO(aviso, objTraductor) || aviso
+      arrayGlobal.avisoVerde.span.fontSize = '20px'
+      miAlerta.createVerde(arrayGlobal.avisoVerde, mensaje, objTraductor)
+    }
+    if (guardar.success === false) {
+      aviso = 'Algo salió mal y no se realizó la copia del reporte!'
+      mensaje = trO(aviso, objTraductor) || aviso
+      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTraductor)
+    }
+
+    modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    modal = document.getElementById('modalAlertM')
+    modal.style.display = 'none'
+    modal.remove()
   } catch (error) {
     console.log(error)
+  }
+}
+
+const funcionSelectorGuardarNuevo = async () => {
+  const nombreDelSelect = document.getElementById('nombreDelSelect')
+  const tipoDeUsuario = document.getElementById('tipodeusuario')
+
+  if (nombreDelSelect.value !== '') {
+    const objeto = {
+      concepto: trO('Modificar', objTraductor) || 'Modificar',
+      detalle: nombreDelSelect.value.toUpperCase(),
+      nivel: tipoDeUsuario.value,
+    }
+    const resultado = await addSelector(objeto, '/addSelector')
+    if (resultado.success) {
+      const modalAlertM = document.getElementById('modalAlertM')
+      modalAlertM.style.display = 'none'
+      modalAlertM.remove()
+      const miAlertaM = new Alerta()
+      miAlertaM.createVerde(arrayGlobal.avisoVerde, null, objTraductor)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
+      modal.addEventListener('click', (e) => {
+        modal.style.display = 'none' // Cerrar el modal
+        const url = `${SERVER}/Pages/ListVariables`
+        window.location.href = url // Redireccionar
+      })
+    }
+  }
+}
+
+const funcionSelectorGuardarCambios = async () => {
+  const nombreDelSelect = document.getElementById('nombreDelSelect')
+  const tipoDeUsuario = document.getElementById('tipodeusuario')
+  const numeroDelSelector = document.getElementById('numeroDelSelector')
+  if (nombreDelSelect.value !== '') {
+    const objeto = {
+      selector: numeroDelSelector.value,
+      detalle: nombreDelSelect.value.toUpperCase(),
+      nivel: tipoDeUsuario.value,
+    }
+    const resultado = await addSelector(objeto, '/updateSelector')
+    if (resultado.success) {
+      const modalAlertM = document.getElementById('modalAlertM')
+      modalAlertM.style.display = 'none'
+      modalAlertM.remove()
+    }
+  }
+}
+const funcionGuardarCambiosEnVariables = async () => {
+  const pastillitas = document.querySelectorAll('.div-pastillita')
+  let divsSinFondoEspecifico = []
+  pastillitas.forEach((div) => {
+    let colorFondo = div.style.background
+    if (colorFondo.replace(/\s+/g, '').indexOf('rgb(157,157,157)') === -1) {
+      // Si no tiene el fondo deseado, añadir a la lista
+      divsSinFondoEspecifico.push(div)
+    }
+  })
+  let arrayId = []
+  let arrayValue = []
+
+  divsSinFondoEspecifico.forEach((element) => {
+    const input = element.querySelector('input')
+    let valor = input.value
+
+    if (valor !== '') {
+      const id = input.getAttribute('id')
+
+      arrayId.push(id)
+      arrayValue.push(valor)
+    }
+  })
+
+  if (arrayId.length > 0) {
+    const objeto = {
+      id: arrayId,
+      value: arrayValue,
+    }
+    const response = await addVariable(objeto, '/updateVariable')
+
+    if (response[0].success) {
+      const modalAlertM = document.getElementById('modalAlertM')
+      modalAlertM.style.display = 'none'
+      modalAlertM.remove()
+      divsSinFondoEspecifico.forEach((element) => {
+        const input = element.querySelector('input')
+        let valor = input.value
+        input.value = valor.toUpperCase()
+        input.style.background = '#cecece'
+      })
+    }
   }
 }
 
@@ -3776,6 +3941,170 @@ class Alerta {
       obj.divCajita.onClick = null
 
       //! fin guardar como nuevo
+    }
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    let div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    let texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+    //! fin salir
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+  }
+
+  createModalMenuListVariables(objeto, objTranslate) {
+    // eslint-disable-next-line no-unused-vars
+
+    const obj = objeto
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+
+    //! nuevo select
+    obj.divCajita.id = 'idDivNuevoSelect'
+    obj.divCajita.onClick = funcionNuevoSelect
+    let div = createDiv(obj.divCajita)
+    const imgNuevoReporte = createIMG(obj.imgNuevoReporte)
+    const mensaje = trO('Nuevo selector', objTranslate) || 'Nuevo selector'
+    let texto = mensaje
+    const spanNuevoReporte = createSpan(obj.nuevo, texto)
+    div.appendChild(imgNuevoReporte)
+    div.appendChild(spanNuevoReporte)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin nuevo select
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+    //! fin salir
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+  }
+
+  createModalMenuCRUDSelector(objeto, objTranslate, guardarComo) {
+    // eslint-disable-next-line no-unused-vars
+
+    const obj = objeto
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+
+    if (!guardarComo) {
+      //! guardar nuevo reporte
+      obj.divCajita.id = 'idDivCRUDSelector'
+      obj.divCajita.onClick = funcionSelectorGuardarNuevo
+      let div = createDiv(obj.divCajita)
+      const imgGuardar = createIMG(obj.imgGuardar)
+      let texto = trO(obj.guardar.text, objTranslate) || obj.guardar.text
+      const spanGuardar = createSpan(obj.guardarCambio, texto)
+      div.appendChild(imgGuardar)
+      div.appendChild(spanGuardar)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar nuevo reporte
+    } else {
+      //! guardar cambios
+      obj.divCajita.id = 'idDivCRUDSelector'
+      obj.divCajita.onClick = funcionSelectorGuardarCambios
+      let div = createDiv(obj.divCajita)
+      const imgGuardarCambios = createIMG(obj.imgGuardarComo)
+      let texto =
+        trO(obj.guardarCambio.text, objTranslate) || obj.guardarCambio.text
+      const spanGuardarCambios = createSpan(obj.guardarCambio, texto)
+      div.appendChild(imgGuardarCambios)
+      div.appendChild(spanGuardarCambios)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar cambios
+
+      //! guardar cambios en las variables
+      obj.divCajita.id = 'idDivGuardarCambiosEnVariables'
+      obj.divCajita.onClick = funcionGuardarCambiosEnVariables
+      div = createDiv(obj.divCajita)
+      const imgGuardarComo = createIMG(obj.imgGuardarComo)
+      texto =
+        trO('Guardar cambio en variables', objTranslate) ||
+        'Guardar cambio en variables'
+      const spanGuardarComo = createSpan(obj.guardarComoNuevo, texto)
+      div.appendChild(imgGuardarComo)
+      div.appendChild(spanGuardarComo)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar como dar cambios en las variables
     }
 
     //! refrescar

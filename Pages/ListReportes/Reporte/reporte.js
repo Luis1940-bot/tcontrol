@@ -660,15 +660,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburguesa = document.getElementById('hamburguesa')
   hamburguesa.addEventListener('click', () => {
     const reporte = desencriptar(sessionStorage.getItem('reporte'))
-    let guardarComo = false
+    // let guardarReporteComo = false
     if (typeof reporte.control_N === 'string') {
-      guardarComo = true
+      arrayGlobal.guardarReporteComo = true
     }
     const miAlertaM = new Alerta()
     miAlertaM.createModalMenuCRUDReporte(
       arrayGlobal.objMenu,
       objTranslate,
-      guardarComo
+      arrayGlobal.guardarReporteComo
     )
     const modal = document.getElementById('modalAlertM')
     // const closeButton = document.querySelector('.modal-close')

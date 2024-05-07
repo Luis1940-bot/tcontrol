@@ -255,3 +255,4 @@ Gerente
 Patrocinador
 Desenvolvedor
 Indeterminado
+Salvar alterações nas variáveis

@@ -255,3 +255,4 @@ Gerente
 Sponsor
 Desarrollador
 Indeterminado
+Guardar cambio en variables

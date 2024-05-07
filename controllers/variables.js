@@ -64,7 +64,8 @@ let objetoMemoria = {
 let arrayReportes = []
 
 let habilitadoGuardar = false
-
+let guardarReporteComo = false
+let guardarSelectorComo = false
 function removeModal(mod) {
   const modal = mod
   if (modal) {
@@ -168,6 +169,8 @@ const arrayGlobal = {
   arraySelect,
   arrayEmpresa,
   arrayReportes,
+  guardarReporteComo,
+  guardarSelectorComo,
 }
 
 const objAlertaAceptarCancelar = {

@@ -255,3 +255,4 @@ Manager
 Sponsor
 Developer
 Indeterminate
+Save change to variables

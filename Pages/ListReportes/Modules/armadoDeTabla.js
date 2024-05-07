@@ -141,7 +141,7 @@ function estilosCell(
   imagen.setAttribute('class', 'img-view')
   imagen.setAttribute('name', 'viewer')
   imagen.style.float = 'right'
-  imagen.src = `${SERVER}/assets/img/icons8-sign-30.png`
+  imagen.src = `${SERVER}/assets/img/icons8-edit-30.png`
   // imagen.style.height = '12px'
   // imagen.style.width = '12px'
   imagen.style.margin = 'auto 5px auto auto'
@@ -218,10 +218,11 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
   const miAlerta = new Alerta()
   if (arrayControl.length > 0) {
     encabezado(encabezados)
-    completaTabla(arrayControl, objTranslate, arrayControl)
+    completaTabla(arrayControl, objTranslate)
     // array = [...arrayControl];
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
+
     if (cantidadDeFilas.childElementCount !== arrayControl.length) {
       mensaje = trO(mensaje) || mensaje
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
