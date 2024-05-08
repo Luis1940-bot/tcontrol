@@ -1,38 +1,40 @@
 <?php
         mb_internal_encoding('UTF-8');
-        function addVariable($objeto) {
+        function addVinculo($objeto) {
 
           try {
+            ob_start();
             include_once BASE_DIR . "/Routes/datos_base.php";
             $selector = $objeto['selector'];
-            $detalle = $objeto['nombre'];
-            $orden = $objeto['orden'];
-            $activo = 's';
-            $nivel = 3; 
-            $concepto = $objeto['concepto'];
+            $idLTYreporte = $objeto['idLTYreporte'];
+            $activo = $objeto['activo'];
+            $idusuario = $objeto['idusuario'];
 
             
             $conn = mysqli_connect($host,$user,$password,$dbname);
             if ($conn->connect_error) {
+                ob_end_clean();
                 die("Conexión fallida: " . $conn->connect_error);
             }
-            $sql = "INSERT INTO LTYselect (selector, detalle, orden, activo, nivel, concepto) VALUES (?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO LTYselectReporte (selector, idLTYreporte, activo, idusuario) VALUES (?, ?, ?, ?);";
           
             $stmt = $conn->prepare($sql);
             if ($stmt === false) {
                 die("Error al preparar la consulta: " . $conn->error);
             }
-            $stmt->bind_param("isisis", $selector, $detalle, $orden, $activo, $nivel, $concepto);
+            $stmt->bind_param("iisi", $selector, $idLTYreporte, $activo, $idusuario);
           
             if ($stmt->execute() === true) {
                 $last_id = $conn->insert_id;
-                $response = array('success' => true, 'message' => 'Se agregó la nueva variable.', 'id' => $last_id);
+                $conn->commit();
+                $response = array('success' => true, 'message' => 'Se hizo el vinculo.', 'id' => $last_id);
             } else {
-                $response = array('success' => false, 'message' => 'No se agregó la nueva variable.');
+                $conn->rollback();
+                $response = array('success' => false, 'message' => 'No se hizo el vinculo.');
             }
             $stmt->close();
             $conn->close();
-            
+              ob_end_clean();
               header('Content-Type: application/json');
               echo  json_encode($response);
             // Cerrar la declaración y la conexión
@@ -59,7 +61,7 @@
 
         if ($data !== null) {
           $objeto = $data['objeto'];
-          addVariable($objeto);
+          addVinculo($objeto);
         } else {
           echo "Error al decodificar la cadena JSON";
         }

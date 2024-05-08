@@ -4,7 +4,7 @@ const SERVER = baseUrl
 
 export default function traerRegistros(q, rut, sql_i) {
   // eslint-disable-next-line no-console
-  console.time('traerRegistros')
+  console.time('traerRegistros-Variables')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
     let obj = {
@@ -37,10 +37,10 @@ export default function traerRegistros(q, rut, sql_i) {
 
         resolve(data)
         // eslint-disable-next-line no-console
-        console.timeEnd('traerRegistros')
+        console.timeEnd('traerRegistros-Variables')
       })
       .catch((error) => {
-        console.timeEnd('traerRegistros')
+        console.timeEnd('traerRegistros-Variables')
         console.error('Error en la solicitud:', error)
         reject(error)
         alert('No se pudo establecer conexión con el servidor')

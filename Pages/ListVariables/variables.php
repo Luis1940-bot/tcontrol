@@ -55,9 +55,16 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
         <div class="form-group" id="addButton">
             <!-- add -->
             <div class="input-button">
-              <button class="add-button" id="buttonAgregar">+</button>
+              <button class="add-button" id="buttonAgregar"></button>
             </div>
             <label for="addVariable">Agregue variable</label>
+        </div>
+        <div class="form-group" id="addButtonVincular">
+            <!-- add -->
+            <div class="input-button">
+              <button class="add-button" id="buttonVincular">Control</button>
+            </div>
+            <label for="buttonVincular">Vincule control</label>
         </div>
         <div class="form-group">
             <label id="leyenda">Acepte o cancele para agregar otras variables.</label>
@@ -65,7 +72,11 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
       </form>
     </div>
     <div class='div2'>
-      
+    </div>
+    <div class="div3">
+        <div class="form-group">
+            <label id="sinControles">No hay controles vinculados.</label>
+        </div>
     </div>
   </main>
   <footer>

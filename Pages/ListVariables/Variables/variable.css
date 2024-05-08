@@ -24,7 +24,8 @@ main {
 }
 
 .div1,
-.div2 {
+.div2,
+.div3 {
   margin-top: 10px;
   padding: 10px; /* Espacio interior para visualización */
   border: 1px solid #ccc; /* Borde para mejor visualización */
@@ -121,12 +122,13 @@ hr {
 .add-button {
   cursor: pointer;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   width: 100%;
 }
 
-.div-pastillita {
+.div-pastillita,
+.div-pastillita-s {
   /*display: inline-flex; /* Cambiado de 'flex' a 'inline-flex' */
   border: 1px solid #9d9d9d;
   border-radius: 5px;
@@ -141,6 +143,22 @@ hr {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 60%;
   display: inline-block;
+}
+.span-variable-s {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 70%;
+  border: 1px solid #aaa;
+  box-shadow: none;
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #212121;
+  background-color: #cecece;
+}
+.select-control {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 60%;
+  display: inline-block;
+  height: 25px;
 }
 
 .span-ON {
@@ -183,14 +201,23 @@ hr {
   display: none;
   color: red;
   font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#titulo {
+#titulo,
+#titulo-c {
   margin-top: 5px;
   margin-left: 20px;
 
   font-size: 20px;
   color: #9d9d9d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#sinControles {
+  display: none;
+  color: red;
+  font-size: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

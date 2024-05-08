@@ -14,6 +14,39 @@
                             FROM LTYselect ORDER BY LTYselect.detalle ASC;";
               break;
 
+              case 'traerSelectReporte':
+                $sql="SELECT 
+                          SQL_NO_CACHE 
+                          sRep.idLTYselectReporte,
+                          sRep.selector,
+                          sRep.idLTYreporte,
+                          rep.nombre AS reporteNombre,
+                          sRep.idusuario,
+                          tu.tipo AS tipoUsuario,
+                          sRep.activo
+                        FROM 
+                          LTYselectReporte sRep
+                          INNER JOIN LTYreporte rep ON rep.idLTYreporte = sRep.idLTYreporte
+                          INNER JOIN tipousuario tu ON tu.idtipousuario = sRep.idusuario
+                        WHERE 
+                          rep.activo = 's';";
+              break;
+
+              case 'traerReporteParaVincular':
+                $sql = "SELECT 
+                            SQL_NO_CACHE 
+                            rep.idLTYreporte AS id,
+                            rep.nombre AS reporte,
+                            rep.nivel AS tUsuario,
+                            tUsu.tipo AS tipo
+                          FROM 
+                            LTYreporte rep
+                            INNER JOIN tipousuario tUsu ON tUsu.idtipousuario = rep.nivel
+                          WHERE 
+                            rep.activo = 's'
+                          ORDER BY reporte ASC;";
+              break;
+              
               default:
                   # code...
                   break;

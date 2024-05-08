@@ -46,6 +46,7 @@ const objTranslate = {
   archivosES: [],
   archivosTR: [],
 }
+let arrayReportesVinculdaos = []
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -108,6 +109,57 @@ async function conceptoOnOff(id, status, item, arrayActual) {
     nuevoArray[item][3] = nuevoStatus
     cargaVariables(nuevoArray)
   }
+}
+
+async function selectReporteOnOff(id, status, item, array) {
+  let nuevoArray = [...array]
+  let nuevoStatus = 's'
+  let src = ''
+  if (status === 'OFF') {
+    nuevoStatus = 'n'
+  }
+  console.log(id, status, item, nuevoArray)
+  // const actualizado = await variableOnOff(
+  //   id,
+  //   nuevoStatus,
+  //   '/selectReporteOnOff'
+  // )
+  // if (actualizado.success) {
+  const div3 = document.querySelector('.div3')
+  div3.innerHTML = ''
+  const sinControles = document.createElement('label')
+  sinControles.setAttribute('id', 'sinControles')
+  div3.appendChild(sinControles)
+
+  if (status === 'OFF') {
+    nuevoStatus = 's'
+  }
+  if (status === 'ON') {
+    nuevoStatus = 'n'
+  }
+
+  nuevoArray[item][4] = nuevoStatus
+  console.log(nuevoArray[item][4])
+  console.log(nuevoArray[item][1])
+  cargaReportesVinculado(nuevoArray)
+  // const div = document.getElementById(`v${item}`)
+  // if (status === 'OFF') {
+  //   nuevoStatus = 'ON'
+  //   src = 'icons8-active-48'
+  // }
+  // if (status === 'ON') {
+  //   nuevoStatus = 'OFF'
+  //   src = 'icons8-inactive-24'
+  // }
+
+  // const span = div.querySelector(`span.span-${status}`)
+  // span.textContent = nuevoStatus
+  // const img = div.querySelector(`img.img-view-${status}`)
+  // img.src = `${SERVER}/assets/img/${src}.png`
+  // img.setAttribute('data-status', `${status}`)
+  // span.classList.replace(`span-${status}`, `span-${nuevoStatus}`)
+  // img.classList.replace(`img-view-${status}`, `img-view-${nuevoStatus}`)
+  // }
 }
 
 function traduccionDeLabels() {
@@ -337,7 +389,7 @@ function cargaVariables(array) {
 }
 
 function intercambioDeDivs() {
-  const pastillita = document.querySelectorAll('.div-pastillita')
+  const pastillita = document.querySelectorAll(`.div-pastillita`)
   let idPastillita = 0
   pastillita.forEach((element) => {
     idPastillita = element.getAttribute('id')
@@ -398,6 +450,79 @@ function cancelarVariable() {
   intercambioDeDivs()
 }
 
+function intercambioDeDivsVinculo() {
+  const pastillita = document.querySelectorAll(`.div-pastillita-s`)
+  let idPastillita = 0
+  pastillita.forEach((element) => {
+    idPastillita = element.getAttribute('id')
+  })
+  idPastillita = Number(idPastillita.slice(1))
+  const formGroup = document.getElementById(`v${idPastillita}`)
+  const selectElement = document.querySelector(
+    `#v${idPastillita} .select-control`
+  )
+  const selectValue = selectElement.value
+  const selectedIndex = selectElement.selectedIndex
+  const selectedOption = selectElement.options[selectedIndex]
+  const selectText = selectedOption ? selectedOption.text : ''
+  formGroup.remove()
+  const sinControles = document.getElementById('sinControles')
+
+  idPastillita >= 1
+    ? (sinControles.style.display = 'none')
+    : (sinControles.style.display = 'flex')
+  const addButton = document.getElementById('addButtonVincular')
+  addButton.style.display = 'flex'
+  return { selectValue, selectText, idPastillita }
+}
+
+async function agregarVinculo(div) {
+  const { selectValue, selectText, idPastillita } = intercambioDeDivsVinculo()
+  if (selectValue) {
+    let guarda = true
+    const numeroDelSelector = document.getElementById('numeroDelSelector')
+    const tipodeusuario = document.getElementById('tipodeusuario')
+    const pastillita = document.querySelectorAll(`.div-pastillita-s`)
+    pastillita.forEach((element) => {
+      const idPasti = element.getAttribute('id')
+      const input = document.querySelector(`#${idPasti} input`)
+      const dataIndex = input.dataset.index
+      if (dataIndex === selectValue) {
+        div.remove()
+        guarda = false
+      }
+    })
+
+    if (guarda) {
+      const objeto = {
+        selector: Number(numeroDelSelector.value),
+        idLTYreporte: Number(selectValue),
+        activo: 's',
+        idusuario: Number(tipodeusuario.value),
+      }
+
+      const resultado = await addVariable(objeto, '/addVinculo')
+      if (resultado.success) {
+        const pastillita = document.querySelectorAll(`.div-pastillita-s`)
+        pastillita.forEach((element) => {
+          const idPast = element.getAttribute('id')
+          const divPastillita = document.getElementById(idPast)
+          divPastillita.remove()
+        })
+        const titulo = document.getElementById('titulo-c')
+        if (titulo) {
+          titulo.remove()
+        }
+        traerSelectReportes()
+      }
+    }
+  }
+}
+
+function cancelarVinculo() {
+  intercambioDeDivsVinculo()
+}
+
 const buttonAgregar = document.getElementById('buttonAgregar')
 buttonAgregar.addEventListener('click', (e) => {
   try {
@@ -448,12 +573,95 @@ buttonAgregar.addEventListener('click', (e) => {
     buttonCancel.style.color = 'red'
     buttonCancel.addEventListener('click', () => {
       //cancelar
-      cancelarVariable()
+      cancelarVariable('')
     })
     div.appendChild(input)
     div.appendChild(buttonAceptar)
     div.appendChild(buttonCancel)
     div2.appendChild(div)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+const buttonVincular = document.getElementById('buttonVincular')
+buttonVincular.addEventListener('click', (e) => {
+  e.preventDefault()
+  try {
+    const addButton = document.getElementById('addButtonVincular')
+    addButton.style.display = 'none'
+    const sinControles = document.getElementById('sinControles')
+
+    const pastillita = document.querySelectorAll('.div-pastillita-s')
+
+    let idPastillita = 0
+    let cantidadPastillitas = 0
+    pastillita.forEach((element) => {
+      idPastillita = element.getAttribute('id')
+      cantidadPastillitas++
+    })
+
+    if (idPastillita === 0) {
+      idPastillita = Number(idPastillita)
+    }
+    if (idPastillita !== 0) {
+      idPastillita = Number(idPastillita.slice(1))
+    }
+    idPastillita++
+
+    if (cantidadPastillitas >= 1) {
+      sinControles.style.display = 'none'
+    } else {
+      sinControles.style.display = 'block'
+    }
+    const div3 = document.querySelector('.div3')
+    const div = document.createElement('div')
+    div.style.background = '#9d9d9d'
+    div.setAttribute('class', 'div-pastillita-s')
+    div.setAttribute('id', `v${idPastillita}`)
+
+    const select = document.createElement('select')
+    select.style.width = '55%'
+    select.setAttribute('class', 'select-control')
+    if (arrayReportesVinculdaos[0].length > 0) {
+      const option = document.createElement('option')
+      option.value = ''
+      option.text = ''
+      select.appendChild(option)
+      arrayReportesVinculdaos.forEach((element) => {
+        const value = element[0]
+        const text = element[1]
+        const option = document.createElement('option')
+        option.value = value
+        option.text = text
+        select.appendChild(option)
+      })
+    }
+    const buttonAceptar = document.createElement('button')
+    buttonAceptar.setAttribute('class', 'button-add')
+    buttonAceptar.setAttribute('id', `b${idPastillita}`)
+    buttonAceptar.innerText = trO('Aceptar') || 'Aceptar'
+    buttonAceptar.style.marginLeft = '5px'
+    buttonAceptar.addEventListener('click', (e) => {
+      //aceptar
+      const id = e.target.id.slice(1)
+      const div = document.getElementById(`v${id}`)
+      agregarVinculo(div)
+    })
+    const buttonCancel = document.createElement('button')
+    buttonCancel.setAttribute('class', 'button-add')
+    buttonCancel.setAttribute('id', `c${idPastillita}`)
+    buttonCancel.innerText = trO('Cancelar') || 'Cancelar'
+    buttonCancel.style.marginLeft = '5px'
+    buttonCancel.style.color = 'red'
+    buttonCancel.addEventListener('click', () => {
+      //cancelar
+      cancelarVinculo()
+    })
+    div.appendChild(select)
+    div.appendChild(buttonAceptar)
+    div.appendChild(buttonCancel)
+    div3.appendChild(div)
   } catch (error) {
     console.log(error)
   }
@@ -505,6 +713,11 @@ function configPHP(user) {
   footer.href = rutaDeveloper
   document.querySelector('.header-McCain').style.display = 'none'
   document.querySelector('.div-encabezado').style.marginTop = '5px'
+  const buttonAgregar = document.getElementById('buttonAgregar')
+  buttonAgregar.innerText = trO('Variables') || 'Variables'
+  const buttonVincular = document.getElementById('buttonVincular')
+  buttonVincular.innerText = trO('Controles') || 'Controles'
+
   // const linkInstitucional = document.getElementById('linkInstitucional');
   // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
@@ -524,6 +737,76 @@ function cargarSelects(array, selector, primerOption) {
   })
 }
 
+function cargaReportesVinculado(arraySelectReporte) {
+  const div3 = document.querySelector('.div3')
+  const numeroDelSelector = document.getElementById('numeroDelSelector')
+  const idSelector = numeroDelSelector.value
+
+  try {
+    const array = arraySelectReporte.filter(
+      (subArray) => subArray[1] === idSelector
+    )
+
+    if (array.length === 0) {
+      const sinControles = document.getElementById('sinControles')
+      sinControles.style.display = 'block'
+    } else {
+      const sinControles = document.getElementById('sinControles')
+      sinControles.style.display = 'none'
+      const titulo = document.createElement('span')
+      titulo.innerText = trO('Controles') || 'Controles'
+      titulo.setAttribute('id', 'titulo-c')
+      div3.appendChild(titulo)
+    }
+
+    array.forEach((element, index) => {
+      const div = document.createElement('div')
+      div.setAttribute('class', 'div-pastillita-s')
+      div.setAttribute('id', `v${index}`)
+
+      const input = document.createElement('input')
+      input.value = element[3]
+      input.setAttribute('class', 'span-variable-s')
+      input.setAttribute('id', element[0])
+      input.setAttribute('data-index', `${element[2]}`)
+      let spanOnOff = document.createElement('span')
+      let selector = element[6]
+      let dirImg = ''
+      if (selector === 'n') {
+        selector = 'OFF'
+        dirImg = 'icons8-inactive-24'
+      }
+      if (selector === 's') {
+        selector = 'ON'
+        dirImg = 'icons8-active-48'
+      }
+
+      spanOnOff.setAttribute('class', `span-${selector}`)
+      spanOnOff.innerText = selector
+      div.appendChild(input)
+      div.appendChild(spanOnOff)
+      const imgStatus = document.createElement('img')
+      imgStatus.setAttribute('class', `img-view-${selector}`)
+      imgStatus.setAttribute('name', 'viewer')
+      imgStatus.src = `${SERVER}/assets/img/${dirImg}.png`
+      imgStatus.style.cursor = 'pointer'
+      imgStatus.setAttribute('data-index', element[0])
+      imgStatus.setAttribute('data-status', selector)
+      imgStatus.setAttribute('data-item', index)
+      imgStatus.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-index')
+        const status = e.target.getAttribute('data-status')
+        const item = e.target.getAttribute('data-item')
+        selectReporteOnOff(id, status, item, arraySelectReporte)
+      })
+      div.appendChild(imgStatus)
+      div3.appendChild(div)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 async function traerInfoSelects() {
   const tipoDeUsuario = await traerRegistros(
     'traerTipoDeUsuario',
@@ -531,6 +814,46 @@ async function traerInfoSelects() {
     null
   )
   cargarSelects(tipoDeUsuario, 'tipodeusuario', false)
+}
+
+async function traerSelectReportes() {
+  const selectReporte = await traerRegistros(
+    'traerSelectReporte',
+    '/traerSelectReporte',
+    null
+  )
+  const numeroDelSelector = document.getElementById('numeroDelSelector')
+  const id = numeroDelSelector.value
+  const seen = new Set() // Set para rastrear elementos únicos
+  const arrayFiltrado = selectReporte
+    .filter((arr) => {
+      const element = arr[2] // Segundo elemento es el criterio
+      if (!seen.has(element)) {
+        seen.add(element)
+        return true
+      }
+      return false
+    })
+    .filter((arr) => arr[1] !== id)
+
+  arrayFiltrado.sort((a, b) => {
+    const elementA = a[3].toLowerCase()
+    const elementB = b[3].toLowerCase()
+    if (elementA < elementB) {
+      return -1
+    } else if (elementA > elementB) {
+      return 1
+    } else {
+      return 0
+    }
+  })
+
+  arrayReportesVinculdaos = await traerRegistros(
+    'traerReporteParaVincular',
+    '/traerReporteParaVincular',
+    null
+  )
+  cargaReportesVinculado(selectReporte)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -571,9 +894,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         dondeEstaEn('', trO('Variable nueva') || 'Variable nueva')
       }
       arrayGlobal.guardarSelectorComo = true
+
       if (typeof variable.control_N === 'number' && variable.control_N === 0) {
         const addButton = document.getElementById('addButton')
         addButton.style.display = 'none'
+        const addButtonVincular = document.getElementById('addButtonVincular')
+        addButtonVincular.style.display = 'none'
         arrayGlobal.guardarSelectorComo = false
       }
       if (typeof variable.control_N === 'string') {
@@ -581,6 +907,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         dondeEstaEn(lugar, variable.control_T)
         cargaInputs(variable.filtrado[0])
         cargaVariables(variable.filtrado)
+        traerSelectReportes()
       }
       traerInfoSelects()
     }, 200)

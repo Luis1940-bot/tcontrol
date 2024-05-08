@@ -77,6 +77,7 @@ function viewer(selector, array, objTranslate) {
     nr: '0',
     filtrado,
   }
+
   sessionStorage.setItem('variable', encriptar(objetoRuta))
 
   let timestamp = new Date().getTime()

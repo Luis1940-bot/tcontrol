@@ -148,6 +148,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           case '/updateVariable':
             include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/updateVariable.php';
             break;
+          case '/traerSelectReporte':
+            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/traerRegistros.php';
+            break;
+          case '/traerReporteParaVincular':
+            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/traerRegistros.php';
+            break;
+          case '/addVinculo':
+            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/aceptarVinculos.php';
+          break;
+        case '/selectReporteOnOff':
+            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/selectReporteOnOff.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada
