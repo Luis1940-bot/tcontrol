@@ -1,6 +1,21 @@
 <?php
-
+// session_start([
+//     // 'cookie_samesite' => 'None',
+//     'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
+// ]);
 header('Content-Type: text/html;charset=utf-8');
+
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
+//  if (isset($_SESSION['login_sso']['email'] )) {
+//       define('EMAIL', $_SESSION['login_sso']['email']);
+//   }
+//   if (defined('EMAIL')) {
+//     echo EMAIL;
+//   } else {
+//      define('EMAIL', 'no está la sesion');
+//   }
 require_once './config.php';
 
 ?>
@@ -19,6 +34,7 @@ require_once './config.php';
   <title></title>
 </head>
 <body>
+  <input type="hidden" id="email" value="<?php echo EMAIL; ?>">
   <div class="spinner"></div>
   <div class='headerFactum'>
       <div class='logoFactum'>

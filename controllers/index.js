@@ -76,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const spinner = document.querySelector('.spinner')
   spinner.style.visibility = 'visible'
   limpiezaDeCache()
-
+  const email = document.getElementById('email')
+  console.log(email.value)
   // session()
   setTimeout(() => {
     // window.location.href = `${SERVER}/Pages/Home/`
