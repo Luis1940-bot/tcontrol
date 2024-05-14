@@ -161,25 +161,29 @@ hr {
   height: 25px;
 }
 
-.span-ON {
+.span-ON,
+.s-span-ON {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: green;
   font-size: 14px;
   font-style: normal;
   margin-left: 10px;
 }
-.span-OFF {
+.span-OFF,
+.s-span-OFF {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: red;
   font-size: 14px;
   font-style: normal;
   margin-left: 10px;
 }
-.img-view-OFF {
+.img-view-OFF,
+.s-img-view-OFF {
   height: 20px;
   margin-left: 10px;
 }
-.img-view-ON {
+.img-view-ON,
+.s-img-view-ON {
   height: 20px;
   margin-left: 10px;
 }

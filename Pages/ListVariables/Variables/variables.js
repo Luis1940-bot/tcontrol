@@ -118,48 +118,35 @@ async function selectReporteOnOff(id, status, item, array) {
   if (status === 'OFF') {
     nuevoStatus = 'n'
   }
-  console.log(id, status, item, nuevoArray)
-  // const actualizado = await variableOnOff(
-  //   id,
-  //   nuevoStatus,
-  //   '/selectReporteOnOff'
-  // )
-  // if (actualizado.success) {
-  const div3 = document.querySelector('.div3')
-  div3.innerHTML = ''
-  const sinControles = document.createElement('label')
-  sinControles.setAttribute('id', 'sinControles')
-  div3.appendChild(sinControles)
+  // console.log(id, status, item, array)
+  const actualizado = await variableOnOff(
+    id,
+    nuevoStatus,
+    '/selectReporteOnOff'
+  )
+  if (actualizado.success) {
+    const div3 = document.querySelector('.div3')
+    div3.innerHTML = ''
+    const sinControles = document.createElement('label')
+    sinControles.setAttribute('id', 'sinControles')
+    div3.appendChild(sinControles)
 
-  if (status === 'OFF') {
-    nuevoStatus = 's'
+    if (status === 'OFF') {
+      nuevoStatus = 's'
+    }
+    if (status === 'ON') {
+      nuevoStatus = 'n'
+    }
+
+    nuevoArray.forEach((arr) => {
+      if (arr[0] === id) {
+        // Modificar algún valor basado en la condición
+        arr[6] = nuevoStatus
+      }
+    })
+
+    cargaReportesVinculado(nuevoArray)
   }
-  if (status === 'ON') {
-    nuevoStatus = 'n'
-  }
-
-  nuevoArray[item][4] = nuevoStatus
-  console.log(nuevoArray[item][4])
-  console.log(nuevoArray[item][1])
-  cargaReportesVinculado(nuevoArray)
-  // const div = document.getElementById(`v${item}`)
-  // if (status === 'OFF') {
-  //   nuevoStatus = 'ON'
-  //   src = 'icons8-active-48'
-  // }
-  // if (status === 'ON') {
-  //   nuevoStatus = 'OFF'
-  //   src = 'icons8-inactive-24'
-  // }
-
-  // const span = div.querySelector(`span.span-${status}`)
-  // span.textContent = nuevoStatus
-  // const img = div.querySelector(`img.img-view-${status}`)
-  // img.src = `${SERVER}/assets/img/${src}.png`
-  // img.setAttribute('data-status', `${status}`)
-  // span.classList.replace(`span-${status}`, `span-${nuevoStatus}`)
-  // img.classList.replace(`img-view-${status}`, `img-view-${nuevoStatus}`)
-  // }
 }
 
 function traduccionDeLabels() {
@@ -781,12 +768,12 @@ function cargaReportesVinculado(arraySelectReporte) {
         dirImg = 'icons8-active-48'
       }
 
-      spanOnOff.setAttribute('class', `span-${selector}`)
+      spanOnOff.setAttribute('class', `s-span-${selector}`)
       spanOnOff.innerText = selector
       div.appendChild(input)
       div.appendChild(spanOnOff)
       const imgStatus = document.createElement('img')
-      imgStatus.setAttribute('class', `img-view-${selector}`)
+      imgStatus.setAttribute('class', `s-img-view-${selector}`)
       imgStatus.setAttribute('name', 'viewer')
       imgStatus.src = `${SERVER}/assets/img/${dirImg}.png`
       imgStatus.style.cursor = 'pointer'
