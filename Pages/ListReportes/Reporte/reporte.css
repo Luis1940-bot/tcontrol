@@ -28,6 +28,8 @@ main {
   margin-top: 10px;
   padding: 10px; /* Espacio interior para visualización */
   border: 1px solid #ccc; /* Borde para mejor visualización */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 form {
@@ -162,6 +164,8 @@ hr {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 9px;
   font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .table-reporte th,
@@ -220,12 +224,29 @@ td {
 }
 
 @media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  main {
+    display: block;
+    overflow-y: auto;
+    min-height: 0;
+    grid-template-rows: auto auto; /* Dos filas, cada una con un div en dispositivos móviles */
+    grid-template-columns: 100%; /* Una columna en móviles */
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  textarea {
+    max-width: 700px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+  textarea {
+    max-width: 700px;
   }
 
   .div1,
@@ -238,6 +259,11 @@ td {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+  textarea {
+    max-width: 900px;
   }
 
   .div1,
@@ -250,6 +276,11 @@ td {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 200px;
+    margin-right: 200px;
+  }
+  textarea {
+    max-width: 1300px;
   }
 
   .div1,
@@ -262,6 +293,11 @@ td {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 200px;
+    margin-right: 200px;
+  }
+  textarea {
+    max-width: 1300px;
   }
 
   .div1,

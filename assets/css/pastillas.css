@@ -2,6 +2,8 @@
 .div-encabezadoPastillas {
   height: auto;
   margin-top: 4px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .div-pastillas {
   height: auto;
@@ -36,7 +38,21 @@
   only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape),
   only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape),
   only screen and (min-width: 1800px) and (orientation: landscape) {
+  .div-encabezadoPastillas {
+    height: auto;
+    margin-top: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+  }
+  .div-pastillas {
+    display: inline-flex;
+    justify-content: space-between;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .pastilla {
-    width: 83%;
+    width: 100%;
   }
 }

@@ -230,12 +230,20 @@ hr {
 }
 
 @media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  main {
+    grid-template-rows: 1fr; /* Una fila */
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 50px;
+    margin-right: 50px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 50px;
+    margin-right: 50px;
   }
 
   .div1,
@@ -248,6 +256,8 @@ hr {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 100px;
+    margin-right: 100px;
   }
 
   .div1,
@@ -260,6 +270,8 @@ hr {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 200px;
+    margin-right: 200px;
   }
 
   .div1,
@@ -272,6 +284,8 @@ hr {
   main {
     grid-template-rows: 1fr; /* Una fila */
     grid-template-columns: 1fr 1fr; /* Dos columnas */
+    margin-left: 300px;
+    margin-right: 300px;
   }
 
   .div1,
