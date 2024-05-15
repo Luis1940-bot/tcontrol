@@ -1,13 +1,31 @@
 <?php
-session_start();
+// session_start();
 
- if (!isset($_SESSION['login_sso']['email'] )) {
-      unset($_SESSION['login_sso']['email'] ); 
-      require_once dirname(dirname(__DIR__)) . '/config.php';
-      header("Location: " . BASE_URL);
-    exit;
-  }
+//  if (!isset($_SESSION['login_sso']['email'] )) {
+//       unset($_SESSION['login_sso']['email'] ); 
+//       require_once dirname(dirname(__DIR__)) . '/config.php';
+//       header("Location: " . BASE_URL);
+//     exit;
+//   }
+session_start([
+    // 'cookie_samesite' => 'None',
+    'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
+]);
 header('Content-Type: text/html;charset=utf-8');
+
+$url = '';
+ if (isset($_SESSION['login_sso']['email'] )) {
+      define('EMAIL', $_SESSION['login_sso']['email']);
+  } else {
+    $sso = true;
+    $url = "https://factumconsultora.com/mccain/index.php";
+
+    if ($sso === false) {
+      $url = "https://factumconsultora.com/scg2-mccain/Pages/Login/index.php";
+    }
+
+    header("Location: ". $url ."");
+  }
 require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>
