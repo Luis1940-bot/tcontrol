@@ -4,15 +4,14 @@ session_start([
     // 'cookie_samesite' => 'None',
     'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
 ]);
-$url = '';
+$url = "https://factumconsultora.com/mccain/index.php";
+define('SSO', $_SESSION['login_sso']['sso']);
  if (isset($_SESSION['login_sso']['email'] )) {
       define('EMAIL', $_SESSION['login_sso']['email']);
+      
   } else {
-    $sso = true;
-    $url = "https://factumconsultora.com/mccain/index.php";
-
-    if ($sso === false) {
-      $url = "https://factumconsultora.com/scg2-mccain/Pages/Login/index.php";
+    if ( SSO === null || SSO === 's_sso' ) {
+      $url = "https://factumconsultora.com/scg2-mccain/index.php";
     }
 
     header("Location: ". $url ."");

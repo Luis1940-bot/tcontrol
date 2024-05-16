@@ -5,11 +5,11 @@ session_start([
 ]);
 header('Content-Type: text/html;charset=utf-8');
 $url = "https://factumconsultora.com/mccain/index.php";
-$sso = true;
+define('SSO', $_SESSION['login_sso']['sso']);
  if (isset($_SESSION['login_sso']['email'] )) {
       define('EMAIL', $_SESSION['login_sso']['email']);
   } else {
-    if ($sso === false) {
+    if ( SSO === null || SSO === 's_sso' ) {
       $url = "https://factumconsultora.com/scg2-mccain/Pages/Login/index.php";
     }
 

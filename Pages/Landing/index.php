@@ -2,15 +2,22 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
+session_start([
+    // 'cookie_samesite' => 'None',
+    'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
+]);
 header('Content-Type: text/html;charset=utf-8');
-session_start();
+$url = "https://factumconsultora.com/mccain/index.php";
+define('SSO', $_SESSION['login_sso']['sso']);
+ if (isset($_SESSION['login_sso']['email'] )) {
+      define('EMAIL', $_SESSION['login_sso']['email']);
+      
+  } else {
+    if ( SSO === null || SSO === 's_sso' ) {
+      $url = "https://factumconsultora.com/scg2-mccain/index.php";
+    }
 
- if (!isset($_SESSION['login_sso']['email'] )) {
-      unset($_SESSION['login_sso']['email'] ); 
-      require_once dirname(dirname(__DIR__)) . '/config.php';
-      header("Location: " . BASE_URL);
-    exit;
+    header("Location: ". $url ."");
   }
 
 
