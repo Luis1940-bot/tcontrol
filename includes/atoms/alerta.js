@@ -269,7 +269,9 @@ function createLabel(config) {
   const label = document.createElement('label')
   config.id !== null ? (label.id = config.id) : null
   config.htmlFor !== null ? (label.htmlFor = config.htmlFor) : null
-  config.innerText !== null ? (label.innerText = config.innerText) : null
+  config.innerText !== null
+    ? (label.innerText = config.innerText.replace(/\n/g, ''))
+    : null
   config.className !== null ? (label.className = config.className) : null
   config.height !== null ? (label.style.height = config.height) : null
   config.width !== null ? (label.style.width = config.width) : null
@@ -311,6 +313,7 @@ function createLabel(config) {
   config.onClick !== null
     ? label.addEventListener('click', config.onClick)
     : null
+  label.innerHTML = label.innerHTML.replace('<br>', '')
   return label
 }
 
@@ -640,11 +643,18 @@ const funcionApi = () => {
     )
 
     const url = window.location.host
+    const path = window.location.pathname
+    const folders = path.split('/').filter((folder) => folder !== '')
+    let primeraSubCarpeta = ''
+    if (folders.length >= 2) {
+      primeraSubCarpeta = folders[0]
+    }
+
     let ruta = ''
     if (desde === null || hasta === null) {
-      ruta = `${url}/Pages/Api/api.php/${procedure}/${plant}/*`
+      ruta = `https://${url}/${primeraSubCarpeta}/Pages/Api/api.php/${procedure}/${plant}/*`
     } else {
-      ruta = `${url}/Pages/Api/api.php/${procedure}/${desde}/${hasta}/${plant}`
+      ruta = `https://${url}/${primeraSubCarpeta}/Pages/Api/api.php/${procedure}/${desde}/${hasta}/${plant}`
     }
     const mensaje0 = document.getElementById('idMensajeInstructivo')
     mensaje0.style.display = 'block'
@@ -1961,6 +1971,18 @@ function cerrarModal(modal) {
   }
 }
 
+// function funcionLogOut(ss) {
+//   // eslint-disable-next-line no-plusplus
+//   for (let i = 0; i < sessionStorage.length; i++) {
+//     const key = sessionStorage.key(i)
+//     sessionStorage.removeItem(key)
+//   }
+
+//   const sso = encodeURIComponent(ss)
+//   const url = `${SERVER}/includes/molecules/logout.php?s=${sso}`
+//   window.location.href = url
+// }
+
 class Alerta {
   constructor() {
     this.modal = null
@@ -2330,6 +2352,10 @@ class Alerta {
 
     texto = trO(user.salir, objTranslate) || user.salir
     const spanSalir = createSpan(obj.salir, texto)
+    // spanSalir.addEventListener('click', () => {
+    //   const { sso } = desencriptar(sessionStorage.getItem('user'))
+    //   funcionLogOut(sso)
+    // })
     modalContent.appendChild(spanSalir)
 
     this.modal.appendChild(modalContent)
@@ -2906,7 +2932,8 @@ class Alerta {
       obj.input.id = 'idDesde'
       obj.input.value = fechaDeHoy
       let input = createInput(obj.input)
-      texto = trO('Desde:', objTrad) || 'Desde:'
+      texto = trO('Desde', objTrad) || 'Desde'
+
       obj.label.innerText = `${texto}: `
       obj.label.margin = 'auto 10px'
       let label = createLabel(obj.label)
@@ -2918,7 +2945,7 @@ class Alerta {
       obj.input.id = 'idHasta'
       obj.input.value = fechaDeHoy
       input = createInput(obj.input)
-      texto = trO('Hasta:', objTrad) || 'Hasta:'
+      texto = trO('Hasta', objTrad) || 'Hasta'
       obj.label.innerText = `${texto}: `
       obj.label.margin = 'auto 10px'
       label = createLabel(obj.label)
@@ -3200,7 +3227,8 @@ class Alerta {
       obj.input.id = 'idDesde'
       obj.input.value = fechaDeHoy
       let input = createInput(obj.input)
-      texto = trO('Desde:', objTranslate) || 'Desde:'
+      texto = trO('Desde', objTranslate) || 'Desde'
+
       obj.label.innerText = `${texto}: `
       obj.label.margin = 'auto 10px'
       let label = createLabel(obj.label)
@@ -3212,7 +3240,7 @@ class Alerta {
       obj.input.id = 'idHasta'
       obj.input.value = fechaDeHoy
       input = createInput(obj.input)
-      texto = trO('Hasta:', objTranslate) || 'Hasta:'
+      texto = trO('Hasta', objTranslate) || 'Hasta'
       obj.label.innerText = `${texto}: `
       obj.label.margin = 'auto 10px'
       label = createLabel(obj.label)
@@ -3669,17 +3697,20 @@ class Alerta {
       obj.input.id = 'idDesde'
       obj.input.value = fechaDeHoy
       let input = createInput(obj.input)
-      texto = trO('Desde:', objTranslate) || 'Desde:'
-      obj.label.innerText = `${texto}: `
+      texto = trO('Desde', objTranslate) || 'Desde'
+
+      obj.label.innerText = `${texto}:`
       obj.label.margin = 'auto 10px'
+
       let label = createLabel(obj.label)
+
       divInput.appendChild(label)
       divInput.appendChild(input)
       modalContent.appendChild(divInput)
       obj.divInput.id = 'idDivInputPorFechaHasta'
       divInput = createDiv(obj.divInput)
 
-      texto = trO('Enviar', objTranslate) || 'Enviar:'
+      texto = trO('Enviar', objTranslate) || 'Enviar'
       obj.btnEnviar.text = texto
       const btn = createButton(obj.btnEnviar)
       btn.setAttribute('data-procedure', rove)

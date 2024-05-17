@@ -1,8 +1,10 @@
 <?php
-// session_start([
-//     'cookie_samesite' => 'None',
-//     'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
-// ]);
+session_start();
+define('SSO', $_SESSION['login_sso']['sso']);
+if (!SSO) {
+  $_SESSION['login_sso']['sso'] = 'null';
+}
+
 header('Content-Type: text/html;charset=utf-8');
 require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>

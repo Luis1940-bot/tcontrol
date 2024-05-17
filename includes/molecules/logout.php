@@ -1,27 +1,32 @@
 <?php
 session_start();
 require_once dirname(dirname(__DIR__)) . '/config.php';
-// Elimina todas las variables de sesión
-$_SESSION = array();
+$url = "https://factumconsultora.com/mccain/index.php";
+define('SSO', $_SESSION['login_sso']['sso']);
 
-// Si se desea destruir la sesión, también se borra el cookie de sesión.
-// Nota: Esto destruirá la sesión, y no solo los datos de la sesión.
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
-    );
-}
-session_regenerate_id(true);
-// Finalmente, destruye la sesión.
-session_destroy();
+ if (isset($_SESSION['login_sso']['email'] )) {
+      $url = "https://factumconsultora.com/mccain/index.php";
+      if ( SSO === 'null' || SSO === ''  ) {
+      $url = BASE_URL . "/index.php";
+    }
+  } else {
+    if ( SSO === 'null' || SSO === ''  ) {
+      $url = BASE_URL . "/index.php";
+    }
+    if ( SSO !== 'null') {
+      $url = "https://factumconsultora.com/mccain/index.php";
+    }
+    
+  }
+
+unset($_SESSION['login_sso']);
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-// Redirige a la página de inicio de sesión o a donde desees.
-header("Location: " . BASE_URL . "/Pages/Login/"); // Cambia "login.php" al nombre de tu página de inicio de sesión
+header("Location: ". $url ."");
 exit;
 
 ?>
+
+

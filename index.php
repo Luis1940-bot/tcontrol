@@ -12,7 +12,6 @@ define('SSO', $_SESSION['login_sso']['sso']);
     if ( SSO === null || SSO === 's_sso' ) {
       $url = "https://factumconsultora.com/scg2-mccain/Pages/Login/index.php";
     }
-
     header("Location: ". $url ."");
   }
 require_once './config.php';

@@ -94,6 +94,9 @@ function trA(palabra, objTrad) {
 function localizador(e) {
   const lugar = trO(e.target.innerText) || e.target.innerText
   document.getElementById('whereUs').innerText += `${espacio}${lugar}`
+  let textContent = document.getElementById('whereUs').textContent
+  textContent = textContent.replace('<br>', '')
+  document.getElementById('whereUs').innerText = textContent
   document.getElementById('volver').style.display = 'block'
   document.getElementById('whereUs').style.display = 'inline'
   navegador.estadoAnteriorButton = e.target.name
@@ -314,9 +317,9 @@ function goBack() {
         navegador.estadoAnteriorWhereUs.length - 1
       ]
 
-    console.log(navegador.estadoAnteriorButton)
-    console.log(navegador.estadoAnteriorWhereUs)
-    console.log(navegador.estadoAnteriorWhereUs.length)
+    // console.log(navegador.estadoAnteriorButton)
+    // console.log(navegador.estadoAnteriorWhereUs)
+    // console.log(navegador.estadoAnteriorWhereUs.length)
     completaButtons(clave)
     const cadena = `${document.getElementById('whereUs').innerText}`
     quitarCadena = quitarCadena.replace('>', '')
@@ -333,6 +336,9 @@ function goBack() {
       return
     }
     document.getElementById('whereUs').innerText = `${nuevaCadena}`
+    let textContent = document.getElementById('whereUs').textContent
+    textContent = textContent.replace('<br>', '')
+    document.getElementById('whereUs').innerText = textContent
   } catch (error) {
     console.log(error)
   }

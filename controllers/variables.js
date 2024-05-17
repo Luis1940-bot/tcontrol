@@ -141,6 +141,7 @@ const closeVentanaVerdeRojaImg = () => {
 
 const funcionLogOut = () => {
   // eslint-disable-next-line no-plusplus
+
   for (let i = 0; i < sessionStorage.length; i++) {
     const key = sessionStorage.key(i)
     sessionStorage.removeItem(key)

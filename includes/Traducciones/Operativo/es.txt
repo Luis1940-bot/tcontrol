@@ -10,7 +10,7 @@ Consultas
 Control
 Control de Cambios
 Controles
-Desde:
+Desde
 DETALLE
 Doc
 Documento no firmado digitalmente.
@@ -51,7 +51,7 @@ Fechas
 Fritas
 Guardar
 Hacer firmar
-Hasta:
+Hasta
 ID
 Imprimir
 Imprimir control

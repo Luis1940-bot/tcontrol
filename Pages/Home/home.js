@@ -100,9 +100,11 @@ function extraeIndice(array, clave) {
 }
 
 function localizador(e) {
-  const lugar = trO(e.target.innerText) || e.target.innerText
-
+  let lugar = trO(e.target.innerText) || e.target.innerText
   document.getElementById('whereUs').innerText += `${espacio}${lugar}`
+  let textContent = document.getElementById('whereUs').textContent
+  textContent = textContent.replace('<br>', '')
+  document.getElementById('whereUs').innerText = textContent
   document.getElementById('volver').style.display = 'block'
   document.getElementById('whereUs').style.display = 'inline'
   navegador.estadoAnteriorButton = e.target.name
@@ -262,7 +264,7 @@ function leeApp(json) {
 }
 
 function dondeEstaEn(array) {
-  const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en '
+  const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en'
   let nuevaCadena = ''
   array.forEach((element, index) => {
     index > 0 ? (nuevaCadena += ` > ${element}`) : null
@@ -273,6 +275,9 @@ function dondeEstaEn(array) {
     }
   })
   document.getElementById('whereUs').innerText = `${ustedEstaEn}${nuevaCadena}`
+  let textContent = document.getElementById('whereUs').textContent
+  textContent = textContent.replace('<br>', '')
+  document.getElementById('whereUs').innerText = textContent
 }
 
 function configPHP(user) {

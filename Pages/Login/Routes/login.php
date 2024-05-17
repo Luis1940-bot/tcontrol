@@ -47,6 +47,7 @@ function consultar($planta, $email, $pass) {
         'username' => $data['nombre'],
         'area' => $data['area'],
         'activo' => $data['activo'],
+        'sso' => 'null',
         );
         
       // Establece las variables de sesión si es necesario
@@ -65,6 +66,9 @@ function consultar($planta, $email, $pass) {
       $_SESSION['login_sso']['qcodusuario'] = $data['qcodusuario'];
       $_SESSION['login_sso']['username'] = $data['nombre'];
       $_SESSION['login_sso']['area'] = $data['area'];
+      if (!$_SESSION['login_sso']['sso']) {
+        $_SESSION['login_sso']['sso'] = 'null';
+      }
       
       // $_SESSION['factum_validation']['ticket_email'] = $email; 
       $_SESSION['factum_validation']['plant'] = $planta;

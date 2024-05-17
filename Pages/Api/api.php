@@ -119,7 +119,7 @@ if (!verificarToken($token, $data, $clave_secreta)) {
 }
 
 header("Content-Type: application/json; charset=utf-8");
-// $http_host = 'http://localhost:8080/Pages/Api/proc_TnEspecialidades/2024-04-01/2024-04-10/1?token=cd2eb0837c9b4c962c22d2ff8b5441b7b45805887f051d39bf133b583baf6860&data=pbi';
+// $http_host = 'https://localhost:8080/Pages/Api/proc_TnEspecialidades/2024-04-01/2024-04-10/1?token=cd2eb0837c9b4c962c22d2ff8b5441b7b45805887f051d39bf133b583baf6860&data=pbi';
 $http_host = $_SERVER['HTTP_HOST'];
 $url = htmlentities($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], ENT_QUOTES, 'UTF-8');
 // Verificar si el token está presente en la URL
