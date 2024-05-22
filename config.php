@@ -39,7 +39,7 @@ if (isLocalhost()) {
       define('PLANOS', $base . '/assets/img/planos/');
     }
     if ($_SERVER['HTTP_HOST'] === 'factumconsultora.com') {
-      $base = 'https://factumconsultora.com/scg2-mccain';
+      $base = 'https://factumconsultora.com/scg-mccain';
       define('BASE_BY', 'by Factum Consultora');
       define('BASE_DEVELOPER', 'Factum');
       define('BASE_CONTENT', 'Factum Consultora');
@@ -50,8 +50,8 @@ if (isLocalhost()) {
       define('PASS', 'Factum2017admin');
       define('SET_FROM', 'alerta.factum@factumconsultora.com');
       define('ADD_BCC', 'luisfactum@gmail.com');
-      define('IMAGE', $_SERVER['DOCUMENT_ROOT'] . '/scg2-mccain/assets/Imagenes/');
-      define('PLANOS', $_SERVER['DOCUMENT_ROOT'] . '/scg2-mccain/assets/img/planos/');
+      define('IMAGE', $_SERVER['DOCUMENT_ROOT'] . '/scg-mccain/assets/Imagenes/');
+      define('PLANOS', $_SERVER['DOCUMENT_ROOT'] . '/scg-mccain/assets/img/planos/');
     }
     
     $baseDir = __DIR__; 

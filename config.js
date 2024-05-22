@@ -11,7 +11,7 @@ if (isLocalhost) {
   baseUrl = 'http://localhost:8080'
 } else {
   // En producción
-  baseUrl = 'https://factumconsultora.com/scg2-mccain'
+  baseUrl = 'https://factumconsultora.com/scg-mccain'
   // baseUrl = 'https://tenkiweb.com/siscon-g'
 }
 

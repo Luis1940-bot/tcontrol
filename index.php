@@ -10,9 +10,11 @@ define('SSO', $_SESSION['login_sso']['sso']);
       define('EMAIL', $_SESSION['login_sso']['email']);
   } else {
     if ( SSO === null || SSO === 's_sso' ) {
-      $url = "https://factumconsultora.com/scg2-mccain/Pages/Login/index.php";
+      $url = "https://factumconsultora.com/scg-mccain/Pages/Login/index.php";
+      
     }
-    header("Location: ". $url ."");
+ 
+    // header("Location: ". $url ."");
   }
 require_once './config.php';
 

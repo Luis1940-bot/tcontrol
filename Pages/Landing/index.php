@@ -14,7 +14,7 @@ define('SSO', $_SESSION['login_sso']['sso']);
       
   } else {
     if ( SSO === null || SSO === 's_sso' ) {
-      $url = "https://factumconsultora.com/scg2-mccain/index.php";
+      $url = "https://factumconsultora.com/scg-mccain/index.php";
     }
 
     header("Location: ". $url ."");
