@@ -4,7 +4,7 @@ ini_set('display_errors', 1); // Asegúrate de que los errores sean mostrados (n
 
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 // include('datos.php');
-
+include_once "addCamposBasicos.php";
 
 function guardarReporte($datos) {
     $dato_decodificado =urldecode($datos);
@@ -42,6 +42,7 @@ function guardarReporte($datos) {
 
         // Respuesta dependiendo del resultado de la inserción.
         if ($cantidad_insert > 0) {
+            addCampos($objeto_json->nombre, $pdo, $lastInsertedId);
             $response = [
                 'success' => true,
                 'message' => 'La operación fue exitosa!',

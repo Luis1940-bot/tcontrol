@@ -15,37 +15,45 @@
                             IFNULL(con.control, '') AS control,
                             IFNULL(con.nombre, '') AS nombre,
                             IFNULL(con.tipodato, '') AS tipodedato,
-                            IFNULL(con.selector, '') AS selector,
                             IFNULL(con.detalle, '') AS detalle,
+                            IFNULL(con.activo, '') AS activo,
+                             IFNULL(con.requerido, '') AS requerido,
+                            IFNULL(con.visible, '') AS campo_visible,
+                            IFNULL(con.enable1, '') AS enabled,
+                            IFNULL(con.orden, '') AS orden,
+                            IFNULL(con.separador, '') AS separador,
+                            IFNULL(con.ok, '') AS oka,
+                            IFNULL(con.valor_defecto, '') AS valorDefecto,
+                            IFNULL(con.selector, '') AS selector,
+                            IFNULL(con.tiene_hijo, '') AS tieneHijo,
+                            IFNULL(con.rutinasql, '') AS rutinaSql,
+                            IFNULL(con.valor_sql, '') AS valorSql,
                             IFNULL(con.tpdeobserva, '') AS tipopdeobserva,
                             IFNULL(con.selector2, '') AS selector2,
-                            IFNULL(rep.idLTYreporte, '') AS idLTYreporte,
-                            IFNULL(con.orden, '') AS orden,
-                            IFNULL(con.activo, '') AS activo,
-                            IFNULL(con.visible, '') AS campo_visible,
-                            IFNULL(con.ok, '') AS oka,
-                            IFNULL(con.separador, '') AS separador,
-                            IFNULL(con.rutinasql, '') AS rutinaSql,
-                            IFNULL(con.valor_defecto, '') AS valorDefecto,
                             IFNULL(con.valor_defecto22, '') AS valorDefecto22,
                             IFNULL(con.sql_valor_defecto22, '') AS sqlValorDefecto,
-                            IFNULL(con.valor_sql, '') AS valorSql,
-                            IFNULL(con.requerido, '') AS requerido,
-                            IFNULL(con.tiene_hijo, '') AS tieneHijo,
+                            
+                            
+                            
                             IFNULL(con.rutina_hijo, '') AS rutinaHijo,
-                            IFNULL(con.enable1, '') AS enabled
+                            IFNULL(rep.idLTYreporte, '') AS idLTYreporte
                           FROM LTYreporte rep
                             LEFT JOIN LTYcontrol con ON con.idLTYreporte = rep.idLTYreporte
                           WHERE rep.activo = 's'
-                            ORDER BY rep.nombre ASC;";
+                            ORDER BY rep.nombre ASC, con.orden ASC;";
               break;
 
               case 'traerTipoDeUsuario':
                 $sql = "SELECT c.idtipousuario AS 'ID', c.tipo AS 'TIPO', c.detalle AS 'DETALLE' FROM tipousuario c ORDER BY c.idtipousuario ASC;";
               break;
 
-              case 'traerAreas':
-                $sql = "SELECT c.idLTYarea AS 'ID', c.areax AS 'AREA' FROM LTYarea c WHERE c.activo='s' ORDER BY c.areax ASC;";
+              case 'traerSelects':
+                $sql = "SELECT SQL_NO_CACHE
+                            sel.selector AS selector,
+                            sel.detalle AS con
+                          FROM LTYselect sel 
+                          GROUP BY sel.detalle
+                          ORDER BY sel.detalle ASC;";
               break;
 
               default:
@@ -56,9 +64,12 @@
           
           require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
           include_once BASE_DIR . "/Routes/datos_base.php";
-          // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
-          // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
-
+            // $host = "190.228.29.59"; 
+            // $user = "fmc_oper2023";
+            // $password = "0uC6jos0bnC8";
+            // $dbname = "mc1000";
+            // $port = 3306;
+            // $charset = "utf-8";
           try {
         
               $con = mysqli_connect($host,$user,$password,$dbname);
@@ -99,7 +110,7 @@
         header("Content-Type: application/json; charset=utf-8");
         $datos = file_get_contents("php://input");
         // $datos = '{"q":"traerReportes","ruta":"/traerControles","rax":"&new=Sun Apr 07 2024 20:13:49 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
-        // $datos = '{"q":"verificarControl,240408142616477","ruta":"/traerControles","rax":"&new=Tue Apr 09 2024 17:06:49 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
+        // $datos = '{"q":"traerSelects","ruta":"/traerLTYcontrol","rax":"&new=Fri May 24 2024 10:08:27 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

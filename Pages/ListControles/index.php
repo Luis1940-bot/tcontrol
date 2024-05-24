@@ -50,6 +50,8 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
         <thead></thead>
         <tbody></tbody>
     </table>
+    <div class="div1">
+    </div>
     <?php
       include_once('../../includes/molecules/pastillas.php');
     ?>

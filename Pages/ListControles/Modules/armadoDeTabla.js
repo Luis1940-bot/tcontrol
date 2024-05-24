@@ -3,6 +3,8 @@ import arrayGlobal from '../../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../../includes/atoms/alerta.js'
 import { encriptar, desencriptar } from '../../../controllers/cript.js'
+import baseUrl from '../../../config.js'
+import traerRegistros from './Controladores/traerRegistros.js'
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -13,13 +15,53 @@ const widthScreen = window.innerWidth
 const widthScreenAjustado = 1 //360 / widthScreen;
 let arrayWidthEncabezado
 
-import baseUrl from '../../../config.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
 
 const encabezados = {
-  title: ['Campos'],
-  width: ['1'],
+  title: [
+    'ID',
+    'Campo',
+    'Tipo de dato',
+    'Detalle',
+    'Situación',
+    'Requerido',
+    'Visible',
+    'Habilitado',
+    'Orden',
+    'Separador',
+    'Valor si',
+    'Valor por Defecto',
+    'Selector de variable',
+    'C/Hijo',
+    'Rutina SQL',
+    'Botón SQL',
+    'Tipo de Observación',
+    '2do Selector',
+    'Valor por defecto',
+    '2da Rutina SQL',
+  ],
+  width: [
+    '0.2',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+  ],
 }
 
 function trO(palabra) {
@@ -44,16 +86,19 @@ function trA(palabra) {
   return palabra
 }
 
-function estilosTheadCell(element, index) {
+function estilosTheadCell(element, index, columnas) {
   const cell = document.createElement('th')
-  if (index < 5) {
+
+  if (index < columnas && arrayWidthEncabezado[index] !== '0') {
     const mensaje = trO(element) || element
     cell.textContent = mensaje.toUpperCase()
     cell.style.background = '#000000'
     cell.style.border = '1px solid #cecece'
     cell.style.overflow = 'hidden'
+
     const widthCell =
       widthScreenAjustado * widthScreen * arrayWidthEncabezado[index]
+
     cell.style.width = `${widthCell}px`
   } else {
     cell.style.display = 'none'
@@ -66,7 +111,7 @@ function encabezado(encabezados) {
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index)
+    const cell = estilosTheadCell(element, index, 2)
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
@@ -78,39 +123,338 @@ function encabezadoCampos(encabezados) {
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index)
+    const cell = estilosTheadCell(element, index, 20)
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
   return thead
 }
 
-function estilosTbodyCellCampos(array) {
-  const newRow = document.createElement('tr')
-  for (let i = 0; i < array[0].length; i++) {}
+function reconoceTipoDeDato(tipoDeDato) {
+  let tipo = ''
+  if (tipoDeDato === 'd') {
+    tipo = trO('Fecha') || 'Fecha'
+  }
+  if (tipoDeDato === 'h') {
+    tipo = trO('Hora') || 'Hora'
+  }
+  if (tipoDeDato === 't') {
+    tipo = trO('Texto') || 'Texto'
+  }
+  if (tipoDeDato === 'tx') {
+    tipo = trO('Texto-Largo') || 'Texto-Largo'
+  }
+  if (tipoDeDato === 'n') {
+    tipo = trO('Número') || 'Número'
+  }
+  if (tipoDeDato === 'b') {
+    tipo = trO('Check-Box') || 'Check-Box'
+  }
+  if (tipoDeDato === 'sd') {
+    tipo = trO('Select-SQL') || 'Select SQL'
+  }
+  if (tipoDeDato === 's') {
+    tipo = trO('Select-Variable') || 'Select-Variable'
+  }
+  if (tipoDeDato === 'title') {
+    tipo = trO('Título-Separador') || 'Título-Separador'
+  }
+  if (tipoDeDato === 'l') {
+    tipo = trO('Leyenda') || 'Leyenda'
+  }
+  if (tipoDeDato === 'subt') {
+    tipo = trO('Sub-Título') || 'Sub-Título'
+  }
+  if (tipoDeDato === 'img') {
+    tipo = trO('Imagen') || 'Imagen'
+  }
+  if (tipoDeDato === 'cn') {
+    tipo = trO('Consulta SQL') || 'Consulta SQL'
+  }
+  if (tipoDeDato === 'btnQwery') {
+    tipo = trO('Botón') || 'Botón SQL'
+  }
+  if (tipoDeDato === 'x') {
+    tipo = trO('Nada') || 'Nada'
+  }
+  if (tipoDeDato === 'photo') {
+    tipo = trO('Foto') || 'Foto'
+  }
+  if (tipoDeDato === 'r') {
+    tipo = trO('Radio') || 'Radio'
+  }
+  return tipo
 }
 
-function viewer(selector, array, objTranslate) {
+function reconoceColumna(i, array, index, selects) {
+  const indice = index
+  let texto = ''
+  let textAlign = ''
+  let paddingLeft = '5px'
+  let color = '#212121'
+  let background = '#fff'
+  let fontStyle = 'Normal'
+  let add = true
+  let button = false
+  let imgButton = 'off'
+  switch (i) {
+    case 0:
+      add = false
+      break
+    case 1:
+      // id
+      texto = array[i]
+      break
+    case 2:
+      // control
+      add = false
+      break
+    case 3:
+      // nombre del control
+      texto = array[i].toUpperCase()
+      break
+    case 4:
+      // tipodedato
+      texto = reconoceTipoDeDato(array[i])
+      break
+    case 5:
+      // detalle
+      texto = array[i]
+      break
+    case 6:
+      // activo
+      if (array[i] === 's') {
+        texto = 'ON'
+        imgButton = 'on'
+      } else if (array[i] === 'n') {
+        texto = 'OFF'
+      }
+      texto = ''
+      button = true
+      break
+    case 7:
+      // requerido
+      if (array[i] === '0') {
+        texto = 'OFF'
+      } else if (array[i] === '1') {
+        texto = 'ON'
+        imgButton = 'on'
+      }
+      texto = ''
+      button = true
+      break
+    case 8:
+      // visible
+      if (array[i] === 's') {
+        texto = 'ON'
+        imgButton = 'on'
+      } else if (array[i] === 'n') {
+        texto = 'OFF'
+      }
+      texto = ''
+      button = true
+      break
+    case 9:
+      // enabled
+      if (array[i] === '0') {
+        texto = 'OFF'
+      } else if (array[i] === '1') {
+        texto = 'ON'
+        imgButton = 'on'
+      }
+      texto = ''
+      button = true
+      break
+    case 10:
+      // orden
+      texto = array[i]
+      break
+    case 11:
+      // separador
+      if (array[i] && array[i] !== '') {
+        if (array[i].trim().charAt(0) === '{') {
+          const medidas = JSON.parse(array[i])
+          texto = `width: ${medidas.width} - height: ${medidas.height}`
+        }
+        if (array[i].trim().charAt(0) === 's') {
+          texto = '--------'
+        }
+      }
+      break
+    case 12:
+      // oka
+      texto = array[i]
+      break
+    case 13:
+      // valorDefecto
+      texto = array[i]
+      break
+    case 14:
+      // selector de variable
+      texto = array[i]
+      if (texto !== '0') {
+        const filtrado = selects.filter((subArray) => subArray[0] === texto)
+        texto = `${texto}-${filtrado[0][1]}`
+      } else {
+        texto = ''
+      }
+      break
+    case 15:
+      // tieneHijo
+      if (array[i] === '0' && array[i] === '') {
+        texto = 'OFF'
+      } else if (array[i] === '1') {
+        texto = 'ON'
+        imgButton = 'on'
+      }
+      texto = ''
+      button = true
+      break
+    case 16:
+      // rutinaSql
+      texto = array[i]
+      if (texto !== '' || texto !== null || texto !== '-') {
+        texto = 'SELECT'
+      } else {
+        texto = ''
+      }
+      break
+    case 17:
+      // valorSql x btnQuerery
+      texto = array[i]
+      if (texto !== '' || texto !== null || texto !== '-') {
+        texto = 'Botón/SELECT'
+      } else {
+        texto = ''
+      }
+      break
+    case 18:
+      // tipo de observacion
+      texto = reconoceTipoDeDato(array[i])
+      break
+    case 19:
+      // selector2
+      texto = array[i]
+      if (texto !== '0') {
+        const filtrado = selects.filter((subArray) => subArray[0] === texto)
+        texto = `${texto}-${filtrado[0][1]}`
+      } else {
+        texto = ''
+      }
+      break
+    case 20:
+      // valorDefecto22
+      texto = array[i]
+      break
+    case 21:
+      // sqlVAlorDefecto
+      texto = array[i]
+      if (texto !== '' || texto !== null || texto !== '-') {
+        texto = 'SELECT'
+      } else {
+        texto = ''
+      }
+      break
+    case 22:
+      // xxx
+      add = false
+      break
+    case 23:
+      // xxx
+      add = false
+      break
+    default:
+      // Código para manejar casos inesperados, si es necesario
+      break
+  }
+  const propiedadesCelda = {
+    indice,
+    texto,
+    textAlign,
+    paddingLeft,
+    color,
+    background,
+    fontStyle,
+    add,
+    button,
+    imgButton,
+  }
+  return propiedadesCelda
+}
+
+function estiloCellCampos(celda) {
+  const cell = document.createElement('td')
+  cell.textContent = celda.texto
+  cell.style.textAlign = celda.textAlign
+  cell.style.color = celda.color
+  cell.style.background = celda.background
+  cell.style.fontStyle = celda.fontStyle
+  cell.style.paddingLeft = '2px'
+  cell.style.fontWeight = 600
+  return cell
+}
+
+function addCeldaFilaCampo(array, index, selects) {
+  try {
+    const newRow = document.createElement('tr')
+    for (let i = 0; i < array.length; i++) {
+      const celda = reconoceColumna(i, array, index, selects)
+      if (celda.add) {
+        const cell = estiloCellCampos(celda)
+        if (celda.button) {
+          const img = document.createElement('img')
+          img.setAttribute('class', `img-status`)
+          img.src = `${SERVER}/assets/img/${celda.imgButton}.png`
+          img.style.cursor = 'pointer'
+          img.setAttribute('data-item', 1)
+          cell.appendChild(img)
+        }
+        newRow.appendChild(cell)
+      }
+    }
+    return newRow
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function viewer(selector, array, objTranslate) {
   //!editar
 
-  const filtrado = array.filter((subArray) => subArray[9] === selector)
+  const segundaTabla = document.querySelector('.tabla-campos')
+  if (segundaTabla) {
+    segundaTabla.innerHTML = ''
+  }
+
+  const filtrado = array.filter((subArray) => subArray[23] === selector)
+
+  const selects = await traerRegistros('traerSelects', '/traerLTYcontrol', null)
   const elemento = document.querySelector('.div-encabezadoPastillas')
+  const div1 = document.querySelector('.div1')
+  const span = document.createElement('span')
+  div1.innerHTML = ''
+  span.innerText = filtrado[0][0]
+  div1.appendChild(span)
   elemento.style.display = 'block'
   if (elemento) {
-    elemento.setAttribute('tabindex', '-1') // O cualquier otro valor de tabindex
-    elemento.focus()
-    const div = document.querySelector('.div-pastillas')
+    div1.setAttribute('tabindex', '-1') // O cualquier otro valor de tabindex
+    div1.focus()
+    const div = document.querySelector('.div2')
+    div.innerHTML = ''
     const tabla = document.createElement('table')
     tabla.style.marginTop = '10px'
+    tabla.setAttribute('class', 'tabla-campos')
     const thead = encabezadoCampos(encabezados)
     tabla.appendChild(thead)
     div.appendChild(tabla)
-    array.forEach((element, index) => {
-      const newRow = estilosTbodyCellCampos(filtrado)
-    })
     const tbody = document.createElement('tbody')
+    filtrado.forEach((element, index) => {
+      const newRow = addCeldaFilaCampo(element, index, selects)
+      tbody.appendChild(newRow)
+    })
+    tabla.appendChild(tbody)
+    div.appendChild(tabla)
   }
-  console.log(filtrado)
 }
 
 function estilosCell(
@@ -167,7 +511,7 @@ function estilosCell(
     imagen.setAttribute('class', 'img-view')
     imagen.setAttribute('name', 'viewer')
     imagen.style.float = 'right'
-    imagen.src = `${SERVER}/assets/img/icons8-edit-30.png`
+    imagen.src = `${SERVER}/assets/img/icons8-view-30.png`
     imagen.style.cursor = 'pointer'
     imagen.setAttribute('data-index', id)
     imagen.addEventListener('click', (e) => {
@@ -257,7 +601,8 @@ function completaTabla(arrayControl, objTranslate) {
   const arraySinDuplicados = eliminarDuplicadosPorPrimerElemento(arrayFinal)
 
   arraySinDuplicados.forEach((element, index) => {
-    const id = element[10]
+    const id = element[24]
+
     const newRow = estilosTbodyCell(
       element,
       index,

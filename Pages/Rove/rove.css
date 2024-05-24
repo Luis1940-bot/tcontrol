@@ -152,11 +152,11 @@ tbody tr td {
   .col-estandar-1,
   .col-estandar-2,
   .fila-19 {
-    display: none;
+    /* display: none; */
   }
   .dwt-lrr,
   .fila-16 {
-    display: none;
+    /* display: none; */
   }
   #tableRove,
   #primerTbody,
@@ -177,7 +177,7 @@ tbody tr td {
   .row-ton,
   .row-hrum,
   .row-producto {
-    display: none;
+    /* display: none; */
   }
 }
 
@@ -188,11 +188,11 @@ tbody tr td {
   .col-estandar-1,
   .col-estandar-2,
   .fila-19 {
-    display: none;
+    /* display: none; */
   }
   .dwt-lrr,
   .fila-16 {
-    display: none;
+    /* display: none; */
   }
   #tableRove,
   #primerTbody,
@@ -213,7 +213,7 @@ tbody tr td {
   .row-ton,
   .row-hrum,
   .row-producto {
-    display: none;
+    /* display: none; */
   }
 }
 

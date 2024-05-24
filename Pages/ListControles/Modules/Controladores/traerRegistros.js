@@ -15,7 +15,6 @@ export default function traerRegistros(q, rut, sql_i) {
     }
     const datos = JSON.stringify(obj)
     // console.log(datos)
-    // const ruta = `${SERVER}/Pages/Controles/Routes/traerRegistros.php?q=${sql}${rax}`
     const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {
       method: 'POST',

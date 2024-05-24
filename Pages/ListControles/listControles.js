@@ -178,11 +178,11 @@ function configPHP(user) {
   document.querySelector('.div-encabezadoPastillas').style.display = 'none'
 
   const pastillas = {
-    clase: ['pastilla', 'pastilla'],
-    text: ['Agregar', 'Clonar'],
+    clase: ['pastilla', 'pastilla', 'pastilla'],
+    text: ['Agregar', 'Editar', 'Clonar'],
     funcion: [addCampo, clonarControl],
-    color: ['#393939', '#cecece'],
-    background: ['#d9d9d9', '#212121'],
+    color: ['#393939', '#212121', '#cecece'],
+    background: ['#f1f1f1', '#d9d9d9', '#212121'],
   }
   cargaPastillas(pastillas)
 }
