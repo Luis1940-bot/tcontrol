@@ -35,7 +35,7 @@
     ],
     "type": ["btn", "btn", "btn", "btn", "btn", "ctrl", "ctrl"],
     "ruta": ["", "", "", "", "", "Menu/index.php", "Admin/index.php"],
-    "nivel": [1, 1, 1, 1, 1, 5, 4],
+    "nivel": [1, 1, 1, 1, 1, 3, 4],
     "Especialidades": {
       "name": ["TONELADAS", "ROVE", "DWT"],
       "type": ["ctrl", "ctrl", "btn"],

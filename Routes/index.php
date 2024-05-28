@@ -163,6 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/traerLTYcontrol':
             include_once dirname(__DIR__) . '/Pages/ListControles/Routes/traerRegistros.php';
           break;
+        case '/turnOnOff':
+            include_once dirname(__DIR__) . '/Pages/ListControles/Routes/turnOnOff.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada

@@ -5,6 +5,7 @@ import { Alerta } from '../../../includes/atoms/alerta.js'
 import { encriptar, desencriptar } from '../../../controllers/cript.js'
 import baseUrl from '../../../config.js'
 import traerRegistros from './Controladores/traerRegistros.js'
+import turnControl from './Controladores/ux.js'
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -34,12 +35,12 @@ const encabezados = {
     'Valor por Defecto',
     'Selector de variable',
     'C/Hijo',
-    'Rutina SQL',
-    'Botón SQL',
+    'Rutina Hijo-Select',
+    'Valor SQL por Defecto',
     'Tipo de Observación',
     '2do Selector',
     'Valor por defecto',
-    '2da Rutina SQL',
+    '2do Valor SQL',
   ],
   width: [
     '0.2',
@@ -186,7 +187,14 @@ function reconoceTipoDeDato(tipoDeDato) {
   return tipo
 }
 
-function reconoceColumna(i, array, index, selects) {
+function addEditar(indice, cantidadDeRegistros) {
+  if (indice > 1 && indice < cantidadDeRegistros - 1) {
+    return true
+  }
+  return false
+}
+
+function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
   const indice = index
   let texto = ''
   let textAlign = ''
@@ -197,6 +205,8 @@ function reconoceColumna(i, array, index, selects) {
   let add = true
   let button = false
   let imgButton = 'off'
+  let buttonEditar = false
+
   switch (i) {
     case 0:
       add = false
@@ -212,14 +222,17 @@ function reconoceColumna(i, array, index, selects) {
     case 3:
       // nombre del control
       texto = array[i].toUpperCase()
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 4:
       // tipodedato
       texto = reconoceTipoDeDato(array[i])
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 5:
       // detalle
       texto = array[i]
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 6:
       // activo
@@ -280,14 +293,17 @@ function reconoceColumna(i, array, index, selects) {
           texto = '--------'
         }
       }
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 12:
       // oka
       texto = array[i]
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 13:
       // valorDefecto
       texto = array[i]
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 14:
       // selector de variable
@@ -298,10 +314,11 @@ function reconoceColumna(i, array, index, selects) {
       } else {
         texto = ''
       }
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 15:
       // tieneHijo
-      if (array[i] === '0' && array[i] === '') {
+      if (array[i] === '0') {
         texto = 'OFF'
       } else if (array[i] === '1') {
         texto = 'ON'
@@ -312,25 +329,28 @@ function reconoceColumna(i, array, index, selects) {
       break
     case 16:
       // rutinaSql
-      texto = array[i]
-      if (texto !== '' || texto !== null || texto !== '-') {
-        texto = 'SELECT'
+      texto = array[i].trim()
+      if (texto && texto !== '-' && texto !== '') {
+        texto = 'SQL'
       } else {
         texto = ''
       }
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 17:
-      // valorSql x btnQuerery
+      // valor sql por defecto
       texto = array[i]
-      if (texto !== '' || texto !== null || texto !== '-') {
-        texto = 'Botón/SELECT'
+      if (texto && texto !== '-' && texto !== '') {
+        texto = 'SQL'
       } else {
         texto = ''
       }
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 18:
       // tipo de observacion
       texto = reconoceTipoDeDato(array[i])
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 19:
       // selector2
@@ -341,19 +361,22 @@ function reconoceColumna(i, array, index, selects) {
       } else {
         texto = ''
       }
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 20:
       // valorDefecto22
       texto = array[i]
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 21:
       // sqlVAlorDefecto
       texto = array[i]
-      if (texto !== '' || texto !== null || texto !== '-') {
-        texto = 'SELECT'
+      if (texto && texto !== '-' && texto !== '') {
+        texto = 'SQL'
       } else {
         texto = ''
       }
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 22:
       // xxx
@@ -378,6 +401,7 @@ function reconoceColumna(i, array, index, selects) {
     add,
     button,
     imgButton,
+    buttonEditar,
   }
   return propiedadesCelda
 }
@@ -394,11 +418,34 @@ function estiloCellCampos(celda) {
   return cell
 }
 
-function addCeldaFilaCampo(array, index, selects) {
+async function turnOnOff(target) {
+  const turn = await turnControl(target)
+  if (turn.success) {
+    const nuevoArray = JSON.parse(turn.actualizado)
+    viewer(target.id, nuevoArray, null)
+  }
+}
+
+function editCampos(target) {}
+
+function addCeldaFilaCampo(
+  array,
+  index,
+  selects,
+  cantidadDeRegistros,
+  idReporte
+) {
   try {
     const newRow = document.createElement('tr')
     for (let i = 0; i < array.length; i++) {
-      const celda = reconoceColumna(i, array, index, selects)
+      const celda = reconoceColumna(
+        i,
+        array,
+        index,
+        selects,
+        cantidadDeRegistros
+      )
+
       if (celda.add) {
         const cell = estiloCellCampos(celda)
         if (celda.button) {
@@ -406,7 +453,57 @@ function addCeldaFilaCampo(array, index, selects) {
           img.setAttribute('class', `img-status`)
           img.src = `${SERVER}/assets/img/${celda.imgButton}.png`
           img.style.cursor = 'pointer'
-          img.setAttribute('data-item', 1)
+          img.setAttribute('data-item', array[1])
+          img.setAttribute('data-column', i)
+          img.setAttribute('data-id', idReporte)
+          const valor = array[i] || '0'
+          let param = 's'
+          img.setAttribute('data-valor', valor)
+          img.addEventListener('click', (e) => {
+            e.preventDefault()
+            let valor = e.target.getAttribute('data-valor')
+            if (valor === '0') {
+              valor = '1'
+              param = 'i'
+            } else if (valor === '1') {
+              valor = '0'
+              param = 'i'
+            } else if (valor === 's') {
+              valor = 'n'
+            } else if (valor === 'n') {
+              valor = 's'
+            }
+            const target = {
+              item: e.target.getAttribute('data-item'),
+              column: e.target.getAttribute('data-column'),
+              valor,
+              param,
+              id: e.target.getAttribute('data-id'),
+            }
+            turnOnOff(target)
+          })
+          cell.appendChild(img)
+        }
+
+        if (celda.buttonEditar) {
+          const img = document.createElement('img')
+          img.setAttribute('class', `img-edit`)
+          img.src = `${SERVER}/assets/img/icons8-edit-24.png`
+          img.style.cursor = 'pointer'
+          img.setAttribute('data-item', array[1])
+          img.setAttribute('data-column', i)
+          img.setAttribute('data-id', idReporte)
+          let param = 's'
+          img.addEventListener('click', (e) => {
+            e.preventDefault()
+            const target = {
+              item: e.target.getAttribute('data-item'),
+              column: e.target.getAttribute('data-column'),
+              valor,
+              param,
+              id: e.target.getAttribute('data-id'),
+            }
+          })
           cell.appendChild(img)
         }
         newRow.appendChild(cell)
@@ -449,7 +546,13 @@ async function viewer(selector, array, objTranslate) {
     div.appendChild(tabla)
     const tbody = document.createElement('tbody')
     filtrado.forEach((element, index) => {
-      const newRow = addCeldaFilaCampo(element, index, selects)
+      const newRow = addCeldaFilaCampo(
+        element,
+        index,
+        selects,
+        filtrado.length,
+        selector
+      )
       tbody.appendChild(newRow)
     })
     tabla.appendChild(tbody)

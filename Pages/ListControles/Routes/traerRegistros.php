@@ -26,16 +26,13 @@
                             IFNULL(con.valor_defecto, '') AS valorDefecto,
                             IFNULL(con.selector, '') AS selector,
                             IFNULL(con.tiene_hijo, '') AS tieneHijo,
-                            IFNULL(con.rutinasql, '') AS rutinaSql,
+                            IFNULL(con.rutina_hijo, '') AS rutinaHijo,
                             IFNULL(con.valor_sql, '') AS valorSql,
                             IFNULL(con.tpdeobserva, '') AS tipopdeobserva,
                             IFNULL(con.selector2, '') AS selector2,
                             IFNULL(con.valor_defecto22, '') AS valorDefecto22,
                             IFNULL(con.sql_valor_defecto22, '') AS sqlValorDefecto,
-                            
-                            
-                            
-                            IFNULL(con.rutina_hijo, '') AS rutinaHijo,
+                            IFNULL(con.rutinasql, '') AS rutinaSql,
                             IFNULL(rep.idLTYreporte, '') AS idLTYreporte
                           FROM LTYreporte rep
                             LEFT JOIN LTYcontrol con ON con.idLTYreporte = rep.idLTYreporte
