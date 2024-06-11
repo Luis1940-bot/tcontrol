@@ -6,6 +6,7 @@ import { encriptar, desencriptar } from '../../../controllers/cript.js'
 import baseUrl from '../../../config.js'
 import traerRegistros from './Controladores/traerRegistros.js'
 import turnControl from './Controladores/ux.js'
+import agregarCampoNuevo from './Controladores/ix.js'
 
 let translateOperativo = []
 let espanolOperativo = []
@@ -15,10 +16,11 @@ let espanolArchivos = []
 const widthScreen = window.innerWidth
 const widthScreenAjustado = 1 //360 / widthScreen;
 let arrayWidthEncabezado
+let arraySinDuplicados = []
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
-
+let arrayOrden = []
 const encabezados = {
   title: [
     'ID',
@@ -41,9 +43,12 @@ const encabezados = {
     '2do Selector',
     'Valor por defecto',
     '2do Valor SQL',
+    'SQL Consulta dinámica',
   ],
   width: [
     '0.2',
+    '1',
+    '1',
     '1',
     '1',
     '1',
@@ -124,7 +129,7 @@ function encabezadoCampos(encabezados) {
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index, 20)
+    const cell = estilosTheadCell(element, index, 21)
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
@@ -194,6 +199,21 @@ function addEditar(indice, cantidadDeRegistros) {
   return false
 }
 
+function changeOrden(indice, cantidadDeRegistros) {
+  if (indice <= 1 || indice === cantidadDeRegistros - 1) {
+    return 0
+  }
+  if (indice > 1 && indice < cantidadDeRegistros - 1) {
+    if (indice === 2) {
+      return 2
+    }
+    if (indice === cantidadDeRegistros - 2) {
+      return 3
+    }
+    return 1
+  }
+}
+
 function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
   const indice = index
   let texto = ''
@@ -206,6 +226,8 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
   let button = false
   let imgButton = 'off'
   let buttonEditar = false
+  let buttonOrden = 0
+  let fontWeight = 600
 
   switch (i) {
     case 0:
@@ -232,6 +254,12 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
     case 5:
       // detalle
       texto = array[i]
+      if (array[4] === 'l' || array[4] === 'subt' || array[4] === 'title') {
+        background = '#ffff59'
+        fontStyle = 'Italic'
+        fontWeight = 600
+        texto = 'El texto va en Campo'
+      }
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 6:
@@ -281,9 +309,16 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
     case 10:
       // orden
       texto = array[i]
+      buttonOrden = changeOrden(indice, cantidadDeRegistros)
       break
     case 11:
       // separador
+      if (array[4] === 'photo' && array[i] === '') {
+        background = '#ff7659'
+        fontStyle = 'Italic'
+        fontWeight = 700
+        texto = 'Add: {"width":"100","height":"100"}'
+      }
       if (array[i] && array[i] !== '') {
         if (array[i].trim().charAt(0) === '{') {
           const medidas = JSON.parse(array[i])
@@ -303,16 +338,29 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
     case 13:
       // valorDefecto
       texto = array[i]
+      if (array[4] === 'photo' && array[i] === '') {
+        background = '#ff7659'
+        fontStyle = 'Italic'
+        fontWeight = 700
+        texto = 'Add: photo.png'
+      }
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 14:
       // selector de variable
+
       texto = array[i]
       if (texto !== '0') {
         const filtrado = selects.filter((subArray) => subArray[0] === texto)
         texto = `${texto}-${filtrado[0][1]}`
       } else {
         texto = ''
+      }
+      if (array[4] === 's' && array[i] === '0') {
+        background = '#ff7659'
+        texto = 'Vincular variable'
+        fontStyle = 'Italic'
+        fontWeight = 700
       }
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
@@ -335,6 +383,12 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
       } else {
         texto = ''
       }
+      if (array[15] === '1' && array[i] === '') {
+        background = '#ff7659'
+        texto = 'Add SQL-Hijo'
+        fontStyle = 'Italic'
+        fontWeight = 700
+      }
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 17:
@@ -345,6 +399,17 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
       } else {
         texto = ''
       }
+      if (
+        (array[4] === 'cn' ||
+          array[4] === 'btnQwery' ||
+          array[6] === 'btnQwery') &&
+        array[i] === ''
+      ) {
+        background = '#ff7659'
+        texto = 'Add SQL'
+        fontStyle = 'Italic'
+        fontWeight = 700
+      }
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 18:
@@ -354,6 +419,9 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
       break
     case 19:
       // selector2
+      if (array[18] === 's' && array[i] === '0') {
+        background = '#ff7659'
+      }
       texto = array[i]
       if (texto !== '0') {
         const filtrado = selects.filter((subArray) => subArray[0] === texto)
@@ -379,8 +447,21 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 22:
-      // xxx
-      add = false
+      // rutinaSql
+      texto = array[i]
+      if (texto && texto !== '-' && texto !== '') {
+        texto = 'SQL'
+      } else {
+        texto = ''
+      }
+
+      if (array[4] === 'sd' && array[i] === '') {
+        background = '#ff7659'
+        texto = 'Add SQL'
+        fontStyle = 'Italic'
+        fontWeight = 700
+      }
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 23:
       // xxx
@@ -402,6 +483,8 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
     button,
     imgButton,
     buttonEditar,
+    buttonOrden,
+    fontWeight,
   }
   return propiedadesCelda
 }
@@ -414,29 +497,193 @@ function estiloCellCampos(celda) {
   cell.style.background = celda.background
   cell.style.fontStyle = celda.fontStyle
   cell.style.paddingLeft = '2px'
-  cell.style.fontWeight = 600
+  cell.style.fontWeight = celda.fontWeight
   return cell
 }
 
-async function turnOnOff(target) {
+async function turnOnOff(target, objTranslate) {
+  // console.log(target)
   const turn = await turnControl(target)
   if (turn.success) {
     const nuevoArray = JSON.parse(turn.actualizado)
-    viewer(target.id, nuevoArray, null)
+    viewer(target.id, nuevoArray, objTranslate)
   }
 }
 
-function editCampos(target) {}
+async function addCampo(target, objTranslate) {
+  // console.log(target)
+  const turn = await agregarCampoNuevo(target)
+  const id = String(target.idLTYreporte)
+  if (turn.success) {
+    const nuevoArray = JSON.parse(turn.actualizado)
+    viewer(id, nuevoArray, objTranslate)
+  }
+}
+
+function subirBajar(target, objTranslate) {
+  const { posicion, cantidadDeRegistros, arrayOrden, item, column, id } = target
+  let { posActual } = posicion
+  let nuevoArray = [...arrayOrden]
+  posActual = Number(posActual)
+  if (posicion.upDown === 'down') {
+    if (posActual < cantidadDeRegistros - 1) {
+      arrayOrden.forEach((element, index) => {
+        if (element.id === item) {
+          nuevoArray[index].orden = posActual + 1
+          nuevoArray[index + 1].orden = posActual
+        }
+      })
+    }
+  } else if (posicion.upDown === 'up') {
+    if (posActual > 3) {
+      arrayOrden.forEach((element, index) => {
+        if (element.id === item) {
+          nuevoArray[index].orden = posActual - 1
+          nuevoArray[index - 1].orden = posActual
+        }
+      })
+    }
+  }
+  const nuevoTarget = {
+    item,
+    column,
+    valor: nuevoArray,
+    param: 'i',
+    id,
+    operation: 'upDown',
+  }
+  turnOnOff(nuevoTarget, objTranslate)
+}
+
+function editCampos(target, objTranslate, LTYselect) {
+  try {
+    const table = document.querySelector('.tabla-campos')
+    const objeto = { ...arrayGlobal.objAlertaAceptarCancelar }
+    const miAlerta = new Alerta()
+    miAlerta.createCRUDControles(
+      objeto,
+      objTranslate,
+      target,
+      table,
+      'editar',
+      (response) => {
+        let valor = ''
+        if (response.dato && response.dato !== 'object') {
+          valor = response.dato.toLowerCase()
+        }
+        if (
+          response.param === 'i' &&
+          response.dato &&
+          response.dato !== 'object'
+        ) {
+          valor = parseInt(response.dato)
+        }
+        if (response.success) {
+          const nuevoTarget = {
+            item: target.item,
+            column: parseInt(target.column),
+            valor,
+            param: response.param,
+            id: target.id,
+            operation: 'turnOnOff',
+          }
+          turnOnOff(nuevoTarget, objTranslate)
+        }
+      },
+      LTYselect
+    )
+    const modal = document.getElementById('modalAlert')
+    modal.style.display = 'block'
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export function nuevoCampo(objTranslate, target) {
+  try {
+    const table = document.querySelector('.tabla-campos')
+    const objeto = { ...arrayGlobal.objAlertaAceptarCancelar }
+    const miAlerta = new Alerta()
+    miAlerta.createNewCampo(objeto, objTranslate, target, table, (response) => {
+      if (response.success) {
+        const nuevoTarget = {
+          reporte: target.despuesDelGuion,
+          idLTYreporte: parseInt(target.antesDelGuion),
+          campo: response.nombre,
+          orden: response.orden,
+          idObservacion: response.idObservacion,
+        }
+        addCampo(nuevoTarget, objTranslate)
+      }
+    })
+    const modal = document.getElementById('modalAlert')
+    modal.style.display = 'block'
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const filtrarSubarrays = (arrayPrincipal) => {
+  const arrayResultante = arrayPrincipal
+    .map((subarray) => {
+      if (subarray.length > 2 && subarray[2] !== '' && subarray[25] === 3) {
+        return [subarray[2], subarray[0]]
+      } else {
+        // console.warn(
+        //   `Subarray ${JSON.stringify(
+        //     subarray
+        //   )} no tiene al menos 3 elementos, no se procesará.`
+        // )
+        return null
+      }
+    })
+    .filter((subarray) => subarray !== null)
+
+  return arrayResultante
+}
+
+export function clonarCamposAReporte(objTranslate, target) {
+  try {
+    const arrayDeDosElementos = filtrarSubarrays(arraySinDuplicados)
+    const objeto = { ...arrayGlobal.objAlertaAceptarCancelar }
+    const miAlerta = new Alerta()
+    miAlerta.clonarCampos(
+      objeto,
+      objTranslate,
+      target,
+      arrayDeDosElementos,
+      (response) => {
+        console.log(response)
+        if (response.success) {
+          const nuevoTarget = {
+            reporte: target.despuesDelGuion,
+            idLTYreporte: parseInt(target.antesDelGuion),
+            campo: response.nombre,
+            orden: response.orden,
+            idObservacion: response.idObservacion,
+          }
+          // addCampo(nuevoTarget, objTranslate)
+        }
+      }
+    )
+    const modal = document.getElementById('modalAlert')
+    modal.style.display = 'block'
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 function addCeldaFilaCampo(
   array,
   index,
   selects,
   cantidadDeRegistros,
-  idReporte
+  idReporte,
+  objTranslate
 ) {
   try {
     const newRow = document.createElement('tr')
+    let col = 0
     for (let i = 0; i < array.length; i++) {
       const celda = reconoceColumna(
         i,
@@ -448,6 +695,7 @@ function addCeldaFilaCampo(
 
       if (celda.add) {
         const cell = estiloCellCampos(celda)
+        col++
         if (celda.button) {
           const img = document.createElement('img')
           img.setAttribute('class', `img-status`)
@@ -479,8 +727,9 @@ function addCeldaFilaCampo(
               valor,
               param,
               id: e.target.getAttribute('data-id'),
+              operation: 'turnOnOff',
             }
-            turnOnOff(target)
+            turnOnOff(target, objTranslate)
           })
           cell.appendChild(img)
         }
@@ -493,18 +742,96 @@ function addCeldaFilaCampo(
           img.setAttribute('data-item', array[1])
           img.setAttribute('data-column', i)
           img.setAttribute('data-id', idReporte)
+          img.setAttribute('data-col', col)
           let param = 's'
+          const vacio = trO('Vacío') || 'Vacío'
           img.addEventListener('click', (e) => {
             e.preventDefault()
             const target = {
               item: e.target.getAttribute('data-item'),
               column: e.target.getAttribute('data-column'),
-              valor,
+              valor: e.target.offsetParent.childNodes[0].data || vacio,
               param,
               id: e.target.getAttribute('data-id'),
+              col: e.target.getAttribute('data-col'),
             }
+            editCampos(target, objTranslate, selects)
           })
           cell.appendChild(img)
+        }
+
+        if (celda.buttonOrden !== 0) {
+          let objetoOrden = {
+            id: array[1],
+            orden: parseInt(celda.texto),
+          }
+          arrayOrden.push(objetoOrden)
+          const div = document.createElement('div')
+          div.setAttribute('class', 'div-orden')
+          const imgDown = document.createElement('img')
+          imgDown.setAttribute('class', `img-orden`)
+          imgDown.src = `${SERVER}/assets/img/icons8-page-down-button-50.png`
+          imgDown.style.cursor = 'pointer'
+          imgDown.setAttribute('data-item', array[1])
+          imgDown.setAttribute('data-column', i)
+          imgDown.setAttribute('data-id', idReporte)
+          imgDown.setAttribute('data-baja', celda.texto)
+
+          imgDown.addEventListener('click', (e) => {
+            e.preventDefault()
+            const posicion = {
+              upDown: 'down',
+              posActual: celda.texto,
+            }
+            const target = {
+              item: e.target.getAttribute('data-item'),
+              column: e.target.getAttribute('data-column'),
+              index,
+              cantidadDeRegistros,
+              id: e.target.getAttribute('data-id'),
+              posicion,
+              arrayOrden,
+            }
+            subirBajar(target, objTranslate)
+          })
+          const imgUp = document.createElement('img')
+          imgUp.setAttribute('class', `img-orden`)
+          imgUp.src = `${SERVER}/assets/img/icons8-page-up-button-50.png`
+          imgUp.style.cursor = 'pointer'
+          imgUp.setAttribute('data-item', array[1])
+          imgUp.setAttribute('data-column', i)
+          imgUp.setAttribute('data-id', idReporte)
+          imgUp.setAttribute('data-sube', celda.texto)
+          imgUp.addEventListener('click', (e) => {
+            e.preventDefault()
+            const posicion = {
+              upDown: 'up',
+              posActual: celda.texto,
+            }
+            const target = {
+              item: e.target.getAttribute('data-item'),
+              column: e.target.getAttribute('data-column'),
+              index,
+              cantidadDeRegistros,
+              id: e.target.getAttribute('data-id'),
+              posicion,
+              arrayOrden,
+            }
+            subirBajar(target, objTranslate)
+          })
+
+          if (celda.buttonOrden === 2) {
+            div.appendChild(imgDown)
+          }
+          if (celda.buttonOrden === 3) {
+            div.appendChild(imgUp)
+          }
+          if (celda.buttonOrden !== 2 && celda.buttonOrden !== 3) {
+            div.appendChild(imgDown)
+            div.appendChild(imgUp)
+          }
+
+          cell.appendChild(div)
         }
         newRow.appendChild(cell)
       }
@@ -517,7 +844,7 @@ function addCeldaFilaCampo(
 
 async function viewer(selector, array, objTranslate) {
   //!editar
-
+  arrayOrden = []
   const segundaTabla = document.querySelector('.tabla-campos')
   if (segundaTabla) {
     segundaTabla.innerHTML = ''
@@ -529,8 +856,12 @@ async function viewer(selector, array, objTranslate) {
   const elemento = document.querySelector('.div-encabezadoPastillas')
   const div1 = document.querySelector('.div1')
   const span = document.createElement('span')
+  span.setAttribute('id', 'idTituloDelReporte')
   div1.innerHTML = ''
-  span.innerText = filtrado[0][0]
+  const tituloDelReporte = `${selector}-${
+    trA(filtrado[0][0]) || filtrado[0][0]
+  }`
+  span.innerText = tituloDelReporte
   div1.appendChild(span)
   elemento.style.display = 'block'
   if (elemento) {
@@ -551,7 +882,8 @@ async function viewer(selector, array, objTranslate) {
         index,
         selects,
         filtrado.length,
-        selector
+        selector,
+        objTranslate
       )
       tbody.appendChild(newRow)
     })
@@ -631,7 +963,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl, id) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 1; i++) {
-    const dato = element[1]
+    const dato = trA(element[1]) || element[1]
     const items = element[25]
     const alignCenter = 'left'
     const paddingLeft = '10px'
@@ -672,6 +1004,7 @@ function eliminarDuplicadosPorPrimerElemento(arr) {
     }
     return false
   })
+
   return resultado
 }
 
@@ -695,13 +1028,14 @@ function completaTabla(arrayControl, objTranslate) {
         : (conteos[primerElemento] = 1)
     }
   })
+
   const arrayFinal = arrayMapeado.map((fila) => {
     const primerElemento = fila[0]
     const conteo = conteos[primerElemento]
     return [...fila, conteo]
   })
 
-  const arraySinDuplicados = eliminarDuplicadosPorPrimerElemento(arrayFinal)
+  arraySinDuplicados = eliminarDuplicadosPorPrimerElemento(arrayFinal)
 
   arraySinDuplicados.forEach((element, index) => {
     const id = element[24]
@@ -722,6 +1056,7 @@ function completaTabla(arrayControl, objTranslate) {
 function loadTabla(arrayControl, encabezados, objTranslate) {
   const miAlerta = new Alerta()
   const arraySinDuplicados = eliminarDuplicadosPorPrimerElemento(arrayControl)
+
   if (arraySinDuplicados.length > 0) {
     encabezado(encabezados)
     completaTabla(arrayControl, objTranslate)

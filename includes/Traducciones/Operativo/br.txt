@@ -256,3 +256,23 @@ Patrocinador
 Desenvolvedor
 Indeterminado
 Salvar alterações nas variáveis
+Adicionar
+Clone
+Vazio
+Data
+Hora
+Texto
+Nada
+Número
+Texto longo
+Imagem
+Selecionar variável
+Consulta SQL
+Botão SQL
+Caixa de seleção
+Rádio
+foto
+SelecioneSQL
+Lenda
+Rubrica
+Qualificação

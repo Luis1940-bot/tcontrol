@@ -165,6 +165,7 @@ class AlertaRove {
 
   createMostrarNumDocumentos(objeto, objTrad, filtrado, typeAlert) {
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
 
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlert'

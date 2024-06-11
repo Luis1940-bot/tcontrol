@@ -256,3 +256,23 @@ Sponsor
 Desarrollador
 Indeterminado
 Guardar cambio en variables
+Agregar
+Clonar
+Vacío
+Fecha
+Hora
+Texto
+Nada
+Número
+Texto-Largo
+Imagen
+Select-Variable
+Consulta SQL
+Botón SQL
+Check-Box
+Radio
+Foto
+Select SQL
+Leyenda
+Sub.Título
+Título

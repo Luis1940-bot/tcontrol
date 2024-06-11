@@ -27,9 +27,10 @@ import cargaTabla from './controlesViews.js'
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
-import tablaVacia from './Modules/armadoDeTabla.js'
+// import tablaVacia from './Modules/armadoDeTabla.js'
 import baseUrl from '../../config.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
+import { clonarCamposAReporte, nuevoCampo } from './Modules/armadoDeTabla.js'
 
 const SERVER = baseUrl
 
@@ -126,17 +127,39 @@ function cambiaColorPastillas(button) {
 
 function addCampo(e) {
   cambiaColorPastillas(e)
-  const tabla = document.getElementById('tableControlViews')
-  const thead = tabla.querySelector('thead')
-  const tbody = tabla.querySelector('tbody')
-  thead.innerHTML = ''
-  tbody.innerHTML = ''
+  const idTituloDelReporte = document.getElementById('idTituloDelReporte')
+  const reporte = idTituloDelReporte.textContent
+  const partes = reporte.split(/-(.+)/)
+  const antesDelGuion = partes[0].trim()
+  const despuesDelGuion = partes[1] ? partes[1].trim() : ''
+  nuevoCampo(objTranslate, { antesDelGuion, despuesDelGuion })
 }
 
-function clonarControl(e) {}
+function clonarControl(e) {
+  cambiaColorPastillas(e)
+  const idTituloDelReporte = document.getElementById('idTituloDelReporte')
+  const reporte = idTituloDelReporte.textContent
+  const partes = reporte.split(/-(.+)/)
+  const idLTYreporte = partes[0].trim()
+  const nameReporte = partes[1] ? partes[1].trim() : ''
+  const target = {
+    idLTYreporte,
+    nameReporte,
+  }
+  clonarCamposAReporte(objTranslate, target)
+}
 
-function cargaPastillas(pastillas) {
+function cargaPastillas() {
   try {
+    const agregar = trO('Agregar') || 'Agregar'
+    const clonar = trO('Clonar') || 'Clonar'
+    const pastillas = {
+      clase: ['pastilla', 'pastilla'],
+      text: [agregar, clonar],
+      funcion: [addCampo, clonarControl],
+      color: ['#212121', '#cecece'],
+      background: ['#d9d9d9', '#212121'],
+    }
     const divPastillas = document.querySelector('.div-pastillas')
     for (let i = 0; i < pastillas.clase.length; i++) {
       let button = document.createElement('button')
@@ -176,15 +199,6 @@ function configPHP(user) {
   document.querySelector('.header-McCain').style.display = 'none'
   document.querySelector('.div-encabezado').style.marginTop = '5px'
   document.querySelector('.div-encabezadoPastillas').style.display = 'none'
-
-  const pastillas = {
-    clase: ['pastilla', 'pastilla'],
-    text: ['Agregar', 'Clonar'],
-    funcion: [addCampo, clonarControl],
-    color: ['#212121', '#cecece'],
-    background: ['#d9d9d9', '#212121'],
-  }
-  cargaPastillas(pastillas)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -217,6 +231,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => {
       dondeEstaEn()
       leeApp(`App/${plant}/app`)
+      cargaPastillas()
     }, 200)
   }
   spinner.style.visibility = 'hidden'

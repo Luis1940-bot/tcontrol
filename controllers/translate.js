@@ -17,7 +17,11 @@ async function leerArchivo(url) {
     const response = await fetch(url)
     if (response.ok) {
       const text = await response.text()
-      return text.trim().split('\n')
+      // Limpia las líneas eliminando caracteres \r y recortando espacios innecesarios
+      return text
+        .trim()
+        .split('\n')
+        .map((line) => line.replace(/\r/g, '').trim())
     }
     return null
   } catch (error) {

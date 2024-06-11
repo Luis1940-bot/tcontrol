@@ -319,7 +319,9 @@ function createLabel(config) {
 
 function createH3(config, typeAlert) {
   const h3 = document.createElement('h3')
-  h3.textContent = config.text[typeAlert]
+  typeAlert !== null
+    ? (h3.textContent = config.text[typeAlert])
+    : (h3.textContent = typeAlert)
   h3.style.fontSize = config.fontSize
   h3.style.fontColor = config.fontColor
   config.marginTop !== null ? (h3.style.marginTop = config.marginTop) : null
@@ -355,6 +357,111 @@ function createIMG(config) {
   config.marginRigth !== null ? (img.marginRigth = config.marginRigth) : null
   config.filter !== null ? (img.filter = config.filter) : null
   return img
+}
+
+function createSelect(array, params, objTranslate) {
+  const { id, className } = params
+  const select = document.createElement('select')
+  if (id) {
+    select.setAttribute('id', id)
+  }
+  if (className) {
+    select.setAttribute('class', className)
+  }
+
+  while (select.firstChild) {
+    select.removeChild(select.firstChild)
+  }
+  const nuevoArray = [...array]
+  // nuevoArray.forEach((element, index) => {
+  //   index === 1 ? select.setAttribute('selector', element[1]) : null
+  // })
+
+  if (array.length > 0) {
+    const emptyOption = document.createElement('option')
+    emptyOption.value = ''
+    emptyOption.text = ''
+    select.appendChild(emptyOption)
+    array.forEach(([value, text]) => {
+      const option = document.createElement('option')
+      option.value = value
+      option.text = trO(text, objTranslate) || text
+      select.appendChild(option)
+    })
+  }
+
+  return select
+}
+
+function createRadioButton(params) {
+  const nuevoRadioButton = document.createElement('input')
+  nuevoRadioButton.setAttribute('type', 'radio')
+  nuevoRadioButton.setAttribute('class', params.class)
+  nuevoRadioButton.setAttribute('name', params.name)
+  params.checked !== null
+    ? nuevoRadioButton.setAttribute('checked', params.name)
+    : null
+  params.value !== null
+    ? nuevoRadioButton.setAttribute('value', params.value)
+    : null
+  params.id !== null ? nuevoRadioButton.setAttribute('id', params.id) : null
+  params.width !== null ? (nuevoRadioButton.style.width = params.width) : null
+  params.heigth !== null
+    ? (nuevoRadioButton.style.height = params.height)
+    : null
+  params.background !== null
+    ? (nuevoRadioButton.style.backgroundColor = params.background)
+    : null
+  params.border !== null
+    ? (nuevoRadioButton.style.border = params.border)
+    : null
+  params.marginLeft !== null
+    ? (nuevoRadioButton.style.marginLeft = params.marginLeft)
+    : null
+  params.marginRight !== null
+    ? (nuevoRadioButton.style.marginRight = params.marginRight)
+    : null
+  params.marginTop !== null
+    ? (nuevoRadioButton.style.marginTop = params.marginTop)
+    : null
+  params.marginBotton !== null
+    ? (nuevoRadioButton.style.marginBotton = params.marginBotton)
+    : null
+  params.paddingLeft !== null
+    ? (nuevoRadioButton.style.paddingLeft = params.paddingLeft)
+    : null
+  params.paddingRight !== null
+    ? (nuevoRadioButton.style.paddingRight = params.paddingRight)
+    : null
+  params.paddingTop !== null
+    ? (nuevoRadioButton.style.paddingTop = params.paddingTop)
+    : null
+  // eslint-disable-next-line max-len
+  params.paddingBotton !== null
+    ? (nuevoRadioButton.style.paddingBotton = params.paddingBotton)
+    : null
+  params.disabled !== null
+    ? nuevoRadioButton.setAttribute('disabled', params.disabled)
+    : null
+  params.dataCustom !== null
+    ? nuevoRadioButton.setAttribute('data-custom', params.dataCustom)
+    : null
+
+  return nuevoRadioButton
+}
+
+function createTextArea(config) {
+  const textArea = document.createElement('textarea')
+  config.id !== null ? (textArea.id = config.id) : null
+  config.value !== null ? (textArea.value = config.value) : null
+  config.className !== null ? (textArea.className = config.className) : null
+  config.margin !== null ? (textArea.margin = config.margin) : null
+  config.fontWeight !== null
+    ? (textArea.style.fontWeight = config.fontWeight)
+    : null
+  config.rows !== null ? textArea.setAttribute('rows', config.rows) : null
+  config.disabled !== null ? (textArea.disabled = config.disabled) : null
+  return textArea
 }
 
 function trO(palabra, objTranslate) {
@@ -1241,6 +1348,7 @@ function cartelVerdeInsertado(
   enviado
 ) {
   const obj = objeto
+  // const obj = JSON.parse(JSON.stringify(objeto))
   let span = document.getElementById('idSpanAvisoVerde')
   span.style.display = 'none'
   let texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert]
@@ -1312,6 +1420,7 @@ function cartelRojoInsertado(
   modal
 ) {
   const obj = objeto
+  // const obj = JSON.parse(JSON.stringify(objeto))
   let span = document.getElementById('idSpanAvisoVerde')
   span.style.display = 'none'
   const texto = trO(mensaje[typeAlert], objTrad) || mensaje[typeAlert]
@@ -1971,6 +2080,123 @@ function cerrarModal(modal) {
   }
 }
 
+function formatoDivsMedidas(m1, m2, m3, num) {
+  let div = document.getElementById('idDivListControles')
+  div.style.height = `${m1}px`
+  div = document.getElementById('idDivSEPARADOR')
+  div.style.height = `${m2}px`
+  const divsRadios = document.querySelectorAll('.div-radios')
+  divsRadios.forEach((element) => {
+    element.style.height = `${m3}px`
+  })
+  if (num === 1) {
+    // vacio
+    div = document.getElementById('idDivCajitaHW')
+    div.style.display = 'none'
+    div = document.getElementById('idDivCajitaSeparador')
+    div.style.display = 'none'
+    const divsMedidas = document.querySelectorAll('.div-medidas')
+    divsMedidas.forEach((element) => {
+      element.style.display = 'none'
+      const inputs = element.getElementsByTagName('input')
+      Array.from(inputs).forEach((input) => {
+        input.value = 100
+      })
+    })
+  }
+  if (num === 2) {
+    // con separador
+    div = document.getElementById('idDivCajitaHW')
+    div.style.display = 'none'
+    div = document.getElementById('idDivCajitaSeparador')
+    div.style.display = 'block'
+    div = document.querySelector('.div-separador')
+    div.style.display = 'block'
+    const divsMedidas = document.querySelectorAll('.div-medidas')
+    divsMedidas.forEach((element) => {
+      element.style.display = 'none'
+      const inputs = element.getElementsByTagName('input')
+      Array.from(inputs).forEach((input) => {
+        input.value = 100
+      })
+    })
+  }
+  if (num === 3) {
+    // con foto
+    div = document.getElementById('idDivCajitaHW')
+    div.style.display = 'block'
+    div = document.getElementById('idDivCajitaSeparador')
+    div.style.display = 'none'
+    const divsMedidas = document.querySelectorAll('.div-medidas')
+    divsMedidas.forEach((element) => {
+      element.style.display = 'block'
+      const inputs = element.getElementsByTagName('input')
+      Array.from(inputs).forEach((input) => {
+        input.value = 100
+      })
+    })
+  }
+}
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function sanitiza(texto) {
+  const blacklist = [
+    'SELECT',
+    'INSERT',
+    'UPDATE',
+    'DELETE',
+    'DROP',
+    'ALTER',
+    'CREATE',
+    'TRUNCATE',
+    'EXEC',
+    'UNION',
+    'TABLE',
+    'DATABASE',
+    'FROM',
+    'WHERE',
+    'JOIN',
+    'OR',
+    'AND',
+    'NOT',
+    'IN',
+    'VALUES',
+    'SET',
+    'GO',
+    'EXECUTE',
+    'MERGE',
+    'CALL',
+    'COMMIT',
+    'ROLLBACK',
+    'GRANT',
+    'REVOKE',
+    'DECLARE',
+    '--',
+    ';',
+    "'",
+    '"',
+    '/*',
+    '*/',
+    '#',
+    '*',
+    '\x00',
+    '\x1a',
+  ]
+
+  let valorLimpio = texto.toLocaleUpperCase()
+
+  blacklist.forEach((pattern) => {
+    const escapedPattern = escapeRegExp(pattern)
+    const regex = new RegExp(`\\b${escapedPattern}\\b`, 'gi') //new RegExp(escapedPattern, 'gi')
+    valorLimpio = valorLimpio.replace(regex, '')
+  })
+
+  return valorLimpio
+}
+
 // function funcionLogOut(ss) {
 //   // eslint-disable-next-line no-plusplus
 //   for (let i = 0; i < sessionStorage.length; i++) {
@@ -1991,6 +2217,7 @@ class Alerta {
   createAlerta(objeto, objTrad, typeAlert) {
     // Crear el elemento modal
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlert'
     this.modal.className = 'modal'
@@ -2132,6 +2359,7 @@ class Alerta {
   createFirma(objeto, objTrad, typeAlert) {
     // Crear el elemento modal
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlert'
     this.modal.className = 'modal'
@@ -2221,6 +2449,7 @@ class Alerta {
   createModalImagenes(objeto, imagen) {
     const imgCopy = imagen
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlert'
     this.modal.className = 'modal'
@@ -2376,6 +2605,7 @@ class Alerta {
     const configMenu = desencriptar(sessionStorage.getItem('config_menu'))
     const enviaPorEmail = sessionStorage.getItem('envia_por_email') === 'true'
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -2553,7 +2783,7 @@ class Alerta {
   createModalConsultaView(objeto, objTranslate) {
     // eslint-disable-next-line no-unused-vars
     const obj = objeto
-
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -2707,6 +2937,7 @@ class Alerta {
       const persona = desencriptar(sessionStorage.getItem('user'))
       const { tipo } = persona
       const obj = objeto
+      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalAlertView'
       this.modal.className = 'modal'
@@ -2885,6 +3116,7 @@ class Alerta {
   createViewerPorFecha(objeto, datos, objTrad) {
     try {
       const obj = objeto
+      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalTablaViewFecha'
       this.modal.className = 'modal'
@@ -3019,6 +3251,7 @@ class Alerta {
       const persona = desencriptar(sessionStorage.getItem('user'))
       const { tipo } = persona
       const obj = objeto
+      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalAlertView'
       this.modal.className = 'modal'
@@ -3181,6 +3414,7 @@ class Alerta {
   createCalendar(objeto, objTranslate, procedure, plant) {
     try {
       const obj = objeto
+      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalTablaViewFecha'
       this.modal.className = 'modal'
@@ -3394,6 +3628,7 @@ class Alerta {
   async createSinCalendar(objeto, texto, objTranslate, procedure, plant) {
     try {
       const obj = objeto
+      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalAlertCarga'
       this.modal.className = 'modal'
@@ -3499,6 +3734,7 @@ class Alerta {
       let firma = document.getElementById('spanUbicacion').textContent
       //! viewer para print
       const obj = objeto
+      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalTablaView'
       this.modal.className = 'modal'
@@ -3584,6 +3820,7 @@ class Alerta {
   createEliminaRegistro(objeto, nuxpedido, objTrad, control) {
     const { control_N, control_T } = control
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlert'
     this.modal.className = 'modal'
@@ -3650,6 +3887,7 @@ class Alerta {
   createCalendarROVE(objeto, objTranslate, rove) {
     try {
       const obj = objeto
+      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalTablaViewFecha'
       this.modal.className = 'modal'
@@ -3797,6 +4035,7 @@ class Alerta {
     // eslint-disable-next-line no-unused-vars
 
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -3848,6 +4087,7 @@ class Alerta {
     // eslint-disable-next-line no-unused-vars
 
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -3913,6 +4153,7 @@ class Alerta {
     // eslint-disable-next-line no-unused-vars
 
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -4011,6 +4252,7 @@ class Alerta {
     // eslint-disable-next-line no-unused-vars
 
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -4077,6 +4319,7 @@ class Alerta {
     // eslint-disable-next-line no-unused-vars
 
     const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
     this.modal.className = 'modal'
@@ -4084,7 +4327,6 @@ class Alerta {
     // Crear el contenido del modal
     const modalContent = createDiv(obj.divContent)
 
-    const span = createSpan(obj.close)
     obj.divCajita.hoverColor = null
     obj.divCajita.position = null
     const divClose = createDiv(obj.divCajita)
@@ -4171,11 +4413,669 @@ class Alerta {
     document.body.appendChild(this.modal)
   }
 
+  createCRUDControles(
+    objeto,
+    objTrad,
+    target,
+    table,
+    typeAlert,
+    callback,
+    LTYselect
+  ) {
+    // Crear el elemento modal
+    const obj = JSON.parse(JSON.stringify(objeto))
+    let datoSeleccionado = null
+    const col = parseInt(target.col) - 1
+    const { column, valor } = target
+    const bindParam = [
+      's',
+      'i',
+      's',
+      's',
+      's',
+      's',
+      's',
+      'i',
+      's',
+      'i',
+      'i',
+      's',
+      's',
+      's',
+      'i',
+      'i',
+      's',
+      's',
+      's',
+      'i',
+      's',
+      's',
+      's',
+      'i',
+    ]
+    const tipoDeParametro = bindParam[parseInt(column)]
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlert'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+    // Crear el contenido del modal
+    obj.divContent.id = 'idDivListControles'
+
+    switch (column) {
+      case '3':
+      case '5':
+      case '12':
+      case '13':
+      case '20':
+      case '4':
+      case '14':
+      case '16':
+      case '17':
+      case '18':
+      case '21':
+      case '19':
+      case '22':
+        obj.divContent.height = '300px'
+        if (
+          column === '5' ||
+          column === '16' ||
+          column === '17' ||
+          column === '21'
+        ) {
+          obj.divContent.height = '350px'
+        }
+        break
+      case '11':
+        obj.divContent.height = '400px'
+        break
+      default:
+        break
+    }
+
+    const modalContent = createDiv(obj.divContent)
+    const spanClose = createSpan(obj.close)
+    spanClose.addEventListener('click', () => {
+      cerrarModal('modalAlert')
+    })
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    obj.divCajita.height = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(spanClose)
+    modalContent.appendChild(divClose)
+    obj.divCajita.height = '100px'
+
+    const thead = table.getElementsByTagName('thead')[0]
+    const row = thead.getElementsByTagName('tr')[0]
+    let texto = row.cells[col].textContent
+
+    obj.titulo.marginTop = null
+    const title = createH3(obj.titulo, typeAlert)
+
+    modalContent.appendChild(title)
+
+    obj.span.text['control'] = texto
+    const spanTexto = createSpan(obj.span, texto)
+    modalContent.appendChild(spanTexto)
+
+    //! tipo de informacion
+    texto = texto.replace(/\s+/g, '')
+    obj.divCajita.id = `idDiv${texto}`
+    const actualMente = trO('Actual', objTrad) || 'Actual'
+    switch (column) {
+      case '3':
+      case '5':
+      case '12':
+      case '13':
+      case '20':
+      case '16':
+      case '17':
+      case '21':
+      case '22':
+        obj.divCajita.height = null
+        const divDetalle = createDiv(obj.divCajita)
+        obj.label.id = `idLabel${texto}`
+        obj.label.innerText = `${actualMente}: ${valor}`
+        obj.label.fontSize = '18px'
+        obj.label.backgroundColor = '#cecece'
+        const label = createLabel(obj.label)
+        obj.input.id = `idInput${texto.trim()}`
+        obj.input.width = '250px'
+        obj.input.fontWeight = 600
+        obj.input.value = valor
+
+        let input = ''
+        if (column === '5') {
+          obj.input.className = 'textArea-detalle'
+          obj.input.rows = 3
+          input = createTextArea(obj.input)
+        }
+        if (column === '16') {
+          let valorModificado = valor
+          if (valor === 'SQL') {
+            valorModificado = `TIENE SQL.\nAcceso solamente por desarrollador.\n1º donde se inserta\n2º tipo de dato\n3º columnas del query\n4º variables a reemplazar\n5º donde se toma el valor\nEjemplo: @@@8@@@s@@@1 @@@1
+            @@@5
+            $SELECT tipousuario.tipo FROM tipousuario WHERE tipousuario.idtipousuario=?;
+            `
+          } else {
+            valorModificado = `No tiene consulta SQL.\nAcceso solamente por desarrollador.\n1º donde se inserta\n2º tipo de dato\n3º columnas del query\n4º variables a reemplazar\n5º donde se toma el valor\nEjemplo: @@@8@@@s@@@1 @@@1
+            @@@5
+            $SELECT tipousuario.tipo FROM tipousuario WHERE tipousuario.idtipousuario=?;`
+          }
+          obj.input.className = 'textArea-detalle'
+          obj.input.rows = 5
+          obj.input.value = valorModificado
+          obj.input.fontWeight = 500
+          obj.input.disabled = 'disabled'
+          input = createTextArea(obj.input)
+        }
+        if (column === '17' || column === '21' || column === '22') {
+          let valorModificado = valor
+          if (valor === 'SQL') {
+            valorModificado = `TIENE SQL.\nAcceso solamente por desarrollador.\nDetermina un valor por un query.`
+          } else {
+            valorModificado = `No tiene consulta SQL.\nAcceso solamente por desarrollador.\nDetermina un valor por un query.`
+          }
+          obj.input.className = 'textArea-detalle'
+          obj.input.rows = 4
+          obj.input.value = valorModificado
+          obj.input.fontWeight = 500
+          obj.input.disabled = 'disabled'
+          input = createTextArea(obj.input)
+        }
+
+        if (
+          column !== '5' &&
+          column !== '16' &&
+          column !== '17' &&
+          column !== '21' &&
+          column !== '22'
+        ) {
+          input = createTextArea(obj.input)
+        }
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === ',') {
+            e.preventDefault()
+          }
+        })
+        input.addEventListener('input', (e) => {
+          datoSeleccionado = e.target.value
+        })
+
+        divDetalle.appendChild(label)
+        divDetalle.appendChild(input)
+        modalContent.appendChild(divDetalle)
+        break
+      case '4':
+      case '18':
+        obj.divCajita.height = null
+        obj.divCajita.alignItems = 'center'
+        const divDetalleS = createDiv(obj.divCajita)
+        obj.label.id = `idLabel${texto.trim()}`
+        obj.label.innerText = `${actualMente}: ${valor}`
+        obj.label.fontSize = '18px'
+        obj.label.backgroundColor = '#cecece'
+        const labelS = createLabel(obj.label)
+        const nameOptions = [
+          ['d', 'Fecha'],
+          ['h', 'Hora'],
+          ['t', 'Texto'],
+          ['x', 'Nada'],
+          ['n', 'Número'],
+          ['tx', 'Texto-Largo'],
+          ['img', 'Imagen'],
+          ['s', 'Select-Variable'], // abrir la seleccion de variables
+          ['cn', 'Consulta SQL'],
+          ['btnQwery', 'Botón SQL'],
+          ['b', 'Check-Box'],
+          ['r', 'Radio'],
+          ['photo', 'Foto'], // abrir campo separador para colocar width-height
+          ['sd', 'Select SQL'],
+          ['l', 'Leyenda'],
+          ['subt', 'Sub.Título'],
+          ['title', 'Título'],
+        ]
+        const params = {
+          id: '',
+          className: 'select-tipodedato',
+        }
+        const select = createSelect(nameOptions, params, objTrad)
+        datoSeleccionado = ''
+        select.addEventListener('change', (e) => {
+          datoSeleccionado = e.target.value
+        })
+        divDetalleS.appendChild(labelS)
+        divDetalleS.appendChild(select)
+        modalContent.appendChild(divDetalleS)
+        break
+
+      case '11':
+        obj.divCajita.height = '150px'
+        // obj.divCajita.display = 'flex'
+        const divDetalleP = createDiv(obj.divCajita)
+        obj.label.id = `idLabel${texto.trim()}`
+        obj.label.innerText = `${actualMente}: ${valor}`
+        obj.label.fontSize = '18px'
+        obj.label.backgroundColor = '#cecece'
+        const labelTituloCampo = createLabel(obj.label)
+        modalContent.appendChild(labelTituloCampo)
+        let paramsRadio = {
+          name: 'radio',
+          class: 'radio-selector',
+          height: '20px',
+          width: '20px',
+          id: null,
+          value: null,
+          background: '#D9D9D9',
+          border: '2px solid #cecece',
+          marginLeft: '0px',
+          marginRight: '20px',
+          marginTop: '1px',
+          marginBotton: null,
+          paddingLeft: null,
+          paddingRight: null,
+          paddingTop: null,
+          paddingBotton: null,
+          disabled: null,
+          dataCustom: null,
+          checked: 'checked',
+        }
+
+        //* se agrega la cajita para contener los radios
+        obj.divCajita.id = null
+        obj.divCajita.className = 'div-radios'
+        obj.divCajita.width = '100%'
+        obj.divCajita.flexDirection = 'row'
+        obj.divCajita.height = '50px'
+        let divCajitaRB = createDiv(obj.divCajita)
+        let radio = createRadioButton(paramsRadio)
+        radio.addEventListener('change', () => {
+          formatoDivsMedidas(400, 120, 120, 1)
+          datoSeleccionado = ' '
+        })
+        obj.span.className = 'radio'
+        obj.span.fontSize = '18px'
+        obj.span.fontWeight = 600
+        obj.span.alignSelf = 'normal'
+        let spanRB = createSpan(obj.span, trO('Vacío', objTrad) || 'Vacío')
+        divCajitaRB.appendChild(radio)
+        divCajitaRB.appendChild(spanRB)
+        divDetalleP.appendChild(divCajitaRB)
+        paramsRadio.checked = null
+
+        let radio2 = createRadioButton(paramsRadio)
+        spanRB = createSpan(
+          obj.span,
+          trO('Con separador', objTrad) || 'Con separador'
+        )
+        radio2.addEventListener('change', () => {
+          formatoDivsMedidas(500, 250, 50, 2)
+          datoSeleccionado = `style="border-bottom: grey 2px solid;"`
+        })
+        divCajitaRB = createDiv(obj.divCajita)
+        divCajitaRB.appendChild(radio2)
+        divCajitaRB.appendChild(spanRB)
+        divDetalleP.appendChild(divCajitaRB)
+
+        //* se agrega otra cajita para separador
+        obj.divCajita.id = 'idDivCajitaSeparador'
+        obj.divCajita.className = null
+        obj.divCajita.heigth = '100px'
+        obj.divCajita.flexDirection = 'column'
+        obj.divCajita.display = 'none'
+        divCajitaRB = createDiv(obj.divCajita)
+        obj.divCajita.className = 'div-separador'
+        obj.divCajita.id = null
+        obj.divCajita.height = null
+        obj.divCajita.width = '90%'
+        obj.divCajita.flexDirection = null
+        obj.divCajita.textAlign = 'center'
+        obj.label.fontWeight = 600
+        let divSeparador = createDiv(obj.divCajita)
+        obj.label.id = null
+        obj.label.fontSize = '18px'
+        obj.label.margin = null
+        obj.label.className = 'label-separador'
+        obj.label.innerText =
+          trO('----Separador----', objTrad) || '----Separador----'
+        const labelSeparador = createLabel(obj.label)
+        divSeparador.appendChild(labelSeparador)
+        divCajitaRB.appendChild(divSeparador)
+        divDetalleP.appendChild(divCajitaRB)
+        modalContent.appendChild(divDetalleP)
+        //*
+
+        let radio3 = createRadioButton(paramsRadio)
+        radio3.addEventListener('change', () => {
+          formatoDivsMedidas(500, 250, 150, 3)
+          const ancho = document.getElementById('idWidth').value
+          const alto = document.getElementById('idHeight').value
+          const dimensions = {
+            width: ancho,
+            height: alto,
+          }
+          datoSeleccionado = JSON.stringify(dimensions)
+          // datoSeleccionado = ''
+        })
+        spanRB = createSpan(obj.span, trO('Con Photo', objTrad) || 'Con Photo')
+        obj.divCajita.id = null
+        obj.divCajita.className = 'div-radios'
+        obj.divCajita.display = 'flex'
+        obj.divCajita.width = '100%'
+        divCajitaRB = createDiv(obj.divCajita)
+        divCajitaRB.appendChild(radio3)
+        divCajitaRB.appendChild(spanRB)
+        obj.divCajita.id = 'idDivCajitaHW'
+        obj.divCajita.className = null
+        obj.divCajita.height = '800px'
+        obj.divCajita.flexDirection = 'column'
+        obj.divCajita.display = 'none'
+        divDetalleP.appendChild(divCajitaRB)
+
+        //* se agrega otra cajita con los inputs
+        divCajitaRB = createDiv(obj.divCajita)
+        obj.divCajita.className = 'div-medidas'
+        obj.divCajita.id = null
+        obj.divCajita.height = null
+        obj.divCajita.width = '90%'
+        obj.divCajita.flexDirection = null
+        obj.divCajita.textAlign = 'left'
+
+        let divHW = createDiv(obj.divCajita)
+        obj.input.type = 'number'
+        obj.input.width = '60%'
+        obj.input.textAlign = 'left'
+        obj.input.fontWeight = 600
+        obj.input.padding = '0px 0px 0px 4px'
+        obj.input.value = 100
+        obj.label.id = null
+        obj.label.fontSize = '14px'
+        obj.label.margin = '15px 0px 0px 10px'
+        obj.label.className = 'label-HW'
+        obj.label.innerText = 'Width'
+        obj.input.id = 'idWidth'
+        const inputH = createInput(obj.input)
+        const labelH = createLabel(obj.label)
+        divHW.appendChild(inputH)
+        divHW.appendChild(labelH)
+        divCajitaRB.appendChild(divHW)
+        divHW = createDiv(obj.divCajita)
+        obj.input.id = 'idHeight'
+        const inputW = createInput(obj.input)
+        obj.label.innerText = 'Height'
+        const labelW = createLabel(obj.label)
+        divHW.appendChild(inputW)
+        divHW.appendChild(labelW)
+        divCajitaRB.appendChild(divHW)
+        divDetalleP.appendChild(divCajitaRB)
+        modalContent.appendChild(divDetalleP)
+
+        break
+      case '14':
+      case '19':
+        //* selector de variable
+        obj.divCajita.height = null
+        obj.divCajita.alignItems = 'center'
+        const divDetalleSelects = createDiv(obj.divCajita)
+        obj.label.id = `idLabel${texto.trim()}`
+        obj.label.innerText = `${actualMente}: ${valor}`
+        obj.label.fontSize = '18px'
+        obj.label.backgroundColor = '#cecece'
+        const labelSelects = createLabel(obj.label)
+        const nameOptionSelect = LTYselect
+        const paramSelect = {
+          id: '',
+          className: 'select-tipodedato',
+        }
+        const selects = createSelect(nameOptionSelect, paramSelect, objTrad)
+        datoSeleccionado = ''
+        selects.addEventListener('change', (e) => {
+          datoSeleccionado = e.target.value
+        })
+        divDetalleSelects.appendChild(labelSelects)
+        divDetalleSelects.appendChild(selects)
+        modalContent.appendChild(divDetalleSelects)
+        break
+      default:
+        break
+    }
+
+    obj.divButtons.height = null
+    obj.divButtons.margin = '10px 0px 0px 0px'
+    const divButton = createDiv(obj.divButtons)
+    texto = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text
+    obj.btnaccept.text = texto
+    const buttonAceptar = createButton(obj.btnaccept)
+
+    buttonAceptar.addEventListener('click', (e) => {
+      e.preventDefault()
+      // aceptar el cambio
+      let response = false
+      let datoSatinizado = ''
+      if (
+        typeof datoSeleccionado === 'object' ||
+        column === '16' ||
+        column === '17' ||
+        column === '21' ||
+        column === '22'
+      ) {
+        datoSatinizado = datoSeleccionado
+      } else {
+        datoSatinizado = sanitiza(datoSeleccionado).trim()
+      }
+      if (datoSeleccionado !== null && datoSatinizado !== valor) {
+        response = {
+          success: true,
+          dato: datoSatinizado,
+          param: tipoDeParametro,
+        }
+      } else {
+        response = { success: false, response: null }
+      }
+      callback(response)
+      cerrarModal('modalAlert')
+    })
+
+    texto = trO(obj.btncancel.text, objTrad) || obj.btncancel.text
+    obj.btncancel.text = texto
+    const buttonCancelar = createButton(obj.btncancel)
+    buttonCancelar.addEventListener('click', (e) => {
+      e.preventDefault()
+      cerrarModal('modalAlert')
+    })
+    const buttonOk = createButton(obj.btnok)
+
+    divButton.appendChild(buttonAceptar)
+    divButton.appendChild(buttonCancelar)
+    divButton.appendChild(buttonOk)
+
+    modalContent.appendChild(divButton)
+    // Agregar el contenido al modal
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+
+    //! funciones de guardado
+
+    //!--detectar escape
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlert')
+      }
+    })
+  }
+
+  createNewCampo(objeto, objTrad, target, table, callback) {
+    const obj = JSON.parse(JSON.stringify(objeto))
+    let datoSeleccionado = null
+    const { antesDelGuion, despuesDelGuion } = target
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlert'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+    // Crear el contenido del modal
+    obj.divContent.id = 'idDivListControles'
+    obj.divContent.height = '300px'
+    const modalContent = createDiv(obj.divContent)
+    const spanClose = createSpan(obj.close)
+    spanClose.addEventListener('click', () => {
+      cerrarModal('modalAlert')
+    })
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    obj.divCajita.height = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(spanClose)
+    modalContent.appendChild(divClose)
+
+    obj.divCajita.height = '100px'
+    let texto = `${target.antesDelGuion}-${target.despuesDelGuion}`
+    obj.titulo.marginTop = null
+    obj.titulo.text.nuevo = texto
+    const title = createH3(obj.titulo, 'nuevo')
+
+    modalContent.appendChild(title)
+    texto = trO('Campo nuevo', objTrad) || 'Campo nuevo'
+    obj.span.text['control'] = texto
+    const spanTexto = createSpan(obj.span, texto)
+    modalContent.appendChild(spanTexto)
+
+    obj.divCajita.id = `idDivCampNuevo`
+    obj.divCajita.height = null
+    const divDetalle = createDiv(obj.divCajita)
+    obj.input.id = `idInputCampoNuevo`
+    obj.input.width = '250px'
+    obj.input.fontWeight = 600
+    obj.input.value = ''
+    const input = createInput(obj.input)
+    input.addEventListener('keydown', (e) => {
+      if (e.key === ',') {
+        e.preventDefault()
+      }
+    })
+    input.addEventListener('input', (e) => {
+      datoSeleccionado = e.target.value
+    })
+    divDetalle.appendChild(input)
+    modalContent.appendChild(divDetalle)
+    obj.divButtons.height = null
+    obj.divButtons.margin = '10px 0px 0px 0px'
+    const divButton = createDiv(obj.divButtons)
+    texto = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text
+    obj.btnaccept.text = texto
+    const buttonAceptar = createButton(obj.btnaccept)
+
+    buttonAceptar.addEventListener('click', (e) => {
+      e.preventDefault()
+      // aceptar el cambio
+      let response = false
+      let datoSatinizado = sanitiza(datoSeleccionado).trim()
+      if (datoSeleccionado !== null && datoSatinizado !== '') {
+        const tbody = table.querySelector('tbody')
+        const filas = tbody.querySelectorAll('tr')
+        const cantidadDeFilas = filas.length - 1
+        const fila = tbody.rows[cantidadDeFilas]
+        let celda = fila.cells[8]
+        const orden = parseInt(celda.textContent.trim())
+        celda = fila.cells[0]
+        const idObservacion = parseInt(celda.textContent.trim())
+        response = {
+          success: true,
+          nombre: datoSatinizado,
+          orden,
+          idObservacion,
+        }
+      } else {
+        response = { success: false, response: null }
+      }
+      callback(response)
+      cerrarModal('modalAlert')
+    })
+
+    texto = trO(obj.btncancel.text, objTrad) || obj.btncancel.text
+    obj.btncancel.text = texto
+    const buttonCancelar = createButton(obj.btncancel)
+    buttonCancelar.addEventListener('click', (e) => {
+      e.preventDefault()
+      cerrarModal('modalAlert')
+    })
+    const buttonOk = createButton(obj.btnok)
+
+    divButton.appendChild(buttonAceptar)
+    divButton.appendChild(buttonCancelar)
+    divButton.appendChild(buttonOk)
+
+    modalContent.appendChild(divButton)
+    // Agregar el contenido al modal
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+
+    //! funciones de guardado
+
+    //!--detectar escape
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlert')
+      }
+    })
+  }
+  clonarCampos(objeto, objTrad, target, array, callback) {
+    console.log(target)
+    const obj = JSON.parse(JSON.stringify(objeto))
+    const { idLTYreporte, nameReporte } = target
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlert'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+    // Crear el contenido del modal
+    obj.divContent.id = 'idDivListControles'
+    obj.divContent.height = '300px'
+    const modalContent = createDiv(obj.divContent)
+    const spanClose = createSpan(obj.close)
+    spanClose.addEventListener('click', () => {
+      cerrarModal('modalAlert')
+    })
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    obj.divCajita.height = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(spanClose)
+    modalContent.appendChild(divClose)
+
+    obj.divCajita.height = '100px'
+    let texto = `${idLTYreporte}-${nameReporte}`
+    obj.titulo.marginTop = null
+    obj.titulo.text.clonar = texto
+    const h3 = createH3(obj.titulo, 'clonar')
+    modalContent.appendChild(h3)
+    texto = trO('Clonar este contol a:', objTrad) || 'Clonar este contol a:'
+    obj.span.text['control'] = texto
+    const spanTexto = createSpan(obj.span, texto)
+    modalContent.appendChild(spanTexto)
+    obj.divCajita.id = `idDivCampNuevo`
+    obj.divCajita.height = null
+    const divDetalle = createDiv(obj.divCajita)
+    const paramSelect = {
+      id: '',
+      className: 'select-tipodedato',
+    }
+    const selects = createSelect(array, paramSelect, objTrad)
+    divDetalle.appendChild(selects)
+    modalContent.appendChild(divDetalle)
+    this.modal.appendChild(modalContent)
+    document.body.appendChild(this.modal)
+  }
+
   destroyAlerta() {
     if (this.modal) {
       // Elimina el elemento modal del DOM
       this.modal.remove()
-
       // Limpia la referencia al elemento
       this.modal = null
     }

@@ -144,7 +144,20 @@ table tbody tr td img {
   width: 12px;
   margin-left: 4px;
 }
-
+.img-edit:hover {
+  background: #9d9d9d;
+}
+.div-orden {
+  padding-left: 2px;
+}
+.img-orden {
+  height: 12px;
+  width: 12px;
+  margin-left: 4px;
+}
+.img-orden:hover {
+  background: #9d9d9d;
+}
 .tabla-campos thead {
   font-size: 8px;
 }
@@ -178,6 +191,18 @@ table tbody tr td img {
   border: 1px solid #cecece;
 }
 
+select {
+  font-size: 12px;
+  width: 90%;
+  border: 1px solid #000;
+  height: 80%;
+}
+
+#idLabelSEPARADOR {
+  text-align: center;
+  margin-top: 10px;
+}
+
 /* Media Queries */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   .button-controles-menu {
@@ -206,7 +231,19 @@ table tbody tr td img {
     width: 20px;
   }
 }
-
+.select-tipodedato {
+  height: 30px;
+  margin-top: 5px;
+}
+.textArea-detalle {
+  margin-top: 5px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.radio-selector {
+  cursor: pointer;
+}
 @media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
   .button-controles-menu {
     font-size: 12px;

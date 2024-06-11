@@ -256,3 +256,23 @@ Sponsor
 Developer
 Indeterminate
 Save change to variables
+Add
+Clone
+Empty
+Date
+Hour
+Text
+Nothing
+Number
+Text-Long
+Image
+Select-Variable
+SQL query
+SQL button
+Check box
+Radio
+Photo
+Select SQL
+Legend
+Caption
+Qualification
