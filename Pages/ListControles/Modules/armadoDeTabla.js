@@ -660,7 +660,7 @@ export function clonarCamposAReporte(objTranslate, target) {
       target,
       arrayDeDosElementos,
       (response) => {
-        console.log(response)
+        // console.log(response)
         if (response.success) {
           const nuevoTarget = {
             origen: parseInt(response.dato.idOrigen),
@@ -848,51 +848,59 @@ function addCeldaFilaCampo(
 
 async function viewer(selector, array, objTranslate) {
   //!editar
-  arrayOrden = []
-  const segundaTabla = document.querySelector('.tabla-campos')
-  if (segundaTabla) {
-    segundaTabla.innerHTML = ''
-  }
+  try {
+    arrayOrden = []
+    const segundaTabla = document.querySelector('.tabla-campos')
+    if (segundaTabla) {
+      segundaTabla.innerHTML = ''
+    }
 
-  const filtrado = array.filter((subArray) => subArray[23] === selector)
+    const filtrado = array.filter((subArray) => subArray[23] === selector)
 
-  const selects = await traerRegistros('traerSelects', '/traerLTYcontrol', null)
-  const elemento = document.querySelector('.div-encabezadoPastillas')
-  const div1 = document.querySelector('.div1')
-  const span = document.createElement('span')
-  span.setAttribute('id', 'idTituloDelReporte')
-  div1.innerHTML = ''
-  const tituloDelReporte = `${selector}-${
-    trA(filtrado[0][0]) || filtrado[0][0]
-  }`
-  span.innerText = tituloDelReporte
-  div1.appendChild(span)
-  elemento.style.display = 'block'
-  if (elemento) {
-    div1.setAttribute('tabindex', '-1') // O cualquier otro valor de tabindex
-    div1.focus()
-    const div = document.querySelector('.div2')
-    div.innerHTML = ''
-    const tabla = document.createElement('table')
-    tabla.style.marginTop = '10px'
-    tabla.setAttribute('class', 'tabla-campos')
-    const thead = encabezadoCampos(encabezados)
-    tabla.appendChild(thead)
-    div.appendChild(tabla)
-    const tbody = document.createElement('tbody')
-    filtrado.forEach((element, index) => {
-      const newRow = addCeldaFilaCampo(
-        element,
-        index,
-        selects,
-        filtrado.length,
-        selector,
-        objTranslate
-      )
-      tbody.appendChild(newRow)
-    })
-    tabla.appendChild(tbody)
-    div.appendChild(tabla)
+    const selects = await traerRegistros(
+      'traerSelects',
+      '/traerLTYcontrol',
+      null
+    )
+    const elemento = document.querySelector('.div-encabezadoPastillas')
+    const div1 = document.querySelector('.div1')
+    const span = document.createElement('span')
+    span.setAttribute('id', 'idTituloDelReporte')
+    div1.innerHTML = ''
+    const tituloDelReporte = `${selector}-${
+      trA(filtrado[0][0]) || filtrado[0][0]
+    }`
+    span.innerText = tituloDelReporte
+    div1.appendChild(span)
+    elemento.style.display = 'block'
+    if (elemento) {
+      div1.setAttribute('tabindex', '-1') // O cualquier otro valor de tabindex
+      div1.focus()
+      const div = document.querySelector('.div2')
+      div.innerHTML = ''
+      const tabla = document.createElement('table')
+      tabla.style.marginTop = '10px'
+      tabla.setAttribute('class', 'tabla-campos')
+      const thead = encabezadoCampos(encabezados)
+      tabla.appendChild(thead)
+      div.appendChild(tabla)
+      const tbody = document.createElement('tbody')
+      filtrado.forEach((element, index) => {
+        const newRow = addCeldaFilaCampo(
+          element,
+          index,
+          selects,
+          filtrado.length,
+          selector,
+          objTranslate
+        )
+        tbody.appendChild(newRow)
+      })
+      tabla.appendChild(tbody)
+      div.appendChild(tabla)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 

@@ -397,6 +397,9 @@
   #idDivGuardar {
     margin-left: 18rem;
   }
+  .modal-content-aceptar {
+    margin-left: 18rem;
+  }
   #idProcesoExitoso {
     margin-top: 100px;
   }
@@ -469,7 +472,7 @@
   }
   .modal-content-aceptar {
     margin-top: 2rem;
-    margin-left: 2rem;
+    margin-left: 15rem;
     float: left;
     text-align: left;
     background-color: #ffffff;
@@ -676,7 +679,7 @@
   }
   .modal-content-aceptar {
     margin-top: 2rem;
-    margin-left: 2rem;
+    margin-left: 20rem;
     float: left;
     text-align: left;
     background-color: #ffffff;
@@ -881,7 +884,7 @@
   }
   .modal-content-aceptar {
     margin-top: 2rem;
-    margin-left: 2rem;
+    margin-left: 30rem;
     float: left;
     text-align: left;
     background-color: #ffffff;
@@ -1088,7 +1091,7 @@
   }
   .modal-content-aceptar {
     margin-top: 2rem;
-    margin-left: 2rem;
+    margin-left: 40rem;
     float: left;
     text-align: left;
     background-color: #ffffff;

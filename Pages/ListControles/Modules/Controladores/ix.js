@@ -16,7 +16,7 @@ function agregarCampoNuevo(objeto, ruta) {
   }
   const datos = JSON.stringify(obj)
   const url = `${SERVER}/Routes/index.php`
-  console.log(datos)
+  // console.log(datos)
   return new Promise((resolve, reject) => {
     // Realiza el fetch y maneja la lógica de la respuesta
     fetch(url, {
