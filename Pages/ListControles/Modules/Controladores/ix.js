@@ -1,7 +1,7 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-function agregarCampoNuevo(objeto) {
+function agregarCampoNuevo(objeto, ruta) {
   // eslint-disable-next-line no-console
   console.time('insert_time')
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objeto))
@@ -11,15 +11,15 @@ function agregarCampoNuevo(objeto) {
   const rax = `&new=${new Date()}`
   let obj = {
     q: nuevoObjeto,
-    ruta: '/addNewCampo',
+    ruta,
     rax,
   }
   const datos = JSON.stringify(obj)
-  const ruta = `${SERVER}/Routes/index.php`
+  const url = `${SERVER}/Routes/index.php`
   console.log(datos)
   return new Promise((resolve, reject) => {
     // Realiza el fetch y maneja la lógica de la respuesta
-    fetch(ruta, {
+    fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

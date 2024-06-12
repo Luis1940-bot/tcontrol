@@ -5065,11 +5065,62 @@ class Alerta {
       id: '',
       className: 'select-tipodedato',
     }
+    let datoSeleccionado = ''
     const selects = createSelect(array, paramSelect, objTrad)
+    selects.addEventListener('change', (e) => {
+      datoSeleccionado = {
+        idOrigen: idLTYreporte,
+        idDestino: e.target.value,
+      }
+    })
     divDetalle.appendChild(selects)
     modalContent.appendChild(divDetalle)
+    obj.divButtons.height = null
+    obj.divButtons.margin = '10px 0px 0px 0px'
+    const divButton = createDiv(obj.divButtons)
+    texto = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text
+    obj.btnaccept.text = texto
+    const buttonAceptar = createButton(obj.btnaccept)
+
+    buttonAceptar.addEventListener('click', (e) => {
+      e.preventDefault()
+      // aceptar el cambio
+      let response = false
+      if (datoSeleccionado !== null) {
+        response = {
+          success: true,
+          dato: datoSeleccionado,
+        }
+      } else {
+        response = { success: false, response: null }
+      }
+      callback(response)
+      cerrarModal('modalAlert')
+    })
+
+    texto = trO(obj.btncancel.text, objTrad) || obj.btncancel.text
+    obj.btncancel.text = texto
+    const buttonCancelar = createButton(obj.btncancel)
+    buttonCancelar.addEventListener('click', (e) => {
+      e.preventDefault()
+      cerrarModal('modalAlert')
+    })
+    const buttonOk = createButton(obj.btnok)
+
+    divButton.appendChild(buttonAceptar)
+    divButton.appendChild(buttonCancelar)
+    divButton.appendChild(buttonOk)
+
+    modalContent.appendChild(divButton)
     this.modal.appendChild(modalContent)
     document.body.appendChild(this.modal)
+    //!--detectar escape
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        cerrarModal('modalAlert')
+      }
+    })
   }
 
   destroyAlerta() {

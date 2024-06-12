@@ -512,11 +512,17 @@ async function turnOnOff(target, objTranslate) {
 
 async function addCampo(target, objTranslate) {
   // console.log(target)
-  const turn = await agregarCampoNuevo(target)
+  const turn = await agregarCampoNuevo(target, '/addNewCampo')
   const id = String(target.idLTYreporte)
   if (turn.success) {
     const nuevoArray = JSON.parse(turn.actualizado)
     viewer(id, nuevoArray, objTranslate)
+  }
+}
+async function clonarReporte(target) {
+  const clon = await agregarCampoNuevo(target, '/clonarReporte')
+  if (clon.success) {
+    window.location.reload()
   }
 }
 
@@ -626,8 +632,9 @@ export function nuevoCampo(objTranslate, target) {
 const filtrarSubarrays = (arrayPrincipal) => {
   const arrayResultante = arrayPrincipal
     .map((subarray) => {
-      if (subarray.length > 2 && subarray[2] !== '' && subarray[25] === 3) {
-        return [subarray[2], subarray[0]]
+      if (subarray.length > 2 && subarray[24] !== '' && subarray[25] === 3) {
+        const reporte = `${subarray[24]}-${subarray[0]}`
+        return [subarray[24], reporte]
       } else {
         // console.warn(
         //   `Subarray ${JSON.stringify(
@@ -656,13 +663,10 @@ export function clonarCamposAReporte(objTranslate, target) {
         console.log(response)
         if (response.success) {
           const nuevoTarget = {
-            reporte: target.despuesDelGuion,
-            idLTYreporte: parseInt(target.antesDelGuion),
-            campo: response.nombre,
-            orden: response.orden,
-            idObservacion: response.idObservacion,
+            origen: parseInt(response.dato.idOrigen),
+            destino: parseInt(response.dato.idDestino),
           }
-          // addCampo(nuevoTarget, objTranslate)
+          clonarReporte(nuevoTarget)
         }
       }
     )

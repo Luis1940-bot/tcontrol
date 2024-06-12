@@ -169,6 +169,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/addNewCampo':
             include_once dirname(__DIR__) . '/Pages/ListControles/Routes/addNewCampo.php';
           break;
+        case '/clonarReporte':
+            include_once dirname(__DIR__) . '/Pages/ListControles/Routes/clonarReporte.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada
