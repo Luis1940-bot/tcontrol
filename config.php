@@ -7,9 +7,9 @@ if (isLocalhost()) {
     $baseDir = __DIR__; 
     define('BASE_URL', $base); //* sirve para localizar componentes como otros php renderizables o css
     define('BASE_DIR', str_replace('\\', '/', $baseDir)); //* sirve para conectar con php que no son renderizables
-    define('BASE_BY', 'by Factum Consultora - Desarrollo');
+    define('BASE_BY', 'by Factum Consultora');
     define('BASE_DEVELOPER', 'Factum - Desarrollo');
-    define('BASE_CONTENT', 'Factum Consultora - Desarrollo');
+    define('BASE_CONTENT', 'Factum Consultora');
     define('BASE_LOGO', 'ftm');
     define('BASE_RUTA', 'https://www.factumconsultora.com');
     define('BASE_PLANOS', $base . '/iControl-Vanilla/icontrol/assets/img/planos/');
