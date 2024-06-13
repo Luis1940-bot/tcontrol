@@ -12,7 +12,7 @@ if (isLocalhost) {
 } else {
   // En producción
   baseUrl = 'https://factumconsultora.com/scg-mccain'
-  // baseUrl = 'https://tenkiweb.com/siscon-g'
+  
 }
 
 // Exporta la variable baseUrl para que otros archivos puedan importarla

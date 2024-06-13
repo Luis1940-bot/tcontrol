@@ -5,7 +5,7 @@ require_once  dirname(__DIR__) . '/config.php';
 // Define las opciones de sesión segura
 $sessionOptions = [
     'use_only_cookies' => 1, // Solo usar cookies para almacenar el identificador de sesión
-    'cookie_lifetime' => 3600, // Tiempo de vida de la cookie de sesión en segundos (1 hora)
+    'cookie_lifetime' => 14400, // Tiempo de vida de la cookie de sesión en segundos (1 hora)
     'cookie_secure' => 1, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
     'cookie_httponly' => 1, // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
     'cookie_samesite' => 'Strict' // Evita ataques de CSRF (Cross-Site Request Forgery)
