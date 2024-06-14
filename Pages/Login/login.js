@@ -22,6 +22,8 @@ const spinner = document.querySelector('.spinner')
 const appJSON = {}
 
 import baseUrl from '../../config.js'
+import leeVersion from '../../controllers/leeVersion.js'
+
 const SERVER = baseUrl
 
 const espanolOperativo = {
@@ -67,16 +69,6 @@ const espanolOperativo = {
       br: 'Preencha a senha.',
     },
   },
-}
-
-function leeVersion(json) {
-  readJSON(json)
-    .then((data) => {
-      document.querySelector('.version').innerText = data.version
-    })
-    .catch((error) => {
-      console.error('Error al cargar el archivo:', error)
-    })
 }
 
 function leeApp(json) {
@@ -423,11 +415,16 @@ function generaOverlay() {
 document.addEventListener('DOMContentLoaded', async () => {
   inicioPerformance()
   spinner.style.visibility = 'visible'
+
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
+
   const person = document.querySelector('#person')
   person.style.display = 'none'
-  leeVersion('version')
+
+  const version = await leeVersion('version')
+  document.querySelector('.version').innerText = version
+
   setTimeout(() => {
     leeApp(`log`)
   }, 200)

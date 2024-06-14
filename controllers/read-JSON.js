@@ -4,6 +4,7 @@ const SERVER = baseUrl
 function readJSON(json) {
   return new Promise((resolve, reject) => {
     const ruta = `${SERVER}/models/${json}.json`
+
     fetch(ruta)
       .then((response) => {
         if (!response.ok) {

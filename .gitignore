@@ -1,2 +1,5 @@
 eslint-main/
 node_modules/
+Libraries/
+
+.env

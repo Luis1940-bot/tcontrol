@@ -11,8 +11,7 @@ if (isLocalhost) {
   baseUrl = 'http://localhost:8080'
 } else {
   // En producción
-  baseUrl = 'https://factumconsultora.com/scg-mccain'
-  
+  baseUrl = 'https://tenkiweb.com/datos'
 }
 
 // Exporta la variable baseUrl para que otros archivos puedan importarla

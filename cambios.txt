@@ -1,0 +1,2 @@
+ const version = await leeVersion('version')
+  document.querySelector('.version').innerText = version
