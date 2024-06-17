@@ -24,8 +24,9 @@ main {
   height: auto;
 }
 
-.div-login-buttons {
+.div-register {
   display: flex;
+  height: auto;
   flex-direction: column;
   align-items: left;
   margin-top: 20px;
@@ -53,7 +54,7 @@ main {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   color: #9d9d9d;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 5px;
 }
 .input-login {
@@ -96,82 +97,12 @@ main {
   margin-left: 1px;
 }
 
-/* Estilos para la ventana emergente */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  padding-top: 200px;
-  /* align-items: center; */
-}
-.alert-box {
-  display: block;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  height: 100px;
-  width: 50%;
-  text-align: center;
-}
-.span-alerta {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 14px;
-  margin-top: 10px;
-  /* margin-bottom: 10px; */
-}
-.button-alerta {
-  height: 35px;
-  width: 90%;
-  padding-left: 0px;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  font-size: 14px;
-  border-radius: 3px;
-  cursor: pointer;
-  background: #000;
-  color: #cecece;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-top: 25px;
-  margin-bottom: 10px;
-}
-.div-a {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.div-a {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-
-.a-login {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-style: italic;
-  font-size: 10px;
-  color: #0066ff;
-  margin-top: 5px;
-  cursor: pointer;
-}
-
-.div-a .a-login:hover {
-  color: #9d9d9d; /* Color de fondo al pasar el ratón */
-}
-
 /* Media Queries */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
-  .div-login-buttons {
-    margin-top: 80px;
-    width: 50%;
-    height: 350px;
+  .div-register {
+    margin-top: 40px;
+    width: 70%;
+    height: 100%;
     padding-left: 10%;
     padding-right: 10%;
   }
@@ -203,20 +134,13 @@ main {
   header {
     height: 70px;
   }
-  .div-login-buttons {
+  .div-register {
     margin-top: 1px;
     width: 30%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
-  }
-  .select-login {
-    /* width: 100%; */
-    height: 30px;
-    font-size: 14px;
-    margin-top: 2px;
-    padding-left: 5px;
   }
   .label-login {
     font-size: 14px;
@@ -247,7 +171,7 @@ main {
   header {
     height: 100px;
   }
-  .div-login-buttons {
+  .div-register {
     margin-top: 90px;
     width: 30%;
     height: 300px;
@@ -255,13 +179,7 @@ main {
     padding-left: 15%;
     padding-right: 15%;
   }
-  .select-login {
-    /* width: 100%; */
-    height: 30px;
-    font-size: 14px;
-    margin-top: 2px;
-    padding-left: 5px;
-  }
+
   .label-login {
     font-size: 14px;
     margin-top: 10px;
@@ -291,7 +209,7 @@ main {
   header {
     height: 100px;
   }
-  .div-login-buttons {
+  .div-register {
     margin-top: 90px;
     width: 30%;
     height: 300px;
@@ -299,13 +217,7 @@ main {
     padding-left: 15%;
     padding-right: 15%;
   }
-  .select-login {
-    /* width: 100%; */
-    height: 30px;
-    font-size: 14px;
-    margin-top: 2px;
-    padding-left: 5px;
-  }
+
   .label-login {
     font-size: 14px;
     margin-top: 10px;
@@ -335,20 +247,13 @@ main {
   header {
     height: 100px;
   }
-  .div-login-buttons {
+  .div-register {
     margin-top: 100px;
     width: 20%;
     height: 300px;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;
-  }
-  .select-login {
-    /* width: 100%; */
-    height: 30px;
-    font-size: 14px;
-    margin-top: 2px;
-    padding-left: 5px;
   }
   .label-login {
     font-size: 14px;
@@ -382,20 +287,13 @@ main {
   header {
     height: 100px;
   }
-  .div-login-buttons {
+  .div-register {
     margin-top: 100px;
     width: 20%;
     height: 300px;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;
-  }
-  .select-login {
-    /* width: 100%; */
-    height: 30px;
-    font-size: 14px;
-    margin-top: 2px;
-    padding-left: 5px;
   }
   .label-login {
     font-size: 14px;

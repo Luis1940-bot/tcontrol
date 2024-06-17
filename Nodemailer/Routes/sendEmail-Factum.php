@@ -174,7 +174,7 @@ function utf8_to_iso8859_1(string $string): string {
 
     return substr($s, 0, $j);
 }
-//$directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/Imagenes/' . $plant . '/';
+//$directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/Imagenes/' . $plant . '/';
 function generarContenidoDinamico($datos, $plant) {
     $contenido = ''; 
     foreach ($datos as $elemento) {
@@ -211,7 +211,7 @@ function generarContenidoDinamico($datos, $plant) {
         if ($valor === 'photo' ) {
           $display = 'none';
           $colSpan = 'colspan="3"';
-          $directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/img/planos/' . $plant . '/';
+          $directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/img/planos/' . $plant . '/';
           $array = json_decode($elemento['displayDetalle'], true);
           $img = $array['img'];
           $width = $array['width'];
@@ -244,7 +244,7 @@ function generarContenidoDinamico($datos, $plant) {
         if ($valor === 'img' && $fileName) {
             foreach ($fileNameArray as &$fileName) {
                 $fileName = trim($fileName, ' "[]');
-                $directorioImagenes = 'https://factumconsultora.com/iControl-Vanilla/icontrol/assets/Imagenes/' . $plant . '/';
+                $directorioImagenes = 'https://tenkiweb.com/iControl-Vanilla/icontrol/assets/Imagenes/' . $plant . '/';
                 $filePath = $directorioImagenes . $fileName;
                 $valor = '<img src="' . $filePath . '" alt="img" width="50px" height="50px">';
                $imagenes = $imagenes .' '. $valor;

@@ -31,6 +31,8 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
   </header>
   <main>
     <div class='div-login-buttons'>
+    <div class="div-a"></div>
+    </div>
 
     </div>
   </main>

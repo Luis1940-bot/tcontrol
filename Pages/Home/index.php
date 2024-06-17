@@ -5,14 +5,14 @@ session_start([
 ]);
 header('Content-Type: text/html;charset=utf-8');
 
-$url = "https://factumconsultora.com/mccain/index.php";
+$url = "https://tenkiweb.com/tcontrol/index.php";
 define('SSO', $_SESSION['login_sso']['sso']);
  if (isset($_SESSION['login_sso']['email'] )) {
       define('EMAIL', $_SESSION['login_sso']['email']);
       
   } else {
     if ( SSO === null || SSO === 's_sso' ) {
-      $url = "https://factumconsultora.com/scg-mccain/index.php";
+      $url = "https://tenkiweb.com/scg-mccain/index.php";
     }
 
     header("Location: ". $url ."");

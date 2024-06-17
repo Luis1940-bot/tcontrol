@@ -12,7 +12,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/doc.css' media='screen'>
-  <title>Factum</title>
+  <title>Tenki</title>
 </head>
 <body>
   <div class='div-encabezadoDoc'>

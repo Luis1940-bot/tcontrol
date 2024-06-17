@@ -14,7 +14,7 @@ require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
   <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/wichConsult.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/modal.css' media='screen'>
-  <title>Factum</title>
+  <title>Tenki</title>
 </head>
 <body>
     <div id='myModal' class='modal'>

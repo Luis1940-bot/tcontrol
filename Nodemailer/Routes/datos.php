@@ -13,6 +13,6 @@ $datox ='[{"name":"DATA ","valor":"2024-04-18","detalle":"Data quando se gera co
 
 $plantx = '"1"';
 
-$encabezadox ='{"documento":"240418201040339","address":"luisglogista@gmail.com/luisfactum@gmail.com","fecha":"2024-04-18","hora":"15:10","notificador":"LUIS GIMENEZ","planta":"ES","reporte":"PRUEBA FACTUM","titulo":"Notificación del sistema de alerta","url":"https://factumconsultora.com/mccain","fechaDeAlerta":"Fecha de alerta:","horaDeAlerta":"Hora de alerta:","notifica":"Notifica","sistema":"Entre al sistema y acceda al documento número","irA":"Ir A","concepto":"CONCEPTO","relevamiento":"RELEVAMIENTO","detalle":"DETALLE","observacion":"OBSERVACIÓN","subject":"Sistema de Alertas"}';
+$encabezadox ='{"documento":"240418201040339","address":"luisglogista@gmail.com/luisfactum@gmail.com","fecha":"2024-04-18","hora":"15:10","notificador":"LUIS GIMENEZ","planta":"ES","reporte":"PRUEBA FACTUM","titulo":"Notificación del sistema de alerta","url":"https://tenkiweb.com/mccain","fechaDeAlerta":"Fecha de alerta:","horaDeAlerta":"Hora de alerta:","notifica":"Notifica","sistema":"Entre al sistema y acceda al documento número","irA":"Ir A","concepto":"CONCEPTO","relevamiento":"RELEVAMIENTO","detalle":"DETALLE","observacion":"OBSERVACIÓN","subject":"Sistema de Alertas"}';
 
 ?>

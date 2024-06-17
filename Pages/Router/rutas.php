@@ -90,6 +90,11 @@ if(isset($_GET['ruta'])) {
         $url = $url_base . '/Pages/ListVariables/variables.php?t='.$time;
         header("Location: $url");
         break;
+
+      case 'RegisterUser':
+        $url = $url_base . '/Pages/RegisterUser/';
+        header("Location: $url");
+        break;
       
       default:
         # code...

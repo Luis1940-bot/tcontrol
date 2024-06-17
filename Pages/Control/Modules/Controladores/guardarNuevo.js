@@ -64,7 +64,7 @@ function tuFuncion(
   objetoControlCopia.email.fecha = fechaActual
   objetoControlCopia.email.hora = horaActual
   objetoControlCopia.email.notificador = notificador
-  objetoControlCopia.email.url = 'https://factumconsultora.com/mccain'
+  objetoControlCopia.email.url = 'https://tenkiweb.com/mccain'
   objetoControlCopia.email.mailNotificador = mailUser
 
   // Puedes retornar la copia del objeto si es necesario

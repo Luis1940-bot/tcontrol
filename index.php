@@ -4,13 +4,13 @@ session_start([
     'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
 ]);
 header('Content-Type: text/html;charset=utf-8');
-$url = "https://factumconsultora.com/mccain/index.php";
+$url = "https://tenkiweb.com/tcontrol/index.php";
 define('SSO', $_SESSION['login_sso']['sso']);
  if (isset($_SESSION['login_sso']['email'] )) {
       define('EMAIL', $_SESSION['login_sso']['email']);
   } else {
     if ( SSO === null || SSO === 's_sso' ) {
-      $url = "https://factumconsultora.com/scg-mccain/Pages/Login/index.php";
+      $url = "https://tenkiweb.com/tcontrol/Pages/Login/index.php";
       
     }
  

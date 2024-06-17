@@ -1,11 +1,11 @@
 <?php
 session_start();
 require_once dirname(dirname(__DIR__)) . '/config.php';
-$url = "https://factumconsultora.com/mccain/index.php";
+$url = "https://tenkiweb.com/tcontrol/index.php";
 define('SSO', $_SESSION['login_sso']['sso']);
 
  if (isset($_SESSION['login_sso']['email'] )) {
-      $url = "https://factumconsultora.com/mccain/index.php";
+      $url = "https://tenkiweb.com/tcontrol/index.php";
       if ( SSO === 'null' || SSO === ''  ) {
       $url = BASE_URL . "/index.php";
     }
@@ -14,7 +14,7 @@ define('SSO', $_SESSION['login_sso']['sso']);
       $url = BASE_URL . "/index.php";
     }
     if ( SSO !== 'null') {
-      $url = "https://factumconsultora.com/mccain/index.php";
+      $url = "https://tenkiweb.com/tcontrol/index.php";
     }
     
   }

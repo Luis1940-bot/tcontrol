@@ -14,7 +14,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/header.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/conection.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/alerta.css' media='screen'>
-  <title>Factum</title>
+  <title>Tenki</title>
 </head>
 <body>
   <?php
@@ -40,7 +40,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
   </div>
   <div class='header-McCain'>
     <div class='div-McCain'>
-      <img id='logo_mccain' src='<?php echo BASE_URL ?>/assets/img/logo.png' alt='McCain'>
+      <img id='logo_mccain' src='<?php echo BASE_URL ?>/assets/img/logo.png' alt='Company'>
     </div>
   </div>
 </body>

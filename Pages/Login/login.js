@@ -14,8 +14,6 @@ import createInput from '../../includes/atoms/createInput.js'
 import createLabel from '../../includes/atoms/createLabel.js'
 import createSpan from '../../includes/atoms/createSpan.js'
 import enviarLogin from './Controllers/enviarFormulario.js'
-// eslint-disable-next-line import/extensions
-import arrayGlobal from '../../controllers/variables.js'
 import createDiv from '../../includes/atoms/createDiv.js'
 
 const spinner = document.querySelector('.spinner')
@@ -23,6 +21,7 @@ const appJSON = {}
 
 import baseUrl from '../../config.js'
 import leeVersion from '../../controllers/leeVersion.js'
+import createA from '../../includes/atoms/createA.js'
 
 const SERVER = baseUrl
 
@@ -33,13 +32,13 @@ const espanolOperativo = {
     br: 'Há uma informação que não está correta.',
   },
   planta: {
-    es: 'Planta',
-    en: 'Plants',
+    es: 'Compañía',
+    en: 'Company',
     br: 'Plantar',
   },
   Email: {
     es: 'Correo electrónico',
-    en: 'E-mail',
+    en: 'Email',
     br: 'E-mail',
   },
   Password: {
@@ -59,14 +58,31 @@ const espanolOperativo = {
       br: 'Preencha o e-mail.',
     },
     planta: {
-      es: 'Seleccione la planta.',
-      en: 'Select the plant.',
-      br: 'Selecione a planta.',
+      es: 'Seleccione compañía.',
+      en: 'Select company.',
+      br: 'Selecione a empresa.',
     },
     pass: {
       es: 'Complete la contraseña.',
       en: 'Fill in the password.',
       br: 'Preencha a senha.',
+    },
+  },
+  a: {
+    planta: {
+      es: 'Registra tu compañía.',
+      en: 'Register your company.',
+      br: 'Registre sua empresa.',
+    },
+    usuario: {
+      es: 'Regístrese.',
+      en: 'Sign Up.',
+      br: 'Registre-se.',
+    },
+    pass: {
+      es: 'Recuperar contraseña.',
+      en: 'Recover password.',
+      br: 'Recuperar senha.',
     },
   },
 }
@@ -112,6 +128,7 @@ function leeApp(json) {
 function session(session) {
   // console.log(session)
   const idiomaPreferido = navigator.language || navigator.languages[0]
+  console.log(idiomaPreferido)
   const partesIdioma = idiomaPreferido.split('-')
   const idioma = partesIdioma[0]
   var spanLogin = document.querySelector('.span-login')
@@ -201,6 +218,13 @@ async function enviarFormulario() {
   }
 }
 
+function RegisterUser(a) {
+  const id = a.target.id
+  const etiqueta = document.getElementById(id)
+  const data = etiqueta.getAttribute('data')
+  window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`
+}
+
 function objParams(
   innerHTML,
   className,
@@ -212,7 +236,9 @@ function objParams(
   text,
   clase,
   name,
-  onClick
+  onClick,
+  href,
+  data
 ) {
   const params = {
     innerHTML,
@@ -226,13 +252,21 @@ function objParams(
     class: clase,
     name,
     onClick,
+    href,
+    data,
   }
   return params
 }
 
 function configPHP(json, idioma) {
   try {
-    const { plantas, elements } = json
+    let { plantas, elements } = json
+    let claseButton = 'button-login'
+    if (plantas.length === 0) {
+      claseButton = 'button-login button-login-apagado'
+      plantas.push({ name: 'Sin compañías' })
+    }
+
     const div = document.querySelector('.div-login-buttons')
     for (const key in elements) {
       // console.log(elements)
@@ -305,7 +339,10 @@ function configPHP(json, idioma) {
             }
           })
         }
-
+        // let claseButton = 'button-login'
+        // if (plantas.length === 0) {
+        //   claseButton = 'button-login button-login-apagado'
+        // }
         if (key === 'button') {
           let labelButton = espanolOperativo[elements.button[0].name][idioma]
           let params = objParams(
@@ -317,7 +354,7 @@ function configPHP(json, idioma) {
             null,
             null,
             labelButton,
-            'button-login',
+            claseButton,
             null,
             enviarFormulario
           )
@@ -325,12 +362,41 @@ function configPHP(json, idioma) {
           const button = createButton(params)
           div.appendChild(button)
         }
+        if (key === 'a') {
+          const divA = document.querySelector('.div-a')
+          elements.a.forEach((element) => {
+            let textA = espanolOperativo.a[element.text][idioma]
+            let href = element.href
+            let id = element.id
+            let params = objParams(
+              null,
+              'a-login',
+              null,
+              id,
+              null,
+              null,
+              null,
+              textA,
+              null,
+              null,
+              RegisterUser,
+              null,
+              href
+            )
+
+            const a = createA(params, textA)
+            divA.appendChild(a)
+          })
+          div.appendChild(divA)
+        }
       }
       const firstInput = div.querySelector('.input-login[type="text"]:focus')
       if (firstInput) {
         firstInput.focus()
       }
     }
+    const button = document.querySelector('.button-login.button-login-apagado')
+    button.disabled = true
   } catch (error) {
     console.log(error)
   }
@@ -405,8 +471,10 @@ function generaOverlay() {
   )
   const button = createButton(paramsButton)
   //*----------------------------------------------
+
   divBox.appendChild(span)
   divBox.appendChild(button)
+
   div.style.display = 'none'
   div.appendChild(divBox)
   body.appendChild(div)
@@ -430,5 +498,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   }, 200)
   generaOverlay()
   spinner.style.visibility = 'hidden'
+
   finPerformance()
 })
