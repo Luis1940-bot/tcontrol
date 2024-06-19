@@ -15,10 +15,10 @@ function generarCodigoAlfabetico($reporte) {
 function addCampo($datos) {
     $dato_decodificado = urldecode($datos);
     $objeto_json = json_decode($dato_decodificado, true);
-    // $host = "190.228.29.59"; 
-    // $user = "fmc_oper2023";
-    // $password = "0uC6jos0bnC8";
-    // $dbname = "mc1000";
+    // $host = "68.178.195.199"; 
+    // $user = "developers";
+    // $password = "6vLB#Q0bOVo4";
+    // $dbname = "tc1000";
     // $port = '3306';
     // $charset='utf-8';
     if ($objeto_json === null) {

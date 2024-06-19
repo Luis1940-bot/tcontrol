@@ -27,3 +27,17 @@ Español
 Inglés
 Portugués
 Registrar
+Colaborador	
+Usuario u operador
+Supervisor	
+Supervisor o encargado
+Jefe	
+Jefatura de área
+Admin	
+Un administrador del cliente
+Gerente	
+Gerente de área
+Sponsor	
+Sponsor, Directores y quien paga por la herramienta
+Desarrollador	
+Sólo para desarrolladores

@@ -1,20 +1,19 @@
 import baseUrl from '../../../../config.js'
-// const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
 
-export default function traerRegistros(q, ruta, sql_i) {
+export default function addVariable(objeto, ruta) {
   // eslint-disable-next-line no-console
-  console.time('traerRegistros')
+  console.time('addCompania')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
     let obj = {
-      q,
       ruta,
-      sql_i,
       rax,
+      objeto,
     }
     const datos = JSON.stringify(obj)
-    // console.log(datos)
+    console.log(datos)
+
     const url = `${SERVER}/Routes/index.php`
     fetch(url, {
       method: 'POST',
@@ -25,14 +24,21 @@ export default function traerRegistros(q, ruta, sql_i) {
       },
       body: datos,
     })
-      .then((res) => res.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText)
+        }
+        return response.json()
+      })
       .then((data) => {
+        // console.log(data)
         resolve(data)
         // eslint-disable-next-line no-console
-        console.timeEnd('traerRegistros')
+        console.timeEnd('addCompania')
+        return data
       })
       .catch((error) => {
-        console.timeEnd('traerRegistros')
+        console.timeEnd('addCompania')
         console.error('Error en la solicitud:', error)
         reject(error)
         alert('No se pudo establecer conexión con el servidor')

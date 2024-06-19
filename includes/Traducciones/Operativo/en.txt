@@ -27,3 +27,17 @@ Spanish
 English
 Portuguese
 to register
+Collaborator
+User or operator
+Supervisor
+Supervisor or manager
+Boss
+Area Headquarters
+Admin
+A client administrator
+Manager
+Area manager
+Sponsor
+Sponsor, Directors and who pays for the tool
+Developer
+For developers only

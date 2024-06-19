@@ -16,27 +16,16 @@ import { trO } from '../../controllers/trOA.js'
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 import { configPHP } from '../../controllers/configPHP.js'
 import { dondeEstaEn } from '../../controllers/dondeEstaEn.js'
-import traerRegistros from './Controllers/traerRegistros.js'
+// import traerRegistros from './Controllers/traerRegistros.js'
 import createA from '../../includes/atoms/createA.js'
 import createButton from '../../includes/atoms/createButton.js'
 import createDiv from '../../includes/atoms/createDiv.js'
 import createLabel from '../../includes/atoms/createLabel.js'
 import createInput from '../../includes/atoms/createInput.js'
 import createSelect from '../../includes/atoms/createSelect.js'
+import createTextArea from '../../includes/atoms/createTextArea.js'
 
 const SERVER = baseUrl
-
-function setearSelects() {
-  const situacion = document.getElementById('situacion')
-  situacion.options[1].selected = true
-  situacion.setAttribute('disabled', true)
-  const verificador = document.getElementById('verificador')
-  verificador.options[1].selected = true
-  verificador.setAttribute('disabled', true)
-  let idiomaPreferido = navigator.languages[1]
-  const idioma = document.getElementById('idioma')
-  idioma.value = idiomaPreferido
-}
 
 function creador(element) {
   let elemento = null
@@ -71,12 +60,15 @@ function creador(element) {
   if (element.tag === 'div') {
     elemento = createDiv(element.config)
   }
+  if (element.tag === 'textarea') {
+    elemento = createTextArea(element.config)
+  }
   return elemento
 }
 
 function armadoDeHTML(json) {
   try {
-    const div = document.querySelector('.div-register')
+    const div = document.querySelector('.div-plant')
     const elementos = json.elements
     elementos.forEach((element) => {
       const elementoCreado = creador(element)
@@ -99,70 +91,15 @@ function leeModelo(ruta) {
     .then((data) => {
       armadoDeHTML(data)
       traduccionDeLabel(objTranslate)
-      cargaSelectArea(objTranslate)
-      cargaTipoDeUsuario(objTranslate)
-      setearSelects()
     })
     .catch((error) => {
       console.error('Error al cargar el archivo:', error)
     })
 }
 
-async function cargaSelectArea(objTranslate) {
-  const areas = await traerRegistros(
-    'traerLTYarea',
-    '/traerAreasParaRegistroUser',
-    null
-  )
-
-  if (areas.length === 0) {
-    const select = document.getElementById('area')
-    const option = document.createElement('option')
-    option.value = 0
-    const texto = trO('Área', objTranslate) || 'Área'
-    option.text = texto
-    select.appendChild(option)
-  } else if (areas.length > 0) {
-    const select = document.getElementById('area')
-    const emptyOption = document.createElement('option')
-    emptyOption.value = ''
-    emptyOption.text = ''
-    select.appendChild(emptyOption)
-    areas.forEach(([value, text]) => {
-      const option = document.createElement('option')
-      option.value = value
-      option.text = trO(text, objTranslate) || text
-      select.appendChild(option)
-    })
-  }
-}
-async function cargaTipoDeUsuario(objTranslate) {
-  const tipoDeUsuario = await traerRegistros(
-    'traerTipoDeUsuario',
-    '/traerTipoDeUsuarioParaRegistroUser',
-    null
-  )
-
-  if (tipoDeUsuario.length > 0) {
-    const select = document.getElementById('tipo_usuario')
-    const emptyOption = document.createElement('option')
-    emptyOption.value = ''
-    emptyOption.text = ''
-    select.appendChild(emptyOption)
-    tipoDeUsuario.forEach(([value, text]) => {
-      const option = document.createElement('option')
-      option.value = value
-      option.text = trO(text, objTranslate) || text
-      select.appendChild(option)
-    })
-    select.selectedIndex = 1
-    select.disabled = true
-  }
-}
-
 function traduccionDeLabel(objTranslate) {
-  const div = document.querySelector('.div-register')
-  const labels = div.querySelectorAll('.label-login')
+  const div = document.querySelector('.div-plant')
+  const labels = div.querySelectorAll('.label-plant')
   labels.forEach((element) => {
     const texto =
       trO(element.textContent.trim(), objTranslate) ||
@@ -184,7 +121,7 @@ function leeApp(json) {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
-    if (e.target.matches('.input-register')) {
+    if (e.target.matches('.input-plant, .textarea-plant')) {
       if (e.key === ',') {
         e.preventDefault()
       }
@@ -208,8 +145,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTimeout(async () => {
     objTranslate = await arraysLoadTranslate()
     leeApp(`log`)
-    leeModelo('Register/registerUser')
-    const nuevaCadena = dondeEstaEn(objTranslate, 'Regístrese.')
+    leeModelo('Register/registerPlant')
+    const nuevaCadena = dondeEstaEn(objTranslate, 'Nueva compañía.')
   }, 200)
 
   spinner.style.visibility = 'hidden'

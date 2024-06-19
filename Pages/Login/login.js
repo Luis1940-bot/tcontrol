@@ -8,7 +8,7 @@ import {
   finPerformance,
 } from '../../includes/Conection/conection.js'
 // eslint-disable-next-line import/extensions
-import { encriptar, desencriptar } from '../../controllers/cript.js'
+import { encriptar } from '../../controllers/cript.js'
 import createSelect from '../../includes/atoms/createSelect.js'
 import createInput from '../../includes/atoms/createInput.js'
 import createLabel from '../../includes/atoms/createLabel.js'
@@ -22,9 +22,12 @@ const appJSON = {}
 import baseUrl from '../../config.js'
 import leeVersion from '../../controllers/leeVersion.js'
 import createA from '../../includes/atoms/createA.js'
+import { configPHP } from '../../controllers/configPHP.js'
+import { trO } from '../../controllers/trOA.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 
 const SERVER = baseUrl
-
+let objTranslate = []
 const espanolOperativo = {
   error: {
     es: 'Hay un dato que no es correcto.',
@@ -87,38 +90,147 @@ const espanolOperativo = {
   },
 }
 
+function cargarSelectCompania(json) {
+  try {
+    //! { "name": "McCain Balcarce-Argentina", "num": 1 },
+    // !{ "name": "McCain Araxa-Brasil", "num": 2 }
+    const idAcceso = document.getElementById('idAcceso')
+    const idSelectLogin = document.getElementById('idSelectLogin')
+    let { plantas } = json
+    let claseButton = 'button-login'
+    let array = []
+    if (plantas.length === 0) {
+      claseButton = 'button-login button-login-apagado'
+      idAcceso.setAttribute('disabled', false)
+      const option = document.createElement('option')
+      option.value = 0
+      const texto = trO('Sin compañías', objTranslate) || 'Sin compañías'
+      option.text = texto
+      idSelectLogin.appendChild(option)
+      const idAltaUsuario = document.getElementById('idAltaUsuario')
+      idAltaUsuario.classList.remove('a-login')
+      idAltaUsuario.classList.add('a-login-disabled')
+      const idOlvidoPass = document.getElementById('idOlvidoPass')
+      idOlvidoPass.classList.remove('a-login')
+      idOlvidoPass.classList.add('a-login-disabled')
+      const idInput0 = document.getElementById('idInput0')
+      idInput0.classList.remove('input-login')
+      idInput0.classList.add('input-login-disabled')
+      const idInput1 = document.getElementById('idInput1')
+      idInput1.classList.remove('input-login')
+      idInput1.classList.add('input-login-disabled')
+    } else {
+      const nombresPlantas = plantas.map((planta) => [planta.num, planta.name])
+      array = [...nombresPlantas]
+      const emptyOption = document.createElement('option')
+      emptyOption.value = ''
+      emptyOption.text = ''
+      idSelectLogin.appendChild(emptyOption)
+      array.forEach(([value, text]) => {
+        const option = document.createElement('option')
+        option.value = value
+        option.text = text
+        idSelectLogin.appendChild(option)
+      })
+    }
+
+    idAcceso.setAttribute('class', claseButton)
+    idAltaUsuario.addEventListener('click', (event) => {
+      event.preventDefault()
+      RegisterUser(event)
+    })
+    const idAltaCompania = document.getElementById('idAltaCompania')
+    idAltaCompania.addEventListener('click', (event) => {
+      event.preventDefault()
+      RegisterUser(event)
+    })
+    idOlvidoPass.addEventListener('click', (event) => {
+      event.preventDefault()
+      RegisterUser(event)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 function leeApp(json) {
   readJSON(json)
     .then((data) => {
       Object.assign(appJSON, data)
-      // console.log(data)
-      const idiomaPreferido = navigator.language || navigator.languages[0]
-      const partesIdioma = idiomaPreferido.split('-')
-      const idioma = partesIdioma[0]
-      const { developer, content, by, rutaDeveloper, logo } = data
-      const metaDescription = document.querySelector('meta[name="description"]')
-      metaDescription.setAttribute('content', content)
-      const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-      faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-      document.title = developer
-      const logoi = document.getElementById('logo_factum')
-      const srcValue = `${SERVER}/assets/img/${logo}.png`
-      const altValue = 'Tenki Web'
-      logoi.src = srcValue
-      logoi.alt = altValue
-      logoi.width = 100
-      logoi.height = 40
-      const footer = document.getElementById('footer')
-      footer.innerText = by
-      footer.href = rutaDeveloper
-      // document.querySelector('.header-McCain').style.display = 'none'
-      configPHP(data, idioma)
+      configPHP(data, SERVER)
       setTimeout(() => {
         const select = document.querySelector('.select-login')
         if (select) {
+          cargarSelectCompania(data)
           select.focus()
         }
       }, 100)
+    })
+    .catch((error) => {
+      console.error('Error al cargar el archivo:', error)
+    })
+}
+
+function creador(element) {
+  let elemento = null
+  if (element.tag === 'label') {
+    element.config.innerHTML =
+      trO(element.config.innerHTML, objTranslate) || element.config.innerHTML
+    elemento = createLabel(element.config)
+  }
+  if (element.tag === 'input') {
+    elemento = createInput(element.config)
+  }
+  if (element.tag === 'a') {
+    element.config.textContent =
+      trO(element.config.textContent, objTranslate) ||
+      element.config.textContent
+    elemento = createA(element.config, element.config.textContent)
+  }
+  if (element.tag === 'select') {
+    let array = []
+    if (element.hasOwnProperty('options')) {
+      if (element.options.length > 0) {
+        array = [...element.options]
+      }
+    }
+    elemento = createSelect(array, element.config)
+  }
+  if (element.tag === 'button') {
+    element.config.text =
+      trO(element.config.text, objTranslate) || element.config.text
+    elemento = createButton(element.config)
+  }
+  if (element.tag === 'div') {
+    elemento = createDiv(element.config)
+  }
+  return elemento
+}
+
+function armadoDeHTML(json) {
+  try {
+    const div = document.querySelector('.div-login-buttons')
+    const elementos = json.elements
+    elementos.forEach((element) => {
+      const elementoCreado = creador(element)
+      if (element.children) {
+        const elementoChildren = element.children
+        elementoChildren.forEach((e) => {
+          const hijo = creador(e)
+          hijo ? elementoCreado.appendChild(hijo) : null
+        })
+      }
+      elementoCreado ? div.appendChild(elementoCreado) : null
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function leeModelo(ruta) {
+  readJSON(ruta)
+    .then((data) => {
+      armadoDeHTML(data)
     })
     .catch((error) => {
       console.error('Error al cargar el archivo:', error)
@@ -222,6 +334,7 @@ function RegisterUser(a) {
   const id = a.target.id
   const etiqueta = document.getElementById(id)
   const data = etiqueta.getAttribute('data')
+  console.log(data)
   window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`
 }
 
@@ -258,150 +371,6 @@ function objParams(
   return params
 }
 
-function configPHP(json, idioma) {
-  try {
-    let { plantas, elements } = json
-    let claseButton = 'button-login'
-    if (plantas.length === 0) {
-      claseButton = 'button-login button-login-apagado'
-      plantas.push({ name: 'Sin compañías' })
-    }
-
-    const div = document.querySelector('.div-login-buttons')
-    for (const key in elements) {
-      // console.log(elements)
-      if (elements.hasOwnProperty(key)) {
-        if (key === 'select') {
-          let labelPlanta = espanolOperativo.planta[idioma]
-          let params = objParams(
-            labelPlanta,
-            'label-login',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-          )
-          let label = createLabel(params)
-          div.appendChild(label)
-          //*----------------------------------
-          const nombresPlantas = plantas.map((planta) => [
-            planta.num,
-            planta.name,
-          ])
-          params = objParams(
-            null,
-            'select-login',
-            null,
-            'idSelectLogin',
-            null,
-            null,
-            null,
-            null
-          )
-          const select = createSelect(nombresPlantas, params)
-          div.appendChild(select)
-          //*------------------------------------
-        }
-        if (key === 'input') {
-          elements.input.forEach((element, index) => {
-            let labelInput = espanolOperativo[element.name][idioma]
-            let params = objParams(
-              labelInput,
-              'label-login',
-              null,
-              null,
-              null,
-              null,
-              null,
-              null
-            )
-            let label = createLabel(params)
-            div.appendChild(label)
-            let id = index === 0 ? 'idInput0' : `idInput${index}`
-            params = objParams(
-              null,
-              'input-login',
-              null,
-              id,
-              null,
-              element.type,
-              '',
-              null,
-              null,
-              null
-            )
-            let input = createInput(params)
-            div.appendChild(input)
-            if (index === 0) {
-              input.focus()
-            }
-          })
-        }
-        // let claseButton = 'button-login'
-        // if (plantas.length === 0) {
-        //   claseButton = 'button-login button-login-apagado'
-        // }
-        if (key === 'button') {
-          let labelButton = espanolOperativo[elements.button[0].name][idioma]
-          let params = objParams(
-            null,
-            'button-login',
-            null,
-            'idLogin',
-            null,
-            null,
-            null,
-            labelButton,
-            claseButton,
-            null,
-            enviarFormulario
-          )
-
-          const button = createButton(params)
-          div.appendChild(button)
-        }
-        if (key === 'a') {
-          const divA = document.querySelector('.div-a')
-          elements.a.forEach((element) => {
-            let textA = espanolOperativo.a[element.text][idioma]
-            let href = element.href
-            let id = element.id
-            let params = objParams(
-              null,
-              'a-login',
-              null,
-              id,
-              null,
-              null,
-              null,
-              textA,
-              null,
-              null,
-              RegisterUser,
-              null,
-              href
-            )
-
-            const a = createA(params, textA)
-            divA.appendChild(a)
-          })
-          div.appendChild(divA)
-        }
-      }
-      const firstInput = div.querySelector('.input-login[type="text"]:focus')
-      if (firstInput) {
-        firstInput.focus()
-      }
-    }
-    const button = document.querySelector('.button-login.button-login-apagado')
-    button.disabled = true
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 function showAlert(message) {
   var overlay = document.getElementById('overlay')
   var alertMessage = document.getElementById('alert-message')
@@ -414,71 +383,81 @@ function closeAlert() {
   overlay.style.display = 'none'
 }
 
-function generaOverlay() {
-  const body = document.querySelector('body')
-  const paramsDiv = objParams(
-    null,
-    null,
-    null,
-    'overlay',
-    null,
-    null,
-    null,
-    null,
-    'overlay',
-    null
-  )
-  const div = createDiv(paramsDiv)
-  //*-------------------------------
-  const paramsDivBox = objParams(
-    null,
-    null,
-    null,
-    'idAlertBox',
-    null,
-    null,
-    null,
-    null,
-    'alert-box',
-    null
-  )
-  const divBox = createDiv(paramsDivBox)
-  //*-----------------------------------------
-  const paramsSpan = objParams(
-    null,
-    'span-alerta',
-    null,
-    'alert-message',
-    null,
-    null,
-    null,
-    ''
-  )
-  const span = createSpan(paramsSpan)
-  //*--------------------------------------
-  const paramsButton = objParams(
-    null,
-    null,
-    null,
-    'idButtonAlert',
-    null,
-    null,
-    null,
-    'oK',
-    'button-alerta',
-    null,
-    closeAlert
-  )
-  const button = createButton(paramsButton)
-  //*----------------------------------------------
+// function generaOverlay() {
+//   const body = document.querySelector('body')
+//   const paramsDiv = objParams(
+//     null,
+//     null,
+//     null,
+//     'overlay',
+//     null,
+//     null,
+//     null,
+//     null,
+//     'overlay',
+//     null
+//   )
+//   const div = createDiv(paramsDiv)
+//   //*-------------------------------
+//   const paramsDivBox = objParams(
+//     null,
+//     null,
+//     null,
+//     'idAlertBox',
+//     null,
+//     null,
+//     null,
+//     null,
+//     'alert-box',
+//     null
+//   )
+//   const divBox = createDiv(paramsDivBox)
+//   //*-----------------------------------------
+//   const paramsSpan = objParams(
+//     null,
+//     'span-alerta',
+//     null,
+//     'alert-message',
+//     null,
+//     null,
+//     null,
+//     ''
+//   )
+//   const span = createSpan(paramsSpan)
+//   //*--------------------------------------
+//   const paramsButton = objParams(
+//     null,
+//     null,
+//     null,
+//     'idButtonAlert',
+//     null,
+//     null,
+//     null,
+//     'oK',
+//     'button-alerta',
+//     null,
+//     closeAlert
+//   )
+//   const button = createButton(paramsButton)
+//   //*----------------------------------------------
 
-  divBox.appendChild(span)
-  divBox.appendChild(button)
+//   divBox.appendChild(span)
+//   divBox.appendChild(button)
 
-  div.style.display = 'none'
-  div.appendChild(divBox)
-  body.appendChild(div)
-}
+//   div.style.display = 'none'
+//   div.appendChild(divBox)
+//   body.appendChild(div)
+// }
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('.input-login')) {
+      if (e.key === ',') {
+        e.preventDefault()
+      }
+    }
+  })
+})
 
 document.addEventListener('DOMContentLoaded', async () => {
   inicioPerformance()
@@ -493,10 +472,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const version = await leeVersion('version')
   document.querySelector('.version').innerText = version
 
-  setTimeout(() => {
+  setTimeout(async () => {
     leeApp(`log`)
+    objTranslate = await arraysLoadTranslate()
+    leeModelo('Login/login')
   }, 200)
-  generaOverlay()
+
   spinner.style.visibility = 'hidden'
 
   finPerformance()

@@ -26,4 +26,18 @@ Linguagem
 Espanhol
 Inglês
 Português
-registrar
+Registrar
+Colaborador
+Usuário ou operador
+Supervisor
+Supervisor ou gerente
+Chefe
+Sede da Área
+Administrador
+Um administrador de cliente
+Gerente
+Gerente da área
+Patrocinador
+Patrocinador, Diretores e quem paga pela ferramenta
+Desenvolvedor
+Somente para desenvolvedores

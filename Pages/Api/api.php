@@ -18,9 +18,9 @@ function verificarToken($token, $data, $clave_secreta) {
 
 function procesar($call, $desde, $hasta, $planta) {
   try {
-    $host = "190.228.29.59"; 
-    $user = "fmc_oper2023";
-    $password = "0uC6jos0bnC8";
+    $host = "68.178.195.199"; 
+    $user = "developers";
+    $password = "6vLB#Q0bOVo4";
     $number = "";
     $desired_length = 4;
     while(strlen($number) + strlen($planta) < $desired_length) {

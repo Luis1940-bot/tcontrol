@@ -21,7 +21,7 @@ function createSelect(array, params) {
     emptyOption.value = ''
     emptyOption.text = ''
     select.appendChild(emptyOption)
-    array.forEach(([value, text]) => {
+    array.forEach(({ value, text }) => {
       const option = document.createElement('option')
       option.value = value
       option.text = text

@@ -172,6 +172,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/clonarReporte':
             include_once dirname(__DIR__) . '/Pages/ListControles/Routes/clonarReporte.php';
           break;
+        case '/traerAreasParaRegistroUser':
+            include_once dirname(__DIR__) . '/Pages/RegisterUser/Routes/traerRegistros.php';
+          break;
+        case '/traerTipoDeUsuarioParaRegistroUser':
+            include_once dirname(__DIR__) . '/Pages/RegisterUser/Routes/traerRegistros.php';
+          break;
+        case '/traerTipoDeUsuarioParaRegistroPlanta':
+            include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/traerRegistros.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada

@@ -1,10 +1,10 @@
 <?php
 mb_internal_encoding('UTF-8');
 function actualizar($target) {
-    // $host = "190.228.29.59"; 
-    // $user = "fmc_oper2023";
-    // $password = "0uC6jos0bnC8";
-    // $dbname = "mc1000";
+    // $host = "68.178.195.199"; 
+    // $user = "developers";
+    // $password = "6vLB#Q0bOVo4";
+    // $dbname = "tc1000";
 
     try {
       require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
