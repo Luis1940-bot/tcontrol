@@ -181,6 +181,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/traerTipoDeUsuarioParaRegistroPlanta':
             include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/traerRegistros.php';
           break;
+        case '/addCompania':
+            include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/nuevaCompania.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada

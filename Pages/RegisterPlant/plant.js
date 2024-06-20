@@ -24,8 +24,116 @@ import createLabel from '../../includes/atoms/createLabel.js'
 import createInput from '../../includes/atoms/createInput.js'
 import createSelect from '../../includes/atoms/createSelect.js'
 import createTextArea from '../../includes/atoms/createTextArea.js'
+import createSpan from '../../includes/atoms/createSpan.js'
+import addCompania from './Controllers/nuevaCompania.js'
+import { desencriptar } from '../../controllers/cript.js'
 
 const SERVER = baseUrl
+
+function validarEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return regex.test(email)
+}
+
+function checaRequeridos() {
+  const cliente = document.getElementById('cliente')
+  cliente.classList.remove('input-plant-requerido')
+  cliente.classList.add('input-plant')
+  if (cliente.value === '') {
+    cliente.classList.remove('input-plant')
+    cliente.classList.add('input-plant-requerido')
+    return false
+  }
+  const contacto = document.getElementById('contacto')
+  contacto.classList.remove('input-plant-requerido')
+  contacto.classList.add('input-plant')
+  if (contacto.value === '') {
+    contacto.classList.remove('input-plant')
+    contacto.classList.add('input-plant-requerido')
+    return false
+  }
+  const email = document.getElementById('email')
+  email.classList.remove('input-plant-requerido')
+  email.classList.add('input-plant')
+  if (email.value === '') {
+    email.classList.remove('input-plant')
+    email.classList.add('input-plant-requerido')
+    return false
+  }
+  if (!validarEmail(email.value)) {
+    email.classList.remove('input-plant')
+    email.classList.add('input-plant-requerido')
+    return false
+  }
+  const objeto = {
+    cliente: cliente.value,
+    detalle: '',
+    contacto: contacto.value,
+    email: email.value,
+    activo: '',
+  }
+  return { add: true, objeto }
+}
+
+async function nuevaComapania() {
+  let envia = checaRequeridos()
+
+  if (envia.add) {
+    const detalle = document.getElementById('detalle')
+    envia.objeto.detalle = detalle.value
+    envia.objeto.activo = 's'
+    const response = await addCompania(envia.objeto, '/addCompania')
+    if (response) {
+      const id = document.getElementById('id')
+      id.value = response.id
+      const url = `${SERVER}/Pages/Login`
+      window.location.href = url
+    }
+  }
+}
+
+function setearElementos() {
+  const situacion = document.getElementById('situacion')
+  situacion.options[1].selected = true
+  situacion.setAttribute('disabled', true)
+
+  const id = document.getElementById('id')
+  id.setAttribute('disabled', true)
+
+  const idRegisterButton = document.getElementById('idRegisterButton')
+  idRegisterButton.addEventListener('click', (e) => {
+    const clase = e.target.className
+    if (clase === 'button-plant') {
+      nuevaComapania()
+    }
+    if (clase === 'button-plant-update') {
+    }
+  })
+
+  const cliente = document.getElementById('cliente')
+  cliente.addEventListener('input', () => {
+    if (cliente.value !== '') {
+      cliente.classList.remove('input-plant-requerido')
+      cliente.classList.add('input-plant')
+    }
+  })
+
+  const contacto = document.getElementById('contacto')
+  contacto.addEventListener('input', () => {
+    if (contacto.value !== '') {
+      contacto.classList.remove('input-plant-requerido')
+      contacto.classList.add('input-plant')
+    }
+  })
+
+  const email = document.getElementById('email')
+  email.addEventListener('input', () => {
+    if (email.value !== '') {
+      email.classList.remove('input-plant-requerido')
+      email.classList.add('input-plant')
+    }
+  })
+}
 
 function creador(element) {
   let elemento = null
@@ -63,6 +171,11 @@ function creador(element) {
   if (element.tag === 'textarea') {
     elemento = createTextArea(element.config)
   }
+  if (element.tag === 'span') {
+    element.config.text =
+      trO(element.config.text, objTranslate) || element.config.text
+    elemento = createSpan(element.config)
+  }
   return elemento
 }
 
@@ -91,6 +204,7 @@ function leeModelo(ruta) {
     .then((data) => {
       armadoDeHTML(data)
       traduccionDeLabel(objTranslate)
+      setearElementos()
     })
     .catch((error) => {
       console.error('Error al cargar el archivo:', error)
@@ -147,9 +261,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeApp(`log`)
     leeModelo('Register/registerPlant')
     const nuevaCadena = dondeEstaEn(objTranslate, 'Nueva compañía.')
+    const divUbicacion = document.querySelector('.div-ubicacion')
+    divUbicacion.style.display = 'none'
+    const volver = document.getElementById('volver')
+    volver.style.display = 'block'
   }, 200)
 
   spinner.style.visibility = 'hidden'
 
   finPerformance()
+})
+
+function goBack() {
+  try {
+    let back = sessionStorage.getItem('volver')
+    if (back) {
+      back = desencriptar(back)
+    }
+    const url = `${SERVER}/Pages/${back}`
+    window.location.href = url
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const volver = document.getElementById('volver')
+volver.addEventListener('click', () => {
+  goBack(null)
 })

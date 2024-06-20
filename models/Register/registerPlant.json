@@ -36,6 +36,14 @@
       }
     },
     {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-plant",
+        "text": "Campo obligatorio."
+      }
+    },
+    {
       "tag": "label",
       "config": {
         "id": null,
@@ -71,12 +79,20 @@
       }
     },
     {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-plant",
+        "text": "Campo obligatorio."
+      }
+    },
+    {
       "tag": "label",
       "config": {
         "id": null,
         "htmlFor": "email",
         "className": "label-plant",
-        "innerHTML": "Email"
+        "innerHTML": "Email de contacto"
       }
     },
     {
@@ -85,6 +101,14 @@
         "id": "email",
         "type": "email",
         "className": "input-plant"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-plant",
+        "text": "Campo obligatorio."
       }
     },
     {
@@ -117,6 +141,7 @@
     {
       "tag": "button",
       "config": {
+        "id": "idRegisterButton",
         "class": "button-plant",
         "text": "Registrar"
       }

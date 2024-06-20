@@ -7,7 +7,7 @@
             $cliente = $objeto['cliente'];
             $detalle = $objeto['detalle'];
             $contacto = $objeto['contacto'];
-            $activo = 's'; 
+            $activo = $objeto['activo']; 
             $email = $objeto['email'];
 
             

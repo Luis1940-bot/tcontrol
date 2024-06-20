@@ -29,7 +29,7 @@ main {
   height: auto;
   flex-direction: column;
   align-items: left;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   border: 2px solid black;
   margin-left: auto;
   margin-right: auto;
@@ -67,6 +67,16 @@ main {
   margin-top: 2px;
   padding-left: 5px;
 }
+.input-plant-requerido {
+  width: 98%;
+  height: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  background-color: #f81212;
+  border: 1px solid #000;
+  margin-top: 2px;
+  padding-left: 5px;
+}
 .textarea-plant {
   width: 98%;
   /* height: 30px; */
@@ -95,6 +105,10 @@ main {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 40px;
 }
+.button-plant-update {
+  background: #cecece;
+  color: #212121;
+}
 .button-plant-apagado {
   background: #cccccc;
   cursor: not-allowed;
@@ -113,7 +127,7 @@ main {
 /* Media Queries */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   .div-plant {
-    margin-top: 40px;
+    margin-top: 10px;
     width: 70%;
     height: 100%;
     padding-left: 10%;

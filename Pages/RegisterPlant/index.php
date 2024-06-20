@@ -28,6 +28,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
     <?php
       include_once('../../includes/molecules/header.php');
       include_once('../../includes/molecules/whereUs.php');
+      include_once('../../includes/molecules/encabezado.php');
     ?>
   </header>
   <main>

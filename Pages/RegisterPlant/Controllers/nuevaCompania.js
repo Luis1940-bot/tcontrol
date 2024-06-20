@@ -1,7 +1,7 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-export default function addVariable(objeto, ruta) {
+export default function addCompania(objeto, ruta) {
   // eslint-disable-next-line no-console
   console.time('addCompania')
   return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ export default function addVariable(objeto, ruta) {
       objeto,
     }
     const datos = JSON.stringify(obj)
-    console.log(datos)
+    // console.log(datos)
 
     const url = `${SERVER}/Routes/index.php`
     fetch(url, {

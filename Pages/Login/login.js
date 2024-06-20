@@ -334,7 +334,7 @@ function RegisterUser(a) {
   const id = a.target.id
   const etiqueta = document.getElementById(id)
   const data = etiqueta.getAttribute('data')
-  console.log(data)
+  sessionStorage.setItem('volver', encriptar('Login'))
   window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`
 }
 
