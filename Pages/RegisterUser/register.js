@@ -121,7 +121,7 @@ async function nuevoUser() {
       '/addUsuario',
       parseInt(plant.value)
     )
-    if (response) {
+    if (response.success) {
       const objetoEmail = {
         cliente: plant.texto,
         usuario: envia.objeto.nombre,
@@ -131,7 +131,9 @@ async function nuevoUser() {
       }
       const miAlerta = new Alerta()
       const obj = arrayGlobal.avisoAmarillo
-      const texto = 'Aguarde un instante luego será redirigido.'
+      const texto =
+        trO('Aguarde un instante luego será redirigido.', objTranslate) ||
+        'Aguarde un instante luego será redirigido.'
       miAlerta.createVerde(obj, texto, objTranslate)
       const modal = document.getElementById('modalAlertVerde')
       modal.style.display = 'block'
@@ -147,6 +149,14 @@ async function nuevoUser() {
         const url = `${SERVER}/Pages/Login`
         window.location.href = url
       }
+    } else {
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto =
+        trO('El usuario ya existe', objTranslate) || 'El usuario ya existe'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     }
   }
 }

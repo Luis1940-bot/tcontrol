@@ -33,6 +33,27 @@
                 printf("Error al cargar el conjunto de caracteres utf8mb4: %s\n", $conn->error);
                 exit();
             }
+
+            // Verificar si ya existe un usuario con el mismo email y cliente
+            $sql_check = "SELECT * FROM usuario WHERE mail = ? AND idLTYcliente = ?";
+            $stmt_check = $conn->prepare($sql_check);
+            if ($stmt_check === false) {
+                die("Error al preparar la consulta: " . $conn->error);
+            }
+            $stmt_check->bind_param("si", $mail, $idLTYcliente);
+            $stmt_check->execute();
+            $result_check = $stmt_check->get_result();
+
+            if ($result_check->num_rows > 0) {
+                $response = array('success' => false, 'message' => 'El usuario ya existe.');
+                $stmt_check->close();
+                $conn->close();
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
+            }
+            $stmt_check->close();
+
             $hash=hash('ripemd160',$pass);
             $sql = "INSERT INTO usuario (nombre, pass, area, puesto, idtipousuario, activo, mail, firma, mi_cfg, idLTYcliente, cod_verificador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
           

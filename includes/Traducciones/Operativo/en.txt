@@ -45,3 +45,5 @@ Wait a moment then you will be redirected.
 Check.
 Enter verification code:
 Verify
+Wait a moment then you will be redirected.
+User already exists

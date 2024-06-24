@@ -45,3 +45,5 @@ Aguarde un instante luego será redirigido.
 Verificación.
 Ingrese el código de verificación:
 Verificar
+Aguarde un instante luego será redirigido.
+El usuario ya existe

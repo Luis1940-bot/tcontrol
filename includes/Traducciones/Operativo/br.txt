@@ -45,3 +45,5 @@ Espere um momento e você será redirecionado.
 Verificar.
 Digite o código de verificação:
 Verificar
+Wait a moment then you will be redirected.
+Usuário já existe

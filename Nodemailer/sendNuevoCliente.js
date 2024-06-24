@@ -16,7 +16,7 @@ export default function enviaMailNuevoCliente(objeto, ruta) {
     const url = `${SERVER}/Routes/index.php`
     // Agregar tiempo de espera a la solicitud fetch
     const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 120000) // 60 segundos
+    const timeoutId = setTimeout(() => controller.abort(), 180000) // 60 segundos
 
     fetch(url, {
       method: 'POST',
