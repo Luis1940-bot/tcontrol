@@ -5,7 +5,7 @@
   // header ("MIME-Version: 1.0\r\n");
   require_once dirname(dirname(__DIR__)) . '/config.php';
 
-  define('EMAIL', BASE_URL .'/Nodemailer/nuevoCliente');
+  define('EMAIL', BASE_URL .'/Nodemailer/nuevoUsuario');
 
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
@@ -25,7 +25,8 @@ require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
 try {
   $datos = json_decode(file_get_contents('php://input'), true);
-  //  $datos = '{"ruta":"/sendNuevoCliente","rax":"&new=Fri Jun 21 2024 11:10:25 GMT-0300 (hora estándar de Argentina)","objeto":{"cliente":"Alpek-Coatzacoalcos","contacto":"Miguel Gonzalez","address":"luisfactum@gmail.com"}}';
+  // $datos = '{"ruta":"/sendNuevoUsuario","rax":"&new=Sat Jun 22 2024 20:23:37 GMT-0300 (hora estándar de Argentina)","objeto":{"cliente":"Alpek-Coatzacoalcos","usuario":"xxx","idusuario":8,"email":"luisfactum@gmail.com"}}';
+  // $datos = json_decode($datos, true);
 
     if (empty($datos)) {
         $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
@@ -43,18 +44,23 @@ try {
     $objeto = $datos['objeto'];
 
     $cliente = $objeto['cliente'];
-    $contacto = $objeto['contacto'];
-    $address = $objeto['address'];
-    $subject = 'Nuevo cliente';
+    $usuario = $objeto['usuario'];
+    $idusuario = $objeto['idusuario'];
+    $address = $objeto['email'];
+    $subject = 'Nuevo usuario';
+    $cod_verificador = $objeto['v'];
 
     ob_start();
-    include(BASE_DIR . '/Nodemailer/nuevoCliente/nuevoCliente.html');
+    include(BASE_DIR . '/Nodemailer/nuevoUsuario/nuevoUsuario.html');
     $html = ob_get_clean();
 
   
    $html  = str_replace('{cliente}', $cliente, $html);
-   $html  = str_replace('{contacto}', $contacto, $html);
+   $html  = str_replace('{usuario}', $usuario, $html);
    $html  = str_replace('{email}', $address, $html);
+   $html  = str_replace('{cod_verificador}', $cod_verificador, $html);
+   $html  = str_replace('{idusuario}', $idusuario, $html);
+  // $html  = str_replace('{verificador}', BASE_DIR . '/404.php' , $html);
 
     $mail = new PHPMailer(true);
   // Configura el servidor SMTP
@@ -73,6 +79,9 @@ try {
         'allow_self_signed' => true
             )
     );
+    $mail->Timeout = 30; // Tiempo de espera de conexión en segundos
+    $mail->SMTPKeepAlive = true; // Mantiene la conexión SMTP activa
+    
     $mail->isHTML(true);
     // Configura los destinatarios
     $mail->SetFrom("alerta.tenki@tenkiweb.com");
@@ -96,6 +105,7 @@ try {
     $response = array('success' => true, 'message' => 'El email se envio con exito!');
     echo json_encode($response);
 } catch (Exception $e) {
-  echo "Error en el envÃ­o del correo: " . $e->getMessage();
+  $response = array('success' => false, 'message' => 'Error en el envío del correo: ' . $e->getMessage());
+    echo json_encode($response);
 }
 ?>

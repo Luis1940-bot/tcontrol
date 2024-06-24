@@ -24,7 +24,7 @@ main {
   height: auto;
 }
 
-.div-register {
+.div-verify {
   display: flex;
   height: auto;
   flex-direction: column;
@@ -40,7 +40,7 @@ main {
   background-color: #ffffff;
 }
 
-.select-register {
+.select-verify {
   width: 100%;
   height: 30px;
   border: 1px solid #000;
@@ -51,14 +51,14 @@ main {
   padding-left: 5px;
 }
 
-.label-register {
+.label-verify {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   color: #9d9d9d;
   margin-top: 10px;
   margin-bottom: 5px;
 }
-.input-register {
+.input-verify {
   width: 98%;
   height: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -68,7 +68,7 @@ main {
   margin-top: 2px;
   padding-left: 5px;
 }
-.input-register-requerido {
+.input-verify-requerido {
   width: 98%;
   height: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -82,7 +82,7 @@ main {
 #firma {
   background-color: #cecece;
 }
-.button-register {
+.button-verify {
   height: 35px;
   width: 100%;
   padding-left: 0px;
@@ -97,13 +97,13 @@ main {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 40px;
 }
-.button-register-apagado {
+.button-verify-apagado {
   background: #cccccc;
   cursor: not-allowed;
   color: #666666;
 }
 
-.span-register {
+.span-verify {
   color: #f81212;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
@@ -130,14 +130,14 @@ main {
 
 /* Media Queries */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
-  .div-register {
+  .div-verify {
     /* margin-top: 40px; */
     width: 70%;
-    height: 100%;
+    height: auto;
     padding-left: 10%;
     padding-right: 10%;
   }
-  .button-register {
+  .button-verify {
     height: 35px;
     width: 100%;
     padding-left: 0px;
@@ -148,8 +148,9 @@ main {
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10px;
   }
-  .input-register {
+  .input-verify {
     width: 97%;
     height: 30px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -165,7 +166,7 @@ main {
   header {
     height: 70px;
   }
-  .div-register {
+  .div-verify {
     margin-top: 1px;
     width: 30%;
     height: auto;
@@ -173,19 +174,19 @@ main {
     padding-left: 15%;
     padding-right: 15%;
   }
-  .label-register {
+  .label-verify {
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
   }
-  .input-register {
+  .input-verify {
     /* width: 88%; */
     height: 30px;
     font-size: 14px;
     margin-top: 2px;
     padding-left: 5px;
   }
-  .button-register {
+  .button-verify {
     height: 35px;
     /* width: 90%; */
     padding-left: 0px;
@@ -202,7 +203,7 @@ main {
   header {
     height: 100px;
   }
-  .div-register {
+  .div-verify {
     margin-top: 90px;
     width: 30%;
     height: 300px;
@@ -211,19 +212,19 @@ main {
     padding-right: 15%;
   }
 
-  .label-register {
+  .label-verify {
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
   }
-  .input-register {
+  .input-verify {
     /* width: 88%; */
     height: 30px;
     font-size: 14px;
     margin-top: 2px;
     padding-left: 5px;
   }
-  .button-register {
+  .button-verify {
     height: 35px;
     /* width: 90%; */
     padding-left: 0px;
@@ -240,7 +241,7 @@ main {
   header {
     height: 100px;
   }
-  .div-register {
+  .div-verify {
     margin-top: 90px;
     width: 30%;
     height: 300px;
@@ -249,19 +250,19 @@ main {
     padding-right: 15%;
   }
 
-  .label-register {
+  .label-verify {
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
   }
-  .input-register {
+  .input-verify {
     /* width: 88%; */
     height: 30px;
     font-size: 14px;
     margin-top: 2px;
     padding-left: 5px;
   }
-  .button-register {
+  .button-verify {
     height: 35px;
     /* width: 90%; */
     padding-left: 0px;
@@ -278,7 +279,7 @@ main {
   header {
     height: 100px;
   }
-  .div-register {
+  .div-verify {
     margin-top: 100px;
     width: 20%;
     height: 300px;
@@ -286,19 +287,19 @@ main {
     padding-left: 10%;
     padding-right: 10%;
   }
-  .label-register {
+  .label-verify {
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
   }
-  .input-register {
+  .input-verify {
     /* width: 88%; */
     height: 30px;
     font-size: 14px;
     margin-top: 2px;
     padding-left: 5px;
   }
-  .button-register {
+  .button-verify {
     height: 35px;
     /* width: 90%; */
     padding-left: 0px;
@@ -318,7 +319,7 @@ main {
   header {
     height: 100px;
   }
-  .div-register {
+  .div-verify {
     margin-top: 100px;
     width: 20%;
     height: 300px;
@@ -326,19 +327,19 @@ main {
     padding-left: 10%;
     padding-right: 10%;
   }
-  .label-register {
+  .label-verify {
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
   }
-  .input-register {
+  .input-verify {
     /* width: 88%; */
     height: 30px;
     font-size: 14px;
     margin-top: 2px;
     padding-left: 5px;
   }
-  .button-register {
+  .button-verify {
     height: 35px;
     /* width: 90%; */
     padding-left: 0px;

@@ -5,7 +5,7 @@
         function traer($q, $sql_i) {
           $porciones = explode(",", $q);
           
-          
+          $plant = $sql_i;
           switch ($porciones[0]) {
 
               case 'traerLTYarea':
@@ -13,7 +13,7 @@
                             ar.idLTYarea AS id, 
                             ar.areax AS area 
                           FROM LTYarea ar 
-                          WHERE ar.activo = 's' AND ar.visible = 's' 
+                          WHERE ar.idLTYcliente = $plant AND ar.activo = 's' AND ar.visible = 's' 
                           ORDER BY ar.idLTYarea ASC;";
               break;
 
@@ -74,7 +74,7 @@
 
         header("Content-Type: application/json; charset=utf-8");
         $datos = file_get_contents("php://input");
-        // $datos = '{"q":"traerLTYarea","ruta":"/traerAreasParaRegistroUser","sql_i":null,"rax":"&new=Mon Jun 17 2024 14:59:22 GMT-0300 (hora estándar de Argentina)"}';
+        // $datos = '{"q":"traerTipoDeUsuario","ruta":"/traerTipoDeUsuarioParaRegistroUser","sql_i":null,"rax":"&new=Fri Jun 21 2024 19:20:33 GMT-0300 (hora estándar de Argentina)"}';
     
 
         if (empty($datos)) {

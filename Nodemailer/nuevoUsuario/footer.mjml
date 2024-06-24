@@ -1,11 +1,11 @@
 <mj-section>
   <mj-column>
     <!-- Enlace al Sistema -->
-    <mj-divider border-color="#fd1f02"></mj-divider>
+    <mj-divider border-color="#0027FF"></mj-divider>
     <mj-button 
       href="https://linkedin.com/in/luisergimenez/"
       background-color="#ffffff"
-      color="#fd1f02"
+      color="#0027FF"
       font-size="14px"
       font-family="helvetica"
       padding="10px 25px"

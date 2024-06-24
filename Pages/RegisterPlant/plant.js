@@ -27,6 +27,9 @@ import createTextArea from '../../includes/atoms/createTextArea.js'
 import createSpan from '../../includes/atoms/createSpan.js'
 import addCompania from './Controllers/nuevaCompania.js'
 import { desencriptar } from '../../controllers/cript.js'
+import enviaMailNuevoCliente from '../../Nodemailer/sendNuevoCliente.js'
+import arrayGlobal from '../../controllers/variables.js'
+import { Alerta } from '../../includes/atoms/alerta.js'
 
 const SERVER = baseUrl
 
@@ -84,10 +87,31 @@ async function nuevaComapania() {
     envia.objeto.activo = 's'
     const response = await addCompania(envia.objeto, '/addCompania')
     if (response) {
-      const id = document.getElementById('id')
-      id.value = response.id
-      const url = `${SERVER}/Pages/Login`
-      window.location.href = url
+      const newPlant = { name: envia.objeto.cliente, num: response.id }
+      const json = await addCompania(newPlant, '/escribirJSON')
+      const objetoEmail = {
+        cliente: envia.objeto.cliente,
+        contacto: envia.objeto.contacto,
+        address: envia.objeto.email,
+      }
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoAmarillo
+      const texto = 'Aguarde un instante luego será redirigido.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
+      const mailEnviado = await enviaMailNuevoCliente(
+        objetoEmail,
+        '/sendNuevoCliente'
+      )
+      if (mailEnviado.success) {
+        const id = document.getElementById('id')
+        id.value = response.id
+        modal.style.display = 'none'
+        modal.remove()
+        const url = `${SERVER}/Pages/Login`
+        window.location.href = url
+      }
     }
   }
 }

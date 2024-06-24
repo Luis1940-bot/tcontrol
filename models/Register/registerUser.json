@@ -38,6 +38,14 @@
       }
     },
     {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-register",
+        "text": "Requerido."
+      }
+    },
+    {
       "tag": "label",
       "config": {
         "id": null,
@@ -56,6 +64,14 @@
       }
     },
     {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-register",
+        "text": "Requerido. No use claves personales."
+      }
+    },
+    {
       "tag": "label",
       "config": {
         "id": null,
@@ -67,10 +83,18 @@
     {
       "tag": "input",
       "config": {
-        "id": "repetir-pass",
+        "id": "repetirPass",
         "type": "password",
         "className": "input-register",
         "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": "idSpanRepetirPass",
+        "className": "span-no-repite-pass",
+        "text": "Correcto."
       }
     },
     {
@@ -121,7 +145,7 @@
       "config": {
         "id": "cod_usuario",
         "className": "span-register",
-        "innerHTML": "xxxx"
+        "text": "-"
       }
     },
     {
@@ -264,6 +288,7 @@
     {
       "tag": "button",
       "config": {
+        "id": "idButtonRegisterUser",
         "class": "button-register",
         "text": "Registrar"
       }

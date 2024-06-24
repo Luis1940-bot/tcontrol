@@ -1,40 +1,54 @@
 import baseUrl from '../config.js'
 const SERVER = baseUrl
 
-async function send(nuevoObjeto) {
-  try {
-    const formData = new FormData()
-    formData.append('datos', JSON.stringify(nuevoObjeto))
-    // console.log(formData)
-    const response = await fetch(
-      `${SERVER}/Nodemailer/Routes/sendNuevoCliente.php`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
-
-    if (response.ok) {
-      const data = await response.json()
-      return data // Devuelve la respuesta del servidor
+export default function enviaMailNuevoCliente(objeto, ruta) {
+  // eslint-disable-next-line no-console
+  console.time('addCompania')
+  return new Promise((resolve, reject) => {
+    const rax = `&new=${new Date()}`
+    let obj = {
+      ruta,
+      rax,
+      objeto,
     }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error:', error)
-    throw error // Re-lanza el error para que pueda ser manejado por el bloque catch en insert
-  }
-  return null
-}
+    const datos = JSON.stringify(obj)
+    // console.log(datos)
+    const url = `${SERVER}/Routes/index.php`
+    // Agregar tiempo de espera a la solicitud fetch
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 120000) // 60 segundos
 
-function enviaMail(datos) {
-  try {
-    const enviado = send(datos)
-    return enviado
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
-  }
-  return null
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        // 'Access-Control-Allow-Origin': '*',
+      },
+      body: datos,
+      signal: controller.signal,
+    })
+      .then((response) => {
+        // console.log(response)
+        clearTimeout(timeoutId)
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText)
+        }
+        return response.json()
+      })
+      .then((data) => {
+        // console.log(data)
+        resolve(data)
+        // eslint-disable-next-line no-console
+        console.timeEnd('addCompania')
+        return data
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId)
+        console.timeEnd('addCompania')
+        console.error('Error en la solicitud:', error)
+        reject(error)
+        alert('No se pudo establecer conexión con el servidor')
+      })
+  })
 }
-
-export default enviaMail

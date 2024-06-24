@@ -10,5 +10,6 @@
         <mj-text font-size="20px" color="#fd1f02" font-family="helvetica">Email: {email}</mj-text>
       </mj-column>
     </mj-section>
+    <mj-include path="./footer.mjml" />
   </mj-body>
 </mjml>

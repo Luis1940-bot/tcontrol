@@ -15,6 +15,10 @@
             if ($conn->connect_error) {
                 die("Conexión fallida: " . $conn->connect_error);
             }
+            if (!$conn->set_charset("utf8mb4")) {
+                printf("Error al cargar el conjunto de caracteres utf8mb4: %s\n", $conn->error);
+                exit();
+            }
             $sql = "INSERT INTO LTYcliente (cliente, detalle, contacto, activo, email) VALUES (?, ?, ?, ?, ?);";
           
             $stmt = $conn->prepare($sql);
@@ -46,6 +50,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
+        // $datos = '{"ruta":"/addCompania","rax":"&new=Thu Jun 20 2024 17:59:43 GMT-0300 (hora estándar de Argentina)","objeto":{"cliente":"mccain-balcarce","detalle":"prueba 2","contacto":"Ernesto","email":"luisglogista@gmail.com","activo":"s"}}';
 
 
         if (empty($datos)) {

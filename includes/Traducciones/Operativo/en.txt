@@ -41,3 +41,7 @@ Sponsor
 Sponsor, Directors and who pays for the tool
 Developer
 For developers only
+Wait a moment then you will be redirected.
+Check.
+Enter verification code:
+Verify

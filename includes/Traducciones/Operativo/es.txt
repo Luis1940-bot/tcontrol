@@ -41,3 +41,7 @@ Sponsor
 Sponsor, Directores y quien paga por la herramienta
 Desarrollador	
 Sólo para desarrolladores
+Aguarde un instante luego será redirigido.
+Verificación.
+Ingrese el código de verificación:
+Verificar

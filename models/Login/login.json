@@ -14,6 +14,14 @@
       "config": { "id": "idSelectLogin", "className": "select-login" }
     },
     {
+      "tag": "span",
+      "config": {
+        "id": "idSpanLogin",
+        "className": "span-sin-planta",
+        "text": "Seleccione un cliente."
+      }
+    },
+    {
       "tag": "label",
       "config": {
         "id": null,

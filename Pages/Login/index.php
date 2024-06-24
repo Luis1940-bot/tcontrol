@@ -19,7 +19,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
   <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/Login/login.css?v=<?php echo(time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
-  <title></title>
+  <title>Tenki</title>
 </head>
 <body>
   <div class="spinner"></div>

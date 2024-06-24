@@ -8,7 +8,7 @@ import {
   finPerformance,
 } from '../../includes/Conection/conection.js'
 // eslint-disable-next-line import/extensions
-import { encriptar } from '../../controllers/cript.js'
+import { encriptar, desencriptar } from '../../controllers/cript.js'
 import createSelect from '../../includes/atoms/createSelect.js'
 import createInput from '../../includes/atoms/createInput.js'
 import createLabel from '../../includes/atoms/createLabel.js'
@@ -90,15 +90,25 @@ const espanolOperativo = {
   },
 }
 
+function RegisterUser(a) {
+  const id = a.target.id
+  const etiqueta = document.getElementById(id)
+  const data = etiqueta.getAttribute('data')
+  sessionStorage.setItem('volver', encriptar('Login'))
+  window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`
+}
+
 function cargarSelectCompania(json) {
   try {
     //! { "name": "McCain Balcarce-Argentina", "num": 1 },
     // !{ "name": "McCain Araxa-Brasil", "num": 2 }
     const idAcceso = document.getElementById('idAcceso')
     const idSelectLogin = document.getElementById('idSelectLogin')
+
     let { plantas } = json
     let claseButton = 'button-login'
     let array = []
+
     if (plantas.length === 0) {
       claseButton = 'button-login button-login-apagado'
       idAcceso.setAttribute('disabled', false)
@@ -132,20 +142,52 @@ function cargarSelectCompania(json) {
         option.text = text
         idSelectLogin.appendChild(option)
       })
+
+      idSelectLogin.addEventListener('change', (e) => {
+        const selectedText = e.target.options[e.target.selectedIndex].text
+        const selectedValue = e.target.value
+        const plant = { texto: selectedText, value: selectedValue }
+        sessionStorage.setItem('plant', encriptar(plant))
+        // console.log(selectedValue)
+        if (selectedValue !== '') {
+          idSelectLogin.classList.remove('select-rojo')
+          idSelectLogin.classList.add('class', 'select-login')
+          const mensaje = document.querySelector('.span-sin-planta')
+          mensaje.style.display = 'none'
+        } else {
+          idSelectLogin.classList.remove('select-login')
+          idSelectLogin.classList.add('class', 'select-rojo')
+          const mensaje = document.querySelector('.span-sin-planta')
+          mensaje.style.display = 'block'
+        }
+      })
     }
 
     idAcceso.setAttribute('class', claseButton)
+
     idAltaUsuario.addEventListener('click', (event) => {
       event.preventDefault()
-      RegisterUser(event)
+      const plant = desencriptar(sessionStorage.getItem('plant'))
+      const plantValue = plant.value
+      if (plantValue === null) {
+        const mensaje = document.querySelector('.span-sin-planta')
+        mensaje.style.display = 'block'
+        const selectPlanta = document.querySelector('#idSelectLogin')
+        selectPlanta.classList.remove('select-login')
+        selectPlanta.classList.add('class', 'select-rojo')
+      } else {
+        RegisterUser(event)
+      }
     })
     const idAltaCompania = document.getElementById('idAltaCompania')
     idAltaCompania.addEventListener('click', (event) => {
       event.preventDefault()
+      console.log('compania')
       RegisterUser(event)
     })
     idOlvidoPass.addEventListener('click', (event) => {
       event.preventDefault()
+      console.log('pass')
       RegisterUser(event)
     })
   } catch (error) {
@@ -203,6 +245,11 @@ function creador(element) {
   }
   if (element.tag === 'div') {
     elemento = createDiv(element.config)
+  }
+  if (element.tag === 'span') {
+    element.config.text =
+      trO(element.config.text, objTranslate) || element.config.text
+    elemento = createSpan(element.config)
   }
   return elemento
 }
@@ -328,14 +375,6 @@ async function enviarFormulario() {
   } catch (error) {
     console.log(error)
   }
-}
-
-function RegisterUser(a) {
-  const id = a.target.id
-  const etiqueta = document.getElementById(id)
-  const data = etiqueta.getAttribute('data')
-  sessionStorage.setItem('volver', encriptar('Login'))
-  window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`
 }
 
 function objParams(
@@ -471,6 +510,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const version = await leeVersion('version')
   document.querySelector('.version').innerText = version
+  const plant = { texto: null, value: null }
+  sessionStorage.setItem('plant', encriptar(plant))
 
   setTimeout(async () => {
     leeApp(`log`)

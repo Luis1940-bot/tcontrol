@@ -7,6 +7,9 @@ function utf8_to_b64(str) {
 }
 
 function b64_to_utf8(str) {
+  if (typeof str === 'object') {
+    return null
+  }
   return decodeURIComponent(
     Array.from(
       atob(str),

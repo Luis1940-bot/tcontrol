@@ -23,8 +23,133 @@ import createDiv from '../../includes/atoms/createDiv.js'
 import createLabel from '../../includes/atoms/createLabel.js'
 import createInput from '../../includes/atoms/createInput.js'
 import createSelect from '../../includes/atoms/createSelect.js'
+import { desencriptar } from '../../controllers/cript.js'
+import createSpan from '../../includes/atoms/createSpan.js'
+import enviaMailNuevoCliente from '../../Nodemailer/sendNuevoCliente.js'
+import arrayGlobal from '../../controllers/variables.js'
+import { Alerta } from '../../includes/atoms/alerta.js'
 
 const SERVER = baseUrl
+
+function validarEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return regex.test(email)
+}
+
+function checaRequeridos() {
+  const nombre = document.getElementById('nombre')
+  nombre.classList.remove('input-register-requerido')
+  nombre.classList.add('input-register')
+  if (nombre.value === '') {
+    nombre.classList.remove('input-register')
+    nombre.classList.add('input-register-requerido')
+    return false
+  }
+
+  const pass = document.getElementById('pass')
+  pass.classList.remove('input-register-requerido')
+  pass.classList.add('input-register')
+  if (pass.value === '') {
+    pass.classList.remove('input-register')
+    pass.classList.add('input-register-requerido')
+    return false
+  }
+
+  const repetirPass = document.getElementById('repetirPass')
+  repetirPass.classList.remove('input-register-requerido')
+  repetirPass.classList.add('input-register')
+  if (repetirPass.value === '') {
+    repetirPass.classList.remove('input-register')
+    repetirPass.classList.add('input-register-requerido')
+    return false
+  }
+
+  if (!validarEmail(email.value)) {
+    email.classList.remove('input-register')
+    email.classList.add('input-register-requerido')
+    return false
+  }
+
+  const areaSelect = document.getElementById('area')
+  const selectedValue = areaSelect.value
+  const selectedText = areaSelect.options[areaSelect.selectedIndex].text
+
+  const puesto = document.getElementById('puesto')
+
+  const selectedTipoDeUsuario = document.getElementById('tipo_usuario')
+  const selectedTipoValue = selectedTipoDeUsuario.value
+  const selectedTipoText =
+    selectedTipoDeUsuario.options[selectedTipoDeUsuario.selectedIndex].text
+
+  const selectedSituacion = document.getElementById('situacion')
+  const selectedSituacionValue = selectedSituacion.value
+  const selectedSituacionText =
+    selectedSituacion.options[selectedSituacion.selectedIndex].text
+
+  const firma = document.getElementById('firma')
+
+  const selectedIdioma = document.getElementById('idioma')
+  const selectedIdiomaValue = selectedIdioma.value
+  const selectedIdiomaText =
+    selectedIdioma.options[selectedIdioma.selectedIndex].text
+
+  const objeto = {
+    nombre: nombre.value,
+    pass: pass.value,
+    valueArea: parseInt(selectedValue),
+    area: selectedText,
+    puesto: puesto.value,
+    idtipousuario: parseInt(selectedTipoValue),
+    textTipoDeUsuario: selectedTipoText,
+    valueSituacion: selectedSituacionValue,
+    textSituacion: selectedSituacionText,
+    email: email.value,
+    firma: firma.value,
+    valueIdioma: selectedIdiomaValue,
+    textIdioma: selectedIdiomaText,
+  }
+  return { add: true, objeto }
+}
+
+async function nuevoUser() {
+  let envia = checaRequeridos()
+
+  if (envia.add) {
+    const plant = desencriptar(sessionStorage.getItem('plant'))
+    const response = await traerRegistros(
+      envia.objeto,
+      '/addUsuario',
+      parseInt(plant.value)
+    )
+    if (response) {
+      const objetoEmail = {
+        cliente: plant.texto,
+        usuario: envia.objeto.nombre,
+        idusuario: response.id,
+        email: envia.objeto.email,
+        v: response.v,
+      }
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoAmarillo
+      const texto = 'Aguarde un instante luego será redirigido.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
+      const mailEnviado = await enviaMailNuevoCliente(
+        objetoEmail,
+        '/sendNuevoUsuario'
+      )
+      if (mailEnviado.success) {
+        const id = document.getElementById('id')
+        id.value = response.id
+        modal.style.display = 'none'
+        modal.remove()
+        const url = `${SERVER}/Pages/Login`
+        window.location.href = url
+      }
+    }
+  }
+}
 
 function setearSelects() {
   const situacion = document.getElementById('situacion')
@@ -36,6 +161,38 @@ function setearSelects() {
   let idiomaPreferido = navigator.languages[1]
   const idioma = document.getElementById('idioma')
   idioma.value = idiomaPreferido
+  const idSpanRepetirPass = document.getElementById('idSpanRepetirPass')
+  idSpanRepetirPass.style.display = 'none'
+
+  const repetirPass = document.getElementById('repetirPass')
+  repetirPass.addEventListener('input', (e) => {
+    const pass = document.getElementById('pass')
+
+    if (e.target.value !== pass.value) {
+      idSpanRepetirPass.classList.remove('span-no-repite-pass')
+      idSpanRepetirPass.classList.add('span-si-repite-pass')
+      idSpanRepetirPass.innerText = 'No están coincidiendo.'
+      idSpanRepetirPass.style.display = 'block'
+      repetirPass.classList.remove('input-register')
+      repetirPass.classList.add('input-register-requerido')
+    } else {
+      idSpanRepetirPass.classList.remove('span-si-repite-pass')
+      idSpanRepetirPass.classList.add('span-no-repite-pass')
+      idSpanRepetirPass.innerText = 'Correcto!'
+      repetirPass.classList.remove('input-register-requerido')
+      repetirPass.classList.add('input-register')
+    }
+  })
+
+  const button = document.getElementById('idButtonRegisterUser')
+  button.addEventListener('click', (e) => {
+    const clase = e.target.className
+    if (clase === 'button-register') {
+      nuevoUser()
+    }
+    if (clase === 'button-user-update') {
+    }
+  })
 }
 
 function creador(element) {
@@ -70,6 +227,11 @@ function creador(element) {
   }
   if (element.tag === 'div') {
     elemento = createDiv(element.config)
+  }
+  if (element.tag === 'span') {
+    element.config.text =
+      trO(element.config.text, objTranslate) || element.config.text
+    elemento = createSpan(element.config)
   }
   return elemento
 }
@@ -109,10 +271,11 @@ function leeModelo(ruta) {
 }
 
 async function cargaSelectArea(objTranslate) {
+  const plant = desencriptar(sessionStorage.getItem('plant'))
   const areas = await traerRegistros(
     'traerLTYarea',
     '/traerAreasParaRegistroUser',
-    null
+    plant.value
   )
 
   if (areas.length === 0) {
@@ -142,7 +305,6 @@ async function cargaTipoDeUsuario(objTranslate) {
     '/traerTipoDeUsuarioParaRegistroUser',
     null
   )
-
   if (tipoDeUsuario.length > 0) {
     const select = document.getElementById('tipo_usuario')
     const emptyOption = document.createElement('option')
@@ -210,9 +372,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeApp(`log`)
     leeModelo('Register/registerUser')
     const nuevaCadena = dondeEstaEn(objTranslate, 'Regístrese.')
+    const spanUbicacion = document.getElementById('spanUbicacion')
+    const plant = desencriptar(sessionStorage.getItem('plant'))
+    spanUbicacion.innerText = plant.texto
+    const volver = document.getElementById('volver')
+    volver.style.display = 'block'
   }, 200)
 
   spinner.style.visibility = 'hidden'
 
   finPerformance()
+})
+
+function goBack() {
+  try {
+    let back = sessionStorage.getItem('volver')
+    if (back) {
+      back = desencriptar(back)
+    }
+    const url = `${SERVER}/Pages/${back}`
+    window.location.href = url
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const volver = document.getElementById('volver')
+volver.addEventListener('click', () => {
+  goBack(null)
 })
