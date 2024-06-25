@@ -86,7 +86,7 @@ async function nuevaComapania() {
     envia.objeto.detalle = detalle.value
     envia.objeto.activo = 's'
     const response = await addCompania(envia.objeto, '/addCompania')
-    if (response) {
+    if (response.success) {
       const newPlant = { name: envia.objeto.cliente, num: response.id }
       const json = await addCompania(newPlant, '/escribirJSON')
       const objetoEmail = {
@@ -112,6 +112,13 @@ async function nuevaComapania() {
         const url = `${SERVER}/Pages/Login`
         window.location.href = url
       }
+    } else {
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto = trO('Algo salió mal.', objTranslate) || 'Algo salió mal.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     }
   }
 }

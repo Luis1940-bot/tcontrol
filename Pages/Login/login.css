@@ -360,7 +360,7 @@ main {
   .div-login-buttons {
     margin-top: 100px;
     width: 20%;
-    height: 300px;
+    height: 350px;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;
@@ -396,6 +396,9 @@ main {
   }
   .alert-box {
     width: 20%;
+  }
+  .a-login {
+    font-size: 14px;
   }
 }
 
@@ -443,5 +446,8 @@ main {
   }
   .alert-box {
     width: 20%;
+  }
+  .a-login {
+    font-size: 14px;
   }
 }

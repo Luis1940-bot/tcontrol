@@ -9,6 +9,16 @@
   --volver-height: 16px;
   --volver-width: 16px;
 }
+.div-encabezado {
+  position: relative;
+}
+.div-volver {
+  position: relative;
+  z-index: 1;
+}
+#spanUbicacion {
+  font-size: 18px;
+}
 
 /* Estilos para diferentes tamaños de pantalla y orientaciones */
 /* Media Queries */
@@ -70,7 +80,7 @@
   .div-encabezado {
     height: var(--div-encabezado-height);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* margin-top: 40px; */
+    margin-top: 40px;
   }
 
   .div-ubicacion {
@@ -93,7 +103,7 @@
   }
 
   .div-ubicacion #spanUbicacion {
-    font-size: var(--spanUbicacion-font-size);
+    font-size: 24px; /*var(--spanUbicacion-font-size); */
     font-weight: 600;
     margin-top: 20px;
   }
@@ -174,15 +184,107 @@
   }
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape),
-  only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape),
-  only screen and (min-width: 1800px) and (orientation: landscape) {
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
   .div-encabezado,
   .div-ubicacion,
   .div-volver {
     height: auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 40px;
+    /* margin-top: 40px; */
+  }
+
+  .div-ubicacion {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 100px;
+    display: var(--div-volver-img-display);
+  }
+
+  #volver {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: 18px;
+    font-style: italic;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  .div-encabezado,
+  .div-ubicacion,
+  .div-volver {
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* margin-top: 40px; */
+  }
+
+  .div-ubicacion {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 100px;
+    display: var(--div-volver-img-display);
+  }
+
+  #volver {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: 18px;
+    font-style: italic;
+  }
+}
+
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
+  .div-encabezado,
+  .div-ubicacion,
+  .div-volver {
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* margin-top: 40px; */
   }
 
   .div-ubicacion {

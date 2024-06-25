@@ -96,6 +96,7 @@ main {
   color: #cecece;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 40px;
+  margin-bottom: 10px;
 }
 .button-register-apagado {
   background: #cccccc;
@@ -166,7 +167,7 @@ main {
     height: 70px;
   }
   .div-register {
-    margin-top: 1px;
+    margin-top: 150px;
     width: 30%;
     height: auto;
     background-color: #ffffff;
@@ -203,9 +204,9 @@ main {
     height: 100px;
   }
   .div-register {
-    margin-top: 90px;
+    margin-top: 190px;
     width: 30%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
@@ -241,9 +242,9 @@ main {
     height: 100px;
   }
   .div-register {
-    margin-top: 90px;
+    margin-top: 180px;
     width: 30%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
@@ -279,9 +280,9 @@ main {
     height: 100px;
   }
   .div-register {
-    margin-top: 100px;
+    margin-top: 180px;
     width: 20%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;
@@ -319,9 +320,9 @@ main {
     height: 100px;
   }
   .div-register {
-    margin-top: 100px;
+    margin-top: 200px;
     width: 20%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;

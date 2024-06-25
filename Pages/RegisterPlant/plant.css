@@ -162,7 +162,7 @@ main {
     height: 70px;
   }
   .div-plant {
-    margin-top: 1px;
+    margin-top: 90px;
     width: 30%;
     height: auto;
     background-color: #ffffff;
@@ -199,9 +199,9 @@ main {
     height: 100px;
   }
   .div-plant {
-    margin-top: 90px;
+    margin-top: 120px;
     width: 30%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
@@ -237,9 +237,9 @@ main {
     height: 100px;
   }
   .div-plant {
-    margin-top: 90px;
+    margin-top: 120px;
     width: 30%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
@@ -275,9 +275,9 @@ main {
     height: 100px;
   }
   .div-plant {
-    margin-top: 100px;
+    margin-top: 120px;
     width: 20%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;
@@ -317,7 +317,7 @@ main {
   .div-plant {
     margin-top: 100px;
     width: 20%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;
