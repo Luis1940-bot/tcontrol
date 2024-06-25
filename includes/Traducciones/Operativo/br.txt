@@ -47,3 +47,5 @@ Digite o código de verificação:
 Verificar
 Wait a moment then you will be redirected.
 Usuário já existe
+Formato de email inválido.
+Seu usuário não foi verificado, você deve procurar o e-mail para verificar ou entrar em contato com o administrador.

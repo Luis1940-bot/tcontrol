@@ -47,3 +47,5 @@ Ingrese el código de verificación:
 Verificar
 Aguarde un instante luego será redirigido.
 El usuario ya existe
+Formato de correo no válido.
+Su usuario no está verificado, debe buscar el email para verificar o comuníquese con el administrador.

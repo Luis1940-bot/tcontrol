@@ -47,3 +47,5 @@ Enter verification code:
 Verify
 Wait a moment then you will be redirected.
 User already exists
+Invalid email format.
+Your user is not verified, you must look for the email to verify or contact the administrator.

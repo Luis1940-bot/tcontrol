@@ -97,33 +97,6 @@
           }
         }
       ]
-    },
-    {
-      "tag": "div",
-      "config": { "id": "overlay", "class": "overlay" },
-      "children": [
-        {
-          "tag": "div",
-          "config": { "id": "idAlertBox", "class": "alert-box" },
-          "children": [
-            {
-              "tag": "span",
-              "config": {
-                "id": "alert-message",
-                "className": "span-alerta"
-              }
-            },
-            {
-              "tag": "button",
-              "config": {
-                "id": "buttonAlerta",
-                "class": "button-alerta",
-                "text": "oK"
-              }
-            }
-          ]
-        }
-      ]
     }
   ]
 }

@@ -25,6 +25,8 @@ import createA from '../../includes/atoms/createA.js'
 import { configPHP } from '../../controllers/configPHP.js'
 import { trO } from '../../controllers/trOA.js'
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import Alerta from '../../includes/atoms/alerta.js'
+import arrayGlobal from '../../controllers/variables.js'
 
 const SERVER = baseUrl
 let objTranslate = []
@@ -60,6 +62,11 @@ const espanolOperativo = {
       en: 'Complete the email.',
       br: 'Preencha o e-mail.',
     },
+    mailError: {
+      es: 'Formato de correo no válido.',
+      en: 'Invalid email format.',
+      br: 'Formato de email inválido.',
+    },
     planta: {
       es: 'Seleccione compañía.',
       en: 'Select company.',
@@ -90,12 +97,128 @@ const espanolOperativo = {
   },
 }
 
+function validarEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return regex.test(email)
+}
+
 function RegisterUser(a) {
   const id = a.target.id
   const etiqueta = document.getElementById(id)
   const data = etiqueta.getAttribute('data')
   sessionStorage.setItem('volver', encriptar('Login'))
   window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`
+}
+
+function session(session) {
+  const idiomaPreferido = navigator.language || navigator.languages[0]
+  const partesIdioma = idiomaPreferido.split('-')
+  const idioma = partesIdioma[0]
+  var spanLogin = document.querySelector('.span-login')
+  if (spanLogin) {
+    // Eliminar el elemento
+    spanLogin.parentNode.removeChild(spanLogin)
+  }
+
+  if (session.success === false) {
+    const div = document.querySelector('.div-login-buttons')
+    let span = document.createElement('span')
+    const texto = espanolOperativo.error[idioma]
+    let params = objParams(
+      null,
+      'span-login',
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    )
+    span = createSpan(params, texto)
+    div.appendChild(span)
+    let input = document.getElementById('idInput0')
+    input.style.color = '#f81212'
+    input = document.getElementById('idInput1')
+    input.style.color = '#f81212'
+    let select = document.getElementById('idSelectLogin')
+    select.style.color = '#f81212'
+  } else if (session.success) {
+    if (session.res.verificador === '1') {
+      let parsedData = encriptar(session.res)
+      sessionStorage.setItem('user', parsedData)
+      setTimeout(() => {
+        window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=home`
+      }, 1000)
+    } else if (session.res.verificador === '0') {
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto =
+        trO(
+          'Su usuario no está verificado, debe buscar el email para verificar o comuníquese con el administrador.',
+          objTranslate
+        ) ||
+        'Su usuario no está verificado, debe buscar el email para verificar o comuníquese con el administrador.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
+    }
+  }
+}
+
+function showAlert(message) {
+  var overlay = document.getElementById('overlay')
+  var alertMessage = document.getElementById('idAlertMessage')
+  alertMessage.textContent = message
+  overlay.style.display = 'flex'
+}
+
+async function enviarFormulario() {
+  try {
+    const idiomaPreferido = navigator.language || navigator.languages[0]
+    const partesIdioma = idiomaPreferido.split('-')
+    const idioma = partesIdioma[0]
+    const select = document.getElementById('idSelectLogin')
+    const email = document.getElementById('idInput0')
+    const password = document.getElementById('idInput1')
+
+    let objeto = {
+      planta: 0,
+      email: '',
+      password: '',
+      ruta: '/login',
+    }
+
+    if (!select.value) {
+      showAlert(espanolOperativo.alertas.planta[idioma])
+      return
+    } else {
+      objeto.planta = parseInt(select.value)
+    }
+    if (!email.value) {
+      showAlert(espanolOperativo.alertas.mail[idioma])
+      return
+    } else {
+      objeto.email = email.value
+    }
+    if (!password.value) {
+      showAlert(espanolOperativo.alertas.pass[idioma])
+      return
+    } else {
+      objeto.password = password.value
+    }
+
+    if (validarEmail(email.value)) {
+      // console.log('El email es válido.')
+    } else {
+      showAlert(espanolOperativo.alertas.mailError[idioma])
+    }
+    const login = await enviarLogin(objeto)
+    setTimeout(() => {
+      session(login)
+    }, 200)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 function cargarSelectCompania(json) {
@@ -160,6 +283,10 @@ function cargarSelectCompania(json) {
           const mensaje = document.querySelector('.span-sin-planta')
           mensaje.style.display = 'block'
         }
+      })
+
+      idAcceso.addEventListener('click', () => {
+        enviarFormulario()
       })
     }
 
@@ -284,99 +411,6 @@ function leeModelo(ruta) {
     })
 }
 
-function session(session) {
-  // console.log(session)
-  const idiomaPreferido = navigator.language || navigator.languages[0]
-  console.log(idiomaPreferido)
-  const partesIdioma = idiomaPreferido.split('-')
-  const idioma = partesIdioma[0]
-  var spanLogin = document.querySelector('.span-login')
-  if (spanLogin) {
-    // Eliminar el elemento
-    spanLogin.parentNode.removeChild(spanLogin)
-  }
-  if (session.success === false) {
-    const div = document.querySelector('.div-login-buttons')
-    let span = document.createElement('span')
-    const texto = espanolOperativo.error[idioma]
-    let params = objParams(
-      null,
-      'span-login',
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    )
-    span = createSpan(params, texto)
-    div.appendChild(span)
-    let input = document.getElementById('idInput0')
-    input.style.color = '#f81212'
-    input = document.getElementById('idInput1')
-    input.style.color = '#f81212'
-    let select = document.getElementById('idSelectLogin')
-    select.style.color = '#f81212'
-  } else {
-    let parsedData = encriptar(session)
-    sessionStorage.setItem('user', parsedData)
-    setTimeout(() => {
-      window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=home`
-    }, 1000)
-  }
-}
-
-function validarEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return regex.test(email)
-}
-
-async function enviarFormulario() {
-  try {
-    const idiomaPreferido = navigator.language || navigator.languages[0]
-    const partesIdioma = idiomaPreferido.split('-')
-    const idioma = partesIdioma[0]
-    const select = document.getElementById('idSelectLogin')
-    const email = document.getElementById('idInput0')
-    const password = document.getElementById('idInput1')
-    let objeto = {
-      planta: '',
-      email: '',
-      password: '',
-      ruta: '/login',
-    }
-    if (!select.value) {
-      showAlert(espanolOperativo.alertas.planta[idioma])
-      return
-    } else {
-      objeto.planta = select.value
-    }
-    if (!email.value) {
-      showAlert(espanolOperativo.alertas.mail[idioma])
-      return
-    } else {
-      objeto.email = email.value
-    }
-    if (!password.value) {
-      showAlert(espanolOperativo.alertas.pass[idioma])
-      return
-    } else {
-      objeto.password = password.value
-    }
-    if (validarEmail(email.value)) {
-      // console.log('El email es válido.')
-    } else {
-      console.log('El email no es válido.')
-    }
-    const login = await enviarLogin(objeto)
-    setTimeout(() => {
-      session(login)
-    }, 200)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 function objParams(
   innerHTML,
   className,
@@ -410,83 +444,77 @@ function objParams(
   return params
 }
 
-function showAlert(message) {
-  var overlay = document.getElementById('overlay')
-  var alertMessage = document.getElementById('alert-message')
-  alertMessage.textContent = message
-  overlay.style.display = 'flex'
-}
-
 function closeAlert() {
   var overlay = document.getElementById('overlay')
   overlay.style.display = 'none'
 }
 
-// function generaOverlay() {
-//   const body = document.querySelector('body')
-//   const paramsDiv = objParams(
-//     null,
-//     null,
-//     null,
-//     'overlay',
-//     null,
-//     null,
-//     null,
-//     null,
-//     'overlay',
-//     null
-//   )
-//   const div = createDiv(paramsDiv)
-//   //*-------------------------------
-//   const paramsDivBox = objParams(
-//     null,
-//     null,
-//     null,
-//     'idAlertBox',
-//     null,
-//     null,
-//     null,
-//     null,
-//     'alert-box',
-//     null
-//   )
-//   const divBox = createDiv(paramsDivBox)
-//   //*-----------------------------------------
-//   const paramsSpan = objParams(
-//     null,
-//     'span-alerta',
-//     null,
-//     'alert-message',
-//     null,
-//     null,
-//     null,
-//     ''
-//   )
-//   const span = createSpan(paramsSpan)
-//   //*--------------------------------------
-//   const paramsButton = objParams(
-//     null,
-//     null,
-//     null,
-//     'idButtonAlert',
-//     null,
-//     null,
-//     null,
-//     'oK',
-//     'button-alerta',
-//     null,
-//     closeAlert
-//   )
-//   const button = createButton(paramsButton)
-//   //*----------------------------------------------
+function generaOverlay() {
+  const body = document.querySelector('body')
+  const paramsDiv = objParams(
+    null,
+    null,
+    null,
+    'overlay',
+    null,
+    null,
+    null,
+    null,
+    'overlay',
+    null
+  )
+  const div = createDiv(paramsDiv)
+  //*-------------------------------
+  const paramsDivBox = objParams(
+    null,
+    null,
+    null,
+    'idAlertBox',
+    null,
+    null,
+    null,
+    null,
+    'alert-box',
+    null
+  )
+  const divBox = createDiv(paramsDivBox)
 
-//   divBox.appendChild(span)
-//   divBox.appendChild(button)
+  //*-----------------------------------------
+  const paramsSpan = objParams(
+    null,
+    'span-alerta',
+    null,
+    'idAlertMessage',
+    null,
+    null,
+    null,
+    ''
+  )
+  const span = createSpan(paramsSpan)
+  //*--------------------------------------
+  const paramsButton = objParams(
+    null,
+    null,
+    null,
+    'idButtonAlert',
+    null,
+    null,
+    null,
+    'oK',
+    'button-alerta',
+    null,
+    closeAlert
+  )
+  const button = createButton(paramsButton)
+  //*----------------------------------------------
 
-//   div.style.display = 'none'
-//   div.appendChild(divBox)
-//   body.appendChild(div)
-// }
+  divBox.appendChild(span)
+  divBox.appendChild(button)
+
+  div.style.display = 'none'
+  div.appendChild(divBox)
+  body.appendChild(div)
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
@@ -517,6 +545,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeApp(`log`)
     objTranslate = await arraysLoadTranslate()
     leeModelo('Login/login')
+    generaOverlay()
   }, 200)
 
   spinner.style.visibility = 'hidden'
