@@ -12,7 +12,7 @@ define('SSO', $_SESSION['login_sso']['sso']);
       
   } else {
     if ( SSO === null || SSO === 's_sso' ) {
-      $url = "https://tenkiweb.com/scg-mccain/index.php";
+      $url = "https://tenkiweb.com/tcontrol/index.php";
     }
 
     header("Location: ". $url ."");

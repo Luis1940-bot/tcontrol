@@ -23,15 +23,13 @@ import { Alerta } from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
 
 import baseUrl from '../../config.js'
-// const SERVER = '/iControl-Vanilla/icontrol';
+import { configPHP } from '../../controllers/configPHP.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { trO } from '../../controllers/trOA.js'
+
 const SERVER = baseUrl
 
-let translateOperativo = []
-let espanolOperativo = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-}
+let objTranslate = []
 
 const spinner = document.querySelector('.spinner')
 const appJSON = {}
@@ -51,21 +49,6 @@ function leeVersion(json) {
     .catch((error) => {
       console.error('Error al cargar el archivo:', error)
     })
-}
-
-function trO(palabra) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
 }
 
 function obtenerNombres(objeto, clave) {
@@ -100,7 +83,7 @@ function extraeIndice(array, clave) {
 }
 
 function localizador(e) {
-  let lugar = trO(e.target.innerText) || e.target.innerText
+  let lugar = trO(e.target.innerText, objTranslate) || e.target.innerText
   document.getElementById('whereUs').innerText += `${espacio}${lugar}`
   let textContent = document.getElementById('whereUs').textContent
   textContent = textContent.replace('<br>', '')
@@ -122,7 +105,7 @@ function completaButtons(obj) {
     if (nivel[i] <= parseInt(tipo)) {
       const element = obj.name[i]
       const params = {
-        text: trO(element) || element,
+        text: trO(element, objTranslate) || element,
         name: obj.name[i],
         class: 'button-selector-home',
         innerHTML: null,
@@ -229,7 +212,9 @@ const funcionDeClick = (e) => {
 
 function alertar(men) {
   const miAlerta = new Alerta()
-  const mensaje = trO(arrayGlobal.mensajesVarios.json[men])
+  const mensaje =
+    trO(arrayGlobal.mensajesVarios.json[men], objTranslate) ||
+    arrayGlobal.mensajesVarios.json[men]
   arrayGlobal.avisoRojo.close.display = 'none'
   miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
   const modal = document.getElementById('modalAlertVerde')
@@ -264,7 +249,8 @@ function leeApp(json) {
 }
 
 function dondeEstaEn(array) {
-  const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en'
+  const ustedEstaEn =
+    `${trO('Usted está en', objTranslate)} ` || 'Usted está en'
   let nuevaCadena = ''
   array.forEach((element, index) => {
     index > 0 ? (nuevaCadena += ` > ${element}`) : null
@@ -280,34 +266,12 @@ function dondeEstaEn(array) {
   document.getElementById('whereUs').innerText = textContent
 }
 
-function configPHP(user) {
-  // const user = desencriptar(sessionStorage.getItem('user'))
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
+  document.querySelector('.header-McCain').style.display = 'none'
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
@@ -315,11 +279,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
+    // const data = await translate(persona.lng)
+    // translateOperativo = data.arrayTranslateOperativo
+    // espanolOperativo = data.arrayEspanolOperativo
+    // objTranslate.operativoES = [...espanolOperativo]
+    // objTranslate.operativoTR = [...translateOperativo]
+    objTranslate = await arraysLoadTranslate()
     leeVersion('version')
     setTimeout(() => {
       dondeEstaEn(navegador.estadoAnteriorWhereUs)
@@ -361,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate),
     }
     personModal(user, objTranslate)
   })
