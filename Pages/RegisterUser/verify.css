@@ -167,7 +167,7 @@ main {
     height: 70px;
   }
   .div-verify {
-    margin-top: 1px;
+    margin-top: 110px;
     width: 30%;
     height: auto;
     background-color: #ffffff;
@@ -195,6 +195,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 10px;
   }
 }
 
@@ -204,9 +205,9 @@ main {
     height: 100px;
   }
   .div-verify {
-    margin-top: 90px;
+    margin-top: 130px;
     width: 30%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
@@ -233,6 +234,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 10px;
   }
 }
 
@@ -242,9 +244,9 @@ main {
     height: 100px;
   }
   .div-verify {
-    margin-top: 90px;
+    margin-top: 120px;
     width: 30%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 15%;
     padding-right: 15%;
@@ -271,6 +273,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 10px;
   }
 }
 
@@ -280,9 +283,9 @@ main {
     height: 100px;
   }
   .div-verify {
-    margin-top: 100px;
+    margin-top: 120px;
     width: 20%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;
@@ -308,6 +311,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 10px;
   }
   .alert-box {
     width: 20%;
@@ -317,12 +321,12 @@ main {
 /* Estilos para pantallas grandes en formato landscape */
 @media only screen and (min-width: 1800px) and (orientation: landscape) {
   header {
-    height: 100px;
+    height: 120px;
   }
   .div-verify {
     margin-top: 100px;
     width: 20%;
-    height: 300px;
+    height: auto;
     background-color: #ffffff;
     padding-left: 10%;
     padding-right: 10%;

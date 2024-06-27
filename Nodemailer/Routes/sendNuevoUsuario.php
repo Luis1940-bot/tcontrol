@@ -47,8 +47,9 @@ try {
     $usuario = $objeto['usuario'];
     $idusuario = $objeto['idusuario'];
     $address = $objeto['email'];
-    $subject = 'Nuevo usuario';
+    $subject = $objeto['subject'];
     $cod_verificador = $objeto['v'];
+    $mensaje = $objeto['mensaje'];
 
     ob_start();
     include(BASE_DIR . '/Nodemailer/nuevoUsuario/nuevoUsuario.html');
@@ -60,6 +61,7 @@ try {
    $html  = str_replace('{email}', $address, $html);
    $html  = str_replace('{cod_verificador}', $cod_verificador, $html);
    $html  = str_replace('{idusuario}', $idusuario, $html);
+   $html  = str_replace('{mensaje}', $mensaje, $html);
   // $html  = str_replace('{verificador}', BASE_DIR . '/404.php' , $html);
 
     $mail = new PHPMailer(true);

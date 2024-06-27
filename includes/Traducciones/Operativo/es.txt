@@ -49,3 +49,15 @@ Aguarde un instante luego será redirigido.
 El usuario ya existe
 Formato de correo no válido.
 Su usuario no está verificado, debe buscar el email para verificar o comuníquese con el administrador.
+Blanqueo de contraseña.
+No se encontró el usuario.
+Falta completar algún campos.
+Hay diferencias entre los emails escritos.
+Ingrese su correo electrónico
+Repita su correo electrónico
+Enviar solicitud
+Ingrese la nueva contraseña
+Repita su la nueva contraseña
+Aceptar contraseña
+Hay diferencias entre las contraseñas escritas.
+Hay diferencias entre los campos escritos.

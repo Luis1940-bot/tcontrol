@@ -196,6 +196,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/sendNuevoUsuario':
             include_once dirname(__DIR__) . '/Nodemailer/Routes/sendNuevoUsuario.php';
           break;
+        case '/confirmaEmail':
+            include_once dirname(__DIR__) . '/Pages/RecoveryPass/Routes/confirmaEmail.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada

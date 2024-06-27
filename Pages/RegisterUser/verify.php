@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['codigo']) && isset($_GE
     $idusuario = $_GET['id'];
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<!-- <html lang="es"> -->
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Luis1940-bot">

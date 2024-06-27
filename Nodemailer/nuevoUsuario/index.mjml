@@ -4,7 +4,7 @@
       <mj-column>
         <mj-text font-size="24px" color="#0027FF" font-family="helvetica" font-weight="700" align="center">iControl</mj-text>
         <mj-divider border-color="#0027FF"></mj-divider>
-        <mj-text font-size="20px" color="#0027FF" font-family="helvetica">Se dio de alta un nuevo usuario:</mj-text>
+        <mj-text font-size="20px" color="#0027FF" font-family="helvetica">{mensaje}</mj-text>
         <mj-text font-size="20px" color="#0027FF" font-family="helvetica">Usuario: {usuario}</mj-text>
         <mj-text font-size="20px" color="#0027FF" font-family="helvetica">Compañía: {cliente}</mj-text>
         <mj-text font-size="20px" color="#0027FF" font-family="helvetica">Email: {email}</mj-text>

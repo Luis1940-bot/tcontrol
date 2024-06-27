@@ -68,7 +68,7 @@ const espanolOperativo = {
       br: 'Formato de email inválido.',
     },
     planta: {
-      es: 'Seleccione compañía.',
+      es: 'Seleccione una compañía.',
       en: 'Select company.',
       br: 'Selecione a empresa.',
     },
@@ -309,13 +309,21 @@ function cargarSelectCompania(json) {
     const idAltaCompania = document.getElementById('idAltaCompania')
     idAltaCompania.addEventListener('click', (event) => {
       event.preventDefault()
-      console.log('compania')
       RegisterUser(event)
     })
     idOlvidoPass.addEventListener('click', (event) => {
       event.preventDefault()
-      console.log('pass')
-      RegisterUser(event)
+      const plant = desencriptar(sessionStorage.getItem('plant'))
+      const plantValue = plant.value
+      if (plantValue === null) {
+        const mensaje = document.querySelector('.span-sin-planta')
+        mensaje.style.display = 'block'
+        const selectPlanta = document.querySelector('#idSelectLogin')
+        selectPlanta.classList.remove('select-login')
+        selectPlanta.classList.add('class', 'select-rojo')
+      } else {
+        RegisterUser(event)
+      }
     })
   } catch (error) {
     console.log(error)

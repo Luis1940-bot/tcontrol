@@ -18,7 +18,7 @@
       "config": {
         "id": "idSpanLogin",
         "className": "span-sin-planta",
-        "text": "Seleccione un cliente."
+        "text": "Seleccione una compañía."
       }
     },
     {
@@ -91,7 +91,7 @@
           "config": {
             "id": "idOlvidoPass",
             "className": "a-login",
-            "data": "OlvidoPass",
+            "data": "RecoveryPass",
             "textContent": "Recuperar contraseña.",
             "href": "RegisterUser"
           }

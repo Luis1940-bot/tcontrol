@@ -1,9 +1,9 @@
 <?php
 session_start();
-define('SSO', $_SESSION['login_sso']['sso']);
-if (!SSO) {
-  $_SESSION['login_sso']['sso'] = 'null';
-}
+// define('SSO', $_SESSION['login_sso']['sso']);
+// if (!SSO) {
+//   $_SESSION['login_sso']['sso'] = 'null';
+// }
 
 header('Content-Type: text/html;charset=utf-8');
 require_once dirname(dirname(__DIR__)) . '/config.php';

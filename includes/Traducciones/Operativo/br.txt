@@ -49,3 +49,15 @@ Wait a moment then you will be redirected.
 Usuário já existe
 Formato de email inválido.
 Seu usuário não foi verificado, você deve procurar o e-mail para verificar ou entrar em contato com o administrador.
+Clareamento de senha
+O usuário não foi encontrado.
+Alguns campos estão faltando.
+Existem diferenças entre e-mails escritos.
+Digite seu e-mail
+Repita seu e-mail
+Enviar solicitação
+Digite a nova senha
+Repita sua nova senha
+Aceitar senha
+Existem diferenças entre senhas escritas.
+Existem diferenças entre os campos escritos.

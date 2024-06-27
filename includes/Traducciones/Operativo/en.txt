@@ -49,3 +49,15 @@ Wait a moment then you will be redirected.
 User already exists
 Invalid email format.
 Your user is not verified, you must look for the email to verify or contact the administrator.
+Password whitening.
+The user was not found.
+Some fields are missing.
+There are differences between written emails.
+Enter your email
+Repeat your email
+Send request
+Enter the new password
+Repeat your new password
+Accept password
+There are differences between written passwords.
+There are differences between the written fields.

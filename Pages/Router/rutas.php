@@ -100,6 +100,11 @@ if(isset($_GET['ruta'])) {
         $url = $url_base . '/Pages/RegisterPlant/';
         header("Location: $url");
         break;
+
+      case 'RecoveryPass':
+        $url = $url_base . '/Pages/RecoveryPass/';
+        header("Location: $url");
+        break;
       
       default:
         # code...

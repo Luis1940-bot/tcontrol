@@ -128,6 +128,8 @@ async function nuevoUser() {
         idusuario: response.id,
         email: envia.objeto.email,
         v: response.v,
+        subject: 'Nuevo usuario',
+        mensaje: 'Se dio de alta un nuevo usuario:',
       }
       const miAlerta = new Alerta()
       const obj = arrayGlobal.avisoAmarillo
