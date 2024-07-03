@@ -2,14 +2,6 @@
 import readJSON from '../../controllers/read-JSON.js'
 // eslint-disable-next-line import/extensions
 import createButton from '../../includes/atoms/createButton.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
 // eslint-disable-next-line import/extensions
@@ -47,7 +39,15 @@ function leeVersion(json) {
       document.querySelector('.version').innerText = data.version
     })
     .catch((error) => {
-      console.error('Error al cargar el archivo:', error)
+      // console.error('Error al cargar el archivo:', error)
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto =
+        trO('Error al cargar el archivo.', objTranslate) ||
+        'Error al cargar el archivo.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     })
 }
 
@@ -227,9 +227,19 @@ function leeApp(json) {
       Object.assign(appJSON, data)
       navegador.estadoAnteriorButton = 'apps'
       navegador.estadoAnteriorWhereUs.push('apps')
-      const nuevoObjeto = obtenerNombres(appJSON, 'apps')
+      const nuevoObjeto = obtenerNombres(data, 'apps')
       navegador.estadoNavButton = nuevoObjeto
-      completaButtons(nuevoObjeto)
+      const cantidadDeApp = data.apps.name.length
+      if (cantidadDeApp > 0) {
+        completaButtons(nuevoObjeto)
+      } else {
+        const mensaje =
+          trO('No está desarrollado el árbol de controles.', objTranslate) ||
+          'No está desarrollado el árbol de controles.'
+        const whereUs = document.getElementById('whereUs')
+        whereUs.innerText = mensaje
+        whereUs.style.display = 'block'
+      }
     })
     .catch((error) => {
       if (error.name === 'SyntaxError') {
@@ -279,11 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    // const data = await translate(persona.lng)
-    // translateOperativo = data.arrayTranslateOperativo
-    // espanolOperativo = data.arrayEspanolOperativo
-    // objTranslate.operativoES = [...espanolOperativo]
-    // objTranslate.operativoTR = [...translateOperativo]
+
     objTranslate = await arraysLoadTranslate()
     leeVersion('version')
     setTimeout(() => {

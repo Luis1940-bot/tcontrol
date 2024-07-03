@@ -37,6 +37,7 @@ import baseUrl from '../../config.js'
 import guardarNuevoReporte from '../../Pages/ListReportes/Modules/Controladores/guardarReporte.js'
 import addSelector from '../../Pages/ListVariables/Modules/Controladores/addSelector.js'
 import addVariable from '../../Pages/ListVariables/Modules/Controladores/aceptarVariable.js'
+import guardarNuevaArea from '../../Pages/ListAreas/Modules/Controladores/guardarArea.js'
 
 const SERVER = baseUrl
 
@@ -788,6 +789,19 @@ const funcionApi = () => {
   }
 }
 
+const funcionNuevaArea = () => {
+  const objetoRuta = {
+    idLTYCliente: 0,
+    idArea: 0,
+    area: '',
+    filtrado: [],
+  }
+  sessionStorage.setItem('area', encriptar(objetoRuta))
+  let timestamp = new Date().getTime()
+  const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=areas&v=${timestamp}`
+  window.location.href = ruta
+}
+
 const funcionNuevoReporte = () => {
   const objetoRuta = {
     control_N: 0,
@@ -1229,6 +1243,132 @@ const funcionGuardarCambiosEnVariables = async () => {
         input.style.background = '#cecece'
       })
     }
+  }
+}
+
+function completaObjetoArea() {
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
+  const inputs = document.querySelectorAll('input')
+  inputs.forEach((input) => {
+    input.style.background = '#fff' // Establece el fondo a blanco
+  })
+  const selects = document.querySelectorAll('select')
+  selects.forEach((select) => {
+    select.style.background = '#fff'
+  })
+  const objetoReporte = {
+    idLTYarea: 0,
+    area: '',
+    idLTYcliente: plant,
+    activo: '',
+    visible: '',
+  }
+
+  const numeroDeArea = document.getElementById('numeroDeArea')
+  objetoReporte.idLTYarea = numeroDeArea.value
+
+  const nombreDeArea = document.getElementById('nombreDeArea')
+  objetoReporte.area = nombreDeArea.value
+  checaCamposReporte(nombreDeArea)
+
+  const situacion = document.getElementById('situacion')
+  let activo = 's'
+  situacion.value === '2' ? (activo = 'n') : null
+  objetoReporte.activo = activo
+
+  const vis = document.getElementById('visible')
+  let visible = 's'
+  vis.value === '2' ? (visible = 'n') : null
+  objetoReporte.visible = visible
+
+  return objetoReporte
+}
+
+const funcionAreaGuardarNuevo = async () => {
+  try {
+    const miAlerta = new Alerta()
+    let aviso = 'Se dará de alta una nueva área.'
+    let mensaje = trO(aviso, objTraductor) || aviso
+    miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, objTraductor)
+    let modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    const objetoGuardarArea = completaObjetoArea()
+    delete objetoGuardarArea.id
+    const guardar = await guardarNuevaArea(
+      objetoGuardarArea,
+      '/guardarAreaNuevo'
+    )
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    modal.style.display = 'none'
+    modal.remove()
+
+    if (guardar.success === true) {
+      //colocar el numero de id del nuevo reporte idControl
+      const id = guardar.last_insert_id
+      aviso = `La nueva área se generó correctamente.`
+      const numeroDeArea = document.getElementById('numeroDeArea')
+      numeroDeArea.value = id
+      numeroDeArea.style.background = '#cecece'
+
+      mensaje = trO(aviso, objTraductor) || aviso
+      arrayGlobal.avisoVerde.span.fontSize = '20px'
+      miAlerta.createVerde(arrayGlobal.avisoVerde, mensaje, objTraductor)
+    }
+    if (guardar.success === false) {
+      aviso = 'Algo salió mal y no se guardó la nueva área!'
+      mensaje = trO(aviso, objTraductor) || aviso
+      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTraductor)
+    }
+
+    modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    modal = document.getElementById('modalAlertM')
+    modal.style.display = 'none'
+    modal.remove()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const funcionAreaGuardarCambios = async () => {
+  try {
+    const miAlerta = new Alerta()
+    let aviso = 'Se modificarán los datos del reporte.'
+    let mensaje = trO(aviso, objTraductor) || aviso
+    miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, objTraductor)
+    let modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    const objetoGuardarArea = completaObjetoArea()
+    const guardar = await guardarNuevoReporte(
+      objetoGuardarArea,
+      '/guardarReporteCambios'
+    )
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    modal.style.display = 'none'
+    modal.remove()
+
+    if (guardar.success === true) {
+      aviso = `Se guardaron las modificaciones al reporte.`
+      mensaje = trO(aviso, objTraductor) || aviso
+      arrayGlobal.avisoVerde.span.fontSize = '20px'
+      miAlerta.createVerde(arrayGlobal.avisoVerde, mensaje, objTraductor)
+    }
+    if (guardar.success === false) {
+      aviso = 'Algo salió mal y no se guardaron las modificaciones!'
+      mensaje = trO(aviso, objTraductor) || aviso
+      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTraductor)
+    }
+
+    modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+    modal = document.getElementById('modalAlertM')
+    modal.style.display = 'none'
+    modal.remove()
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -2484,6 +2624,7 @@ class Alerta {
   }
 
   createVerde(obj, texto, objTrad) {
+    // console.log(obj, texto, objTrad)
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertVerde'
     this.modal.className = 'modal'
@@ -3377,6 +3518,160 @@ class Alerta {
           const cod = idTituloH3.getAttribute('data-index')
           const name = idTituloH3.getAttribute('data-name')
           const status = idTituloH3.getAttribute('data-status')
+          onOff(cod, status)
+          setTimeout(() => {
+            const url = new URL(window.location.href)
+            window.location.href = url.href
+          }, 200)
+        })
+      } else {
+        texto =
+          trO(
+            'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias',
+            objTrad
+          ) ||
+          'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias'
+        typeAlert = 'descripcion'
+        obj.span.text[typeAlert] = texto
+        obj.span.marginTop = '10px'
+        obj.span.fontSize = '18px'
+        obj.span.fontColor = 'red'
+        let spanTexto = createSpan(obj.span, texto)
+        modalContent.appendChild(spanTexto)
+        this.modal.appendChild(modalContent)
+        document.body.appendChild(this.modal)
+      }
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          cerrarModal('modalAlertView')
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  createViewerAreas(objeto, array, objTrad) {
+    try {
+      const nivelReporte = 1
+      const persona = desencriptar(sessionStorage.getItem('user'))
+      const { tipo } = persona
+      const obj = objeto
+
+      this.modal = document.createElement('div')
+      this.modal.id = 'modalAlertView'
+      this.modal.className = 'modal'
+      this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+
+      const modalContent = createDiv(obj.divContent)
+
+      const span = createSpan(obj.close)
+      obj.divCajita.hoverColor = null
+      obj.divCajita.position = null
+      const divClose = createDiv(obj.divCajita)
+      divClose.appendChild(span)
+      modalContent.appendChild(divClose)
+
+      let texto = array[0]
+      let typeAlert = 'viewer'
+
+      obj.titulo.text[typeAlert] = `${array[1]} - ${texto.toUpperCase()}`
+      const title = createH3(obj.titulo, typeAlert)
+      title.id = 'idTituloH3'
+      title.setAttribute('data-index', array[1])
+      title.setAttribute('data-name', array[0])
+      title.setAttribute('data-status', array[20])
+      modalContent.appendChild(title)
+
+      let on_of = 'ON'
+      let colorOnOff = 'green'
+      if (array[3] === 'n') {
+        on_of = 'OFF'
+        colorOnOff = 'red'
+      }
+
+      texto = `Status: ${on_of}`
+      typeAlert = 'status'
+      obj.span.text[typeAlert] = texto
+      obj.span.marginTop = '2px'
+      obj.span.fontColor = colorOnOff
+      let spanStatus = createSpan(obj.span, texto)
+      modalContent.appendChild(spanStatus)
+
+      on_of = 'ON'
+      colorOnOff = 'green'
+      if (array[4] === 'n') {
+        on_of = 'OFF'
+        colorOnOff = 'red'
+      }
+
+      texto = `Visible: ${on_of}`
+      typeAlert = 'status'
+      obj.span.text[typeAlert] = texto
+      obj.span.marginTop = '2px'
+      obj.span.fontColor = colorOnOff
+      obj.span.fontSize = '18px'
+      spanStatus = createSpan(obj.span, texto)
+      modalContent.appendChild(spanStatus)
+
+      if (nivelReporte <= parseInt(tipo)) {
+        const divButton = createDiv(obj.divButtons)
+        texto = trO('Editar', objTrad) || 'Editar'
+        obj.btnNuevo.text = texto
+        const btnNuevo = createButton(obj.btnNuevo)
+
+        texto = trO('ON/OFF', objTrad) || 'ON/OFF'
+        obj.btnVerCargados.text = texto
+        const btnVerCargados = createButton(obj.btnVerCargados)
+
+        texto = trO('Visible/No visible', objTrad) || 'Visible/No visible'
+        obj.btnVerVisibles.text = texto
+        const btnVisible = createButton(obj.btnVerVisibles)
+
+        texto =
+          trO(obj.btnProcedimiento.text, objTrad) || obj.btnProcedimiento.text
+        obj.btnProcedimiento.text = texto
+        const btnProcedimiento = createButton(obj.btnProcedimiento)
+
+        divButton.appendChild(btnNuevo)
+        divButton.appendChild(btnVerCargados)
+        divButton.appendChild(btnVisible)
+        divButton.appendChild(btnProcedimiento)
+
+        modalContent.appendChild(divButton)
+        this.modal.appendChild(modalContent)
+        document.body.appendChild(this.modal)
+        const idbtnNuevo = document.getElementById('idbtnNuevo')
+        idbtnNuevo.addEventListener('click', () => {
+          //!editar
+          const idTituloH3 = document.getElementById('idTituloH3')
+          const cod = idTituloH3.getAttribute('data-index')
+          const name = idTituloH3.getAttribute('data-name')
+          const url = `${cod}`
+          const filtrado = arrayGlobal.arrayReportes.filter(
+            (subArray) => subArray[1] === cod
+          )
+          const objetoRuta = {
+            control_N: url,
+            control_T: decodeURIComponent(name),
+            nr: '0',
+            filtrado,
+          }
+          sessionStorage.setItem('area', encriptar(objetoRuta))
+
+          let timestamp = new Date().getTime()
+          const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
+          window.location.href = ruta
+        })
+        const idbtnCargados = document.getElementById('idVerCargados')
+        idbtnCargados.addEventListener('click', () => {
+          //! ON/OFF
+          const idTituloH3 = document.getElementById('idTituloH3')
+          const cod = idTituloH3.getAttribute('data-index')
+          const name = idTituloH3.getAttribute('data-name')
+          const status = idTituloH3.getAttribute('data-status')
+
           onOff(cod, status)
           setTimeout(() => {
             const url = new URL(window.location.href)
@@ -5026,7 +5321,7 @@ class Alerta {
     })
   }
   clonarCampos(objeto, objTrad, target, array, callback) {
-    console.log(target)
+    // console.log(target)
     const obj = JSON.parse(JSON.stringify(objeto))
     const { idLTYreporte, nameReporte } = target
     this.modal = document.createElement('div')
@@ -5121,6 +5416,155 @@ class Alerta {
         cerrarModal('modalAlert')
       }
     })
+  }
+
+  createModalMenuArea(objeto, objTranslate) {
+    // eslint-disable-next-line no-unused-vars
+
+    const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+
+    //! nuevo reporte
+    obj.divCajita.id = 'idDivNuevaArea'
+    obj.divCajita.onClick = funcionNuevaArea
+    let div = createDiv(obj.divCajita)
+    const imgNuevaArea = createIMG(obj.imgNuevoReporte)
+    let texto = trO('Área nueva', objTranslate) || 'Área nueva'
+    const spanNuevaArea = createSpan(obj.nuevo, texto)
+    div.appendChild(imgNuevaArea)
+    div.appendChild(spanNuevaArea)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin nuevo reporte
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+    //! fin salir
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
+  }
+
+  createModalMenuCRUDArea(objeto, objTranslate, guardarComo) {
+    // eslint-disable-next-line no-unused-vars
+
+    const obj = objeto
+    // const obj = JSON.parse(JSON.stringify(objeto))
+    this.modal = document.createElement('div')
+    this.modal.id = 'modalAlertM'
+    this.modal.className = 'modal'
+    this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+    // Crear el contenido del modal
+    const modalContent = createDiv(obj.divContent)
+
+    const span = createSpan(obj.close)
+    obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
+    const divClose = createDiv(obj.divCajita)
+    divClose.appendChild(span)
+    modalContent.appendChild(divClose)
+
+    if (!guardarComo) {
+      //! guardar nuevo area
+      obj.divCajita.id = 'idDivCRUDArea'
+      obj.divCajita.onClick = funcionAreaGuardarNuevo
+      let div = createDiv(obj.divCajita)
+      const imgGuardar = createIMG(obj.imgGuardar)
+      let texto = trO(obj.guardar.text, objTranslate) || obj.guardar.text
+      const spanGuardar = createSpan(obj.guardarCambio, texto)
+      div.appendChild(imgGuardar)
+      div.appendChild(spanGuardar)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar nuevo area
+    } else {
+      //! guardar cambios
+      obj.divCajita.id = 'idDivCRUDArea'
+      obj.divCajita.onClick = funcionAreaGuardarCambios
+      let div = createDiv(obj.divCajita)
+      const imgGuardarCambios = createIMG(obj.imgGuardarComo)
+      let texto =
+        trO(obj.guardarCambio.text, objTranslate) || obj.guardarCambio.text
+      const spanGuardarCambios = createSpan(obj.guardarCambio, texto)
+      div.appendChild(imgGuardarCambios)
+      div.appendChild(spanGuardarCambios)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
+
+      //! fin guardar cambios
+    }
+
+    //! refrescar
+    obj.divCajita.id = 'idDivRefrescar'
+    obj.divCajita.onClick = funcionRefrescar
+    let div = createDiv(obj.divCajita)
+    const imgRefresh = createIMG(obj.imgRefresh)
+    let texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+    const spanRefresh = createSpan(obj.refresh, texto)
+    div.appendChild(imgRefresh)
+    div.appendChild(spanRefresh)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+
+    //! fin refrescar
+
+    //! salir
+    obj.divCajita.id = 'idDivSalir'
+    obj.divCajita.onClick = funcionSalir
+    div = createDiv(obj.divCajita)
+    const imgSalir = createIMG(obj.imgSalir)
+    texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+    const spanSalir = createSpan(obj.salir, texto)
+    div.appendChild(imgSalir)
+    div.appendChild(spanSalir)
+    modalContent.appendChild(div)
+    obj.divCajita.onClick = null
+    //! fin salir
+
+    this.modal.appendChild(modalContent)
+
+    // Agregar el modal al body del documento
+    document.body.appendChild(this.modal)
   }
 
   destroyAlerta() {

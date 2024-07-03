@@ -61,3 +61,30 @@ Repita su la nueva contraseña
 Aceptar contraseña
 Hay diferencias entre las contraseñas escritas.
 Hay diferencias entre los campos escritos.
+No está desarrollado el árbol de controles.
+Controles
+Consultas
+Reportes
+Informes
+Variables
+Menú
+Buscar...
+Doc
+No existen controles cargados. Comuníquese con el administrador.
+Error. El código del documento debe ser un número.
+No se encontraron registros con el documento
+Cerrar sesión
+Inicio
+Error al cargar el archivo.
+Todos
+Activos
+Apagados
+No existen reportes cargados. Comuníquese con el administrador.
+Aguarde unos instantes, se están listando los reportes activos. Gracias!
+Agregar
+Clonar
+No existen controles cargados. Comuníquese con el administrador.
+Aguarde unos instantes, se están listando los controles. Gracias!
+No existen variables cargadas. Comuníquese con el administrador.
+Aguarde unos instantes, se están listando las áreas activas. Gracias!
+No existen áreas cargadas. Comuníquese con el administrador.

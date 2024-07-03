@@ -69,6 +69,10 @@ function createInput(config) {
     ? (input.style.transition = 'background-color 0.3s')
     : null
 
+  config.accept !== null && config.accept !== undefined
+    ? input.setAttribute('accept', config.accept)
+    : null
+
   config.hoverColor !== null && config.hoverColor !== undefined
     ? input.addEventListener('mouseover', () => {
         input.style.color = config.hoverColor

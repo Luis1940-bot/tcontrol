@@ -61,3 +61,30 @@ Repeat your new password
 Accept password
 There are differences between written passwords.
 There are differences between the written fields.
+The control tree is not developed.
+Controls
+Consultations
+Reports
+Reports
+Variables
+Menu
+Look for...
+Doc
+There are no loaded controls. Contact the administrator.
+Mistake. The document code must be a number.
+No records found with the document
+Sign off
+Start
+Error loading file.
+All
+Assets
+Off
+There are no reports loaded. Contact the administrator.
+Wait a few moments, the active reports are being listed. Thank you!
+Add
+Clone
+There are no loaded controls. Contact the administrator.
+Please wait a few moments, the controls are being listed. Thank you!
+There are no loaded variables. Contact the administrator.
+Please wait a few moments, the active areas are being listed. Thank you!
+There are no loaded areas. Contact the administrator.

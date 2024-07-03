@@ -105,6 +105,11 @@ if(isset($_GET['ruta'])) {
         $url = $url_base . '/Pages/RecoveryPass/';
         header("Location: $url");
         break;
+
+      case 'areas':
+        $url = $url_base . '/Pages/ListAreas/areas.php?t='.$time;
+        header("Location: $url");
+        break;
       
       default:
         # code...

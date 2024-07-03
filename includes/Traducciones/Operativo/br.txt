@@ -61,3 +61,30 @@ Repita sua nova senha
 Aceitar senha
 Existem diferenças entre senhas escritas.
 Existem diferenças entre os campos escritos.
+A árvore de controle não está desenvolvida.
+Controles
+Consultas
+Relatórios
+Relatórios
+Variáveis
+Cardápio
+Procurar...
+Doc
+Não há controles carregados. Entre em contato com o administrador.
+Erro. O código do documento deve ser um número.
+Nenhum registro encontrado com o documento
+Fechar Sessão
+Começar
+Erro ao carregar o arquivo.
+Todos
+Ativos
+Desligado
+Não há relatórios carregados. Entre em contato com o administrador.
+Aguarde alguns instantes, os relatórios ativos estão sendo listados. Obrigado!
+Adicionar
+Clone
+Não há controles carregados. Entre em contato com o administrador.
+Aguarde alguns instantes, os controles estão sendo listados. Obrigado!
+Não há variáveis ​​carregadas. Entre em contato com o administrador.
+Aguarde alguns instantes, as áreas ativas estão sendo listadas. Obrigado!
+Não há áreas carregadas. Entre em contato com o administrador.

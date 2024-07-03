@@ -139,6 +139,50 @@
       ]
     },
     {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "logo",
+        "className": "label-plant",
+        "innerHTML": "Logo (PNG)"
+      }
+    },
+    {
+      "tag": "button",
+      "config": {
+        "id": "idLogo",
+        "class": "button-logo",
+        "text": "Seleccionar Logo"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": "idSpanLogo",
+        "className": "span-logo",
+        "text": ""
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "logo",
+        "type": "file",
+        "className": "input-file",
+        "name": "logo",
+        "accept": "image/png"
+      }
+    },
+    {
+      "tag": "img",
+      "config": {
+        "id": "idImgLogo",
+        "class": "thumbnail",
+        "src": "#",
+        "alt": "Sin logo."
+      }
+    },
+    {
       "tag": "button",
       "config": {
         "id": "idRegisterButton",

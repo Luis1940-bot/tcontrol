@@ -18,6 +18,7 @@ import { encriptar, desencriptar } from '../../controllers/cript.js'
 import actualizarLenguaje from '../../includes/Traducciones/Lenguajes/fijarLenguaje.js'
 
 import baseUrl from '../../config.js'
+import { configPHP } from '../../controllers/configPHP.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
 
@@ -168,33 +169,11 @@ function leeApp(json) {
     })
 }
 
-function configPHP(user) {
-  // const user = desencriptar(sessionStorage.getItem('user'))
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 50
-  logoi.height = 20
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  const linkInstitucional = document.getElementById('linkInstitucional')
-  linkInstitucional.href = rutaDeveloper
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
   spinner.style.visibility = 'visible'
   const customButton = document.getElementById('planta')
   const persona = desencriptar(sessionStorage.getItem('user'))
@@ -212,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadLenguages(persona) {
   try {
+    // console.log(persona)
     const leng = persona.lng
     const id = persona.id
     const objetoLng = {
@@ -231,10 +211,3 @@ async function loadLenguages(persona) {
     console.error('Ocurrió un error al cargar los datos:', error)
   }
 }
-
-// const button = document.querySelector('.my-button')
-// button.addEventListener('click', () => {
-//   const persona = desencriptar(sessionStorage.getItem('user'))
-//   spinner.style.visibility = 'visible'
-//   loadLenguages(persona.lng)
-// })

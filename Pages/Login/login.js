@@ -344,7 +344,15 @@ function leeApp(json) {
       }, 100)
     })
     .catch((error) => {
-      console.error('Error al cargar el archivo:', error)
+      // console.error('Error al cargar el archivo:', error)
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto =
+        trO('Error al cargar el archivo.', objTranslate) ||
+        'Error al cargar el archivo.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     })
 }
 
@@ -415,7 +423,15 @@ function leeModelo(ruta) {
       armadoDeHTML(data)
     })
     .catch((error) => {
-      console.error('Error al cargar el archivo:', error)
+      // console.error('Error al cargar el archivo:', error)
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto =
+        trO('Error al cargar el archivo.', objTranslate) ||
+        'Error al cargar el archivo.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     })
 }
 

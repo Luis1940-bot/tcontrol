@@ -7,18 +7,18 @@ import baseUrl from '../../../config.js'
 import traerRegistros from './Controladores/traerRegistros.js'
 import turnControl from './Controladores/ux.js'
 import agregarCampoNuevo from './Controladores/ix.js'
+import { trA, trO } from '../../../controllers/trOA.js'
 
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
+// let translateOperativo = []
+// let espanolOperativo = []
+// let translateArchivos = []
+// let espanolArchivos = []
 
 const widthScreen = window.innerWidth
 const widthScreenAjustado = 1 //360 / widthScreen;
 let arrayWidthEncabezado
 let arraySinDuplicados = []
 
-// const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
 let arrayOrden = []
 const encabezados = {
@@ -70,33 +70,33 @@ const encabezados = {
   ],
 }
 
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
+// function trO(palabra) {
+//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
+//   const index = espanolOperativo.findIndex(
+//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
+//   )
+//   if (index !== -1) {
+//     return translateOperativo[index]
+//   }
+//   return palabra
+// }
 
-function trA(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolArchivos.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateArchivos[index]
-  }
-  return palabra
-}
+// function trA(palabra) {
+//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
+//   const index = espanolArchivos.findIndex(
+//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
+//   )
+//   if (index !== -1) {
+//     return translateArchivos[index]
+//   }
+//   return palabra
+// }
 
-function estilosTheadCell(element, index, columnas) {
+function estilosTheadCell(element, index, columnas, objTranslate) {
   const cell = document.createElement('th')
 
   if (index < columnas && arrayWidthEncabezado[index] !== '0') {
-    const mensaje = trO(element) || element
+    const mensaje = trO(element, objTranslate) || element
     cell.textContent = mensaje.toUpperCase()
     cell.style.background = '#000000'
     cell.style.border = '1px solid #cecece'
@@ -112,24 +112,24 @@ function estilosTheadCell(element, index, columnas) {
   return cell
 }
 
-function encabezado(encabezados) {
+function encabezado(encabezados, objTranslate) {
   const thead = document.querySelector('thead')
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index, 2)
+    const cell = estilosTheadCell(element, index, 2, objTranslate)
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
   return thead
 }
 
-function encabezadoCampos(encabezados) {
+function encabezadoCampos(encabezados, objTranslate) {
   const thead = document.createElement('thead')
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index, 21)
+    const cell = estilosTheadCell(element, index, 21, objTranslate)
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
@@ -139,55 +139,55 @@ function encabezadoCampos(encabezados) {
 function reconoceTipoDeDato(tipoDeDato) {
   let tipo = ''
   if (tipoDeDato === 'd') {
-    tipo = trO('Fecha') || 'Fecha'
+    tipo = trO('Fecha', objTranslate) || 'Fecha'
   }
   if (tipoDeDato === 'h') {
-    tipo = trO('Hora') || 'Hora'
+    tipo = trO('Hora', objTranslate) || 'Hora'
   }
   if (tipoDeDato === 't') {
-    tipo = trO('Texto') || 'Texto'
+    tipo = trO('Texto', objTranslate) || 'Texto'
   }
   if (tipoDeDato === 'tx') {
-    tipo = trO('Texto-Largo') || 'Texto-Largo'
+    tipo = trO('Texto-Largo', objTranslate) || 'Texto-Largo'
   }
   if (tipoDeDato === 'n') {
-    tipo = trO('Número') || 'Número'
+    tipo = trO('Número', objTranslate) || 'Número'
   }
   if (tipoDeDato === 'b') {
-    tipo = trO('Check-Box') || 'Check-Box'
+    tipo = trO('Check-Box', objTranslate) || 'Check-Box'
   }
   if (tipoDeDato === 'sd') {
-    tipo = trO('Select-SQL') || 'Select SQL'
+    tipo = trO('Select-SQL', objTranslate) || 'Select SQL'
   }
   if (tipoDeDato === 's') {
-    tipo = trO('Select-Variable') || 'Select-Variable'
+    tipo = trO('Select-Variable', objTranslate) || 'Select-Variable'
   }
   if (tipoDeDato === 'title') {
-    tipo = trO('Título-Separador') || 'Título-Separador'
+    tipo = trO('Título-Separador', objTranslate) || 'Título-Separador'
   }
   if (tipoDeDato === 'l') {
-    tipo = trO('Leyenda') || 'Leyenda'
+    tipo = trO('Leyenda', objTranslate) || 'Leyenda'
   }
   if (tipoDeDato === 'subt') {
-    tipo = trO('Sub-Título') || 'Sub-Título'
+    tipo = trO('Sub-Título', objTranslate) || 'Sub-Título'
   }
   if (tipoDeDato === 'img') {
-    tipo = trO('Imagen') || 'Imagen'
+    tipo = trO('Imagen', objTranslate) || 'Imagen'
   }
   if (tipoDeDato === 'cn') {
-    tipo = trO('Consulta SQL') || 'Consulta SQL'
+    tipo = trO('Consulta SQL', objTranslate) || 'Consulta SQL'
   }
   if (tipoDeDato === 'btnQwery') {
-    tipo = trO('Botón') || 'Botón SQL'
+    tipo = trO('Botón', objTranslate) || 'Botón SQL'
   }
   if (tipoDeDato === 'x') {
-    tipo = trO('Nada') || 'Nada'
+    tipo = trO('Nada', objTranslate) || 'Nada'
   }
   if (tipoDeDato === 'photo') {
-    tipo = trO('Foto') || 'Foto'
+    tipo = trO('Foto', objTranslate) || 'Foto'
   }
   if (tipoDeDato === 'r') {
-    tipo = trO('Radio') || 'Radio'
+    tipo = trO('Radio', objTranslate) || 'Radio'
   }
   return tipo
 }
@@ -881,7 +881,7 @@ async function viewer(selector, array, objTranslate) {
       const tabla = document.createElement('table')
       tabla.style.marginTop = '10px'
       tabla.setAttribute('class', 'tabla-campos')
-      const thead = encabezadoCampos(encabezados)
+      const thead = encabezadoCampos(encabezados, objTranslate)
       tabla.appendChild(thead)
       div.appendChild(tabla)
       const tbody = document.createElement('tbody')
@@ -975,7 +975,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl, id) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 1; i++) {
-    const dato = trA(element[1]) || element[1]
+    const dato = trA(element[1], objTranslate) || element[1]
     const items = element[25]
     const alignCenter = 'left'
     const paddingLeft = '10px'
@@ -1024,7 +1024,7 @@ function completaTabla(arrayControl, objTranslate) {
   const tbody = document.querySelector('tbody')
   // const cantidadDeRegistros = arrayControl.length;
   const arrayMapeado = arrayControl.map((fila) => [
-    trA(fila[0]),
+    trA(fila[0], objTranslate),
     ...fila.slice(0),
   ])
   const conteos = {}
@@ -1070,32 +1070,36 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
   const arraySinDuplicados = eliminarDuplicadosPorPrimerElemento(arrayControl)
 
   if (arraySinDuplicados.length > 0) {
-    encabezado(encabezados)
+    encabezado(encabezados, objTranslate)
     completaTabla(arrayControl, objTranslate)
     // array = [...arrayControl];
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
 
     if (cantidadDeFilas.childElementCount !== arraySinDuplicados.length) {
-      mensaje = trO(mensaje) || mensaje
+      mensaje = trO(mensaje, objTranslate) || mensaje
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
     }
     setTimeout(() => {}, 1000)
   } else {
-    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTranslate)
-    const modal = document.getElementById('modalAlert')
+    let mensaje =
+      trO(
+        'No existen controles cargados. Comuníquese con el administrador.',
+        objTranslate
+      ) || 'No existen controles cargados. Comuníquese con el administrador.'
+    miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+    let modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
+    modal = document.querySelector('.div-encabezadoPastillas')
+    modal.style.display = 'none'
+    modal = document.querySelector('.div-ubicacionSearch')
+    modal.style.display = 'none'
   }
 }
 
 export default function tablaVacia(arrayControl, encabezados, objTranslate) {
-  // arraysLoadTranslate();
-  translateOperativo = objTranslate.operativoTR
-  espanolOperativo = objTranslate.operativoES
-  translateArchivos = objTranslate.archivosTR
-  espanolArchivos = objTranslate.archivosES
   setTimeout(() => {
     loadTabla(arrayControl, encabezados, objTranslate)
   }, 200)

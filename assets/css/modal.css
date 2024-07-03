@@ -172,7 +172,8 @@
   #idbtnNuevo,
   #idVerCargados,
   #idProcedimiento,
-  #idVerCargadosPorFecha {
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
     margin-top: 10px;
     height: 40px;
     font-size: 14px;
@@ -374,7 +375,8 @@
   #idbtnNuevo,
   #idVerCargados,
   #idProcedimiento,
-  #idVerCargadosPorFecha {
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
     margin-top: 6px;
     height: 30px;
     font-size: 12px;
@@ -585,7 +587,8 @@
   #idbtnNuevo,
   #idVerCargados,
   #idProcedimiento,
-  #idVerCargadosPorFecha {
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
     margin-top: 6px;
     height: 30px;
     font-size: 12px;
@@ -790,7 +793,8 @@
   #idbtnNuevo,
   #idVerCargados,
   #idProcedimiento,
-  #idVerCargadosPorFecha {
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
     margin-top: 6px;
     height: 30px;
     font-size: 12px;
@@ -997,7 +1001,8 @@
   #idbtnNuevo,
   #idVerCargados,
   #idProcedimiento,
-  #idVerCargadosPorFecha {
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
     margin-top: 6px;
     height: 30px;
     font-size: 12px;
@@ -1203,7 +1208,8 @@
   #idbtnNuevo,
   #idVerCargados,
   #idProcedimiento,
-  #idVerCargadosPorFecha {
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
     margin-top: 6px;
     height: 30px;
     font-size: 12px;

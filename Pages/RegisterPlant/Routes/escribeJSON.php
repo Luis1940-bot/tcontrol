@@ -14,9 +14,9 @@
 
           // Guardar los datos actualizados en log.json
       if (file_put_contents($file, json_encode($currentData, JSON_PRETTY_PRINT))) {
-          echo json_encode(['status' => 'success']);
+          echo json_encode(['success' =>true]);
       } else {
-          echo json_encode(['status' => 'error', 'message' => 'Failed to write to log.json']);
+          echo json_encode(['success' => false, 'message' => 'Failed to write to log.json']);
       }
   }
 

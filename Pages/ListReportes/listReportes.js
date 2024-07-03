@@ -1,19 +1,6 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
 import readJSON from '../../controllers/read-JSON.js'
-
 // eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateArchivo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolArchivo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
-// eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
 // eslint-disable-next-line import/extensions
 import {
@@ -30,19 +17,12 @@ import arrayGlobal from '../../controllers/variables.js'
 import tablaVacia from './Modules/armadoDeTabla.js'
 import baseUrl from '../../config.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
+import { configPHP } from '../../controllers/configPHP.js'
+import { trO } from '../../controllers/trOA.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 
 const SERVER = baseUrl
-
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
+let objTranslate = []
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -67,27 +47,12 @@ function leeVersion(json) {
     })
 }
 
-function trO(palabra) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
 function leeApp(json) {
   readJSON(json)
     .then((data) => {
       Object.assign(objButtons, data)
       const search = document.getElementById('search')
-      search.placeholder = trO('Buscar...' || 'Buscar...')
+      search.placeholder = trO('Buscar...', objTranslate) || 'Buscar...'
       search.style.display = 'inline'
 
       const planta = objButtons.planta
@@ -96,9 +61,6 @@ function leeApp(json) {
       divButtons.style.display = 'none'
 
       cargaTabla(objTranslate)
-      // navegador.estadoAnteriorButton = 'Menu'
-      // navegador.estadoAnteriorWhereUs.push('Controles')
-      // completaButtons('Controles')
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -107,10 +69,8 @@ function leeApp(json) {
 }
 
 function dondeEstaEn() {
-  // const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
-  // document.getElementById('whereUs').innerText = ustedEstaEn;
-  let lugar = trO('Admin') || 'Admin'
-  lugar = `${trO('Reportes') || 'Reportes'}`
+  let lugar = trO('Admin', objTranslate) || 'Admin'
+  lugar = `${trO('Reportes', objTranslate) || 'Reportes'}`
   lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
@@ -166,7 +126,8 @@ function cargaPastillas(pastillas) {
     for (let i = 0; i < pastillas.clase.length; i++) {
       let button = document.createElement('button')
       button.setAttribute('class', pastillas.clase[i])
-      button.textContent = trO(pastillas.text[i]) || pastillas.text[i]
+      button.textContent =
+        trO(pastillas.text[i], objTranslate) || pastillas.text[i]
       button.style.color = pastillas.color[i]
       button.style.background = pastillas.background[i]
       button.onclick = pastillas.funcion[i]
@@ -177,26 +138,17 @@ function cargaPastillas(pastillas) {
   }
 }
 
-function configPHP(user) {
+document.addEventListener('DOMContentLoaded', async () => {
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
+  inicioPerformance()
+  configPHP(user, SERVER)
+  spinner.style.visibility = 'visible'
+  const hamburguesa = document.querySelector('#hamburguesa')
+  hamburguesa.style.display = 'block'
   const divVolver = document.querySelector('.div-volver')
   divVolver.style.display = 'block'
   document.getElementById('volver').style.display = 'block'
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
   document.querySelector('.header-McCain').style.display = 'none'
   document.querySelector('.div-encabezado').style.marginTop = '5px'
   const pastillas = {
@@ -206,39 +158,15 @@ function configPHP(user) {
     color: ['#cecece', '#393939', '#393939'],
     background: ['#212121', '#d9d9d9', '#d9d9d9'],
   }
-  cargaPastillas(pastillas)
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-  const user = desencriptar(sessionStorage.getItem('user'))
-  const { plant } = user
-  inicioPerformance()
-  configPHP(user)
-  spinner.style.visibility = 'visible'
-  const hamburguesa = document.querySelector('#hamburguesa')
-  hamburguesa.style.display = 'block'
 
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-
-    translateArchivos = data.arrayTranslateArchivo
-    espanolArchivos = data.arrayEspanolArchivo
-
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
-
-    objTranslate.archivosES = [...espanolArchivos]
-    objTranslate.archivosTR = [...translateArchivos]
-
     leeVersion('version')
-    setTimeout(() => {
+    setTimeout(async () => {
+      objTranslate = await arraysLoadTranslate()
+      cargaPastillas(pastillas)
       dondeEstaEn()
       leeApp(`App/${plant}/app`)
     }, 200)
@@ -257,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate),
     }
     personModal(user, objTranslate)
   })
@@ -269,8 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const miAlertaM = new Alerta()
     miAlertaM.createModalMenuReportes(arrayGlobal.objMenuRove, objTranslate)
     const modal = document.getElementById('modalAlertM')
-    // const closeButton = document.querySelector('.modal-close')
-    // closeButton.addEventListener('click', closeModal)
     modal.style.display = 'block'
   })
 })

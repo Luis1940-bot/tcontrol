@@ -199,6 +199,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/confirmaEmail':
             include_once dirname(__DIR__) . '/Pages/RecoveryPass/Routes/confirmaEmail.php';
           break;
+        case '/creaJSONapp':
+            include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/creaJSONapp.php';
+          break;
+        case '/traerLTYareas':
+            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/traerRegistros.php';
+          break;
+        case '/guardarAreaNuevo':
+            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/guardarAreaNuevo.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada

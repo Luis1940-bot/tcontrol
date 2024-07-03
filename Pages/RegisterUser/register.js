@@ -133,6 +133,7 @@ async function nuevoUser() {
       }
       const miAlerta = new Alerta()
       const obj = arrayGlobal.avisoAmarillo
+      obj.close.display = 'none'
       const texto =
         trO('Aguarde un instante luego será redirigido.', objTranslate) ||
         'Aguarde un instante luego será redirigido.'
@@ -149,7 +150,9 @@ async function nuevoUser() {
         modal.style.display = 'none'
         modal.remove()
         const url = `${SERVER}/Pages/Login`
-        window.location.href = url
+        setTimeout(() => {
+          window.location.href = url
+        }, 200)
       }
     } else {
       const miAlerta = new Alerta()

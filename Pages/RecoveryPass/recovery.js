@@ -176,6 +176,7 @@ async function envioEmailPlanta() {
         }
         const miAlerta = new Alerta()
         const obj = arrayGlobal.avisoAmarillo
+        obj.close.display = 'none'
         const texto =
           trO('Aguarde un instante luego será redirigido.', objTranslate) ||
           'Aguarde un instante luego será redirigido.'

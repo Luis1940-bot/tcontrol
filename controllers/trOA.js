@@ -1,4 +1,5 @@
 function trO(palabra, objTranslate) {
+  // console.log(palabra, objTranslate)
   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
   const index = objTranslate.operativoES.findIndex(
     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada

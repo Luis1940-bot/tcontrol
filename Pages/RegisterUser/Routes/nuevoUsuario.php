@@ -1,6 +1,6 @@
 <?php
         mb_internal_encoding('UTF-8');
-        function addUsuario($objeto, $plant) {
+        function addUsuario($objeto, $idPlanta) {
 
           try {
             include_once BASE_DIR . "/Routes/datos_base.php";
@@ -13,7 +13,7 @@
             $mail = $objeto['email'];
             $firma = $objeto['firma'];
             $mi_cfg = 'd-' . $objeto['valueIdioma'];
-            $idLTYcliente = $plant;
+            $idLTYcliente = $idPlanta;
             $cod_verificador = bin2hex(random_bytes(16)); // Generar código de verificación
 
             // $host = "68.178.195.199"; 
@@ -61,6 +61,7 @@
             if ($stmt === false) {
                 die("Error al preparar la consulta: " . $conn->error);
             }
+            
             $stmt->bind_param("ssssissssis", $nombre, $hash, $area, $puesto, $idtipousuario, $activo, $mail, $firma, $mi_cfg, $idLTYcliente, $cod_verificador);
           
             if ($stmt->execute() === true) {
@@ -86,7 +87,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
-        //  $datos = '{"q":{"nombre":"Luis Gimenez","pass":"4488","valueArea":0,"area":"Área","puesto":"","idtipousuario":1,"textTipoDeUsuario":"Colaborador","valueSituacion":"s","textSituacion":"Activo","email":"luisfactum@gmail.com","firma":"","valueIdioma":"es","textIdioma":"Español"},"ruta":"/addUsuario","sql_i":7,"rax":"&new=Sat Jun 22 2024 19:51:22 GMT-0300 (hora estándar de Argentina)"}';
+        //  $datos = '{"q":{"nombre":"trt","pass":"1","valueArea":0,"area":"Área","puesto":"d","idtipousuario":1,"textTipoDeUsuario":"Colaborador","valueSituacion":"s","textSituacion":"Activo","email":"d@.com.ar","firma":"","valueIdioma":"es","textIdioma":"Español"},"ruta":"/addUsuario","sql_i":2,"rax":"&new=Fri Jun 28 2024 08:50:30 GMT-0300 (hora estándar de Argentina)"}';
 
 
 
@@ -100,8 +101,8 @@
 
         if ($data !== null) {
           $objeto = $data['q'];
-          $plant = $data['sql_i'];
-          addUsuario($objeto, $plant);
+          $idPlanta = $data['sql_i'];
+          addUsuario($objeto, $idPlanta);
         } else {
           echo "Error al decodificar la cadena JSON";
         }

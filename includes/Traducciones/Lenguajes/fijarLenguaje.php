@@ -8,7 +8,7 @@ function fijarLenguaje($id, $mi_cfg) {
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
     }
-    $sql = "UPDATE usuarios SET mi_cfg = ? WHERE idusuario = ?";
+    $sql = "UPDATE usuario SET mi_cfg = ? WHERE idusuario = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         die("Error al preparar la consulta: " . $conn->error);
@@ -37,7 +37,7 @@ function fijarLenguaje($id, $mi_cfg) {
 header("Content-Type: application/json; charset=utf-8");
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 $datos = file_get_contents("php://input");
-// $datos = '{"leng":"br","id":6,"ruta":"/mi_cfg","rax":"&new=Fri Apr 05 2024 19:00:01 GMT-0300 (hora estándar de Argentina)"}';
+// $datos = '{"leng":"br","id":5,"ruta":"/mi_cfg","rax":"&new=Fri Apr 05 2024 19:00:01 GMT-0300 (hora estándar de Argentina)"}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

@@ -2,14 +2,7 @@
 import readJSON from '../../controllers/read-JSON.js'
 // eslint-disable-next-line import/extensions
 import createButton from '../../includes/atoms/createButton.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
+
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
 // eslint-disable-next-line import/extensions
@@ -21,18 +14,13 @@ import {
 import { desencriptar, encriptar } from '../../controllers/cript.js'
 
 import baseUrl from '../../config.js'
+import { configPHP } from '../../controllers/configPHP.js'
+import { trO, trA } from '../../controllers/trOA.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import Alerta from '../../includes/atoms/alerta.js'
+import arrayGlobal from '../../controllers/variables.js'
 const SERVER = baseUrl
-
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
+let objTranslate = []
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -50,49 +38,20 @@ function leeVersion(json) {
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
-      console.error('Error al cargar el archivo:', error)
+      // console.error('Error al cargar el archivo:', error)
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto =
+        trO('Error al cargar el archivo.', objTranslate) ||
+        'Error al cargar el archivo.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     })
 }
 
-function trO(palabra) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
-function trA(palabra, objTrad) {
-  try {
-    if (palabra === undefined || palabra === null || objTrad === null) {
-      return ''
-    }
-    const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-    const index = objTrad.archivosES.findIndex(
-      (item) =>
-        item.replace(/\s/g, '').toLowerCase().trim() ===
-        palabraNormalizada.trim()
-    )
-    if (index !== -1) {
-      return objTrad.archivosTR[index]
-    }
-    return palabra
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
-    return palabra
-  }
-  // return palabra;
-}
-
 function localizador(e) {
-  const lugar = trO(e.target.innerText) || e.target.innerText
+  const lugar = trO(e.target.innerText, objTranslate) || e.target.innerText
   document.getElementById('whereUs').innerText += `${espacio}${lugar}`
   let textContent = document.getElementById('whereUs').textContent
   textContent = textContent.replace('<br>', '')
@@ -104,7 +63,7 @@ function localizador(e) {
 }
 
 function dondeEstaEn() {
-  let lugar = trO('Consultas') || 'Consultas'
+  let lugar = trO('Consultas', objTranslate) || 'Consultas'
   lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
@@ -139,6 +98,9 @@ function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
 
 /* eslint-enable no-use-before-define */
 function completaButtons(obj) {
+  if (!obj) {
+    return
+  }
   const divButtons = document.querySelector('.div-consultas-buttons')
   divButtons.innerHTML = ''
   // document.getElementById('spanUbicacion').innerText = objButtons.planta
@@ -223,57 +185,35 @@ function leeApp(json, complit) {
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
-      console.error('Error al cargar el archivo:', error)
+      // console.error('Error al cargar el archivo:', error)
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto =
+        trO('Error al cargar el archivo.', objTranslate) ||
+        'Error al cargar el archivo.'
+      miAlerta.createVerde(obj, texto, objTranslate)
+      const modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     })
-}
-
-function configPHP(user) {
-  // const user = desencriptar(sessionStorage.getItem('user'))
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  document.querySelector('.div-encabezado').style.marginTop = '5px'
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
+  document.querySelector('.header-McCain').style.display = 'none'
+  document.querySelector('.div-encabezado').style.marginTop = '5px'
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    translateArchivos = data.arrayTranslateArchivo
-    espanolArchivos = data.arrayEspanolArchivo
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
-    objTranslate.archivosES = [...espanolArchivos]
-    objTranslate.archivosTR = [...translateArchivos]
     leeVersion('version')
-    setTimeout(() => {
+    setTimeout(async () => {
+      objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
       leeApp(`App/${plant}/app`, false)
       leeApp(`consultas/${plant}/app`, true)
@@ -293,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate),
     }
     personModal(user, objTranslate)
   })
@@ -323,7 +263,7 @@ function goBack() {
     completaButtons(clave)
     const cadena = `${document.getElementById('whereUs').innerText}`
     quitarCadena = quitarCadena.replace('>', '')
-    quitarCadena = trO(quitarCadena || quitarCadena)
+    quitarCadena = trO(quitarCadena, objTranslate) || quitarCadena
     let nuevaCadena = cadena.replace(quitarCadena, '')
     const ultimoIndice = nuevaCadena.lastIndexOf('>')
     if (ultimoIndice === -1) {

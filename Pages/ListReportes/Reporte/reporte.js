@@ -190,7 +190,7 @@ function agregaPastillaEmail(email) {
 }
 
 function cargaInputs(array) {
-  console.log(array)
+  // console.log(array)
   try {
     const idControl = document.getElementById('idControl')
     idControl.value = array[1]

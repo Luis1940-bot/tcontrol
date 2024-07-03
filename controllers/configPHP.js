@@ -1,9 +1,9 @@
-function configPHP(data, SERVER) {
+function configPHP(user, SERVER) {
   try {
     const idiomaPreferido = navigator.language || navigator.languages[0]
     const partesIdioma = idiomaPreferido.split('-')
     const idioma = partesIdioma[0]
-    const { developer, content, by, rutaDeveloper, logo } = data
+    const { developer, content, by, rutaDeveloper, logo } = user
     const metaDescription = document.querySelector('meta[name="description"]')
     metaDescription.setAttribute('content', content)
     const faviconLink = document.querySelector('link[rel="shortcut icon"]')
@@ -19,6 +19,8 @@ function configPHP(data, SERVER) {
     const footer = document.getElementById('footer')
     footer.innerText = by
     footer.href = rutaDeveloper
+    const linkInstitucional = document.getElementById('linkInstitucional')
+    linkInstitucional.href = rutaDeveloper
   } catch (error) {
     console.log(error)
   }

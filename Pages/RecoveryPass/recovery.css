@@ -97,6 +97,10 @@ main {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 40px;
 }
+.button-recovery:hover {
+  background: #cecece;
+  color: #000;
+}
 .button-recovery-apagado {
   background: #cccccc;
   cursor: not-allowed;

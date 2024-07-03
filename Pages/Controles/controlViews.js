@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/extensions
+// // eslint-disable-next-line import/extensions
 import traerRegistros from './Modules/Controladores/traerRegistros.js'
 // eslint-disable-next-line import/extensions
 import tablaVacia from './Modules/armadoDeTabla.js'
@@ -8,26 +8,11 @@ import arrayGlobal from '../../controllers/variables.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
 import filtrarTabla from './Modules/Controladores/filtrarTabla.js'
+import { trO } from '../../controllers/trOA.js'
 
 const encabezados = {
-  title: ['controles'],
+  title: ['Controles'],
   width: ['1'],
-}
-
-let translateOperativo = []
-let espanolOperativo = []
-// let translateArchivos = [];
-// let espanolArchivos = [];
-
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
 }
 
 async function cargaDeRegistros(objTranslate) {
@@ -50,7 +35,7 @@ async function cargaDeRegistros(objTranslate) {
 async function mensajeDeCarga(objTranslate) {
   const miAlerta = new Alerta()
   const aviso = arrayGlobal.avisoListandoControles.span.text
-  const mensaje = trO(aviso) || aviso
+  const mensaje = trO(aviso, objTranslate) || aviso
   miAlerta.createControl(
     arrayGlobal.avisoListandoControles,
     mensaje,
@@ -68,10 +53,6 @@ async function mensajeDeCarga(objTranslate) {
 
 function cargaTabla(objTranslate) {
   try {
-    translateOperativo = objTranslate.operativoTR
-    espanolOperativo = objTranslate.operativoES
-    // translateArchivos = objTranslate.archivosTR;
-    // espanolArchivos = objTranslate.archivosES;
     mensajeDeCarga(objTranslate)
   } catch (error) {
     // eslint-disable-next-line no-console

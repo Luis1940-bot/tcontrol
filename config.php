@@ -7,19 +7,19 @@ if (isLocalhost()) {
     $baseDir = __DIR__; 
     define('BASE_URL', $base); //* sirve para localizar componentes como otros php renderizables o css
     define('BASE_DIR', str_replace('\\', '/', $baseDir)); //* sirve para conectar con php que no son renderizables
-    define('BASE_BY', 'by Factum Consultora');
-    define('BASE_DEVELOPER', 'Factum - Desarrollo');
-    define('BASE_CONTENT', 'Factum Consultora');
-    define('BASE_LOGO', 'ftm');
-    define('BASE_RUTA', 'https://www.factumconsultora.com');
-    define('BASE_PLANOS', $base . '/iControl-Vanilla/icontrol/assets/img/planos/');
-    define('BASE_IMAGENES', $base . '/iControl-Vanilla/icontrol/assets/Imagenes/');
-    define('HOST', 'smtp.factumconsultora.com');
-    define('USERNAME', 'alerta.factum@factumconsultora.com');
-    define('PASS', 'Factum2017admin');
-    define('SET_FROM', 'alerta.factum@factumconsultora.com');
-    define('ADD_BCC', 'luisfactum@gmail.com');
-    define('IMAGE', $baseDir . '/assets/imagenes/');
+    define('BASE_BY', 'by Luis Gimenez');
+    define('BASE_DEVELOPER', 'Tenkiweb');
+    define('BASE_CONTENT', 'Tenki Web');
+    define('BASE_LOGO', 'tcontrol');
+    define('BASE_RUTA', 'https://linkedin.com/in/luisergimenez/');
+    define('BASE_PLANOS', $base . '/tcontrol/assets/img/planos/');
+    define('BASE_IMAGENES', $base . '/tcontrol/assets/Imagenes/');
+    define('HOST', 'mail.tenkiweb.com');
+    define('USERNAME', 'alerta.tenki@tenkiweb.com');
+    define('PASS', ']SDGGL}#p.Ba');
+    define('SET_FROM', 'alerta.tenki@tenkiweb.com');
+    define('ADD_BCC', 'luisglogista@gmail.com');
+    define('IMAGE', $baseDir . '/assets/');
     define('PLANOS', $base . '/assets/img/planos/');
 } else {
     // En producción
@@ -35,7 +35,7 @@ if (isLocalhost()) {
       define('PASS', ']SDGGL}#p.Ba');
       define('SET_FROM', 'alerta.tenki@tenkiweb.com');
       define('ADD_BCC', 'luisglogista@gmail.com');
-      define('IMAGE', $base . '/assets/imagenes/');
+      define('IMAGE', $base . '/assets/');
       define('PLANOS', $base . '/assets/img/planos/');
     }
     

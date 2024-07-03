@@ -30,6 +30,7 @@ import { desencriptar } from '../../controllers/cript.js'
 import enviaMailNuevoCliente from '../../Nodemailer/sendNuevoCliente.js'
 import arrayGlobal from '../../controllers/variables.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
+import createImg from '../../includes/atoms/createImg.js'
 
 const SERVER = baseUrl
 
@@ -68,58 +69,139 @@ function checaRequeridos() {
     email.classList.add('input-plant-requerido')
     return false
   }
+
+  var imagenLogo = document.getElementById('idImgLogo')
+  let fileName = []
+  let src = []
+  let extension = []
+  let plant = []
+  let carpeta = []
+
+  if (imagenLogo) {
+    fileName.push(imagenLogo.getAttribute('fileName'))
+    src.push(imagenLogo.src)
+    extension.push(imagenLogo.getAttribute('extension'))
+    carpeta.push('Logos/')
+  }
+
+  const objetoImagen = {
+    fileName,
+    src,
+    extension,
+    plant,
+    carpeta,
+  }
+
   const objeto = {
     cliente: cliente.value,
     detalle: '',
     contacto: contacto.value,
     email: email.value,
     activo: '',
+    objetoImagen,
   }
   return { add: true, objeto }
 }
 
-async function nuevaComapania() {
-  let envia = checaRequeridos()
+async function subirImagenes(img, plant) {
+  if (img.length === 0) {
+    return null
+  }
+  if (img.extension[0].length === 0) {
+    return null
+  }
 
-  if (envia.add) {
-    const detalle = document.getElementById('detalle')
-    envia.objeto.detalle = detalle.value
-    envia.objeto.activo = 's'
-    const response = await addCompania(envia.objeto, '/addCompania')
-    if (response.success) {
-      const newPlant = { name: envia.objeto.cliente, num: response.id }
-      const json = await addCompania(newPlant, '/escribirJSON')
-      const objetoEmail = {
-        cliente: envia.objeto.cliente,
-        contacto: envia.objeto.contacto,
-        address: envia.objeto.email,
-      }
-      const miAlerta = new Alerta()
-      const obj = arrayGlobal.avisoAmarillo
-      const texto = 'Aguarde un instante luego será redirigido.'
-      miAlerta.createVerde(obj, texto, objTranslate)
-      const modal = document.getElementById('modalAlertVerde')
-      modal.style.display = 'block'
-      const mailEnviado = await enviaMailNuevoCliente(
-        objetoEmail,
-        '/sendNuevoCliente'
-      )
-      if (mailEnviado.success) {
+  img.plant.push(plant)
+
+  const formData = new FormData()
+  formData.append('imgBase64', JSON.stringify(img)) // encodeURIComponent
+  // console.log(formData)
+  fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
+    method: 'POST',
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // eslint-disable-next-line no-console
+      // console.log('Respuesta del servidor:', data)
+      return data
+    })
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('Error al enviar la imagen:', error)
+    })
+  return null
+}
+
+async function nuevaComapania() {
+  try {
+    const miAlerta = new Alerta()
+    let obj = arrayGlobal.avisoRojo
+    let texto = ''
+    let envia = checaRequeridos()
+    if (envia.add) {
+      const detalle = document.getElementById('detalle')
+      envia.objeto.detalle = detalle.value
+      envia.objeto.activo = 's'
+      const response = await addCompania(envia.objeto, '/addCompania')
+      if (response.success) {
+        const newPlant = { name: envia.objeto.cliente, num: response.id }
+        const json = await addCompania(newPlant, '/escribirJSON')
+        const jsonApp = await addCompania(newPlant, '/creaJSONapp')
+        const objetoEmail = {
+          cliente: envia.objeto.cliente,
+          contacto: envia.objeto.contacto,
+          address: envia.objeto.email,
+        }
+        obj = arrayGlobal.avisoAmarillo
+        obj.close.display = 'none'
+        texto = 'Aguarde un instante luego será redirigido.'
+        miAlerta.createVerde(obj, texto, objTranslate)
+        const modal = document.getElementById('modalAlertVerde')
+        modal.style.display = 'block'
+        const mailEnviado = await enviaMailNuevoCliente(
+          objetoEmail,
+          '/sendNuevoCliente'
+        )
+        const imagen = envia.objeto.objetoImagen
+        if (imagen.extension[0] !== null) {
+          await subirImagenes(imagen, response.id)
+        }
         const id = document.getElementById('id')
         id.value = response.id
         modal.style.display = 'none'
         modal.remove()
         const url = `${SERVER}/Pages/Login`
-        window.location.href = url
+        setTimeout(() => {
+          window.location.href = url
+        }, 200)
+      } else {
+        texto = trO('Algo salió mal.', objTranslate) || 'Algo salió mal.'
+        miAlerta.createVerde(obj, texto, objTranslate)
+        const modal = document.getElementById('modalAlertVerde')
+        modal.style.display = 'block'
       }
-    } else {
-      const miAlerta = new Alerta()
-      const obj = arrayGlobal.avisoRojo
-      const texto = trO('Algo salió mal.', objTranslate) || 'Algo salió mal.'
-      miAlerta.createVerde(obj, texto, objTranslate)
-      const modal = document.getElementById('modalAlertVerde')
-      modal.style.display = 'block'
     }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function cargaImagen(file) {
+  if (file) {
+    // Leer y mostrar la miniatura
+    var reader = new FileReader()
+    reader.onload = function (e) {
+      var thumbnail = document.getElementById('idImgLogo')
+      thumbnail.src = e.target.result
+      thumbnail.style.display = 'block'
+      thumbnail.setAttribute('fileName', 'logo.png')
+      thumbnail.setAttribute('extension', 'png')
+    }
+    reader.readAsDataURL(file)
+  } else {
+    document.getElementById('file-name').textContent = 'Sin logo.'
+    document.getElementById('idImgLogo').style.display = 'none'
   }
 }
 
@@ -139,6 +221,18 @@ function setearElementos() {
     }
     if (clase === 'button-plant-update') {
     }
+  })
+
+  const idLogo = document.getElementById('idLogo')
+  idLogo.addEventListener('click', (e) => {
+    document.getElementById('logo').click()
+  })
+
+  const inputLogo = document.getElementById('logo')
+  inputLogo.addEventListener('change', function () {
+    var fileName = this.files[0] ? this.files[0].name : 'Sin logo.'
+    document.getElementById('idSpanLogo').textContent = fileName
+    cargaImagen(this.files[0])
   })
 
   const cliente = document.getElementById('cliente')
@@ -206,6 +300,9 @@ function creador(element) {
     element.config.text =
       trO(element.config.text, objTranslate) || element.config.text
     elemento = createSpan(element.config)
+  }
+  if (element.tag === 'img') {
+    elemento = createImg(element.config)
   }
   return elemento
 }

@@ -1,22 +1,6 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
 import readJSON from '../../controllers/read-JSON.js'
 // eslint-disable-next-line import/extensions
-import createButton from '../../includes/atoms/createButton.js'
-// eslint-disable-next-line import/extensions
-import createImg from '../../includes/atoms/createImg.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateArchivo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolArchivo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
-// eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
 // eslint-disable-next-line import/extensions
 import {
@@ -35,19 +19,12 @@ import { Alerta } from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
 
 import baseUrl from '../../config.js'
-// const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = baseUrl
+import { configPHP } from '../../controllers/configPHP.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { trO } from '../../controllers/trOA.js'
 
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
+const SERVER = baseUrl
+let objTranslate = []
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -67,30 +44,15 @@ function leeVersion(json) {
     })
 }
 
-function trO(palabra) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
 function leeApp(json) {
   readJSON(json)
     .then((data) => {
       Object.assign(objButtons, data)
       const search = document.getElementById('search')
-      search.placeholder = trO('Buscar...' || 'Buscar...')
+      search.placeholder = trO('Buscar...', objTranslate) || 'Buscar...'
       search.style.display = 'inline'
       const doc = document.getElementById('doc')
-      doc.placeholder = trO('Doc' || 'Doc')
+      doc.placeholder = trO('Doc', objTranslate) || 'Doc'
       const divUbicacionDoc = document.querySelector('.div-ubicacionDoc')
       divUbicacionDoc.style.display = 'block'
       const planta = objButtons.planta
@@ -112,44 +74,23 @@ function leeApp(json) {
 function dondeEstaEn() {
   // const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
   // document.getElementById('whereUs').innerText = ustedEstaEn;
-  let lugar = trO('Menú') || 'Menú'
-  lugar = `${trO('Controles') || 'Controles'}`
+  let lugar = trO('Menú', objTranslate) || 'Menú'
+  lugar = `${trO('Controles', objTranslate) || 'Controles'}`
   lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
-}
-
-function configPHP(user) {
   const divVolver = document.querySelector('.div-volver')
   divVolver.style.display = 'block'
   document.getElementById('volver').style.display = 'block'
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  document.querySelector('.div-encabezado').style.marginTop = '5px'
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  document.querySelector('.header-McCain').style.display = 'none'
+  document.querySelector('.div-encabezado').style.marginTop = '5px'
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
@@ -157,21 +98,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-
-    translateArchivos = data.arrayTranslateArchivo
-    espanolArchivos = data.arrayEspanolArchivo
-
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
-
-    objTranslate.archivosES = [...espanolArchivos]
-    objTranslate.archivosTR = [...translateArchivos]
 
     leeVersion('version')
-    setTimeout(() => {
+    setTimeout(async () => {
+      objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
       leeApp(`App/${plant}/app`)
     }, 200)
@@ -190,34 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate),
     }
     personModal(user, objTranslate)
   })
 })
-
-function segundaCargaListado() {
-  try {
-    const button = document.getElementsByName('Controles')
-    let lugar = document.getElementById('whereUs').innerText
-    const newLugar = trO(button.name || 'Controles')
-    lugar = `${lugar} > ${newLugar}`
-    const search = document.getElementById('search')
-    const placeholder = trO('Buscar...' || 'Buscar...')
-    search.placeholder = placeholder
-    search.style.display = 'inline'
-    const doc = document.getElementById('doc')
-    doc.placeholder = trO('Doc' || 'Doc')
-    const divUbicacionDoc = document.querySelector('.div-ubicacionDoc')
-    divUbicacionDoc.style.display = 'block'
-    const divButtons = document.querySelector('.div-controles-buttons')
-    divButtons.style.display = 'none'
-    document.getElementById('whereUs').innerHTML = lugar
-    cargaTabla(objTranslate)
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const buscaDoc = document.getElementById('imgDoc')
 buscaDoc.addEventListener('click', async () => {
@@ -244,7 +151,7 @@ buscaDoc.addEventListener('click', async () => {
     } else {
       const miAlerta = new Alerta()
       const aviso = `No se encontraron registros con el documento`
-      const mensaje = trO(aviso) || aviso
+      const mensaje = trO(aviso, objTranslate) || aviso
       arrayGlobal.avisoRojo.div.top = '500px'
       arrayGlobal.avisoRojo.close.id = 'idCloseAvisoAmarillo'
       miAlerta.createVerde(
@@ -258,7 +165,7 @@ buscaDoc.addEventListener('click', async () => {
   } else {
     const miAlerta = new Alerta()
     const aviso = 'Error. El código del documento debe ser un número.'
-    const mensaje = trO(aviso) || aviso
+    const mensaje = trO(aviso, objTranslate) || aviso
     arrayGlobal.avisoRojo.div.top = '500px'
     arrayGlobal.avisoRojo.close.id = 'idCloseAvisoAmarillo'
     miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
@@ -276,18 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (persona) {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
-      const data = await translate(persona.lng)
-      translateOperativo = data.arrayTranslateOperativo
-      espanolOperativo = data.arrayEspanolOperativo
 
-      translateArchivos = data.arrayTranslateArchivo
-      espanolArchivos = data.arrayEspanolArchivo
-
-      objTranslate.operativoES = [...espanolOperativo]
-      objTranslate.operativoTR = [...translateOperativo]
-
-      objTranslate.archivosES = [...espanolArchivos]
-      objTranslate.archivosTR = [...translateArchivos]
       setTimeout(() => {
         // segundaCargaListado()
       }, 200)

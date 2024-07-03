@@ -14,6 +14,7 @@ if (isset($datos)) {
     $fileNameArray = $imgJson['fileName'];
     $extensionArray = $imgJson['extension'];
     $plant = $imgJson['plant'];
+    $carpeta = $imgJson['carpeta'];
 
     $numImages = count($srcArray);
 
@@ -73,7 +74,7 @@ if (isset($datos)) {
                
                
                 // $directorioImagenes = dirname(dirname(__DIR__)) . '/assets/imagenes/' . $plant[$i] . '/';
-                 $directorioImagenes = IMAGE  . $plant[$i] . '/';
+                 $directorioImagenes = IMAGE . $carpeta[$i]  . $plant[$i] . '/';
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);
                 }
@@ -101,7 +102,7 @@ if (isset($datos)) {
                
               
                 // $directorioImagenes = dirname(dirname(__DIR__)) . '/assets/imagenes/' . $plant[$i] . '/';
-                $directorioImagenes = IMAGE . $plant[$i] . '/';
+                $directorioImagenes = IMAGE . $carpeta[$i] . $plant[$i] . '/';
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);
                 }

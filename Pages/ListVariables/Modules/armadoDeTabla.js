@@ -5,45 +5,18 @@ import { Alerta } from '../../../includes/atoms/alerta.js'
 import variableOnOff from './Controladores/variableOnOff.js'
 import { encriptar, desencriptar } from '../../../controllers/cript.js'
 
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-
 const widthScreen = window.innerWidth
 const widthScreenAjustado = 1 //360 / widthScreen;
 let arrayWidthEncabezado
 
 import baseUrl from '../../../config.js'
-// const SERVER = '/iControl-Vanilla/icontrol';
+import { trA, trO } from '../../../controllers/trOA.js'
 const SERVER = baseUrl
 
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
-function trA(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolArchivos.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateArchivos[index]
-  }
-  return palabra
-}
-
-function estilosTheadCell(element, index) {
+function estilosTheadCell(element, index, objTranslate) {
   const cell = document.createElement('th')
   if (index < 5) {
-    const mensaje = trO(element) || element
+    const mensaje = trO(element, objTranslate) || element
     cell.textContent = mensaje.toUpperCase()
     cell.style.background = '#000000'
     cell.style.border = '1px solid #cecece'
@@ -57,12 +30,12 @@ function estilosTheadCell(element, index) {
   return cell
 }
 
-function encabezado(encabezados) {
+function encabezado(encabezados, objTranslate) {
   const thead = document.querySelector('thead')
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index)
+    const cell = estilosTheadCell(element, index, objTranslate)
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
@@ -231,7 +204,7 @@ function estilosTbodyCellConcepto(element, index, objTranslate, arrayControl) {
     const background = '#ffffff'
     const colorText = '#000000'
     const indice = element[0]
-    const Ord = trO('Status') || 'Status'
+    const Ord = trO('Status', objTranslate) || 'Status'
 
     const cell = estilosCell(
       alignCenter,
@@ -335,7 +308,7 @@ function completaTabla(arrayControl, objTranslate) {
   const tbody = document.querySelector('tbody')
   // const cantidadDeRegistros = arrayControl.length;
   const arrayMapeado = arrayControl.map((fila) => [
-    trA(fila[1]),
+    trA(fila[1], objTranslate),
     ...fila.slice(1),
   ])
   arrayMapeado.sort((a, b) => a[1].localeCompare(b[1]))
@@ -352,32 +325,33 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
   const miAlerta = new Alerta()
   const arraySinDuplicados = eliminarDuplicadosPorSegundoElemento(arrayControl)
   if (arraySinDuplicados.length > 0) {
-    encabezado(encabezados)
+    encabezado(encabezados, objTranslate)
     completaTabla(arrayControl, objTranslate)
     // array = [...arrayControl];
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
-
     if (cantidadDeFilas.childElementCount !== arraySinDuplicados.length) {
-      mensaje = trO(mensaje) || mensaje
+      mensaje = trO(mensaje, objTranslate) || mensaje
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
+      modal = document.querySelector('.div-ubicacionSearch')
+      modal.style.display = 'none'
     }
     setTimeout(() => {}, 1000)
   } else {
-    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTranslate)
-    const modal = document.getElementById('modalAlert')
+    let mensaje =
+      trO(
+        'No existen variables cargadas. Comuníquese con el administrador.',
+        objTranslate
+      ) || 'No existen variables cargadas. Comuníquese con el administrador.'
+    miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+    let modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
   }
 }
 
 export default function tablaVacia(arrayControl, encabezados, objTranslate) {
-  // arraysLoadTranslate();
-  translateOperativo = objTranslate.operativoTR
-  espanolOperativo = objTranslate.operativoES
-  translateArchivos = objTranslate.archivosTR
-  espanolArchivos = objTranslate.archivosES
   setTimeout(() => {
     loadTabla(arrayControl, encabezados, objTranslate)
   }, 200)
