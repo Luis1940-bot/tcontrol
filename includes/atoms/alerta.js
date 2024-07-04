@@ -1335,15 +1335,16 @@ const funcionAreaGuardarNuevo = async () => {
 const funcionAreaGuardarCambios = async () => {
   try {
     const miAlerta = new Alerta()
-    let aviso = 'Se modificarán los datos del reporte.'
+    let aviso = 'Se modificarán los datos del área.'
     let mensaje = trO(aviso, objTraductor) || aviso
     miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, objTraductor)
     let modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
-    const objetoGuardarArea = completaObjetoArea()
-    const guardar = await guardarNuevoReporte(
+    // const objetoGuardarArea = completaObjetoArea()
+    const objetoGuardarArea = desencriptar(sessionStorage.getItem('area'))
+    const guardar = await guardarNuevaArea(
       objetoGuardarArea,
-      '/guardarReporteCambios'
+      '/guardarCambioArea'
     )
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
@@ -1351,7 +1352,7 @@ const funcionAreaGuardarCambios = async () => {
     modal.remove()
 
     if (guardar.success === true) {
-      aviso = `Se guardaron las modificaciones al reporte.`
+      aviso = `Se guardaron las modificaciones del área.`
       mensaje = trO(aviso, objTraductor) || aviso
       arrayGlobal.avisoVerde.span.fontSize = '20px'
       miAlerta.createVerde(arrayGlobal.avisoVerde, mensaje, objTraductor)
@@ -1364,9 +1365,6 @@ const funcionAreaGuardarCambios = async () => {
 
     modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
-    modal = document.getElementById('modalAlertM')
-    modal.style.display = 'none'
-    modal.remove()
   } catch (error) {
     console.log(error)
   }
@@ -3552,15 +3550,12 @@ class Alerta {
     }
   }
 
-  createViewerAreas(objeto, array, objTrad) {
+  createViewerAreas(objeto, array, callback) {
     try {
-      const nivelReporte = 1
-      const persona = desencriptar(sessionStorage.getItem('user'))
-      const { tipo } = persona
       const obj = objeto
 
       this.modal = document.createElement('div')
-      this.modal.id = 'modalAlertView'
+      this.modal.id = 'modalAlert'
       this.modal.className = 'modal'
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
 
@@ -3569,19 +3564,21 @@ class Alerta {
       const span = createSpan(obj.close)
       obj.divCajita.hoverColor = null
       obj.divCajita.position = null
+      obj.divCajita.height = null
       const divClose = createDiv(obj.divCajita)
       divClose.appendChild(span)
       modalContent.appendChild(divClose)
 
       let texto = array[0]
-      let typeAlert = 'viewer'
+      let typeAlert = 'editar'
 
       obj.titulo.text[typeAlert] = `${array[1]} - ${texto.toUpperCase()}`
       const title = createH3(obj.titulo, typeAlert)
       title.id = 'idTituloH3'
       title.setAttribute('data-index', array[1])
       title.setAttribute('data-name', array[0])
-      title.setAttribute('data-status', array[20])
+      title.setAttribute('data-status', array[3])
+      title.setAttribute('data-visible', array[4])
       modalContent.appendChild(title)
 
       let on_of = 'ON'
@@ -3593,9 +3590,10 @@ class Alerta {
 
       texto = `Status: ${on_of}`
       typeAlert = 'status'
-      obj.span.text[typeAlert] = texto
+      obj.span.text = texto
       obj.span.marginTop = '2px'
       obj.span.fontColor = colorOnOff
+      obj.span.fontSize = '18px'
       let spanStatus = createSpan(obj.span, texto)
       modalContent.appendChild(spanStatus)
 
@@ -3608,97 +3606,66 @@ class Alerta {
 
       texto = `Visible: ${on_of}`
       typeAlert = 'status'
-      obj.span.text[typeAlert] = texto
+      obj.span.text = texto
       obj.span.marginTop = '2px'
       obj.span.fontColor = colorOnOff
       obj.span.fontSize = '18px'
       spanStatus = createSpan(obj.span, texto)
       modalContent.appendChild(spanStatus)
 
-      if (nivelReporte <= parseInt(tipo)) {
-        const divButton = createDiv(obj.divButtons)
-        texto = trO('Editar', objTrad) || 'Editar'
-        obj.btnNuevo.text = texto
-        const btnNuevo = createButton(obj.btnNuevo)
+      obj.input.width = null
+      obj.input.type = 'text'
+      obj.input.fontWeight = null
+      obj.input.value = array[0]
+      obj.input.id = 'idInputArea'
+      const input = createInput(obj.input)
+      input.addEventListener('keydown', (e) => {
+        if (e.key === ',') {
+          e.preventDefault()
+        }
+      })
+      modalContent.appendChild(input)
 
-        texto = trO('ON/OFF', objTrad) || 'ON/OFF'
-        obj.btnVerCargados.text = texto
-        const btnVerCargados = createButton(obj.btnVerCargados)
+      const divButton = createDiv(obj.divButtons)
+      const btnaccept = createButton(obj.btnaccept)
+      divButton.appendChild(btnaccept)
 
-        texto = trO('Visible/No visible', objTrad) || 'Visible/No visible'
-        obj.btnVerVisibles.text = texto
-        const btnVisible = createButton(obj.btnVerVisibles)
+      const btncancel = createButton(obj.btncancel)
+      divButton.appendChild(btncancel)
 
-        texto =
-          trO(obj.btnProcedimiento.text, objTrad) || obj.btnProcedimiento.text
-        obj.btnProcedimiento.text = texto
-        const btnProcedimiento = createButton(obj.btnProcedimiento)
+      modalContent.appendChild(divButton)
 
-        divButton.appendChild(btnNuevo)
-        divButton.appendChild(btnVerCargados)
-        divButton.appendChild(btnVisible)
-        divButton.appendChild(btnProcedimiento)
+      this.modal.appendChild(modalContent)
+      document.body.appendChild(this.modal)
+      const idAceptar = document.getElementById('idAceptar')
+      idAceptar.addEventListener('click', () => {
+        //!editar
+        const idTituloH3 = document.getElementById('idTituloH3')
+        const cod = idTituloH3.getAttribute('data-index')
+        let value = document.getElementById('idInputArea').value
+        const id = parseInt(cod)
+        const filtrado = arrayGlobal.arrayReportes.filter(
+          (subArray) => subArray[1] === cod
+        )
 
-        modalContent.appendChild(divButton)
-        this.modal.appendChild(modalContent)
-        document.body.appendChild(this.modal)
-        const idbtnNuevo = document.getElementById('idbtnNuevo')
-        idbtnNuevo.addEventListener('click', () => {
-          //!editar
-          const idTituloH3 = document.getElementById('idTituloH3')
-          const cod = idTituloH3.getAttribute('data-index')
-          const name = idTituloH3.getAttribute('data-name')
-          const url = `${cod}`
-          const filtrado = arrayGlobal.arrayReportes.filter(
-            (subArray) => subArray[1] === cod
-          )
-          const objetoRuta = {
-            control_N: url,
-            control_T: decodeURIComponent(name),
-            nr: '0',
+        if (value !== '' && value.toLowerCase() !== array[0].toLowerCase()) {
+          value = sanitiza(value).trim()
+          const objetoArea = {
+            id,
+            value,
             filtrado,
           }
-          sessionStorage.setItem('area', encriptar(objetoRuta))
+          sessionStorage.setItem('area', encriptar(objetoArea))
+          funcionAreaGuardarCambios()
+          callback(value)
+        }
+        cerrarModal('modalAlert')
+      })
 
-          let timestamp = new Date().getTime()
-          const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
-          window.location.href = ruta
-        })
-        const idbtnCargados = document.getElementById('idVerCargados')
-        idbtnCargados.addEventListener('click', () => {
-          //! ON/OFF
-          const idTituloH3 = document.getElementById('idTituloH3')
-          const cod = idTituloH3.getAttribute('data-index')
-          const name = idTituloH3.getAttribute('data-name')
-          const status = idTituloH3.getAttribute('data-status')
-
-          onOff(cod, status)
-          setTimeout(() => {
-            const url = new URL(window.location.href)
-            window.location.href = url.href
-          }, 200)
-        })
-      } else {
-        texto =
-          trO(
-            'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias',
-            objTrad
-          ) ||
-          'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias'
-        typeAlert = 'descripcion'
-        obj.span.text[typeAlert] = texto
-        obj.span.marginTop = '10px'
-        obj.span.fontSize = '18px'
-        obj.span.fontColor = 'red'
-        let spanTexto = createSpan(obj.span, texto)
-        modalContent.appendChild(spanTexto)
-        this.modal.appendChild(modalContent)
-        document.body.appendChild(this.modal)
-      }
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
           event.preventDefault()
-          cerrarModal('modalAlertView')
+          cerrarModal('modalAlert')
         }
       })
     } catch (error) {
@@ -5517,21 +5484,6 @@ class Alerta {
       obj.divCajita.onClick = null
 
       //! fin guardar nuevo area
-    } else {
-      //! guardar cambios
-      obj.divCajita.id = 'idDivCRUDArea'
-      obj.divCajita.onClick = funcionAreaGuardarCambios
-      let div = createDiv(obj.divCajita)
-      const imgGuardarCambios = createIMG(obj.imgGuardarComo)
-      let texto =
-        trO(obj.guardarCambio.text, objTranslate) || obj.guardarCambio.text
-      const spanGuardarCambios = createSpan(obj.guardarCambio, texto)
-      div.appendChild(imgGuardarCambios)
-      div.appendChild(spanGuardarCambios)
-      modalContent.appendChild(div)
-      obj.divCajita.onClick = null
-
-      //! fin guardar cambios
     }
 
     //! refrescar

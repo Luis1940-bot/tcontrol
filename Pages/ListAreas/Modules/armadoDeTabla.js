@@ -9,7 +9,15 @@ let arrayWidthEncabezado
 
 import baseUrl from '../../../config.js'
 import { trO, trA } from '../../../controllers/trOA.js'
+import areaOnOff from './Controladores/areaOnOff.js'
+import traerRegistros from './Controladores/traerRegistros.js'
+import { desencriptar } from '../../../controllers/cript.js'
 const SERVER = baseUrl
+
+const encabezados = {
+  title: ['Áreas'],
+  width: ['1'],
+}
 
 function estilosTheadCell(element, index, objTranslate) {
   const cell = document.createElement('th')
@@ -39,16 +47,57 @@ function encabezado(encabezados, objTranslate) {
   thead.appendChild(newRow)
 }
 
-function viewer(array, objTranslate) {
-  console.log(array)
+function viewer(array, indice) {
   const miAlerta = new Alerta()
-  miAlerta.createViewerAreas(arrayGlobal.objAlertaViewer, array, objTranslate)
-  const modal = document.getElementById('modalAlertView')
+  miAlerta.createViewerAreas(
+    arrayGlobal.objAlertaAceptarCancelar,
+    array,
+    (response) => {
+      if (response) {
+        const nuevoValor = response
+        const table = document.getElementById('tableAreasViews')
+        const tbody = table.getElementsByTagName('tbody')[0]
+        const fila = tbody.getElementsByTagName('tr')[indice]
+        const celda = fila.getElementsByTagName('td')[0]
+        const firstChild = celda.firstChild
+        if (firstChild.nodeType === Node.TEXT_NODE) {
+          firstChild.textContent = nuevoValor
+        } else {
+          firstCell.insertBefore(
+            document.createTextNode(nuevoValor),
+            firstChild
+          )
+        }
+      }
+    }
+  )
+  const modal = document.getElementById('modalAlert')
   modal.style.display = 'block'
 }
 
-async function conceptoOnOff(id, status, objTranslate) {
-  const actualizado = await variableOnOff(id, status, '/variableOnOff')
+async function cargaDeRegistros(objTranslate) {
+  try {
+    const reportes = await traerRegistros(
+      'traerLTYareas',
+      '/traerLTYareas',
+      null
+    )
+    arrayGlobal.arrayReportes = [...reportes]
+    // Finaliza la carga y realiza cualquier otra acción necesaria
+    completaTabla(reportes, objTranslate)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(error)
+    // eslint-disable-next-line no-console
+    console.log('error por espera de la carga de un modal')
+    setTimeout(() => {
+      window.location.reload()
+    }, 100)
+  }
+}
+
+async function conceptoOnOff(id, status, objTranslate, tipo) {
+  const actualizado = await areaOnOff(id, status, '/areaOnOff', tipo)
   if (actualizado.success) {
     await cargaDeRegistros(objTranslate)
   }
@@ -66,7 +115,8 @@ function estilosCell(
   visible,
   indice,
   objTranslate,
-  arrayControl
+  arrayControl,
+  id
 ) {
   const cell = document.createElement('td')
   cell.textContent = datos.toUpperCase()
@@ -95,7 +145,7 @@ function estilosCell(
   imagen.setAttribute('data-index', indice)
   imagen.addEventListener('click', (e) => {
     const i = e.target.getAttribute('data-index')
-    viewer(arrayControl[i], objTranslate)
+    viewer(arrayControl[i], indice)
   })
   cell.appendChild(imagen)
 
@@ -120,12 +170,12 @@ function estilosCell(
     imgStatus.style.float = 'right'
     imgStatus.src = `${SERVER}/assets/img/${dirImg}.png`
     imgStatus.style.cursor = 'pointer'
-    imgStatus.setAttribute('data-index', indice)
+    imgStatus.setAttribute('data-index', id)
     imgStatus.setAttribute('data-status', visible)
     imgStatus.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-index')
       const status = e.target.getAttribute('data-status')
-      conceptoOnOff(id, status, objTranslate)
+      conceptoOnOff(parseInt(id), status, objTranslate, 'visible')
     })
     cell.appendChild(imgStatus)
   }
@@ -150,12 +200,12 @@ function estilosCell(
     imgStatus.style.float = 'right'
     imgStatus.src = `${SERVER}/assets/img/${dirImg}.png`
     imgStatus.style.cursor = 'pointer'
-    imgStatus.setAttribute('data-index', indice)
+    imgStatus.setAttribute('data-index', id)
     imgStatus.setAttribute('data-status', activo)
     imgStatus.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-index')
       const status = e.target.getAttribute('data-status')
-      conceptoOnOff(id, status, objTranslate)
+      conceptoOnOff(parseInt(id), status, objTranslate, 'activo')
     })
     cell.appendChild(imgStatus)
   }
@@ -176,11 +226,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
     const fontWeight = 700
     const background = '#ffffff'
     const colorText = '#000000'
-    // let size = '10px'
-    // if (widthScreen > 1000) {
-    //   size = '10px'
-    // }
-    // const fontSize = size
+    const id = element[1]
     const indice = index
 
     const cell = estilosCell(
@@ -195,7 +241,8 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
       visible,
       indice,
       objTranslate,
-      arrayControl
+      arrayControl,
+      id
     )
     newRow.appendChild(cell)
   }
@@ -204,6 +251,9 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
 
 function completaTabla(arrayControl, objTranslate) {
   const tbody = document.querySelector('tbody')
+  if (tbody) {
+    tbody.innerHTML = ''
+  }
   // const cantidadDeRegistros = arrayControl.length;
   const arrayMapeado = arrayControl.map((fila) => [
     trA(fila[1], objTranslate),
@@ -221,6 +271,10 @@ function completaTabla(arrayControl, objTranslate) {
 }
 
 function loadTabla(arrayControl, encabezados, objTranslate) {
+  const table = document.getElementById('loadTabla')
+  if (table) {
+    table.innerHTML = ''
+  }
   const miAlerta = new Alerta()
   if (arrayControl.length > 0) {
     encabezado(encabezados, objTranslate)

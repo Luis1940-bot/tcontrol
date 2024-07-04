@@ -1,14 +1,20 @@
 <?php
 
         mb_internal_encoding('UTF-8');
-        function onOff($id, $activo, $tipo) {
+        function onOff($id, $status, $tipo) {
+            // $host = "68.178.195.199"; 
+            // $user = "developers";
+            // $password = "6vLB#Q0bOVo4";
+            // $dbname = "tc1000";
+            // $port = '3306';
+            // $charset='utf-8';
 
           try {
             include_once BASE_DIR . "/Routes/datos_base.php";
-            if ($activo === 's') {
-              $activo = 'n';
-            } else if($activo === 'n') {
-              $activo = 's';
+            if ($status === 's') {
+              $status = 'n';
+            } else if($status === 'n') {
+              $status = 's';
             }
            
             $conn = mysqli_connect($host,$user,$password,$dbname);
@@ -27,7 +33,7 @@
             if ($stmt === false) {
                 die("Error al preparar la consulta: " . $conn->error);
             }
-            $stmt->bind_param("si", $activo , $id);
+            $stmt->bind_param("si", $status , $id);
           
             if ($stmt->execute() === true) {
                 $response = array('success' => true, 'message' => 'Se actualizo la situación del area.');
@@ -51,7 +57,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
-        // $datos = '{"q":"200","ruta":"/variableOnOff","rax":"&new=Fri May 03 2024 08:54:56 GMT-0300 (hora estándar de Argentina)","activo":"n"}';
+        // $datos = '{"q":4,"ruta":"/areaOnOff","rax":"&new=Wed Jul 03 2024 15:32:45 GMT-0300 (hora estándar de Argentina)","status":"s","tipo":"activo"}';
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
@@ -63,9 +69,9 @@
 
         if ($data !== null) {
           $q = $data['q'];
-          $activo = $data['activo'];
+          $status = $data['status'];
           $tipo = $data['tipo'];
-          onOff($q, $activo, $tipo);
+          onOff($q, $status, $tipo);
         } else {
           echo "Error al decodificar la cadena JSON";
         }

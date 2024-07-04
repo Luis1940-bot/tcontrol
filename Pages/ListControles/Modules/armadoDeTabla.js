@@ -9,11 +9,6 @@ import turnControl from './Controladores/ux.js'
 import agregarCampoNuevo from './Controladores/ix.js'
 import { trA, trO } from '../../../controllers/trOA.js'
 
-// let translateOperativo = []
-// let espanolOperativo = []
-// let translateArchivos = []
-// let espanolArchivos = []
-
 const widthScreen = window.innerWidth
 const widthScreenAjustado = 1 //360 / widthScreen;
 let arrayWidthEncabezado
@@ -69,28 +64,6 @@ const encabezados = {
     '1',
   ],
 }
-
-// function trO(palabra) {
-//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-//   const index = espanolOperativo.findIndex(
-//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-//   )
-//   if (index !== -1) {
-//     return translateOperativo[index]
-//   }
-//   return palabra
-// }
-
-// function trA(palabra) {
-//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-//   const index = espanolArchivos.findIndex(
-//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-//   )
-//   if (index !== -1) {
-//     return translateArchivos[index]
-//   }
-//   return palabra
-// }
 
 function estilosTheadCell(element, index, columnas, objTranslate) {
   const cell = document.createElement('th')

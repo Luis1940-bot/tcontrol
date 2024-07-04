@@ -1,7 +1,7 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-export default function areaOnOff(q, activo, ruta, tipo) {
+export default function areaOnOff(q, status, ruta, tipo) {
   // eslint-disable-next-line no-console
   console.time('areaOnOff')
   return new Promise((resolve, reject) => {
@@ -10,7 +10,7 @@ export default function areaOnOff(q, activo, ruta, tipo) {
       q,
       ruta,
       rax,
-      activo,
+      status,
       tipo,
     }
     const datos = JSON.stringify(obj)

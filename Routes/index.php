@@ -208,6 +208,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case '/guardarAreaNuevo':
             include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/guardarAreaNuevo.php';
           break;
+        case '/areaOnOff':
+            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/areaOnOff.php';
+          break;
+        case '/guardarCambioArea':
+            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/guardarCambioArea.php';
+          break;
         // Agrega más casos según las rutas de tu aplicación
         default:
             // Ruta no encontrada
