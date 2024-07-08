@@ -109,7 +109,7 @@ function encabezadoCampos(encabezados, objTranslate) {
   return thead
 }
 
-function reconoceTipoDeDato(tipoDeDato) {
+function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   let tipo = ''
   if (tipoDeDato === 'd') {
     tipo = trO('Fecha', objTranslate) || 'Fecha'
@@ -187,7 +187,14 @@ function changeOrden(indice, cantidadDeRegistros) {
   }
 }
 
-function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
+function reconoceColumna(
+  i,
+  array,
+  index,
+  selects,
+  cantidadDeRegistros,
+  objTranslate
+) {
   const indice = index
   let texto = ''
   let textAlign = ''
@@ -221,7 +228,7 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
       break
     case 4:
       // tipodedato
-      texto = reconoceTipoDeDato(array[i])
+      texto = reconoceTipoDeDato(array[i], objTranslate)
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 5:
@@ -387,7 +394,7 @@ function reconoceColumna(i, array, index, selects, cantidadDeRegistros) {
       break
     case 18:
       // tipo de observacion
-      texto = reconoceTipoDeDato(array[i])
+      texto = reconoceTipoDeDato(array[i], objTranslate)
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
     case 19:
@@ -474,32 +481,33 @@ function estiloCellCampos(celda) {
   return cell
 }
 
-async function turnOnOff(target, objTranslate) {
+async function turnOnOff(target, objTranslate, plant) {
   // console.log(target)
-  const turn = await turnControl(target)
+  const turn = await turnControl(target, plant)
+
   if (turn.success) {
     const nuevoArray = JSON.parse(turn.actualizado)
-    viewer(target.id, nuevoArray, objTranslate)
+    viewer(target.id, nuevoArray, objTranslate, plant)
   }
 }
 
-async function addCampo(target, objTranslate) {
+async function addCampo(target, objTranslate, plant) {
   // console.log(target)
-  const turn = await agregarCampoNuevo(target, '/addNewCampo')
+  const turn = await agregarCampoNuevo(target, '/addNewCampo', plant)
   const id = String(target.idLTYreporte)
   if (turn.success) {
     const nuevoArray = JSON.parse(turn.actualizado)
-    viewer(id, nuevoArray, objTranslate)
+    viewer(id, nuevoArray, objTranslate, plant)
   }
 }
 async function clonarReporte(target) {
-  const clon = await agregarCampoNuevo(target, '/clonarReporte')
+  const clon = await agregarCampoNuevo(target, '/clonarReporte', null)
   if (clon.success) {
     window.location.reload()
   }
 }
 
-function subirBajar(target, objTranslate) {
+function subirBajar(target, objTranslate, plant) {
   const { posicion, cantidadDeRegistros, arrayOrden, item, column, id } = target
   let { posActual } = posicion
   let nuevoArray = [...arrayOrden]
@@ -531,10 +539,10 @@ function subirBajar(target, objTranslate) {
     id,
     operation: 'upDown',
   }
-  turnOnOff(nuevoTarget, objTranslate)
+  turnOnOff(nuevoTarget, objTranslate, plant)
 }
 
-function editCampos(target, objTranslate, LTYselect) {
+function editCampos(target, objTranslate, LTYselect, plant) {
   try {
     const table = document.querySelector('.tabla-campos')
     const objeto = { ...arrayGlobal.objAlertaAceptarCancelar }
@@ -566,7 +574,7 @@ function editCampos(target, objTranslate, LTYselect) {
             id: target.id,
             operation: 'turnOnOff',
           }
-          turnOnOff(nuevoTarget, objTranslate)
+          turnOnOff(nuevoTarget, objTranslate, plant)
         }
       },
       LTYselect
@@ -578,7 +586,7 @@ function editCampos(target, objTranslate, LTYselect) {
   }
 }
 
-export function nuevoCampo(objTranslate, target) {
+export function nuevoCampo(objTranslate, target, plant) {
   try {
     const table = document.querySelector('.tabla-campos')
     const objeto = { ...arrayGlobal.objAlertaAceptarCancelar }
@@ -592,7 +600,7 @@ export function nuevoCampo(objTranslate, target) {
           orden: response.orden,
           idObservacion: response.idObservacion,
         }
-        addCampo(nuevoTarget, objTranslate)
+        addCampo(nuevoTarget, objTranslate, plant)
       }
     })
     const modal = document.getElementById('modalAlert')
@@ -656,7 +664,8 @@ function addCeldaFilaCampo(
   selects,
   cantidadDeRegistros,
   idReporte,
-  objTranslate
+  objTranslate,
+  plant
 ) {
   try {
     const newRow = document.createElement('tr')
@@ -667,7 +676,8 @@ function addCeldaFilaCampo(
         array,
         index,
         selects,
-        cantidadDeRegistros
+        cantidadDeRegistros,
+        objTranslate
       )
 
       if (celda.add) {
@@ -706,7 +716,7 @@ function addCeldaFilaCampo(
               id: e.target.getAttribute('data-id'),
               operation: 'turnOnOff',
             }
-            turnOnOff(target, objTranslate)
+            turnOnOff(target, objTranslate, plant)
           })
           cell.appendChild(img)
         }
@@ -721,7 +731,7 @@ function addCeldaFilaCampo(
           img.setAttribute('data-id', idReporte)
           img.setAttribute('data-col', col)
           let param = 's'
-          const vacio = trO('Vacío') || 'Vacío'
+          const vacio = trO('Vacío', objTranslate) || 'Vacío'
           img.addEventListener('click', (e) => {
             e.preventDefault()
             const target = {
@@ -732,7 +742,7 @@ function addCeldaFilaCampo(
               id: e.target.getAttribute('data-id'),
               col: e.target.getAttribute('data-col'),
             }
-            editCampos(target, objTranslate, selects)
+            editCampos(target, objTranslate, selects, plant)
           })
           cell.appendChild(img)
         }
@@ -769,7 +779,7 @@ function addCeldaFilaCampo(
               posicion,
               arrayOrden,
             }
-            subirBajar(target, objTranslate)
+            subirBajar(target, objTranslate, plant)
           })
           const imgUp = document.createElement('img')
           imgUp.setAttribute('class', `img-orden`)
@@ -794,7 +804,7 @@ function addCeldaFilaCampo(
               posicion,
               arrayOrden,
             }
-            subirBajar(target, objTranslate)
+            subirBajar(target, objTranslate, plant)
           })
 
           if (celda.buttonOrden === 2) {
@@ -819,7 +829,7 @@ function addCeldaFilaCampo(
   }
 }
 
-async function viewer(selector, array, objTranslate) {
+async function viewer(selector, array, objTranslate, plant) {
   //!editar
   try {
     arrayOrden = []
@@ -829,11 +839,10 @@ async function viewer(selector, array, objTranslate) {
     }
 
     const filtrado = array.filter((subArray) => subArray[23] === selector)
-
     const selects = await traerRegistros(
       'traerSelects',
       '/traerLTYcontrol',
-      null
+      plant
     )
     const elemento = document.querySelector('.div-encabezadoPastillas')
     const div1 = document.querySelector('.div1')
@@ -841,7 +850,7 @@ async function viewer(selector, array, objTranslate) {
     span.setAttribute('id', 'idTituloDelReporte')
     div1.innerHTML = ''
     const tituloDelReporte = `${selector}-${
-      trA(filtrado[0][0]) || filtrado[0][0]
+      trA(filtrado[0][0], objTranslate) || filtrado[0][0]
     }`
     span.innerText = tituloDelReporte
     div1.appendChild(span)
@@ -865,7 +874,8 @@ async function viewer(selector, array, objTranslate) {
           selects,
           filtrado.length,
           selector,
-          objTranslate
+          objTranslate,
+          plant
         )
         tbody.appendChild(newRow)
       })
@@ -891,7 +901,8 @@ function estilosCell(
   indice,
   objTranslate,
   arrayControl,
-  id
+  id,
+  plant
 ) {
   const cell = document.createElement('td')
   cell.textContent = datos
@@ -934,9 +945,10 @@ function estilosCell(
     imagen.src = `${SERVER}/assets/img/icons8-view-30.png`
     imagen.style.cursor = 'pointer'
     imagen.setAttribute('data-index', id)
+    imagen.setAttribute('data-plant', plant)
     imagen.addEventListener('click', (e) => {
       const sel = e.target.getAttribute('data-index')
-      viewer(sel, arrayControl, objTranslate)
+      viewer(sel, arrayControl, objTranslate, plant)
     })
     cell.appendChild(imagen)
   }
@@ -944,7 +956,14 @@ function estilosCell(
   return cell
 }
 
-function estilosTbodyCell(element, index, objTranslate, arrayControl, id) {
+function estilosTbodyCell(
+  element,
+  index,
+  objTranslate,
+  arrayControl,
+  id,
+  plant
+) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 1; i++) {
@@ -972,7 +991,8 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl, id) {
       indice,
       objTranslate,
       arrayControl,
-      id
+      id,
+      plant
     )
     newRow.appendChild(cell)
   }
@@ -993,7 +1013,7 @@ function eliminarDuplicadosPorPrimerElemento(arr) {
   return resultado
 }
 
-function completaTabla(arrayControl, objTranslate) {
+function completaTabla(arrayControl, objTranslate, plant) {
   const tbody = document.querySelector('tbody')
   // const cantidadDeRegistros = arrayControl.length;
   const arrayMapeado = arrayControl.map((fila) => [
@@ -1030,7 +1050,8 @@ function completaTabla(arrayControl, objTranslate) {
       index,
       objTranslate,
       arrayControl,
-      id
+      id,
+      plant
     )
     tbody.appendChild(newRow)
   })
@@ -1038,13 +1059,13 @@ function completaTabla(arrayControl, objTranslate) {
   tableControlViews.style.display = 'block'
 }
 
-function loadTabla(arrayControl, encabezados, objTranslate) {
+function loadTabla(arrayControl, encabezados, objTranslate, plant) {
   const miAlerta = new Alerta()
   const arraySinDuplicados = eliminarDuplicadosPorPrimerElemento(arrayControl)
 
   if (arraySinDuplicados.length > 0) {
     encabezado(encabezados, objTranslate)
-    completaTabla(arrayControl, objTranslate)
+    completaTabla(arrayControl, objTranslate, plant)
     // array = [...arrayControl];
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
@@ -1072,8 +1093,13 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
   }
 }
 
-export default function tablaVacia(arrayControl, encabezados, objTranslate) {
+export default function tablaVacia(
+  arrayControl,
+  encabezados,
+  objTranslate,
+  plant
+) {
   setTimeout(() => {
-    loadTabla(arrayControl, encabezados, objTranslate)
+    loadTabla(arrayControl, encabezados, objTranslate, plant)
   }, 200)
 }

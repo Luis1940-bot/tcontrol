@@ -236,7 +236,7 @@ function viewerConceptos(array, objTrad) {
     const thead = document.createElement('thead')
     const tr = document.createElement('tr')
     arrayWidthEncabezado = [...encabezados.width]
-    const cell = estilosTheadCell('Concepto', 0)
+    const cell = estilosTheadCell('Concepto', 0, objTrad)
     tr.appendChild(cell)
     thead.appendChild(tr)
     table.appendChild(thead)

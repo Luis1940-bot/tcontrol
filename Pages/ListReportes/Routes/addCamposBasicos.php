@@ -10,10 +10,10 @@ function generarCodigoAlfabetico($nombre) {
   return $codigo;
 }
 
-function addCampos($nombre, $pdo, $lastInsertedId){
+function addCampos($nombre, $pdo, $lastInsertedId, $idLTYcliente){
     $codigoBase = generarCodigoAlfabetico($nombre);
-    $campos = "control, nombre, tipodato, detalle, tpdeobserva, idLTYreporte, orden, visible, requerido";
-    $interrogantes = "?, ?, ?, ?, ?, ?, ?, ?, ?";
+    $campos = "control, nombre, tipodato, detalle, tpdeobserva, idLTYreporte, orden, visible, requerido, idLTYcliente";
+    $interrogantes = "?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
     
     try {
         $pdo->beginTransaction();
@@ -37,7 +37,7 @@ function addCampos($nombre, $pdo, $lastInsertedId){
                 $nombreCampo = 'OBSERVACIÓN';
             }
 
-            $datos = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $lastInsertedId, $i, 's', 1];
+            $datos = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $lastInsertedId, $i, 's', 1, $idLTYcliente];
             $sql = "INSERT INTO LTYcontrol ($campos) VALUES ($interrogantes);";
             $sentencia = $pdo->prepare($sql);
             $sentencia->execute($datos);

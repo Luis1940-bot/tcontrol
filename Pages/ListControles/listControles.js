@@ -60,7 +60,10 @@ function leeApp(json) {
       const planta = objButtons.planta
       document.getElementById('spanUbicacion').textContent = planta
 
-      cargaTabla(objTranslate)
+      const user = desencriptar(sessionStorage.getItem('user'))
+      const { plant } = user
+
+      cargaTabla(objTranslate, plant)
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -91,16 +94,18 @@ function cambiaColorPastillas(button) {
 
 function addCampo(e) {
   cambiaColorPastillas(e)
+  const plant = e.target.getAttribute('data-plant')
   const idTituloDelReporte = document.getElementById('idTituloDelReporte')
   const reporte = idTituloDelReporte.textContent
   const partes = reporte.split(/-(.+)/)
   const antesDelGuion = partes[0].trim()
   const despuesDelGuion = partes[1] ? partes[1].trim() : ''
-  nuevoCampo(objTranslate, { antesDelGuion, despuesDelGuion })
+  nuevoCampo(objTranslate, { antesDelGuion, despuesDelGuion }, parseInt(plant))
 }
 
 function clonarControl(e) {
   cambiaColorPastillas(e)
+  const plant = e.target.getAttribute('data-plant')
   const idTituloDelReporte = document.getElementById('idTituloDelReporte')
   const reporte = idTituloDelReporte.textContent
   const partes = reporte.split(/-(.+)/)
@@ -110,10 +115,10 @@ function clonarControl(e) {
     idLTYreporte,
     nameReporte,
   }
-  clonarCamposAReporte(objTranslate, target)
+  clonarCamposAReporte(objTranslate, target, parseInt(plant))
 }
 
-function cargaPastillas() {
+function cargaPastillas(plant) {
   try {
     const agregar = trO('Agregar', objTranslate) || 'Agregar'
     const clonar = trO('Clonar', objTranslate) || 'Clonar'
@@ -128,6 +133,7 @@ function cargaPastillas() {
     for (let i = 0; i < pastillas.clase.length; i++) {
       let button = document.createElement('button')
       button.setAttribute('class', pastillas.clase[i])
+      button.setAttribute('data-plant', plant)
       button.textContent =
         trO(pastillas.text[i], objTranslate) || pastillas.text[i]
       button.style.color = pastillas.color[i]
@@ -166,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
       leeApp(`App/${plant}/app`)
-      cargaPastillas()
+      cargaPastillas(plant)
     }, 200)
   }
   spinner.style.visibility = 'hidden'

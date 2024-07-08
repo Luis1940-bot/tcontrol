@@ -10,19 +10,20 @@
             $activo = 's';
             $nivel = 3; 
             $concepto = $objeto['concepto'];
+            $idLTYcliente = $objeto['idLTYcliente'];
 
             
             $conn = mysqli_connect($host,$user,$password,$dbname);
             if ($conn->connect_error) {
                 die("Conexión fallida: " . $conn->connect_error);
             }
-            $sql = "INSERT INTO LTYselect (selector, detalle, orden, activo, nivel, concepto) VALUES (?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO LTYselect (selector, detalle, orden, activo, nivel, concepto, idLTYcliente) VALUES (?, ?, ?, ?, ?, ?, ?);";
           
             $stmt = $conn->prepare($sql);
             if ($stmt === false) {
                 die("Error al preparar la consulta: " . $conn->error);
             }
-            $stmt->bind_param("isisis", $selector, $detalle, $orden, $activo, $nivel, $concepto);
+            $stmt->bind_param("isisisi", $selector, $detalle, $orden, $activo, $nivel, $concepto, $idLTYcliente);
           
             if ($stmt->execute() === true) {
                 $last_id = $conn->insert_id;

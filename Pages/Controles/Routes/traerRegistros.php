@@ -18,7 +18,7 @@
                   , tipousuario.tipo AS nivel
                   FROM LTYreporte
                   LEFT JOIN tipousuario ON tipousuario.idtipousuario=LTYreporte.nivel  
-                  WHERE LTYreporte.activo='s' ORDER BY LTYreporte.nombre ASC;";
+                  WHERE LTYreporte.idLTYcliente = ". $sql_i ." AND LTYreporte.activo='s' ORDER BY LTYreporte.nombre ASC;";
               break;
 
               case 'verificarControl':

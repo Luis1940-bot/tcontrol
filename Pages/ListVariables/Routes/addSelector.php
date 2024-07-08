@@ -4,6 +4,12 @@
         function addSelector($q) {
 
           try {
+            // $host = "68.178.195.199"; 
+            // $user = "developers";
+            // $password = "6vLB#Q0bOVo4";
+            // $dbname = "tc1000";
+            // $port = '3306';
+            // $charset='utf-8';
            include_once BASE_DIR . "/Routes/datos_base.php";
 
           $detalle = $q['detalle'];
@@ -11,6 +17,7 @@
           $activo = 's';
           $nivel = $q['nivel']; 
           $concepto = $q['concepto'];
+          $idLTYcliente = $q['idLTYcliente'];
 
 
           $conn = mysqli_connect($host, $user, $password, $dbname);
@@ -19,7 +26,8 @@
           }
 
           // Iniciar transacción
-          $conn->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+          // $conn->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+          $conn->autocommit(false);
           $conn->query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
 
           // Consulta para obtener el máximo valor de 'selector'
@@ -35,14 +43,14 @@
           $selector = $maxSelector + 1;  // Incrementar el máximo valor encontrado
 
           // Preparar la sentencia de inserción con el nuevo valor de 'selector'
-          $sql = "INSERT INTO LTYselect (selector, detalle, orden, activo, nivel, concepto) VALUES (?, ?, ?, ?, ?, ?);";
+          $sql = "INSERT INTO LTYselect (selector, detalle, orden, activo, nivel, concepto, idLTYcliente) VALUES (?, ?, ?, ?, ?, ?, ?);";
           $stmt = $conn->prepare($sql);
           if ($stmt === false) {
               $conn->rollback(); // Revertir transacción en caso de error
               die("Error al preparar la consulta: " . $conn->error);
           }
 
-          $stmt->bind_param("isisis", $selector, $detalle, $orden, $activo, $nivel, $concepto);
+          $stmt->bind_param("isisisi", $selector, $detalle, $orden, $activo, $nivel, $concepto, $idLTYcliente);
 
           if ($stmt->execute() === true) {
               
@@ -70,7 +78,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
-        // $datos = '{"ruta":"/addSelector","rax":"&new=Mon May 06 2024 14:21:40 GMT-0300 (hora estándar de Argentina)","q":{"concepto":"","detalle":"FACTUM","nivel":"1"}}';
+        // $datos = '{"ruta":"/addSelector","rax":"&new=Thu Jul 04 2024 09:26:43 GMT-0300 (hora estándar de Argentina)","q":{"concepto":"Modificar","detalle":"UUUUUU","nivel":"1","idLTYcliente":7}}';
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

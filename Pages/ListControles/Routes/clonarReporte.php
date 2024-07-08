@@ -79,7 +79,8 @@ function clonarReporte($datos) {
                 con.requerido,
                 con.tiene_hijo,
                 con.rutina_hijo,
-                con.enable1
+                con.enable1,
+                con.idLTYcliente
             FROM LTYcontrol con
             WHERE con.idLTYreporte=? ORDER BY con.orden ASC";
 
@@ -128,9 +129,8 @@ function clonarReporte($datos) {
                 throw new Exception('Error al ejecutar la consulta de DELETE: ' . $stmtDelete->error);
             }
             $stmtDelete->close();
-
-            $interrogantes = "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
-            $parametros = "sssissiiisssssssssiisi";
+            $interrogantes = "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
+            $parametros = "sssissiiisssssssssiisii";
             foreach ($campos as &$campo) {
                 $cadena = $campo['control'];
                 $longitud = strlen($cadena) - 1;
@@ -165,7 +165,8 @@ function clonarReporte($datos) {
                     $campo['requerido'],
                     $campo['tiene_hijo'],
                     $campo['rutina_hijo'] ?? null,
-                    $campo['enable1']
+                    $campo['enable1'],
+                    $campo['idLTYcliente']
                 ];
                 $stmtInsert->bind_param($parametros, ...$datosAdd);
     
@@ -197,7 +198,7 @@ function clonarReporte($datos) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"q":"%7B%22origen%22%3A328%2C%22destino%22%3A329%7D","ruta":"/clonarReporte","rax":"&new=Wed Jun 12 2024 09:11:05 GMT-0300 (hora estándar de Argentina)"}';
+$datos = '{"q":"%7B%22origen%22%3A4%2C%22destino%22%3A10%7D","ruta":"/clonarReporte","rax":"&new=Mon Jul 08 2024 10:24:20 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

@@ -36,7 +36,7 @@
                             IFNULL(rep.idLTYreporte, '') AS idLTYreporte
                           FROM LTYreporte rep
                             LEFT JOIN LTYcontrol con ON con.idLTYreporte = rep.idLTYreporte
-                          WHERE rep.activo = 's'
+                          WHERE rep.activo = 's' and rep.idLTYcliente = ". $sql_i ."
                             ORDER BY rep.nombre ASC, con.orden ASC;";
               break;
 
@@ -49,6 +49,7 @@
                             sel.selector AS selector,
                             sel.detalle AS con
                           FROM LTYselect sel 
+                          WHERE sel.idLTYcliente = ". $sql_i ."
                           GROUP BY sel.detalle
                           ORDER BY sel.detalle ASC;";
               break;

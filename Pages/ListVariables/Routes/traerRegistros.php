@@ -11,7 +11,9 @@
               case 'traerVariables':
                   $sql="SELECT SQL_NO_CACHE LTYselect.idLTYselect, LTYselect.detalle, LTYselect.concepto, LTYselect.activo
                             ,LTYselect.selector, LTYselect.orden, LTYselect.nivel, RAND(),NOW() 
-                            FROM LTYselect ORDER BY LTYselect.detalle ASC;";
+                            FROM LTYselect 
+                            WHERE LTYselect.idLTYcliente = ". $sql_i ."
+                            ORDER BY LTYselect.detalle ASC;";
               break;
 
               case 'traerSelectReporte':
@@ -29,6 +31,7 @@
                           INNER JOIN LTYreporte rep ON rep.idLTYreporte = sRep.idLTYreporte
                           INNER JOIN tipousuario tu ON tu.idtipousuario = sRep.idusuario
                         WHERE 
+                          rep.idLTYreporte = ". $sql_i ." AND
                           rep.activo = 's';";
               break;
 
@@ -43,6 +46,7 @@
                             LTYreporte rep
                             INNER JOIN tipousuario tUsu ON tUsu.idtipousuario = rep.nivel
                           WHERE 
+                            rep.idLTYreporte = ". $sql_i ." AND
                             rep.activo = 's'
                           ORDER BY reporte ASC;";
               break;

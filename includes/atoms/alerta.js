@@ -844,11 +844,13 @@ function completaObjetoReporte() {
   selects.forEach((select) => {
     select.style.background = '#fff'
   })
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
   const objetoReporte = {
     id: '',
     nombre: '',
     detalle: '',
-    idLTYcliente: 1,
+    idLTYcliente: plant,
     idLTYarea: 0,
     titulo: '',
     rotulo1: '',
@@ -961,14 +963,14 @@ function completaObjetoReporte() {
   if (email_ === 1) {
     const emailGroup = document.querySelector('.email-group')
     const remainingPastillitas = emailGroup.querySelectorAll(
-      '.div-pastillita > label'
+      '.div-pastillita .label-email'
     )
     let direcciones_emails = ''
     for (let i = 0; i < remainingPastillitas.length; i++) {
       const element = remainingPastillitas[i]
       direcciones_emails += `/${element.textContent}`
     }
-    direcciones_emails = direcciones_emails.substr(1)
+    direcciones_emails = direcciones_emails.slice(1)
     objetoReporte.direcciones_mail = direcciones_emails
   }
 
@@ -1157,12 +1159,15 @@ const funcionReporteGuardarComo = async () => {
 const funcionSelectorGuardarNuevo = async () => {
   const nombreDelSelect = document.getElementById('nombreDelSelect')
   const tipoDeUsuario = document.getElementById('tipodeusuario')
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
 
   if (nombreDelSelect.value !== '') {
     const objeto = {
       concepto: trO('Modificar', objTraductor) || 'Modificar',
       detalle: nombreDelSelect.value.toUpperCase(),
       nivel: tipoDeUsuario.value,
+      idLTYcliente: plant,
     }
     const resultado = await addSelector(objeto, '/addSelector')
     if (resultado.success) {
@@ -1186,6 +1191,7 @@ const funcionSelectorGuardarCambios = async () => {
   const nombreDelSelect = document.getElementById('nombreDelSelect')
   const tipoDeUsuario = document.getElementById('tipodeusuario')
   const numeroDelSelector = document.getElementById('numeroDelSelector')
+
   if (nombreDelSelect.value !== '') {
     const objeto = {
       selector: numeroDelSelector.value,
@@ -1224,11 +1230,13 @@ const funcionGuardarCambiosEnVariables = async () => {
       arrayValue.push(valor)
     }
   })
-
+  const user = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = user
   if (arrayId.length > 0) {
     const objeto = {
       id: arrayId,
       value: arrayValue,
+      idLTYcliente: plant,
     }
     const response = await addVariable(objeto, '/updateVariable')
 
@@ -4588,7 +4596,7 @@ class Alerta {
     this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
     // Crear el contenido del modal
     const modalContent = createDiv(obj.divContent)
-
+    const span = createSpan(obj.close)
     obj.divCajita.hoverColor = null
     obj.divCajita.position = null
     const divClose = createDiv(obj.divCajita)

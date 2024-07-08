@@ -1,7 +1,7 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-function agregarCampoNuevo(objeto, ruta) {
+function agregarCampoNuevo(objeto, ruta, sql_i) {
   // eslint-disable-next-line no-console
   console.time('insert_time')
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objeto))
@@ -13,6 +13,7 @@ function agregarCampoNuevo(objeto, ruta) {
     q: nuevoObjeto,
     ruta,
     rax,
+    sql_i,
   }
   const datos = JSON.stringify(obj)
   const url = `${SERVER}/Routes/index.php`

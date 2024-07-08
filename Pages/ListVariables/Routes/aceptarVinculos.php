@@ -9,6 +9,7 @@
             $idLTYreporte = $objeto['idLTYreporte'];
             $activo = $objeto['activo'];
             $idusuario = $objeto['idusuario'];
+            $idLTYcliente = $objeto['idLTYcliente'];
 
             
             $conn = mysqli_connect($host,$user,$password,$dbname);
@@ -16,13 +17,13 @@
                 ob_end_clean();
                 die("Conexión fallida: " . $conn->connect_error);
             }
-            $sql = "INSERT INTO LTYselectReporte (selector, idLTYreporte, activo, idusuario) VALUES (?, ?, ?, ?);";
+            $sql = "INSERT INTO LTYselectReporte (selector, idLTYreporte, activo, idusuario, idLTYcliente) VALUES (?, ?, ?, ?, ?);";
           
             $stmt = $conn->prepare($sql);
             if ($stmt === false) {
                 die("Error al preparar la consulta: " . $conn->error);
             }
-            $stmt->bind_param("iisi", $selector, $idLTYreporte, $activo, $idusuario);
+            $stmt->bind_param("iisii", $selector, $idLTYreporte, $activo, $idusuario, $idLTYcliente);
           
             if ($stmt->execute() === true) {
                 $last_id = $conn->insert_id;

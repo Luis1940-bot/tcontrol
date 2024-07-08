@@ -39,10 +39,10 @@
                 ]
             ],
             "apps" => [
-                "name" => [],
-                "type" => [],
-                "ruta" => [],
-                "nivel" => []
+                "name" => ["SCG", "Admin"],
+                "type" => ["ctrl", "ctrl"],
+                "ruta" => ["Menu/index.php", "Admin/index.php"],
+                "nivel" => [3, 4]
             ],
         ];
 

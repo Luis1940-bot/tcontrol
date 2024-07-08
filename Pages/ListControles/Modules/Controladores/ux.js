@@ -1,7 +1,7 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-function turnControl(target) {
+function turnControl(target, sql_i) {
   // eslint-disable-next-line no-console
   console.time('update_time')
   const rax = `&new=${new Date()}`
@@ -9,6 +9,7 @@ function turnControl(target) {
     q: target,
     ruta: '/turnOnOff',
     rax,
+    sql_i,
   }
 
   const datos = JSON.stringify(obj)
@@ -32,6 +33,7 @@ function turnControl(target) {
       })
       .then((data) => {
         if (typeof data === 'object') {
+          // console.log(data)
           // eslint-disable-next-line no-console
           // eslint-disable-next-line no-console
           console.timeEnd('update_time')

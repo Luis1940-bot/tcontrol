@@ -13,7 +13,7 @@
                             ar.idLTYarea AS id, 
                             ar.areax AS area 
                           FROM LTYarea ar 
-                          WHERE ar.idLTYcliente = $plant AND ar.activo = 's' AND ar.visible = 's' 
+                          WHERE ar.idLTYcliente = ". $plant ." AND ar.activo = 's' AND ar.visible = 's' 
                           ORDER BY ar.idLTYarea ASC;";
               break;
 

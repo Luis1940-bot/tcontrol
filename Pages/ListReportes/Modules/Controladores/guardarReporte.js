@@ -4,13 +4,17 @@ const SERVER = baseUrl
 function guardarReporte(objeto, ruta) {
   // eslint-disable-next-line no-console
   console.time('insert_time')
+  const plantx = objeto.idLTYcliente
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objeto))
   const rax = `&new=${new Date()}`
+
   let obj = {
     q: nuevoObjeto,
     ruta,
     rax,
+    planta: plantx,
   }
+  console.log(plantx)
   const datos = JSON.stringify(obj)
   const url = `${SERVER}/Routes/index.php`
   // console.log(datos)

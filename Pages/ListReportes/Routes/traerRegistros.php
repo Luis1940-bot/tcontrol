@@ -19,6 +19,7 @@
                   , LTYreporte.idLTYarea
                   FROM LTYreporte
                   LEFT JOIN tipousuario ON tipousuario.idtipousuario=LTYreporte.nivel  
+                  WHERE LTYreporte.idLTYcliente = ". $sql_i ."
                   ORDER BY LTYreporte.nombre ASC;";
               break;
 
@@ -27,7 +28,7 @@
               break;
 
               case 'traerAreas':
-                $sql = "SELECT c.idLTYarea AS 'ID', c.areax AS 'AREA' FROM LTYarea c WHERE c.activo='s' ORDER BY c.areax ASC;";
+                $sql = "SELECT c.idLTYarea AS 'ID', c.areax AS 'AREA' FROM LTYarea c WHERE c.activo='s' AND c.idLTYcliente = ". $sql_i ." ORDER BY c.areax ASC;";
               break;
 
               default:

@@ -12,7 +12,7 @@ function generarCodigoAlfabetico($reporte) {
     return $codigo;
 }
 
-function addCampo($datos) {
+function addCampo($datos, $plant) {
     $dato_decodificado = urldecode($datos);
     $objeto_json = json_decode($dato_decodificado, true);
     // $host = "68.178.195.199"; 
@@ -30,12 +30,13 @@ function addCampo($datos) {
     $nombreCampo = $objeto_json['campo'];
     $idLTYreporte = $objeto_json['idLTYreporte'];
     $idObservacion = $objeto_json['idObservacion'];
+    $idLTYcliente = $plant;
     
     $codigoBase = generarCodigoAlfabetico($reporte);
     $i = $orden + 1;
     $codigo = $codigoBase . $i;
-    $campos = "control, nombre, tipodato, detalle, tpdeobserva, idLTYreporte, orden, visible, requerido";
-    $interrogantes = "?, ?, ?, ?, ?, ?, ?, ?, ?";
+    $campos = "control, nombre, tipodato, detalle, tpdeobserva, idLTYreporte, orden, visible, requerido, idLTYcliente";
+    $interrogantes = "?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
     $tipoDeDato = 'x';
     $detalle = '------';
 
@@ -71,7 +72,7 @@ function addCampo($datos) {
         }
 
         // Ejecución del INSERT
-        $datosAdd = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $idLTYreporte, $orden, 's', 0];
+        $datosAdd = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $idLTYreporte, $orden, 's', 0, $idLTYcliente];
         $sqlInsert = "INSERT INTO LTYcontrol ($campos) VALUES ($interrogantes)";
         $stmtInsert = $mysqli->prepare($sqlInsert);
 
@@ -79,14 +80,14 @@ function addCampo($datos) {
             throw new Exception('Error al preparar la consulta de INSERT: ' . $mysqli->error);
         }
 
-        $stmtInsert->bind_param("sssssiisi", ...$datosAdd);
+        $stmtInsert->bind_param("sssssiisis", ...$datosAdd);
 
         if (!$stmtInsert->execute()) {
             throw new Exception('Error al ejecutar la consulta de INSERT: ' . $stmtInsert->error);
         }
 
         // Llamada a la función traerControlActualizado
-        $actualizado = traerControlActualizado($mysqli);
+        $actualizado = traerControlActualizado($mysqli, $idLTYcliente);
 
         $response = array('success' => true, 'actualizado' => $actualizado);
 
@@ -119,7 +120,8 @@ error_log('JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];
-  addCampo($datos);
+  $sql_i = $data['sql_i'];
+  addCampo($datos, $sql_i);
 } else {
   echo "Error al decodificar la cadena JSON";
 }

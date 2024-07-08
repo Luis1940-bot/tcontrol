@@ -1,18 +1,5 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
 import readJSON from '../../../controllers/read-JSON.js'
-
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateArchivo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolArchivo,
-  // eslint-disable-next-line import/extensions
-} from '../../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import personModal from '../../../controllers/person.js'
 // eslint-disable-next-line import/extensions
@@ -33,19 +20,13 @@ import { Alerta } from '../../../includes/atoms/alerta.js'
 import variableOnOff from '../Modules/Controladores/variableOnOff.js'
 import variableUpDown from '../Modules/Controladores/variableUpDown.js'
 import addVariable from '../Modules/Controladores/aceptarVariable.js'
+import { configPHP } from '../../../controllers/configPHP.js'
+import { arraysLoadTranslate } from '../../../controllers/arraysLoadTranslate.js'
+import { trO } from '../../../controllers/trOA.js'
 
 const SERVER = baseUrl
+let objTranslate = []
 
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
 let arrayReportesVinculdaos = []
 
 const spinner = document.querySelector('.spinner')
@@ -60,32 +41,6 @@ function leeVersion(json) {
       // eslint-disable-next-line no-console
       console.error('Error al cargar el archivo:', error)
     })
-}
-
-function trO(palabra) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
-function trA(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolArchivos.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateArchivos[index]
-  }
-  return palabra
 }
 
 async function conceptoOnOff(id, status, item, arrayActual) {
@@ -153,7 +108,7 @@ function traduccionDeLabels() {
   const form = document.querySelector('#formVariable')
   const labels = form.querySelectorAll('label')
   labels.forEach((label) => {
-    let texto = trO(label.textContent) || label.textContent
+    let texto = trO(label.textContent, objTranslate) || label.textContent
     label.innerText = texto
   })
 }
@@ -277,7 +232,7 @@ function cargaVariables(array) {
 
   try {
     const titulo = document.createElement('span')
-    titulo.innerText = trO('Variables') || 'Variables'
+    titulo.innerText = trO('Variables', objTranslate) || 'Variables'
     titulo.setAttribute('id', 'titulo')
     div2.appendChild(titulo)
     array.forEach((element, index) => {
@@ -402,11 +357,14 @@ async function agregarVariable() {
     const nuevoOrden = idPastillita + 1
     const numeroDelSelector = document.getElementById('numeroDelSelector')
     const nombreDelSelect = document.getElementById('nombreDelSelect')
+    const user = desencriptar(sessionStorage.getItem('user'))
+    const { plant } = user
     const objeto = {
       selector: parseInt(numeroDelSelector.value),
       nombre: nombreDelSelect.value,
       orden: nuevoOrden,
       concepto: inputValue,
+      idLTYcliente: plant,
     }
 
     const resultado = await addVariable(objeto, '/addVariable')
@@ -480,12 +438,16 @@ async function agregarVinculo(div) {
       }
     })
 
+    const user = desencriptar(sessionStorage.getItem('user'))
+    const { plant } = user
+
     if (guarda) {
       const objeto = {
         selector: Number(numeroDelSelector.value),
         idLTYreporte: Number(selectValue),
         activo: 's',
         idusuario: Number(tipodeusuario.value),
+        idLTYcliente: plant,
       }
 
       const resultado = await addVariable(objeto, '/addVinculo')
@@ -500,7 +462,8 @@ async function agregarVinculo(div) {
         if (titulo) {
           titulo.remove()
         }
-        traerSelectReportes()
+
+        traerSelectReportes(plant)
       }
     }
   }
@@ -547,15 +510,15 @@ buttonAgregar.addEventListener('click', (e) => {
     input.focus()
     const buttonAceptar = document.createElement('button')
     buttonAceptar.setAttribute('class', 'button-add')
-    buttonAceptar.innerText = trO('Aceptar') || 'Aceptar'
+    buttonAceptar.innerText = trO('Aceptar', objTranslate) || 'Aceptar'
     buttonAceptar.style.marginLeft = '5px'
-    buttonAceptar.addEventListener('click', () => {
+    buttonAceptar.addEventListener('click', (e) => {
       //aceptar
       agregarVariable(e)
     })
     const buttonCancel = document.createElement('button')
     buttonCancel.setAttribute('class', 'button-add')
-    buttonCancel.innerText = trO('Cancelar') || 'Cancelar'
+    buttonCancel.innerText = trO('Cancelar', objTranslate) || 'Cancelar'
     buttonCancel.style.marginLeft = '5px'
     buttonCancel.style.color = 'red'
     buttonCancel.addEventListener('click', () => {
@@ -627,7 +590,7 @@ buttonVincular.addEventListener('click', (e) => {
     const buttonAceptar = document.createElement('button')
     buttonAceptar.setAttribute('class', 'button-add')
     buttonAceptar.setAttribute('id', `b${idPastillita}`)
-    buttonAceptar.innerText = trO('Aceptar') || 'Aceptar'
+    buttonAceptar.innerText = trO('Aceptar', objTranslate) || 'Aceptar'
     buttonAceptar.style.marginLeft = '5px'
     buttonAceptar.addEventListener('click', (e) => {
       //aceptar
@@ -638,7 +601,7 @@ buttonVincular.addEventListener('click', (e) => {
     const buttonCancel = document.createElement('button')
     buttonCancel.setAttribute('class', 'button-add')
     buttonCancel.setAttribute('id', `c${idPastillita}`)
-    buttonCancel.innerText = trO('Cancelar') || 'Cancelar'
+    buttonCancel.innerText = trO('Cancelar', objTranslate) || 'Cancelar'
     buttonCancel.style.marginLeft = '5px'
     buttonCancel.style.color = 'red'
     buttonCancel.addEventListener('click', () => {
@@ -672,41 +635,10 @@ function dondeEstaEn(lugar, control_T) {
   // const { control_T } = desencriptar(sessionStorage.getItem('contenido'))
 
   // let lugar = trO('EDITAR: ') || 'EDITAR: '
-  lugar = `${lugar} ${trO(control_T) || control_T}`
+  lugar = `${lugar} ${trO(control_T, objTranslate) || control_T}`
   lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
-}
-
-function configPHP(user) {
-  const divVolver = document.querySelector('.div-volver')
-  divVolver.style.display = 'block'
-  document.getElementById('volver').style.display = 'block'
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  document.querySelector('.div-encabezado').style.marginTop = '5px'
-  const buttonAgregar = document.getElementById('buttonAgregar')
-  buttonAgregar.innerText = trO('Variables') || 'Variables'
-  const buttonVincular = document.getElementById('buttonVincular')
-  buttonVincular.innerText = trO('Controles') || 'Controles'
-
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
 
 function cargarSelects(array, selector, primerOption) {
@@ -718,7 +650,7 @@ function cargarSelects(array, selector, primerOption) {
   primerOption ? select.appendChild(option) : null
   array.forEach((element) => {
     const option = document.createElement('option')
-    option.text = trO(element[1]) || element[1]
+    option.text = trO(element[1], objTranslate) || element[1]
     option.value = element[0]
     select.appendChild(option)
   })
@@ -741,7 +673,7 @@ function cargaReportesVinculado(arraySelectReporte) {
       const sinControles = document.getElementById('sinControles')
       sinControles.style.display = 'none'
       const titulo = document.createElement('span')
-      titulo.innerText = trO('Controles') || 'Controles'
+      titulo.innerText = trO('Controles', objTranslate) || 'Controles'
       titulo.setAttribute('id', 'titulo-c')
       div3.appendChild(titulo)
     }
@@ -803,11 +735,11 @@ async function traerInfoSelects() {
   cargarSelects(tipoDeUsuario, 'tipodeusuario', false)
 }
 
-async function traerSelectReportes() {
+async function traerSelectReportes(plant) {
   const selectReporte = await traerRegistros(
     'traerSelectReporte',
     '/traerSelectReporte',
-    null
+    plant
   )
   const numeroDelSelector = document.getElementById('numeroDelSelector')
   const id = numeroDelSelector.value
@@ -838,18 +770,23 @@ async function traerSelectReportes() {
   arrayReportesVinculdaos = await traerRegistros(
     'traerReporteParaVincular',
     '/traerReporteParaVincular',
-    null
+    plant
   )
   cargaReportesVinculado(selectReporte)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   const variable = desencriptar(sessionStorage.getItem('variable'))
-
+  const divVolver = document.querySelector('.div-volver')
+  divVolver.style.display = 'block'
+  document.getElementById('volver').style.display = 'block'
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
+  document.querySelector('.header-McCain').style.display = 'none'
+  document.querySelector('.div-encabezado').style.marginTop = '5px'
+
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'block'
@@ -857,28 +794,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-
-    translateArchivos = data.arrayTranslateArchivo
-    espanolArchivos = data.arrayEspanolArchivo
-
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
-
-    objTranslate.archivosES = [...espanolArchivos]
-    objTranslate.archivosTR = [...translateArchivos]
-
+    objTranslate = await arraysLoadTranslate()
+    const buttonAgregar = document.getElementById('buttonAgregar')
+    buttonAgregar.innerText = trO('Variables', objTranslate) || 'Variables'
+    const buttonVincular = document.getElementById('buttonVincular')
+    buttonVincular.innerText = trO('Controles', objTranslate) || 'Controles'
     leeVersion('version')
     setTimeout(() => {
       // dondeEstaEn()
       leeApp(`App/${plant}/app`)
-      traduccionDeLabels()
+      traduccionDeLabels(objTranslate)
       limpiarInputs()
       if (typeof variable.control_N === 'number') {
         document.getElementById('whereUs').style.display = 'none'
-        dondeEstaEn('', trO('Variable nueva') || 'Variable nueva')
+        dondeEstaEn('', trO('Variable nueva', objTranslate) || 'Variable nueva')
       }
       arrayGlobal.guardarSelectorComo = true
 
@@ -890,11 +819,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         arrayGlobal.guardarSelectorComo = false
       }
       if (typeof variable.control_N === 'string') {
-        let lugar = trO('EDITAR: ') || 'EDITAR: '
+        let lugar = trO('EDITAR: ', objTranslate) || 'EDITAR: '
         dondeEstaEn(lugar, variable.control_T)
         cargaInputs(variable.filtrado[0])
-        cargaVariables(variable.filtrado)
-        traerSelectReportes()
+        cargaVariables(variable.filtrado, objTranslate)
+        traerSelectReportes(plant)
       }
       traerInfoSelects()
     }, 200)
@@ -913,7 +842,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate),
     }
     personModal(user, objTranslate)
   })
@@ -927,18 +856,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (persona) {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
-      const data = await translate(persona.lng)
-      translateOperativo = data.arrayTranslateOperativo
-      espanolOperativo = data.arrayEspanolOperativo
-
-      translateArchivos = data.arrayTranslateArchivo
-      espanolArchivos = data.arrayEspanolArchivo
-
-      objTranslate.operativoES = [...espanolOperativo]
-      objTranslate.operativoTR = [...translateOperativo]
-
-      objTranslate.archivosES = [...espanolArchivos]
-      objTranslate.archivosTR = [...translateArchivos]
+      objTranslate = await arraysLoadTranslate()
       setTimeout(() => {
         // segundaCargaListado()
       }, 200)

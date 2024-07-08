@@ -60,7 +60,10 @@ function leeApp(json) {
       const divButtons = document.querySelector('.div-reportes-buttons')
       divButtons.style.display = 'none'
 
-      cargaTabla(objTranslate)
+      const user = desencriptar(sessionStorage.getItem('user'))
+      const { plant } = user
+
+      cargaTabla(objTranslate, plant)
     })
     .catch((error) => {
       // eslint-disable-next-line no-console

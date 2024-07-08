@@ -7,10 +7,15 @@ async function send(nuevoObjeto, encabezados, plant) {
     formData.append('datos', JSON.stringify(nuevoObjeto))
     formData.append('encabezados', JSON.stringify(encabezados))
     formData.append('plant', plant)
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 240000) // 60 segundos
+    const url = `${SERVER}/Nodemailer/Routes/sendEmail.php`
     // console.log(formData)
-    const response = await fetch(`${SERVER}/Nodemailer/Routes/sendEmail.php`, {
+
+    const response = await fetch(url, {
       method: 'POST',
       body: formData,
+      signal: controller.signal,
     })
 
     if (response.ok) {

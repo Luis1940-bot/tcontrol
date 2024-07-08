@@ -88,3 +88,24 @@ Aguarde unos instantes, se están listando los controles. Gracias!
 No existen variables cargadas. Comuníquese con el administrador.
 Aguarde unos instantes, se están listando las áreas activas. Gracias!
 No existen áreas cargadas. Comuníquese con el administrador.
+Elaboró
+Revisó
+Aprobó
+Vigencia
+Versión
+Modificación
+Fecha actual
+Firma control
+Firma supervisa
+Control de cambios
+No
+Si
+Indeterminado
+Todos los días
+Una vez por semana
+Una vez por quincena
+Una vez por mes
+Una vez por trimestre
+Una vez por semestre
+Una vez por año
+EDITAR

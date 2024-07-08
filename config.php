@@ -1,6 +1,6 @@
 <?php
 // Archivo: config.php
-
+$base = 'http://localhost:8080';
 // Define la ruta base según el entorno
 if (isLocalhost()) {
     $base = 'http://localhost:8080';

@@ -88,3 +88,24 @@ Aguarde alguns instantes, os controles estão sendo listados. Obrigado!
 Não há variáveis ​​carregadas. Entre em contato com o administrador.
 Aguarde alguns instantes, as áreas ativas estão sendo listadas. Obrigado!
 Não há áreas carregadas. Entre em contato com o administrador.
+Elaborado
+Revisado
+aprovado
+Validade
+Versão
+Modificação
+Data atual
+Assinatura de controle
+A empresa supervisiona
+Controle de mudanças
+Não
+Sim
+Indeterminado
+Todos os dias
+Uma vez por semana
+Uma vez a cada duas semanas
+Uma vez por mês
+Uma vez por trimestre
+Uma vez por semestre
+Uma vez ao ano
+EDITAR

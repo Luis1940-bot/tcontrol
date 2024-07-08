@@ -88,3 +88,24 @@ Please wait a few moments, the controls are being listed. Thank you!
 There are no loaded variables. Contact the administrator.
 Please wait a few moments, the active areas are being listed. Thank you!
 There are no loaded areas. Contact the administrator.
+Elaborated
+Revised
+approved
+Validity
+Version
+Modification
+Current date
+Control signature
+Firm supervises
+Change control
+No
+Yeah
+Indeterminate
+Every day
+Once a week
+Once a fortnight
+Once a month
+Once a quarter
+Once a semester
+Once per year
+EDIT

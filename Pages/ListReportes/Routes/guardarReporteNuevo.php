@@ -6,7 +6,7 @@ require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 // include('datos.php');
 include_once "addCamposBasicos.php";
 
-function guardarReporte($datos) {
+function guardarReporte($datos, $plant) {
     $dato_decodificado =urldecode($datos);
     $objeto_json = json_decode($dato_decodificado);
 
@@ -18,6 +18,8 @@ function guardarReporte($datos) {
           $placeholders?$placeholders=$placeholders.','.':'.$clave:$placeholders=':'.$clave;
           $i++;
       }
+      $idLTYcliente = $plant;
+     
     include_once BASE_DIR . "/Routes/datos_base.php";
     try {
         $pdo = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $user, $password);
@@ -42,7 +44,7 @@ function guardarReporte($datos) {
 
         // Respuesta dependiendo del resultado de la inserción.
         if ($cantidad_insert > 0) {
-            addCampos($objeto_json->nombre, $pdo, $lastInsertedId);
+            addCampos($objeto_json->nombre, $pdo, $lastInsertedId, $idLTYcliente);
             $response = [
                 'success' => true,
                 'message' => 'La operación fue exitosa!',
@@ -73,7 +75,7 @@ function guardarReporte($datos) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = $datox;
+
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
   echo json_encode($response);
@@ -85,7 +87,8 @@ error_log('JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];
-  guardarReporte($datos);
+  $plant = $data['planta'];
+  guardarReporte($datos, $plant);
 } else {
   echo "Error al decodificar la cadena JSON";
 }

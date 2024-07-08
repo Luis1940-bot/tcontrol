@@ -1,18 +1,5 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
 import readJSON from '../../../controllers/read-JSON.js'
-
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateArchivo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolArchivo,
-  // eslint-disable-next-line import/extensions
-} from '../../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import personModal from '../../../controllers/person.js'
 // eslint-disable-next-line import/extensions
@@ -30,19 +17,12 @@ import traerRegistros from '../Modules/Controladores/traerRegistros.js'
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../../controllers/variables.js'
 import { Alerta } from '../../../includes/atoms/alerta.js'
+import { configPHP } from '../../../controllers/configPHP.js'
+import { arraysLoadTranslate } from '../../../controllers/arraysLoadTranslate.js'
+import { trO, trA } from '../../../controllers/trOA.js'
 
 const SERVER = baseUrl
-
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
+let objTranslate = []
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -58,37 +38,11 @@ function leeVersion(json) {
     })
 }
 
-function trO(palabra) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
-function trA(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolArchivos.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateArchivos[index]
-  }
-  return palabra
-}
-
-function traduccionDeLabels() {
+function traduccionDeLabels(objTrad) {
   const form = document.querySelector('#formReporte')
   const labels = form.querySelectorAll('label')
   labels.forEach((label) => {
-    let texto = trO(label.textContent) || label.textContent
+    let texto = trO(label.textContent, objTrad) || label.textContent
     label.innerText = texto
   })
 }
@@ -189,70 +143,72 @@ function agregaPastillaEmail(email) {
   }
 }
 
-function cargaInputs(array) {
+function cargaInputs(array, objTrad) {
   // console.log(array)
   try {
     const idControl = document.getElementById('idControl')
     idControl.value = array[1]
 
     const firstName = document.getElementById('firstName')
-    firstName.value = trA(array[0]) || array[0]
+    firstName.value = trA(array[0], objTrad) || array[0]
     const controlReporte = document.getElementById('controlReporte')
-    controlReporte.innerText = trA(array[0]) || array[0]
+    controlReporte.innerText = trA(array[0], objTrad) || array[0]
 
     const titulo = document.getElementById('titulo')
-    titulo.value = trA(array[25]) || array[25]
+    titulo.value = trA(array[25], objTrad) || array[25]
 
     const detalle = document.getElementById('detalle')
-    detalle.value = trO(array[2]) || array[2]
+    detalle.value = trO(array[2], objTrad) || array[2]
 
     const establecimiento = document.getElementById('establecimiento')
-    establecimiento.value = trO(array[4]) || array[4]
+    establecimiento.value = trO(array[4], objTrad) || array[4]
     const areaReporte = document.getElementById('areaReporte')
-    areaReporte.innerText = `${trO('Área') || 'Área'}: ${
+    areaReporte.innerText = `${trO('Área', objTrad) || 'Área'}: ${
       trO(array[13]) || array[13]
     }`
 
     const empresaReporte = document.getElementById('empresaReporte')
-    empresaReporte.innerText = trO(array[4]) || array[4]
+    empresaReporte.innerText = trO(array[4], objTrad) || array[4]
 
     const sectorControlado = document.getElementById('sectorControlado')
-    sectorControlado.value = trO(array[26]) || array[26]
+    sectorControlado.value = trO(array[26], objTrad) || array[26]
 
     const regdc = document.getElementById('regdc')
-    regdc.value = trO(array[8]) || array[8]
+    regdc.value = trO(array[8], objTrad) || array[8]
     const regdcReporte = document.getElementById('regdcReporte')
-    regdcReporte.innerText = trO(array[8]) || array[8]
+    regdcReporte.innerText = trO(array[8], objTrad) || array[8]
 
     const pieDeInforme = document.getElementById('pieDeInforme')
-    pieDeInforme.value = trO(array[22]) || array[22]
+    pieDeInforme.value = trO(array[22], objTrad) || array[22]
 
     const elaboro = document.getElementById('elaboro')
-    elaboro.value = trO(array[5]) || array[5]
+    elaboro.value = trO(array[5], objTrad) || array[5]
     const elaboroReporte = document.getElementById('elaboroReporte')
-    elaboroReporte.innerText = `${trO('Elaboró') || 'Elaboró'}: ${
-      trO(array[5]) || array[5]
+    elaboroReporte.innerText = `${trO('Elaboró', objTrad) || 'Elaboró'}: ${
+      trO(array[5], objTrad) || array[5]
     }`
 
     const reviso = document.getElementById('reviso')
-    reviso.value = trO(array[6]) || array[6]
+    reviso.value = trO(array[6], objTrad) || array[6]
     const revisoReporte = document.getElementById('revisoReporte')
-    revisoReporte.innerText = `${trO('Revisó') || 'Revisó'}: ${
-      trO(array[6]) || array[6]
+    revisoReporte.innerText = `${trO('Revisó', objTrad) || 'Revisó'}: ${
+      trO(array[6], objTrad) || array[6]
     }`
 
     const aprobo = document.getElementById('aprobo')
-    aprobo.value = trO(array[7]) || array[7]
+    aprobo.value = trO(array[7], objTrad) || array[7]
     const aproboReporte = document.getElementById('aproboReporte')
-    aproboReporte.innerText = `${trO('Aprobó') || 'Aprobó'}: ${
-      trO(array[7]) || array[7]
+    aproboReporte.innerText = `${trO('Aprobó', objTrad) || 'Aprobó'}: ${
+      trO(array[7], objTrad) || array[7]
     }`
 
     let fecha = convertirFecha(array[9])
     const vigencia = document.getElementById('vigencia')
     vigencia.value = fecha
     const vigenciaReporte = document.getElementById('vigenciaReporte')
-    vigenciaReporte.innerText = `${trO('Vigencia') || 'Vigencia'}: ${fecha}`
+    vigenciaReporte.innerText = `${
+      trO('Vigencia', objTrad) || 'Vigencia'
+    }: ${fecha}`
 
     fecha = convertirFecha(array[11])
 
@@ -260,13 +216,15 @@ function cargaInputs(array) {
     modificacion.value = fecha
     const modificacionReporte = document.getElementById('modificacionReporte')
     modificacionReporte.innerText = `${
-      trO('Modificación') || 'Modificación'
+      trO('Modificación', objTrad) || 'Modificación'
     } ${fecha}`
 
     const version = document.getElementById('version')
     version.value = array[12]
     const versionReporte = document.getElementById('versionReporte')
-    versionReporte.innerText = `${trO('Versión') || 'Versión'} ${array[12]}`
+    versionReporte.innerText = `${trO('Versión', objTrad) || 'Versión'} ${
+      array[12]
+    }`
 
     const testimado = document.getElementById('testimado')
     testimado.value = parseInt(array[23])
@@ -290,38 +248,39 @@ function cargaInputs(array) {
     const emailSiNo = document.getElementById('email')
     setTimeout(() => {
       fijarValorSelect(areaControladora, array[28])
-      fijarTextoSelect(situacion, trO(array[20]) || array[20])
+      fijarTextoSelect(situacion, trO(array[20], objTrad) || array[20])
       fijarValorSelect(frecuencia, array[23])
-      fijarTextoSelect(tipodeusuario, trO(array[19]) || array[19])
+      fijarTextoSelect(tipodeusuario, trO(array[19], objTrad) || array[19])
       fijarValorSelect(emailSiNo, envioEmail)
     }, 500)
 
     const fechaReporte = document.getElementById('fechaReporte')
     fechaReporte.innerText = `${
-      trO('Fecha actual') || 'Fecha actual'
+      trO('Fecha actual', objTrad) || 'Fecha actual'
     }: ${fechasGenerator.fecha_corta_ddmmyyyy(new Date())}`
 
     const docReporte = document.getElementById('docReporte')
-    docReporte.innerText = `${trO('Doc') || 'Doc'}: `
+    docReporte.innerText = `${trO('Doc', objTrad) || 'Doc'}: `
 
     const firma1 = document.getElementById('firma1')
-    firma1.innerText = `${trO('Firma control') || 'Firma control'}: ${
-      trO(array[26]) || array[26]
+    firma1.innerText = `${trO('Firma control', objTrad) || 'Firma control'}: ${
+      trO(array[26], objTrad) || array[26]
     }`
 
     const firma2 = document.getElementById('firma2')
     firma2.innerText = `${trO('Firma supervisa') || 'Firma supervisa'}: ${
-      trO(array[27]) || array[27]
+      trO(array[27], objTrad) || array[27]
     }`
 
     const controlCambios = document.getElementById('controlCambios')
-    controlCambios.innerText = trO('Control de cambios') || 'Control de cambios'
+    controlCambios.innerText =
+      trO('Control de cambios', objTrad) || 'Control de cambios'
   } catch (error) {
     console.log(error)
   }
 }
 
-function cargarSelects(array, selector, primerOption) {
+function cargarSelects(array, selector, primerOption, objTrad) {
   let select = document.querySelector(`#${selector}`)
   select.innerHTML = ''
   const option = document.createElement('option')
@@ -330,32 +289,32 @@ function cargarSelects(array, selector, primerOption) {
   primerOption ? select.appendChild(option) : null
   array.forEach((element) => {
     const option = document.createElement('option')
-    option.text = trO(element[1]) || element[1]
+    option.text = trO(element[1], objTrad) || element[1]
     option.value = element[0]
     select.appendChild(option)
   })
 }
 
-async function traerInfoSelects() {
+async function traerInfoSelects(plant, objTrad) {
   const tipoDeUsuario = await traerRegistros(
     'traerTipoDeUsuario',
     '/traerReportes',
-    null
+    plant
   )
-  cargarSelects(tipoDeUsuario, 'tipodeusuario', false)
-  const areas = await traerRegistros('traerAreas', '/traerReportes', null)
-  cargarSelects(areas, 'areaControladora', true)
+  cargarSelects(tipoDeUsuario, 'tipodeusuario', false, objTrad)
+  const areas = await traerRegistros('traerAreas', '/traerReportes', plant)
+  cargarSelects(areas, 'areaControladora', true, objTrad)
 
   const situacion = [
     [1, 'ON'],
     [2, 'OFF'],
   ]
-  cargarSelects(situacion, 'situacion', false)
+  cargarSelects(situacion, 'situacion', false, objTrad)
   const email = [
     [1, 'No'],
     [2, 'Si'],
   ]
-  cargarSelects(email, 'email', false)
+  cargarSelects(email, 'email', false, objTrad)
   const frecuencia = [
     [0, 'Indeterminado'],
     [1, 'Todos los días'],
@@ -366,7 +325,7 @@ async function traerInfoSelects() {
     [180, 'Una vez por semestre'],
     [365, 'Una vez por año'],
   ]
-  cargarSelects(frecuencia, 'frecuencia', false)
+  cargarSelects(frecuencia, 'frecuencia', false, objTrad)
   document.getElementById('testimado').value = 5
 }
 
@@ -384,48 +343,27 @@ function leeApp(json) {
     })
 }
 
-function dondeEstaEn(lugar, control_T) {
+function dondeEstaEn(lugar, control_T, objTrad) {
   // const { control_T } = desencriptar(sessionStorage.getItem('contenido'))
 
   // let lugar = trO('EDITAR: ') || 'EDITAR: '
-  lugar = `${lugar} ${trO(control_T) || control_T}`
+  lugar = `${lugar} ${trO(control_T, objTrad) || control_T}`
   lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
   document.getElementById('whereUs').innerHTML = lugar
   document.getElementById('whereUs').style.display = 'inline'
-}
-
-function configPHP(user) {
-  const divVolver = document.querySelector('.div-volver')
-  divVolver.style.display = 'block'
-  document.getElementById('volver').style.display = 'block'
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  document.querySelector('.div-encabezado').style.marginTop = '5px'
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   const reporte = desencriptar(sessionStorage.getItem('reporte'))
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
+  const divVolver = document.querySelector('.div-volver')
+  divVolver.style.display = 'block'
+  document.getElementById('volver').style.display = 'block'
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
+  document.querySelector('.header-McCain').style.display = 'none'
+  document.querySelector('.div-encabezado').style.marginTop = '5px'
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'block'
@@ -433,35 +371,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-
-    translateArchivos = data.arrayTranslateArchivo
-    espanolArchivos = data.arrayEspanolArchivo
-
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
-
-    objTranslate.archivosES = [...espanolArchivos]
-    objTranslate.archivosTR = [...translateArchivos]
-
     leeVersion('version')
-    setTimeout(() => {
-      // dondeEstaEn()
+    setTimeout(async () => {
+      objTranslate = await arraysLoadTranslate()
       leeApp(`App/${plant}/app`)
-      traduccionDeLabels()
+      traduccionDeLabels(objTranslate)
       limpiarInputs()
       if (typeof reporte.control_N === 'number') {
         document.getElementById('whereUs').style.display = 'none'
-        dondeEstaEn('', trO('Reporte nuevo') || 'Reporte nuevo')
+        dondeEstaEn(
+          '',
+          trO('Reporte nuevo', objTranslate) || 'Reporte nuevo',
+          objTranslate
+        )
       }
       if (typeof reporte.control_N === 'string') {
         let lugar = trO('EDITAR: ') || 'EDITAR: '
-        dondeEstaEn(lugar, reporte.control_T)
-        cargaInputs(reporte.filtrado[0])
+        dondeEstaEn(lugar, reporte.control_T, objTranslate)
+        cargaInputs(reporte.filtrado[0], objTranslate)
       }
-      traerInfoSelects()
+      traerInfoSelects(plant, objTranslate)
     }, 200)
   }
   spinner.style.visibility = 'hidden'
@@ -478,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate),
     }
     personModal(user, objTranslate)
   })
@@ -492,20 +421,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (persona) {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
-      const data = await translate(persona.lng)
-      translateOperativo = data.arrayTranslateOperativo
-      espanolOperativo = data.arrayEspanolOperativo
-
-      translateArchivos = data.arrayTranslateArchivo
-      espanolArchivos = data.arrayEspanolArchivo
-
-      objTranslate.operativoES = [...espanolOperativo]
-      objTranslate.operativoTR = [...translateOperativo]
-
-      objTranslate.archivosES = [...espanolArchivos]
-      objTranslate.archivosTR = [...translateArchivos]
-      setTimeout(() => {
-        // segundaCargaListado()
+      setTimeout(async () => {
+        objTranslate = await arraysLoadTranslate()
       }, 200)
     }
   }
@@ -606,7 +523,7 @@ const sectorControlado = document.getElementById('sectorControlado')
 sectorControlado.addEventListener('change', () => {
   const areaReporte = document.getElementById('areaReporte')
   areaReporte.innerText = `${
-    trO('Área') || 'Área'
+    trO('Área', objTranslate) || 'Área'
   }: ${sectorControlado.value.toUpperCase()}`
 })
 
@@ -620,7 +537,7 @@ const elaboro = document.getElementById('elaboro')
 elaboro.addEventListener('change', () => {
   const elaboroReporte = document.getElementById('elaboroReporte')
   elaboroReporte.innerText = `${
-    trO('Elaboró') || 'Elaboró'
+    trO('Elaboró', objTranslate) || 'Elaboró'
   }: ${elaboro.value.toUpperCase()}`
 })
 
@@ -628,7 +545,7 @@ const reviso = document.getElementById('reviso')
 reviso.addEventListener('change', () => {
   const revisoReporte = document.getElementById('revisoReporte')
   revisoReporte.innerText = `${
-    trO('Revisó') || 'Revisó'
+    trO('Revisó', objTranslate) || 'Revisó'
   }: ${reviso.value.toUpperCase()}`
 })
 
@@ -636,7 +553,7 @@ const aprobo = document.getElementById('aprobo')
 aprobo.addEventListener('change', () => {
   const aproboReporte = document.getElementById('aproboReporte')
   aproboReporte.innerText = `${
-    trO('Aprobó') || 'Aprobó'
+    trO('Aprobó', objTranslate) || 'Aprobó'
   }: ${aprobo.value.toUpperCase()}`
 })
 
@@ -644,7 +561,7 @@ const vigencia = document.getElementById('vigencia')
 vigencia.addEventListener('change', () => {
   const vigenciaReporte = document.getElementById('vigenciaReporte')
   vigenciaReporte.innerText = `${
-    trO('Vigencia') || 'Vigencia'
+    trO('Vigencia', objTranslate) || 'Vigencia'
   }: ${vigencia.value.toUpperCase()}`
 })
 
@@ -652,7 +569,7 @@ const version = document.getElementById('version')
 version.addEventListener('change', () => {
   const versionReporte = document.getElementById('versionReporte')
   versionReporte.innerText = `${
-    trO('Versión') || 'Versión'
+    trO('Versión', objTranslate) || 'Versión'
   }: ${version.value.toUpperCase()}`
 })
 

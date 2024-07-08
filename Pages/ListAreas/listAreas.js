@@ -48,7 +48,7 @@ function leeVersion(json) {
     })
 }
 
-function leeApp(json) {
+function leeApp(json, plant) {
   readJSON(json)
     .then((data) => {
       Object.assign(objButtons, data)
@@ -59,7 +59,7 @@ function leeApp(json) {
       const planta = objButtons.planta
       document.getElementById('spanUbicacion').textContent = planta
 
-      cargaTabla(objTranslate)
+      cargaTabla(objTranslate, plant)
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setTimeout(async () => {
       objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
-      leeApp(`App/${plant}/app`)
+      leeApp(`App/${plant}/app`, plant)
     }, 200)
   }
   spinner.style.visibility = 'hidden'

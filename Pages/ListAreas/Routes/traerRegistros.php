@@ -15,7 +15,7 @@
                               ar.activo AS situacion,
                               ar.visible AS visible
                             FROM LTYarea ar 
-                            WHERE ar.idLTYcliente = 7 
+                            WHERE ar.idLTYcliente = ". $sql_i ."
                             ORDER BY ar.idLTYarea ASC;";
               break;
 
