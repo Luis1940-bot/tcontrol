@@ -60,10 +60,10 @@ function leeApp(json) {
       const divButtons = document.querySelector('.div-controles-buttons')
       divButtons.style.display = 'none'
 
-      cargaTabla(objTranslate)
-      // navegador.estadoAnteriorButton = 'Menu'
-      // navegador.estadoAnteriorWhereUs.push('Controles')
-      // completaButtons('Controles')
+      const user = desencriptar(sessionStorage.getItem('user'))
+      const { plant } = user
+
+      cargaTabla(objTranslate, plant)
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -72,8 +72,6 @@ function leeApp(json) {
 }
 
 function dondeEstaEn() {
-  // const ustedEstaEn = `${trO('Usted está en')} ` || 'Usted está en ';
-  // document.getElementById('whereUs').innerText = ustedEstaEn;
   let lugar = trO('Menú', objTranslate) || 'Menú'
   lugar = `${trO('Controles', objTranslate) || 'Controles'}`
   lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`

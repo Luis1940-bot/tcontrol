@@ -166,9 +166,14 @@ function cargaInputs(array) {
     nombreDelSelect.value = array[1]
 
     const tipodeusuario = document.getElementById('tipodeusuario')
-    setTimeout(() => {
-      fijarValorSelect(tipodeusuario, array[6])
-    }, 500)
+    function checkAndSetValues() {
+      if (tipodeusuario.options.length > 0) {
+        fijarValorSelect(tipodeusuario, array[6])
+      } else {
+        setTimeout(checkAndSetValues, 100) // Reintentar después de 100ms
+      }
+    }
+    checkAndSetValues()
   } catch (error) {
     console.log(error)
   }
@@ -228,6 +233,7 @@ async function cambiarOrden(id, orden, subebaja, array) {
 }
 
 function cargaVariables(array) {
+  // console.log(array)
   const div2 = document.querySelector('.div2')
 
   try {
@@ -368,22 +374,8 @@ async function agregarVariable() {
     }
 
     const resultado = await addVariable(objeto, '/addVariable')
-
     if (resultado.success) {
-      const variable = desencriptar(sessionStorage.getItem('variable'))
-
-      let arrayActualizado = [...variable.filtrado]
-      const id = String(resultado.id)
-      const nuevoArray = [
-        id,
-        nombreDelSelect,
-        inputValue,
-        's',
-        numeroDelSelector,
-        nuevoOrden,
-        '3',
-      ]
-      arrayActualizado.push(nuevoArray)
+      let arrayActualizado = [...resultado.array]
       const div2 = document.querySelector('.div2')
       div2.innerHTML = ''
       cargaVariables(arrayActualizado)
@@ -406,6 +398,7 @@ function intercambioDeDivsVinculo() {
   const selectElement = document.querySelector(
     `#v${idPastillita} .select-control`
   )
+
   const selectValue = selectElement.value
   const selectedIndex = selectElement.selectedIndex
   const selectedOption = selectElement.options[selectedIndex]
@@ -573,7 +566,8 @@ buttonVincular.addEventListener('click', (e) => {
     const select = document.createElement('select')
     select.style.width = '55%'
     select.setAttribute('class', 'select-control')
-    if (arrayReportesVinculdaos[0].length > 0) {
+
+    if (arrayReportesVinculdaos.length > 0) {
       const option = document.createElement('option')
       option.value = ''
       option.text = ''

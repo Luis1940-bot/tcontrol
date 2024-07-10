@@ -85,6 +85,8 @@ function fijarValorSelect(selectElement, valor) {
     console.log('El elemento select no fue encontrado.')
     return
   }
+
+  let numberOfOptions = selectElement.options.length
   for (let i = 0; i < selectElement.options.length; i++) {
     let option = selectElement.options[i]
     if (option.value === valor) {
@@ -164,7 +166,7 @@ function cargaInputs(array, objTrad) {
     establecimiento.value = trO(array[4], objTrad) || array[4]
     const areaReporte = document.getElementById('areaReporte')
     areaReporte.innerText = `${trO('Área', objTrad) || 'Área'}: ${
-      trO(array[13]) || array[13]
+      trO(array[13], objTrad) || array[13]
     }`
 
     const empresaReporte = document.getElementById('empresaReporte')
@@ -246,13 +248,24 @@ function cargaInputs(array, objTrad) {
     const frecuencia = document.getElementById('frecuencia')
     const tipodeusuario = document.getElementById('tipodeusuario')
     const emailSiNo = document.getElementById('email')
-    setTimeout(() => {
-      fijarValorSelect(areaControladora, array[28])
-      fijarTextoSelect(situacion, trO(array[20], objTrad) || array[20])
-      fijarValorSelect(frecuencia, array[23])
-      fijarTextoSelect(tipodeusuario, trO(array[19], objTrad) || array[19])
-      fijarValorSelect(emailSiNo, envioEmail)
-    }, 500)
+    function checkAndSetValues() {
+      if (
+        areaControladora.options.length > 0 &&
+        situacion.options.length > 0 &&
+        frecuencia.options.length > 0 &&
+        tipodeusuario.options.length > 0 &&
+        emailSiNo.options.length > 0
+      ) {
+        fijarValorSelect(areaControladora, array[28])
+        fijarTextoSelect(situacion, trO(array[20], objTrad) || array[20])
+        fijarValorSelect(frecuencia, array[23])
+        fijarTextoSelect(tipodeusuario, trO(array[19], objTrad) || array[19])
+        fijarValorSelect(emailSiNo, envioEmail)
+      } else {
+        setTimeout(checkAndSetValues, 100) // Reintentar después de 100ms
+      }
+    }
+    checkAndSetValues()
 
     const fechaReporte = document.getElementById('fechaReporte')
     fechaReporte.innerText = `${
@@ -268,9 +281,9 @@ function cargaInputs(array, objTrad) {
     }`
 
     const firma2 = document.getElementById('firma2')
-    firma2.innerText = `${trO('Firma supervisa') || 'Firma supervisa'}: ${
-      trO(array[27], objTrad) || array[27]
-    }`
+    firma2.innerText = `${
+      trO('Firma supervisa', objTrad) || 'Firma supervisa'
+    }: ${trO(array[27], objTrad) || array[27]}`
 
     const controlCambios = document.getElementById('controlCambios')
     controlCambios.innerText =
@@ -372,8 +385,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
     leeVersion('version')
+    objTranslate = await arraysLoadTranslate()
     setTimeout(async () => {
-      objTranslate = await arraysLoadTranslate()
       leeApp(`App/${plant}/app`)
       traduccionDeLabels(objTranslate)
       limpiarInputs()
@@ -386,7 +399,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         )
       }
       if (typeof reporte.control_N === 'string') {
-        let lugar = trO('EDITAR: ') || 'EDITAR: '
+        let lugar = trO('EDITAR: ', objTranslate) || 'EDITAR: '
         dondeEstaEn(lugar, reporte.control_T, objTranslate)
         cargaInputs(reporte.filtrado[0], objTranslate)
       }

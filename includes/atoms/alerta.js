@@ -3201,6 +3201,7 @@ class Alerta {
           // const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
           //   Math.random() * 10
           // )}`
+          console.log(cod)
           const objetoRuta = {
             control_N: url,
             control_T: decodeURIComponent(name),

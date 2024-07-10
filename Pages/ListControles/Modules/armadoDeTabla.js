@@ -495,14 +495,14 @@ async function addCampo(target, objTranslate, plant) {
   // console.log(target)
   const turn = await agregarCampoNuevo(target, '/addNewCampo', plant)
   const id = String(target.idLTYreporte)
-  if (turn.success) {
-    const nuevoArray = JSON.parse(turn.actualizado)
+  if (turn.actualizado.success) {
+    const nuevoArray = JSON.parse(turn.actualizado.data)
     viewer(id, nuevoArray, objTranslate, plant)
   }
 }
 async function clonarReporte(target) {
   const clon = await agregarCampoNuevo(target, '/clonarReporte', null)
-  if (clon.success) {
+  if (clon.actualizado.success) {
     window.location.reload()
   }
 }

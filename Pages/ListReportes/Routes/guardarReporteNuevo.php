@@ -1,4 +1,5 @@
 <?php
+ mb_internal_encoding('UTF-8');
 error_reporting(E_ALL); // Muestra todos los errores y warnings
 ini_set('display_errors', 1); // Asegúrate de que los errores sean mostrados (no usar en producción)
 

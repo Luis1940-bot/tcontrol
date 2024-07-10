@@ -13,7 +13,7 @@
             if ($conn->connect_error) {
                 die("Conexión fallida: " . $conn->connect_error);
             }
-
+            mysqli_set_charset($conn, "utf8");
             $sql = "UPDATE LTYselect SET concepto = ? WHERE idLTYselect = ?";
 
             $stmt = $conn->prepare($sql);

@@ -14,7 +14,7 @@ function guardarReporte(objeto, ruta) {
     rax,
     planta: plantx,
   }
-  console.log(plantx)
+  // console.log(plantx)
   const datos = JSON.stringify(obj)
   const url = `${SERVER}/Routes/index.php`
   // console.log(datos)

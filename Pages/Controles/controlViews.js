@@ -15,9 +15,9 @@ const encabezados = {
   width: ['1'],
 }
 
-async function cargaDeRegistros(objTranslate) {
+async function cargaDeRegistros(objTranslate, plant) {
   try {
-    const reportes = await traerRegistros('traerReportes', null)
+    const reportes = await traerRegistros('traerReportes', parseInt(plant))
 
     // Finaliza la carga y realiza cualquier otra acción necesaria
     tablaVacia(reportes, encabezados, objTranslate)
@@ -32,7 +32,7 @@ async function cargaDeRegistros(objTranslate) {
   }
 }
 
-async function mensajeDeCarga(objTranslate) {
+async function mensajeDeCarga(objTranslate, plant) {
   const miAlerta = new Alerta()
   const aviso = arrayGlobal.avisoListandoControles.span.text
   const mensaje = trO(aviso, objTranslate) || aviso
@@ -48,12 +48,12 @@ async function mensajeDeCarga(objTranslate) {
   // eslint-disable-next-line no-promise-executor-return
   await new Promise((resolve) => setTimeout(() => resolve(), 200))
 
-  await cargaDeRegistros(objTranslate)
+  await cargaDeRegistros(objTranslate, plant)
 }
 
-function cargaTabla(objTranslate) {
+function cargaTabla(objTranslate, plant) {
   try {
-    mensajeDeCarga(objTranslate)
+    mensajeDeCarga(objTranslate, plant)
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(error)

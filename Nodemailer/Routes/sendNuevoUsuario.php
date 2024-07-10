@@ -1,4 +1,5 @@
 <?php
+  ob_start();
   header("Content-Type: text/html;charset=utf-8");
   header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
   header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
@@ -81,7 +82,7 @@ try {
         'allow_self_signed' => true
             )
     );
-    $mail->Timeout = 30; // Tiempo de espera de conexión en segundos
+    $mail->Timeout = 60; // Tiempo de espera de conexión en segundos
     $mail->SMTPKeepAlive = true; // Mantiene la conexión SMTP activa
     
     $mail->isHTML(true);
@@ -104,6 +105,7 @@ try {
     }
     
     $mail->send();
+    ob_end_clean();
     $response = array('success' => true, 'message' => 'El email se envio con exito!');
     echo json_encode($response);
 } catch (Exception $e) {

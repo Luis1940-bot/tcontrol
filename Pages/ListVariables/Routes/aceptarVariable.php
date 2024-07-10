@@ -4,6 +4,11 @@
 
           try {
             include_once BASE_DIR . "/Routes/datos_base.php";
+            // $host = "68.178.195.199"; 
+            // $user = "developers";
+            // $password = "6vLB#Q0bOVo4";
+            // $dbname = "tc1000";
+
             $selector = $objeto['selector'];
             $detalle = $objeto['nombre'];
             $orden = $objeto['orden'];
@@ -17,17 +22,35 @@
             if ($conn->connect_error) {
                 die("Conexión fallida: " . $conn->connect_error);
             }
+            mysqli_set_charset($conn, "utf8");
             $sql = "INSERT INTO LTYselect (selector, detalle, orden, activo, nivel, concepto, idLTYcliente) VALUES (?, ?, ?, ?, ?, ?, ?);";
           
             $stmt = $conn->prepare($sql);
             if ($stmt === false) {
                 die("Error al preparar la consulta: " . $conn->error);
             }
+            echo $concepto;
             $stmt->bind_param("isisisi", $selector, $detalle, $orden, $activo, $nivel, $concepto, $idLTYcliente);
           
             if ($stmt->execute() === true) {
                 $last_id = $conn->insert_id;
-                $response = array('success' => true, 'message' => 'Se agregó la nueva variable.', 'id' => $last_id);
+                $sqlSelect = "SELECT SQL_NO_CACHE LTYselect.idLTYselect, LTYselect.detalle, LTYselect.concepto, LTYselect.activo
+                                      ,LTYselect.selector, LTYselect.orden, LTYselect.nivel, RAND(),NOW() 
+                                      FROM LTYselect 
+                                      WHERE LTYselect.idLTYcliente = ? AND LTYselect.selector = ?
+                                      ORDER BY LTYselect.detalle ASC;";
+                $stmtSelect = $conn->prepare($sqlSelect);
+                if ($stmtSelect === false) {
+                    die("Error al preparar la consulta SELECT: " . $conn->error);
+                }
+                $stmtSelect->bind_param("ii", $idLTYcliente, $selector);
+                $stmtSelect->execute();
+                $result = $stmtSelect->get_result();
+                $updatedRecords = array();
+                while ($row = $result->fetch_assoc()) {
+                    $updatedRecords[] = array_values($row); 
+                }
+                $response = array('success' => true, 'message' => 'Se agregó la nueva variable.', 'id' => $last_id, 'array' => $updatedRecords);
             } else {
                 $response = array('success' => false, 'message' => 'No se agregó la nueva variable.');
             }
@@ -48,7 +71,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
-        // $datos = '{"ruta":"/addVariable","rax":"&new=Mon May 06 2024 08:42:24 GMT-0300 (hora estándar de Argentina)","objeto":{"selector":"32","nombre":"COMPORTAMIENTO","orden":4,"concepto":"riesgo"}}';
+        // $datos = '{"ruta":"/addSelector","rax":"&new=Wed Jul 10 2024 10:29:56 GMT-0300 (hora estándar de Argentina)","q":{"concepto":"Modificar","detalle":"TÍTULOS","nivel":"1","idLTYcliente":14}}';
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

@@ -51,8 +51,8 @@ function addCampo($datos, $plant) {
     if ($mysqli->connect_error) {
         return array('success' => false, 'message' => 'Error de conexión a la base de datos: ' . $mysqli->connect_error);
     }
-
-    $mysqli->set_charset($charset);
+    mysqli_set_charset($mysqli, "utf8");
+    // $mysqli->set_charset($charset);
 
     $mysqli->begin_transaction();
 
@@ -88,8 +88,9 @@ function addCampo($datos, $plant) {
 
         // Llamada a la función traerControlActualizado
         $actualizado = traerControlActualizado($mysqli, $idLTYcliente);
+        $actualizadoArray = json_decode($actualizado, true);
 
-        $response = array('success' => true, 'actualizado' => $actualizado);
+        $response = array('success' => true, 'actualizado' => $actualizadoArray);
 
         $mysqli->commit();
     } catch (Exception $e) {
@@ -107,7 +108,7 @@ function addCampo($datos, $plant) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"q":"%7B%22reporte%22%3A%22REPORTE%20CON%20CONTROL%20AUTOMATICO%22%2C%22idLTYreporte%22%3A328%2C%22campo%22%3A%22PRUEBA%22%2C%22orden%22%3A3%2C%22idObservacion%22%3A5253%7D","ruta":"/addNewCampo","rax":"&new=Fri Jun 07 2024 16:10:56 GMT-0300 (hora estándar de Argentina)"}';
+// $datos = '{"q":"%7B%22reporte%22%3A%22REPORTE%20DE%20PRUEBA%22%2C%22idLTYreporte%22%3A12%2C%22campo%22%3A%22T%C3%8DTULO%22%2C%22orden%22%3A3%2C%22idObservacion%22%3A41%7D","ruta":"/addNewCampo","rax":"&new=Wed Jul 10 2024 14:03:20 GMT-0300 (hora estándar de Argentina)","sql_i":14}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

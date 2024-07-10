@@ -31,7 +31,7 @@
                           INNER JOIN LTYreporte rep ON rep.idLTYreporte = sRep.idLTYreporte
                           INNER JOIN tipousuario tu ON tu.idtipousuario = sRep.idusuario
                         WHERE 
-                          rep.idLTYreporte = ". $sql_i ." AND
+                          rep.idLTYcliente = ". $sql_i ." AND
                           rep.activo = 's';";
               break;
 
@@ -46,7 +46,7 @@
                             LTYreporte rep
                             INNER JOIN tipousuario tUsu ON tUsu.idtipousuario = rep.nivel
                           WHERE 
-                            rep.idLTYreporte = ". $sql_i ." AND
+                            rep.idLTYcliente = ". $sql_i ." AND
                             rep.activo = 's'
                           ORDER BY reporte ASC;";
               break;

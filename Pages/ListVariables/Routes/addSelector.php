@@ -24,7 +24,7 @@
           if ($conn->connect_error) {
               die("Conexión fallida: " . $conn->connect_error);
           }
-
+          mysqli_set_charset($conn, "utf8");
           // Iniciar transacción
           // $conn->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
           $conn->autocommit(false);

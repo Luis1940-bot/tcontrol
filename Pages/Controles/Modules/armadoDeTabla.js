@@ -8,7 +8,7 @@ const widthScreenAjustado = 1 //360 / widthScreen;
 let arrayWidthEncabezado
 
 import baseUrl from '../../../config.js'
-import { trO } from '../../../controllers/trOA.js'
+import { trO, trA } from '../../../controllers/trOA.js'
 
 const SERVER = baseUrl
 
@@ -151,7 +151,7 @@ function completaTabla(arrayControl, objTranslate) {
   const tbody = document.querySelector('tbody')
   // const cantidadDeRegistros = arrayControl.length;
   const arrayMapeado = arrayControl.map((fila) => [
-    trA(fila[0]),
+    trA(fila[0], objTranslate),
     ...fila.slice(1),
   ])
   arrayMapeado.sort((a, b) => a[0].localeCompare(b[0]))

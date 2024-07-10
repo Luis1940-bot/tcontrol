@@ -10,14 +10,6 @@ import readJSON from '../../controllers/read-JSON.js'
 import menuModal from '../../controllers/menu.js'
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
@@ -31,17 +23,14 @@ import traerNR from '../Control/Modules/Controladores/traerNR.js'
 import cargarNR from '../Control/Modules/ControlNR/loadNR.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../controllers/cript.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 
 import baseUrl from '../../config.js'
+import { configPHP } from '../../controllers/configPHP.js'
+import { trO } from '../../controllers/trOA.js'
 const SERVER = baseUrl
-
+let objTranslate = []
 let data = {}
-let translateOperativo = []
-let espanolOperativo = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-}
 
 let controlN = ''
 let controlT = ''
@@ -81,30 +70,7 @@ function leeApp(json) {
     })
 }
 
-function configPHP() {
-  const user = desencriptar(sessionStorage.getItem('user'))
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
-}
-
-function configuracionLoad() {
+function configuracionLoad(user) {
   inicioPerformance()
   const contenido = sessionStorage.getItem('contenido')
   const url = desencriptar(contenido)
@@ -114,23 +80,9 @@ function configuracionLoad() {
   nr === '0' ? (nr = '') : sessionStorage.setItem('doc', encriptar(nr))
   document.getElementById('doc').innerText = `Doc: ${nr}`
   document.getElementById('wichC').innerText = controlT
-
-  configPHP()
+  configPHP(user, SERVER)
+  document.querySelector('.header-McCain').style.display = 'none'
   finPerformance()
-}
-
-function trO(palabra) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
 }
 
 function actualizarProgreso(porcentaje) {
@@ -169,7 +121,7 @@ function actualizarProgreso(porcentaje) {
   })
 }
 
-async function cargaDeRegistros() {
+async function cargaDeRegistros(objTrad) {
   try {
     inicioPerformance()
     await actualizarProgreso('10%')
@@ -193,7 +145,7 @@ async function cargaDeRegistros() {
     arrayGlobal.arrayControl = [...nuevoControlData]
 
     // Finaliza la carga y realiza cualquier otra acción necesaria
-    tablaVacia(nuevoControlData, encabezados)
+    tablaVacia(nuevoControlData, encabezados, objTrad)
     finPerformance()
     // Ajustar el porcentaje a 100%
 
@@ -217,14 +169,10 @@ async function cargaDeRegistros() {
   }
 }
 
-async function mensajeDeCarga() {
+async function mensajeDeCarga(objTrad) {
   const miAlerta = new Alerta()
-  const mensaje = trO(arrayGlobal.avisoCargandoControl.span.text)
-  miAlerta.createControl(
-    arrayGlobal.avisoCargandoControl,
-    mensaje,
-    objTranslate
-  )
+  const mensaje = trO(arrayGlobal.avisoCargandoControl.span.text, objTrad)
+  miAlerta.createControl(arrayGlobal.avisoCargandoControl, mensaje, objTrad)
   const modal = document.getElementById('modalAlertCarga')
   modal.style.display = 'block'
   sessionStorage.setItem('loadSystem', 1)
@@ -233,17 +181,7 @@ async function mensajeDeCarga() {
   // eslint-disable-next-line no-promise-executor-return
   await new Promise((resolve) => setTimeout(() => resolve(), 200))
 
-  await cargaDeRegistros()
-}
-
-async function arraysLoadTranslate() {
-  const persona = desencriptar(sessionStorage.getItem('user'))
-  if (persona) {
-    data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    mensajeDeCarga()
-  }
+  await cargaDeRegistros(objTrad)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -270,15 +208,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
       leeVersion('version')
-      const datas = await translate(persona.lng)
-      translateOperativo = datas.arrayTranslateOperativo
-      espanolOperativo = datas.arrayEspanolOperativo
-      objTranslate.operativoES = [...espanolOperativo]
-      objTranslate.operativoTR = [...translateOperativo]
-
-      setTimeout(() => {
-        configuracionLoad()
-        arraysLoadTranslate()
+      setTimeout(async () => {
+        objTranslate = await arraysLoadTranslate()
+        configuracionLoad(persona)
+        mensajeDeCarga(objTranslate)
         leeApp(`App/${plant}/app`)
         spinner.style.visibility = 'hidden'
         // eslint-disable-next-line no-console

@@ -8,32 +8,13 @@ import arrayGlobal from '../../../controllers/variables.js'
 import traerRegistros from './Controladores/traerRegistros.js'
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../../includes/atoms/alerta.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateArchivo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolArchivo,
-  // eslint-disable-next-line import/extensions
-} from '../../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import hacerMemoria from './Controladores/hacerMemoria.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar } from '../../../controllers/cript.js'
+import { trO, trA } from '../../../controllers/trOA.js'
 
 let data = {}
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivo = []
-let espanolArchivo = []
-const objTranslate = {
-  operativoES: [...translateOperativo],
-  operativoTR: [...espanolOperativo],
-}
 
 const widthScreen = window.innerWidth
 const widthScreenAjustado = 360 / widthScreen
@@ -43,39 +24,11 @@ let elementHTML
 let ID = 0
 let fila = 0
 
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
-function trA(palabra) {
-  try {
-    const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-    const index = espanolArchivo.findIndex(
-      (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-    )
-    if (index !== -1) {
-      return translateArchivo[index]
-    }
-    return palabra
-  } catch (error) {
-    // eslint-disable-next-line indent, no-console
-    console.log(error)
-    return palabra
-  }
-  // return palabra;
-}
-
-function estilosTheadCell(element, index) {
+function estilosTheadCell(element, index, objTrad) {
   const cell = document.createElement('th')
   if (index < 5) {
-    cell.textContent = trO(element.toUpperCase()) || element.toUpperCase()
+    cell.textContent =
+      trO(element.toUpperCase(), objTrad) || element.toUpperCase()
     cell.style.background = '#000000'
     cell.style.border = '1px solid #cecece'
     cell.style.overflow = 'hidden'
@@ -88,12 +41,12 @@ function estilosTheadCell(element, index) {
   return cell
 }
 
-function encabezado(encabezados) {
+function encabezado(encabezados, objTrad) {
   const thead = document.querySelector('thead')
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index)
+    const cell = estilosTheadCell(element, index, objTrad)
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
@@ -110,12 +63,13 @@ function estilosCell(
   background,
   colorText,
   requerido,
-  display
+  display,
+  objTrad
 ) {
   const cell = document.createElement('td')
   let dato = ''
   typeof datos === 'string' && datos !== null
-    ? (dato = trA(datos))
+    ? ((dato = trA(datos, objTrad)), objTrad)
     : (dato = datos)
   if (dato !== null && type === null) {
     cell.textContent = `${dato} ${requerido}` || `${dato} ${requerido}`
@@ -139,7 +93,7 @@ function estilosCell(
   return cell
 }
 
-function estilosTbodyCell(element, index, cantidadDeRegistros) {
+function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 6; i++) {
@@ -481,7 +435,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros) {
       background,
       colorText,
       requerido,
-      display
+      display,
+      objTrad
     )
     newRow.appendChild(cell)
   }
@@ -514,7 +469,7 @@ async function traerValorPorDefecto(sqli, tipo, html) {
   }
 }
 
-function completaTabla(arrayControl) {
+function completaTabla(arrayControl, encabezados, objTrad) {
   const tbody = document.querySelector('tbody')
   const cantidadDeRegistros = arrayControl.length
   const email = arrayControl[0][22]
@@ -527,10 +482,21 @@ function completaTabla(arrayControl) {
       unidades / parseFloat(cantidadDeRegistros + 0.2)
     )
     const idSpanCarga = document.getElementById('idSpanCarga')
-    setTimeout(() => {
-      idSpanCarga.innerText = `${Math.floor(porcentaje * 100)}%`
-    }, 100)
-    const newRow = estilosTbodyCell(element, index, cantidadDeRegistros)
+    function checkAndSetValues() {
+      if (idSpanCarga) {
+        idSpanCarga.innerText = `${Math.floor(porcentaje * 100)}%`
+      } else {
+        setTimeout(checkAndSetValues, 100) // Reintentar después de 100ms
+      }
+    }
+    checkAndSetValues()
+
+    const newRow = estilosTbodyCell(
+      element,
+      index,
+      cantidadDeRegistros,
+      objTrad
+    )
     tbody.appendChild(newRow)
     fila += 1
     // ! ocultamos la columnas para la observacion
@@ -565,6 +531,7 @@ function completaTabla(arrayControl) {
       traerRutina(element[26], selectDinamic)
     }
     // ! cargamos valor por defecto de un sql query en columna 4
+
     if (element[9] === 'n' || element[9] === 't' || element[9] === 'tx') {
       if (
         element[27] !== '' &&
@@ -578,33 +545,23 @@ function completaTabla(arrayControl) {
   })
 }
 
-async function arraysLoadTranslate() {
-  const persona = desencriptar(sessionStorage.getItem('user'))
-  if (persona) {
-    document.querySelector('.custom-button').innerText =
-      persona.lng.toUpperCase()
-    data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    translateArchivo = data.arrayTranslateArchivo
-    espanolArchivo = data.arrayEspanolArchivo
-    const contenido = sessionStorage.getItem('contenido')
-    const url = desencriptar(contenido)
-    // const url = new URL(window.location.href);
-    const controlT = url.control_T // url.searchParams.get('control_T');
-    document.getElementById('wichC').innerText = trA(controlT)
-  }
+function controlT(objTrad) {
+  const contenido = sessionStorage.getItem('contenido')
+  const url = desencriptar(contenido)
+  // const url = new URL(window.location.href);
+  const controlT = url.control_T // url.searchParams.get('control_T');
+  document.getElementById('wichC').innerText = trA(controlT, objTrad)
 }
 
-function loadTabla(arrayControl, encabezados) {
+function loadTabla(arrayControl, encabezados, objTrad) {
   const miAlerta = new Alerta()
   if (arrayControl.length > 0) {
-    encabezado(encabezados)
-    completaTabla(arrayControl, encabezados)
+    encabezado(encabezados, objTrad)
+    completaTabla(arrayControl, encabezados, objTrad)
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
     if (cantidadDeFilas.childElementCount !== arrayControl.length) {
-      mensaje = trO(mensaje) || mensaje
+      mensaje = trO(mensaje, objTrad) || mensaje
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
@@ -619,9 +576,10 @@ function loadTabla(arrayControl, encabezados) {
   }
 }
 
-export default function tablaVacia(arrayControl, encabezados) {
-  arraysLoadTranslate()
+export default function tablaVacia(arrayControl, encabezados, objTrad) {
+  // arraysLoadTranslate()
+  controlT(objTrad)
   setTimeout(() => {
-    loadTabla(arrayControl, encabezados)
+    loadTabla(arrayControl, encabezados, objTrad)
   }, 200)
 }

@@ -7,6 +7,14 @@
       if (!file_exists($directorio)) {
           mkdir($directorio, 0777, true);
       }
+      $directorioPlano = BASE_DIR . '/assets/img/planos/' . $clienteNum . '/';
+      if (!file_exists($directorioPlano)) {
+          mkdir($directorioPlano, 0777, true);
+      }
+      $directorioImaenes = BASE_DIR . '/assets/Imagenes/' . $clienteNum . '/';
+      if (!file_exists($directorioImaenes)) {
+          mkdir($directorioImaenes, 0777, true);
+      }
       $file = $directorio . 'app.json';
 
       // Comprobar si el archivo app.json existe

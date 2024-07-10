@@ -2,13 +2,28 @@
   <mj-body>
     <mj-section>
       <mj-column>
-        <mj-text font-size="24px" color="#0027FF" font-family="helvetica" font-weight="700" align="center">iControl</mj-text>
+        <mj-text
+          font-size="24px"
+          color="#0027FF"
+          font-family="helvetica"
+          font-weight="700"
+          align="center"
+          >tControl</mj-text
+        >
         <mj-divider border-color="#0027FF"></mj-divider>
-        <mj-text font-size="20px" color="#0027FF" font-family="helvetica">{mensaje}</mj-text>
-        <mj-text font-size="20px" color="#0027FF" font-family="helvetica">Usuario: {usuario}</mj-text>
-        <mj-text font-size="20px" color="#0027FF" font-family="helvetica">Compañía: {cliente}</mj-text>
-        <mj-text font-size="20px" color="#0027FF" font-family="helvetica">Email: {email}</mj-text>
-        <mj-button 
+        <mj-text font-size="20px" color="#0027FF" font-family="helvetica"
+          >{mensaje}</mj-text
+        >
+        <mj-text font-size="20px" color="#0027FF" font-family="helvetica"
+          >Usuario: {usuario}</mj-text
+        >
+        <mj-text font-size="20px" color="#0027FF" font-family="helvetica"
+          >Compañía: {cliente}</mj-text
+        >
+        <mj-text font-size="20px" color="#0027FF" font-family="helvetica"
+          >Email: {email}</mj-text
+        >
+        <mj-button
           href="http://localhost:8080/Pages/RegisterUser/verify.php?codigo={cod_verificador}&id={idusuario}"
           background-color="#ffffff"
           color="#0027FF"
@@ -18,10 +33,18 @@
           border="none"
           border-radius="3px"
           text-decoration="none"
-          align="left">
-          Para validar este nuevo usuario debe hacer click acá e ingresar el siguiente código:
+          align="left"
+        >
+          Para validar este nuevo usuario debe hacer click acá e ingresar el
+          siguiente código:
         </mj-button>
-        <mj-text font-size="18px" color="#0027FF" font-family="helvetica" align="center">{cod_verificador}</mj-text>
+        <mj-text
+          font-size="18px"
+          color="#0027FF"
+          font-family="helvetica"
+          align="center"
+          >{cod_verificador}</mj-text
+        >
       </mj-column>
     </mj-section>
     <mj-include path="./footer.mjml" />

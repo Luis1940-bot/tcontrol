@@ -1,11 +1,21 @@
 <?php
 session_start();
-define('SSO', $_SESSION['login_sso']['sso']);
-if (!SSO) {
-  $_SESSION['login_sso']['sso'] = 'null';
+header('Content-Type: text/html;charset=utf-8');
+
+if (isset($_SESSION['login_sso'])) {
+    define('SSO', $_SESSION['login_sso']['sso'] ?? null);
+    define('EMAIL', $_SESSION['login_sso']['email'] ?? null);
+} else {
+    define('SSO', null);
+    define('EMAIL', null);
 }
 
-header('Content-Type: text/html;charset=utf-8');
+if (!isset($_SESSION['login_sso']['email']) && (SSO === null || SSO === 's_sso')) {
+    $url = "https://tenkiweb.com/tcontrol/Pages/Login/index.php";
+    // header("Location: ". $url ."");
+}
+
+
 require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>
