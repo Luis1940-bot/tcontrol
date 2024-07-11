@@ -230,12 +230,14 @@ function leeApp(json) {
       const nuevoObjeto = obtenerNombres(data, 'apps')
       navegador.estadoNavButton = nuevoObjeto
       const cantidadDeApp = data.apps.name.length
-      if (cantidadDeApp > 0) {
+      if (cantidadDeApp >= 2) {
         completaButtons(nuevoObjeto)
       } else {
         const mensaje =
-          trO('No está desarrollado el árbol de controles.', objTranslate) ||
-          'No está desarrollado el árbol de controles.'
+          trO(
+            'No está desarrollado el árbol de controles. Póngase en contacto con el Administrador o con el Desarrolador.',
+            objTranslate
+          ) || 'No está desarrollado el árbol de controles.'
         const whereUs = document.getElementById('whereUs')
         whereUs.innerText = mensaje
         whereUs.style.display = 'block'

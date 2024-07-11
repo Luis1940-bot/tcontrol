@@ -7,7 +7,7 @@ require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 <!-- <html lang='en'> -->
 <head>
   <meta charset='UTF-8'>
-  <meta name='description' content='Factum Consultora'>
+  <meta name='description' content='TenkiWeb'>
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>

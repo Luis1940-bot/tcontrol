@@ -29,7 +29,7 @@
             if ($stmt === false) {
                 die("Error al preparar la consulta: " . $conn->error);
             }
-            echo $concepto;
+            
             $stmt->bind_param("isisisi", $selector, $detalle, $orden, $activo, $nivel, $concepto, $idLTYcliente);
           
             if ($stmt->execute() === true) {
@@ -46,7 +46,7 @@
                 $stmtSelect->bind_param("ii", $idLTYcliente, $selector);
                 $stmtSelect->execute();
                 $result = $stmtSelect->get_result();
-                $updatedRecords = array();
+                $updatedRecords = [];
                 while ($row = $result->fetch_assoc()) {
                     $updatedRecords[] = array_values($row); 
                 }
@@ -71,7 +71,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
-        // $datos = '{"ruta":"/addSelector","rax":"&new=Wed Jul 10 2024 10:29:56 GMT-0300 (hora estándar de Argentina)","q":{"concepto":"Modificar","detalle":"TÍTULOS","nivel":"1","idLTYcliente":14}}';
+        // $datos = '{"ruta":"/addVariable","rax":"&new=Wed Jul 10 2024 20:30:35 GMT-0300 (hora estándar de Argentina)","objeto":{"selector":1,"nombre":"PRIORIDAD","orden":3,"concepto":"Baja","idLTYcliente":15}}';
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

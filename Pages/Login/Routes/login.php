@@ -70,8 +70,8 @@ function consultar($planta, $email, $pass) {
       $_SESSION['login_sso']['username'] = $data['nombre'];
       $_SESSION['login_sso']['area'] = $data['area'];
       $_SESSION['login_sso']['verificador'] = $data['verificador'];
-      if (!$_SESSION['login_sso']['sso']) {
-        $_SESSION['login_sso']['sso'] = 'null';
+      if (!isset($_SESSION['login_sso']['sso'])) {
+          $_SESSION['login_sso']['sso'] = 'null';
       }
       
       $_SESSION['factum_validation']['plant'] = $planta;
@@ -81,13 +81,7 @@ function consultar($planta, $email, $pass) {
         $response = array('success' => true, 'res' => $response);
         header('Content-Type: application/json');
         echo json_encode($response);
-        return json_encode($response);
-        // $json = json_encode($response);
-        // // Antes de enviar la respuesta
-        // error_log('JSON response: ' . json_encode($data));
-        // header('Content-Type: application/json');
-        // echo $json;
-        // return $json;
+
         }else{
             $response = array('success' => false, 'message' => 'Hay un dato que no es correcto.');
             echo json_encode($response);
@@ -103,7 +97,7 @@ function consultar($planta, $email, $pass) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"planta":1,"email":"luisfactum@gmail.com","password":"4488","ruta":"/login","rax":"&new=Tue Jun 25 2024 09:40:51 GMT-0300 (hora estándar de Argentina)"}';
+$datos = '{"planta":15,"email":"luisfactum@gmail.com","password":"4488","ruta":"/login","rax":"&new=Wed Jul 10 2024 19:19:11 GMT-0300 (hora estándar de Argentina)"}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

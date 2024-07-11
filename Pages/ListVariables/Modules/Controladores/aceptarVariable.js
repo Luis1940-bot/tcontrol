@@ -13,7 +13,6 @@ export default function addVariable(objeto, ruta) {
     }
     const datos = JSON.stringify(obj)
     // console.log(datos)
-
     const url = `${SERVER}/Routes/index.php`
     fetch(url, {
       method: 'POST',

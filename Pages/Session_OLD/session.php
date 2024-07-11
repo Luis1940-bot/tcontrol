@@ -15,9 +15,9 @@ $_SESSION['factum_validation'] = [
     'id' =>  '6',
     'tipo' =>  '7',
     'developer' => 'Factum', //* Tenki Web
-    'content' => 'Factum Consultora',
+    'content' => 'TenkiWeb',
     'logo' => 'ftm', //* icontrol 
-    'by' => 'by Factum Consultora', //* by Tenkyweb
+    'by' => 'by TenkiWeb', //* by Tenkyweb
     'rutaDeveloper' => 'https://www.factumconsultora.com', //* https://linkedin.com/in/luisergimenez/
 ];
 
@@ -29,9 +29,9 @@ $_SESSION['factum_validation'] = [
 //     'id' => isset($_SESSION['factum_validation']['id']) ? $_SESSION['factum_validation']['id'] : '6',
 //     'tipo' => isset($_SESSION['factum_validation']['tipo']) ? $_SESSION['factum_validation']['tipo'] : '7',
 //     'developer' => 'Factum', //* Tenki Web
-//     'content' => 'Factum Consultora',
+//     'content' => 'TenkiWeb',
 //     'logo' => 'ftm', //* icontrol 
-//     'by' => 'by Factum Consultora', //* by Tenkyweb
+//     'by' => 'by TenkiWeb', //* by Tenkyweb
 //     'rutaDeveloper' => 'https://www.factumconsultora.com', //* https://linkedin.com/in/luisergimenez/
 // ];
 

@@ -9,7 +9,7 @@ export default function enviarLogin(objeto) {
     obj.rax = rax
     const datos = JSON.stringify(obj)
     // console.log(datos)
-    // const ruta = `${SERVER}/Pages/Login/Routes/login.php?${rax}`
+
     const ruta = `${SERVER}/Routes/index.php`
     // console.log(ruta)
     fetch(ruta, {
