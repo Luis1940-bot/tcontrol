@@ -110,10 +110,10 @@ Once a semester
 Once per year
 EDIT
 The control tree is not developed. Contact the Administrator or Developer.
-concept
-survey
-detail
-observation
+Concept
+Survey
+Detail
+Observation
 Keep
 Save Changes
 Save as...
@@ -129,7 +129,7 @@ When signing, be sure of the data provided.
 You are about to delete the registry
 Documents involved in the cargo.
 Clone this control to:
-make sign
+Make sign
 Process completed successfully! All steps of the procedure have been executed correctly.
 The process may take a few moments until the image is displayed in the corresponding cell.
 There was an error that does not allow you to continue with the correct process.
@@ -184,7 +184,7 @@ View by date
 Send
 Select the date range for:
 Alert Example
-new report
+New report
 A new report will be registered.
 The new report was generated correctly with the id:
 Something went wrong and the new report was not saved!

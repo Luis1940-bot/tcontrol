@@ -7,7 +7,7 @@ function createSpan(dato, clase) {
   return span
 }
 
-function carga(table, objTrad, fila, estandares) {
+function carga(table, objTrad, fila, estandares, trO) {
   let tr = table.getElementsByTagName('tr')
   estandares.forEach((element) => {
     const horaEstandar = parseInt(element[7])
@@ -53,7 +53,7 @@ function cargaVacios(table, fila, claseOld, claseNew, claseSpan, relleno) {
   }
 }
 
-export default function cargarStandares(estandares, objTrad) {
+export default function cargarStandares(estandares, objTrad, trO) {
   try {
     const table = document.getElementById('tableRove')
     cargaVacios(table, 0, 'col-barra', 'row-producto', 'producto', '-')
@@ -62,7 +62,7 @@ export default function cargarStandares(estandares, objTrad) {
     cargaVacios(table, 3, 'col-barra', 'row-lr', 'lr', '-')
     cargaVacios(table, 4, 'col-barra', 'row-ton', 'ton', '-')
     cargaVacios(table, 5, 'col-barra', 'row-fc', 'fc', '-')
-    carga(table, objTrad, 0, estandares)
+    carga(table, objTrad, 0, estandares, trO)
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(error)

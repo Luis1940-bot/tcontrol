@@ -110,10 +110,10 @@ Uma vez por semestre
 Uma vez ao ano
 EDITAR
 A árvore de controle não está desenvolvida. Entre em contato com o administrador ou desenvolvedor.
-conceito
-enquete
-detalhe
-observação
+Conceito
+Enquete
+Detalhe
+Observação
 Manter
 Guardar mudanças
 Salvar como...
@@ -129,7 +129,7 @@ Ao assinar, certifique-se dos dados fornecidos.
 Você está prestes a excluir o registro
 Documentos envolvidos na carga.
 Clone este controle para:
-fazer sinal
+Fazer sinal
 Processo concluído com sucesso! Todas as etapas do procedimento foram executadas corretamente.
 O processo pode demorar alguns instantes até que a imagem seja exibida na célula correspondente.
 Ocorreu um erro que não permite continuar com o processo correto.
@@ -184,7 +184,7 @@ Ver por data
 Enviar
 Selecione o intervalo de datas para:
 Exemplo de alerta
-novo relatório
+Novo relatório
 Um novo relatório será registrado.
 O novo relatório foi gerado corretamente com o id:
 Algo deu errado e o novo relatório não foi salvo!

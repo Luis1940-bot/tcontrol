@@ -39,9 +39,10 @@ import addSelector from '../../Pages/ListVariables/Modules/Controladores/addSele
 import addVariable from '../../Pages/ListVariables/Modules/Controladores/aceptarVariable.js'
 import guardarNuevaArea from '../../Pages/ListAreas/Modules/Controladores/guardarArea.js'
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { trO, trA } from '../../controllers/trOA.js'
 
 const SERVER = baseUrl
-let objTranslate = []
+let objTraductor = []
 // const objTraductor = {
 //   operativoES: [],
 //   operativoTR: [],
@@ -58,7 +59,7 @@ let fila = 0
 document.addEventListener('DOMContentLoaded', async () => {
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
-    objTranslate = await arraysLoadTranslate()
+    objTraductor = await arraysLoadTranslate()
     // const data = await translate(persona.lng)
     // const translateOperativo = data.arrayTranslateOperativo
     // const espanolOperativo = data.arrayEspanolOperativo
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // objTraductor.archivosES = [...espanolArchivos]
     // objTraductor.archivosTR = [...translateArchivos]
 
-    // return objTraductor
+    return objTraductor
   }
   return null
 })
@@ -467,44 +468,44 @@ function createTextArea(config) {
   return textArea
 }
 
-function trO(palabra, objTranslate) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = objTranslate.operativoES.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return objTranslate.operativoTR[index]
-  }
-  return palabra
-}
+// function trO(palabra, objTranslate) {
+//   if (palabra === undefined || palabra === null) {
+//     return ''
+//   }
+//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
+//   const index = objTranslate.operativoES.findIndex(
+//     (item) =>
+//       item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
+//   )
+//   if (index !== -1) {
+//     return objTranslate.operativoTR[index]
+//   }
+//   return palabra
+// }
 
-function trA(palabra, objTrad) {
-  try {
-    if (palabra === undefined || palabra === null || objTrad === null) {
-      return ''
-    }
-    const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
+// function trA(palabra, objTrad) {
+//   try {
+//     if (palabra === undefined || palabra === null || objTrad === null) {
+//       return ''
+//     }
+//     const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
 
-    const index = objTrad.archivosES.findIndex(
-      (item) =>
-        item.replace(/\s/g, '').toLowerCase().trim() ===
-        palabraNormalizada.trim()
-    )
-    if (index !== -1) {
-      return objTrad.archivosTR[index]
-    }
-    return palabra
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
-    return palabra
-  }
-  // return palabra;
-}
+//     const index = objTrad.archivosES.findIndex(
+//       (item) =>
+//         item.replace(/\s/g, '').toLowerCase().trim() ===
+//         palabraNormalizada.trim()
+//     )
+//     if (index !== -1) {
+//       return objTrad.archivosTR[index]
+//     }
+//     return palabra
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.log(error)
+//     return palabra
+//   }
+//   // return palabra;
+// }
 
 function procesoStyleDisplay(elementosStyle) {
   if (!elementosStyle) {
@@ -523,9 +524,10 @@ function procesoStyleDisplay(elementosStyle) {
   }
 }
 
-const funcionGuardar = () => {
+const funcionGuardar = async () => {
   const { habilitadoGuardar } = arrayGlobal
   if (habilitadoGuardar) {
+    let objTraductor = await arraysLoadTranslate()
     // eslint-disable-next-line no-use-before-define
     const miAlerta = new Alerta()
     const obj = arrayGlobal.objAlertaAceptarCancelar
@@ -550,7 +552,8 @@ const funcionGuardar = () => {
     procesoStyleDisplay(elementosStyle)
   }
 }
-const funcionGuardarCambio = () => {
+const funcionGuardarCambio = async () => {
+  let objTraductor = await arraysLoadTranslate()
   arrayGlobal.habilitadoGuardar = true
   const { habilitadoGuardar } = arrayGlobal
   if (habilitadoGuardar) {
@@ -578,7 +581,8 @@ const funcionGuardarCambio = () => {
     procesoStyleDisplay(elementosStyle)
   }
 }
-const funcionGuardarComoNuevo = () => {
+const funcionGuardarComoNuevo = async () => {
+  let objTraductor = await arraysLoadTranslate()
   arrayGlobal.habilitadoGuardar = true
   sessionStorage.setItem('doc', null)
   const { habilitadoGuardar } = arrayGlobal
@@ -612,8 +616,9 @@ const funcionRefrescar = () => {
   const url = new URL(window.location.href)
   window.location.href = url.href
 }
-const funcionHacerFirmar = () => {
+const funcionHacerFirmar = async () => {
   // eslint-disable-next-line no-use-before-define
+  let objTraductor = await arraysLoadTranslate()
   const miAlertaFirmar = new Alerta()
   const obj = arrayGlobal.objAlertaAceptarCancelar
   miAlertaFirmar.createFirma(obj, objTraductor, 'firmar')
@@ -4281,8 +4286,8 @@ class Alerta {
           modal.remove()
           modal = document.getElementById('modalTablaViewFecha')
           modal.remove()
-          primerRender(rove, objTranslate)
-          cargarStandares(estandaresRove, objTranslate)
+          primerRender(rove, objTranslate, trO)
+          cargarStandares(estandaresRove, objTranslate, trO)
           const documentos = await callRove(`doc${rove}`, desde, desde)
           setTimeout(() => {
             pintaBarras(documentos, objTranslate)

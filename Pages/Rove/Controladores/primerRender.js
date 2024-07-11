@@ -16,7 +16,7 @@ function agregaHoras(table, fila) {
   }
 }
 
-function porcentajes(table, objTrad, filas) {
+function porcentajes(table, objTrad, filas, trO) {
   let tr = table.getElementsByTagName('tr')
   let porciento = 100
   for (let r = 6; r < filas; r++) {
@@ -30,7 +30,7 @@ function porcentajes(table, objTrad, filas) {
   td.appendChild(createSpan(span, null))
 }
 
-function titulos(table, rove, objTrad) {
+function titulos(table, rove, objTrad, trO) {
   let tr = table.getElementsByTagName('tr')
 
   let fila = Array()
@@ -153,8 +153,8 @@ export default function primerRender(rove, objTrad, trO) {
     }
 
     table.appendChild(tbody)
-    titulos(table, rove, objTrad)
-    porcentajes(table, objTrad, 16)
+    titulos(table, rove, objTrad, trO)
+    porcentajes(table, objTrad, 16, trO)
     agregaHoras(table, 16)
   } catch (error) {
     // eslint-disable-next-line no-console
