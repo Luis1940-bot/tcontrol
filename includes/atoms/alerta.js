@@ -1,13 +1,5 @@
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../controllers/variables.js'
-// // eslint-disable-next-line import/extensions, import/no-named-as-default
-// import translate, {
-//   // eslint-disable-next-line no-unused-vars
-//   arrayTranslateOperativo,
-//   // eslint-disable-next-line no-unused-vars
-//   arrayEspanolOperativo,
-//   // eslint-disable-next-line import/extensions
-// } from '../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import guardarNuevo from '../../Pages/Control/Modules/Controladores/guardarNuevo.js'
 // eslint-disable-next-line import/extensions
@@ -43,12 +35,6 @@ import { trO, trA } from '../../controllers/trOA.js'
 
 const SERVER = baseUrl
 let objTraductor = []
-// const objTraductor = {
-//   operativoES: [],
-//   operativoTR: [],
-//   archivosES: [],
-//   archivosTR: [],
-// }
 
 const widthScreen = window.innerWidth
 const widthScreenAjustado = 360 / widthScreen
@@ -60,18 +46,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     objTraductor = await arraysLoadTranslate()
-    // const data = await translate(persona.lng)
-    // const translateOperativo = data.arrayTranslateOperativo
-    // const espanolOperativo = data.arrayEspanolOperativo
-
-    // const translateArchivos = data.arrayTranslateArchivo
-    // const espanolArchivos = data.arrayEspanolArchivo
-
-    // objTraductor.operativoES = [...espanolOperativo]
-    // objTraductor.operativoTR = [...translateOperativo]
-
-    // objTraductor.archivosES = [...espanolArchivos]
-    // objTraductor.archivosTR = [...translateArchivos]
 
     return objTraductor
   }

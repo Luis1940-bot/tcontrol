@@ -10,9 +10,9 @@
               case 'traerControles':
                       $reporte = $porciones[1];
                       $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.horaautomatica,'%H:%i') as hora,LTYregistrocontrol.observacion,
-                      usuarios.nombre, RAND(),NOW()  
+                      usuario.nombre, RAND(),NOW()  
                       FROM LTYregistrocontrol 
-                      INNER JOIN usuarios ON LTYregistrocontrol.idusuario=usuarios.idusuario
+                      INNER JOIN usuario ON LTYregistrocontrol.idusuario=usuario.idusuario
                       WHERE LTYregistrocontrol.idLTYreporte=".$reporte." 
                       GROUP BY LTYregistrocontrol.nuxpedido
                       ORDER BY LTYregistrocontrol.fecha DESC, LTYregistrocontrol.horaautomatica DESC LIMIT 1000;";
@@ -23,9 +23,9 @@
                       $fechaInicial = $porciones[2];
                       $fechaActual = $porciones[3];
                       $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.horaautomatica,'%H:%i') as hora,LTYregistrocontrol.observacion,
-                      usuarios.nombre, RAND(),NOW()  
+                      usuario.nombre, RAND(),NOW()  
                       FROM LTYregistrocontrol 
-                      INNER JOIN usuarios ON LTYregistrocontrol.idusuario=usuarios.idusuario
+                      INNER JOIN usuario ON LTYregistrocontrol.idusuario=usuario.idusuario
                       WHERE LTYregistrocontrol.idLTYreporte=".$reporte." AND 
                       LTYregistrocontrol.fecha>='".$fechaInicial."' AND LTYregistrocontrol.fecha<='".$fechaActual."' 
                       GROUP BY LTYregistrocontrol.nuxpedido
@@ -55,8 +55,8 @@
                       , LTYcontrol.tiene_hijo AS HIJO,LTYregistrocontrol.imagenes AS IMG, LTYreporte.direcciones_mail AS DIR_MAIL
                       , RAND(),NOW(), LTYregistrocontrol.idLTYregistrocontrol AS ID, LTYcontrol.nombre AS NOMBRE
                         FROM LTYregistrocontrol
-                        LEFT JOIN usuarios u ON LTYregistrocontrol.supervisor=u.idusuario 
-                        LEFT JOIN usuarios w ON LTYregistrocontrol.idusuario=w.idusuario
+                        LEFT JOIN usuario u ON LTYregistrocontrol.supervisor=u.idusuario 
+                        LEFT JOIN usuario w ON LTYregistrocontrol.idusuario=w.idusuario
                         INNER JOIN LTYcontrol ON LTYcontrol.idLTYcontrol=LTYregistrocontrol.idLTYcontrol
                         INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=LTYregistrocontrol.idLTYreporte
                         WHERE LTYregistrocontrol.nuxpedido=".$reporte."   ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol.idLTYcontrol ASC";

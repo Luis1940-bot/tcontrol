@@ -49,8 +49,8 @@
                             , LTYcontrol.tiene_hijo AS HIJO, LTYcontrol.rutina_hijo AS SQL_HIJO,LTYregistrocontrol.imagenes AS IMG, LTYreporte.direcciones_mail AS DIR_MAIL
                             , RAND(),NOW(), LTYregistrocontrol.idLTYregistrocontrol AS ID
                               FROM LTYregistrocontrol
-                              LEFT JOIN usuarios u ON LTYregistrocontrol.supervisor=u.idusuario 
-                              LEFT JOIN usuarios w ON LTYregistrocontrol.idusuario=w.idusuario
+                              LEFT JOIN usuario u ON LTYregistrocontrol.supervisor=u.idusuario 
+                              LEFT JOIN usuario w ON LTYregistrocontrol.idusuario=w.idusuario
                               INNER JOIN LTYcontrol ON LTYcontrol.idLTYcontrol=LTYregistrocontrol.idLTYcontrol
                               INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=LTYregistrocontrol.idLTYreporte
                               WHERE LTYregistrocontrol.nuxpedido=".$control_cargado." ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol.idLTYcontrol ASC;";
