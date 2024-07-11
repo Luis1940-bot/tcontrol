@@ -1,4 +1,4 @@
-import { trO } from '../../../controllers/trOA'
+// import { trO } from '../../../controllers/trOA'
 
 function createSpan(dato, clase) {
   const span = document.createElement('span')
@@ -137,7 +137,7 @@ function TbodyCell(c, r) {
   return cell
 }
 
-export default function primerRender(rove, objTrad) {
+export default function primerRender(rove, objTrad, trO) {
   try {
     const table = document.getElementById('tableRove')
     const tbody = document.createElement('tbody')

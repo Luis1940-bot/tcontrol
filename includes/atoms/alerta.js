@@ -1,13 +1,13 @@
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../controllers/variables.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
+// // eslint-disable-next-line import/extensions, import/no-named-as-default
+// import translate, {
+//   // eslint-disable-next-line no-unused-vars
+//   arrayTranslateOperativo,
+//   // eslint-disable-next-line no-unused-vars
+//   arrayEspanolOperativo,
+//   // eslint-disable-next-line import/extensions
+// } from '../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import guardarNuevo from '../../Pages/Control/Modules/Controladores/guardarNuevo.js'
 // eslint-disable-next-line import/extensions
@@ -38,15 +38,16 @@ import guardarNuevoReporte from '../../Pages/ListReportes/Modules/Controladores/
 import addSelector from '../../Pages/ListVariables/Modules/Controladores/addSelector.js'
 import addVariable from '../../Pages/ListVariables/Modules/Controladores/aceptarVariable.js'
 import guardarNuevaArea from '../../Pages/ListAreas/Modules/Controladores/guardarArea.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 
 const SERVER = baseUrl
-
-const objTraductor = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
+let objTranslate = []
+// const objTraductor = {
+//   operativoES: [],
+//   operativoTR: [],
+//   archivosES: [],
+//   archivosTR: [],
+// }
 
 const widthScreen = window.innerWidth
 const widthScreenAjustado = 360 / widthScreen
@@ -57,20 +58,21 @@ let fila = 0
 document.addEventListener('DOMContentLoaded', async () => {
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
-    const data = await translate(persona.lng)
-    const translateOperativo = data.arrayTranslateOperativo
-    const espanolOperativo = data.arrayEspanolOperativo
+    objTranslate = await arraysLoadTranslate()
+    // const data = await translate(persona.lng)
+    // const translateOperativo = data.arrayTranslateOperativo
+    // const espanolOperativo = data.arrayEspanolOperativo
 
-    const translateArchivos = data.arrayTranslateArchivo
-    const espanolArchivos = data.arrayEspanolArchivo
+    // const translateArchivos = data.arrayTranslateArchivo
+    // const espanolArchivos = data.arrayEspanolArchivo
 
-    objTraductor.operativoES = [...espanolOperativo]
-    objTraductor.operativoTR = [...translateOperativo]
+    // objTraductor.operativoES = [...espanolOperativo]
+    // objTraductor.operativoTR = [...translateOperativo]
 
-    objTraductor.archivosES = [...espanolArchivos]
-    objTraductor.archivosTR = [...translateArchivos]
+    // objTraductor.archivosES = [...espanolArchivos]
+    // objTraductor.archivosTR = [...translateArchivos]
 
-    return objTraductor
+    // return objTraductor
   }
   return null
 })

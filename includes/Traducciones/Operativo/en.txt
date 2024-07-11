@@ -114,3 +114,102 @@ concept
 survey
 detail
 observation
+Keep
+Save Changes
+Save as...
+Sign
+Attention
+Documents
+New
+Edit
+A new control will be saved.
+The changes will be saved.
+A copy of the current one is made.
+When signing, be sure of the data provided.
+You are about to delete the registry
+Documents involved in the cargo.
+Clone this control to:
+make sign
+Process completed successfully! All steps of the procedure have been executed correctly.
+The process may take a few moments until the image is displayed in the corresponding cell.
+There was an error that does not allow you to continue with the correct process.
+Wait a few moments, the process is running. The controls are complex digital instruments, during loading it is controlled that everything happens as expected. Thank you!
+Alert Example
+Reload(F5)
+Return
+You are working with a new control that has not been saved.
+Document not digitally signed.
+Signed by
+It is sent by email. Deselect not to send.
+Alert Example
+New Query(F5)
+Copied to clipboard.
+Authorized from Area Headquarters.
+The process may take a few moments as the inferred data is checked.
+Did not make any changes to those determined by configuration. You will not be able to save any controls.
+Required data is missing and has not been completed. Close this message, complete the required information and accept again.
+The insertion process was successful.
+The quantity of:
+items
+Document no.
+Something went wrong.
+The process failed as no inserted data is recorded. Check the internet connection and try again.\nIf the problem persists, contact the analyst in your area.
+Emails have been sent according to the control configuration.
+Wait a few moments, the process is running. The controls are complex digital instruments, during loading it is controlled that everything happens as expected. Thank you!
+The table did not populate as expected, please try again.
+There are no modifications in the control that require saving, verify the inferred data since the data present is the standard.
+Alert date:
+Alert time:
+Enter the system and access document number
+Gonna
+Notify
+Alert System
+Alert system notification
+The file is not in proper JSON format. Contact the developer.
+The JSON file does not exist. Contact the developer.
+Error loading JSON file. Contact the developer.
+Your digital signature could not be completed, there is an error in your key. Please verify and try again. Thank you
+Action
+Former
+Current
+If the data is correct, accept, otherwise you can cancel the operation.\n If you accept, you will no longer be able to undo the action.
+This control will be sent by email according to the email configuration.
+This control will NOT be sent by email.
+The saving process was successful.
+Please wait a few moments, the active controls are being listed. Thank you!
+View uploaded
+See visible
+Procedure
+View by date
+Send
+Select the date range for:
+Alert Example
+new report
+A new report will be registered.
+The new report was generated correctly with the id:
+Something went wrong and the new report was not saved!
+The report data will be modified.
+Modifications to the report were saved.
+Something went wrong and the modifications were not saved!
+A copy of the current report will be released.
+The copy of the report was generated correctly with the id:
+Something went wrong and a copy of the report was not made!
+A new area will be registered.
+The new area was generated successfully.
+Something went wrong and the new area was not saved!
+The area data will be modified.
+The area modifications were saved.
+Something went wrong and the modifications were not saved!
+First
+Last
+Type of user:
+You do not have permission to create or review this control. Contact your supervisor. Thank you
+You do not have permission to create or review this report. Contact your supervisor. Thank you
+The query is being performed, it will take a few seconds, it can be very complex depending on the files involved and the time interval requested. Secure the internet connection.
+No record was found that matches the dates provided. Review the dates in Loaded Controls.
+Select the date range for the query:
+No record was found that matches the dates provided. Review the dates in Loaded Controls.
+Empty
+With separator
+With Photo
+New camp

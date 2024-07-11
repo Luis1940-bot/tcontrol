@@ -1,4 +1,4 @@
-import { trO } from '../../../controllers/trOA'
+// import { trO } from '../../../controllers/trOA'
 
 function createSpan(dato, clase) {
   const span = document.createElement('span')
