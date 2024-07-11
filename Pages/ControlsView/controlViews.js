@@ -8,6 +8,7 @@ import arrayGlobal from '../../controllers/variables.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
 
 import baseUrl from '../../config.js'
+import { trO } from '../../controllers/trOA.js'
 const SERVER = baseUrl
 
 const encabezados = {
@@ -15,24 +16,7 @@ const encabezados = {
   width: ['1'],
 }
 
-let translateOperativo = []
-let espanolOperativo = []
-// let translateArchivos = [];
-// let espanolArchivos = [];
-
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
-async function cargaDeRegistros(objTranslate, control) {
+async function cargaDeRegistros(objTranslate, control, plant) {
   try {
     const { control_N, control_T, desde, hasta } = control
     const whereUs = document.getElementById('whereUs')
@@ -42,7 +26,7 @@ async function cargaDeRegistros(objTranslate, control) {
     whereUs.appendChild(textoAdicional)
     let reportes
     desde === undefined || hasta === undefined
-      ? (reportes = await traerRegistros(`traerControles,${control_N}`, null))
+      ? (reportes = await traerRegistros(`traerControles,${control_N}`, plant))
       : null
     desde !== undefined || hasta !== undefined
       ? (reportes = await traerRegistros(
@@ -57,7 +41,7 @@ async function cargaDeRegistros(objTranslate, control) {
     } else {
       const miAlerta = new Alerta()
       const aviso = 'No se encontraron registros para este control.'
-      const mensaje = trO(aviso) || aviso
+      const mensaje = trO(aviso, objTranslate) || aviso
       arrayGlobal.avisoAmarillo.div.top = '500px'
       arrayGlobal.avisoAmarillo.close.id = 'idCloseAvisoAmarillo'
       miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, objTranslate)
@@ -75,10 +59,10 @@ async function cargaDeRegistros(objTranslate, control) {
   }
 }
 
-async function mensajeDeCarga(objTranslate, control) {
+async function mensajeDeCarga(objTranslate, control, plant) {
   const miAlerta = new Alerta()
   const aviso = arrayGlobal.avisoListandoControles.span.text
-  const mensaje = trO(aviso) || aviso
+  const mensaje = trO(aviso, objTranslate) || aviso
   miAlerta.createControl(
     arrayGlobal.avisoListandoControles,
     mensaje,
@@ -91,16 +75,12 @@ async function mensajeDeCarga(objTranslate, control) {
   // eslint-disable-next-line no-promise-executor-return
   await new Promise((resolve) => setTimeout(() => resolve(), 200))
 
-  await cargaDeRegistros(objTranslate, control)
+  await cargaDeRegistros(objTranslate, control, plant)
 }
 
-function cargaTabla(objTranslate, control) {
+function cargaTabla(objTranslate, control, plant) {
   try {
-    translateOperativo = objTranslate.operativoTR
-    espanolOperativo = objTranslate.operativoES
-    // translateArchivos = objTranslate.archivosTR;
-    // espanolArchivos = objTranslate.archivosES;
-    mensajeDeCarga(objTranslate, control)
+    mensajeDeCarga(objTranslate, control, plant)
     document.getElementById('volver').style.display = 'block'
   } catch (error) {
     // eslint-disable-next-line no-console

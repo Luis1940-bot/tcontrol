@@ -2,22 +2,8 @@ import { encriptar, desencriptar } from '../../../controllers/cript.js'
 import traerRegistros from '../../Rove/Controladores/traerRegistros.js'
 
 import baseUrl from '../../../config.js'
+import { trO } from '../../../controllers/trOA.js'
 const SERVER = baseUrl
-
-function trO(palabra, objTranslate) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = objTranslate.operativoES.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return objTranslate.operativoTR[index]
-  }
-  return palabra
-}
 
 function createDiv(config) {
   const div = document.createElement('div')

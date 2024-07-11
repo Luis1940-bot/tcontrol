@@ -2,46 +2,9 @@ import { encriptar, desencriptar } from '../../../controllers/cript.js'
 import traerRegistros from '../../Rove/Controladores/traerRegistros.js'
 
 import baseUrl from '../../../config.js'
+import { trA } from '../../../controllers/trOA.js'
 const SERVER = baseUrl
 
-function trO(palabra, objTranslate) {
-  if (palabra === undefined || palabra === null) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = objTranslate.operativoES.findIndex(
-    (item) =>
-      item.replace(/\s/g, '').toLowerCase().trim() === palabraNormalizada.trim()
-  )
-  if (index !== -1) {
-    return objTranslate.operativoTR[index]
-  }
-  return palabra
-}
-
-function trA(palabra, objTrad) {
-  try {
-    if (palabra === undefined || palabra === null || objTrad === null) {
-      return ''
-    }
-    const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-
-    const index = objTrad.archivosES.findIndex(
-      (item) =>
-        item.replace(/\s/g, '').toLowerCase().trim() ===
-        palabraNormalizada.trim()
-    )
-    if (index !== -1) {
-      return objTrad.archivosTR[index]
-    }
-    return palabra
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
-    return palabra
-  }
-  // return palabra;
-}
 
 async function handleClickEnlace(dato) {
   const { rove } = desencriptar(sessionStorage.getItem('rove'))

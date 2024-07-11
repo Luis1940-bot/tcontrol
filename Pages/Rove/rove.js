@@ -1,13 +1,5 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
 import readJSON from '../../controllers/read-JSON.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
 // eslint-disable-next-line import/extensions
@@ -23,18 +15,11 @@ import arrayGlobal from '../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
 
 import baseUrl from '../../config.js'
+import { configPHP } from '../../controllers/configPHP.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { trO } from '../../controllers/trOA.js'
 const SERVER = baseUrl
-
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
+let objTranslate = []
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -52,17 +37,6 @@ function leeVersion(json) {
       // eslint-disable-next-line no-console
       console.error('Error al cargar el archivo:', error)
     })
-}
-
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
 }
 
 function abrirCalendar(objTrad, rove) {
@@ -95,31 +69,6 @@ function dondeEstaEn() {
   document.getElementById('whereUs').style.display = 'inline'
 }
 
-function configPHP(user) {
-  // const user = desencriptar(sessionStorage.getItem('user'))
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  document.querySelector('.div-encabezado').style.marginTop = '5px'
-
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
-}
-
 function verificaTipoDeConsulta(objTranslate) {
   try {
     const { rove } = desencriptar(sessionStorage.getItem('rove'))
@@ -133,7 +82,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
+  document.querySelector('.header-McCain').style.display = 'none'
+  document.querySelector('.div-encabezado').style.marginTop = '5px'
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   // hamburguesa.style.display = 'none'
@@ -141,18 +92,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    translateArchivos = data.arrayTranslateArchivo
-    espanolArchivos = data.arrayEspanolArchivo
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
-    objTranslate.archivosES = [...espanolArchivos]
-    objTranslate.archivosTR = [...translateArchivos]
     leeVersion('version')
-    setTimeout(() => {
-      dondeEstaEn()
+    setTimeout(async () => {
+      objTranslate = await arraysLoadTranslate()
+      dondeEstaEn(objTranslate)
       leeApp(`App/${plant}/app`, false)
       verificaTipoDeConsulta(objTranslate)
     }, 200)
@@ -171,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate),
     }
     personModal(user, objTranslate)
   })
