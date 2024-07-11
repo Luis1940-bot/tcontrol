@@ -14,9 +14,10 @@ function verifica($q, $sql_i){
   $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
   try {
 
-    $sql="SELECT u.idusuario, u.nombre, u.mail, u.idtipousuario, u.mi_cfg  FROM usuarios u WHERE u.idusuario=?";
+    $sql="SELECT u.idusuario, u.nombre, u.mail, u.idtipousuario, u.mi_cfg  FROM usuario u WHERE u.idusuario=? AND u.idLTYcliente=?";
     $query = $pdo->prepare($sql);
     $query->bindParam(1, $idSupervisor, PDO::PARAM_STR);
+    $query->bindParam(2, $sql_i, PDO::PARAM_INT);
     $query->execute();
     $data = $query->fetchAll();
     // echo count($data).'<br>';

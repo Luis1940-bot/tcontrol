@@ -27,8 +27,9 @@ let fila = 0
 function estilosTheadCell(element, index, objTrad) {
   const cell = document.createElement('th')
   if (index < 5) {
-    cell.textContent =
-      trO(element.toUpperCase(), objTrad) || element.toUpperCase()
+    const texto = trO(element, objTrad) || element
+    cell.textContent = texto.toUpperCase()
+
     cell.style.background = '#000000'
     cell.style.border = '1px solid #cecece'
     cell.style.overflow = 'hidden'
@@ -237,10 +238,11 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       type = selectDinamic
     } else if (i === 2 && tipoDeDato === 's') {
       dato = null
+      const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
       const arraySel = arrayGlobal.arraySelect.filter(
         (ele) => ele[2] === element[12]
       )
-      const select = ElementGenerator.generateSelect(arraySel)
+      const select = ElementGenerator.generateSelect(arraySel, valorXDefecto)
       type = select
     } else if (i === 2 && tipoDeDato === 'img') {
       dato = null

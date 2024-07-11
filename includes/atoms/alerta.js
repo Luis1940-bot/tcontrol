@@ -1380,7 +1380,9 @@ const funcionAreaGuardarCambios = async () => {
 
 async function firmar(firmadoPor, objTrad) {
   const pass = document.getElementById('idInputFirma').value
-  const supervisor = await traerFirma(pass)
+  const persona = desencriptar(sessionStorage.getItem('user'))
+  const { plant } = persona
+  const supervisor = await traerFirma(pass, plant)
 
   let modal = document.getElementById('modalAlert')
   modal.style.display = 'none'

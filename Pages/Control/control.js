@@ -30,7 +30,6 @@ import { configPHP } from '../../controllers/configPHP.js'
 import { trO } from '../../controllers/trOA.js'
 const SERVER = baseUrl
 let objTranslate = []
-let data = {}
 
 let controlN = ''
 let controlT = ''
@@ -121,7 +120,7 @@ function actualizarProgreso(porcentaje) {
   })
 }
 
-async function cargaDeRegistros(objTrad) {
+async function cargaDeRegistros(objTrad, plant) {
   try {
     inicioPerformance()
     await actualizarProgreso('10%')
@@ -130,7 +129,7 @@ async function cargaDeRegistros(objTrad) {
     sessionStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4)
 
     await actualizarProgreso('20%')
-    const empresaData = await traerRegistros('empresa', null)
+    const empresaData = await traerRegistros('empresa', plant)
     arrayGlobal.arrayEmpresa = [...empresaData]
 
     await actualizarProgreso('30%')
@@ -151,9 +150,9 @@ async function cargaDeRegistros(objTrad) {
 
     if (nr) {
       // console.log(nr)
-      const controlNr = await traerNR(nr, null)
+      const controlNr = await traerNR(nr, plant)
       setTimeout(() => {
-        cargarNR(controlNr)
+        cargarNR(controlNr, plant)
         // eslint-disable-next-line no-console
         // console.log(cargaNR);
       }, 1000)
@@ -169,7 +168,7 @@ async function cargaDeRegistros(objTrad) {
   }
 }
 
-async function mensajeDeCarga(objTrad) {
+async function mensajeDeCarga(objTrad, plant) {
   const miAlerta = new Alerta()
   const mensaje = trO(arrayGlobal.avisoCargandoControl.span.text, objTrad)
   miAlerta.createControl(arrayGlobal.avisoCargandoControl, mensaje, objTrad)
@@ -181,7 +180,7 @@ async function mensajeDeCarga(objTrad) {
   // eslint-disable-next-line no-promise-executor-return
   await new Promise((resolve) => setTimeout(() => resolve(), 200))
 
-  await cargaDeRegistros(objTrad)
+  await cargaDeRegistros(objTrad, plant)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -211,7 +210,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       setTimeout(async () => {
         objTranslate = await arraysLoadTranslate()
         configuracionLoad(persona)
-        mensajeDeCarga(objTranslate)
+        mensajeDeCarga(objTranslate, plant)
         leeApp(`App/${plant}/app`)
         spinner.style.visibility = 'hidden'
         // eslint-disable-next-line no-console

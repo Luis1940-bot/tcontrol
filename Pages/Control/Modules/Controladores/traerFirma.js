@@ -1,7 +1,7 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-export default function traerFirma(pss) {
+export default function traerFirma(pss, sql_i) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
@@ -9,10 +9,10 @@ export default function traerFirma(pss) {
       q: pss,
       ruta: '/traerFirma',
       rax,
+      sql_i,
     }
     const datos = JSON.stringify(obj)
-    // const pass = encodeURIComponent(pss)
-    // const ruta = `${SERVER}/Pages/Control/Routes/supervisores.php?q=${pass}${rax}`
+    // console.log(datos)
     const ruta = `${SERVER}/Routes/index.php`
     fetch(ruta, {
       method: 'POST',

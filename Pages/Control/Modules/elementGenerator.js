@@ -143,7 +143,7 @@ class ElementGenerator {
     return selectDinamic
   }
 
-  static generateSelect(array) {
+  static generateSelect(array, valorXDefecto) {
     const select = document.createElement('select')
     while (select.firstChild) {
       select.removeChild(select.firstChild)
@@ -164,6 +164,15 @@ class ElementGenerator {
         option.text = text
         select.appendChild(option)
       })
+
+      if (valorXDefecto) {
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].text === valorXDefecto) {
+            select.selectedIndex = i
+            break
+          }
+        }
+      }
     }
 
     return select

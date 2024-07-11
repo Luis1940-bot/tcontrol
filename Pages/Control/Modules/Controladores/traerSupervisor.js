@@ -1,7 +1,7 @@
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-export default function traerSupervisor(idSupervisor) {
+export default function traerSupervisor(idSupervisor, sql_i) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
@@ -10,7 +10,7 @@ export default function traerSupervisor(idSupervisor) {
       q: idSupervisor,
       ruta: '/traerSupervisor',
       rax,
-      sql_i: null,
+      sql_i,
     }
     const datos = JSON.stringify(obj)
     // console.log(datos)

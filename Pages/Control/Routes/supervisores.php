@@ -5,7 +5,7 @@
   //     unset($_SESSION['factum_validation']['email'] ); 
   // }
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
-function verifica($q){
+function verifica($q, $sql_i){
   global $q;
   $pass=urldecode($q);
   
@@ -16,9 +16,10 @@ function verifica($q){
   $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
   try {
 
-    $sql="SELECT u.idusuario, u.nombre, u.mail, u.idtipousuario, u.mi_cfg  FROM usuarios u WHERE u.pass=?";
+    $sql="SELECT u.idusuario, u.nombre, u.mail, u.idtipousuario, u.mi_cfg  FROM usuario u WHERE u.pass=? AND u.idLTYcliente=?";
     $query = $pdo->prepare($sql);
     $query->bindParam(1, $hash, PDO::PARAM_STR);
+    $query->bindParam(2, $sql_i, PDO::PARAM_INT);
     $query->execute();
     $data = $query->fetchAll();
     // echo count($data).'<br>';
@@ -51,6 +52,7 @@ function verifica($q){
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
+// $datos = '{"q":"4488","ruta":"/traerFirma","rax":"&new=Thu Jul 11 2024 11:07:07 GMT-0300 (hora estándar de Argentina)","sql_i":15}';
 
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
@@ -63,7 +65,8 @@ error_log('JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $q = $data['q'];
-  verifica($q);
+  $sql_i = $data['sql_i'];
+  verifica($q, $sql_i);
 } else {
   echo "Error al decodificar la cadena JSON";
 }

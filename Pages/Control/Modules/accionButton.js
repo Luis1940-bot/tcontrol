@@ -1,47 +1,11 @@
 // eslint-disable-next-line import/extensions
 import traerRegistros from './Controladores/traerRegistros.js'
-// eslint-disable-next-line import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateArchivo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolArchivo,
-  // eslint-disable-next-line import/extensions
-} from '../../../controllers/translate.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar } from '../../../controllers/cript.js'
+import { trO } from '../../../controllers/trOA.js'
+import { arraysLoadTranslate } from '../../../controllers/arraysLoadTranslate.js'
 
-let data = {}
-let translateOperativo = []
-let espanolOperativo = []
-// let translateArchivo = [];
-// let espanolArchivo = [];
-
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
-// function trA(palabra) {
-//   const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
-//   const index = espanolArchivo.findIndex(
-//     (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada,
-//   );
-//   if (index !== -1) {
-//     return translateArchivo[index];
-//   }
-//   return palabra;
-// }
+let objTranslate = []
 
 async function cargaModal(respuesta, input, haceClick) {
   try {
@@ -247,14 +211,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    // translateArchivo = data.arrayTranslateArchivo;
-    // espanolArchivo = data.arrayEspanolArchivo;
-    // eslint-disable-next-line prefer-destructuring
+    objTranslate = await arraysLoadTranslate()
+
     const placeholder = buscarModal.placeholder
-    buscarModal.placeholder = trO(placeholder) || placeholder
+    buscarModal.placeholder = trO(placeholder, objTranslate) || placeholder
   }
 })
 

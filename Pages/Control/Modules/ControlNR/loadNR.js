@@ -105,11 +105,11 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
   }
 }
 
-async function verSupervisor(idSupervisor) {
+async function verSupervisor(idSupervisor, plant) {
   let configMenu
   // console.log(idSupervisor, typeof idSupervisor)
   if (idSupervisor !== '0') {
-    const supervisor = await traerSupervisor(idSupervisor)
+    const supervisor = await traerSupervisor(idSupervisor, plant)
     configMenu = {
       guardar: false,
       guardarComo: true,
@@ -138,7 +138,7 @@ async function verSupervisor(idSupervisor) {
   }
 }
 
-function cargarNR(datos) {
+function cargarNR(datos, plant) {
   try {
     // console.log(datos)
     const idSupervisor = datos[0][6]
@@ -181,7 +181,7 @@ function cargarNR(datos) {
         )
       }
     }
-    verSupervisor(idSupervisor)
+    verSupervisor(idSupervisor, plant)
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(error)

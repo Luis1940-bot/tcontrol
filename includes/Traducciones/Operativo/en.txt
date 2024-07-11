@@ -110,3 +110,7 @@ Once a semester
 Once per year
 EDIT
 The control tree is not developed. Contact the Administrator or Developer.
+concept
+survey
+detail
+observation

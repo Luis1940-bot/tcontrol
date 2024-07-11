@@ -1,52 +1,21 @@
 // eslint-disable-next-line import/extensions
 import objVariables from '../../../controllers/variables.js'
-// eslint-disable-next-line import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateArchivo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolArchivo,
-  // eslint-disable-next-line import/extensions
-} from '../../../controllers/translate.js'
 // eslint-disable-next-line import/extensions
 import { Alerta } from '../../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar } from '../../../controllers/cript.js'
+import { arraysLoadTranslate } from '../../../controllers/arraysLoadTranslate.js'
+import { trO } from '../../../controllers/trOA.js'
 
-let data = {}
-let translateOperativo = []
-let espanolOperativo = []
-// let translateArchivo = [];
-// let espanolArchivo = [];
-// const objTranslate = {
-//   operativoES: [...translateOperativo],
-//   operativoTR: [...espanolOperativo],
-// };
+let objTranslate = []
 const reader = new FileReader()
-function trO(palabra) {
-  if (palabra === undefined) {
-    return ''
-  }
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
 
 let row = 0
 function buttonImage(id) {
   row = id
   const miAlerta = new Alerta()
   const mensaje =
-    trO(objVariables.avisoImagenes.span.text) ||
+    trO(objVariables.avisoImagenes.span.text, objTranslate) ||
     objVariables.avisoImagenes.span.text
   miAlerta.createVerde(objVariables.avisoImagenes, mensaje, null)
   const modal = document.getElementById('modalAlertVerde')
@@ -142,11 +111,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    // objTranslate.operativoES = [...translateOperativo];
-    // objTranslate.operativoTR = [...espanolOperativo];
+    objTranslate = await arraysLoadTranslate()
   }
 })
 

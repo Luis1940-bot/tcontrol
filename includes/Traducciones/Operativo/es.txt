@@ -110,3 +110,7 @@ Una vez por semestre
 Una vez por año
 EDITAR
 No está desarrollado el árbol de controles. Póngase en contacto con el Administrador o con el Desarrolador.
+concepto
+relevamiento
+detalle
+observación

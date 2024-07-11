@@ -13,7 +13,7 @@
                   switch ($porciones[0]) {
 
                       case 'empresa':
-                          $sql='SELECT c.cliente FROM LTYcliente c;';
+                          $sql="SELECT c.cliente FROM LTYcliente c WHERE c.idLTYcliente =".$sql_i.";";
                       break;
 
                       case 'NuevoControl':
