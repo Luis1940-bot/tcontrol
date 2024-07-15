@@ -1,9 +1,12 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('max_execution_time', 300); // 5 minutos
 header("Content-Type: text/html;charset=utf-8");
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 1 Jul 2000 05:00:00 GMT");
 header("MIME-Version: 1.0");
-ini_set('max_execution_time', 300); // 5 minutos
+
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
 
@@ -50,11 +53,11 @@ function connectToDatabase() {
 
 $pdo = connectToDatabase();
 
-$iterationLimit = 50; // Limite de iteraciones para evitar ejecución infinita
+$iterationLimit = 20; // Limite de iteraciones para evitar ejecución infinita
 $iterations = 0;
 
 $startTime = time(); // Registrar el tiempo de inicio
-$maxExecutionTime = 270; // Tiempo máximo de ejecución en segundos (4.5 minutos)
+$maxExecutionTime = 180; // Tiempo máximo de ejecución en segundos (4.5 minutos)
 
 while ($iterations < $iterationLimit) {
     $iterations++;

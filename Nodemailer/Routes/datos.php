@@ -14,6 +14,6 @@ $datox ='[{"name":"FECHA *","valor":"2024-07-15","detalle":"La fecha cuando se o
 
 $plantx = '"15"';
 
-$encabezadox ='{"documento":"240715162900928","address":"luisfactum@gmail.com","fecha":"2024-07-15","hora":"11:29","notificador":"Luis Gimenez","planta":"Alpek-PTAC Cosoleacaque","idPlanta":15,"reporte":"REPORFTE DE PRUEBA","titulo":"Notificação do sistema de alerta","url":"https://tenkiweb.com/tcontrol","fechaDeAlerta":"Data do alerta:","horaDeAlerta":"Tempo de alerta:","notifica":"Notificar","sistema":"Entre no sistema e acesse o número do documento","irA":"Vai","concepto":"Conceito","relevamiento":"Enquete","detalle":"Detalhe","observacion":"Observação","subject":"Sistema de Alerta","idLTYreporte":"14"}';
+$encabezadox ='{"documento":"240715162900928","address":"luisfactum@gmail.com/luisglogista@gmail.com","fecha":"2024-07-15","hora":"11:29","notificador":"Luis Gimenez","planta":"Alpek-PTAC Cosoleacaque","idPlanta":15,"reporte":"REPORFTE DE PRUEBA","titulo":"Notificação do sistema de alerta","url":"https://tenkiweb.com/tcontrol","fechaDeAlerta":"Data do alerta:","horaDeAlerta":"Tempo de alerta:","notifica":"Notificar","sistema":"Entre no sistema e acesse o número do documento","irA":"Vai","concepto":"Conceito","relevamiento":"Enquete","detalle":"Detalhe","observacion":"Observação","subject":"Sistema de Alerta","idLTYreporte":"14"}';
 
 ?>

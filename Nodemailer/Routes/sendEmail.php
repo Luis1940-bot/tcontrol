@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-include('datos.php');
+// include('datos.php');
 
 
 require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php';
@@ -26,14 +26,14 @@ require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
 
-  $datos =json_decode($datox, true);
-  $encabezados =json_decode($encabezadox, true);
+  // $datos =json_decode($datox, true);
+  // $encabezados =json_decode($encabezadox, true);
 
 
 
 try {
-  //  $datos = json_decode($_POST['datos'], true);
-  //  $encabezados = json_decode($_POST['encabezados'], true);
+   $datos = json_decode($_POST['datos'], true);
+   $encabezados = json_decode($_POST['encabezados'], true);
  
 
 
@@ -63,11 +63,9 @@ try {
     $reporte = $idLTYreporte . '-' . $encabezados['reporte'];
     $cliente = $plant . '-' . $planta;
     $idPlanta = $plant;
+
 ob_start();
-
 include(BASE_DIR . '/Nodemailer/emailTenki/email.html');
-
-
 $html = ob_get_clean();
 
    
@@ -110,7 +108,7 @@ $html = ob_get_clean();
     $output = shell_exec('php ' . escapeshellarg($script_path) );
       if ($output === null) {
           logMessage("Error al ejecutar el script de cola:  Revisa sendEmail.log para más detalles.");
-          logMessage("Salida del comando shell_exec: " . $output);
+          logMessage("Salida del comando shell_exec: es null");
       } else {
           logMessage("Script de cola ejecutado correctamente: ");
           logMessage("Salida del comando shell_exec: " . $output);
