@@ -1,47 +1,33 @@
 import baseUrl from '../config.js'
 const SERVER = baseUrl
 
-async function send(nuevoObjeto, encabezados) {
-  const formData = new FormData()
-  formData.append('datos', JSON.stringify(nuevoObjeto))
-  formData.append('encabezados', JSON.stringify(encabezados))
-  // formData.append('plant', plant)
-  const url = `${SERVER}/Nodemailer/Routes/sendEmail.php`
-  console.log(formData)
-
-  console.time('sendEmail')
-  return new Promise((resolve, reject) => {
+async function send(nuevoObjeto, encabezados, plant) {
+  try {
+    const formData = new FormData()
+    formData.append('datos', JSON.stringify(nuevoObjeto))
+    formData.append('encabezados', JSON.stringify(encabezados))
+    formData.append('plant', plant)
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), 240000) // 60 segundos
+    const url = `${SERVER}/Nodemailer/Routes/sendEmail.php`
+    // console.log(formData)
 
-    fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       body: formData,
       signal: controller.signal,
     })
-      .then((response) => {
-        console.log(response)
-        clearTimeout(timeoutId)
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText)
-        }
-        return response.json()
-      })
-      .then((data) => {
-        console.log(data)
-        resolve(data)
-        // eslint-disable-next-line no-console
-        console.timeEnd('sendEmail')
-        return data
-      })
-      .catch((error) => {
-        clearTimeout(timeoutId)
-        console.timeEnd('sendEmail')
-        console.error('Error en la solicitud:', error)
-        reject(error)
-        alert('No se pudo establecer conexión con el servidor')
-      })
-  })
+
+    if (response.ok) {
+      const data = await response.json()
+      return data // Devuelve la respuesta del servidor
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error:', error)
+    throw error // Re-lanza el error para que pueda ser manejado por el bloque catch en insert
+  }
+  return null
 }
 
 function enviaMail(datos, encabezados, plant) {

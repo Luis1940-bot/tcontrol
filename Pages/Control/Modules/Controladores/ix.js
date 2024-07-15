@@ -11,23 +11,23 @@ function limpiarObjeto(objeto) {
   return nuevoObjeto
 }
 
-function insertarRegistro(objeto) {
+function insertarRegistro(objeto, plant) {
   // eslint-disable-next-line no-console
   console.time('insert_time')
   const objLimpio = limpiarObjeto(objeto)
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio))
-  // const ruta = `${SERVER}/Pages/Control/Routes/insert.php?v=${Math.round(
-  //   Math.random() * 10
-  // )}`
+
   const rax = `&new=${new Date()}`
   let obj = {
     q: nuevoObjeto,
     ruta: '/ix2024',
     rax,
+    sql_i: plant,
   }
   const datos = JSON.stringify(obj)
   const ruta = `${SERVER}/Routes/index.php`
   // console.log(datos)
+
   return new Promise((resolve, reject) => {
     // Realiza el fetch y maneja la lógica de la respuesta
     fetch(ruta, {
@@ -46,7 +46,7 @@ function insertarRegistro(objeto) {
       .then((data) => {
         if (typeof data === 'object') {
           // eslint-disable-next-line no-console
-          // console.log(data);
+          // console.log(data)
           // eslint-disable-next-line no-console
           console.timeEnd('insert_time')
           resolve(data) // Resuelve la promesa con el valor correcto

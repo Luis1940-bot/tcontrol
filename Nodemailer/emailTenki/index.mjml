@@ -1,0 +1,28 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text align="center" color="#555" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#eee" width="800px">
+    <mj-include path="./header.mjml" />
+    <mj-section background-color="#fff">
+      <mj-column>
+        <mj-table width="100%">
+         	<thead>
+            <tr style="background:#333333; color:#fff; width:100%; height:20px; font-size:14px; font-style:normal;">
+              <th style="border: 1px solid #cecece; width:20%;">{concepto}</th>
+              <th style="border: 1px solid #cecece; width:25%;">{relevamiento}</th>
+              <th style="border: 1px solid #cecece; width:25%;">{detalle}</th>
+              <th style="border: 1px solid #cecece; width:30%;">{observacion}</th>
+            </tr>
+           </thead>
+          <tbody>
+            {contenido_dinamico}
+          </tbody>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+    <mj-include path="./footer.mjml" />
+  </mj-body>
+</mjml>

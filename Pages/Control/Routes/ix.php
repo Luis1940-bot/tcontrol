@@ -2,61 +2,51 @@
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 include('generatorNuxPedido.php');
 // include('datos.php');
-// $datos = $datox;
 
-function insertar_registro($datos) {
+function convertToValidJson($data) {
+    $string = str_replace("\n", ", ", $data);
+    // Corregir comillas internas
+    $string = str_replace('", "', '","', $string);
+    $string = str_replace("\n", '', $string);
+
+    // Agregar llaves al principio y al final
+    $string = '{' . $string . '}';
+    return $string;
+}
+
+
+function insertar_registro($datos, $idLTYcliente) {
   $dato_decodificado =urldecode($datos);
   $objeto_json = json_decode($dato_decodificado);
-
-  $i=0;
-  $campos='';
-  $interrogantes='';
-  $cantidad_insert=0;
-  foreach ($objeto_json as $clave => $valor) {
-      $campos?$campos=$campos.','.$clave:$campos=$clave;
-      $interrogantes?$interrogantes=$interrogantes.','.':'.$clave:$interrogantes=':'.$clave;
-      $i++;
+  $nuevoObjetoJSON = convertToValidJson($objeto_json->objJSON[0]); //convertToValidJson($array[0]);
+  if (json_last_error() !== JSON_ERROR_NONE) {
+      die('Error al codificar JSON: ' . json_last_error_msg());
   }
-  // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
+  // var_dump($objeto_json->objJSON[0]);
+  // var_dump($nuevoObjetoJSON);
+
+  $fecha = $objeto_json->fecha[0];
+  $idusuario = $objeto_json->idusuario[0];
+  $idLTYreporte = $objeto_json->idLTYreporte[0];
+  $supervisor = $objeto_json->supervisor[0];
+  $observacion = $objeto_json->observacion[0];
+  $imagenes = $objeto_json->imagenes[0];
+  $nuxpedido=generaNuxPedido();
+  $campos = 'fecha, nuxpedido, idusuario, idLTYreporte, supervisor, observacion, imagenes, objJSON, idLTYcliente';
+  $interrogantes = '?,?,?,?,?,?,?,?,?';
+  $cantidad_insert=1;
+
   include_once BASE_DIR . "/Routes/datos_base.php";
   $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-  $sql="INSERT INTO LTYregistrocontrol (".$campos.") VALUES (".$interrogantes.");";
-  $c=0;
-  $d=0;
-  $campos=explode(",",$campos);
-  $interrogantes=explode(",",$interrogantes);
-  $cantidad_registros=count($valor);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $pdo->beginTransaction();
+  $sql="INSERT INTO LTYregistrocontrol (".$campos.") VALUES (".$interrogantes.");";
+  $insert = [$fecha, $nuxpedido, $idusuario, $idLTYreporte, $supervisor, $observacion, $imagenes, $nuevoObjetoJSON, $idLTYcliente];
   $sentencia = $pdo->prepare($sql);
-  $nuxpedido=generaNuxPedido();
-  for ($i=0; $i <$cantidad_registros ; $i++){
-      foreach ($objeto_json as $clave => $valor){
-        $tipodedato="PDO::PARAM_STR";
-        if ($campos[$c]==='tipodedato') {
-          $parametro= $objeto_json->tipodedato[$i];
-          if ($parametro==='n') {
-            $tipodedato="PDO::PARAM_INT ";
-          }
-        }
-        $sentencia->bindParam($interrogantes[$c], $campos[$c]);
-        $c++;
-        
-      }
-      $c=0;
-      
-      foreach ($objeto_json as $clave => $valor){
-        $valor_ingresar=$valor[$i];
-        $clave==='nuxpedido'?$valor_ingresar=$nuxpedido:null;
-        $campos[$d]=$valor_ingresar;
-        $d++;
-      }
-      $d=0;
-      $sentencia->execute();
-      $cantidad_insert += $sentencia->rowCount();
-      // echo "------------EXECUTE------<br>";
-  }
-  $pdo->commit(); 
+  $sentencia->execute($insert);
+
+  $pdo->commit();
   if ($cantidad_insert > 0) {
     // echo "El registro se insertó correctamente";
     $response = array('success' => true, 'message' => 'La operación fue exitosa!', 'registros' => $cantidad_insert, 'documento' => $nuxpedido);
@@ -85,7 +75,8 @@ error_log('JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];
-  insertar_registro($datos);
+  $sql_i = $data['sql_i'];
+  insertar_registro($datos, $sql_i);
 } else {
   echo "Error al decodificar la cadena JSON";
 }

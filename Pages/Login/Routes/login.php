@@ -97,7 +97,7 @@ function consultar($planta, $email, $pass) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-$datos = '{"planta":15,"email":"luisfactum@gmail.com","password":"4488","ruta":"/login","rax":"&new=Wed Jul 10 2024 19:19:11 GMT-0300 (hora estándar de Argentina)"}';
+// $datos = '{"planta":15,"email":"luisfactum@gmail.com","password":"4488","ruta":"/login","rax":"&new=Wed Jul 10 2024 19:19:11 GMT-0300 (hora estándar de Argentina)"}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

@@ -3,20 +3,22 @@
   header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
   header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   header ("MIME-Version: 1.0\r\n");
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
+
   require_once dirname(dirname(__DIR__)) . '/config.php';
 
-  define('EMAIL', BASE_URL .'/Nodemailer/emailFactum');
+  define('EMAIL', BASE_URL .'/Nodemailer/emailTenki');
 
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
-
+  set_time_limit(0);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-// include('datos.php');
+include('datos.php');
 
 
 require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php';
@@ -24,16 +26,16 @@ require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
 
-  // $datos =json_decode($datox, true);
-  // $encabezados =json_decode($encabezadox, true);
-  // $plant = json_decode($plantx, true);
+  $datos =json_decode($datox, true);
+  $encabezados =json_decode($encabezadox, true);
+
 
 
 try {
-   $datos =json_decode($_POST['datos'], true);
-   $encabezados =json_decode($_POST['encabezados'], true);
-   $plant =$_POST['plant'];
-  
+  //  $datos = json_decode($_POST['datos'], true);
+  //  $encabezados = json_decode($_POST['encabezados'], true);
+ 
+
 
    if ($datos === null && json_last_error() !== JSON_ERROR_NONE) {
     die('Error al decodificar JSON');
@@ -44,7 +46,7 @@ try {
     $hora = $encabezados['hora'];
     $notificador = $encabezados['notificador'];
     $planta = $encabezados['planta'];
-    $reporte = $encabezados['reporte'];
+    $plant = $encabezados['idPlanta'];
     $titulo = $encabezados['titulo'];
     $url = $encabezados['url'];
     $fechaDeAlerta = $encabezados['fechaDeAlerta'];
@@ -57,16 +59,19 @@ try {
     $detalle = $encabezados['detalle'];
     $observacion = $encabezados['observacion'];
     $subject = $encabezados['subject'];
-    
+    $idLTYreporte = $encabezados['idLTYreporte'];
+    $reporte = $idLTYreporte . '-' . $encabezados['reporte'];
+    $cliente = $plant . '-' . $planta;
+    $idPlanta = $plant;
 ob_start();
 
-include(BASE_DIR . '/Nodemailer/emailFactum/email.html');
+include(BASE_DIR . '/Nodemailer/emailTenki/email.html');
 
 
 $html = ob_get_clean();
 
    
-   $html  = str_replace('{planta}', $planta, $html);
+   $html  = str_replace('{planta}', $cliente, $html);
    $html  = str_replace('{notificacion}', $titulo, $html);
    $html  = str_replace('{nombreDeControl}', $reporte, $html);
    $html  = str_replace('{fechaDeAlerta}', $fechaDeAlerta, $html);
@@ -84,59 +89,61 @@ $html = ob_get_clean();
    $html  = str_replace('{detalle}', $detalle, $html);
    $html  = str_replace('{observacion}', $observacion , $html);
    $html  = str_replace('{contenido_dinamico}', generarContenidoDinamico($datos, $plant), $html);
+   
   //  echo 'html>>>> '.$html;
-    $mail = new PHPMailer(true);
-  // Configura el servidor SMTP
-    $mail->isSMTP();
-    $mail->CharSet = 'UTF-8';
-    $mail->Encoding = "quoted-printable";
-    $mail->SMTPAuth = true;
-    $mail->Host = HOST;
-    $mail->Username = USERNAME;
-    $mail->Password = PASS;
-    // $mail->SMTPSecure = 'tls';
-    $mail->Port = 25;
-    $mail->SMTPOptions = array(
-    'ssl' => array(
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        'allow_self_signed' => true
-            )
-    );
-    $mail->isHTML(true);
-    // Configura los destinatarios
-    $mail->SetFrom(SET_FROM);
-    // $mail->addAddress('destinatario@example.com', 'Destinatario');
-    $mail->addBCC(ADD_BCC);
-    // Configura el asunto y el cuerpo del correo electrónico
-    $mail->Subject = $subject; 
-    $mail->Body    = $html;
-    
+    include_once BASE_DIR . "/Routes/datos_base.php";
+    $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $pdo->prepare("INSERT INTO email_queue (email_address, subject, body, nx, idLTYreporte, idPlant) VALUES (:email_address, :subject, :body, :nx, :idLTYreporte, :idPlant)");
+    $stmt->execute([
+        ':email_address' => $address,
+        ':subject' => $subject,
+        ':body' => $html,
+        ':nx' => $documento,
+        'idLTYreporte' => $idLTYreporte,
+        'idPlant' => $idPlanta,
+    ]);
+    ob_clean();
+    $response = array('success' => true, 'message' => 'El email se envio con exito!', 'reporte' => $reporte, 'documento' => $documento);
 
-    if (strlen($address)>0) {
-      $dirs = explode("/", $address);
-    
-      $cantidad_emails=count($dirs);
-      for ($i=0; $i < $cantidad_emails; $i++) { 
-        $mail->AddAddress($dirs[$i]);
-      };
-    }else{
-      $mail->addAddress($email_usuario, $notificador);
-    }
-    
-    // $mail->addAddress('luisglogista@gmail.com', 'Luis');
+    $script_path = BASE_DIR . '/Nodemailer/Routes/queue_processor.php';
+    $output = shell_exec('php ' . escapeshellarg($script_path) );
+      if ($output === null) {
+          logMessage("Error al ejecutar el script de cola:  Revisa sendEmail.log para más detalles.");
+          logMessage("Salida del comando shell_exec: " . $output);
+      } else {
+          logMessage("Script de cola ejecutado correctamente: ");
+          logMessage("Salida del comando shell_exec: " . $output);
+      }
 
-    // Envía el correo electrónico
-    $mail->send();
-    $response = array('success' => true, 'message' => 'El email se envió con éxito!', 'reporte' => $reporte, 'documento' => $documento);
     echo json_encode($response);
 } catch (Exception $e) {
   echo "Error en el envío del correo: " . $e->getMessage();
 }
 
 
+function logMessage($message) {
+
+    $logFile = BASE_DIR . '/logs/sendEmail.log';
+    $maxSize = 5 * 1024 * 1024; // 5MB
+
+    // Rotar el log si supera el tamaño máximo
+    if (file_exists($logFile) && filesize($logFile) > $maxSize) {
+        rename($logFile, $logFile . '.' . date('Y-m-d_H-i-s') . '.bak');
+    }
+
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+}
+
+// $whoami_script = BASE_DIR . '/Nodemailer/Routes/whoami.php';
+// $whoami_output = shell_exec('php ' . escapeshellarg($whoami_script));
+
+// logMessage("Usuario que ejecuta el script: " . $whoami_output);
+
 
 ?>
+
 
 <?php
 function utf8_to_iso8859_1(string $string): string {

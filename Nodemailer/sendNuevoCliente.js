@@ -3,7 +3,7 @@ const SERVER = baseUrl
 
 export default function enviaMailNuevoCliente(objeto, ruta) {
   // eslint-disable-next-line no-console
-  console.time('addCompania')
+  console.time('sendEmail')
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
     let obj = {
@@ -40,12 +40,12 @@ export default function enviaMailNuevoCliente(objeto, ruta) {
         // console.log(data)
         resolve(data)
         // eslint-disable-next-line no-console
-        console.timeEnd('addCompania')
+        console.timeEnd('sendEmail')
         return data
       })
       .catch((error) => {
         clearTimeout(timeoutId)
-        console.timeEnd('addCompania')
+        console.timeEnd('sendEmail')
         console.error('Error en la solicitud:', error)
         reject(error)
         alert('No se pudo establecer conexión con el servidor')

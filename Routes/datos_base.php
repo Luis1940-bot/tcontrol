@@ -1,7 +1,7 @@
 <?php
 $plant = "1"; //$_SESSION['login_sso']['plant'];
 
-  header("Content-Type: text/html;charset=utf-8");
+  // header("Content-Type: text/html;charset=utf-8");
   $host = "68.178.195.199"; 
   $user = "developers";
   $password = "6vLB#Q0bOVo4";

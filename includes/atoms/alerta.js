@@ -1252,7 +1252,9 @@ async function insert(
   docStorage
 ) {
   try {
-    const { plant } = desencriptar(sessionStorage.getItem('user'))
+    const { texto, value } = desencriptar(sessionStorage.getItem('plant'))
+    const plant = parseInt(value)
+    const nombrePlanta = texto
     const nuevoObjetoControl = { ...nuevoObjeto }
     delete nuevoObjetoControl.name
     delete nuevoObjetoControl.email
@@ -1261,14 +1263,18 @@ async function insert(
 
     let insertado
     if (docStorage === false) {
-      insertado = await insertarRegistro(nuevoObjetoControl)
+      insertado = await insertarRegistro(
+        nuevoObjetoControl,
+        objEncabezados.idPlanta
+      )
     } else {
       insertado = await updateRegistro(nuevoObjetoControl, docStorage)
     }
 
-    // console.log(insertado);
-
-    const imagenes = await subirImagenes(nuevoObjeto.objImagen, plant)
+    const imagenes = await subirImagenes(
+      nuevoObjeto.objImagen,
+      objEncabezados.idPlanta
+    )
     // console.log(imagenes);
 
     const enviaPorEmail = sessionStorage.getItem('envia_por_email')
@@ -1277,7 +1283,7 @@ async function insert(
     encabezados.documento = insertado.documento
     let enviado = ''
     if (enviaPorEmailBooleano) {
-      enviado = await enviaMail(nuevoObjeto, encabezados, plant)
+      enviado = await enviaMail(nuevoObjeto, encabezados)
       // console.log(enviado);
     }
     const amarillo = document.getElementById('idDivAvisoVerde')
@@ -1298,7 +1304,7 @@ async function insert(
   }
 }
 
-function armaEncabezado(arrayMensajes, objTrad, docStorage) {
+function armaEncabezado(arrayMensajes, objTrad, docStorage, planta) {
   const encabezadosEmail = arrayMensajes.objetoControl.email
   let mensaje = arrayMensajes.mensajesVarios.email.fechaDeAlerta
   const fechaDeAlerta = trO(mensaje, objTrad) || mensaje
@@ -1322,13 +1328,18 @@ function armaEncabezado(arrayMensajes, objTrad, docStorage) {
   const subject = trO(mensaje, objTrad) || mensaje
   mensaje = arrayMensajes.mensajesVarios.email.titulo
   const titulo = trO(mensaje, objTrad) || mensaje
+  const idLTYreporte = arrayMensajes.objetoControl.idLTYreporte[0]
+  const { texto, value } = planta
+  const numeroPlanta = parseInt(value)
+  const nombrePlanta = texto
   const encabezados = {
     documento: docStorage,
     address: encabezadosEmail.address,
     fecha: encabezadosEmail.fecha,
     hora: encabezadosEmail.hora,
     notificador: encabezadosEmail.notificador,
-    planta: encabezadosEmail.planta,
+    planta: nombrePlanta,
+    idPlanta: numeroPlanta,
     reporte: encabezadosEmail.reporte,
     titulo,
     url: encabezadosEmail.url,
@@ -1342,6 +1353,7 @@ function armaEncabezado(arrayMensajes, objTrad, docStorage) {
     detalle,
     observacion,
     subject,
+    idLTYreporte,
   }
 
   return encabezados
@@ -2027,7 +2039,16 @@ class Alerta {
             .fill(null)
             .map((_, index) => (index === 0 ? convertido : null)),
         }
-        const encabezados = armaEncabezado(arrayGlobal, objTrad, docStorage)
+
+        const planta = desencriptar(sessionStorage.getItem('plant'))
+
+        const encabezados = armaEncabezado(
+          arrayGlobal,
+          objTrad,
+          docStorage,
+          planta
+        )
+
         // soloEnviaEmail(nuevoObjeto, encabezados)
         // console.log(encabezados, ' >>>nuevo objeto: ', nuevoObjeto)
         insert(
