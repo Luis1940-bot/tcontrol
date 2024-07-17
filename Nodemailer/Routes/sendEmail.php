@@ -103,21 +103,35 @@ $html = ob_get_clean();
     ]);
     ob_clean();
     $response = array('success' => true, 'message' => 'El email se envio con exito!', 'reporte' => $reporte, 'documento' => $documento);
-
-    $script_path = BASE_DIR . '/Nodemailer/Routes/queue_processor.php';
-    $output = shell_exec('php ' . escapeshellarg($script_path) );
-      if ($output === null) {
-          logMessage("Error al ejecutar el script de cola:  Revisa sendEmail.log para más detalles.");
-          logMessage("Salida del comando shell_exec: es null");
-      } else {
-          logMessage("Script de cola ejecutado correctamente: ");
-          logMessage("Salida del comando shell_exec: " . $output);
-      }
-
     echo json_encode($response);
+
+    // Detectar el sistema operativo
+    $os = strtoupper(substr(PHP_OS, 0, 3));
+    $script_path = BASE_DIR . '/Nodemailer/Routes/queue_processor.php';
+    if ($os === 'WIN') {
+        // Comando para Windows
+        $command = 'start /B php ' . escapeshellarg($script_path);
+    } else {
+        // Comando para Linux
+        $command = 'nohup php ' . escapeshellarg($script_path) . ' > /dev/null 2>&1 & echo $!';
+    }
+    // shell_exec($command);
+
+    ob_start();
+    $pid = exec($command);
+    ob_end_clean();
+
+    if ($pid) {
+        logMessage("Script de cola lanzado con PID: $pid");
+    } else {
+        logMessage("Error al lanzar el script de cola.");
+    }
+
 } catch (Exception $e) {
-  echo "Error en el envío del correo: " . $e->getMessage();
+  echo json_encode(['success' => false, 'message' => 'Error en el envío del correo: ' . $e->getMessage()]);
+  // echo "Error en el envío del correo: " . $e->getMessage();
 }
+
 
 
 function logMessage($message) {
@@ -131,7 +145,8 @@ function logMessage($message) {
     }
 
     $timestamp = date('Y-m-d H:i:s');
-    file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+    // file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+    file_put_contents($logFile, date('[Y-m-d H:i:s] ') . $message .  PHP_EOL, FILE_APPEND | LOCK_EX);
 }
 
 // $whoami_script = BASE_DIR . '/Nodemailer/Routes/whoami.php';

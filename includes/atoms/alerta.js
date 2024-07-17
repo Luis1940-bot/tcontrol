@@ -1252,9 +1252,9 @@ async function insert(
   docStorage
 ) {
   try {
-    const { texto, value } = desencriptar(sessionStorage.getItem('plant'))
+    const { value } = desencriptar(sessionStorage.getItem('plant'))
     const plant = parseInt(value)
-    const nombrePlanta = texto
+
     const nuevoObjetoControl = { ...nuevoObjeto }
     delete nuevoObjetoControl.name
     delete nuevoObjetoControl.email
@@ -1270,7 +1270,7 @@ async function insert(
     } else {
       insertado = await updateRegistro(nuevoObjetoControl, docStorage)
     }
-
+    // console.log(insertado)
     const imagenes = await subirImagenes(
       nuevoObjeto.objImagen,
       objEncabezados.idPlanta
@@ -1284,7 +1284,7 @@ async function insert(
     let enviado = ''
     if (enviaPorEmailBooleano) {
       enviado = await enviaMail(nuevoObjeto, encabezados)
-      // console.log(enviado);
+      // console.log(enviado)
     }
     const amarillo = document.getElementById('idDivAvisoVerde')
     amarillo.style.display = 'none'

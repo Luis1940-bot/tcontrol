@@ -213,3 +213,4 @@ Vazio
 Com separador
 Com foto
 Novo acampamento
+Você está trabalhando com um controle salvo com o número:

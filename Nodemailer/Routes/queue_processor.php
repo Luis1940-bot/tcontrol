@@ -53,15 +53,15 @@ function connectToDatabase() {
 
 $pdo = connectToDatabase();
 
-$iterationLimit = 20; // Limite de iteraciones para evitar ejecución infinita
+$iterationLimit = 5; // Limite de iteraciones para evitar ejecución infinita
 $iterations = 0;
-
 $startTime = time(); // Registrar el tiempo de inicio
 $maxExecutionTime = 180; // Tiempo máximo de ejecución en segundos (4.5 minutos)
 
+
 while ($iterations < $iterationLimit) {
     $iterations++;
-    set_time_limit(60); // Extiende el tiempo de ejecución en cada iteración
+    // set_time_limit(60); // Extiende el tiempo de ejecución en cada iteración
 
     // Verificar el tiempo transcurrido
     if (time() - $startTime > $maxExecutionTime) {
@@ -81,6 +81,7 @@ while ($iterations < $iterationLimit) {
             $pdo->commit();
             sleep(5); // Reducir el tiempo de espera
             continue;
+           
         }
 
         logMessage("Correo electrónico encontrado: " . print_r($email['subject'], true));
