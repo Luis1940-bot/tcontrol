@@ -1406,9 +1406,16 @@ function formatarMenu(doc, configMenu, objTranslate) {
   }
   if (doc === 'null' && firmado === true) {
     //! console.log('menú con firma sin doc');
+    const idMensaje2 = document.getElementById('idMensaje2')
+    let mensajeFirmado =
+      trO('Documento firmado digitalmente.', objTranslate) ||
+      'Documento firmado digitalmente.'
+
+    idMensaje2.innerText = `${mensajeFirmado}`
     const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text
     const firmadoPor = trO(textFirmado, objTranslate) || textFirmado
     const idMensajeFirmado = document.getElementById('idMensajeFirmado')
+
     idMensajeFirmado.innerText = `${firmadoPor}: ${configMenu.configFirma['nombre']}`
     idMensajeFirmado.style.display = 'flex'
     nuevoConfigMenu = {
@@ -1435,6 +1442,14 @@ function formatarMenu(doc, configMenu, objTranslate) {
   }
   if ((doc !== 'null' && firmado === undefined) || firmado === false) {
     //! console.log('menú guardado con doc y  sin firma');
+    const idMensaje1 = document.getElementById('idMensaje1')
+    let mensajeDoc =
+      trO(
+        'Estás trabajando con un control guardado con el número:',
+        objTranslate
+      ) || 'Estás trabajando con un control guardado con el número:'
+    const documentoNumero = desencriptar(doc)
+    idMensaje1.innerText = `${mensajeDoc} ${documentoNumero}`
     nuevoConfigMenu = {
       guardar: false,
       guardarComo: true,
@@ -1471,6 +1486,19 @@ function formatarMenu(doc, configMenu, objTranslate) {
   }
   if (doc !== 'null' && firmado === true) {
     //! console.log('menú guardado con firma');
+    const idMensaje1 = document.getElementById('idMensaje1')
+    let mensajeDoc =
+      trO(
+        'Estás trabajando con un control guardado con el número:',
+        objTranslate
+      ) || 'Estás trabajando con un control guardado con el número:'
+    const documentoNumero = desencriptar(doc)
+    idMensaje1.innerText = `${mensajeDoc} ${documentoNumero}`
+    let mensajeFirmado =
+      trO('Documento firmado digitalmente.', objTranslate) ||
+      'Documento firmado digitalmente.'
+
+    idMensaje2.innerText = `${mensajeFirmado}`
     const nombreFirma = configMenu.configFirma['nombre']
     const textFirmado = arrayGlobal.objMenu.mensajeFirmado.text
     const firmadoPor = trO(textFirmado, objTranslate) || textFirmado

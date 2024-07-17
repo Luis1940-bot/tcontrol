@@ -214,3 +214,4 @@ Con separador
 Con Photo
 Campo nuevo
 Estás trabajando con un control guardado con el número:
+Documento firmado digitalmente.
