@@ -121,6 +121,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
       let respuesta
 
       const td = tr[i].querySelectorAll('td')
+
       // eslint-disable-next-line no-unused-vars
       const displayRow = window.getComputedStyle(tr[i]).display
       // eslint-disable-next-line no-plusplus
@@ -176,10 +177,13 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
           imagenes,
           terceraColumna,
         }
-
+        //  const { type } = objParametros
         if (c === 2) {
           respuesta = respuestaColumna(c, i, objParametros)
           ;({ valor, selector1, valorS, familiaselector } = respuesta)
+
+          i === 0 && type === 'date' ? objetoControl.fecha.push(valor) : null
+          i === 1 && type === 'time' ? objetoControl.hora.push(valor) : null
         }
         if (c === 4) {
           respuesta = respuestaColumna(c, i, objParametros, plant, carpeta)
@@ -192,8 +196,9 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
           objetoControl.name.push(campo.textContent)
           fechaActual = fechasGenerator.fecha_corta_yyyymmdd(new Date())
           horaActual = fechasGenerator.hora_actual(new Date())
-          objetoControl.fecha.push(fechaActual)
+          // objetoControl.fecha.push(fechaActual)
           // objetoControl.hora.push(valor)
+
           objetoControl.nuxpedido.push(0)
           valor !== null
             ? objetoControl.valor.push(valor)

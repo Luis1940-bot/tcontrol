@@ -7,7 +7,7 @@ import createDiv from '../../includes/atoms/createDiv.js'
 // eslint-disable-next-line import/extensions
 import createRadioButton from '../../includes/atoms/createRadioButton.js'
 // eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate from '../../controllers/translate.js'
+import translate from '../../controllers/arraysLoadTranslate.js'
 // eslint-disable-next-line import/extensions
 import {
   inicioPerformance,

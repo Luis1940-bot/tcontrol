@@ -16,7 +16,7 @@ import { desencriptar, encriptar } from '../../controllers/cript.js'
 import baseUrl from '../../config.js'
 import { configPHP } from '../../controllers/configPHP.js'
 import { trO, trA } from '../../controllers/trOA.js'
-import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { arraysLoadTranslate } from '../../controllers/Translate.js'
 import Alerta from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
 const SERVER = baseUrl

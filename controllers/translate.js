@@ -35,7 +35,6 @@ async function leerArchivo(url) {
 // async translate(leng) {
 const translate = async (leng) => {
   try {
-    // console.log(leng)
     const [operatiEspanol, operativoOther, archivoEspanol, archivoOther] =
       await Promise.all([
         leerArchivo(`${OperativoURL}es.txt`),

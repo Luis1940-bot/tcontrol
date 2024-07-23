@@ -39,21 +39,18 @@
 
                       case 'ctrlCargado':
                           $control_cargado=$porciones[1];
-                          $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha AS FECHA, LTYregistrocontrol.nuxpedido AS PEDIDO, LTYregistrocontrol.desvio AS DESVIO, LTYregistrocontrol.valor AS VALOR, 
-                              LTYregistrocontrol.tipodedato AS TIPODEDATO, LTYregistrocontrol.idLTYcontrol AS IDCONTROL, LTYregistrocontrol.supervisor AS DISUPERVISOR, IF(LTYregistrocontrol.supervisor=0,'',u.nombre) AS NOMBRE_SUPERVISOR,
-                              LTYregistrocontrol.tpdeobserva AS TIPO_OBSERVA,LTYregistrocontrol.observacion AS OBSERVACION,LTYregistrocontrol.selector AS SELECTOR,LTYregistrocontrol.selector2 AS SELECTOR_2,
-                              LTYregistrocontrol.valorS,LTYregistrocontrol.valorOBS,LTYregistrocontrol.idusuario
+                          $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha AS FECHA, LTYregistrocontrol.hora AS HORA, LTYregistrocontrol.nuxpedido AS PEDIDO, 
+                              LTYregistrocontrol.supervisor AS DISUPERVISOR, IF(LTYregistrocontrol.supervisor=0,'',u.nombre) AS NOMBRE_SUPERVISOR,
+                              LTYregistrocontrol.observacion AS OBSERVACION,
+                              LTYregistrocontrol.idusuario
                               ,w.nombre AS NOMBRE_USUARIO
-                            ,IFNULL(LTYcontrol.rutinasql,'') AS RUTINA, IFNULL(LTYcontrol.valor_defecto,'') AS VALOR_DEFECTO
-                            ,LTYcontrol.requerido AS REQUERIDO,LTYreporte.envio_mail AS X_MAIL,LTYcontrol.valor_sql AS VALOR_SQL
-                            , LTYcontrol.tiene_hijo AS HIJO, LTYcontrol.rutina_hijo AS SQL_HIJO,LTYregistrocontrol.imagenes AS IMG, LTYreporte.direcciones_mail AS DIR_MAIL
-                            , RAND(),NOW(), LTYregistrocontrol.idLTYregistrocontrol AS ID
+                            ,LTYreporte.envio_mail AS X_MAIL,LTYregistrocontrol.imagenes AS IMG, LTYreporte.direcciones_mail AS DIR_MAIL
+                            , RAND(),NOW(), LTYregistrocontrol.idLTYregistrocontrol AS ID, LTYregistrocontrol.newJSON AS newJSON
                               FROM LTYregistrocontrol
                               LEFT JOIN usuario u ON LTYregistrocontrol.supervisor=u.idusuario 
                               LEFT JOIN usuario w ON LTYregistrocontrol.idusuario=w.idusuario
-                              INNER JOIN LTYcontrol ON LTYcontrol.idLTYcontrol=LTYregistrocontrol.idLTYcontrol
                               INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=LTYregistrocontrol.idLTYreporte
-                              WHERE LTYregistrocontrol.nuxpedido=".$control_cargado." ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol.idLTYcontrol ASC;";
+                              WHERE LTYregistrocontrol.nuxpedido=".$control_cargado.";";
                           // echo $sql.'<br><br>';".$control_cargado."
                       break;
 

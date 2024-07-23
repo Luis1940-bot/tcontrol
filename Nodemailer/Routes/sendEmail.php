@@ -90,7 +90,7 @@ $html = ob_get_clean();
    
   //  echo 'html>>>> '.$html;
     include_once BASE_DIR . "/Routes/datos_base.php";
-    $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset=utf8",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $pdo->prepare("INSERT INTO email_queue (email_address, subject, body, nx, idLTYreporte, idPlant) VALUES (:email_address, :subject, :body, :nx, :idLTYreporte, :idPlant)");
     $stmt->execute([
@@ -102,20 +102,20 @@ $html = ob_get_clean();
         'idPlant' => $idPlanta,
     ]);
     ob_clean();
-    $response = array('success' => true, 'message' => 'El email se envio con exito!', 'reporte' => $reporte, 'documento' => $documento);
-    echo json_encode($response);
+    // $response = array('success' => true, 'message' => 'El email se envio con exito!', 'reporte' => $reporte, 'documento' => $documento);
+    // echo json_encode($response);
 
     // Detectar el sistema operativo
     $os = strtoupper(substr(PHP_OS, 0, 3));
     $script_path = BASE_DIR . '/Nodemailer/Routes/queue_processor.php';
     if ($os === 'WIN') {
         // Comando para Windows
-        $command = 'start /B php ' . escapeshellarg($script_path);
+        $command = 'start /B php ' . escapeshellarg($script_path) . ' 2>&1';
     } else {
         // Comando para Linux
-        $command = 'nohup php ' . escapeshellarg($script_path) . ' > /dev/null 2>&1 & echo $!';
+        $command = 'nohup php ' . escapeshellarg($script_path) . '  > /dev/null 2>&1 & echo $!';
     }
-
+  //. ' > /dev/null 2>& 2>&1'
   //   $pid = exec($command);
   //   if ($pid) {
   //       logMessage("Script de cola lanzado con PID: $pid");
@@ -136,7 +136,8 @@ $html = ob_get_clean();
         logMessage("Error al lanzar el script de cola: " . implode(", ", $output));
         $response = array('success' => false, 'message' => 'Error al lanzar el script de cola.');
     }
-    // echo json_encode($response);
+    echo json_encode($response);
+    // return;
     exit;
 } catch (Exception $e) {
   echo json_encode(['success' => false, 'message' => 'Error en el envío del correo: ' . $e->getMessage()]);

@@ -16,9 +16,7 @@ function updateRegistro(objeto, nux) {
   console.time('update_time')
   const objLimpio = limpiarObjeto(objeto)
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio))
-  // const ruta = `${SERVER}/Pages/Control/Routes/update.php?v=${Math.round(
-  //   Math.random() * 10
-  // )}`
+  // console.log(nuevoObjeto)
   const rax = `&new=${new Date()}`
   let obj = {
     q: nuevoObjeto,

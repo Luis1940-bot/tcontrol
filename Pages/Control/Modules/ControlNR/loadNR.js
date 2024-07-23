@@ -11,7 +11,7 @@ import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
 function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
-  // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos)
+  console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos)
 
   const td = tds
   if (
@@ -140,7 +140,9 @@ async function verSupervisor(idSupervisor, plant) {
 
 function cargarNR(datos, plant) {
   try {
-    // console.log(datos)
+    console.log(datos)
+    console.log(datos[0][14])
+    return
     const idSupervisor = datos[0][6]
     const tbody = document.querySelector('tbody')
     const tr = tbody.querySelectorAll('tr')

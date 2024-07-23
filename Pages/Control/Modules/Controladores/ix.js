@@ -14,6 +14,7 @@ function limpiarObjeto(objeto) {
 function insertarRegistro(objeto, plant) {
   // eslint-disable-next-line no-console
   console.time('insert_time')
+  // console.log(objeto)
   const objLimpio = limpiarObjeto(objeto)
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio))
 

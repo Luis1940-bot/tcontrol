@@ -1278,6 +1278,7 @@ async function insert(
     encabezados.documento = insertado.documento
 
     let enviado = ''
+
     if (enviaPorEmailBooleano) {
       enviado = await enviaMail(nuevoObjeto, encabezados)
     }
@@ -2826,7 +2827,7 @@ class Alerta {
           // const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
           //   Math.random() * 10
           // )}`
-          console.log(cod)
+          // console.log(cod)
           const objetoRuta = {
             control_N: url,
             control_T: decodeURIComponent(name),

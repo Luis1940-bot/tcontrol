@@ -1,54 +1,6 @@
 import baseUrl from '../config.js'
 const SERVER = baseUrl
 
-// async function send(nuevoObjeto, encabezados) {
-//   const formData = new FormData()
-//   formData.append('datos', JSON.stringify(nuevoObjeto))
-//   formData.append('encabezados', JSON.stringify(encabezados))
-//   const url = `${SERVER}/Nodemailer/Routes/sendEmail.php`
-//   // console.log(formData)
-
-//   console.time('sendEmail')
-//   return new Promise((resolve, reject) => {
-//     const controller = new AbortController()
-//     const timeoutId = setTimeout(() => controller.abort(), 420000) // 60 segundos
-
-//     fetch(url, {
-//       method: 'POST',
-//       body: formData,
-//       signal: controller.signal,
-//     })
-//       .then((response) => {
-//         // console.log(response)
-//         clearTimeout(timeoutId)
-//         if (!response.ok) {
-//           throw new Error('Network response was not ok ' + response.statusText)
-//         }
-//         return response.json()
-//       })
-//       .then((data) => {
-//         // console.log(data)
-//         resolve(data)
-//         // eslint-disable-next-line no-console
-//         console.timeEnd('sendEmail')
-//         return data
-//       })
-//       .catch((error) => {
-//         clearTimeout(timeoutId)
-//         console.timeEnd('sendEmail')
-//         console.error('Error en la solicitud:', error)
-//         if (error.name === 'AbortError') {
-//           // alert('La solicitud tardó demasiado y fue abortada.')
-//         } else {
-//           alert('No se pudo establecer conexión con el servidor')
-//         }
-//         console.error('Error en la solicitud:', error)
-//         reject(error)
-//         // alert('No se pudo establecer conexión con el servidor')
-//       })
-//   })
-// }
-
 async function send(nuevoObjeto, encabezados) {
   const formData = new FormData()
   formData.append('datos', JSON.stringify(nuevoObjeto))
@@ -56,14 +8,16 @@ async function send(nuevoObjeto, encabezados) {
   const url = `${SERVER}/Nodemailer/Routes/sendEmail.php`
 
   console.time('sendEmail')
-  try {
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 60000) // 60 segundos
+  const controller = new AbortController()
+  const signal = controller.signal
 
+  const timeoutId = setTimeout(() => controller.abort(), 600000) // 420 segundos
+
+  try {
     const response = await fetch(url, {
       method: 'POST',
       body: formData,
-      signal: controller.signal,
+      signal: signal,
     })
 
     clearTimeout(timeoutId)
@@ -78,13 +32,17 @@ async function send(nuevoObjeto, encabezados) {
   } catch (error) {
     clearTimeout(timeoutId)
     console.timeEnd('sendEmail')
-    console.error('Error en la solicitud:', error)
+
     if (error.name === 'AbortError') {
+      console.error('La solicitud fue abortada debido a un timeout.')
       alert('La solicitud tardó demasiado y fue abortada.')
     } else {
+      console.error('Error en la solicitud:', error)
       alert('No se pudo establecer conexión con el servidor')
     }
-    throw error
+    const url = `${SERVER}/Pages/Controles`
+    window.location.href = url
+    // throw error
   }
 }
 

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   spinner.style.visibility = 'visible'
   limpiezaDeCache()
   const email = document.getElementById('email')
-  console.log(email.value)
+  // console.log(email.value)
   // session()
   setTimeout(() => {
     // window.location.href = `${SERVER}/Pages/Home/`

@@ -568,6 +568,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTimeout(async () => {
     leeApp(`log`)
     objTranslate = await arraysLoadTranslate()
+    // console.log(objTranslate)
     leeModelo('Login/login')
     generaOverlay()
   }, 200)

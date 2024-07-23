@@ -7,7 +7,7 @@ import translate, {
   // eslint-disable-next-line no-unused-vars
   arrayEspanolOperativo,
   // eslint-disable-next-line import/extensions
-} from '../../controllers/translate.js'
+} from '../../controllers/arraysLoadTranslate.js'
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
 // eslint-disable-next-line import/extensions

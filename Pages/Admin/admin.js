@@ -14,7 +14,7 @@ import { desencriptar } from '../../controllers/cript.js'
 
 import baseUrl from '../../config.js'
 import { configPHP } from '../../controllers/configPHP.js'
-import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { arraysLoadTranslate } from '../../controllers/Translate.js'
 import { trO } from '../../controllers/trOA.js'
 
 const SERVER = baseUrl
