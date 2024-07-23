@@ -4,13 +4,13 @@ const SERVER = baseUrl
 function guardaNotas(obj, plant) {
   // console.log(obj)
   const urlGuardar = `${SERVER}/Pages/Control/Routes/backup.php`
-  const objetoFormateado = JSON.stringify(obj, null, 2)
-  const objetoFormateadoConSaltos = objetoFormateado.replace(/\],/g, '],\n')
+  // const objetoFormateado = JSON.stringify(obj, null, 2)
+  // const objetoFormateadoConSaltos = objetoFormateado.replace(/\],/g, '],\n')
   const dataToSend = {
     plant: plant,
-    notes: objetoFormateadoConSaltos,
+    notes: obj,
   }
-
+  // console.log(JSON.stringify(dataToSend))
   // Configuración de la solicitud Fetch
   const opcionesSolicitud = {
     method: 'POST',

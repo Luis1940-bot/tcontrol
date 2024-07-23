@@ -134,6 +134,7 @@ while ($iterations < $iterationLimit) {
                 $stmt = $pdo->prepare("UPDATE email_queue SET status = 'done' WHERE id = :id");
                 $stmt->execute([':id' => $email['id']]);
                 $pdo->commit();
+                
             } else {
                 logMessage("Error al enviar el correo electrónico.");
                 $pdo->beginTransaction();
@@ -161,4 +162,5 @@ while ($iterations < $iterationLimit) {
     sleep(5); // Reducir el tiempo de espera
 }
 logMessage("Script finalizado después de $iterations iteraciones.");
+return;
 ?>

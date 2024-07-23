@@ -18,6 +18,7 @@ function buscarEnArray(id, array) {
 
 function convertirObjATextPlano(obj) {
   const data = { ...obj }
+
   delete data.src
   const lines = []
 
@@ -35,8 +36,9 @@ function convertirObjATextPlano(obj) {
   })
 
   // Convertir el arreglo de líneas a un solo texto con saltos de línea
-  const plainText = lines.join('\n')
-  return plainText
+  const plainText = lines.join(',')
+
+  return `{${plainText}}`
 }
 
 function tuFuncion(
@@ -71,7 +73,7 @@ function tuFuncion(
   return objetoControlCopia
 }
 
-function recorroTable(objetoControl, arrayControl, nux) {
+function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
   try {
     const person = desencriptar(sessionStorage.getItem('user'))
     const idPerson = person.id
@@ -148,6 +150,8 @@ function recorroTable(objetoControl, arrayControl, nux) {
           src: [],
           fileName: [],
           extension: [],
+          plant: [],
+          carpeta: [],
         }
 
         const objParametros = {
@@ -178,7 +182,7 @@ function recorroTable(objetoControl, arrayControl, nux) {
           ;({ valor, selector1, valorS, familiaselector } = respuesta)
         }
         if (c === 4) {
-          respuesta = respuestaColumna(c, i, objParametros)
+          respuesta = respuestaColumna(c, i, objParametros, plant, carpeta)
           ;({ selector2, valorOBS, familiaselector, imagenes, observacion } =
             respuesta)
         }
@@ -189,6 +193,7 @@ function recorroTable(objetoControl, arrayControl, nux) {
           fechaActual = fechasGenerator.fecha_corta_yyyymmdd(new Date())
           horaActual = fechasGenerator.hora_actual(new Date())
           objetoControl.fecha.push(fechaActual)
+          // objetoControl.hora.push(valor)
           objetoControl.nuxpedido.push(0)
           valor !== null
             ? objetoControl.valor.push(valor)
@@ -287,9 +292,9 @@ function recorroTable(objetoControl, arrayControl, nux) {
   }
   return true
 }
-function guardarNuevo(objetoControl, arrayControl, nuxpedido) {
+function guardarNuevo(objetoControl, arrayControl, nuxpedido, planta, carpeta) {
   // console.log(objetoControl, arrayControl, nuxpedido)
-  return recorroTable(objetoControl, arrayControl, nuxpedido)
+  return recorroTable(objetoControl, arrayControl, nuxpedido, planta, carpeta)
 }
 
 export default guardarNuevo

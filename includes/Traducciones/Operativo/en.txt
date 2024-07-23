@@ -215,3 +215,4 @@ With Photo
 New camp
 You are working with a control saved with the number:
 Digitally signed document.
+Keep in mind that the emails are being verified for sending.

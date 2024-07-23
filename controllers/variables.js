@@ -40,6 +40,7 @@ let objetoControl = {
   },
   detalle: [],
   objImagen: [],
+  hora: [],
 }
 let objetoMemoria = {
   fecha: [],
@@ -1755,7 +1756,9 @@ const objMenuCView = {
 const mensajesVarios = {
   guardar: {
     esperaAmarillo:
-      'El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.',
+      'El proceso puede demorar unos instantes, ya que se comprueban los datos inferidos.',
+    esperaAmarilloConEmail:
+      'Tener en cuenta que se están verificando los emails para su envío.',
     sinModificaciones:
       'No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.',
     faltanRequeridos:

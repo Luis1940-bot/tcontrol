@@ -23,30 +23,28 @@ if (empty($plant)) {
     exit;
 }
 
+$maxFileSize = 1048576; // 1 MB
 // Construir la ruta del archivo
 $file_path = BASE_DIR . '/Pages/Control/TXT/' . $plant . '/';
 if (!file_exists($file_path)) {
     mkdir($file_path, 0777, true);
 }
 $file = $file_path . 'backup.txt';
-// $file_path = BASE_DIR . '/Pages/Control/TXT/' . $plant . '/backup.txt';
 
-// Convertir las notas de nuevo a un formato legible si es necesario
-// (Puedes omitir esta parte si no necesitas realizar ninguna acción específica con las notas)
-$notes_decoded = json_decode($notes);
-
-if ($notes_decoded === null && json_last_error() !== JSON_ERROR_NONE) {
-    // Manejar errores de decodificación JSON
-    error_log('Error al decodificar JSON de notas: ' . json_last_error_msg());
-    http_response_code(400); // Bad Request
-    echo json_encode(array('message' => 'Error al decodificar JSON de notas'));
-    exit;
+// Verificar el tamaño del archivo
+if (file_exists($file) && filesize($file) > $maxFileSize) {
+    // Opcional: puedes renombrar el archivo actual y crear uno nuevo
+    $archivedFile = $file_path . 'backup_' . date('Ymd_His') . '.txt';
+    if (!rename($file, $archivedFile)) {
+        error_log('Error al renombrar el archivo: ' . error_get_last()['message']);
+        http_response_code(500); // Internal Server Error
+        echo json_encode(array('message' => 'Error al renombrar el archivo'));
+        exit;
+    }
 }
 
-file_put_contents($file, '');
-
 // Escribir las notas en el archivo
-if (file_put_contents($file, $notes . PHP_EOL, FILE_APPEND | LOCK_EX ) === false) {
+if (file_put_contents($file, $notes . PHP_EOL, FILE_APPEND | LOCK_EX) === false) {
     // Manejar errores de escritura en el archivo
     error_log('Error al escribir en el archivo: ' . error_get_last()['message']);
     http_response_code(500); // Internal Server Error

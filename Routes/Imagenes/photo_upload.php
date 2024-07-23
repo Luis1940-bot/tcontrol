@@ -10,11 +10,13 @@ if (isset($datos)) {
   
     $dato_decodificado = ($datos);//urldecode
     $imgJson = json_decode($dato_decodificado, true);
+    
     $srcArray = $imgJson['src'];
     $fileNameArray = $imgJson['fileName'];
     $extensionArray = $imgJson['extension'];
     $plant = $imgJson['plant'];
     $carpeta = $imgJson['carpeta'];
+ 
 
     $numImages = count($srcArray);
 
@@ -80,7 +82,7 @@ if (isset($datos)) {
                 }
 
                 $rutaImagen = $directorioImagenes . $imageName;
-
+               
                 // Guardar la imagen redimensionada en el servidor
                 file_put_contents($rutaImagen, $resizedImageData);
 
@@ -115,17 +117,20 @@ if (isset($datos)) {
                 $responses[] = array(
                     'success' => true,
                     'message' => "Elemento $i: Imagen subida correctamente",
-                    'rutaImagen' => $rutaImagen
+                    // 'rutaImagen' => $rutaImagen
                 );
             }
         }
 
         $response = array('success' => true, 'data' => $responses);
+        echo json_encode($response);
+        exit;
     }
 } else {
     $response = array('success' => false, 'message' => 'No se recibió la información esperada.');
+    echo json_encode($response);
+    exit;
 }
 
-echo json_encode($response);
-exit;
+
 ?>

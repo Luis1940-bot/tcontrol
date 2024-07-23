@@ -1,96 +1,78 @@
 <?php
+require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+mb_internal_encoding('UTF-8');
+// include('datos.php');
 
-function insertar_registro($datos, $nuxpedido, $pdo) {
-  $dato_decodificado =urldecode($datos);
-  $objeto_json = json_decode($dato_decodificado);
-  $i=0;
-  $campos='';
-  $interrogantes='';
-  $cantidad_insert=0;
-  foreach ($objeto_json as $clave => $valor) {
-      $campos?$campos=$campos.','.$clave:$campos=$clave;
-      $interrogantes?$interrogantes=$interrogantes.','.':'.$clave:$interrogantes=':'.$clave;
-      $i++;
-  }
+function convertToValidJson($data) {
+    $string = str_replace("\n", ", ", $data);
+    // Corregir comillas internas
+    $string = str_replace('", "', '","', $string);
+    $string = str_replace("\n", '', $string);
 
-  $sql="INSERT INTO LTYregistrocontrol (".$campos.") VALUES (".$interrogantes.");";
-  $c=0;
-  $d=0;
-  $campos=explode(",",$campos);
-  $interrogantes=explode(",",$interrogantes);
-  $cantidad_registros=count($valor);
-
-  $pdo->beginTransaction();
-  $sentencia = $pdo->prepare($sql);
-  for ($i=0; $i <$cantidad_registros ; $i++){
-      foreach ($objeto_json as $clave => $valor){
-        $tipodedato="PDO::PARAM_STR";
-        if ($campos[$c]==='tipodedato') {
-          $parametro= $objeto_json->tipodedato[$i];
-          if ($parametro==='n') {
-            $tipodedato="PDO::PARAM_INT ";
-          }
-        }
-        $sentencia->bindParam($interrogantes[$c], $campos[$c]);
-        $c++;
-        
-      }
-      $c=0;
-      foreach ($objeto_json as $clave => $valor){
-        $valor_ingresar=$valor[$i];
-        // $clave==='nuxpedido'?$valor_ingresar=$nuxpedido:null;
-        $campos[$d]=$valor_ingresar;
-        $d++;
-      }
-      $d=0;
-      $sentencia->execute();
-      $cantidad_insert += $sentencia->rowCount();
-      // echo "------------EXECUTE------<br>";
-  }
-  $pdo->commit(); 
-  if ($cantidad_insert > 0) {
-    // echo "El registro se insertó correctamente";
-    $response = array('success' => true, 'message' => 'La operación fue exitosa!', 'registros' => $cantidad_insert, 'documento' => $nuxpedido);
-    // echo json_encode($response);
-  } else {
-    // echo "No se insertó ningún registro";
-    $response = array('success' => false, 'message' => 'Algo salió mal.');
-    // echo json_encode($response);
-  }
-  $pdo=null; 
-  echo json_encode($response);
-  exit;
+    // Agregar llaves al principio y al final
+    $string = '{' . $string . '}';
+    return $string;
 }
 
-function eliminaRegistros($datos, $nux, $pdo) {
+
+function update_registro($datos, $nuxpedido) {
+try {
+    $dato_decodificado =urldecode($datos);
+    $objeto_json = json_decode($dato_decodificado);
+    $nuevoObjetoJSON = convertToValidJson($objeto_json->objJSON[0]); //convertToValidJson($array[0]);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        die('Error al codificar JSON: ' . json_last_error_msg());
+    }
   
-  $resultadoEliminacion = eliminaNuxPedido($nux, $pdo);
-  $deletes = $resultadoEliminacion['numFilasDeleteadas'];
-  if ($deletes > 0 && $nux !== 0) {
-    insertar_registro($datos, $nux, $pdo);
-  }
-}
+ 
+    $fecha = $objeto_json->fecha[0];
+    $idusuario = $objeto_json->idusuario[0];
+    $supervisor = $objeto_json->supervisor[0];
+    $observacion = $objeto_json->observacion[0] || "";
+    $imagenes = $objeto_json->imagenes[0] || "";
+    $cantidad_insert = 0;
 
-function actualizar($datos, $nux){
-  try {
-    require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+    echo $fecha.'\n';
+    echo $idusuario.'\n';
+    echo $supervisor.'\n';
+    echo $observacion.'\n';
+    echo $imagenes.'\n';
+
+    // var_dump($nuevoObjetoJSON);
+   
     include_once BASE_DIR . "/Routes/datos_base.php";
-    // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
-    $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-    eliminaRegistros($datos, $nux, $pdo);
+    $conn = mysqli_connect($host,$user,$password,$dbname);
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
+    }
+    mysqli_set_charset($conn, "utf8");
+    $sql = "UPDATE LTYregistrocontrol SET fecha = ?, idusuario = ?, supervisor = ?, observacion = ?, imagenes = ?, objJSON = ? WHERE nuxpedido = ?"; 
 
-  } catch (\Throwable $e) {
-    print "Error!: ".$e->getMessage()."<br>";
-    die();
-  }
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $conn->error);
+    }
+    $stmt->bind_param("siissss", $fecha , $idusuario , $supervisor , $observacion , $imagenes , $nuevoObjetoJSON, $nuxpedido);
+
+    if ($stmt->execute() === true) {
+        $cantidad_insert = 1;
+        $response = array('success' => true, 'message' => 'La operacion fue exitosa!', 'registros' => $cantidad_insert, 'documento' => $nuxpedido);
+    } else {
+        $response = array('success' => false, 'message' => 'No se actualizo el control.');
+    }
+    $stmt->close();
+    $conn->close();
+
+    header('Content-Type: application/json');
+    echo  json_encode($response);
+} catch (\Throwable $e) {
+  print "Error!: ".$e->getMessage()."<br>";
+  die();
 }
-
+}
 
 header("Content-Type: application/json; charset=utf-8");
-// session_start();
-include('elimina.php');
 $datos = file_get_contents("php://input");
-// include('datos.php');
 // $datos = $datox;
 
 if (empty($datos)) {
@@ -105,7 +87,8 @@ error_log('JSON response: ' . json_encode($data));
 if ($data !== null) {
   $datos = $data['q'];
   $nux = $data['nux'];
-  actualizar($datos, $nux, true);
+
+  update_registro($datos, $nux);
 } else {
   echo "Error al decodificar la cadena JSON";
 }

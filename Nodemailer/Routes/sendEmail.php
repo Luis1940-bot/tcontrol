@@ -115,18 +115,29 @@ $html = ob_get_clean();
         // Comando para Linux
         $command = 'nohup php ' . escapeshellarg($script_path) . ' > /dev/null 2>&1 & echo $!';
     }
-    // shell_exec($command);
 
-    ob_start();
-    $pid = exec($command);
-    ob_end_clean();
+  //   $pid = exec($command);
+  //   if ($pid) {
+  //       logMessage("Script de cola lanzado con PID: $pid");
+  //   } else {
+  //       logMessage("Error al lanzar el script de cola.");
+  //   }
+  // return;
 
-    if ($pid) {
-        logMessage("Script de cola lanzado con PID: $pid");
+  // Capturar salida y errores
+    $output = [];
+    $return_var = null;
+    exec($command, $output, $return_var);
+
+    if ($return_var === 0) {
+        logMessage("Script de cola lanzado con PID: " . implode(", ", $output));
+        $response = array('success' => true, 'message' => 'Correo encolado para envío', 'reporte' => $reporte, 'documento' => $documento);
     } else {
-        logMessage("Error al lanzar el script de cola.");
+        logMessage("Error al lanzar el script de cola: " . implode(", ", $output));
+        $response = array('success' => false, 'message' => 'Error al lanzar el script de cola.');
     }
-
+    // echo json_encode($response);
+    exit;
 } catch (Exception $e) {
   echo json_encode(['success' => false, 'message' => 'Error en el envío del correo: ' . $e->getMessage()]);
   // echo "Error en el envío del correo: " . $e->getMessage();

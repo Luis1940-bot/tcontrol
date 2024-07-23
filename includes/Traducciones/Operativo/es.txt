@@ -145,7 +145,7 @@ Ejemplo de Alerta
 Nueva Consulta(F5)
 Copiado al portapapeles.
 Autorizado desde Jefatura de Área.
-El proceso puede demorar unos instantes, ya que se compureban los datos inferidos.
+El proceso puede demorar unos instantes, ya que se comprueban los datos inferidos.
 No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.
 Están faltando datos requeridos que no se han completado. Cierre este mensaje, complete el dato requerido y acepte nuevamente.
 El proceso de insertar resultó exitosamente.
@@ -215,3 +215,4 @@ Con Photo
 Campo nuevo
 Estás trabajando con un control guardado con el número:
 Documento firmado digitalmente.
+Tener en cuenta que se están verificando los emails para su envío.

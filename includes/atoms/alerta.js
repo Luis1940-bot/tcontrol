@@ -998,6 +998,7 @@ function limpiaArrays() {
 
 function convertirObjATextPlano(obj) {
   const data = { ...obj }
+
   delete data.objImagen
   const lines = []
 
@@ -1014,12 +1015,12 @@ function convertirObjATextPlano(obj) {
   })
 
   // Convertir el arreglo de líneas a un solo texto con saltos de línea
-  const plainText = lines.join('\n')
+  const plainText = lines.join(',')
 
-  return plainText
+  return `${plainText}`
 }
 
-function subirImagenes(img, plant) {
+function subirImagenes(img) {
   if (img.length === 0) {
     return null
   }
@@ -1027,11 +1028,9 @@ function subirImagenes(img, plant) {
     return null
   }
 
-  img[0].plant = plant
-
   const formData = new FormData()
   formData.append('imgBase64', JSON.stringify(img[0])) // encodeURIComponent
-  // console.log(formData);
+  // console.log(formData)
   fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
     method: 'POST',
     body: formData,
@@ -1166,7 +1165,8 @@ function informe(
   miAlerta,
   objTrad,
   mod,
-  plant
+  plant,
+  nuxpedido
 ) {
   const modal = mod
   const mensaje = arrayGlobal.mensajesVarios.guardar
@@ -1230,7 +1230,8 @@ function informe(
     sessionStorage.setItem('config_menu', encriptar(configMenu))
 
     limpiaArrays()
-    guardaNotas(convertido, plant)
+    const stringConvertido = `NUXPEDIDO: ${nuxpedido}, ${convertido}`
+    guardaNotas(stringConvertido, plant)
   } else {
     obj.div.background = '#D82137'
     const modalContent = createDiv(obj.div)
@@ -1249,7 +1250,8 @@ async function insert(
   miAlertaInforme,
   objTrad,
   modal,
-  docStorage
+  docStorage,
+  enviaPorEmailBooleano
 ) {
   try {
     const { value } = desencriptar(sessionStorage.getItem('plant'))
@@ -1270,24 +1272,19 @@ async function insert(
     } else {
       insertado = await updateRegistro(nuevoObjetoControl, docStorage)
     }
-    // console.log(insertado)
-    const imagenes = await subirImagenes(
-      nuevoObjeto.objImagen,
-      objEncabezados.idPlanta
-    )
-    // console.log(imagenes);
 
-    const enviaPorEmail = sessionStorage.getItem('envia_por_email')
-    const enviaPorEmailBooleano = enviaPorEmail === 'true'
+    const imagenes = await subirImagenes(nuevoObjeto.objImagen)
     const encabezados = { ...objEncabezados }
     encabezados.documento = insertado.documento
+
     let enviado = ''
     if (enviaPorEmailBooleano) {
       enviado = await enviaMail(nuevoObjeto, encabezados)
-      // console.log(enviado)
     }
+
     const amarillo = document.getElementById('idDivAvisoVerde')
     amarillo.style.display = 'none'
+
     informe(
       convertido,
       insertado,
@@ -1296,7 +1293,8 @@ async function insert(
       miAlertaInforme,
       objTrad,
       modal,
-      plant
+      plant,
+      insertado.documento
     )
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -1969,6 +1967,10 @@ class Alerta {
   createAlerta(objeto, objTrad, typeAlert) {
     // Crear el elemento modal
     const obj = objeto
+    const planta = desencriptar(sessionStorage.getItem('plant'))
+    const carpeta = 'Imagenes/'
+    const enviaPorEmail = sessionStorage.getItem('envia_por_email')
+    const enviaPorEmailBooleano = enviaPorEmail === 'true'
     // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlert'
@@ -2043,7 +2045,9 @@ class Alerta {
       const okGuardar = guardarNuevo(
         arrayGlobal.objetoControl,
         arrayGlobal.arrayControl,
-        docStorage
+        docStorage,
+        planta,
+        carpeta
       )
 
       const requerido = desencriptar(sessionStorage.getItem('requerido'))
@@ -2051,8 +2055,15 @@ class Alerta {
         const miAlerta = new Alerta()
         const miAlertaInforme = new Alerta()
         let mensaje = arrayGlobal.mensajesVarios.guardar.esperaAmarillo
+
         arrayGlobal.avisoAmarillo.close.display = 'none'
         mensaje = trO(mensaje, objTrad)
+        if (enviaPorEmailBooleano) {
+          mensaje = `${mensaje} ${trO(
+            arrayGlobal.mensajesVarios.guardar.esperaAmarilloConEmail,
+            objTrad
+          )}`
+        }
         miAlerta.createVerde(arrayGlobal.avisoAmarillo, mensaje, null)
         const modal = document.getElementById('modalAlertVerde')
         modal.style.display = 'block'
@@ -2067,8 +2078,6 @@ class Alerta {
             .fill(null)
             .map((_, index) => (index === 0 ? convertido : null)),
         }
-
-        const planta = desencriptar(sessionStorage.getItem('plant'))
 
         const encabezados = armaEncabezado(
           arrayGlobal,
@@ -2086,7 +2095,8 @@ class Alerta {
           miAlertaInforme,
           objTrad,
           modal,
-          docStorage
+          docStorage,
+          enviaPorEmailBooleano
         )
       }
       if (!requerido.requerido || !okGuardar) {
