@@ -150,7 +150,7 @@ function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   if (tipoDeDato === 'cn') {
     tipo = trO('Consulta SQL', objTranslate) || 'Consulta SQL'
   }
-  if (tipoDeDato === 'btnQwery') {
+  if (tipoDeDato === 'btnqwery') {
     tipo = trO('Botón', objTranslate) || 'Botón SQL'
   }
   if (tipoDeDato === 'x') {
@@ -381,8 +381,8 @@ function reconoceColumna(
       }
       if (
         (array[4] === 'cn' ||
-          array[4] === 'btnQwery' ||
-          array[6] === 'btnQwery') &&
+          array[4] === 'btnqwery' ||
+          array[6] === 'btnqwery') &&
         array[i] === ''
       ) {
         background = '#ff7659'

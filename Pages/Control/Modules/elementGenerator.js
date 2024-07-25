@@ -140,6 +140,7 @@ class ElementGenerator {
     selectDinamic.addEventListener('change', (event) => {
       eventSelect(event, hijo, sqlHijo)
     })
+
     return selectDinamic
   }
 

@@ -266,7 +266,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
         'InputButton-transparent'
       )
       type = inputButton
-    } else if (i === 2 && tipoDeDato === 'btnQwery') {
+    } else if (i === 2 && tipoDeDato === 'btnqwery') {
       dato = null
       let text = element[orden[1]].toUpperCase()
       const consulta = element[23] || ''
@@ -398,7 +398,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
         'InputButton-transparent'
       )
       type = inputButton
-    } else if (i === 4 && tipoDeObservacion === 'btnQwery') {
+    } else if (i === 4 && tipoDeObservacion === 'btnqwery') {
       dato = null
       let text = element[orden[1]].toUpperCase()
       const consulta = element[23] || ''

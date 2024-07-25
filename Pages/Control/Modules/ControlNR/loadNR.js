@@ -10,9 +10,18 @@ import { encriptar, desencriptar } from '../../../../controllers/cript.js'
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
-function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
-  console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos)
-
+function columna2(
+  tagName,
+  type,
+  tds,
+  valor,
+  datos,
+  i,
+  columnaTd,
+  selDatos,
+  index
+) {
+  // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos, index)
   const td = tds
   if (
     (tagName === 'INPUT' && type === 'date') ||
@@ -28,41 +37,63 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
   ) {
     td[columnaTd].childNodes[0].value = valor
   }
+
   if (tagName === 'SELECT' && type === 'select-one') {
     if (valor) {
-      const select = td[columnaTd].childNodes[0]
-      // eslint-disable-next-line no-plusplus
-      for (let m = 0; m < select.options.length; m++) {
-        if (select.options[m].innerText === valor) {
-          select.selectedIndex = m
-          break
+      let optionFound = false
+      let select
+      function getSelectedText(selectElement) {
+        if (
+          selectElement &&
+          selectElement.options &&
+          selectElement.selectedIndex !== -1
+        ) {
+          return selectElement.options[selectElement.selectedIndex].innerText
+        }
+        return null
+      }
+      function checkAndSetValues() {
+        select = td[columnaTd].childNodes[0]
+        if (select.options.length > 0) {
+          for (let m = 0; m < select.options.length; m++) {
+            if (select.options[m].innerText === valor) {
+              select.selectedIndex = m
+              optionFound = true
+              break
+            }
+          }
+
+          if (!optionFound) {
+            const option = document.createElement('option')
+            // eslint-disable-next-line prefer-destructuring
+            option.value = datos.valorS[index]
+            option.innerText = valor
+            select.appendChild(option)
+          }
+        } else {
+          setTimeout(checkAndSetValues, 200)
         }
       }
-      if (select.options.length === 0) {
+      checkAndSetValues()
+      const selectedText = getSelectedText(select)
+      if (selectedText === null && valor) {
         const option = document.createElement('option')
-        // eslint-disable-next-line prefer-destructuring
-        option.value = datos[i][selDatos]
+        option.value = datos.valorS[index]
         option.innerText = valor
         select.appendChild(option)
       }
+      // eslint-disable-next-line no-plusplus
     }
   }
   if (tagName === 'INPUT' && type === 'checkbox') {
     const checkbox = td[columnaTd].childNodes[0]
-    valor === '1' ? (checkbox.checked = true) : (checkbox.checked = false)
+    valor === 1 ? (checkbox.checked = true) : (checkbox.checked = false)
   }
-  if (tagName === 'BUTTON' && type === 'submit' && datos[i][23] !== '') {
+  const imagen = datos.imagenes[index]
+  if (tagName === 'BUTTON' && type === 'submit' && imagen !== '') {
     const { plant } = desencriptar(sessionStorage.getItem('user'))
-
-    let cadenaJSON = datos[i][23]
-    cadenaJSON = cadenaJSON.replace(/fileName/g, '"fileName"')
-    cadenaJSON = cadenaJSON.replace(/extension/g, '"extension"')
-    cadenaJSON = cadenaJSON.replace(
-      /("fileName": \[.*?\])\s?("extension": \[.*?\])/,
-      '$1, $2'
-    )
-    cadenaJSON = cadenaJSON.replace(/(\w+):/g, '"$1":')
-    const objeto = JSON.parse(`{${cadenaJSON}}`)
+    const jsonString = imagen.replace(/'/g, '"')
+    const objeto = JSON.parse(jsonString)
     const cantidadDeImagenes = objeto.fileName.length
     const rutaBase = `${SERVER}/assets/Imagenes/${plant}/`
     const ul = td[3].childNodes[0]
@@ -107,8 +138,8 @@ function columna2(tagName, type, tds, valor, datos, i, columnaTd, selDatos) {
 
 async function verSupervisor(idSupervisor, plant) {
   let configMenu
-  // console.log(idSupervisor, typeof idSupervisor)
-  if (idSupervisor !== '0') {
+
+  if (idSupervisor !== 0) {
     const supervisor = await traerSupervisor(idSupervisor, plant)
     configMenu = {
       guardar: false,
@@ -117,8 +148,10 @@ async function verSupervisor(idSupervisor, plant) {
       firma: true,
       configFirma: supervisor,
     }
+
     sessionStorage.setItem('config_menu', encriptar(configMenu))
-  } else if (idSupervisor === '0') {
+    sessionStorage.setItem('firmado', encriptar(supervisor))
+  } else if (idSupervisor === 0) {
     const supervisor = {
       id: 0,
       mail: '',
@@ -133,44 +166,37 @@ async function verSupervisor(idSupervisor, plant) {
       firma: false,
       configFirma: supervisor,
     }
+
     sessionStorage.setItem('firma', encriptar('x'))
     sessionStorage.setItem('config_menu', encriptar('x'))
   }
 }
 
-function cargarNR(datos, plant) {
+function cargarNR(res, plant) {
   try {
-    console.log(datos)
-    console.log(datos[0][14])
-    return
-    const idSupervisor = datos[0][6]
+    const objString = res[0][14]
+    const datos = JSON.parse(objString)
+    const idSupervisor = datos.supervisor[0]
     const tbody = document.querySelector('tbody')
     const tr = tbody.querySelectorAll('tr')
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length - 0; i++) {
       const row = tr[i]
-      // console.log(row);
+      // console.log(row)
       const td = row.querySelectorAll('td')
       // console.log(td);
       const codigo = td[5].innerText
       const { tagName } = td[2].childNodes[0]
       const { type } = td[2].childNodes[0]
-      // const { value } = td[2].childNodes[0];
-      // const valor = datos[i][3]
       const tagNameObservaciones = td[4].childNodes[0].tagName
       const typeObservaciones = td[4].childNodes[0].type
-      // const valueObservaciones = td[4].childNodes[0].value;
-      // const valorObservaciones = datos[i][9]
-      const elementoEncontrado = datos.find((subarray) => {
-        return subarray.some(
-          (element, i) => i === 5 && element === codigo.trim()
-        )
-      })
-      // codigo.trim() === datos[i][5].trim()
-      if (elementoEncontrado) {
-        const valor = elementoEncontrado[3]
-        const valorObservaciones = elementoEncontrado[9]
-        columna2(tagName, type, td, valor, datos, i, 2, 12)
+      const codigoString = codigo.toString().trim()
+      const elementoEncontrado = datos.idLTYcontrol.indexOf(codigoString)
+
+      if (elementoEncontrado !== -1) {
+        const valor = datos.valor[elementoEncontrado]
+        const valorObservaciones = datos.observacion[elementoEncontrado]
+        columna2(tagName, type, td, valor, datos, i, 2, 12, elementoEncontrado)
         columna2(
           tagNameObservaciones,
           typeObservaciones,
@@ -179,7 +205,8 @@ function cargarNR(datos, plant) {
           datos,
           i,
           4,
-          13
+          13,
+          elementoEncontrado
         )
       }
     }

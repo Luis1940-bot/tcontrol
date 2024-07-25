@@ -1,5 +1,7 @@
 eslint-main/
 node_modules/
 Libraries/
+Imagenes/
+Logos/
 
 .env

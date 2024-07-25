@@ -244,7 +244,7 @@ function formatado(valor, tipoDeDato, nombreControl, fila, imagenes) {
         return ''
       }
       break
-    case 'btnQwery':
+    case 'btnqwery':
       return nombreControl
     case 'x':
       return ''

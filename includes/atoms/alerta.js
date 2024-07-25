@@ -1264,6 +1264,7 @@ async function insert(
     delete nuevoObjetoControl.objImagen
 
     let insertado
+    console.log(docStorage)
     if (docStorage === false) {
       insertado = await insertarRegistro(
         nuevoObjetoControl,
@@ -4524,7 +4525,7 @@ class Alerta {
           ['img', 'Imagen'],
           ['s', 'Select-Variable'], // abrir la seleccion de variables
           ['cn', 'Consulta SQL'],
-          ['btnQwery', 'Botón SQL'],
+          ['btnqwery', 'Botón SQL'],
           ['b', 'Check-Box'],
           ['r', 'Radio'],
           ['photo', 'Foto'], // abrir campo separador para colocar width-height

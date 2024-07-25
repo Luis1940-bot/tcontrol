@@ -1,3 +1,4 @@
+import { trO } from '../../../controllers/trOA.js'
 function createButton(config) {
   const button = document.createElement('button')
   button.className = `${config.className}`

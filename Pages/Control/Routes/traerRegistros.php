@@ -4,12 +4,11 @@
   // if (!isset($_SESSION['login_sso']['email'] )) {
   //     unset($_SESSION['login_sso']['email'] ); 
   // }
-
+        // include('datos.php');
         $sql='';
         
         function traer($q, $sql_i) {
           $porciones = explode(",", $q);
-                  
                   switch ($porciones[0]) {
 
                       case 'empresa':
@@ -67,8 +66,8 @@
                                     FROM LTYcontrol c
                                     WHERE c.idLTYreporte = ".$porciones[1]."
                                       AND (
-                                        (c.tipodato NOT IN (TRIM('cn'), TRIM('btnQwery')))
-                                        AND (c.tpdeobserva NOT IN (TRIM('cn'), TRIM('btnQwery')))
+                                        (c.tipodato NOT IN (TRIM('cn'), TRIM('btnqwery')))
+                                        AND (c.tpdeobserva NOT IN (TRIM('cn'), TRIM('btnqwery')))
                                         AND (c.activo = 's')
                                         AND (c.visible = 's')
                                       )
@@ -138,6 +137,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
+        // $datos = $datox;
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

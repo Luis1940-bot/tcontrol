@@ -84,6 +84,9 @@ async function consultaQuery(event, consulta) {
 
 async function traerHijo(sql, array) {
   try {
+    if (array[0].length === 0) {
+      return null
+    }
     const objTraerHijo = {
       filaInserta: sql.substring(0, 4).replace(/@/g, ''),
       tipoDeElemento: sql.substring(5, 8).replace(/@/g, ''),
@@ -94,6 +97,7 @@ async function traerHijo(sql, array) {
     }
     const resultado = sql.substring(21, sql.length)
     const textoDespuesDelDolar = resultado.replace(/\?/g, () => array.shift())
+
     objTraerHijo.res = await traerRegistros(
       `traer_LTYsql`,
       `${encodeURIComponent(textoDespuesDelDolar)}`
@@ -136,6 +140,7 @@ function insertarDatoEnFila(obj) {
     const posicion = Number(obj.filaInserta) + 1
     const fila = document.querySelector(`tr:nth-child(${posicion})`)
     const select = fila.querySelector('td:nth-child(3) select')
+
     select.setAttribute('selector', 'select-hijo')
     const nuevoArray = obj.res
     if (nuevoArray[0][0] !== '') {
@@ -165,6 +170,10 @@ async function eventSelect(event, hijo, sqlHijo) {
     try {
       // Aquí puedes usar indexTextPairs para acceder a los índices y textos
       obj = await traerHijo(sqlHijo, indexTextPairs[0])
+      if (obj === null) {
+        return
+      }
+
       insertarDatoEnFila(obj)
     } catch (error) {
       console.error('Error al llamar a traerHijo:', error)

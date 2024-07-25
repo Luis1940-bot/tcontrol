@@ -63,7 +63,7 @@ function enviaMail(datos, encabezados, plant) {
         }
         if (
           tipoDeDato === 'x' ||
-          tipoDeDato === 'btnQwery' ||
+          tipoDeDato === 'btnqwery' ||
           tipoDeDato === 'img'
         ) {
           valorHtmlValor = ''
