@@ -11,7 +11,7 @@ if (isLocalhost) {
   baseUrl = 'http://localhost:8080'
 } else {
   // En producción
-  baseUrl = 'https://tenkiweb.com/datos'
+  baseUrl = 'https://tenkiweb.com/tcontrol'
 }
 
 // Exporta la variable baseUrl para que otros archivos puedan importarla
