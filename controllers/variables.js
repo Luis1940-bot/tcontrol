@@ -497,7 +497,7 @@ const avisoVerde = {
   span: {
     id: null,
     text: '¡Proceso completado con éxito! Todos los pasos del procedimiento se han ejecutado correctamente.',
-    fontSize: '12px',
+    fontSize: null, //'12px',
     fontColor: '#ECECEC',
     marginTop: '0px',
     display: 'block',

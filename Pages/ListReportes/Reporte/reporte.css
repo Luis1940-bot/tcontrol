@@ -218,6 +218,9 @@ td {
   height: 30px;
   width: 30px;
 }
+#idControl {
+  background: #d9d9d9;
+}
 /* #tipodeusuario {
   pointer-events: none;
   background-color: #e9e9e9;
