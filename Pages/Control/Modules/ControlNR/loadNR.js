@@ -184,8 +184,9 @@ function cargarNR(res, plant) {
       const row = tr[i]
       // console.log(row)
       const td = row.querySelectorAll('td')
-      // console.log(td);
+
       const codigo = td[5].innerText
+
       const { tagName } = td[2].childNodes[0]
       const { type } = td[2].childNodes[0]
       const tagNameObservaciones = td[4].childNodes[0].tagName
@@ -194,8 +195,11 @@ function cargarNR(res, plant) {
       const elementoEncontrado = datos.idLTYcontrol.indexOf(codigoString)
 
       if (elementoEncontrado !== -1) {
-        const valor = datos.valor[elementoEncontrado]
+        let valor = datos.valor[elementoEncontrado]
         const valorObservaciones = datos.observacion[elementoEncontrado]
+        if (valor === 'tx') {
+          valor = null
+        }
         columna2(tagName, type, td, valor, datos, i, 2, 12, elementoEncontrado)
         columna2(
           tagNameObservaciones,

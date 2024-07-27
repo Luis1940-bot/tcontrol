@@ -129,9 +129,25 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
         const displayCell = window.getComputedStyle(td[c]).display
         const element = td[c]
         const campo = td[1]
-        const node = element.childNodes[0]
-        const datoCelda = element.childNodes[0].data
-        const valueCelda = element.childNodes[0].value
+
+        let node, datoCelda, valueCelda
+        if (element.childNodes.length > 0) {
+          node = element.childNodes[0]
+          datoCelda = node.data || null
+          valueCelda = node.value || null
+        } else {
+          // Si no hay nodos hijos, recupera el valor directamente del td
+          node = null
+          datoCelda = element.textContent || null
+          valueCelda = null
+          // console.warn(
+          //   `El td en la columna ${c} no tiene nodos hijos. Valor de la celda: ${datoCelda}`
+          // )
+        }
+
+        // const node = element.childNodes[0]
+        // const datoCelda = element.childNodes[0].data
+        // const valueCelda = element.childNodes[0].value
         const colspanValue = td[1].getAttribute('colspan')
         const inputElement = element.querySelector('input')
         const { nodeType } = node

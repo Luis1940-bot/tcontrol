@@ -43,19 +43,33 @@ function hacerMemoria(arrayControl) {
       for (let c = 2; c <= 4; c += 2) {
         const displayCell = window.getComputedStyle(td[c]).display
         const element = td[c]
-        const node = element.childNodes[0]
-        const datoCelda = element.childNodes[0].data
-        const valueCelda = element.childNodes[0].value
+
+        let node, datoCelda, valueCelda
+        if (element.childNodes.length > 0) {
+          node = element.childNodes[0]
+          datoCelda = node.data || null
+          valueCelda = node.value || null
+        } else {
+          // Si no hay nodos hijos, recupera el valor directamente del td
+          node = null
+          datoCelda = element.textContent || null
+          valueCelda = null
+          // console.warn(
+          //   `El td en la columna ${c} no tiene nodos hijos. Valor de la celda: ${datoCelda}`
+          // )
+        }
+
         const colspanValue = td[1].getAttribute('colspan')
         const inputElement = element.querySelector('input')
-        const { nodeType } = node
-        const { type } = node
-        const { tagName } = node
+        const nodeType = node ? node.nodeType : null
+        const type = node ? node.type : null
+        const tagName = node ? node.tagName : null
+
         let childeNode0
         let inputmode
         let select
-        const checkbox = node.checked
-        const radio = node.checked
+        const checkbox = node ? node.checked : null
+        const radio = node ? node.checked : null
         let divConsultas
         let liImages
         const selector = null
@@ -90,6 +104,7 @@ function hacerMemoria(arrayControl) {
           terceraColumna,
         }
 
+        let respuesta
         if (c === 2) {
           respuesta = respuestaColumna(c, i, objParametros)
           ;({ valor, selector1, valorS, familiaselector } = respuesta)
@@ -101,7 +116,6 @@ function hacerMemoria(arrayControl) {
         }
 
         if (c === 4) {
-          // console.log(valor,displayRow)
           const founded = buscarEnArray(td[5].textContent, arrayControl)
           arrayGlobal.objetoMemoria.fecha.push(
             fechasGenerator.fecha_corta_yyyymmdd(new Date())

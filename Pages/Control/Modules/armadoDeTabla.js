@@ -69,9 +69,12 @@ function estilosCell(
 ) {
   const cell = document.createElement('td')
   let dato = ''
-  typeof datos === 'string' && datos !== null
-    ? ((dato = trA(datos, objTrad)), objTrad)
-    : (dato = datos)
+
+  if (typeof datos === 'string' && datos !== null) {
+    dato = trA(datos, objTrad) || datos
+  } else {
+    dato = datos
+  }
   if (dato !== null && type === null) {
     cell.textContent = `${dato} ${requerido}` || `${dato} ${requerido}`
   } else if (dato === null && type !== null) {
@@ -100,6 +103,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
   for (let i = 0; i < 6; i++) {
     const orden = [0, 3, 4, 6, 7, 1]
     let dato = element[orden[i]]
+
     const tipoDeDato = element[5]
     const tipoDeObservacion = element[9]
     let alignCenter = 'left'
@@ -112,6 +116,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
     let colorText = '#000000'
     let requerido = ''
     let display = null
+
     if (i === 0) {
       ID += 1
       dato = ID
@@ -122,7 +127,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
     } else if (i === 2) {
       alignCenter = 'center'
     } else if (i === 4) {
-      dato = ''
+      dato = '' //null
     } else if (i === 5) {
       display = 'none'
     }
@@ -195,7 +200,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       )
       type = inputHora
     } else if (i === 2 && tipoDeDato === 'x') {
-      dato = ''
+      dato = '' //null
       type = null
     } else if (i === 2 && tipoDeDato === 't') {
       dato = null
@@ -336,7 +341,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       )
       type = inputHora
     } else if (i === 4 && tipoDeObservacion === 'x') {
-      dato = ''
+      dato = '' //null
       type = null
     } else if (i === 4 && tipoDeObservacion === 't') {
       dato = null
@@ -426,6 +431,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       )
       type = radioButton
     }
+
     const cell = estilosCell(
       alignCenter,
       paddingLeft,
@@ -501,6 +507,7 @@ function completaTabla(arrayControl, encabezados, objTrad) {
     )
     tbody.appendChild(newRow)
     fila += 1
+
     // ! ocultamos la columnas para la observacion
     if (element[8] === 'n') {
       const filaOculta = tbody.querySelector(`tr:nth-child(${index + 1})`)

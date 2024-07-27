@@ -1264,7 +1264,7 @@ async function insert(
     delete nuevoObjetoControl.objImagen
 
     let insertado
-    console.log(docStorage)
+
     if (docStorage === false) {
       insertado = await insertarRegistro(
         nuevoObjetoControl,
