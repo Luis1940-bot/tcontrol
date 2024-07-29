@@ -1,0 +1,31 @@
+# .htaccess en el directorio raíz de tu sitio web (por ejemplo, public_html)
+
+# Configurar tipos MIME para archivos JavaScript
+
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+</IfModule>
+
+# Habilitar la compresión para mejorar la carga
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Opcional: Configuración de redirección
+
+# Redireccionar http a https
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.\*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirección de URL
+
+# RewriteRule ^old-page.html$ new-page.html [R=301,L]

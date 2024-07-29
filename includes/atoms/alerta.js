@@ -2171,6 +2171,7 @@ class Alerta {
     const divFirmar = createDiv(obj.divCajita)
     obj.input.id = 'idInputFirma'
     obj.input.type = 'password'
+    obj.input.value = ''
     const inputEmail = createInput(obj.input)
     texto = trO(obj.label.innerText, objTrad) || obj.label.innerText
     obj.label.id = 'idLabelFirma'
