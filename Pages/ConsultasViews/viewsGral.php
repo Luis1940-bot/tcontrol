@@ -41,8 +41,6 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
       include_once('../../includes/molecules/header.php');
       include_once('../../includes/molecules/encabezado.php');
       include_once('../../includes/molecules/whereUs.php');
-
- 
     ?>
   </header>
   <main>
@@ -56,10 +54,10 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
        include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='<?php echo BASE_URL ?>/Pages/ConsultasViews/consultasView.js?v=<?php echo(time()); ?>'></script>
-<script src='<?php echo BASE_URL ?>/includes/atoms/cdnjs/xlsx.full.min.js'></script>
-<script src='<?php echo BASE_URL ?>/includes/atoms/html2canvas/html2canvas.min.js'></script>
-<script src='<?php echo BASE_URL ?>/includes/atoms/jspdf/jspdf.min.js'></script>
-
+  <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/Pages/ConsultasViews/consultasView.js?v=<?php echo(time()); ?>'></script>
+  <script src='<?php echo BASE_URL ?>/includes/atoms/cdnjs/xlsx.full.min.js'></script>
+  <script src='<?php echo BASE_URL ?>/includes/atoms/html2canvas/html2canvas.min.js'></script>
+  <script src='<?php echo BASE_URL ?>/includes/atoms/jspdf/jspdf.min.js'></script>
 </body>
 </html>

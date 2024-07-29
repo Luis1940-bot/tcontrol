@@ -115,6 +115,7 @@ main {
   color: #cecece;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 40px;
+  margin-bottom: 20px;
 }
 .button-plant:hover {
   background: #cecece;
@@ -200,6 +201,8 @@ main {
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   .input-plant {
     width: 97%;
@@ -246,6 +249,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 }
 
@@ -284,6 +288,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 }
 
@@ -322,6 +327,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 }
 
@@ -359,6 +365,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   .alert-box {
     width: 20%;
@@ -399,6 +406,7 @@ main {
     padding-bottom: 0px;
     font-size: 14px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   .alert-box {
     width: 20%;

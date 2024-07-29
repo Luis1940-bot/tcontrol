@@ -57,6 +57,7 @@ if (!isset($_SESSION['login_sso']['email']) && (SSO === null || SSO === 's_sso')
       include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='<?php echo BASE_URL ?>/Pages/Home/home.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/Pages/Home/home.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

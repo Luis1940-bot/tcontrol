@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['codigo']) && isset($_GE
         include_once('../../includes/molecules/footer.php');
         ?>
     </footer>
+    <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
     <script type='module' src='<?php echo BASE_URL ?>/Pages/RegisterUser/verify.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

@@ -53,6 +53,7 @@ define('SSO', $_SESSION['login_sso']['sso']);
       include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='<?php echo BASE_URL ?>/Pages/Admin/admin.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/Pages/Admin/admin.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

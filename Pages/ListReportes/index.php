@@ -57,7 +57,8 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
       include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-<script type='module' src='<?php echo BASE_URL ?>/Pages/ListReportes/listReportes.js?v=<?php echo(time()); ?>'></script>
-<script type='module' src='<?php echo BASE_URL ?>/Pages/ListReportes/reportesViews.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/Pages/ListReportes/listReportes.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/Pages/ListReportes/reportesViews.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

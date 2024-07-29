@@ -65,6 +65,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
       include_once('../../includes/molecules/modales/modal.php');
       include_once('../../includes/molecules/modales/modalInforme.php');
     ?>
-<script type='module' src='./control.js?v=<?php echo(time()); ?>'></script>
+    <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
+    <script type='module' src='./control.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>

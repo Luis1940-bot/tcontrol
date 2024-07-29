@@ -2138,7 +2138,6 @@ class Alerta {
     this.modal.className = 'modal'
     this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
     // Crear el contenido del modal
-
     if (typeAlert === 'firmar' && widthScreen !== 360) {
       obj.divContent.height = '290px'
     }
@@ -3196,6 +3195,7 @@ class Alerta {
       this.modal.className = 'modal'
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
 
+      obj.divContent.height = '290px'
       const modalContent = createDiv(obj.divContent)
 
       const span = createSpan(obj.close)
