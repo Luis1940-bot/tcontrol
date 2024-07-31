@@ -1,4 +1,4 @@
-import baseUrl from '../../../../config.js'
+import baseUrl from '../../../config.js'
 const SERVER = baseUrl
 
 export default function addCompania(objeto, ruta) {

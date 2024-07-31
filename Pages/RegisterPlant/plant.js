@@ -5,11 +5,6 @@ import {
   inicioPerformance,
   finPerformance,
 } from '../../includes/Conection/conection.js'
-
-const spinner = document.querySelector('.spinner')
-const appJSON = {}
-let objTranslate = []
-
 import baseUrl from '../../config.js'
 import leeVersion from '../../controllers/leeVersion.js'
 import { trO } from '../../controllers/trOA.js'
@@ -32,8 +27,11 @@ import arrayGlobal from '../../controllers/variables.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
 import createImg from '../../includes/atoms/createImg.js'
 
-const SERVER = baseUrl
+const spinner = document.querySelector('.spinner')
+const appJSON = {}
+let objTranslate = []
 
+const SERVER = baseUrl
 function validarEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return regex.test(email)

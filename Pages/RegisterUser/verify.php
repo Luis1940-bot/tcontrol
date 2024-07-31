@@ -57,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['codigo']) && isset($_GE
     <meta name="author" content="Luis1940-bot">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='shortcut icon' type='image/x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
-    <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/RegisterUser/verify.css?v=<?php echo(time()); ?>' media='screen'>
-    <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
+    <link rel='shortcut icon' type='image/x-icon' href='../../assets/img/favicon.ico'>
+    <link rel='stylesheet' type='text/css' href='../../Pages/RegisterUser/verify.css?v=<?php echo(time()); ?>' media='screen'>
+    <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
     <title>Tenki</title>
 </head>
 <body>
@@ -87,8 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['codigo']) && isset($_GE
         include_once('../../includes/molecules/footer.php');
         ?>
     </footer>
-    <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
-    <script type='module' src='<?php echo BASE_URL ?>/Pages/RegisterUser/verify.js?v=<?php echo(time()); ?>'></script>
+    <script type='module' src='../../config.js?v=<?php echo(time()); ?>'></script>
+    <script type='module' src='../../Pages/RegisterUser/verify.js?v=<?php echo(time()); ?>'></script>
 </body>
 </html>
 <?php
