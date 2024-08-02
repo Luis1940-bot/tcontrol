@@ -1,5 +1,11 @@
 <?php
-
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 function generarCodigoAlfabetico($reporte) {
     $palabras = explode(' ', $reporte);
     $codigo = '';
@@ -94,6 +100,7 @@ function addCampo($datos, $plant) {
 
         $mysqli->commit();
     } catch (Exception $e) {
+         error_log("Error al agregar nuevo campo. Error: " . $e);
         $mysqli->rollback();
         $response = array('success' => false, 'message' => 'Error en la base de datos: ' . $e->getMessage());
     }

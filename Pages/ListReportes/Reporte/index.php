@@ -16,8 +16,13 @@ define('SSO', $_SESSION['login_sso']['sso']);
 
     header("Location: ". $url ."");
   }
-
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->

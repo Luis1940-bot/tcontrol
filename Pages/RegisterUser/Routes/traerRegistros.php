@@ -29,6 +29,7 @@
           
           require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
           include_once BASE_DIR . "/Routes/datos_base.php";
+          
             // $host = "68.178.195.199"; 
             // $user = "developers";
             // $password = "6vLB#Q0bOVo4";
@@ -64,6 +65,7 @@
               // $pdo=null;
               
           } catch (\PDOException $e) {
+              error_log("Error al traer registros. Error: " . $e);
               print "Error!: ".$e->getMessage()."<br>";
               die();
           }
@@ -73,6 +75,13 @@
 
 
         header("Content-Type: application/json; charset=utf-8");
+        require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+        ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+        if (isset($_SESSION['timezone'])) {
+            date_default_timezone_set($_SESSION['timezone']);
+        } else {
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
+        }
         $datos = file_get_contents("php://input");
         // $datos = '{"q":"traerTipoDeUsuario","ruta":"/traerTipoDeUsuarioParaRegistroUser","sql_i":null,"rax":"&new=Fri Jun 21 2024 19:20:33 GMT-0300 (hora estándar de Argentina)"}';
     

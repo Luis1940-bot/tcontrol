@@ -1,5 +1,12 @@
 <?php
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 mb_internal_encoding('UTF-8');
 // include('datos.php');
 
@@ -100,6 +107,7 @@ function convertToValidJson($dataString) {
           echo "Error al convertir el string a JSON: " . json_last_error_msg();
       }
   } catch (\Throwable $e) {
+     error_log("Error decoding JSON: " . $e);
     print "Error!: ".$e->getMessage()."<br>";
 
   }
@@ -164,6 +172,7 @@ try {
     header('Content-Type: application/json');
     echo  json_encode($response);
 } catch (\Throwable $e) {
+   error_log("Error al actualizar registro: " . $nuxpedido);
   print "Error!: ".$e->getMessage()."<br>";
   die();
 }

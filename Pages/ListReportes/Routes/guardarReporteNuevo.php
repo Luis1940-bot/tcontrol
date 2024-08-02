@@ -1,5 +1,12 @@
 <?php
  mb_internal_encoding('UTF-8');
+ require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 error_reporting(E_ALL); // Muestra todos los errores y warnings
 ini_set('display_errors', 1); // Asegúrate de que los errores sean mostrados (no usar en producción)
 
@@ -59,6 +66,7 @@ function guardarReporte($datos, $plant) {
             ];
         }
     } catch (PDOException $e) {
+       error_log("Error al insertar reporte nuevo. Error: " . $e);
         // En caso de error, revertir la transacción y mostrar el mensaje de error.
         $pdo->rollBack();
         $response = [

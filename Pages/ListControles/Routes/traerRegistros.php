@@ -62,6 +62,13 @@
           
           require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
           include_once BASE_DIR . "/Routes/datos_base.php";
+          require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+          ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+          if (isset($_SESSION['timezone'])) {
+              date_default_timezone_set($_SESSION['timezone']);
+          } else {
+              date_default_timezone_set('America/Argentina/Buenos_Aires');
+          }
             // $host = "68.178.195.199"; 
             // $user = "developers";
             // $password = "6vLB#Q0bOVo4";
@@ -97,6 +104,7 @@
               // $pdo=null;
               
           } catch (\PDOException $e) {
+              error_log("Error al traer registros. Error: " . $sql . " Cliente: " . $sql_i);
               print "Error!: ".$e->getMessage()."<br>";
               die();
           }

@@ -1,5 +1,14 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
+
+
 $datos=$_POST['datos'];
 
 include('generatorNuxPedido.php');
@@ -65,6 +74,7 @@ function insertar_registro($datos) {
     $response = array('success' => true, 'message' => 'La operación fue exitosa!', 'registros' => $cantidad_insert, 'documento' => $nuxpedido);
     // echo json_encode($response);
   } else {
+     error_log("Error al insertar registro.");
     // echo "No se insertó ningún registro";
     $response = array('success' => false, 'message' => 'Algo salió mal no hay registros insertados');
     // echo json_encode($response);

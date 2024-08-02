@@ -2,6 +2,14 @@
 header("Content-Type: text/html;charset=utf-8");
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
+require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
+// Inicializar el logger con la ruta deseada
+ErrorLogger::initialize((dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 // include('datos.php');
 $datos = $_POST['imgBase64'];
 // $datos = $datox;
@@ -127,6 +135,7 @@ if (isset($datos)) {
         exit;
     }
 } else {
+    error_log("Error al subir imágenes");
     $response = array('success' => false, 'message' => 'No se recibió la información esperada.');
     echo json_encode($response);
     exit;

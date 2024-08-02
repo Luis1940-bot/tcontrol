@@ -3,6 +3,13 @@ error_reporting(E_ALL); // Muestra todos los errores y warnings
 ini_set('display_errors', 1); // Asegúrate de que los errores sean mostrados (no usar en producción)
 
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 // include('datos.php');
 
 
@@ -38,6 +45,7 @@ function guardarCambiosReporte($datos) {
         ];
         
     } catch (PDOException $e) {
+         error_log("Error al guardar cambios en reporte. Error: " . $e);
         // En caso de error, revertir la transacción y mostrar el mensaje de error.
         $response = [
             'success' => false,
@@ -62,7 +70,7 @@ if (empty($datos)) {
 }
 $data = json_decode($datos, true);
 
-error_log('JSON response: ' . json_encode($data));
+// error_log('JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];

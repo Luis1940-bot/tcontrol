@@ -19,6 +19,8 @@ if (!isset($_SESSION['login_sso']['email']) && (SSO === null || SSO === 's_sso')
     $url = "https://tenkiweb.com/tcontrol/Pages/Login/index.php";
     // header("Location: ". $url ."");
 }
+require_once __DIR__ . '/ErrorLogger.php';
+ErrorLogger::initialize(__DIR__ . '/logs/error.log');
 require_once './config.php';
 
 ?>

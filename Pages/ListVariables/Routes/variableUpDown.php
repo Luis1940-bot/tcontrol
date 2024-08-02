@@ -1,6 +1,13 @@
 <?php
 
         mb_internal_encoding('UTF-8');
+        require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+        ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+        if (isset($_SESSION['timezone'])) {
+            date_default_timezone_set($_SESSION['timezone']);
+        } else {
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
+        }
         function upDown($id, $array) {
 
           try {
@@ -44,6 +51,7 @@
 
             
           } catch (\Throwable $e) {
+             error_log("Error de up down de variable. Error: " . $e);
             print "Error!: ".$e->getMessage()."<br>";
             die();
           }

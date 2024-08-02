@@ -1,7 +1,14 @@
 <?php
 mb_internal_encoding('UTF-8');
 require_once dirname(dirname(__DIR__)) . '/config.php';
-
+require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
+// Inicializar el logger con la ruta deseada
+ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 // Configura las opciones de sesión segura
 // Inicia la sesión de PHP
 session_start();
@@ -23,7 +30,8 @@ $randomString = str_replace(' ', '', $randomString);
 
 // Obtiene el valor actual del tiempo en milisegundos
 $time = time();
-
+$ruta = '';
+$url = '';
 // Verificar si se ha proporcionado un valor para 'ruta'
 if(isset($_GET['ruta'])) {
     // Obtener el valor de 'ruta'
@@ -119,6 +127,7 @@ if(isset($_GET['ruta'])) {
 } else {
     // Si no se proporciona 'ruta', manejar el caso aquí
     echo "No se proporcionó un valor para 'ruta'.";
+    error_log("No se proporcionó un valor para 'ruta: " . $ruta . $url);
 }
 
 

@@ -180,12 +180,14 @@ async function enviarFormulario() {
     const select = document.getElementById('idSelectLogin')
     const email = document.getElementById('idInput0')
     const password = document.getElementById('idInput1')
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
     let objeto = {
       planta: 0,
       email: '',
       password: '',
       ruta: '/login',
+      timezone,
     }
 
     if (!select.value) {

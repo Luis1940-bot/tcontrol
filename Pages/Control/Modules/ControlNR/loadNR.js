@@ -9,7 +9,7 @@ import { encriptar, desencriptar } from '../../../../controllers/cript.js'
 
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
-
+console.log(SERVER)
 function columna2(
   tagName,
   type,
@@ -95,6 +95,7 @@ function columna2(
     const jsonString = imagen.replace(/'/g, '"')
     const objeto = JSON.parse(jsonString)
     const cantidadDeImagenes = objeto.fileName.length
+    console.log(objeto)
     const rutaBase = `${SERVER}/assets/Imagenes/${plant}/`
     const ul = td[3].childNodes[0]
 
@@ -106,6 +107,7 @@ function columna2(
       const li = document.createElement('li')
       const fileNameWithoutExtension = nombreArchivo.replace(/\.[^.]+$/, '')
       const rutaCompleta = `${rutaBase}${nombreArchivo}`
+      console.log(rutaCompleta)
       li.id = `li_${fileNameWithoutExtension}`
       img.setAttribute('class', 'img-select')
       img.setAttribute('data-filename', nombreArchivo)
@@ -124,6 +126,7 @@ function columna2(
         .then((response) => response.blob())
         .then((blob) => {
           const reader = new FileReader()
+          console.log(reader)
           reader.onload = () => {
             // Establecer el atributo src con la representación base64 de la imagen
             img.src = reader.result

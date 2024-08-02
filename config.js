@@ -7,6 +7,7 @@ const isLocalhost =
 
 // Define la ruta base según el entorno
 let baseUrl
+
 if (isLocalhost) {
   baseUrl = 'http://localhost:8080'
 } else {

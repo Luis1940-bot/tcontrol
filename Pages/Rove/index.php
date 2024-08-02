@@ -17,7 +17,14 @@ define('SSO', $_SESSION['login_sso']['sso']);
     header("Location: ". $url ."");
   }
 require_once dirname(dirname(__DIR__)) . '/config.php';
-
+ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
+// echo "Zona horaria actual: " . date_default_timezone_get() . "<br>";
+// echo "Fecha y hora actual: " . date('Y-m-d H:i:s') . "<br>";
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->

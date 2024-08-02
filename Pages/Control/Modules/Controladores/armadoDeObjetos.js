@@ -50,6 +50,7 @@ function consologuear(c, i, objParams) {
 
 function respuestaColumna(c, i, objParams, plant, carpeta) {
   try {
+    // console.log(objParams)
     // ** tagName-INPUT   tagName-SELECT   tagName-DIV*/
     const obj = objParams
     const { tagName, type } = obj
@@ -61,6 +62,7 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
     let valorOBS = 0
     const familiaselector = 0
     const { imagenes } = obj
+    console.log(imagenes)
     let observacion = ''
 
     if (tagName === 'INPUT') {

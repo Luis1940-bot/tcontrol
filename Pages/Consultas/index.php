@@ -16,7 +16,8 @@ define('SSO', $_SESSION['login_sso']['sso']);
 
     header("Location: ". $url ."");
   }
-
+require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
 require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>

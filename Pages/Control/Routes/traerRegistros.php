@@ -95,6 +95,13 @@
 
                   
                   include_once BASE_DIR . "/Routes/datos_base.php";
+                  require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+                  ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+                  if (isset($_SESSION['timezone'])) {
+                      date_default_timezone_set($_SESSION['timezone']);
+                  } else {
+                      date_default_timezone_set('America/Argentina/Buenos_Aires');
+                  }
                   // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
                   // $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};chartset={$charset}",$user,$password);
 
@@ -127,6 +134,7 @@
                       $pdo=null;
                       
                   } catch (\PDOException $e) {
+                       error_log("Error al traer registros. Consulta: " . $sql);
                       print "Error!: ".$e->getMessage()."<br>";
                       die();
                   }

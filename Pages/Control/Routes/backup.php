@@ -1,5 +1,10 @@
 <?php
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 
 // Obtener el objeto desde la solicitud POST
 $data = json_decode(file_get_contents('php://input'), true);

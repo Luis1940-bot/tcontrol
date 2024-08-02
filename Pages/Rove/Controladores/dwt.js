@@ -5,7 +5,6 @@ import baseUrl from '../../../config.js'
 import { trA } from '../../../controllers/trOA.js'
 const SERVER = baseUrl
 
-
 async function handleClickEnlace(dato) {
   const { rove } = desencriptar(sessionStorage.getItem('rove'))
 

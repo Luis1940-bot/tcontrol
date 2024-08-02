@@ -1,10 +1,21 @@
 <?php
 require_once dirname(dirname(__DIR__)) . '/config.php';
+require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
+// echo "Zona horaria actual: " . date_default_timezone_get() . "<br>";
+// echo "Fecha y hora actual: " . date('Y-m-d H:i:s') . "<br>";
 
 function verificarCodigo($idusuario, $codigo_verificacion, $codigo_ingresado) {
     include_once BASE_DIR . "/Routes/datos_base.php";
     $conn = new mysqli($host, $user, $password, $dbname, $port);
     if ($conn->connect_error) {
+            error_log("Conexion fallida: " . $conn->connect_error);
+            print "Error!: ".$e->getMessage()."<br>";
         die("Conexión fallida: " . $conn->connect_error);
     }
 
@@ -39,6 +50,7 @@ function verificarCodigo($idusuario, $codigo_verificacion, $codigo_ingresado) {
             return false;
         }
     } else {
+        error_log("Error en UPDATE usuario. Diferencia de odigo ingresado.");
         $stmt->close();
         $conn->close();
         return false;

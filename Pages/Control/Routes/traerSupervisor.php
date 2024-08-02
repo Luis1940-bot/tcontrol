@@ -5,6 +5,14 @@ header("Content-Type: text/html;charset=utf-8");
 //       unset($_SESSION['factum_validation']['email'] ); 
 //   }
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
+
 function verifica($q, $sql_i){
   // global $q;
   $idSupervisor=$q; //urldecode($q);
@@ -41,6 +49,7 @@ function verifica($q, $sql_i){
         }
     
   } catch (\PDOException $e) {
+             error_log("Error al traer supervisor. " . $q . "Planta: " . $sql_i);
             $errorResponse = array('error' => 'Error!: ' . $e->getMessage());
             echo json_encode($errorResponse);
             return $errorResponse;

@@ -1,5 +1,12 @@
 <?php
   mb_internal_encoding('UTF-8');
+  require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+  ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+  if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
   function writeJSON($objeto) {
       $clienteNum = $objeto['num'];
      
@@ -69,6 +76,7 @@
       if (file_put_contents($file, json_encode($currentData, JSON_PRETTY_PRINT))) {
           echo json_encode(['success' => true]);
       } else {
+          error_log("Error al crear el JSON.");
           echo json_encode(['success' => false, 'message' => 'Failed tocreate to app.json']);
       }
   }

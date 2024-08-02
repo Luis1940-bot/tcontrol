@@ -1,4 +1,11 @@
 <?php
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 function generarCodigoAlfabetico($nombre) {
   $palabras = explode(' ', $nombre);
   $codigo = '';
@@ -49,6 +56,7 @@ function addCampos($nombre, $pdo, $lastInsertedId, $idLTYcliente){
         
         $pdo->commit();
     } catch (PDOException $e) {
+         error_log("Error al cargar los campos básicos. Error:" . $e);
         $pdo->rollBack();
         die("Error en la ejecución de la consulta: " . $e->getMessage());
     }

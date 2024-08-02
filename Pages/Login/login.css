@@ -27,7 +27,7 @@ main {
 .div-login-buttons {
   display: flex;
   flex-direction: column;
-  align-items: left;
+  /* align-items: left; */
   margin-top: 20px;
   border: 2px solid black;
   margin-left: auto;

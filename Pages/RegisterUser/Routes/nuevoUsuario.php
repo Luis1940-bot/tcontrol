@@ -1,7 +1,14 @@
 <?php
         mb_internal_encoding('UTF-8');
+          require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+          ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+          if (isset($_SESSION['timezone'])) {
+              date_default_timezone_set($_SESSION['timezone']);
+          } else {
+              date_default_timezone_set('America/Argentina/Buenos_Aires');
+          }
         function addUsuario($objeto, $idPlanta) {
-
+          $nombre = '';
           try {
             include_once BASE_DIR . "/Routes/datos_base.php";
             $nombre = $objeto['nombre'];
@@ -27,6 +34,7 @@
             
             $conn = mysqli_connect($host,$user,$password,$dbname);
             if ($conn->connect_error) {
+                 error_log("Conexion fallida: ");
                 die("Conexión fallida: " . $conn->connect_error);
             }
             if (!$conn->set_charset("utf8mb4")) {
@@ -79,6 +87,7 @@
 
             
           } catch (\Throwable $e) {
+            error_log("Error al crear el nuevo usuario: " . $nombre);
             print "Error!: ".$e->getMessage()."<br>";
             die();
           }

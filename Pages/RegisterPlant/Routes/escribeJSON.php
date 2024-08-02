@@ -1,22 +1,35 @@
 <?php
   mb_internal_encoding('UTF-8');
+  require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+  ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+  if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
+
   function writeJSON($objeto) {
-      $file = BASE_DIR . '/models/log.json';
-      $currentData = json_decode(file_get_contents($file), true);
+      try {
+        $file = BASE_DIR . '/models/log.json';
+        $currentData = json_decode(file_get_contents($file), true);
 
-          // Asegurarse de que 'plantas' existe y es un array
-      if (!isset($currentData['plantas']) || !is_array($currentData['plantas'])) {
-          $currentData['plantas'] = [];
-      }
+            // Asegurarse de que 'plantas' existe y es un array
+        if (!isset($currentData['plantas']) || !is_array($currentData['plantas'])) {
+            $currentData['plantas'] = [];
+        }
 
-        // Agregar el nuevo elemento a 'plantas'
-      $currentData['plantas'][] = $objeto;
+          // Agregar el nuevo elemento a 'plantas'
+        $currentData['plantas'][] = $objeto;
 
-          // Guardar los datos actualizados en log.json
-      if (file_put_contents($file, json_encode($currentData, JSON_PRETTY_PRINT))) {
-          echo json_encode(['success' =>true]);
-      } else {
-          echo json_encode(['success' => false, 'message' => 'Failed to write to log.json']);
+            // Guardar los datos actualizados en log.json
+        if (file_put_contents($file, json_encode($currentData, JSON_PRETTY_PRINT))) {
+            echo json_encode(['success' =>true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to write to log.json']);
+        }
+      } catch (\Throwable $e) {
+          error_log("Error al escribir el JSON. Error: " . $e);
+          print "Error!: ".$e->getMessage()."<br>";
       }
   }
 

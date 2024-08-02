@@ -1,4 +1,11 @@
 <?php
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 function eliminaNuxPedido($nux, $pdo){
       $result = array(
             'numFilasDeleteadas' => 0
@@ -13,6 +20,7 @@ function eliminaNuxPedido($nux, $pdo){
         $numFilasDeleteadas = $sentencia->rowCount();
         $pdo->commit(); 
       } catch (PDOException $e) {
+           error_log("Error al eliminar nux: " . $nux);
           // Manejar errores de PDO aquí si es necesario
           $pdo->rollBack();
           die("Error en la ejecución de la consulta: " . $e->getMessage());
