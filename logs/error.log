@@ -1,1 +1,3 @@
 
+[02-Aug-2024 09:57:38 America/Argentina/Buenos_Aires] [Error 8] Undefined index: menu in D:\04.DESARROLLOS\tcontrol\Pages\Router\rutas.php on line 67
+[02-Aug-2024 10:02:05 America/Argentina/Buenos_Aires] JSON response: {"q":11,"ruta":"\/traerSupervisor","rax":"&new=Fri Aug 02 2024 10:02:05 GMT-0300 (hora est\u00e1ndar de Argentina)","sql_i":15}

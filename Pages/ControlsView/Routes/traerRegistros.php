@@ -9,27 +9,27 @@
             switch ($operacion) {
               case 'traerControles':
                       $reporte = $porciones[1];
-                      $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.horaautomatica,'%H:%i') as hora,LTYregistrocontrol.observacion,
+                      $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.hora,'%H:%i') as hora,LTYregistrocontrol.observacion,
                       usuario.nombre, RAND(),NOW()  
                       FROM LTYregistrocontrol 
                       INNER JOIN usuario ON LTYregistrocontrol.idusuario=usuario.idusuario
                       WHERE LTYregistrocontrol.idLTYreporte=".$reporte." 
                       GROUP BY LTYregistrocontrol.nuxpedido
-                      ORDER BY LTYregistrocontrol.fecha DESC, LTYregistrocontrol.horaautomatica DESC LIMIT 1000;";
+                      ORDER BY LTYregistrocontrol.fecha DESC, LTYregistrocontrol.hora DESC LIMIT 1000;";
                 break;
 
                 case 'traerControlesFechas':
                       $reporte = $porciones[1];
                       $fechaInicial = $porciones[2];
                       $fechaActual = $porciones[3];
-                      $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.horaautomatica,'%H:%i') as hora,LTYregistrocontrol.observacion,
+                      $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.hora,'%H:%i') as hora,LTYregistrocontrol.observacion,
                       usuario.nombre, RAND(),NOW()  
                       FROM LTYregistrocontrol 
                       INNER JOIN usuario ON LTYregistrocontrol.idusuario=usuario.idusuario
                       WHERE LTYregistrocontrol.idLTYreporte=".$reporte." AND 
                       LTYregistrocontrol.fecha>='".$fechaInicial."' AND LTYregistrocontrol.fecha<='".$fechaActual."' 
                       GROUP BY LTYregistrocontrol.nuxpedido
-                      ORDER BY LTYregistrocontrol.fecha DESC, LTYregistrocontrol.horaautomatica DESC;";
+                      ORDER BY LTYregistrocontrol.fecha DESC, LTYregistrocontrol.hora DESC;";
                 break;
 
                 case 'NuevoControl':
@@ -59,7 +59,7 @@
                         LEFT JOIN usuario w ON LTYregistrocontrol.idusuario=w.idusuario
                         INNER JOIN LTYcontrol ON LTYcontrol.idLTYcontrol=LTYregistrocontrol.idLTYcontrol
                         INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=LTYregistrocontrol.idLTYreporte
-                        WHERE LTYregistrocontrol.nuxpedido=".$reporte."   ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol.idLTYcontrol ASC";
+                        WHERE LTYregistrocontrol.nuxpedido=".$reporte."   ORDER BY LTYcontrol.orden ASC, LTYregistrocontrol.idLTYcontrol ASC;";
                 break;
 
                 case 'controlNT':
