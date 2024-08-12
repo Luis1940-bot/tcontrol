@@ -1176,6 +1176,12 @@ function informe(
     obj.div.background = '#21D849'
     const modalContent = createDiv(obj.div)
     const typeAlert = 'success'
+    let enviadoSuccess = ''
+    if (enviado === null) {
+      enviadoSuccess = ''
+    } else {
+      enviadoSuccess = enviado.success
+    }
     cartelVerdeInsertado(
       typeAlert,
       obj,
@@ -1184,7 +1190,7 @@ function informe(
       mensaje,
       insertado,
       modal,
-      enviado.success
+      enviadoSuccess
     )
 
     const documento = document.getElementById('doc').textContent

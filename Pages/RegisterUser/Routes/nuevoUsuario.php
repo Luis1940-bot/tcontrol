@@ -106,7 +106,7 @@
           exit;
         }
         $data = json_decode($datos, true);
-        error_log('JSON response: ' . json_encode($data));
+        error_log('Pages/RegisterUser/Routes/nuevoUsuario-JSON response: ' . json_encode($data));
 
         if ($data !== null) {
           $objeto = $data['q'];

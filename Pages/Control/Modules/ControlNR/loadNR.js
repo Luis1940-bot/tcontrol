@@ -9,7 +9,7 @@ import { encriptar, desencriptar } from '../../../../controllers/cript.js'
 
 import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
-console.log(SERVER)
+
 function columna2(
   tagName,
   type,

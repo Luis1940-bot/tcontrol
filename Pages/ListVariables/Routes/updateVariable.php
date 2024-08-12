@@ -73,7 +73,7 @@
           exit;
         }
         $data = json_decode($datos, true);
-        error_log('JSON response: ' . json_encode($data));
+        error_log('Pages/ListVariables/Routes/updateVariables-JSON response: ' . json_encode($data));
 
         if ($data !== null) {
           $q = $data['objeto'];

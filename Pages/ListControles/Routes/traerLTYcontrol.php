@@ -1,5 +1,11 @@
 <?php
 mb_internal_encoding('UTF-8');
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+if (isset($_SESSION['timezone'])) {
+    date_default_timezone_set($_SESSION['timezone']);
+} else {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 
 function traerControlActualizado($conn, $plant) {
     $sql = "SELECT SQL_NO_CACHE
@@ -67,6 +73,7 @@ function traerControlActualizado($conn, $plant) {
         return $json;
 
     } catch (Exception $e) {
+       error_log("Error al traer control. Error: " . $e);
         $errorJson = json_encode(array('success' => false, 'message' => $e->getMessage()));
         // echo $errorJson;
         return $errorJson;

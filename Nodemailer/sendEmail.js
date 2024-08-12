@@ -35,10 +35,10 @@ async function send(nuevoObjeto, encabezados) {
 
     if (error.name === 'AbortError') {
       console.error('La solicitud fue abortada debido a un timeout.')
-      alert('La solicitud tardó demasiado y fue abortada.')
+      // alert('La solicitud tardó demasiado y fue abortada.')
     } else {
       console.error('Error en la solicitud:', error)
-      alert('No se pudo establecer conexión con el servidor')
+      // alert('No se pudo establecer conexión con el servidor')
     }
     const url = `${SERVER}/Pages/Controles`
     window.location.href = url

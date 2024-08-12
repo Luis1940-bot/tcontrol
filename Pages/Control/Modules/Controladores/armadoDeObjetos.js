@@ -62,7 +62,6 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
     let valorOBS = 0
     const familiaselector = 0
     const { imagenes } = obj
-    console.log(imagenes)
     let observacion = ''
 
     if (tagName === 'INPUT') {
@@ -125,9 +124,10 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
         imagenes.src.push(rutaSrc)
         imagenes.fileName.push(fileName)
         imagenes.extension.push(fileExtension)
-        imagenes.plant.push(plant.value)
-        imagenes.carpeta.push(carpeta)
+        // imagenes.plant.push(plant.value)
+        // imagenes.carpeta.push(carpeta)
       }
+      console.log(imagenes)
     }
     if (tagName === 'IMG') {
       const nombreDeLaImagen = obj.node.alt

@@ -97,7 +97,7 @@
         }
         $data = json_decode($datos, true);
 
-        error_log('JSON response: ' . json_encode($data));
+        error_log('Pages/Controles/Routes/traerRegistros-JSON response: ' . json_encode($data));
 
         if ($data !== null) {
           $q = $data['q'];
