@@ -88,7 +88,7 @@ while ($iterations < $iterationLimit) {
             }
 
             $mail = new PHPMailer(true);
-
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
             try {
                 $mail->isSMTP();
                 $mail->CharSet = 'UTF-8';

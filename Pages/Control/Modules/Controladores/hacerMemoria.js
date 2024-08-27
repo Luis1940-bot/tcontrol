@@ -13,7 +13,7 @@ function buscarEnArray(id, array) {
   return resultado
 }
 
-function hacerMemoria(arrayControl) {
+function hacerMemoria(arrayControl, plant) {
   try {
     const person = desencriptar(sessionStorage.getItem('user'))
     const idPerson = person.id
@@ -110,7 +110,8 @@ function hacerMemoria(arrayControl) {
           ;({ valor, selector1, valorS, familiaselector } = respuesta)
         }
         if (c === 4) {
-          respuesta = respuestaColumna(c, i, objParametros)
+          console.log(plant)
+          respuesta = respuestaColumna(c, i, objParametros, plant, null)
           ;({ selector2, valorOBS, familiaselector, imagenes, observacion } =
             respuesta)
         }

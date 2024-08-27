@@ -158,7 +158,8 @@ function logMessage($message) {
 
     $timestamp = date('Y-m-d H:i:s');
     // file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
-    file_put_contents($logFile, date('[Y-m-d H:i:s] ') . $message .  PHP_EOL, FILE_APPEND | LOCK_EX);
+    // file_put_contents($logFile, date('[Y-m-d H:i:s] ') . $message .  PHP_EOL, FILE_APPEND | LOCK_EX);
+    file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND | LOCK_EX);
 }
 
 // $whoami_script = BASE_DIR . '/Nodemailer/Routes/whoami.php';

@@ -1020,7 +1020,7 @@ function convertirObjATextPlano(obj) {
   return `${plainText}`
 }
 
-function subirImagenes(img) {
+async function subirImagenes(img) {
   if (img.length === 0) {
     return null
   }
@@ -1028,9 +1028,17 @@ function subirImagenes(img) {
     return null
   }
 
+  const imgJsonString = JSON.stringify(img[0])
+  try {
+    JSON.parse(imgJsonString) // Esto lanzará un error si el JSON no es válido
+  } catch (e) {
+    console.error('JSON inválido:', e)
+    return null
+  }
+
   const formData = new FormData()
-  formData.append('imgBase64', JSON.stringify(img[0])) // encodeURIComponent
-  // console.log(formData)
+  formData.append('imgBase64', imgJsonString)
+
   fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
     method: 'POST',
     body: formData,
@@ -1260,6 +1268,7 @@ async function insert(
   enviaPorEmailBooleano
 ) {
   try {
+    // console.log(desencriptar(sessionStorage.getItem('plant')))
     const { value } = desencriptar(sessionStorage.getItem('plant'))
     const plant = parseInt(value)
 
@@ -1271,23 +1280,41 @@ async function insert(
 
     let insertado
 
-    if (docStorage === false) {
-      insertado = await insertarRegistro(
-        nuevoObjetoControl,
-        objEncabezados.idPlanta
-      )
-    } else {
-      insertado = await updateRegistro(nuevoObjetoControl, docStorage)
+    try {
+      if (docStorage === false) {
+        insertado = await insertarRegistro(
+          nuevoObjetoControl,
+          objEncabezados.idPlanta
+        )
+      } else {
+        insertado = await updateRegistro(nuevoObjetoControl, docStorage)
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error insert:', error)
     }
 
-    const imagenes = await subirImagenes(nuevoObjeto.objImagen)
+    // console.log(plant)
+    // console.log(nuevoObjeto.objImagen)
+    let imagenes
+    try {
+      imagenes = await subirImagenes(nuevoObjeto.objImagen)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error subir imagenes:', error)
+    }
     const encabezados = { ...objEncabezados }
     encabezados.documento = insertado.documento
 
     let enviado = ''
 
-    if (enviaPorEmailBooleano) {
-      enviado = await enviaMail(nuevoObjeto, encabezados)
+    try {
+      if (enviaPorEmailBooleano) {
+        enviado = await enviaMail(nuevoObjeto, encabezados)
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error envio email:', error)
     }
 
     const amarillo = document.getElementById('idDivAvisoVerde')
@@ -2079,6 +2106,7 @@ class Alerta {
           arrayGlobal.objetoControl.nuxpedido.fill(docStorage)
         }
         const convertido = convertirObjATextPlano(arrayGlobal.objetoControl)
+        // console.log(convertido)
         const nuevoObjeto = {
           ...arrayGlobal.objetoControl,
           // eslint-disable-next-line max-len

@@ -50,7 +50,6 @@ function consologuear(c, i, objParams) {
 
 function respuestaColumna(c, i, objParams, plant, carpeta) {
   try {
-    // console.log(objParams)
     // ** tagName-INPUT   tagName-SELECT   tagName-DIV*/
     const obj = objParams
     const { tagName, type } = obj
@@ -63,6 +62,8 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
     const familiaselector = 0
     const { imagenes } = obj
     let observacion = ''
+
+    // console.log(c, tagName, type, plant, carpeta, obj)
 
     if (tagName === 'INPUT') {
       if (type === 'text') {
@@ -116,18 +117,20 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
     if (c === 4 && obj.terceraColumna.tagName === 'UL') {
       const ul = obj.terceraColumna
       // eslint-disable-next-line no-plusplus
+      // console.log(ul.children.length)
       for (let m = 0; m < ul.children.length; m++) {
         const li = ul.children[m].childNodes[0]
         const rutaSrc = li.getAttribute('src')
         const fileName = li.getAttribute('data-filename')
         const fileExtension = li.getAttribute('data-fileextension')
+
         imagenes.src.push(rutaSrc)
         imagenes.fileName.push(fileName)
         imagenes.extension.push(fileExtension)
-        // imagenes.plant.push(plant.value)
-        // imagenes.carpeta.push(carpeta)
+        imagenes.plant.push(plant.value)
+        imagenes.carpeta.push(carpeta)
       }
-      console.log(imagenes)
+      // console.log(imagenes)
     }
     if (tagName === 'IMG') {
       const nombreDeLaImagen = obj.node.alt

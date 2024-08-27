@@ -165,6 +165,7 @@ try {
         $response = array('success' => true, 'message' => 'La operacion fue exitosa!', 'registros' => $cantidad_insert, 'documento' => $nuxpedido);
     } else {
         $response = array('success' => false, 'message' => 'No se actualizo el control.');
+        error_log('ix-JSON response: ' . 'No se actualizo el control' . $nuxpedido);
     }
     $stmt->close();
     $conn->close();
@@ -189,7 +190,7 @@ if (empty($datos)) {
 }
 $data = json_decode($datos, true);
 
-error_log('ux-JSON response: ' . json_encode($data));
+// error_log('ux-JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];
@@ -198,5 +199,6 @@ if ($data !== null) {
   update_registro($datos, $nux);
 } else {
   echo "Error al decodificar la cadena JSON";
+  error_log('ux-JSON response: ' . "Error al decodificar la cadena JSON");
 }
 ?>

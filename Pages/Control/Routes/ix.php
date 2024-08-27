@@ -159,6 +159,7 @@ function insertar_registro($datos, $idLTYcliente) {
   } else {
     // echo "No se insertó ningún registro";
     $response = array('success' => false, 'message' => 'Algo salió mal no hay registros insertados');
+    error_log('ix-JSON response: ' . 'Algo salió mal no hay registros insertados' . $nuxpedido);
     // echo json_encode($response);
   }
   $pdo=null; 
@@ -176,7 +177,7 @@ if (empty($datos)) {
 }
 $data = json_decode($datos, true);
 
-error_log('ix-JSON response: ' . json_encode($data));
+// error_log('ix-JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];
@@ -184,5 +185,6 @@ if ($data !== null) {
   insertar_registro($datos, $sql_i);
 } else {
   echo "Error al decodificar la cadena JSON";
+  error_log('ix-JSON response: ' . "Error al decodificar la cadena JSON");
 }
 ?>

@@ -30,10 +30,10 @@ if (php_sapi_name() == 'cli') {
         $base = 'https://tenkiweb.com/tcontrol';
     }
     define('BASE_URL', $base);
-    define('BASE_PLANOS', $base . '/tcontrol/assets/img/planos/');
-    define('BASE_IMAGENES', $base . '/tcontrol/assets/Imagenes/');
-    define('IMAGE', $baseDir . '/assets/');
-    define('PLANOS', $base . '/assets/img/planos/');
+    define('BASE_PLANOS', $base . '/assets/img/planos/');
+    define('BASE_IMAGENES', $base . '/assets/Imagenes/');
+    define('IMAGE', BASE_DIR . '/assets/');
+    define('PLANOS', BASE_DIR . '/assets/img/planos/');
 }
 
 /**

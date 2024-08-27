@@ -11,13 +11,19 @@ if (isset($_SESSION['timezone'])) {
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
 // include('datos.php');
-$datos = $_POST['imgBase64'];
+// // $datos = $_POST['imgBase64'];
+$datos = ($_POST['imgBase64']);
+
 // $datos = $datox;
 
 if (isset($datos)) {
   
-    $dato_decodificado = ($datos);//urldecode
-    $imgJson = json_decode($dato_decodificado, true);
+    // $dato_decodificado = ($datos);//urldecode
+    $imgJson = json_decode($datos, true);
+    if ($imgJson === null && json_last_error() !== JSON_ERROR_NONE) {
+        error_log('Error al decodificar JSON: ' . json_last_error_msg());
+        die('Error al decodificar JSON: ' . json_last_error_msg());
+    }
     
     $srcArray = $imgJson['src'];
     $fileNameArray = $imgJson['fileName'];
@@ -32,14 +38,14 @@ if (isset($datos)) {
         $response = array('success' => false, 'message' => 'No se proporcionaron imágenes para procesar.');
     } else {
         $responses = array();
-
+        $elemento=0;
         for ($i = 0; $i < $numImages; $i++) {
             $src = $srcArray[$i];
             $fileName = $fileNameArray[$i];
             $extension = $extensionArray[$i];
-
+            $elemento = $elemento +1;
             if (empty($src) || empty($fileName) || empty($extension)) {
-                $responses[] = array('success' => false, 'message' => "Elemento $i: La información enviada no es válida.");
+                $responses[] = array('success' => false, 'message' => "Elemento $elemento: La información enviada no es válida.");
                 continue;
             }
 
@@ -84,19 +90,23 @@ if (isset($datos)) {
                
                
                 // $directorioImagenes = dirname(dirname(__DIR__)) . '/assets/imagenes/' . $plant[$i] . '/';
-                 $directorioImagenes = IMAGE . $carpeta[$i]  . $plant[$i] . '/';
+                 $directorioImagenes = IMAGE  . $carpeta[$i]  . $plant[$i] . '/';
+                //  echo '88 '.$directorioImagenes;
                 if (!file_exists($directorioImagenes)) {
                     mkdir($directorioImagenes, 0777, true);
                 }
 
                 $rutaImagen = $directorioImagenes . $imageName;
-               
+                // echo IMAGE;
+                // echo '--------------------------\n';
+                // echo '93-  '.$directorioImagenes;
+              //  echo '94-  '.$rutaImagen;
                 // Guardar la imagen redimensionada en el servidor
                 file_put_contents($rutaImagen, $resizedImageData);
 
                 $responses[] = array(
                     'success' => true,
-                    'message' => "Elemento $i: Imagen subida y redimensionada correctamente",
+                    'message' => "Elemento $elemento: Imagen subida y redimensionada correctamente",
                     // 'rutaImagen' => $rutaImagen
                 );
 
@@ -118,7 +128,7 @@ if (isset($datos)) {
                 }
 
                 $rutaImagen = $directorioImagenes . $imageName;
-
+                // echo '121-  '.$rutaImagen;
                 // Guardar la imagen original en el servidor
                 file_put_contents($rutaImagen, $imgData);
 

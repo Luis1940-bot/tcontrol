@@ -575,9 +575,10 @@ function loadTabla(arrayControl, encabezados, objTrad) {
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
     }
-    setTimeout(() => {
-      hacerMemoria(arrayControl)
-    }, 1000)
+    // setTimeout(() => {
+    //   const { plant } = desencriptar(sessionStorage.getItem('user'))
+    //   hacerMemoria(arrayControl, plant)
+    // }, 1000)
   } else {
     miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTranslate)
     const modal = document.getElementById('modalAlert')

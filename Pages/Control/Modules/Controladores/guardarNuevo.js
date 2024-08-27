@@ -244,6 +244,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
           objetoControl.requerido.push(founded[21])
           if (imagenes.src.length > 0) {
             const convertido = convertirObjATextPlano(imagenes)
+
             objetoControl.imagenes.push(convertido)
             objetoControl.objImagen.push(imagenes)
           } else {

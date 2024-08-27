@@ -64,7 +64,7 @@ if(isset($_GET['ruta'])) {
         break;
 
       case 'menu':
-        $rove = $_GET['menu'];
+        // $rove = $_GET['menu'];
         $url = $url_base . '/Pages/Menu/index.php?t='.$time;
         header("Location: $url");
         break;
