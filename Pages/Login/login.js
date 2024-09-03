@@ -16,7 +16,7 @@ import createSpan from '../../includes/atoms/createSpan.js'
 import enviarLogin from './Controllers/enviarFormulario.js'
 import createDiv from '../../includes/atoms/createDiv.js'
 
-const spinner = document.querySelector('.spinner')
+// const spinner = document.querySelector('.spinner')
 const appJSON = {}
 
 import baseUrl from '../../config.js'
@@ -233,7 +233,7 @@ function cargarSelectCompania(json) {
     let { plantas } = json
     let claseButton = 'button-login'
     let array = []
-    console.log(plantas, ' ----- ', plantas.length)
+    // console.log(plantas, ' ----- ', plantas.length)
     if (plantas.length === 0) {
       claseButton = 'button-login button-login-apagado'
       idAcceso.setAttribute('disabled', false)
@@ -337,16 +337,20 @@ function leeApp(json) {
     .then((data) => {
       Object.assign(appJSON, data)
       configPHP(data, SERVER)
-      setTimeout(() => {
+
+      function checkSelect() {
         const select = document.querySelector('.select-login')
         if (select) {
           cargarSelectCompania(data)
           select.focus()
+        } else {
+          requestAnimationFrame(checkSelect)
         }
-      }, 100)
+      }
+
+      requestAnimationFrame(checkSelect)
     })
     .catch((error) => {
-      // console.error('Error al cargar el archivo:', error)
       const miAlerta = new Alerta()
       const obj = arrayGlobal.avisoRojo
       const texto =
@@ -359,44 +363,48 @@ function leeApp(json) {
 }
 
 function creador(element) {
-  let elemento = null
-  if (element.tag === 'label') {
-    element.config.innerHTML =
-      trO(element.config.innerHTML, objTranslate) || element.config.innerHTML
-    elemento = createLabel(element.config)
-  }
-  if (element.tag === 'input') {
-    elemento = createInput(element.config)
-  }
-  if (element.tag === 'a') {
-    element.config.textContent =
-      trO(element.config.textContent, objTranslate) ||
-      element.config.textContent
-    elemento = createA(element.config, element.config.textContent)
-  }
-  if (element.tag === 'select') {
-    let array = []
-    if (element.hasOwnProperty('options')) {
-      if (element.options.length > 0) {
-        array = [...element.options]
-      }
+  try {
+    let elemento = null
+    if (element.tag === 'label') {
+      element.config.innerHTML =
+        trO(element.config.innerHTML, objTranslate) || element.config.innerHTML
+      elemento = createLabel(element.config)
     }
-    elemento = createSelect(array, element.config)
+    if (element.tag === 'input') {
+      elemento = createInput(element.config)
+    }
+    if (element.tag === 'a') {
+      element.config.textContent =
+        trO(element.config.textContent, objTranslate) ||
+        element.config.textContent
+      elemento = createA(element.config, element.config.textContent)
+    }
+    if (element.tag === 'select') {
+      let array = []
+      if (element.hasOwnProperty('options')) {
+        if (element.options.length > 0) {
+          array = [...element.options]
+        }
+      }
+      elemento = createSelect(array, element.config)
+    }
+    if (element.tag === 'button') {
+      element.config.text =
+        trO(element.config.text, objTranslate) || element.config.text
+      elemento = createButton(element.config)
+    }
+    if (element.tag === 'div') {
+      elemento = createDiv(element.config)
+    }
+    if (element.tag === 'span') {
+      element.config.text =
+        trO(element.config.text, objTranslate) || element.config.text
+      elemento = createSpan(element.config)
+    }
+    return elemento
+  } catch (error) {
+    console.log(error)
   }
-  if (element.tag === 'button') {
-    element.config.text =
-      trO(element.config.text, objTranslate) || element.config.text
-    elemento = createButton(element.config)
-  }
-  if (element.tag === 'div') {
-    elemento = createDiv(element.config)
-  }
-  if (element.tag === 'span') {
-    element.config.text =
-      trO(element.config.text, objTranslate) || element.config.text
-    elemento = createSpan(element.config)
-  }
-  return elemento
 }
 
 function armadoDeHTML(json) {
@@ -476,70 +484,74 @@ function closeAlert() {
 }
 
 function generaOverlay() {
-  const body = document.querySelector('body')
-  const paramsDiv = objParams(
-    null,
-    null,
-    null,
-    'overlay',
-    null,
-    null,
-    null,
-    null,
-    'overlay',
-    null
-  )
-  const div = createDiv(paramsDiv)
-  //*-------------------------------
-  const paramsDivBox = objParams(
-    null,
-    null,
-    null,
-    'idAlertBox',
-    null,
-    null,
-    null,
-    null,
-    'alert-box',
-    null
-  )
-  const divBox = createDiv(paramsDivBox)
+  try {
+    const body = document.querySelector('body')
+    const paramsDiv = objParams(
+      null,
+      null,
+      null,
+      'overlay',
+      null,
+      null,
+      null,
+      null,
+      'overlay',
+      null
+    )
+    const div = createDiv(paramsDiv)
+    //*-------------------------------
+    const paramsDivBox = objParams(
+      null,
+      null,
+      null,
+      'idAlertBox',
+      null,
+      null,
+      null,
+      null,
+      'alert-box',
+      null
+    )
+    const divBox = createDiv(paramsDivBox)
 
-  //*-----------------------------------------
-  const paramsSpan = objParams(
-    null,
-    'span-alerta',
-    null,
-    'idAlertMessage',
-    null,
-    null,
-    null,
-    ''
-  )
-  const span = createSpan(paramsSpan)
-  //*--------------------------------------
-  const paramsButton = objParams(
-    null,
-    null,
-    null,
-    'idButtonAlert',
-    null,
-    null,
-    null,
-    'oK',
-    'button-alerta',
-    null,
-    closeAlert
-  )
-  const button = createButton(paramsButton)
-  //*----------------------------------------------
+    //*-----------------------------------------
+    const paramsSpan = objParams(
+      null,
+      'span-alerta',
+      null,
+      'idAlertMessage',
+      null,
+      null,
+      null,
+      ''
+    )
+    const span = createSpan(paramsSpan)
+    //*--------------------------------------
+    const paramsButton = objParams(
+      null,
+      null,
+      null,
+      'idButtonAlert',
+      null,
+      null,
+      null,
+      'oK',
+      'button-alerta',
+      null,
+      closeAlert
+    )
+    const button = createButton(paramsButton)
+    //*----------------------------------------------
 
-  divBox.appendChild(span)
-  divBox.appendChild(button)
+    divBox.appendChild(span)
+    divBox.appendChild(button)
 
-  div.style.display = 'none'
-  div.appendChild(divBox)
-  body.appendChild(div)
+    div.style.display = 'none'
+    div.appendChild(divBox)
+    body.appendChild(div)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -552,64 +564,46 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-// document.addEventListener('DOMContentLoaded', async () => {
-//   inicioPerformance()
-//   spinner.style.visibility = 'visible'
-
-//   const hamburguesa = document.querySelector('#hamburguesa')
-//   hamburguesa.style.display = 'none'
-
-//   const person = document.querySelector('#person')
-//   person.style.display = 'none'
-
-//   const version = await leeVersion('version')
-//   document.querySelector('.version').innerText = version
-//   const plant = { texto: null, value: null }
-//   sessionStorage.setItem('plant', encriptar(plant))
-
-//   setTimeout(async () => {
-//     leeApp(`log`)
-//     objTranslate = await arraysLoadTranslate()
-//     // console.log(objTranslate)
-//     leeModelo('Login/login')
-//     generaOverlay()
-//   }, 200)
-
-//   spinner.style.visibility = 'hidden'
-
-//   finPerformance()
-// })
-
 document.addEventListener('DOMContentLoaded', async () => {
-  inicioPerformance() // Inicia la medición del rendimiento
+  try {
+    inicioPerformance() // Inicia la medición del rendimiento
 
-  spinner.style.visibility = 'visible' // Muestra el spinner
+    const spinner = document.querySelector('.spinner')
+    if (spinner) {
+      spinner.style.visibility = 'visible'
+    }
 
-  // Oculta elementos en el DOM
-  const hamburguesa = document.querySelector('#hamburguesa')
-  hamburguesa.style.display = 'none'
+    // Oculta elementos en el DOM
+    const hamburguesa = document.querySelector('#hamburguesa')
+    hamburguesa.style.display = 'none'
 
-  const person = document.querySelector('#person')
-  person.style.display = 'none'
+    const person = document.querySelector('#person')
+    person.style.display = 'none'
 
-  // Obtiene la versión y la muestra en el DOM
-  const version = await leeVersion('version')
-  document.querySelector('.version').innerText = version
+    // Obtiene la versión y la muestra en el DOM
+    const version = await leeVersion('version')
+    document.querySelector('.version').innerText = version
 
-  // Guarda el objeto `plant` en sessionStorage
-  const plant = { texto: null, value: null }
-  sessionStorage.setItem('plant', encriptar(plant))
+    // Guarda el objeto `plant` en sessionStorage
+    const plant = { texto: null, value: null }
+    sessionStorage.setItem('plant', encriptar(plant))
 
-  // Espera 200ms antes de continuar
-  await new Promise((resolve) => setTimeout(resolve, 200))
+    // Espera 200ms antes de continuar
+    await new Promise((resolve) => setTimeout(resolve, 200))
 
-  // Ejecuta las funciones restantes en orden
-  await leeApp('log') // Si es asincrónico, espera que termine
-  objTranslate = await arraysLoadTranslate() // Carga la traducción
-  leeModelo('Login/login') // Carga el modelo
-  generaOverlay() // Genera el overlay
+    // Ejecuta las funciones restantes en orden
+    await leeApp('log') // Si es asincrónico, espera que termine
 
-  // Oculta el spinner y finaliza la medición del rendimiento
-  spinner.style.visibility = 'hidden'
-  finPerformance()
+    objTranslate = await arraysLoadTranslate() // Carga la traducción
+
+    leeModelo('Login/login') // Carga el modelo
+    generaOverlay() // Genera el overlay
+
+    // Oculta el spinner y finaliza la medición del rendimiento
+    spinner.style.visibility = 'hidden'
+
+    finPerformance()
+  } catch (error) {
+    console.log(error)
+  }
 })

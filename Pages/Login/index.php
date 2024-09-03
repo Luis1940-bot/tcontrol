@@ -2,18 +2,18 @@
 session_start();
 header('Content-Type: text/html;charset=utf-8');
 
-if (isset($_SESSION['login_sso'])) {
-    define('SSO', $_SESSION['login_sso']['sso'] ?? null);
-    define('EMAIL', $_SESSION['login_sso']['email'] ?? null);
-} else {
-    define('SSO', null);
-    define('EMAIL', null);
-}
+// if (isset($_SESSION['login_sso'])) {
+//     define('SSO', $_SESSION['login_sso']['sso'] ?? null);
+//     define('EMAIL', $_SESSION['login_sso']['email'] ?? null);
+// } else {
+//     define('SSO', null);
+//     define('EMAIL', null);
+// }
 
-if (!isset($_SESSION['login_sso']['email']) && (SSO === null || SSO === 's_sso')) {
-    $url = "https://tenkiweb.com/tcontrol/Pages/Login/index.php";
-    // header("Location: ". $url ."");
-}
+// if (!isset($_SESSION['login_sso']['email']) && (SSO === null || SSO === 's_sso')) {
+//     $url = "https://tenkiweb.com/tcontrol/Pages/Login/index.php";
+//     // header("Location: ". $url ."");
+// }
 
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
