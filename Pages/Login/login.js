@@ -233,7 +233,7 @@ function cargarSelectCompania(json) {
     let { plantas } = json
     let claseButton = 'button-login'
     let array = []
-
+    console.log(plantas, ' ----- ', plantas.length)
     if (plantas.length === 0) {
       claseButton = 'button-login button-login-apagado'
       idAcceso.setAttribute('disabled', false)
@@ -552,30 +552,64 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-document.addEventListener('DOMContentLoaded', async () => {
-  inicioPerformance()
-  spinner.style.visibility = 'visible'
+// document.addEventListener('DOMContentLoaded', async () => {
+//   inicioPerformance()
+//   spinner.style.visibility = 'visible'
 
+//   const hamburguesa = document.querySelector('#hamburguesa')
+//   hamburguesa.style.display = 'none'
+
+//   const person = document.querySelector('#person')
+//   person.style.display = 'none'
+
+//   const version = await leeVersion('version')
+//   document.querySelector('.version').innerText = version
+//   const plant = { texto: null, value: null }
+//   sessionStorage.setItem('plant', encriptar(plant))
+
+//   setTimeout(async () => {
+//     leeApp(`log`)
+//     objTranslate = await arraysLoadTranslate()
+//     // console.log(objTranslate)
+//     leeModelo('Login/login')
+//     generaOverlay()
+//   }, 200)
+
+//   spinner.style.visibility = 'hidden'
+
+//   finPerformance()
+// })
+
+document.addEventListener('DOMContentLoaded', async () => {
+  inicioPerformance() // Inicia la medición del rendimiento
+
+  spinner.style.visibility = 'visible' // Muestra el spinner
+
+  // Oculta elementos en el DOM
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
 
   const person = document.querySelector('#person')
   person.style.display = 'none'
 
+  // Obtiene la versión y la muestra en el DOM
   const version = await leeVersion('version')
   document.querySelector('.version').innerText = version
+
+  // Guarda el objeto `plant` en sessionStorage
   const plant = { texto: null, value: null }
   sessionStorage.setItem('plant', encriptar(plant))
 
-  setTimeout(async () => {
-    leeApp(`log`)
-    objTranslate = await arraysLoadTranslate()
-    // console.log(objTranslate)
-    leeModelo('Login/login')
-    generaOverlay()
-  }, 200)
+  // Espera 200ms antes de continuar
+  await new Promise((resolve) => setTimeout(resolve, 200))
 
+  // Ejecuta las funciones restantes en orden
+  await leeApp('log') // Si es asincrónico, espera que termine
+  objTranslate = await arraysLoadTranslate() // Carga la traducción
+  leeModelo('Login/login') // Carga el modelo
+  generaOverlay() // Genera el overlay
+
+  // Oculta el spinner y finaliza la medición del rendimiento
   spinner.style.visibility = 'hidden'
-
   finPerformance()
 })

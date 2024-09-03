@@ -1,54 +1,58 @@
 {
-  "plantas": [
-    {
-      "name": "Alpek-PTAC Cosoleacaque",
-      "num": 15
+    "plantas": [
+        {
+            "name": "Alpek-PTAC Cosoleacaque",
+            "num": 15
+        },
+        {
+            "name": "ffffff",
+            "num": 21
+        }
+    ],
+    "company": "Luis Gimenez",
+    "developer": "Tenki",
+    "by": "by Luis Gimenez",
+    "logo": "tcontrol",
+    "rutaDeveloper": "https:\/\/www.linkedin.com\/in\/luisergimenez",
+    "elements": {
+        "select": [
+            {
+                "type": "select",
+                "name": "Plants"
+            }
+        ],
+        "input": [
+            {
+                "type": "email",
+                "name": "Email"
+            },
+            {
+                "type": "password",
+                "name": "Password"
+            }
+        ],
+        "button": [
+            {
+                "type": "button",
+                "name": "Login"
+            }
+        ],
+        "a": [
+            {
+                "id": "idAltaUsuario",
+                "text": "usuario",
+                "href": "RegisterUser"
+            },
+            {
+                "id": "idAltaCompania",
+                "text": "planta",
+                "href": "RegisterPlant"
+            },
+            {
+                "id": "idOlvidoPass",
+                "text": "pass",
+                "href": "OlvidoPass"
+            }
+        ]
     }
-  ],
-  "company": "Luis Gimenez",
-  "developer": "Tenki",
-  "by": "by Luis Gimenez",
-  "logo": "tcontrol",
-  "rutaDeveloper": "https://www.linkedin.com/in/luisergimenez",
-  "elements": {
-    "select": [
-      {
-        "type": "select",
-        "name": "Plants"
-      }
-    ],
-    "input": [
-      {
-        "type": "email",
-        "name": "Email"
-      },
-      {
-        "type": "password",
-        "name": "Password"
-      }
-    ],
-    "button": [
-      {
-        "type": "button",
-        "name": "Login"
-      }
-    ],
-    "a": [
-      {
-        "id": "idAltaUsuario",
-        "text": "usuario",
-        "href": "RegisterUser"
-      },
-      {
-        "id": "idAltaCompania",
-        "text": "planta",
-        "href": "RegisterPlant"
-      },
-      {
-        "id": "idOlvidoPass",
-        "text": "pass",
-        "href": "OlvidoPass"
-      }
-    ]
-  }
 }

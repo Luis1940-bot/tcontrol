@@ -3,7 +3,7 @@ header('Content-Type: text/html;charset=utf-8');
 require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>
-<!-- <html lang='en'> -->
+<html lang='es'>
 <head>
   <meta charset='UTF-8'>
   <meta name='description' content='TenkiWeb'>

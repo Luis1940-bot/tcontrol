@@ -142,6 +142,7 @@ async function nuevaComapania() {
       envia.objeto.detalle = detalle.value
       envia.objeto.activo = 's'
       const response = await addCompania(envia.objeto, '/addCompania')
+
       if (response.success) {
         const newPlant = { name: envia.objeto.cliente, num: response.id }
         const json = await addCompania(newPlant, '/escribirJSON')

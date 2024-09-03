@@ -125,7 +125,7 @@
         }
         $data = json_decode($datos, true);
 
-        error_log('Pages/ListControles/Routes/traerRegistros-JSON response: ' . json_encode($data));
+        
 
         if ($data !== null) {
           $q = $data['q'];
@@ -133,6 +133,7 @@
           traer($q, $sql_i);
         } else {
           echo "Error al decodificar la cadena JSON";
+          error_log('Pages/ListControles/Routes/traerRegistros-JSON response: ' . json_encode($data));
         }
    
 ?>
