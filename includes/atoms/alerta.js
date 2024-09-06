@@ -191,120 +191,120 @@ const funcionSalir = () => {
   // window.close()
   window.history.back()
 }
+
 const funcionExportarExcel = () => {
   try {
     const tabla = document.getElementById('tableConsultaViews')
     const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Sheet JS' })
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
     const blob = new Blob([wbout], { type: 'application/octet-stream' })
-    const nameConsulta = document.getElementById('whereUs').textContent
-    // Crear un enlace y simular un clic en él
+
+    const nameConsulta = document.getElementById('whereUs').textContent.trim()
+    const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date())
+
+    // Crear un enlace para la descarga
     const a = document.createElement('a')
     const url = URL.createObjectURL(blob)
     a.href = url
-    const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date())
-    a.download = `${nameConsulta} ${fechaDeHoy}.xlsx` // Nombre predeterminado
+    a.download = `${nameConsulta} ${fechaDeHoy}.xlsx`
 
-    // Abrir una ventana emergente para que el usuario elija la ubicación y el nombre del archivo
-    a.addEventListener('click', () => {
-      setTimeout(() => {
-        URL.revokeObjectURL(url)
-      }, 100)
-    })
-
+    // Agregar el enlace temporal al DOM, simular el clic y luego limpiar
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
-    setTimeout(() => {
-      const menu = document.getElementById('modalAlertM')
+    URL.revokeObjectURL(url)
+
+    // Cerrar y eliminar el modal después de la exportación
+    const menu = document.getElementById('modalAlertM')
+    if (menu) {
       menu.style.display = 'none'
       menu.remove()
-    }, 100)
+    }
   } catch (error) {
-    console.log(error)
+    console.error('Error al exportar la tabla a Excel:', error)
   }
 }
 
-const funcionExportarPDF = () => {
+const funcionExportarPDF = async () => {
   try {
     // Obtener la tabla
     const tabla = document.getElementById('tableConsultaViews')
-    html2canvas(tabla)
-      .then((canvas) => {
-        const nameConsulta = document.getElementById('whereUs').textContent
-        const imgData = canvas.toDataURL('image/png', 1.0)
-        const pdf = new jsPDF('p', 'pt', 'a4')
-        const pdfWidth = pdf.internal.pageSize.getWidth()
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width // Calcular la altura en función de la relación de aspecto de la imagen
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
-        // pdf.addImage(imgData, 'PNG', 0, 0)
-        const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date())
-        pdf.save(`${nameConsulta} ${fechaDeHoy}.pdf`)
-      })
-      .catch((error) => {
-        console.error('Error en html2canvas:', error)
-      })
-    setTimeout(() => {
-      const menu = document.getElementById('modalAlertM')
+    const nameConsulta = document.getElementById('whereUs').textContent.trim()
+    const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date())
+
+    // Capturar la tabla como imagen utilizando html2canvas
+    const canvas = await html2canvas(tabla)
+    const imgData = canvas.toDataURL('image/png', 1.0)
+
+    // Crear y configurar el PDF
+    const pdf = new jsPDF('p', 'pt', 'a4')
+    const pdfWidth = pdf.internal.pageSize.getWidth()
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width // Calcular la altura en función de la relación de aspecto de la imagen
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+
+    // Guardar el PDF
+    pdf.save(`${nameConsulta} ${fechaDeHoy}.pdf`)
+
+    // Ocultar y eliminar el modal si existe
+    const menu = document.getElementById('modalAlertM')
+    if (menu) {
       menu.style.display = 'none'
       menu.remove()
-    }, 100)
+    }
   } catch (error) {
-    console.log(error)
+    console.error('Error al exportar la tabla a PDF:', error)
   }
 }
 
 const funcionExportarJSON = () => {
   try {
-    const tbody = document
-      .getElementById('tableConsultaViews')
-      .getElementsByTagName('tbody')[0]
-    const thead = document
-      .getElementById('tableConsultaViews')
-      .getElementsByTagName('thead')[0]
-    const columnNames = Array.from(thead.getElementsByTagName('th')).map(
-      (th) => th.innerText
+    const tabla = document.getElementById('tableConsultaViews')
+    const tbody = tabla.querySelector('tbody')
+    const thead = tabla.querySelector('thead')
+
+    // Obtener los nombres de las columnas
+    const columnNames = Array.from(thead.getElementsByTagName('th')).map((th) =>
+      th.innerText.trim()
     )
-    const rows = tbody.getElementsByTagName('tr')
-    const jsonData = []
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].getElementsByTagName('td')
+
+    // Crear los datos JSON a partir de las filas de la tabla
+    const jsonData = Array.from(tbody.getElementsByTagName('tr')).map((row) => {
+      const cells = row.getElementsByTagName('td')
       const rowData = {}
 
-      for (let j = 0; j < cells.length; j++) {
-        rowData[columnNames[j]] = cells[j].innerText
-      }
+      columnNames.forEach((name, index) => {
+        rowData[name] = cells[index].innerText.trim()
+      })
 
-      jsonData.push(rowData)
-    }
-    // Crear un formulario dinámicamente
+      return rowData
+    })
+
+    // Crear un formulario dinámico
     const form = document.createElement('form')
     form.method = 'POST'
     form.action = `${SERVER}/Routes/viewJson.php`
     form.target = '_blank'
 
-    // Adjuntar los datos al formulario
+    // Crear y adjuntar el input oculto con los datos JSON
     const input = document.createElement('input')
     input.type = 'hidden'
     input.name = 'data'
     input.value = JSON.stringify(jsonData)
     form.appendChild(input)
 
-    // Adjuntar el formulario al cuerpo del documento
+    // Agregar el formulario al cuerpo, enviarlo y luego eliminarlo
     document.body.appendChild(form)
-
-    // Enviar el formulario
     form.submit()
-
-    // Remover el formulario del cuerpo del documento (opcional)
     document.body.removeChild(form)
-    setTimeout(() => {
-      const menu = document.getElementById('modalAlertM')
+
+    // Ocultar y eliminar el modal si existe
+    const menu = document.getElementById('modalAlertM')
+    if (menu) {
       menu.style.display = 'none'
       menu.remove()
-    }, 100)
+    }
   } catch (error) {
-    console.log(error)
+    console.error('Error al exportar la tabla a JSON:', error)
   }
 }
 
@@ -943,47 +943,57 @@ const funcionAreaGuardarCambios = async () => {
 }
 
 async function firmar(firmadoPor, objTrad) {
-  const pass = document.getElementById('idInputFirma').value
-  const persona = desencriptar(sessionStorage.getItem('user'))
-  const { plant } = persona
-  const supervisor = await traerFirma(pass, plant)
+  try {
+    const pass = document.getElementById('idInputFirma').value
+    const persona = desencriptar(sessionStorage.getItem('user'))
+    const { plant } = persona
+    const supervisor = await traerFirma(pass, plant)
 
-  let modal = document.getElementById('modalAlert')
-  modal.style.display = 'none'
-  modal.remove()
-  if (supervisor.id !== null) {
-    const idMensajeFirmado = document.getElementById('idMensajeFirmado')
-    idMensajeFirmado.innerText = `${firmadoPor}: ${supervisor.nombre}`
-    const elementosStyle = {
-      element: ['idMensajeFirmado', 'idDivFirmar', 'idDivFirmado'],
-      style: ['block', 'none', 'block'],
-      remove: [null, null, null],
+    let modal = document.getElementById('modalAlert')
+    modal.style.display = 'none'
+    modal.remove()
+
+    if (supervisor.id !== null) {
+      const idMensajeFirmado = document.getElementById('idMensajeFirmado')
+      idMensajeFirmado.innerText = `${firmadoPor}: ${supervisor.nombre}`
+
+      const elementosStyle = {
+        element: ['idMensajeFirmado', 'idDivFirmar', 'idDivFirmado'],
+        style: ['block', 'none', 'block'],
+        remove: [null, null, null],
+      }
+      procesoStyleDisplay(elementosStyle)
+
+      sessionStorage.setItem('firmado', encriptar(supervisor))
+
+      const configMenu = {
+        guardar: true,
+        guardarComo: false,
+        guardarCambios: false,
+        firma: false,
+        configFirma: supervisor,
+      }
+      sessionStorage.setItem('config_menu', encriptar(configMenu))
+    } else {
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto = arrayGlobal.mensajesVarios.firma.no_encontrado
+      miAlerta.createVerde(obj, texto, objTrad)
+
+      let modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
     }
-    procesoStyleDisplay(elementosStyle)
 
-    sessionStorage.setItem('firmado', encriptar(supervisor))
-    const configMenu = {
-      guardar: true,
-      guardarComo: false,
-      guardarCambios: false,
-      firma: false,
-      configFirma: supervisor,
-    }
-
-    sessionStorage.setItem('config_menu', encriptar(configMenu))
-  } else {
-    const miAlerta = new Alerta()
-    const obj = arrayGlobal.avisoRojo
-    const texto = arrayGlobal.mensajesVarios.firma.no_encontrado
-    miAlerta.createVerde(obj, texto, objTrad)
-    let modal = document.getElementById('modalAlertVerde')
-    modal.style.display = 'block'
+    // Esperar la eliminación del modal con promesas en lugar de setTimeout
+    await new Promise((resolve) => {
+      const menu = document.getElementById('modalAlertM')
+      menu.style.display = 'none'
+      menu.remove()
+      resolve()
+    })
+  } catch (error) {
+    console.error('Error en firmar:', error)
   }
-  setTimeout(() => {
-    const menu = document.getElementById('modalAlertM')
-    menu.style.display = 'none'
-    menu.remove()
-  }, 1000)
 }
 
 function limpiaArrays() {
@@ -3060,16 +3070,13 @@ class Alerta {
       const persona = desencriptar(sessionStorage.getItem('user'))
       const { tipo } = persona
       const obj = objeto
-      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalAlertView'
       this.modal.className = 'modal'
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent)
-      // const span = createSpan(obj.close)
-      // modalContent.appendChild(span)
-
       const span = createSpan(obj.close)
       obj.divCajita.hoverColor = null
       obj.divCajita.position = null
@@ -3079,7 +3086,6 @@ class Alerta {
 
       let texto = array[0]
       let typeAlert = 'viewer'
-      // texto = trA(texto, objTrad) || texto;
 
       obj.titulo.text[typeAlert] = `${array[1]} - ${texto}`
       const title = createH3(obj.titulo, typeAlert)
@@ -3089,7 +3095,6 @@ class Alerta {
       title.setAttribute('data-status', array[20])
       modalContent.appendChild(title)
 
-      // eslint-disable-next-line prefer-destructuring
       texto = array[2]
       texto = trA(texto, objTrad) || texto
       typeAlert = 'descripcion'
@@ -3128,7 +3133,7 @@ class Alerta {
       texto = trO('Tipo de usuario:', objTrad) || 'Tipo de usuario:'
       texto = `${texto} ${array[14]}-${array[19]}`
       typeAlert = 'nivelUsuario'
-      obj.span.text[typeAlert] = `${texto} ${array[14]}-${array[19]}`
+      obj.span.text[typeAlert] = texto
       obj.span.fontSize = '12px'
       obj.span.fontColor = '#212121'
       obj.span.marginTop = '10px'
@@ -3157,6 +3162,7 @@ class Alerta {
         modalContent.appendChild(divButton)
         this.modal.appendChild(modalContent)
         document.body.appendChild(this.modal)
+
         const idbtnNuevo = document.getElementById('idbtnNuevo')
         idbtnNuevo.addEventListener('click', () => {
           //!editar
@@ -3175,22 +3181,22 @@ class Alerta {
           }
           sessionStorage.setItem('reporte', encriptar(objetoRuta))
 
-          let timestamp = new Date().getTime()
+          const timestamp = new Date().getTime()
           const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=reporte&v=${timestamp}`
           window.location.href = ruta
         })
+
         const idbtnCargados = document.getElementById('idVerCargados')
-        idbtnCargados.addEventListener('click', () => {
+        idbtnCargados.addEventListener('click', async () => {
           //! ON/OFF
           const idTituloH3 = document.getElementById('idTituloH3')
           const cod = idTituloH3.getAttribute('data-index')
           const name = idTituloH3.getAttribute('data-name')
           const status = idTituloH3.getAttribute('data-status')
-          onOff(cod, status)
-          setTimeout(() => {
-            const url = new URL(window.location.href)
-            window.location.href = url.href
-          }, 200)
+          await onOff(cod, status)
+
+          // Recargar la página sin necesidad de setTimeout
+          window.location.reload()
         })
       } else {
         texto =
@@ -3209,6 +3215,7 @@ class Alerta {
         this.modal.appendChild(modalContent)
         document.body.appendChild(this.modal)
       }
+
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
           event.preventDefault()
@@ -3817,18 +3824,16 @@ class Alerta {
     })
   }
 
-  createCalendarROVE(objeto, objTranslate, rove) {
+  async createCalendarROVE(objeto, objTranslate, rove) {
     try {
       const obj = objeto
-      // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div')
       this.modal.id = 'modalTablaViewFecha'
       this.modal.className = 'modal'
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent)
-      // let span = createSpan(obj.close)
-      // modalContent.appendChild(span)
       let span = createSpan(obj.close)
       obj.divCajita.hoverColor = null
       obj.divCajita.position = null
@@ -3836,11 +3841,15 @@ class Alerta {
       divClose.appendChild(span)
       modalContent.appendChild(divClose)
 
-      let texto = 'Seleccione el intervalo de fechas para la consulta:'
-      texto = trO(texto, objTranslate) || texto
+      let texto =
+        trO(
+          'Seleccione el intervalo de fechas para la consulta:',
+          objTranslate
+        ) || 'Seleccione el intervalo de fechas para la consulta:'
       obj.span.text = texto
       span = createSpan(obj.span, texto)
       modalContent.appendChild(span)
+
       obj.titulo.text.text = `ROVE: ${rove.toUpperCase()}`
       const title = createH3(obj.titulo, 'text')
       title.id = 'idTituloFechasH3'
@@ -3851,18 +3860,15 @@ class Alerta {
       obj.imgPrint.display = 'inline-block'
       const imagenButton = createIMG(obj.imgPrint)
       obj.span.alignSelf = 'left'
-      obj.span.passing = null
-      obj.span.className = null
-      obj.span.padding = null
       obj.span.left = '10px'
-      obj.imgPrint.display = 'inline-block'
       span = createSpan(obj.span, 'Fechas')
       divEncabezado.appendChild(imagenButton)
-
       divEncabezado.appendChild(span)
       modalContent.appendChild(divEncabezado)
+
       const hr = createHR(obj)
       modalContent.appendChild(hr)
+
       const fechaDeHoy = fechasGenerator.fecha_corta_yyyymmdd(new Date())
       let divInput = createDiv(obj.divInput)
       obj.input.id = 'idDesde'
@@ -3872,12 +3878,12 @@ class Alerta {
 
       obj.label.innerText = `${texto}:`
       obj.label.margin = 'auto 10px'
-
       let label = createLabel(obj.label)
 
       divInput.appendChild(label)
       divInput.appendChild(input)
       modalContent.appendChild(divInput)
+
       obj.divInput.id = 'idDivInputPorFechaHasta'
       divInput = createDiv(obj.divInput)
 
@@ -3886,73 +3892,78 @@ class Alerta {
       const btn = createButton(obj.btnEnviar)
       btn.setAttribute('data-procedure', rove)
       modalContent.appendChild(btn)
+
       // Agregar el contenido al modal
       this.modal.appendChild(modalContent)
 
       // Agregar el modal al body del documento
       document.body.appendChild(this.modal)
+
+      // Evento de click para el botón "Enviar"
       const idbtnEnviar = document.getElementById('idbtnEnviar')
       idbtnEnviar.addEventListener('click', async (e) => {
         const name = e.target.attributes[3].value
-        // console.log(name)
         let inputDesde = document.getElementById('idDesde')
         let desde = inputDesde.value
-        // const fechaDesde = new Date(desde)
         const fechaDesde = new Date(`${desde}T00:00:00-03:00`)
         let fechaCorta = fechasGenerator.fecha_corta_ddmmyyyy(fechaDesde)
         document.getElementById('whereUs').innerText += ` [${fechaCorta}]`
+
         const miAlerta = new Alerta()
         const aviso =
-          'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
+          'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.'
         const mensaje = trO(aviso, objTranslate) || aviso
-        // arrayGlobal.avisoListandoControles.div.height = '200px'
-        // arrayGlobal.avisoListandoControles.div.top = '70px'
         miAlerta.createControl(
           arrayGlobal.avisoListandoControles,
           mensaje,
           objTranslate
         )
+
         let modal = document.getElementById('modalAlertCarga')
         modal.style.display = 'block'
         document.getElementById('idSpanCarga').style.display = 'none'
-        await new Promise((resolve) => setTimeout(() => resolve(), 200))
-        //! comienza la busqueda del rove
+
+        // Esperar antes de continuar
+        await new Promise((resolve) => setTimeout(resolve, 200))
+
+        //! Comienza la búsqueda del ROVE
         const estandaresRove = await callRove(`est${rove}`, desde, desde)
 
-        if (estandaresRove.success === false) {
+        if (!estandaresRove.success) {
           const miAlerta = new Alerta()
           const aviso =
-            'No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.'
+            'No se encontró algún registro que coincida con las fechas proporcionadas. Revise las fechas en Controles cargados.'
           const mensaje = trO(aviso, objTranslate) || aviso
           arrayGlobal.avisoRojo.span.text = mensaje
-          arrayGlobal.avisoRojo.span.padding = '0px 0px 0px 0px'
           arrayGlobal.avisoRojo.div.height = '110px'
-          arrayGlobal.avisoRojo.div.margin = '200px auto auto auto'
           miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
-          let modal = document.getElementById('modalAlertCarga')
+
+          modal = document.getElementById('modalAlertCarga')
           modal.remove()
           modal = document.getElementById('modalAlertVerde')
           modal.style.display = 'block'
+          return
         }
-        if (estandaresRove.success !== false) {
-          modal = document.getElementById('modalAlertCarga')
-          modal.remove()
-          modal = document.getElementById('modalTablaViewFecha')
-          modal.remove()
-          primerRender(rove, objTranslate, trO)
-          cargarStandares(estandaresRove, objTranslate, trO)
-          const documentos = await callRove(`doc${rove}`, desde, desde)
-          setTimeout(() => {
-            pintaBarras(documentos, objTranslate)
-          }, 100)
-          const downtimes = await callRove(`dwt${rove}`, desde, desde)
-          setTimeout(() => {
-            dwt(downtimes, objTranslate)
-          }, 100)
-          const table = document.getElementById('tableRove')
-          table.style.display = 'block'
-        }
+
+        modal = document.getElementById('modalAlertCarga')
+        modal.remove()
+        modal = document.getElementById('modalTablaViewFecha')
+        modal.remove()
+
+        primerRender(rove, objTranslate, trO)
+        cargarStandares(estandaresRove, objTranslate, trO)
+
+        // Ejecutar en secuencia sin setTimeout
+        const documentos = await callRove(`doc${rove}`, desde, desde)
+        await pintaBarras(documentos, objTranslate)
+
+        const downtimes = await callRove(`dwt${rove}`, desde, desde)
+        await dwt(downtimes, objTranslate)
+
+        const table = document.getElementById('tableRove')
+        table.style.display = 'block'
       })
+
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
           event.preventDefault()

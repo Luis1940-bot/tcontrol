@@ -16,7 +16,7 @@ import { desencriptar, encriptar } from '../../controllers/cript.js'
 import baseUrl from '../../config.js'
 import { configPHP } from '../../controllers/configPHP.js'
 import { trO, trA } from '../../controllers/trOA.js'
-import { arraysLoadTranslate } from '../../controllers/Translate.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 import Alerta from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
 const SERVER = baseUrl
@@ -200,27 +200,37 @@ function leeApp(json, complit) {
 document.addEventListener('DOMContentLoaded', async () => {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
+
   inicioPerformance()
   configPHP(user, SERVER)
   spinner.style.visibility = 'visible'
+
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
   document.querySelector('.header-McCain').style.display = 'none'
   document.querySelector('.div-encabezado').style.marginTop = '5px'
+
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    leeVersion('version')
-    setTimeout(async () => {
+    await leeVersion('version')
+
+    async function iniciarAplicacion() {
       objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
-      leeApp(`App/${plant}/app`, false)
-      leeApp(`consultas/${plant}/app`, true)
-    }, 200)
+      await leeApp(`App/${plant}/app`, false)
+      await leeApp(`consultas/${plant}/app`, true)
+
+      spinner.style.visibility = 'hidden'
+      finPerformance()
+    }
+
+    requestAnimationFrame(iniciarAplicacion)
+  } else {
+    spinner.style.visibility = 'hidden'
+    finPerformance()
   }
-  spinner.style.visibility = 'hidden'
-  finPerformance()
 })
 
 document.addEventListener('DOMContentLoaded', () => {

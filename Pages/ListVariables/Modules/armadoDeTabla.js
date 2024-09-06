@@ -324,35 +324,39 @@ function completaTabla(arrayControl, objTranslate) {
 function loadTabla(arrayControl, encabezados, objTranslate) {
   const miAlerta = new Alerta()
   const arraySinDuplicados = eliminarDuplicadosPorSegundoElemento(arrayControl)
+
   if (arraySinDuplicados.length > 0) {
     encabezado(encabezados, objTranslate)
     completaTabla(arrayControl, objTranslate)
-    // array = [...arrayControl];
+
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
+
     if (cantidadDeFilas.childElementCount !== arraySinDuplicados.length) {
       mensaje = trO(mensaje, objTranslate) || mensaje
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
-      modal = document.querySelector('.div-ubicacionSearch')
-      modal.style.display = 'none'
+      const divUbicacionSearch = document.querySelector('.div-ubicacionSearch')
+      divUbicacionSearch.style.display = 'none'
     }
-    setTimeout(() => {}, 1000)
   } else {
-    let mensaje =
+    const mensaje =
       trO(
         'No existen variables cargadas. Comuníquese con el administrador.',
         objTranslate
       ) || 'No existen variables cargadas. Comuníquese con el administrador.'
     miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
-    let modal = document.getElementById('modalAlertVerde')
+    const modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
   }
 }
 
 export default function tablaVacia(arrayControl, encabezados, objTranslate) {
-  setTimeout(() => {
+  function requestAnimationFrameCallback() {
     loadTabla(arrayControl, encabezados, objTranslate)
-  }, 200)
+  }
+
+  // Use requestAnimationFrame to ensure the function runs at the next repaint.
+  requestAnimationFrame(requestAnimationFrameCallback)
 }

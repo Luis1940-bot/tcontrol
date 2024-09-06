@@ -22,13 +22,15 @@ async function cargaDeRegistros(objTranslate, plant) {
     // Finaliza la carga y realiza cualquier otra acción necesaria
     tablaVacia(reportes, encabezados, objTranslate)
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.warn(error)
-    // eslint-disable-next-line no-console
     console.log('error por espera de la carga de un modal')
-    setTimeout(() => {
+
+    // Reemplazo de setTimeout con requestAnimationFrame
+    function recargarPagina() {
       window.location.reload()
-    }, 100)
+    }
+
+    requestAnimationFrame(recargarPagina)
   }
 }
 

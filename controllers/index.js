@@ -17,18 +17,30 @@ function limpiezaDeCache() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const spinner = document.querySelector('.spinner')
   spinner.style.visibility = 'visible'
-  limpiezaDeCache()
-  const email = document.getElementById('email')
-  // console.log(email.value)
-  // session()
-  setTimeout(() => {
-    // window.location.href = `${SERVER}/Pages/Home/`
-    // window.location.href = `${SERVER}/Pages/Login/`
-    // console.log(`${SERVER}/Pages/Router/rutas.php?ruta=login`)
+
+  try {
+    // Ejecuta la limpieza de caché
+    await limpiezaDeCache()
+
+    // Procesa el email si es necesario
+    const email = document.getElementById('email')
+    // Puedes hacer algo con email.value aquí si es necesario
+    // console.log(email.value);
+
+    // Redirige después de un breve retraso simulado
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // Realiza el redireccionamiento
     window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=login`
-    // window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=home`
-  }, 1000)
+
+    // Alternativamente, si necesitas redirigir a otra página
+    // window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=home`;
+  } catch (error) {
+    console.warn('Error:', error)
+  } finally {
+    spinner.style.visibility = 'hidden'
+  }
 })

@@ -557,33 +557,46 @@ function completaTabla(arrayControl, objTranslate) {
 
 function loadTabla(arrayControl, encabezados, objTranslate) {
   const miAlerta = new Alerta()
+
   if (arrayControl.length > 0) {
-    encabezado(encabezados)
-    completaTabla(arrayControl, objTranslate)
-    // array = [...arrayControl];
-    const cantidadDeFilas = document.querySelector('table tbody')
-    let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
-    if (cantidadDeFilas.childElementCount !== arrayControl.length) {
-      mensaje = trO(mensaje) || mensaje
-      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
-      const modal = document.getElementById('modalAlert')
-      modal.style.display = 'block'
-    }
-    setTimeout(() => {}, 1000)
+    // Usar requestAnimationFrame para asegurar que el DOM está listo
+    requestAnimationFrame(() => {
+      // Cargar encabezado y completar la tabla
+      encabezado(encabezados)
+      completaTabla(arrayControl, objTranslate)
+
+      // Verificar que el número de filas en la tabla sea correcto
+      const cantidadDeFilas = document.querySelector('table tbody')
+      let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
+      if (cantidadDeFilas.childElementCount !== arrayControl.length) {
+        mensaje = trO(mensaje) || mensaje
+        miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
+        const modal = document.getElementById('modalAlert')
+        modal.style.display = 'block'
+      }
+    })
   } else {
-    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTranslate)
+    // Mostrar mensaje de error si no hay controles cargados
+    let mensaje =
+      trO(
+        'No existen controles cargados. Comuníquese con el administrador.',
+        objTranslate
+      ) || 'No existen controles cargados. Comuníquese con el administrador.'
+    miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
     const modal = document.getElementById('modalAlert')
     modal.style.display = 'block'
   }
 }
 
 export default function tablaVacia(arrayControl, encabezados, objTranslate) {
-  // arraysLoadTranslate();
+  // Configurar las traducciones
   translateOperativo = objTranslate.operativoTR
   espanolOperativo = objTranslate.operativoES
   translateArchivos = objTranslate.archivosTR
   espanolArchivos = objTranslate.archivosES
-  setTimeout(() => {
+
+  // Usar requestAnimationFrame para asegurarse de que el DOM esté listo antes de cargar la tabla
+  requestAnimationFrame(() => {
     loadTabla(arrayControl, encabezados, objTranslate)
-  }, 200)
+  })
 }

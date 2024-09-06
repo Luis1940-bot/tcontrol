@@ -85,8 +85,15 @@ function configuracionLoad(user) {
 }
 
 function actualizarProgreso(porcentaje) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const idSpanCarga = document.getElementById('idSpanCarga')
+
+    // Validar que idSpanCarga exista
+    if (!idSpanCarga) {
+      console.error("Elemento 'idSpanCarga' no encontrado en el DOM.")
+      return reject(new Error("Elemento 'idSpanCarga' no disponible."))
+    }
+
     const startTime = new Date().getTime()
     const duration = 1000 // Duración total en milisegundos (1 segundo)
     const startPercentage = parseFloat(idSpanCarga.innerText) || 0 // Obtener el porcentaje inicial
@@ -124,6 +131,7 @@ async function cargaDeRegistros(objTrad, plant) {
   try {
     inicioPerformance()
     await actualizarProgreso('10%')
+
     const countSelect = await traerRegistros(`countSelect,${controlN}`, null)
     sessionStorage.setItem('loadSystem', 2)
     sessionStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4)
@@ -143,28 +151,18 @@ async function cargaDeRegistros(objTrad, plant) {
     )
     arrayGlobal.arrayControl = [...nuevoControlData]
 
-    // Finaliza la carga y realiza cualquier otra acción necesaria
     tablaVacia(nuevoControlData, encabezados, objTrad)
     finPerformance()
     // Ajustar el porcentaje a 100%
 
     if (nr) {
-      // console.log(nr)
       const controlNr = await traerNR(nr, plant)
-      setTimeout(() => {
-        cargarNR(controlNr, plant)
-        // eslint-disable-next-line no-console
-        // console.log(cargaNR);
-      }, 1000)
+      await cargarNR(controlNr, plant) // Asegúrate de que cargarNR sea una función async
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.warn(error)
-    // eslint-disable-next-line no-console
     console.log('error por espera de la carga de un modal')
-    setTimeout(() => {
-      window.location.reload()
-    }, 100)
+    window.location.reload() // Puedes utilizar una redirección directa en lugar de setTimeout
   }
 }
 
@@ -185,13 +183,15 @@ async function mensajeDeCarga(objTrad, plant) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible'
-  // eslint-disable-next-line no-console
-  console.time('timeControl')
+  console.time('timeControl') // Medir tiempo de ejecución
+
+  // Configuración inicial
   arrayGlobal.habilitadoGuardar = false
   sessionStorage.setItem('firma', encriptar('x'))
   sessionStorage.setItem('config_menu', encriptar('x'))
   sessionStorage.setItem('envia_por_email', false)
   sessionStorage.setItem('doc', null)
+
   const supervisor = {
     id: 0,
     mail: '',
@@ -200,26 +200,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     tipo: 0,
   }
   sessionStorage.setItem('firmado', encriptar(supervisor))
+
   try {
     const persona = desencriptar(sessionStorage.getItem('user'))
     const { plant } = persona
+
     if (persona) {
+      // Actualización de interfaz con datos del usuario
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
-      leeVersion('version')
-      setTimeout(async () => {
-        objTranslate = await arraysLoadTranslate()
-        configuracionLoad(persona)
-        mensajeDeCarga(objTranslate, plant)
-        leeApp(`App/${plant}/app`)
-        spinner.style.visibility = 'hidden'
-        // eslint-disable-next-line no-console
-        console.timeEnd('timeControl')
-      }, 300)
+
+      // Cargar versión y traducciones
+      await leeVersion('version')
+      objTranslate = await arraysLoadTranslate()
+
+      // Cargar configuraciones
+      await configuracionLoad(persona)
+
+      // Cargar mensaje de progreso y registros
+      await mensajeDeCarga(objTranslate, plant)
+
+      // Cargar información de la app
+      await leeApp(`App/${plant}/app`)
+
+      spinner.style.visibility = 'hidden' // Ocultar spinner
+      console.timeEnd('timeControl') // Finalizar medición del tiempo
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn(error)
+    console.warn(error) // Manejo de errores
     spinner.style.visibility = 'hidden'
   }
 })

@@ -1066,7 +1066,7 @@ function loadTabla(arrayControl, encabezados, objTranslate, plant) {
   if (arraySinDuplicados.length > 0) {
     encabezado(encabezados, objTranslate)
     completaTabla(arrayControl, objTranslate, plant)
-    // array = [...arrayControl];
+
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
 
@@ -1076,7 +1076,6 @@ function loadTabla(arrayControl, encabezados, objTranslate, plant) {
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
     }
-    setTimeout(() => {}, 1000)
   } else {
     let mensaje =
       trO(
@@ -1084,6 +1083,7 @@ function loadTabla(arrayControl, encabezados, objTranslate, plant) {
         objTranslate
       ) || 'No existen controles cargados. Comuníquese con el administrador.'
     miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+
     let modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
     modal = document.querySelector('.div-encabezadoPastillas')
@@ -1099,7 +1099,8 @@ export default function tablaVacia(
   objTranslate,
   plant
 ) {
-  setTimeout(() => {
+  // Reemplazar setTimeout con requestAnimationFrame para garantizar que el DOM esté listo
+  requestAnimationFrame(() => {
     loadTabla(arrayControl, encabezados, objTranslate, plant)
-  }, 200)
+  })
 }

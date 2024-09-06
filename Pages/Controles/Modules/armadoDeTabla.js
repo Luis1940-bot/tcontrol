@@ -166,19 +166,22 @@ function completaTabla(arrayControl, objTranslate) {
 
 function loadTabla(arrayControl, encabezados, objTranslate) {
   const miAlerta = new Alerta()
+
   if (arrayControl.length > 0) {
-    encabezado(encabezados, objTranslate)
-    completaTabla(arrayControl, objTranslate, arrayControl)
-    // array = [...arrayControl];
-    const cantidadDeFilas = document.querySelector('table tbody')
-    let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
-    if (cantidadDeFilas.childElementCount !== arrayControl.length) {
-      mensaje = trO(mensaje, objTranslate) || mensaje
-      miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
-      const modal = document.getElementById('modalAlert')
-      modal.style.display = 'block'
-    }
-    setTimeout(() => {}, 1000)
+    // Utilizar requestAnimationFrame para asegurar que el DOM está listo
+    requestAnimationFrame(() => {
+      encabezado(encabezados, objTranslate)
+      completaTabla(arrayControl, objTranslate, arrayControl)
+
+      const cantidadDeFilas = document.querySelector('table tbody')
+      let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
+      if (cantidadDeFilas.childElementCount !== arrayControl.length) {
+        mensaje = trO(mensaje, objTranslate) || mensaje
+        miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null)
+        const modal = document.getElementById('modalAlert')
+        modal.style.display = 'block'
+      }
+    })
   } else {
     let mensaje =
       trO(
@@ -191,8 +194,23 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
   }
 }
 
-export default function tablaVacia(arrayControl, encabezados, objTranslate) {
-  setTimeout(() => {
-    loadTabla(arrayControl, encabezados, objTranslate)
-  }, 200)
+export default async function tablaVacia(
+  arrayControl,
+  encabezados,
+  objTranslate
+) {
+  // Asegúrate de que arrayControl y objTranslate están completamente cargados
+  if (arrayControl && arrayControl.length > 0) {
+    await loadTabla(arrayControl, encabezados, objTranslate)
+  } else {
+    const miAlerta = new Alerta()
+    let mensaje =
+      trO(
+        'No existen controles cargados. Comuníquese con el administrador.',
+        objTranslate
+      ) || 'No existen controles cargados. Comuníquese con el administrador.'
+    miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+    const modal = document.getElementById('modalAlertVerde')
+    modal.style.display = 'block'
+  }
 }

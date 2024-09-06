@@ -113,7 +113,6 @@ function checaRequeridos() {
 
 async function nuevoUser() {
   let envia = checaRequeridos()
-
   if (envia.add) {
     const plant = desencriptar(sessionStorage.getItem('plant'))
     const response = await traerRegistros(
@@ -121,6 +120,7 @@ async function nuevoUser() {
       '/addUsuario',
       parseInt(plant.value)
     )
+
     if (response.success) {
       const objetoEmail = {
         cliente: plant.texto,
@@ -131,6 +131,7 @@ async function nuevoUser() {
         subject: 'Nuevo usuario',
         mensaje: 'Se dio de alta un nuevo usuario:',
       }
+
       const miAlerta = new Alerta()
       const obj = arrayGlobal.avisoAmarillo
       obj.close.display = 'none'
@@ -138,21 +139,31 @@ async function nuevoUser() {
         trO('Aguarde un instante luego será redirigido.', objTranslate) ||
         'Aguarde un instante luego será redirigido.'
       miAlerta.createVerde(obj, texto, objTranslate)
+
       const modal = document.getElementById('modalAlertVerde')
       modal.style.display = 'block'
+
       const mailEnviado = await enviaMailNuevoCliente(
         objetoEmail,
         '/sendNuevoUsuario'
       )
+
       if (mailEnviado.success) {
         const id = document.getElementById('id')
         id.value = response.id
+
         modal.style.display = 'none'
-        modal.remove()
+
+        // Espera a que el modal sea removido del DOM antes de redirigir
+        await new Promise((resolve) => {
+          requestAnimationFrame(() => {
+            modal.remove()
+            resolve()
+          })
+        })
+
         const url = `${SERVER}/Pages/Login`
-        setTimeout(() => {
-          window.location.href = url
-        }, 200)
+        window.location.href = url
       }
     } else {
       const miAlerta = new Alerta()
@@ -382,21 +393,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   const version = await leeVersion('version')
   document.querySelector('.version').innerText = version
 
-  setTimeout(async () => {
+  async function inicializar() {
     objTranslate = await arraysLoadTranslate()
     leeApp(`log`)
     leeModelo('Register/registerUser')
+
     const nuevaCadena = dondeEstaEn(objTranslate, 'Regístrese.')
     const spanUbicacion = document.getElementById('spanUbicacion')
     const plant = desencriptar(sessionStorage.getItem('plant'))
     spanUbicacion.innerText = plant.texto
+
     const volver = document.getElementById('volver')
     volver.style.display = 'block'
-  }, 200)
 
-  spinner.style.visibility = 'hidden'
+    spinner.style.visibility = 'hidden'
+    finPerformance()
+  }
 
-  finPerformance()
+  function verificarElementos() {
+    const spanUbicacion = document.getElementById('spanUbicacion')
+    const volver = document.getElementById('volver')
+
+    if (spanUbicacion && volver) {
+      inicializar()
+    } else {
+      requestAnimationFrame(verificarElementos) // Continúa intentando hasta que los elementos estén presentes
+    }
+  }
+
+  requestAnimationFrame(verificarElementos) // Inicia la verificación de los elementos
 })
 
 function goBack() {

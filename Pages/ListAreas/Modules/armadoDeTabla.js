@@ -275,11 +275,13 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
   if (table) {
     table.innerHTML = ''
   }
+
   const miAlerta = new Alerta()
+
   if (arrayControl.length > 0) {
     encabezado(encabezados, objTranslate)
     completaTabla(arrayControl, objTranslate)
-    // array = [...arrayControl];
+
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
 
@@ -289,7 +291,6 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
     }
-    setTimeout(() => {}, 1000)
   } else {
     let mensaje =
       trO(
@@ -305,7 +306,8 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
 }
 
 export default function tablaVacia(arrayControl, encabezados, objTranslate) {
-  setTimeout(() => {
+  // Usar requestAnimationFrame en lugar de setTimeout para asegurar que el DOM esté listo
+  requestAnimationFrame(() => {
     loadTabla(arrayControl, encabezados, objTranslate)
-  }, 200)
+  })
 }

@@ -252,7 +252,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
     } else if (i === 2 && tipoDeDato === 'img') {
       dato = null
       const text = '📸'
-      const img = ElementGenerator.generateButtonImage(text, fila + 1)
+      const img = ElementGenerator.generateButtonImage(text, index + 1)
       type = img
       background = 'transparent'
     } else if (i === 2 && tipoDeDato === 'cn') {
@@ -481,24 +481,27 @@ function completaTabla(arrayControl, encabezados, objTrad) {
   const tbody = document.querySelector('tbody')
   const cantidadDeRegistros = arrayControl.length
   const email = arrayControl[0][22]
-  email === '1'
-    ? sessionStorage.setItem('envia_por_email', true)
-    : sessionStorage.setItem('envia_por_email', false)
-  arrayControl.forEach((element, index) => {
-    const unidades = parseFloat(index + 1)
-    const porcentaje = parseFloat(
-      unidades / parseFloat(cantidadDeRegistros + 0.2)
-    )
-    const idSpanCarga = document.getElementById('idSpanCarga')
-    function checkAndSetValues() {
-      if (idSpanCarga) {
-        idSpanCarga.innerText = `${Math.floor(porcentaje * 100)}%`
-      } else {
-        setTimeout(checkAndSetValues, 100) // Reintentar después de 100ms
-      }
-    }
-    checkAndSetValues()
 
+  // Establecer valor en sessionStorage
+  sessionStorage.setItem('envia_por_email', email === '1')
+
+  // Función para actualizar el porcentaje de carga
+  function updateProgress() {
+    const idSpanCarga = document.getElementById('idSpanCarga')
+    if (idSpanCarga) {
+      const porcentaje = (100 * (fila / cantidadDeRegistros)).toFixed(0)
+      idSpanCarga.innerText = `${porcentaje}%`
+    } else {
+      requestAnimationFrame(updateProgress) // Reintentar en el siguiente frame
+    }
+  }
+
+  // Inicializar el progreso
+  let fila = 0
+  updateProgress()
+
+  // Procesar cada elemento del array
+  arrayControl.forEach((element, index) => {
     const newRow = estilosTbodyCell(
       element,
       index,
@@ -508,7 +511,7 @@ function completaTabla(arrayControl, encabezados, objTrad) {
     tbody.appendChild(newRow)
     fila += 1
 
-    // ! ocultamos la columnas para la observacion
+    // Ocultar filas específicas
     if (element[8] === 'n') {
       const filaOculta = tbody.querySelector(`tr:nth-child(${index + 1})`)
       if (filaOculta) {
@@ -516,42 +519,28 @@ function completaTabla(arrayControl, encabezados, objTrad) {
       }
       ID -= 1
     }
-    // ! cargamos consultas dinamicas sd en columna 2
-    if (
-      element[5] === 'sd' &&
-      element[8] === 's' &&
-      (element[19] !== '' || element[19] !== null)
-    ) {
+
+    // Cargar consultas dinámicas
+    if (element[5] === 'sd' && element[8] === 's' && element[19]) {
       traerRutina(element[19], selectDinamic)
     }
-    // ! cargamos valor por defecto de un sql query en columna 2
-    if (element[5] === 'n' || element[5] === 't' || element[5] === 'tx') {
-      if (
-        element[23] !== '' &&
-        element[23] !== ' ' &&
-        element[23] !== null &&
-        element[23] !== undefined
-      ) {
-        traerValorPorDefecto(element[23], element[5], elementHTML)
-      }
+
+    // Cargar valor por defecto
+    if (['n', 't', 'tx'].includes(element[5]) && element[23]) {
+      traerValorPorDefecto(element[23], element[5], elementHTML)
     }
-    // ! cargamos consultas dinamicas sd en columna 4
-    if (element[9] === 'sd' && (element[26] !== '' || element[26] !== null)) {
+
+    if (element[9] === 'sd' && element[26]) {
       traerRutina(element[26], selectDinamic)
     }
-    // ! cargamos valor por defecto de un sql query en columna 4
 
-    if (element[9] === 'n' || element[9] === 't' || element[9] === 'tx') {
-      if (
-        element[27] !== '' &&
-        element[27] !== ' ' &&
-        element[27] !== null &&
-        element[27] !== undefined
-      ) {
-        traerValorPorDefecto(element[27], element[9], elementHTML)
-      }
+    if (['n', 't', 'tx'].includes(element[9]) && element[27]) {
+      traerValorPorDefecto(element[27], element[9], elementHTML)
     }
   })
+
+  // Finalizar actualización de progreso
+  updateProgress()
 }
 
 function controlT(objTrad) {

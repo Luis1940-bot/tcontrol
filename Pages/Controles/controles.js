@@ -83,29 +83,46 @@ function dondeEstaEn() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Ajustes iniciales de la interfaz
   document.querySelector('.header-McCain').style.display = 'none'
   document.querySelector('.div-encabezado').style.marginTop = '5px'
+
+  // Desencriptar información del usuario
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
+
+  // Inicio de procesos de performance y configuración
   inicioPerformance()
   configPHP(user, SERVER)
   spinner.style.visibility = 'visible'
+
+  // Ocultar elementos innecesarios
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
+
+  // Desencriptar y configurar el idioma de la interfaz
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
 
-    leeVersion('version')
-    setTimeout(async () => {
+    // Cargar la versión y las traducciones, luego ejecutar las aplicaciones
+    await leeVersion('version')
+
+    async function iniciarAplicacion() {
       objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
-      leeApp(`App/${plant}/app`)
-    }, 200)
+      await leeApp(`App/${plant}/app`)
+
+      spinner.style.visibility = 'hidden'
+      finPerformance()
+    }
+
+    requestAnimationFrame(iniciarAplicacion)
+  } else {
+    spinner.style.visibility = 'hidden'
+    finPerformance()
   }
-  spinner.style.visibility = 'hidden'
-  finPerformance()
 })
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -182,9 +199,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase()
 
-      setTimeout(() => {
-        // segundaCargaListado()
-      }, 200)
+      // setTimeout(() => {
+      //   // segundaCargaListado()
+      // }, 200)
     }
   }
 })

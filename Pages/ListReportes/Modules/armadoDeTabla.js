@@ -189,10 +189,11 @@ function completaTabla(arrayControl, objTranslate) {
 
 function loadTabla(arrayControl, encabezados, objTranslate) {
   const miAlerta = new Alerta()
+
   if (arrayControl.length > 0) {
     encabezado(encabezados, objTranslate)
     completaTabla(arrayControl, objTranslate)
-    // array = [...arrayControl];
+
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
 
@@ -202,7 +203,6 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
       const modal = document.getElementById('modalAlert')
       modal.style.display = 'block'
     }
-    setTimeout(() => {}, 1000)
   } else {
     let mensaje =
       trO(
@@ -210,6 +210,7 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
         objTranslate
       ) || 'No existen reportes cargados. Comuníquese con el administrador.'
     miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+
     let modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
     modal = document.querySelector('.div-encabezadoPastillas')
@@ -220,7 +221,8 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
 }
 
 export default function tablaVacia(arrayControl, encabezados, objTranslate) {
-  setTimeout(() => {
+  // Usar requestAnimationFrame en lugar de setTimeout
+  requestAnimationFrame(() => {
     loadTabla(arrayControl, encabezados, objTranslate)
-  }, 200)
+  })
 }

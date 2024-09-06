@@ -15,6 +15,7 @@ const MAX_HEIGHT = 800 // Ajusta según tus necesidades
 const QUALITY = 0.8 // Calidad inicial de compresión
 
 let row = 0
+
 function buttonImage(id) {
   row = id
   const miAlerta = new Alerta()
@@ -22,16 +23,30 @@ function buttonImage(id) {
     trO(objVariables.avisoImagenes.span.text, objTranslate) ||
     objVariables.avisoImagenes.span.text
   miAlerta.createVerde(objVariables.avisoImagenes, mensaje, null)
+
   const modal = document.getElementById('modalAlertVerde')
   modal.style.display = 'block'
+
   const imageInput = document.getElementById('imageInput')
-  setTimeout(() => {
+
+  // Escucha el evento de transición del modal si tiene alguna animación o cambio de estilo
+  modal.addEventListener(
+    'transitionend',
+    () => {
+      imageInput.click()
+    },
+    { once: true }
+  ) // Se asegura de que el evento solo ocurra una vez
+
+  // Si el modal no tiene transición/animación, se puede invocar el click inmediatamente
+  if (getComputedStyle(modal).transitionDuration === '0s') {
     imageInput.click()
-  }, 500)
+  }
 }
 
 function generateLi(image) {
   const img = image
+
   const dataFilename = img.getAttribute('data-filenamewithoutextension')
   const fila = document.querySelector(`tr:nth-child(${row})`)
   const ul = fila.querySelector('ul')
@@ -39,8 +54,8 @@ function generateLi(image) {
   li.id = `li_${dataFilename}`
   img.setAttribute('class', 'img-select')
   li.appendChild(img)
-  // const canvas = document.createElement('canvas');
-  // li.appendChild(canvas);
+  // const canvas = document.createElement('canvas')
+  // li.appendChild(canvas)
   ul.appendChild(li)
 }
 
@@ -101,10 +116,13 @@ function loadImage(selectedFile) {
     reader.onload = (e) => {
       const img = new Image()
       img.src = e.target.result // Aquí el formato es base64
-
       let fileName = selectedFile.name
       const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1)
       fileName = `imagen_${Date.now()}.${fileExtension}`
+      const fileNameWithoutExtension = fileName.substring(
+        0,
+        fileName.lastIndexOf('.')
+      )
       img.onload = () => {
         const modalVerde = document.getElementById('modalAlertVerde')
         if (modalVerde) {
@@ -116,13 +134,12 @@ function loadImage(selectedFile) {
           .then((base64data) => {
             const imgElement = new Image()
             imgElement.src = base64data // Aquí el formato es base64
-
             imgElement.onload = () => {
               imgElement.setAttribute('data-filename', fileName)
               imgElement.setAttribute('data-fileextension', fileExtension)
               imgElement.setAttribute(
                 'data-fileNameWithoutExtension',
-                fileName.substring(0, fileName.lastIndexOf('.'))
+                fileNameWithoutExtension
               )
               imgElement.style.maxWidth = '100%'
               imgElement.setAttribute('className', '')
@@ -139,7 +156,6 @@ function loadImage(selectedFile) {
 
               // Puedes usar `base64data` para enviar la imagen al servidor si es necesario
               // console.log('Base64 image data:', base64data)
-
               resolve(imgElement)
             }
           })
@@ -147,6 +163,7 @@ function loadImage(selectedFile) {
       }
       img.onerror = reject
     }
+
     reader.readAsDataURL(selectedFile)
   })
 }

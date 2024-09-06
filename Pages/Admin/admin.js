@@ -115,28 +115,77 @@ function dondeEstaEn() {
   document.getElementById('volver').style.display = 'block'
 }
 
+// document.addEventListener('DOMContentLoaded', async () => {
+//   const user = desencriptar(sessionStorage.getItem('user'))
+//   const { plant } = user
+//   inicioPerformance()
+//   configPHP(user, SERVER)
+//   spinner.style.visibility = 'visible'
+//   const hamburguesa = document.querySelector('#hamburguesa')
+//   hamburguesa.style.display = 'none'
+//   document.querySelector('.header-McCain').style.display = 'none'
+//   const persona = desencriptar(sessionStorage.getItem('user'))
+//   if (persona) {
+//     document.querySelector('.custom-button').innerText =
+//       persona.lng.toUpperCase()
+//     leeVersion('version')
+//     setTimeout(async () => {
+//       objTranslate = await arraysLoadTranslate()
+//       dondeEstaEn()
+//       leeApp(`App/${plant}/app`)
+//     }, 200)
+//   }
+//   spinner.style.visibility = 'hidden'
+//   finPerformance()
+// })
+
 document.addEventListener('DOMContentLoaded', async () => {
+  inicioPerformance()
+  spinner.style.visibility = 'visible'
+
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
-  inicioPerformance()
+
   configPHP(user, SERVER)
-  spinner.style.visibility = 'visible'
+
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
-  document.querySelector('.header-McCain').style.display = 'none'
+
+  const headerMcCain = document.querySelector('.header-McCain')
+  headerMcCain.style.display = 'none'
+
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
-    leeVersion('version')
-    setTimeout(async () => {
-      objTranslate = await arraysLoadTranslate()
-      dondeEstaEn()
-      leeApp(`App/${plant}/app`)
-    }, 200)
   }
-  spinner.style.visibility = 'hidden'
-  finPerformance()
+
+  async function inicializar() {
+    const version = await leeVersion('version')
+    document.querySelector('.version').innerText = version
+
+    objTranslate = await arraysLoadTranslate()
+    dondeEstaEn()
+    leeApp(`App/${plant}/app`)
+
+    spinner.style.visibility = 'hidden'
+    finPerformance()
+  }
+
+  function verificarElementos() {
+    const customButton = document.querySelector('.custom-button')
+    const versionElement = document.querySelector('.version')
+    const hamburguesa = document.querySelector('#hamburguesa')
+    const headerMcCain = document.querySelector('.header-McCain')
+
+    if (customButton && versionElement && hamburguesa && headerMcCain) {
+      inicializar()
+    } else {
+      requestAnimationFrame(verificarElementos) // Continúa intentando hasta que los elementos estén presentes
+    }
+  }
+
+  requestAnimationFrame(verificarElementos) // Inicia la verificación de los elementos
 })
 
 document.addEventListener('DOMContentLoaded', () => {

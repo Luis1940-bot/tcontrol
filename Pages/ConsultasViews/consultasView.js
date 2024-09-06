@@ -176,36 +176,89 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
+// document.addEventListener('DOMContentLoaded', async () => {
+//   const user = desencriptar(sessionStorage.getItem('user'))
+//   const { plant } = user
+//   inicioPerformance()
+//   configPHP(user)
+//   spinner.style.visibility = 'visible'
+//   const hamburguesa = document.querySelector('#hamburguesa')
+//   // hamburguesa.style.display = 'none'
+//   const persona = desencriptar(sessionStorage.getItem('user'))
+//   if (persona) {
+//     document.querySelector('.custom-button').innerText =
+//       persona.lng.toUpperCase()
+//     const data = await translate(persona.lng)
+//     translateOperativo = data.arrayTranslateOperativo
+//     espanolOperativo = data.arrayEspanolOperativo
+//     translateArchivos = data.arrayTranslateArchivo
+//     espanolArchivos = data.arrayEspanolArchivo
+//     objTranslate.operativoES = [...espanolOperativo]
+//     objTranslate.operativoTR = [...translateOperativo]
+//     objTranslate.archivosES = [...espanolArchivos]
+//     objTranslate.archivosTR = [...translateArchivos]
+//     leeVersion('version')
+//     setTimeout(() => {
+//       dondeEstaEn()
+//       leeApp(`App/${plant}/app`, false)
+//       verificaTipoDeConsulta(objTranslate, plant)
+//     }, 200)
+//   }
+//   spinner.style.visibility = 'hidden'
+//   finPerformance()
+// })
+
 document.addEventListener('DOMContentLoaded', async () => {
+  const spinner = document.querySelector('#spinner') // Asegúrate de que el elemento spinner esté disponible
+  spinner.style.visibility = 'visible'
+
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
+
   inicioPerformance()
   configPHP(user)
-  spinner.style.visibility = 'visible'
-  const hamburguesa = document.querySelector('#hamburguesa')
-  // hamburguesa.style.display = 'none'
-  const persona = desencriptar(sessionStorage.getItem('user'))
-  if (persona) {
-    document.querySelector('.custom-button').innerText =
-      persona.lng.toUpperCase()
-    const data = await translate(persona.lng)
-    translateOperativo = data.arrayTranslateOperativo
-    espanolOperativo = data.arrayEspanolOperativo
-    translateArchivos = data.arrayTranslateArchivo
-    espanolArchivos = data.arrayEspanolArchivo
-    objTranslate.operativoES = [...espanolOperativo]
-    objTranslate.operativoTR = [...translateOperativo]
-    objTranslate.archivosES = [...espanolArchivos]
-    objTranslate.archivosTR = [...translateArchivos]
-    leeVersion('version')
-    setTimeout(() => {
+
+  async function inicializar() {
+    const persona = desencriptar(sessionStorage.getItem('user'))
+    if (persona) {
+      document.querySelector('.custom-button').innerText =
+        persona.lng.toUpperCase()
+
+      const data = await translate(persona.lng)
+      translateOperativo = data.arrayTranslateOperativo
+      espanolOperativo = data.arrayEspanolOperativo
+      translateArchivos = data.arrayTranslateArchivo
+      espanolArchivos = data.arrayEspanolArchivo
+
+      objTranslate.operativoES = [...espanolOperativo]
+      objTranslate.operativoTR = [...translateOperativo]
+      objTranslate.archivosES = [...espanolArchivos]
+      objTranslate.archivosTR = [...translateArchivos]
+
+      const version = await leeVersion('version')
+      document.querySelector('.version').innerText = version
+
       dondeEstaEn()
       leeApp(`App/${plant}/app`, false)
       verificaTipoDeConsulta(objTranslate, plant)
-    }, 200)
+
+      spinner.style.visibility = 'hidden'
+      finPerformance()
+    }
   }
-  spinner.style.visibility = 'hidden'
-  finPerformance()
+
+  function verificarElementos() {
+    const customButton = document.querySelector('.custom-button')
+    const spinner = document.querySelector('#spinner')
+
+    if (customButton && spinner) {
+      inicializar()
+    } else {
+      requestAnimationFrame(verificarElementos) // Continúa intentando hasta que los elementos estén presentes
+    }
+  }
+
+  requestAnimationFrame(verificarElementos) // Inicia la verificación de los elementos
 })
 
 document.addEventListener('DOMContentLoaded', () => {

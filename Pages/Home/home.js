@@ -281,26 +281,39 @@ function dondeEstaEn(array) {
 document.addEventListener('DOMContentLoaded', async () => {
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
+
   inicioPerformance()
   configPHP(user, SERVER)
   document.querySelector('.header-McCain').style.display = 'none'
   spinner.style.visibility = 'visible'
+
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
+
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
 
     objTranslate = await arraysLoadTranslate()
-    leeVersion('version')
-    setTimeout(() => {
-      dondeEstaEn(navegador.estadoAnteriorWhereUs)
-      leeApp(`App/${plant}/app`)
-    }, 200)
+    await leeVersion('version')
+
+    function iniciarAplicacion() {
+      if (document.querySelector('.custom-button')) {
+        dondeEstaEn(navegador.estadoAnteriorWhereUs)
+        leeApp(`App/${plant}/app`)
+        spinner.style.visibility = 'hidden'
+        finPerformance()
+      } else {
+        requestAnimationFrame(iniciarAplicacion) // Continúa intentando hasta que el elemento esté listo
+      }
+    }
+
+    requestAnimationFrame(iniciarAplicacion) // Inicia la verificación de los elementos
+  } else {
+    spinner.style.visibility = 'hidden'
+    finPerformance()
   }
-  spinner.style.visibility = 'hidden'
-  finPerformance()
 })
 
 function goBack() {

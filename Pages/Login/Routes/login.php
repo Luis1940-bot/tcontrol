@@ -8,9 +8,9 @@ ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
 function consultar($planta, $email, $pass) {
     try {
         include_once BASE_DIR."/Routes/datos_base_primera.php";
-        $dbnameLogin = 'tc1000';
+        // $dbnameLogin = 'tc1000';
 
-        $cnn = new PDO("mysql:host={$host};dbname={$dbnameLogin};port={$port};charset=utf8", $user, $password);
+        $cnn = new PDO("mysql:host={$host};dbname={$dbname};port={$port};charset=utf8", $user, $password);
         $hash = hash('ripemd160', $pass);
         $sql = "SELECT nombre, idusuario, mail, idtipousuario, firma, qcodusuario, area, mi_cfg, activo, verificador FROM usuario
                 WHERE mail=? and pass=? and idLTYcliente=?;";
@@ -85,6 +85,7 @@ function consultar($planta, $email, $pass) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
+$datos = '{"planta":15,"email":"luisfactum@gmail.com","password":"4488","ruta":"/login","timezone":"America/Argentina/Buenos_Aires","rax":"&new=Fri Sep 06 2024 16:06:45 GMT-0300 (hora estándar de Argentina)"}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

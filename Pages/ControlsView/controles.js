@@ -63,20 +63,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   spinner.style.visibility = 'visible'
   const hamburguesa = document.querySelector('#hamburguesa')
   hamburguesa.style.display = 'none'
+
   const persona = desencriptar(sessionStorage.getItem('user'))
   if (persona) {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
 
     leeVersion('version')
-    setTimeout(async () => {
+
+    // Reemplazar setTimeout con requestAnimationFrame
+    requestAnimationFrame(async () => {
       objTranslate = await arraysLoadTranslate()
       dondeEstaEn(objTranslate)
       leeApp(`App/${plant}/app`)
       const control = desencriptar(sessionStorage.getItem('listadoCtrls'))
       cargaTabla(objTranslate, control, plant)
-    }, 200)
+    })
   }
+
   spinner.style.visibility = 'hidden'
   finPerformance()
 })

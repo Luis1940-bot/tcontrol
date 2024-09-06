@@ -131,52 +131,68 @@ async function subirImagenes(img, plant) {
   return null
 }
 
-async function nuevaComapania() {
+async function nuevaCompania() {
   try {
     const miAlerta = new Alerta()
     let obj = arrayGlobal.avisoRojo
     let texto = ''
+
     let envia = checaRequeridos()
     if (envia.add) {
       const detalle = document.getElementById('detalle')
       envia.objeto.detalle = detalle.value
       envia.objeto.activo = 's'
-      const response = await addCompania(envia.objeto, '/addCompania')
 
+      const response = await addCompania(envia.objeto, '/addCompania')
       if (response.success) {
         const newPlant = { name: envia.objeto.cliente, num: response.id }
-        const json = await addCompania(newPlant, '/escribirJSON')
-        const jsonApp = await addCompania(newPlant, '/creaJSONapp')
+        await Promise.all([
+          addCompania(newPlant, '/escribirJSON'),
+          addCompania(newPlant, '/creaJSONapp'),
+        ])
+
         const objetoEmail = {
           cliente: envia.objeto.cliente,
           contacto: envia.objeto.contacto,
           address: envia.objeto.email,
         }
+
         obj = arrayGlobal.avisoAmarillo
         obj.close.display = 'none'
         texto = 'Aguarde un instante luego será redirigido.'
         miAlerta.createVerde(obj, texto, objTranslate)
+
         const modal = document.getElementById('modalAlertVerde')
         modal.style.display = 'block'
+
         const mailEnviado = await enviaMailNuevoCliente(
           objetoEmail,
           '/sendNuevoCliente'
         )
-        const imagen = envia.objeto.objetoImagen
-        if (imagen.extension[0] !== null) {
-          await subirImagenes(imagen, response.id)
+
+        if (envia.objeto.objetoImagen.extension[0] !== null) {
+          await subirImagenes(envia.objeto.objetoImagen, response.id)
         }
+
         const id = document.getElementById('id')
         id.value = response.id
+
         modal.style.display = 'none'
-        modal.remove()
+
+        // Espera a que el modal sea removido del DOM antes de redirigir
+        await new Promise((resolve) => {
+          requestAnimationFrame(() => {
+            modal.remove()
+            resolve()
+          })
+        })
+
         const url = `${SERVER}/Pages/Login`
-        setTimeout(() => {
-          window.location.href = url
-        }, 200)
+        window.location.href = url
       } else {
         texto = trO('Algo salió mal.', objTranslate) || 'Algo salió mal.'
         miAlerta.createVerde(obj, texto, objTranslate)
+
         const modal = document.getElementById('modalAlertVerde')
         modal.style.display = 'block'
       }
@@ -216,7 +232,7 @@ function setearElementos() {
   idRegisterButton.addEventListener('click', (e) => {
     const clase = e.target.className
     if (clase === 'button-plant') {
-      nuevaComapania()
+      nuevaCompania()
     }
     if (clase === 'button-plant-update') {
     }
@@ -383,20 +399,38 @@ document.addEventListener('DOMContentLoaded', async () => {
   const version = await leeVersion('version')
   document.querySelector('.version').innerText = version
 
-  setTimeout(async () => {
+  async function inicializar() {
     objTranslate = await arraysLoadTranslate()
     leeApp(`log`)
     leeModelo('Register/registerPlant')
+
     const nuevaCadena = dondeEstaEn(objTranslate, 'Nueva compañía.')
     const divUbicacion = document.querySelector('.div-ubicacion')
-    divUbicacion.style.display = 'none'
+    if (divUbicacion) {
+      divUbicacion.style.display = 'none'
+    }
+
     const volver = document.getElementById('volver')
-    volver.style.display = 'block'
-  }, 200)
+    if (volver) {
+      volver.style.display = 'block'
+    }
 
-  spinner.style.visibility = 'hidden'
+    spinner.style.visibility = 'hidden'
+    finPerformance()
+  }
 
-  finPerformance()
+  function verificarElementos() {
+    const divUbicacion = document.querySelector('.div-ubicacion')
+    const volver = document.getElementById('volver')
+
+    if (divUbicacion && volver) {
+      inicializar()
+    } else {
+      requestAnimationFrame(verificarElementos) // Continúa intentando hasta que los elementos estén presentes
+    }
+  }
+
+  requestAnimationFrame(verificarElementos) // Inicia la verificación de los elementos
 })
 
 function goBack() {
