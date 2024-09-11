@@ -1,6 +1,6 @@
 <?php
 ob_start();
-header('Content-Type: text/html;charset=utf-8');
+// header('Content-Type: text/html;charset=utf-8');
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 ?>
 <!DOCTYPE html>

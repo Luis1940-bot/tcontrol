@@ -44,7 +44,7 @@ function eliminaNuxPedido($nux, $sql_i){
   }
   $data = json_decode($datos, true, 512, JSON_BIGINT_AS_STRING);
 
-  error_log('Pages/ControlViews/Routes/eliminaRegistr-JSON response: ' . json_encode($data));
+  // error_log('Pages/ControlViews/Routes/eliminaRegistr-JSON response: ' . json_encode($data));
 
   if ($data !== null) {
     $nux = $data['q'];
@@ -55,6 +55,7 @@ function eliminaNuxPedido($nux, $sql_i){
   }
   } else {
     echo "Error al decodificar la cadena JSON";
+     error_log('Pages/ControlViews/Routes/eliminaRegistr-JSON response: ' . json_encode($data));
   }
 
 ?>

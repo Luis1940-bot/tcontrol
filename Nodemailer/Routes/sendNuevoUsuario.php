@@ -26,7 +26,7 @@ require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
 try {
   $datos = json_decode(file_get_contents('php://input'), true);
-  // $datos = '{"ruta":"/sendNuevoUsuario","rax":"&new=Sat Jun 22 2024 20:23:37 GMT-0300 (hora estándar de Argentina)","objeto":{"cliente":"Alpek-Coatzacoalcos","usuario":"xxx","idusuario":8,"email":"luisfactum@gmail.com"}}';
+  // $datos = '{"ruta":"/sendNuevoUsuario","rax":"&new=Fri Sep 06 2024 20:35:22 GMT-0300 (hora estándar de Argentina)","objeto":{"cliente":"Alpek-PTAC Cosoleacaque","usuario":"grgrg","idusuario":15,"email":"luisglogista@gmail.com","v":"1a1fa5b9eb168096de1ed13e169b7792","subject":"Nuevo usuario","mensaje":"Se dio de alta un nuevo usuario:"}}';
   // $datos = json_decode($datos, true);
 
     if (empty($datos)) {
@@ -74,7 +74,7 @@ try {
     $mail->Host ="mail.tenkiweb.com";
     $mail->Username = "alerta.tenki@tenkiweb.com";
     $mail->Password = "]SDGGL}#p.Ba";
-    $mail->Port = 25;
+    $mail->Port = 587;
     $mail->SMTPOptions = array(
     'ssl' => array(
         'verify_peer' => false,

@@ -97,7 +97,7 @@ while ($iterations < $iterationLimit) {
                 $mail->Host = HOST;
                 $mail->Username = USERNAME;
                 $mail->Password = PASS;
-                $mail->Port = 25;
+                $mail->Port = 587;
                 $mail->SMTPOptions = array(
                     'ssl' => array(
                         'verify_peer' => false,

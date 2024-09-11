@@ -67,7 +67,7 @@ if (empty($datos)) {
 }
 $data = json_decode($datos, true);
 
-error_log('Pages/Control/Routes/traerSupervisor-JSON response: ' . json_encode($data));
+// error_log('Pages/Control/Routes/traerSupervisor-JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $q = $data['q'];

@@ -92,7 +92,7 @@ if (empty($datos)) {
 }
 $data = json_decode($datos, true);
 
-error_log('Pages/ListReportes/Routes/guardarReporteCambios-JSON response: ' . json_encode($data));
+// error_log('Pages/ListReportes/Routes/guardarReporteCambios-JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];

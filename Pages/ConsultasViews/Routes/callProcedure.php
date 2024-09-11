@@ -83,7 +83,7 @@ if (empty($datos)) {
 }
     
     $data = json_decode($datos, true);
-    error_log('callProcedure-JSON response: ' . json_encode($data));
+    // error_log('callProcedure-JSON response: ' . json_encode($data));
     // Verifica si la decodificación fue exitosa
     if ($data !== null) {
       // Accede a los valores

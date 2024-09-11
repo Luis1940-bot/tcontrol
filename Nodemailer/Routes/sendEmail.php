@@ -101,7 +101,10 @@ $html = ob_get_clean();
         'idLTYreporte' => $idLTYreporte,
         'idPlant' => $idPlanta,
     ]);
-    ob_clean();
+    if (ob_get_length()) {
+        ob_end_clean(); // Solo limpiar si hay un buffer activo
+    }
+    // ob_clean();
     // $response = array('success' => true, 'message' => 'El email se envio con exito!', 'reporte' => $reporte, 'documento' => $documento);
     // echo json_encode($response);
 

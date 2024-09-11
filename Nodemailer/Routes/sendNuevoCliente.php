@@ -65,7 +65,7 @@ try {
     $mail->Host ="mail.tenkiweb.com";
     $mail->Username = "alerta.tenki@tenkiweb.com";
     $mail->Password = "]SDGGL}#p.Ba";
-    $mail->Port = 25;
+    $mail->Port = 587;
     $mail->SMTPOptions = array(
     'ssl' => array(
         'verify_peer' => false,

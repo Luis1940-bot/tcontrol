@@ -1278,7 +1278,6 @@ async function insert(
   enviaPorEmailBooleano
 ) {
   try {
-    // console.log(desencriptar(sessionStorage.getItem('plant')))
     const { value } = desencriptar(sessionStorage.getItem('plant'))
     const plant = parseInt(value)
 
@@ -1300,19 +1299,19 @@ async function insert(
         insertado = await updateRegistro(nuevoObjetoControl, docStorage)
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error insert:', error)
+      return // Manejar el error y detener la ejecución
     }
 
-    // console.log(plant)
-    // console.log(nuevoObjeto.objImagen)
     let imagenes
+
     try {
       imagenes = await subirImagenes(nuevoObjeto.objImagen)
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error subir imagenes:', error)
+      return // Manejar el error y detener la ejecución
     }
+
     const encabezados = { ...objEncabezados }
     encabezados.documento = insertado.documento
 
@@ -1320,21 +1319,23 @@ async function insert(
 
     try {
       if (enviaPorEmailBooleano) {
-        enviado = await enviaMail(nuevoObjeto, encabezados)
+        enviado = await enviaMail(nuevoObjeto, encabezados) // Espera la resolución de la promesa
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error envio email:', error)
+      return // Manejar el error y detener la ejecución
     }
 
+    // Ocultar el aviso amarillo
     const amarillo = document.getElementById('idDivAvisoVerde')
     amarillo.style.display = 'none'
 
+    // Llamar a informe() solo después de que todas las promesas anteriores se hayan resuelto
     informe(
       convertido,
       insertado,
       imagenes,
-      enviado,
+      enviado, // Ahora 'enviado' tiene el valor correcto
       miAlertaInforme,
       objTrad,
       modal,

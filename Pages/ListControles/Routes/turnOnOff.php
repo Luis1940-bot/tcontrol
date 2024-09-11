@@ -143,7 +143,7 @@ if (empty($datos)) {
 }
 $data = json_decode($datos, true);
 
-error_log('Pages/ListControles/Routes/turnOnOff-JSON response: ' . json_encode($data));
+// error_log('Pages/ListControles/Routes/turnOnOff-JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $target = $data['q'];

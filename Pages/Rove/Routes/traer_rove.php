@@ -55,7 +55,7 @@ if (empty($datos)) {
 }
 
     $data = json_decode($datos, true);
-    error_log('Pages/Rove/Routes/traer_rove-JSON response: ' . json_encode($data));
+    // error_log('Pages/Rove/Routes/traer_rove-JSON response: ' . json_encode($data));
     // Verifica si la decodificación fue exitosa
     if ($data !== null) {
       // Accede a los valores

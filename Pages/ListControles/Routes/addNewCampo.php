@@ -124,7 +124,7 @@ if (empty($datos)) {
 }
 
 $data = json_decode($datos, true);
-error_log('Pages/ListControles/Routes/addNewCampo-JSON response: ' . json_encode($data));
+// error_log('Pages/ListControles/Routes/addNewCampo-JSON response: ' . json_encode($data));
 
 if ($data !== null) {
   $datos = $data['q'];

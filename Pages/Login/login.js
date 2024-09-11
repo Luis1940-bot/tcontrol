@@ -143,13 +143,16 @@ function session(session) {
     let select = document.getElementById('idSelectLogin')
     select.style.color = '#f81212'
   } else if (session.success) {
-    if (session.res.verificador === '1') {
+    if (session.res.verificador === '1' || session.res.verificador === 1) {
       let parsedData = encriptar(session.res)
       sessionStorage.setItem('user', parsedData)
       setTimeout(() => {
         window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=home`
       }, 1000)
-    } else if (session.res.verificador === '0') {
+    } else if (
+      session.res.verificador === '0' ||
+      session.res.verificador === 0
+    ) {
       const miAlerta = new Alerta()
       const obj = arrayGlobal.avisoRojo
       const texto =
@@ -172,7 +175,7 @@ function showAlert(message) {
   overlay.style.display = 'flex'
 }
 
-async function enviarFormulario() {
+async function enviar() {
   try {
     const idiomaPreferido = navigator.language || navigator.languages[0]
     const partesIdioma = idiomaPreferido.split('-')
@@ -225,6 +228,7 @@ async function enviarFormulario() {
 
 function cargarSelectCompania(json) {
   try {
+    // console.log(json)
     //! { "name": "McCain Balcarce-Argentina", "num": 1 },
     // !{ "name": "McCain Araxa-Brasil", "num": 2 }
     const idAcceso = document.getElementById('idAcceso')
@@ -236,7 +240,8 @@ function cargarSelectCompania(json) {
     // console.log(plantas, ' ----- ', plantas.length)
     if (plantas.length === 0) {
       claseButton = 'button-login button-login-apagado'
-      idAcceso.setAttribute('disabled', false)
+      // idAcceso.setAttribute('disabled', false)
+      idAcceso.disabled = false
       const option = document.createElement('option')
       option.value = 0
       const texto = trO('Sin compañías', objTranslate) || 'Sin compañías'
@@ -288,7 +293,7 @@ function cargarSelectCompania(json) {
       })
 
       idAcceso.addEventListener('click', () => {
-        enviarFormulario()
+        enviar()
       })
     }
 

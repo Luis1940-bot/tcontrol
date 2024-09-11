@@ -45,7 +45,7 @@ if (empty($datos)) {
     exit;
 }
 $data = json_decode($datos, true);
-error_log('JSON response: ' . json_encode($data));
+// error_log('JSON response: ' . json_encode($data));
 // Verifica si la decodificación fue exitosa
 if ($data !== null) {
   // Accede a los valores

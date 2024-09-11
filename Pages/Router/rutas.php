@@ -48,7 +48,7 @@ if(isset($_GET['ruta'])) {
         break;
 
       case '404':
-        $url = $url_base . '/404.php';
+        $url = $url_base . '/404.php?t='.$time;
         header("Location: $url");
         break;
 

@@ -67,7 +67,7 @@
           exit;
         }
         $data = json_decode($datos, true);
-        error_log('Pages/ListAreas/Routes/guardarCambioAreas-JSON response: ' . json_encode($data));
+        // error_log('Pages/ListAreas/Routes/guardarCambioAreas-JSON response: ' . json_encode($data));
 
         if ($data !== null) {
           $q = $data['q'];

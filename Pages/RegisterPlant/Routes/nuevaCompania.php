@@ -67,7 +67,7 @@
           exit;
         }
         $data = json_decode($datos, true);
-        error_log('Pages/RegisterPlant/Routes/nuevaCompania-JSON response: ' . json_encode($data));
+        // error_log('Pages/RegisterPlant/Routes/nuevaCompania-JSON response: ' . json_encode($data));
 
         if ($data !== null) {
           $objeto = $data['objeto'];

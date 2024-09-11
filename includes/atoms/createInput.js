@@ -2,6 +2,9 @@ function createInput(config) {
   const input = document.createElement('input')
   config.id !== null && config.id !== undefined ? (input.id = config.id) : null
   input.type = config.type
+  if (config.type === 'password') {
+    input.autocomplete = 'new-password'
+  }
   config.name !== null && config.name !== undefined
     ? (input.name = config.name)
     : null
