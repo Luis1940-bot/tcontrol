@@ -1,4 +1,6 @@
 <?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $clave_secreta = "qV8qI3oT3'lZ7$";
 //$fecha_actual = date("Y/m/d");
@@ -18,15 +20,15 @@ function verificarToken($token, $data, $clave_secreta) {
 
 function procesar($call, $desde, $hasta, $planta) {
   try {
-    $host = "68.178.195.199"; 
-    $user = "developers";
-    $password = "6vLB#Q0bOVo4";
-    $number = "";
-    $desired_length = 4;
-    while(strlen($number) + strlen($planta) < $desired_length) {
-        $number .= "0"; // Agregar un cero a la cadena
-    }
-    $dbname = "mc" . $planta . $number;
+    $host = "34.174.211.66"; 
+    $user = "uumwldufguaxi";
+    $password = "5lvvumrslp0v";
+    // $number = "";
+    // $desired_length = 4;
+    // while(strlen($number) + strlen($planta) < $desired_length) {
+    //     $number .= "0"; // Agregar un cero a la cadena
+    // }
+    $dbname = "db5i8ff3wrjzw3"; //"mc" . $planta . $number;
     $port = 3306;
 
     $sql = "CALL ".$call."('".$desde."', '".$hasta."')";
@@ -43,7 +45,7 @@ function procesar($call, $desde, $hasta, $planta) {
 
         $result = mysqli_query($con,$sql);
         $arr_customers = array();
-        $arrayResultdo = array();
+        // $arrayResultdo = array();
         $column_names = array();
         while ($column = mysqli_fetch_field($result)) {
             $column_names[] = $column->name;
@@ -55,7 +57,7 @@ function procesar($call, $desde, $hasta, $planta) {
         }
 
         // echo "Después de la inclusión: " . json_encode($arrayResultdo) . PHP_EOL;
-        $json = json_encode($arr_customers);
+        $json = json_encode($arr_customers, JSON_UNESCAPED_UNICODE);
         echo $json;
         mysqli_close($con);
   } catch (\Throwable $e) {
@@ -66,7 +68,7 @@ function procesar($call, $desde, $hasta, $planta) {
 
 function preparaDatos($path){
   try {
-    
+
     $path_parts = explode('/', $path);
     $largo = sizeof($path_parts);
     if ($path_parts[$largo -1] === '*') {
@@ -93,7 +95,6 @@ function preparaDatos($path){
           // $hasta = $temp;
       }
     }
-    
 
     procesar($call, $desde, $hasta, $planta);
   } catch (\Throwable $e) {
@@ -119,7 +120,7 @@ if (!verificarToken($token, $data, $clave_secreta)) {
 }
 
 header("Content-Type: application/json; charset=utf-8");
-// $http_host = 'https://localhost:8080/Pages/Api/proc_TnEspecialidades/2024-04-01/2024-04-10/1?token=cd2eb0837c9b4c962c22d2ff8b5441b7b45805887f051d39bf133b583baf6860&data=pbi';
+// $http_host = 'https://localhost:8080/Pages/Api/api.php/proc_companias/15/*?token=d96188a658f11da082b06679eda358a07f068f083b17539cf139a9bbb7bd262e&data=valor.data.bueno';
 $http_host = $_SERVER['HTTP_HOST'];
 $url = htmlentities($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], ENT_QUOTES, 'UTF-8');
 // Verificar si el token está presente en la URL

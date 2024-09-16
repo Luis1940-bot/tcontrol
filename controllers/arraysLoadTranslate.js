@@ -9,7 +9,6 @@ async function arraysLoadTranslate() {
     const persona = desencriptar(sessionStorage.getItem('user'))
     idiomaPreferido = persona.lng
   }
-
   const data = await translate(idiomaPreferido)
   let translateOperativo = data.arrayTranslateOperativo
   let espanolOperativo = data.arrayEspanolOperativo

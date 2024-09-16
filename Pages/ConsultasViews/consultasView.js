@@ -1,13 +1,5 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
 import readJSON from '../../controllers/read-JSON.js'
-// eslint-disable-next-line import/extensions, import/no-named-as-default
-import translate, {
-  // eslint-disable-next-line no-unused-vars
-  arrayTranslateOperativo,
-  // eslint-disable-next-line no-unused-vars
-  arrayEspanolOperativo,
-  // eslint-disable-next-line import/extensions
-} from '../../controllers/arraysLoadTranslate.js'
 // eslint-disable-next-line import/extensions
 import personModal from '../../controllers/person.js'
 // eslint-disable-next-line import/extensions
@@ -25,20 +17,11 @@ import { Alerta } from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
 // eslint-disable-next-line import/extensions
 import menuModalConsultasView from '../../controllers/menuConsultasView.js'
-
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { configPHP } from '../../controllers/configPHP.js'
+import { trO } from '../../controllers/trOA.js'
 import baseUrl from '../../config.js'
 const SERVER = baseUrl
-
-let translateOperativo = []
-let espanolOperativo = []
-let translateArchivos = []
-let espanolArchivos = []
-const objTranslate = {
-  operativoES: [],
-  operativoTR: [],
-  archivosES: [],
-  archivosTR: [],
-}
 
 const spinner = document.querySelector('.spinner')
 const objButtons = {}
@@ -46,7 +29,7 @@ const navegador = {
   estadoAnteriorButton: '',
   estadoAnteriorWhereUs: [],
 }
-
+let objTranslate = []
 const goLanding = document.querySelector('.custom-button')
 goLanding.addEventListener('click', () => {
   const url = `${SERVER}/Pages/Landing`
@@ -64,22 +47,11 @@ function leeVersion(json) {
     })
 }
 
-function trO(palabra) {
-  const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
-  const index = espanolOperativo.findIndex(
-    (item) => item.replace(/\s/g, '').toLowerCase() === palabraNormalizada
-  )
-  if (index !== -1) {
-    return translateOperativo[index]
-  }
-  return palabra
-}
-
 async function mensajeDeCarga(objTranslate, procedure, plant) {
   const miAlerta = new Alerta()
   const aviso =
     'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.' //arrayGlobal.avisoListandoControles.span.text
-  const mensaje = trO(aviso) || aviso
+  const mensaje = trO(aviso, objTranslate) || aviso
   // arrayGlobal.avisoListandoControles.div.height = '200px'
   // arrayGlobal.avisoListandoControles.div.top = '70px'
   miAlerta.createSinCalendar(
@@ -129,31 +101,6 @@ function dondeEstaEn() {
   document.getElementById('volver').style.display = 'block'
 }
 
-function configPHP(user) {
-  // const user = desencriptar(sessionStorage.getItem('user'))
-  const { developer, content, by, rutaDeveloper, logo } = user
-  const metaDescription = document.querySelector('meta[name="description"]')
-  metaDescription.setAttribute('content', content)
-  const faviconLink = document.querySelector('link[rel="shortcut icon"]')
-  faviconLink.href = `${SERVER}/assets/img/favicon.ico`
-  document.title = developer
-  const logoi = document.getElementById('logo_factum')
-  const srcValue = `${SERVER}/assets/img/${logo}.png`
-  const altValue = 'Tenki Web'
-  logoi.src = srcValue
-  logoi.alt = altValue
-  logoi.width = 100
-  logoi.height = 40
-  const footer = document.getElementById('footer')
-  footer.innerText = by
-  footer.href = rutaDeveloper
-  document.querySelector('.header-McCain').style.display = 'none'
-  document.querySelector('.div-encabezado').style.marginTop = '5px'
-
-  // const linkInstitucional = document.getElementById('linkInstitucional');
-  // linkInstitucional.href = 'https://www.factumconsultora.com';
-}
-
 function verificaTipoDeConsulta(objTranslate, plant) {
   try {
     const procedure = desencriptar(sessionStorage.getItem('procedure'))
@@ -176,89 +123,35 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-// document.addEventListener('DOMContentLoaded', async () => {
-//   const user = desencriptar(sessionStorage.getItem('user'))
-//   const { plant } = user
-//   inicioPerformance()
-//   configPHP(user)
-//   spinner.style.visibility = 'visible'
-//   const hamburguesa = document.querySelector('#hamburguesa')
-//   // hamburguesa.style.display = 'none'
-//   const persona = desencriptar(sessionStorage.getItem('user'))
-//   if (persona) {
-//     document.querySelector('.custom-button').innerText =
-//       persona.lng.toUpperCase()
-//     const data = await translate(persona.lng)
-//     translateOperativo = data.arrayTranslateOperativo
-//     espanolOperativo = data.arrayEspanolOperativo
-//     translateArchivos = data.arrayTranslateArchivo
-//     espanolArchivos = data.arrayEspanolArchivo
-//     objTranslate.operativoES = [...espanolOperativo]
-//     objTranslate.operativoTR = [...translateOperativo]
-//     objTranslate.archivosES = [...espanolArchivos]
-//     objTranslate.archivosTR = [...translateArchivos]
-//     leeVersion('version')
-//     setTimeout(() => {
-//       dondeEstaEn()
-//       leeApp(`App/${plant}/app`, false)
-//       verificaTipoDeConsulta(objTranslate, plant)
-//     }, 200)
-//   }
-//   spinner.style.visibility = 'hidden'
-//   finPerformance()
-// })
-
 document.addEventListener('DOMContentLoaded', async () => {
-  const spinner = document.querySelector('#spinner') // Asegúrate de que el elemento spinner esté disponible
-  spinner.style.visibility = 'visible'
-
   const user = desencriptar(sessionStorage.getItem('user'))
   const { plant } = user
 
   inicioPerformance()
-  configPHP(user)
+  configPHP(user, SERVER)
+  document.querySelector('.header-McCain').style.display = 'none'
+  document.querySelector('.div-encabezado').style.marginTop = '5px'
 
-  async function inicializar() {
-    const persona = desencriptar(sessionStorage.getItem('user'))
-    if (persona) {
-      document.querySelector('.custom-button').innerText =
-        persona.lng.toUpperCase()
+  const persona = desencriptar(sessionStorage.getItem('user'))
+  if (persona) {
+    document.querySelector('.custom-button').innerText =
+      persona.lng.toUpperCase()
+    await leeVersion('version')
 
-      const data = await translate(persona.lng)
-      translateOperativo = data.arrayTranslateOperativo
-      espanolOperativo = data.arrayEspanolOperativo
-      translateArchivos = data.arrayTranslateArchivo
-      espanolArchivos = data.arrayEspanolArchivo
-
-      objTranslate.operativoES = [...espanolOperativo]
-      objTranslate.operativoTR = [...translateOperativo]
-      objTranslate.archivosES = [...espanolArchivos]
-      objTranslate.archivosTR = [...translateArchivos]
-
-      const version = await leeVersion('version')
-      document.querySelector('.version').innerText = version
-
+    async function iniciarAplicacion() {
+      objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
-      leeApp(`App/${plant}/app`, false)
-      verificaTipoDeConsulta(objTranslate, plant)
-
+      leeApp(`App/${plant}/app`)
       spinner.style.visibility = 'hidden'
+      verificaTipoDeConsulta(objTranslate, plant)
       finPerformance()
     }
+
+    requestAnimationFrame(iniciarAplicacion)
+  } else {
+    spinner.style.visibility = 'hidden'
+    finPerformance()
   }
-
-  function verificarElementos() {
-    const customButton = document.querySelector('.custom-button')
-    const spinner = document.querySelector('#spinner')
-
-    if (customButton && spinner) {
-      inicializar()
-    } else {
-      requestAnimationFrame(verificarElementos) // Continúa intentando hasta que los elementos estén presentes
-    }
-  }
-
-  requestAnimationFrame(verificarElementos) // Inicia la verificación de los elementos
 })
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -271,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = {
       person: persona.person,
       home: 'Inicio',
-      salir: trO('Cerrar sesión'),
+      salir: trO('Cerrar sesión', objTranslate) || 'Cerrar sesión',
     }
     personModal(user, objTranslate)
   })

@@ -1,0 +1,29 @@
+{
+  "Consultas": {
+    "name": ["Mantenimiento"],
+    "active": [1],
+    "button": [1]
+  },
+  "Mantenimiento": {
+    "name": ["Listado de Compañías", "Auditorías M&T"],
+    "confecha": [0, 1],
+    "archivo": ["x", "x"],
+    "active": [1, 1],
+    "button": [0, 0, 0, 0],
+    "procedure": ["proc_companias", "proc_auditoriaMyT"],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null]
+  },
+  "Producción": {
+    "name": [],
+    "confecha": [],
+    "archivo": [],
+    "active": [],
+    "button": [],
+    "procedure": [],
+    "in": [],
+    "out": [],
+    "operation": []
+  }
+}

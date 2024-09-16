@@ -216,3 +216,4 @@ New camp
 You are working with a control saved with the number:
 Digitally signed document.
 Keep in mind that the emails are being verified for sending.
+The query is being processed, it will take a few seconds. It may be very complex depending on the files involved and the time interval requested. Ensure your internet connection.

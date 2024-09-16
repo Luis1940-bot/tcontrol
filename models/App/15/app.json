@@ -1,81 +1,57 @@
 {
-    "planta": "Alpek-PTAC Cosoleacaque",
-    "idiomas": {
-        "bienvenido": [
-            "Bienvenido",
-            "Bem-vindo(Br)",
-            "Welcome"
-        ],
-        "abreviatura": [
-            "es",
-            "bra",
-            "en"
-        ]
+  "planta": "Alpek-PTAC Cosoleacaque",
+  "idiomas": {
+    "bienvenido": ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
+    "abreviatura": ["es", "bra", "en"]
+  },
+  "Menu": {
+    "name": ["Controles", "Consultas"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", "Consultas/index.php"]
+  },
+  "Controles": {
+    "name": ["Controles", "Imprimir control"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", ""]
+  },
+  "Ad": {
+    "name": ["Reportes", "Controles", "Variables", "Areas"],
+    "type": ["", "", "", ""],
+    "ruta": [
+      "ListReportes/index.php",
+      "ListControles/index.php",
+      "ListVariables/index.php",
+      "ListAreas/index.php"
+    ]
+  },
+  "apps": {
+    "name": ["SCG", "Admin", "Producción", "Mantenimiento"],
+    "type": ["ctrl", "ctrl", "btn", "btn"],
+    "ruta": ["Menu/index.php", "Admin/index.php", "", ""],
+    "nivel": [3, 4, 1, 1],
+    "Producción": {
+      "name": ["PTA", "TA"],
+      "type": ["btn", "btn"],
+      "ruta": ["", ""],
+      "nivel": [1, 1]
     },
-    "Menu": {
-        "name": [
-            "Controles",
-            "Consultas"
-        ],
-        "type": [
-            "",
-            ""
-        ],
-        "ruta": [
-            "Controles\/index.php",
-            "Consultas\/index.php"
-        ]
-    },
-    "Controles": {
-        "name": [
-            "Controles",
-            "Imprimir control"
-        ],
-        "type": [
-            "",
-            ""
-        ],
-        "ruta": [
-            "Controles\/index.php",
-            ""
-        ]
-    },
-    "Ad": {
-        "name": [
-            "Reportes",
-            "Controles",
-            "Variables",
-            "Areas"
-        ],
-        "type": [
-            "",
-            "",
-            "",
-            ""
-        ],
-        "ruta": [
-            "ListReportes\/index.php",
-            "ListControles\/index.php",
-            "ListVariables\/index.php",
-            "ListAreas\/index.php"
-        ]
-    },
-    "apps": {
-        "name": [
-            "SCG",
-            "Admin"
-        ],
-        "type": [
-            "ctrl",
-            "ctrl"
-        ],
-        "ruta": [
-            "Menu\/index.php",
-            "Admin\/index.php"
-        ],
-        "nivel": [
-            3,
-            4
-        ]
+    "Mantenimiento": {
+      "name": ["Ingeniería", "Planeación", "Mec & Tub", "Elec & Inst"],
+      "type": ["btn", "btn", "btn", "btn"],
+      "ruta": ["", "", "", ""],
+      "nivel": [1, 1, 1, 1],
+      "Ingeniería": {
+        "name": ["Confiabilidad", "Integridad"],
+        "type": ["btn", "btn"],
+        "ruta": ["", ""],
+        "nivel": [1, 1]
+      },
+      "Planeación": {
+        "name": [],
+        "type": [],
+        "ruta": [],
+        "nivel": []
+      }
     }
+  }
 }

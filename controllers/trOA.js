@@ -1,7 +1,6 @@
 function trO(palabra, objTranslate) {
-  // console.log(palabra, objTranslate)
   try {
-    if (!palabra) {
+    if (!palabra || !objTranslate) {
       return
     }
     const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
@@ -22,7 +21,7 @@ function trO(palabra, objTranslate) {
 
 function trA(palabra, objTranslate) {
   try {
-    if (!palabra) {
+    if (!palabra || !objTranslate) {
       return
     }
     const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase()
