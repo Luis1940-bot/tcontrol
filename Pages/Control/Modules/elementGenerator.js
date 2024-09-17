@@ -58,6 +58,7 @@ class ElementGenerator {
   static generateInputCheckBox(checked) {
     const inputCheckBox = document.createElement('input')
     inputCheckBox.setAttribute('type', 'checkbox')
+    inputCheckBox.classList.add('custom-checkbox')
     inputCheckBox.checked = checked
     return inputCheckBox
   }

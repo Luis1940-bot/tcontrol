@@ -206,7 +206,7 @@ function clonarReporte($datos) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-$datos = '{"q":"%7B%22origen%22%3A4%2C%22destino%22%3A10%7D","ruta":"/clonarReporte","rax":"&new=Mon Jul 08 2024 10:24:20 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
+// $datos = '{"q":"%7B%22origen%22%3A4%2C%22destino%22%3A10%7D","ruta":"/clonarReporte","rax":"&new=Mon Jul 08 2024 10:24:20 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

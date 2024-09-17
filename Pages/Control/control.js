@@ -76,7 +76,9 @@ function configuracionLoad(user) {
   controlN = url.control_N
   controlT = url.control_T
   nr = url.nr
-  nr === '0' ? (nr = '') : sessionStorage.setItem('doc', encriptar(nr))
+  nr === '0' || nr === ''
+    ? (nr = '')
+    : sessionStorage.setItem('doc', encriptar(nr))
   document.getElementById('doc').innerText = `Doc: ${nr}`
   document.getElementById('wichC').innerText = controlT
   configPHP(user, SERVER)

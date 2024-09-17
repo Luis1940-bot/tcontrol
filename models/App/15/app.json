@@ -33,7 +33,27 @@
       "name": ["PTA", "TA"],
       "type": ["btn", "btn"],
       "ruta": ["", ""],
-      "nivel": [1, 1]
+      "nivel": [1, 1],
+      "PTA": {
+        "name": ["Purificación"],
+        "type": ["btn"],
+        "ruta": [""],
+        "nivel": [1],
+        "Purificación": {
+          "name": [
+            "TURNO 4 FILTROS",
+            "TURNO 5 FILTROS",
+            "TURNO 4 REACCIÓN/PH2",
+            "TURNO 5 REACCIÓN/PH2",
+            "TURNO 4 PREPARACIÓN",
+            "TURNO 5 PREPARACIÓN",
+            "TURNO 4 RLM"
+          ],
+          "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+          "ruta": [],
+          "nivel": [1, 1, 1, 1, 1, 1, 1]
+        }
+      }
     },
     "Mantenimiento": {
       "name": ["Ingeniería", "Planeación", "Mec & Tub", "Elec & Inst"],
@@ -47,6 +67,20 @@
         "nivel": [1, 1]
       },
       "Planeación": {
+        "name": [],
+        "type": [],
+        "ruta": [],
+        "nivel": []
+      },
+      "Mec & Tub": {
+        "name": ["AUDITORÍA COMPAÑÍA"],
+        "type": ["ctrl"],
+        "ruta": [
+          "control_N=17&control_T=AUDITORÍA%20TUBERÍA%20-%20SOLDADURA%20-%20SERVICIOS%20GENERALES&nr="
+        ],
+        "nivel": [1]
+      },
+      "Elec & Inst": {
         "name": [],
         "type": [],
         "ruta": [],

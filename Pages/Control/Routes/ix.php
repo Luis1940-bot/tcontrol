@@ -94,6 +94,8 @@ function convertToValidJson($dataString) {
   }, $dataString);
 
 
+
+     
       // Convertir el string a un array asociativo
       $dataArray = json_decode('{' . $dataString . '}', true);
 

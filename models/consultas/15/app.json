@@ -10,7 +10,7 @@
     "archivo": ["x", "x"],
     "active": [1, 1],
     "button": [0, 0, 0, 0],
-    "procedure": ["proc_companias", "proc_auditoriaMyT"],
+    "procedure": ["proc_companias", "proc_auditoria_compania"],
     "in": [null, null],
     "out": [null, null],
     "operation": [null, null]

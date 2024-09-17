@@ -502,7 +502,7 @@ async function addCampo(target, objTranslate, plant) {
 }
 async function clonarReporte(target) {
   const clon = await agregarCampoNuevo(target, '/clonarReporte', null)
-  if (clon.actualizado.success) {
+  if (clon.success) {
     window.location.reload()
   }
 }
@@ -647,6 +647,7 @@ export function clonarCamposAReporte(objTranslate, target) {
             origen: parseInt(response.dato.idOrigen),
             destino: parseInt(response.dato.idDestino),
           }
+
           clonarReporte(nuevoTarget)
         }
       }
