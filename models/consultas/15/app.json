@@ -1,8 +1,8 @@
 {
   "Consultas": {
-    "name": ["Mantenimiento"],
-    "active": [1],
-    "button": [1]
+    "name": ["Mantenimiento", "Producción"],
+    "active": [1, 1],
+    "button": [1, 1]
   },
   "Mantenimiento": {
     "name": ["Listado de Compañías", "Auditorías M&T"],
@@ -16,14 +16,36 @@
     "operation": [null, null]
   },
   "Producción": {
-    "name": [],
-    "confecha": [],
-    "archivo": [],
-    "active": [],
-    "button": [],
-    "procedure": [],
-    "in": [],
-    "out": [],
-    "operation": []
+    "name": ["PTA", "TA"],
+    "confecha": [null, null],
+    "archivo": ["x", "x"],
+    "active": [1, 1],
+    "button": [1, 1],
+    "procedure": [null, null],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null]
+  },
+  "PTA": {
+    "name": ["Purificación"],
+    "confecha": [null],
+    "archivo": ["x"],
+    "active": [1],
+    "button": [1],
+    "procedure": [null],
+    "in": [null],
+    "out": [null],
+    "operation": [null]
+  },
+  "Purificación": {
+    "name": ["Área de Preparación"],
+    "confecha": [1],
+    "archivo": ["x"],
+    "active": [1],
+    "button": [0],
+    "procedure": ["proc_area_preparacion"],
+    "in": [null],
+    "out": [null],
+    "operation": [null]
   }
 }

@@ -62,16 +62,16 @@ function columna2(
               break
             }
           }
-
           if (!optionFound) {
             const option = document.createElement('option')
             // eslint-disable-next-line prefer-destructuring
             option.value = datos.valorS[index]
             option.innerText = valor
             select.appendChild(option)
+            console.log(valor)
           }
         } else {
-          setTimeout(checkAndSetValues, 200)
+          setTimeout(checkAndSetValues, 1000)
         }
       }
       checkAndSetValues()
@@ -137,6 +137,12 @@ function columna2(
       ul.appendChild(li)
     }
   }
+  const tipodedato = datos.tipodedato[index]
+  if (tagName === 'DIV' && tipodedato === 'cn') {
+    //es una consulta cn con button
+    let inputElement = document.querySelector('td div.button-cn input')
+    inputElement.value = valor
+  }
 }
 
 async function verSupervisor(idSupervisor, plant) {
@@ -179,6 +185,7 @@ function cargarNR(res, plant) {
   try {
     const objString = res[0][14]
     const datos = JSON.parse(objString)
+
     const idSupervisor = datos.supervisor[0]
     const tbody = document.querySelector('tbody')
     const tr = tbody.querySelectorAll('tr')
@@ -196,7 +203,7 @@ function cargarNR(res, plant) {
       const typeObservaciones = td[4].childNodes[0].type
       const codigoString = codigo.toString().trim()
       const elementoEncontrado = datos.idLTYcontrol.indexOf(codigoString)
-
+      // console.log(elementoEncontrado)
       if (elementoEncontrado !== -1) {
         let valor = datos.valor[elementoEncontrado]
         const valorObservaciones = datos.observacion[elementoEncontrado]

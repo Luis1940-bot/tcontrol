@@ -18,6 +18,7 @@ import baseUrl from '../../config.js'
 import { configPHP } from '../../controllers/configPHP.js'
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 import { trO } from '../../controllers/trOA.js'
+import LogOut from '../../controllers/logout.js'
 
 const SERVER = baseUrl
 
@@ -351,6 +352,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     personModal(user, objTranslate)
   })
+      setTimeout(function () {
+        alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.')
+        LogOut()
+      }, 43200000 - 300000)
 })
 
 const volver = document.getElementById('volver')

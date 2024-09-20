@@ -19,6 +19,7 @@ import actualizarLenguaje from '../../includes/Traducciones/Lenguajes/fijarLengu
 
 import baseUrl from '../../config.js'
 import { configPHP } from '../../controllers/configPHP.js'
+import LogOut from '../../controllers/logout.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
 
@@ -187,6 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
   leeApp(`App/${plant}/app`)
   spinner.style.visibility = 'hidden'
   finPerformance()
+  setTimeout(function () {
+    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.')
+    LogOut()
+  }, 43200000 - 300000)
 })
 
 async function loadLenguages(persona) {

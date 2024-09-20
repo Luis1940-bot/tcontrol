@@ -2012,6 +2012,7 @@ class Alerta {
 
   createAlerta(objeto, objTrad, typeAlert) {
     // Crear el elemento modal
+
     const obj = objeto
     const planta = desencriptar(sessionStorage.getItem('plant'))
     const carpeta = 'Imagenes/'
@@ -2088,6 +2089,7 @@ class Alerta {
         : null
       procesoStyleDisplay(elementosStyle)
       limpiaArrays()
+
       const okGuardar = guardarNuevo(
         arrayGlobal.objetoControl,
         arrayGlobal.arrayControl,
@@ -2116,7 +2118,9 @@ class Alerta {
         if (docStorage !== false) {
           arrayGlobal.objetoControl.nuxpedido.fill(docStorage)
         }
+
         const convertido = convertirObjATextPlano(arrayGlobal.objetoControl)
+
         // console.log(convertido)
         const nuevoObjeto = {
           ...arrayGlobal.objetoControl,

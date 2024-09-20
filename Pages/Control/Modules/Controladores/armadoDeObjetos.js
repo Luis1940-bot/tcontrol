@@ -69,7 +69,11 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
       if (type === 'text') {
         inputmode = obj.inputElement.getAttribute('inputmode')
         obj.inputmode = inputmode
-        if (inputmode === 'decimal' && obj.valueCelda !== '') {
+        if (
+          inputmode === 'decimal' &&
+          obj.valueCelda !== '' &&
+          obj.valueCelda !== null
+        ) {
           let decimal = obj.valueCelda
           decimal === '' ? (decimal = 0) : null
           const numeroFormateado = decimal.replace(/\./g, '').replace(',', '.')
@@ -78,7 +82,8 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
             ? ((observacion = parseFloat(numeroFormateado)), (valor = null))
             : null
         } else {
-          valor = obj.valueCelda
+          obj.valueCelda === null ? (valor = '') : (valor = obj.valueCelda)
+          // valor = obj.valueCelda
           c === 4 ? ((observacion = valor), (valor = null)) : null
         }
       }
@@ -87,13 +92,21 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
         c === 4 ? ((observacion = valor), (valor = null)) : null
       }
       if (type === 'date' || type === 'time') {
-        valor = obj.valueCelda
+        obj.valueCelda === null ? (valor = '') : (valor = obj.valueCelda)
+        // valor = obj.valueCelda
         c === 4 ? ((observacion = valor), (valor = null)) : null
       }
     }
     if (tagName === 'TEXTAREA' && type === 'textarea') {
-      valor = obj.valueCelda
+      obj.valueCelda === null ? (valor = '') : (valor = obj.valueCelda)
+      // valor = obj.valueCelda
       c === 4 ? ((observacion = valor), (valor = null)) : null
+      const elementoColSpan = obj.element
+      const colspanValue = elementoColSpan.getAttribute('colspan')
+
+      if (colspanValue && colspanValue === '4') {
+        obj.valueCelda === null ? (valor = '') : null
+      }
     }
     if (tagName === 'SELECT' && type === 'select-one' && obj.valueCelda) {
       valor = obj.node.options[obj.node.selectedIndex].textContent
@@ -104,7 +117,8 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
       if (c === 4) {
         observacion = valor
         valor = null
-        valorOBS = obj.valueCelda
+        obj.valueCelda === null ? (valorOBS = '') : (valorOBS = obj.valueCelda)
+        // valorOBS = obj.valueCelda
         obj.selector !== 'selectDinamic' && obj.selector !== 'select-hijo'
           ? (selector2 = obj.selector)
           : null

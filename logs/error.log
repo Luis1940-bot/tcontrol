@@ -27,3 +27,5 @@
 [16-Sep-2024 15:30:15 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\ControlsView\Routes\traerRegistros.php on line 112
 [16-Sep-2024 18:49:17 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: datox in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 174
 [16-Sep-2024 18:50:37 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: datox in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 174
+[17-Sep-2024 14:13:59 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: campo in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 141
+[17-Sep-2024 14:16:56 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: campo in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 141

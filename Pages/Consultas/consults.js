@@ -19,6 +19,7 @@ import { trO, trA } from '../../controllers/trOA.js'
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 import Alerta from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
+import LogOut from '../../controllers/logout.js'
 const SERVER = baseUrl
 let objTranslate = []
 
@@ -247,6 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     personModal(user, objTranslate)
   })
+  setTimeout(function () {
+    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.')
+    LogOut()
+  }, 43200000 - 300000)
 })
 
 function goBack() {

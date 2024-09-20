@@ -6,6 +6,21 @@ session_start([
     // 'cookie_samesite' => 'None',
     'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
 ]);
+
+// Tiempo de inactividad en segundos (12 horas)
+$inactive = 43200;
+
+// Verifica si la sesión ha estado inactiva por más de 12 horas
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $inactive) {
+    session_unset();     // Elimina los datos de sesión
+    session_destroy();   // Destruye la sesión
+    header("Location:  https://tenkiweb.com/tcontrol/index.php"); // Redirige al login o logout
+    exit();
+}
+
+// Actualiza la última actividad
+$_SESSION['last_activity'] = time();
+
 $url = "https://tenkiweb.com/tcontrol/index.php";
 define('SSO', $_SESSION['login_sso']['sso']);
  if (isset($_SESSION['login_sso']['email'] )) {

@@ -28,6 +28,8 @@ import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 import baseUrl from '../../config.js'
 import { configPHP } from '../../controllers/configPHP.js'
 import { trO } from '../../controllers/trOA.js'
+import LogOut from '../../controllers/logout.js'
+
 const SERVER = baseUrl
 let objTranslate = []
 
@@ -260,6 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
   tableControl.addEventListener('change', () => {
     arrayGlobal.habilitadoGuardar = true
   })
+
+  setTimeout(function () {
+    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.')
+    LogOut()
+  }, 43200000 - 300000)
 })
 
 const goLanding = document.querySelector('.custom-button')

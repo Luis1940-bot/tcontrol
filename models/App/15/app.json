@@ -40,18 +40,48 @@
         "ruta": [""],
         "nivel": [1],
         "Purificación": {
-          "name": [
-            "TURNO 4 FILTROS",
-            "TURNO 5 FILTROS",
-            "TURNO 4 REACCIÓN/PH2",
-            "TURNO 5 REACCIÓN/PH2",
-            "TURNO 4 PREPARACIÓN",
-            "TURNO 5 PREPARACIÓN",
-            "TURNO 4 RLM"
-          ],
-          "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+          "name": ["Check List Energía", "Actividades PTA"],
+          "type": ["btn", "btn"],
           "ruta": [],
-          "nivel": [1, 1, 1, 1, 1, 1, 1]
+          "nivel": [1, 1],
+          "Check List Energía": {
+            "name": [
+              "ÁREA DE PREPARACIÓN",
+              "ÁREA DE CRISTALIZACIÓN",
+              "ÁREA DE FILTROS",
+              "ÁREA DE RLM"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=26&control_T=ÁREA%20DE%20PREPARACIÓN&nr=",
+              "control_N=27&control_T=ÁREA%20DE%20CRISTALIZACIÓN&nr=",
+              "control_N=28&control_T=ÁREA%20DE%20FILTROS&nr=",
+              "control_N=29&control_T=ÁREA%20DE%20RLM&nr="
+            ],
+            "nivel": [1, 1, 1, 1]
+          },
+          "Actividades PTA": {
+            "name": [
+              "TURNO 4 FILTROS",
+              "TURNO 5 FILTROS",
+              "TURNO 4 REACCIÓN PH2",
+              "TURNO 5 REACCIÓN PH2",
+              "TURNO 4 PREPARACIÓN",
+              "TURNO 5 PREPARACIÓN",
+              "TURNO 4 RLM"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=19&control_T=TURNO%204%20FILTROS&nr=",
+              "control_N=20&control_T=TURNO%205%20FILTROS&nr=",
+              "control_N=21&control_T=TURNO%204%20REACCIÓN%20PH2&nr=",
+              "control_N=22&control_T=TURNO%205%20REACCIÓN%20PH2&nr=",
+              "control_N=23&control_T=TURNO%204%20PREPARACIÓN&nr=",
+              "control_N=24&control_T=TURNO%205%20PREPARACIÓN&nr=",
+              "control_N=25&control_T=TURNO%204%20RLM&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1, 1, 1]
+          }
         }
       }
     },

@@ -10,12 +10,12 @@ if (isset($_SESSION['timezone'])) {
 function clonarReporte($datos) {
     $dato_decodificado = urldecode($datos);
     $objeto_json = json_decode($dato_decodificado, true);
-    // $host = "68.178.195.199"; 
-    // $user = "developers";
-    // $password = "6vLB#Q0bOVo4";
-    // $dbname = "tc1000";
-    // $port = '3306';
-    // $charset='utf-8';
+    // $host = "34.174.211.66";
+    // $user = "uumwldufguaxi";
+    // $password = "5lvvumrslp0v";
+    // $dbname = "db5i8ff3wrjzw3";
+    // $port = 3306;
+    // $charset = "utf-8";
 
     if ($objeto_json === null) {
         return array('success' => false, 'message' => 'Error al decodificar la cadena JSON');
@@ -36,11 +36,12 @@ function clonarReporte($datos) {
         return array('success' => false, 'message' => 'Error de conexión a la base de datos: ' . $mysqli->connect_error);
     }
 
-    $mysqli->set_charset($charset);
+    // $mysqli->set_charset($charset);
+    mysqli_set_charset($mysqli, "utf8");
 
     try {
         // PRIMER SELECT
-        $sqlSelect = "SELECT con.control FROM LTYcontrol con WHERE con.idLTYreporte=? LIMIT 1";
+        $sqlSelect = "SELECT con.control FROM LTYcontrol con WHERE con.idLTYreporte=? ORDER BY con.idLTYcontrol ASC LIMIT 1";
         $stmtSelect = $mysqli->prepare($sqlSelect);
 
         if ($stmtSelect === false) {
@@ -138,10 +139,15 @@ function clonarReporte($datos) {
             $stmtDelete->close();
             $interrogantes = "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
             $parametros = "sssissiiisssssssssiisii";
+            $cadena = $campo['control'];
+            $longitud = strlen($cadena) - 1;
+            $numeroControl = substr($cadena, $longitud - strlen($cadena));
+
             foreach ($campos as &$campo) {
-                $cadena = $campo['control'];
-                $longitud = strlen($cadena) - 1;
-                $numeroControl = substr($cadena, $longitud - strlen($cadena));
+                // $cadena = $campo['control'];
+                // $longitud = strlen($cadena) - 1;
+                // $numeroControl = substr($cadena, $longitud - strlen($cadena));
+                $numeroControl ++;
                 $campo['control'] = $control . $numeroControl;
                 $campo['idLTYreporte'] = $idDestino;
                 $sqlInsert = "INSERT INTO LTYcontrol ($fields) VALUES ($interrogantes)";
