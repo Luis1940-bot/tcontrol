@@ -178,6 +178,8 @@ async function nuevoUser() {
 }
 
 function setearSelects() {
+  const id = document.getElementById('id')
+  id.setAttribute('disabled', true)
   const situacion = document.getElementById('situacion')
   situacion.options[1].selected = true
   situacion.setAttribute('disabled', true)

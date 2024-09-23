@@ -38,14 +38,24 @@
     "operation": [null]
   },
   "Purificación": {
-    "name": ["Área de Preparación"],
-    "confecha": [1],
-    "archivo": ["x"],
-    "active": [1],
-    "button": [0],
-    "procedure": ["proc_area_preparacion"],
-    "in": [null],
-    "out": [null],
-    "operation": [null]
+    "name": [
+      "Área de Preparación",
+      "Área de Cristalización",
+      "Área de Filtros",
+      "Área de RLM"
+    ],
+    "confecha": [1, 1, 1, 1],
+    "archivo": ["x", "x", "x", "x"],
+    "active": [1, 1, 1, 1],
+    "button": [0, 0, 0, 0],
+    "procedure": [
+      "proc_area_preparacion",
+      "proc_area_cristalizacion",
+      "proc_area_filtros",
+      "proc_area_rlm"
+    ],
+    "in": [null, null, null, null],
+    "out": [null, null, null, null],
+    "operation": [null, null, null, null]
   }
 }

@@ -24,7 +24,7 @@
           >Email: {email}</mj-text
         >
         <mj-button
-          href="http://localhost:8080/Pages/RegisterUser/verify.php?codigo={cod_verificador}&id={idusuario}"
+          href="https://tenkiweb/tcontrol/Pages/RegisterUser/verify.php?codigo={cod_verificador}&id={idusuario}"
           background-color="#ffffff"
           color="#0027FF"
           font-size="14px"
