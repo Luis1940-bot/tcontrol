@@ -16,7 +16,7 @@
                       break;
 
                       case 'NuevoControl':
-                          $sql="SELECT  SQL_NO_CACHE 'ID',LTYcontrol.idLTYcontrol AS id, LTYcontrol.control AS CONTROL_1, LTYcontrol.nombre AS NOMBRE,'RELEVAMIENTO', LTYcontrol.tipodato AS TIPO, 
+                          $sql="SELECT   'ID',LTYcontrol.idLTYcontrol AS id, LTYcontrol.control AS CONTROL_1, LTYcontrol.nombre AS NOMBRE,'RELEVAMIENTO', LTYcontrol.tipodato AS TIPO, 
                           LTYcontrol.detalle AS DETALLE, 'OBSERVACION', LTYcontrol.visible AS VISIBLE, LTYcontrol.tpdeobserva AS TPDOBSV,'valorOBS','idselector1', LTYcontrol.selector AS SELECTOR, 'valorSEL','idselector2',
                           LTYcontrol.selector2 AS SELECTOR2,'valorSEL2', LTYcontrol.separador AS SEPARADOR, LTYreporte.botonesaccion, IFNULL(LTYcontrol.rutinasql,'') AS RUTINA, IFNULL(LTYcontrol.valor_defecto,'') AS VALOR_DEFECTO
                           ,LTYcontrol.requerido AS REQUERIDO,LTYreporte.envio_mail AS X_MAIL,LTYcontrol.valor_sql AS VALOR_SQL
@@ -30,7 +30,7 @@
 
                       case 'Selectores':
                           // SE USA PARA LA CARGA DE LOS SELECTORES
-                          $sql="SELECT SQL_NO_CACHE LTYselect.idLTYselect AS ID, LTYselect.concepto AS CONCEPT, LTYselect.selector AS SELEC, LTYselect.detalle AS DETALLE, RAND(),NOW()
+                          $sql="SELECT  LTYselect.idLTYselect AS ID, LTYselect.concepto AS CONCEPT, LTYselect.selector AS SELEC, LTYselect.detalle AS DETALLE, RAND(),NOW()
                           FROM LTYselectReporte 
                           INNER JOIN LTYselect ON LTYselectReporte.selector=LTYselect.selector
                           WHERE LTYselect.activo='s' AND LTYselectReporte.idLTYreporte=".$porciones[1]." ORDER BY LTYselect.orden ASC;";
@@ -38,7 +38,7 @@
 
                       case 'ctrlCargado':
                           $control_cargado=$porciones[1];
-                          $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha AS FECHA, LTYregistrocontrol.hora AS HORA, LTYregistrocontrol.nuxpedido AS PEDIDO, 
+                          $sql="SELECT  LTYregistrocontrol.fecha AS FECHA, LTYregistrocontrol.hora AS HORA, LTYregistrocontrol.nuxpedido AS PEDIDO, 
                               LTYregistrocontrol.supervisor AS DISUPERVISOR, IF(LTYregistrocontrol.supervisor=0,'',u.nombre) AS NOMBRE_SUPERVISOR,
                               LTYregistrocontrol.observacion AS OBSERVACION,
                               LTYregistrocontrol.idusuario
@@ -54,7 +54,7 @@
                       break;
 
                       case 'img21':
-                          $sql="SELECT SQL_NO_CACHE LTYimage.idLTYimage, LTYimage.idLTYreporte, LTYimage.imagen, LTYimage.altura,
+                          $sql="SELECT  LTYimage.idLTYimage, LTYimage.idLTYreporte, LTYimage.imagen, LTYimage.altura,
                           LTYimage.ancho, LTYimage.tipo, LTYimage.orden, LTYimage.detalle, RAND(),NOW()
                           FROM LTYimage
                           WHERE LTYimage.activo='s'

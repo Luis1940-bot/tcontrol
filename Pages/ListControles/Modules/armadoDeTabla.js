@@ -25,7 +25,7 @@ const encabezados = {
     'Situación',
     'Requerido',
     'Visible',
-    'Habilitado',
+    'Inhabilitar',
     'Orden',
     'Separador',
     'Valor si',
@@ -482,7 +482,6 @@ function estiloCellCampos(celda) {
 }
 
 async function turnOnOff(target, objTranslate, plant) {
-  // console.log(target)
   const turn = await turnControl(target, plant)
 
   if (turn.success) {
@@ -937,7 +936,6 @@ function estilosCell(
   spanOnOff.style.display = 'inline-block'
 
   cell.appendChild(spanOnOff)
-
   if (img && onOff === '') {
     const imagen = document.createElement('img')
     imagen.setAttribute('class', 'img-view')

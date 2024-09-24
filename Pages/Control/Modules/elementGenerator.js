@@ -75,12 +75,27 @@ class ElementGenerator {
     valorPorDefecto !== undefined
       ? (inputNumber.value = valorPorDefecto)
       : null
+
     inputNumber.addEventListener('input', function handleInput() {
-      this.value = this.value.replace(/[^\d.]/g, '')
+      // Permitir solo dígitos y un único punto decimal
+      const sanitizedValue = this.value.replace(/[^\d.]/g, '')
+
+      // Verifica si el valor contiene más de un punto decimal
+      const parts = sanitizedValue.split('.')
+      if (parts.length > 2) {
+        this.value = parts[0] + '.' + parts[1] // Permitir solo la primera parte decimal
+      } else {
+        this.value = sanitizedValue // Si es válido, actualiza el valor del input
+      }
     })
+
     inputNumber.addEventListener('blur', function handleBlur() {
-      this.value = parseFloat(this.value).toLocaleString()
+      // Validar el valor cuando el input pierde el foco
+      if (this.value === '' || isNaN(Number(this.value))) {
+        this.value = '' // Si es vacío o no es número, dejarlo vacío en vez de NaN
+      }
     })
+
     return inputNumber
   }
 

@@ -65,7 +65,8 @@ function estilosCell(
   colorText,
   requerido,
   display,
-  objTrad
+  objTrad,
+  enabled
 ) {
   const cell = document.createElement('td')
   let dato = ''
@@ -79,6 +80,12 @@ function estilosCell(
     cell.textContent = `${dato} ${requerido}` || `${dato} ${requerido}`
   } else if (dato === null && type !== null) {
     cell.appendChild(type)
+    // Deshabilitar el elemento si enabled es 1
+    if (enabled === 1) {
+      type.disabled = true // Inhabilita el input, select, textarea
+    } else {
+      type.disabled = false // Asegura que esté habilitado si enabled no es 1
+    }
   }
   cell.style.borderBottom = '1px solid #cecece'
   // cell.style.background = background;
@@ -106,6 +113,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
 
     const tipoDeDato = element[5]
     const tipoDeObservacion = element[9]
+    let enabled = 0
     let alignCenter = 'left'
     let paddingLeft = '0px'
     let colSpan = 0
@@ -188,6 +196,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
         valorXDefecto
       )
       type = inputDate
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'h') {
       dato = null
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
@@ -199,6 +208,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
         valorXDefecto
       )
       type = inputHora
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'x') {
       dato = '' //null
       type = null
@@ -209,12 +219,14 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       const inputText = ElementGenerator.generateInputText(width, valorXDefecto)
       elementHTML = inputText
       type = inputText
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'b') {
       dato = null
       let checked = false
       element[20] === '1' ? (checked = true) : (checked = false)
       const inputCheckBox = ElementGenerator.generateInputCheckBox(checked)
       type = inputCheckBox
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'n') {
       dato = null
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
@@ -225,6 +237,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       )
       elementHTML = inputNumber
       type = inputNumber
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'tx') {
       dato = null
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
@@ -235,12 +248,14 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       indexMas === cantidadDeRegistros
         ? ((colSpan = 1), (alignCenter = 'left'), (paddingLeft = '3px'))
         : null
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'sd') {
       dato = null
       const hijo = element[24]
       const sqlHijo = element[25]
       selectDinamic = ElementGenerator.generateSelectDinamic(hijo, sqlHijo)
       type = selectDinamic
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 's') {
       dato = null
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
@@ -249,6 +264,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       )
       const select = ElementGenerator.generateSelect(arraySel, valorXDefecto)
       type = select
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'img') {
       dato = null
       const text = '📸'
@@ -287,6 +303,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
         'InputButton-transparent'
       )
       type = buttonQuery
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'r') {
       dato = null
       let checked = false
@@ -298,6 +315,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
         name
       )
       type = radioButton
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'photo') {
       dato = null
       const src = element[20]
@@ -444,7 +462,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
       colorText,
       requerido,
       display,
-      objTrad
+      objTrad,
+      enabled
     )
     newRow.appendChild(cell)
   }
