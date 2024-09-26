@@ -83,6 +83,7 @@ async function consultaQuery(event, consulta) {
 }
 
 async function traerHijo(sql, array) {
+  console.log(sql, array)
   try {
     if (array[0].length === 0) {
       return null

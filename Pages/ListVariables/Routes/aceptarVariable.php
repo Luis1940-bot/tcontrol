@@ -41,7 +41,7 @@
           
             if ($stmt->execute() === true) {
                 $last_id = $conn->insert_id;
-                $sqlSelect = "SELECT SQL_NO_CACHE LTYselect.idLTYselect, LTYselect.detalle, LTYselect.concepto, LTYselect.activo
+                $sqlSelect = "SELECT  LTYselect.idLTYselect, LTYselect.detalle, LTYselect.concepto, LTYselect.activo
                                       ,LTYselect.selector, LTYselect.orden, LTYselect.nivel, RAND(),NOW() 
                                       FROM LTYselect 
                                       WHERE LTYselect.idLTYcliente = ? AND LTYselect.selector = ?

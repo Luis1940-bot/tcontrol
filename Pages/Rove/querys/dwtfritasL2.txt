@@ -1,5 +1,5 @@
 SELECT 
-    SQL_NO_CACHE
+    
     num_reporte,
     'FRITAS L2',
     name_reporte,

@@ -9,7 +9,7 @@
           switch ($porciones[0]) {
 
               case 'traerVariables':
-                  $sql="SELECT SQL_NO_CACHE LTYselect.idLTYselect, LTYselect.detalle, LTYselect.concepto, LTYselect.activo
+                  $sql="SELECT  LTYselect.idLTYselect, LTYselect.detalle, LTYselect.concepto, LTYselect.activo
                             ,LTYselect.selector, LTYselect.orden, LTYselect.nivel, RAND(),NOW() 
                             FROM LTYselect 
                             WHERE LTYselect.idLTYcliente = ". $sql_i ."
@@ -18,7 +18,7 @@
 
               case 'traerSelectReporte':
                 $sql="SELECT 
-                          SQL_NO_CACHE 
+                           
                           sRep.idLTYselectReporte,
                           sRep.selector,
                           sRep.idLTYreporte,
@@ -37,7 +37,7 @@
 
               case 'traerReporteParaVincular':
                 $sql = "SELECT 
-                            SQL_NO_CACHE 
+                             
                             rep.idLTYreporte AS id,
                             rep.nombre AS reporte,
                             rep.nivel AS tUsuario,

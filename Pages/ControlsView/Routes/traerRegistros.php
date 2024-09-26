@@ -9,7 +9,7 @@
             switch ($operacion) {
               case 'traerControles':
                       $reporte = $porciones[1];
-                      $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.hora,'%H:%i') as hora,LTYregistrocontrol.observacion,
+                      $sql="SELECT  LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.hora,'%H:%i') as hora,LTYregistrocontrol.observacion,
                       usuario.nombre, RAND(),NOW()  
                       FROM LTYregistrocontrol 
                       INNER JOIN usuario ON LTYregistrocontrol.idusuario=usuario.idusuario
@@ -22,7 +22,7 @@
                       $reporte = $porciones[1];
                       $fechaInicial = $porciones[2];
                       $fechaActual = $porciones[3];
-                      $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.hora,'%H:%i') as hora,LTYregistrocontrol.observacion,
+                      $sql="SELECT  LTYregistrocontrol.fecha,LTYregistrocontrol.nuxpedido,date_format(LTYregistrocontrol.hora,'%H:%i') as hora,LTYregistrocontrol.observacion,
                       usuario.nombre, RAND(),NOW()  
                       FROM LTYregistrocontrol 
                       INNER JOIN usuario ON LTYregistrocontrol.idusuario=usuario.idusuario
@@ -34,7 +34,7 @@
 
                 case 'NuevoControl':
                     $reporte = $porciones[1];
-                    $sql="SELECT SQL_NO_CACHE 'ID',LTYcontrol.idLTYcontrol AS id, LTYcontrol.control AS CONTROL_1, LTYcontrol.nombre AS NOMBRE,'RELEVAMIENTO', LTYcontrol.tipodato AS TIPO, 
+                    $sql="SELECT  'ID',LTYcontrol.idLTYcontrol AS id, LTYcontrol.control AS CONTROL_1, LTYcontrol.nombre AS NOMBRE,'RELEVAMIENTO', LTYcontrol.tipodato AS TIPO, 
                     LTYcontrol.detalle AS DETALLE, 'OBSERVACION', LTYcontrol.visible AS VISIBLE, LTYcontrol.tpdeobserva AS TPDOBSV
                     ,LTYcontrol.requerido AS REQUERIDO
                     ,LTYcontrol.enable1 AS ENABLE, RAND(),NOW()
@@ -46,7 +46,7 @@
 
                 case 'ctrlCargado':
                   $reporte = $porciones[1];
-                    $sql="SELECT SQL_NO_CACHE LTYregistrocontrol.fecha AS FECHA, LTYregistrocontrol.nuxpedido AS PEDIDO, LTYregistrocontrol.desvio AS DESVIO, LTYregistrocontrol.valor AS VALOR, 
+                    $sql="SELECT  LTYregistrocontrol.fecha AS FECHA, LTYregistrocontrol.nuxpedido AS PEDIDO, LTYregistrocontrol.desvio AS DESVIO, LTYregistrocontrol.valor AS VALOR, 
                         LTYregistrocontrol.tipodedato AS TIPODEDATO, LTYregistrocontrol.idLTYcontrol AS IDCONTROL, LTYregistrocontrol.supervisor AS DISUPERVISOR, IF(LTYregistrocontrol.supervisor=0,'',u.nombre) AS NOMBRE_SUPERVISOR,
                         LTYregistrocontrol.tpdeobserva AS TIPO_OBSERVA,LTYregistrocontrol.observacion AS OBSERVACION
                   ,LTYregistrocontrol.idusuario

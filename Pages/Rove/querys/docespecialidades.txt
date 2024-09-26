@@ -1,5 +1,5 @@
 SELECT 
-    SQL_NO_CACHE
+    
     fecha,
     ROUND(hora, 0),
     nux,

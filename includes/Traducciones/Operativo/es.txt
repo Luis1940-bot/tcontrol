@@ -203,8 +203,8 @@ Algo salió mal y no se guardaron las modificaciones!
 Primera
 Última
 Tipo de usuario:
-No tiene permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias
-No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias
+No tiene permiso para crear o revisar este control. Póngase en contacto con su jefe. Gracias
+No tiene permiso para crear o revisar este reporte. Póngase en contacto con su jefe. Gracias
 Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.
 No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.
 Seleccione el intervalo de fechas para la consulta:

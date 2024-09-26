@@ -42,47 +42,46 @@ function columna2(
     if (valor) {
       let optionFound = false
       let select
-      function getSelectedText(selectElement) {
-        if (
-          selectElement &&
-          selectElement.options &&
-          selectElement.selectedIndex !== -1
-        ) {
-          return selectElement.options[selectElement.selectedIndex].innerText
-        }
-        return null
-      }
+      let retries = 0 // Contador para reintentos
+      const maxRetries = 20 // Número máximo de reintentos
+      const retryDelay = 200 // Retraso entre cada reintento (en milisegundos)
+
+      // Función para verificar y seleccionar el valor en el select
       function checkAndSetValues() {
-        select = td[columnaTd].childNodes[0]
-        if (select.options.length > 0) {
+        select = td[columnaTd].childNodes[0] // Seleccionamos el <select> dentro del <td>
+        // Verificar si el select existe y si tiene opciones cargadas
+        if (select && select.options.length > 0) {
           for (let m = 0; m < select.options.length; m++) {
             if (select.options[m].innerText === valor) {
-              select.selectedIndex = m
+              select.selectedIndex = m // Seleccionar el valor coincidente
               optionFound = true
-              break
+              return // Terminar la función ya que encontramos la opción
             }
           }
+
+          // Si no se encontró la opción, agregarla como una nueva opción
           if (!optionFound) {
             const option = document.createElement('option')
-            // eslint-disable-next-line prefer-destructuring
-            option.value = datos.valorS[index]
+            option.value = datos.valorS[index] // Asegúrate de que 'datos.valorS[index]' existe
             option.innerText = valor
             select.appendChild(option)
-            console.log(valor)
+            select.selectedIndex = select.options.length - 1 // Seleccionar la nueva opción
           }
         } else {
-          setTimeout(checkAndSetValues, 1000)
+          // Si no hay opciones, reintentar hasta que estén disponibles
+          retries++
+          if (retries < maxRetries) {
+            setTimeout(checkAndSetValues, retryDelay) // Reintentar después de un breve retraso
+          } else {
+            console.warn(
+              `No se pudo cargar el select después de ${maxRetries} intentos.`
+            )
+          }
         }
       }
+
+      // Iniciar la función para verificar y establecer el valor en el select
       checkAndSetValues()
-      const selectedText = getSelectedText(select)
-      if (selectedText === null && valor) {
-        const option = document.createElement('option')
-        option.value = datos.valorS[index]
-        option.innerText = valor
-        select.appendChild(option)
-      }
-      // eslint-disable-next-line no-plusplus
     }
   }
   if (tagName === 'INPUT' && type === 'checkbox') {

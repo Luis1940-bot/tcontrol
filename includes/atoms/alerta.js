@@ -2912,10 +2912,10 @@ class Alerta {
       } else {
         texto =
           trO(
-            'No tiene permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias',
+            'No tiene permiso para crear o revisar este control. Póngase en contacto con su jefe. Gracias',
             objTrad
           ) ||
-          'No tiene permiso para crear o revisar este control. Póngase en contacto con su supervisor. Gracias'
+          'No tiene permiso para crear o revisar este control. Póngase en contacto con su jefe. Gracias'
         typeAlert = 'descripcion'
         obj.span.text[typeAlert] = texto
         obj.span.marginTop = '10px'
@@ -3206,10 +3206,10 @@ class Alerta {
       } else {
         texto =
           trO(
-            'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias',
+            'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su jefe. Gracias',
             objTrad
           ) ||
-          'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su supervisor. Gracias'
+          'No tiene permiso para crear o revisar este reporte. Póngase en contacto con su jefe. Gracias'
         typeAlert = 'descripcion'
         obj.span.text[typeAlert] = texto
         obj.span.marginTop = '10px'

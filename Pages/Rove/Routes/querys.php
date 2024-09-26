@@ -6,7 +6,7 @@ $sql = null;
  switch ($query) {
           case 'docespecialidades':
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         fecha,
                         ROUND(hora, 0),
                         nux,
@@ -38,7 +38,7 @@ $sql = null;
             break;
           case 'docfritas_L1':
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         fecha,
                         ROUND(hora, 0),
                         nux,
@@ -71,7 +71,7 @@ $sql = null;
 
           case 'docfritas_L2':
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         fecha,
                         ROUND(hora, 0),
                         nux,
@@ -106,7 +106,7 @@ $sql = null;
             
           case 'docpure': 
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         fecha,
                         ROUND(hora, 0),
                         nux,
@@ -140,7 +140,7 @@ $sql = null;
 
           case 'dwtespecialidades':
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         num_reporte,
                         'ESPECIALIDADES',
                         name_reporte,
@@ -203,7 +203,7 @@ $sql = null;
             
           case 'dwtfritas_L1':
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         num_reporte,
                         'FRITAS L1',
                         name_reporte,
@@ -262,7 +262,7 @@ $sql = null;
 
           case 'dwtfritas_L2':
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         num_reporte,
                         'FRITAS L2',
                         name_reporte,
@@ -314,7 +314,7 @@ $sql = null;
 
           case 'dwtpure':
             $sql = "SELECT 
-                        SQL_NO_CACHE
+                        
                         num_reporte,
                         'PURÉ',
                         name_reporte,
@@ -370,7 +370,7 @@ $sql = null;
 
           case 'estespecialidades':
             $sql = "SELECT 
-                        SQL_NO_CACHE fecha,
+                         fecha,
                         IFNULL(mp, '-') AS mp,
                         AVG(hrum) AS hrum,
                         AVG(cap) AS cap,
@@ -425,7 +425,7 @@ $sql = null;
 
           case 'estfritas_L1':
             $sql = "SELECT 
-                        SQL_NO_CACHE fecha,
+                         fecha,
                         IFNULL(mp, '-') AS mp,
                         ROUND(hrum, 0) AS hrum,
                         ROUND(cap, 1) AS cap,
@@ -481,7 +481,7 @@ $sql = null;
 
           case 'estfritas_L2':
             $sql = "SELECT 
-                        SQL_NO_CACHE fecha,
+                         fecha,
                         mp,
                         ROUND(hrum, 0) AS hrum,
                         ROUND(cap, 1) AS cap,
@@ -520,7 +520,7 @@ $sql = null;
 ;            break;
 
           case 'estpure':
-            $sql = "SELECT SQL_NO_CACHE
+            $sql = "SELECT 
                         fecha,
                         IFNULL(mp, '-') AS mp,
                         ROUND(hrum, 0) AS hrum,

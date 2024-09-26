@@ -1,4 +1,4 @@
-SELECT SQL_NO_CACHE
+SELECT 
     fecha,
     IFNULL(mp, '-') AS mp,
     ROUND(hrum, 0) AS hrum,

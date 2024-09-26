@@ -15,6 +15,7 @@ function updateRegistro(objeto, nux) {
   // eslint-disable-next-line no-console
   console.time('update_time')
   const objLimpio = limpiarObjeto(objeto)
+  // console.log(objLimpio)
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio))
   // console.log(nuevoObjeto)
   const rax = `&new=${new Date()}`

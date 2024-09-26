@@ -9,7 +9,7 @@
           switch ($porciones[0]) {
 
               case 'traerReportes':
-                  $sql="SELECT  SQL_NO_CACHE LTYreporte.nombre, LTYreporte.idLTYreporte, LTYreporte.detalle 
+                  $sql="SELECT   LTYreporte.nombre, LTYreporte.idLTYreporte, LTYreporte.detalle 
                   ,IFNULL((SELECT MAX(LTYregistrocontrol.fecha) FROM LTYregistrocontrol WHERE  LTYregistrocontrol.idLTYreporte=LTYreporte.idLTYreporte),'.')  AS ULTIMA_FECHA
                   ,LTYreporte.rotulo1 AS CIA, LTYreporte.elaboro, LTYreporte.reviso, LTYreporte.aprobo, LTYreporte.regdc, LTYreporte.vigencia, LTYreporte.cambio
                   ,LTYreporte.modificacion, LTYreporte.version,LTYreporte.rotulo3,LTYreporte.nivel,LTYreporte.envio_mail
@@ -23,7 +23,7 @@
 
               case 'verificarControl':
                 $nuxpedido = $porciones[1];
-                $sql="SELECT SQL_NO_CACHE DISTINCT(c.idLTYreporte) AS reporte, LTYreporte.nombre 
+                $sql="SELECT  DISTINCT(c.idLTYreporte) AS reporte, LTYreporte.nombre 
                 FROM LTYregistrocontrol c 
                 INNER JOIN LTYreporte ON LTYreporte.idLTYreporte=c.idLTYreporte
                 WHERE c.nuxpedido='".$nuxpedido."';";

@@ -1,8 +1,23 @@
 {
   "Consultas": {
-    "name": ["Mantenimiento", "Producción"],
-    "active": [1, 1],
-    "button": [1, 1]
+    "name": ["Gestión", "Mantenimiento", "Producción"],
+    "active": [1, 1, 1],
+    "button": [1, 1, 1]
+  },
+  "Gestión": {
+    "name": ["PA Facilitador", "PA Jefatura", "PA Gerencia"],
+    "confecha": [1, 1, 1],
+    "archivo": ["x", "x", "x"],
+    "active": [1, 1, 1],
+    "button": [0, 0, 0],
+    "procedure": [
+      "proc_pa_facilitador",
+      "proc_pa_jefatura",
+      "proc_pa_gerencia"
+    ],
+    "in": [null, null, null],
+    "out": [null, null, null],
+    "operation": [null, null, null]
   },
   "Mantenimiento": {
     "name": ["Listado de Compañías", "Auditorías M&T"],

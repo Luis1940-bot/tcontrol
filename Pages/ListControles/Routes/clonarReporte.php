@@ -64,7 +64,7 @@ function clonarReporte($datos) {
             }
 
             // SEGUNDO SELECT
-            $sqlSelectFull = "SELECT SQL_NO_CACHE
+            $sqlSelectFull = "SELECT 
                 con.idLTYcontrol,
                 con.control,
                 con.nombre,

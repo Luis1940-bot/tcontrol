@@ -8,7 +8,7 @@ if (isset($_SESSION['timezone'])) {
 }
 
 function traerControlActualizado($conn, $plant) {
-    $sql = "SELECT SQL_NO_CACHE
+    $sql = "SELECT 
                 UPPER(rep.nombre) AS reporte,
                 IFNULL(con.idLTYcontrol, '') AS id,
                 IFNULL(con.control, '') AS control,

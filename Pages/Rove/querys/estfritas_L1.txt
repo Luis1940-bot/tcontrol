@@ -1,5 +1,5 @@
 SELECT 
-    SQL_NO_CACHE fecha,
+     fecha,
     IFNULL(mp, '-') AS mp,
     ROUND(hrum, 0) AS hrum,
     ROUND(cap, 1) AS cap,

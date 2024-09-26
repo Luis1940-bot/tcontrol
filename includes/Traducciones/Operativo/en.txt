@@ -203,8 +203,8 @@ Something went wrong and the modifications were not saved!
 First
 Last
 Type of user:
-You do not have permission to create or review this control. Contact your supervisor. Thank you
-You do not have permission to create or review this report. Contact your supervisor. Thank you
+You do not have permission to create or review this control. Contact your leader. Thank you
+You do not have permission to create or review this report. Contact your leader. Thank you
 The query is being performed, it will take a few seconds, it can be very complex depending on the files involved and the time interval requested. Secure the internet connection.
 No record was found that matches the dates provided. Review the dates in Loaded Controls.
 Select the date range for the query:

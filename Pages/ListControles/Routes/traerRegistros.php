@@ -9,7 +9,7 @@
           switch ($porciones[0]) {
 
               case 'traerLTYcontrol':
-                  $sql="SELECT SQL_NO_CACHE
+                  $sql="SELECT 
                             UPPER(rep.nombre) AS reporte,
                             IFNULL(con.idLTYcontrol, '') AS id,
                             IFNULL(con.control, '') AS control,
@@ -45,7 +45,7 @@
               break;
 
               case 'traerSelects':
-                $sql = "SELECT SQL_NO_CACHE
+                $sql = "SELECT 
                             sel.selector AS selector,
                             sel.detalle AS con
                           FROM LTYselect sel 

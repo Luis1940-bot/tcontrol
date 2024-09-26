@@ -480,9 +480,18 @@ async function traerRutina(sqli, selDinamico) {
     console.log(error)
   }
 }
-async function traerValorPorDefecto(sqli, tipo, html) {
+async function traerValorPorDefecto(sqli, tipo, html, url) {
   try {
-    const sql = encodeURIComponent(sqli)
+    let sql_i = sqli
+    const nr = url.nr
+
+    if (sqli.includes('?') && nr !== '0') {
+      sql_i = sql_i.replace('?', nr)
+    } else if (sqli.includes('?') && nr === '0') {
+      sql_i = sql_i.replace('?', '0')
+    }
+
+    const sql = encodeURIComponent(sql_i)
     if (tipo === 'n') {
       const arrayValor = await traerRegistros(`traer_LTYsql`, `${sql}`) //encodeURIComponent
       ElementGenerator.generateInputNumberQuery(arrayValor, html)
@@ -496,7 +505,7 @@ async function traerValorPorDefecto(sqli, tipo, html) {
   }
 }
 
-function completaTabla(arrayControl, encabezados, objTrad) {
+function completaTabla(arrayControl, encabezados, objTrad, url) {
   const tbody = document.querySelector('tbody')
   const cantidadDeRegistros = arrayControl.length
   const email = arrayControl[0][22]
@@ -518,7 +527,7 @@ function completaTabla(arrayControl, encabezados, objTrad) {
   // Inicializar el progreso
   let fila = 0
   updateProgress()
-
+  // console.log(arrayControl)
   // Procesar cada elemento del array
   arrayControl.forEach((element, index) => {
     const newRow = estilosTbodyCell(
@@ -546,7 +555,7 @@ function completaTabla(arrayControl, encabezados, objTrad) {
 
     // Cargar valor por defecto
     if (['n', 't', 'tx'].includes(element[5]) && element[23]) {
-      traerValorPorDefecto(element[23], element[5], elementHTML)
+      traerValorPorDefecto(element[23], element[5], elementHTML, url)
     }
 
     if (element[9] === 'sd' && element[26]) {
@@ -554,7 +563,7 @@ function completaTabla(arrayControl, encabezados, objTrad) {
     }
 
     if (['n', 't', 'tx'].includes(element[9]) && element[27]) {
-      traerValorPorDefecto(element[27], element[9], elementHTML)
+      traerValorPorDefecto(element[27], element[9], elementHTML, null)
     }
   })
 
@@ -565,16 +574,18 @@ function completaTabla(arrayControl, encabezados, objTrad) {
 function controlT(objTrad) {
   const contenido = sessionStorage.getItem('contenido')
   const url = desencriptar(contenido)
+  // console.log(url)
   // const url = new URL(window.location.href);
   const controlT = url.control_T // url.searchParams.get('control_T');
   document.getElementById('wichC').innerText = trA(controlT, objTrad)
+  return url
 }
 
-function loadTabla(arrayControl, encabezados, objTrad) {
+function loadTabla(arrayControl, encabezados, objTrad, url) {
   const miAlerta = new Alerta()
   if (arrayControl.length > 0) {
     encabezado(encabezados, objTrad)
-    completaTabla(arrayControl, encabezados, objTrad)
+    completaTabla(arrayControl, encabezados, objTrad, url)
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
     if (cantidadDeFilas.childElementCount !== arrayControl.length) {
@@ -596,8 +607,9 @@ function loadTabla(arrayControl, encabezados, objTrad) {
 
 export default function tablaVacia(arrayControl, encabezados, objTrad) {
   // arraysLoadTranslate()
-  controlT(objTrad)
+  const url = controlT(objTrad)
+  // console.log(arrayControl)
   setTimeout(() => {
-    loadTabla(arrayControl, encabezados, objTrad)
+    loadTabla(arrayControl, encabezados, objTrad, url)
   }, 200)
 }
