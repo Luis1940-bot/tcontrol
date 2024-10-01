@@ -128,7 +128,73 @@
             "ctrl",
             "ctrl"
           ],
-          "ruta": ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+          "ruta": [
+            "control_N=33&control_T=SA-Calderas%20LUNES%20TURNO%201&nr=",
+            "control_N=34&control_T=SA-Calderas%20LUNES%20TURNO%202&nr=",
+            "control_N=35&control_T=SA-Calderas%20MARTES%20TURNO%201&nr=",
+            "control_N=36&control_T=SA-Calderas%20MARTES%20TURNO%202&nr=",
+            "control_N=37&control_T=SA-Calderas%20MIÉRCOLES%20TURNO%201&nr=",
+            "control_N=38&control_T=SA-Calderas%20MIÉRCOLES%20TURNO%202&nr=",
+            "control_N=39&control_T=SA-Calderas%20JUEVES%20TURNO%201&nr=",
+            "control_N=40&control_T=SA-Calderas%20JUEVES%20TURNO%202&nr=",
+            "control_N=41&control_T=SA-Calderas%20VIERNES%20TURNO%201&nr=",
+            "control_N=42&control_T=SA-Calderas%20VIERNES%20TURNO%202&nr=",
+            "control_N=43&control_T=SA-Calderas%20SÁBADO%20TURNO%201&nr=",
+            "control_N=44&control_T=SA-Calderas%20SÁBADO%20TURNO%202&nr=",
+            "control_N=45&control_T=SA-Calderas%20DOMINGO%20TURNO%201&nr=",
+            "control_N=46&control_T=SA-Calderas%20DOMINGO%20TURNO%202&nr="
+          ],
+          "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        },
+        "Turbinas": {
+          "name": [
+            "Lunes Turno 1",
+            "Lunes Turno 2",
+            "Martes Turno 1",
+            "Martes Turno 2",
+            "Miércoles Turno 1",
+            "Miércoles Turno 2",
+            "Jueves Turno 1",
+            "Jueves Turno 2",
+            "Viernes Turno 1",
+            "Viernes Turno 2",
+            "Sábado Turno 1",
+            "Sábado Turno 2",
+            "Domingo Turno 1",
+            "Domingo Turno 2"
+          ],
+          "type": [
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl"
+          ],
+          "ruta": [
+            "control_N=47&control_T=SA-Turbinas%20LUNES%20TURNO%201&nr=",
+            "control_N=48&control_T=SA-Turbinas%20LUNES%20TURNO%202&nr=",
+            "control_N=49&control_T=SA-Turbinas%20MARTES%20TURNO%201&nr=",
+            "control_N=50&control_T=SA-Turbinas%20MARTES%20TURNO%202&nr=",
+            "control_N=51&control_T=SA-Turbinas%20MIÉRCOLES%20TURNO%201&nr=",
+            "control_N=52&control_T=SA-Turbinas%20MIÉRCOLES%20TURNO%202&nr=",
+            "control_N=53&control_T=SA-Turbinas%20JUEVES%20TURNO%201&nr=",
+            "control_N=54&control_T=SA-Turbinas%20JUEVES%20TURNO%202&nr=",
+            "control_N=55&control_T=SA-Turbinas%20VIERNES%20TURNO%201&nr=",
+            "control_N=56&control_T=SA-Turbinas%20VIERNES%20TURNO%202&nr=",
+            "control_N=57&control_T=SA-Turbinas%20SÁBADO%20TURNO%201&nr=",
+            "control_N=58&control_T=SA-Turbinas%20SÁBADO%20TURNO%202&nr=",
+            "control_N=59&control_T=SA-Turbinas%20DOMINGO%20TURNO%201&nr=",
+            "control_N=60&control_T=SA-Turbinas%20DOMINGO%20TURNO%202&nr="
+          ],
           "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         }
       }
