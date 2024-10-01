@@ -4432,7 +4432,7 @@ class Alerta {
           column === '17' ||
           column === '21'
         ) {
-          obj.divContent.height = '350px'
+          obj.divContent.height = 'auto'
         }
         break
       case '11':
@@ -4869,7 +4869,7 @@ class Alerta {
     this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
     // Crear el contenido del modal
     obj.divContent.id = 'idDivListControles'
-    obj.divContent.height = '300px'
+    obj.divContent.height = 'auto'
     const modalContent = createDiv(obj.divContent)
     const spanClose = createSpan(obj.close)
     spanClose.addEventListener('click', () => {
@@ -4986,7 +4986,7 @@ class Alerta {
     this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
     // Crear el contenido del modal
     obj.divContent.id = 'idDivListControles'
-    obj.divContent.height = '300px'
+    obj.divContent.height = 'auto'
     const modalContent = createDiv(obj.divContent)
     const spanClose = createSpan(obj.close)
     spanClose.addEventListener('click', () => {
