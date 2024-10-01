@@ -11,9 +11,13 @@ import baseUrl from '../../../../config.js'
 const SERVER = baseUrl
 
 function buscarEnArray(id, array) {
-  const idStr = id.toString().trim()
-  const resultado = array.find((registro) => registro[1] === idStr)
-  return resultado
+  try {
+    const idStr = id.toString().trim()
+    const resultado = array.find((registro) => registro[1] === idStr)
+    return resultado
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 function convertirObjATextPlano(obj) {
@@ -115,7 +119,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
       let valorS
       let valorOBS
       let familiaselector
-
+      let valid = false
       // let imagenes;
       let observacion
       let respuesta
@@ -198,7 +202,6 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
         if (c === 2) {
           respuesta = respuestaColumna(c, i, objParametros)
           ;({ valor, selector1, valorS, familiaselector } = respuesta)
-
           i === 0 && type === 'date' ? objetoControl.fecha.push(valor) : null
           i === 1 && type === 'time' ? objetoControl.hora.push(valor) : null
         }
@@ -209,7 +212,14 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
         }
 
         if (c === 4) {
-          founded = buscarEnArray(td[5].textContent, arrayControl)
+          const tdCount = tr[i].cells.length
+          let valorFounded = 0
+          if (tdCount === 6) {
+            founded = buscarEnArray(td[5].textContent, arrayControl)
+          } else if (tdCount === 5) {
+            founded = buscarEnArray(td[4].textContent, arrayControl)
+          }
+
           objetoControl.name.push(campo.textContent)
           fechaActual = fechasGenerator.fecha_corta_yyyymmdd(new Date())
           horaActual = fechasGenerator.hora_actual(new Date())

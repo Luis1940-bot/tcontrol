@@ -217,3 +217,4 @@ Você está trabalhando com um controle salvo com o número:
 Documento assinado digitalmente.
 Lembre-se de que os e-mails estão sendo verificados para envio.
 A consulta está sendo realizada, levará alguns segundos, pode ser muito complexa dependendo dos arquivos envolvidos e do intervalo de tempo solicitado. Proteja a conexão com a Internet.
+Validado por

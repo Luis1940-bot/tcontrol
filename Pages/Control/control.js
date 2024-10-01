@@ -155,7 +155,7 @@ async function cargaDeRegistros(objTrad, plant) {
     )
     arrayGlobal.arrayControl = [...nuevoControlData]
 
-    tablaVacia(nuevoControlData, encabezados, objTrad)
+    tablaVacia(nuevoControlData, encabezados, objTrad, plant)
     finPerformance()
     // Ajustar el porcentaje a 100%
     // console.log(nr)

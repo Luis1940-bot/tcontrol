@@ -104,7 +104,7 @@ function estilosCell(
   return cell
 }
 
-function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
+function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 6; i++) {
@@ -332,7 +332,25 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad) {
         plant
       )
       type = img
+    } else if (i === 2 && tipoDeDato === 'valid') {
+      dato = null
+      let text = 'VALIDAR'
+      const anchoButton =
+        widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.2
+      const wordLenght = text.length * 7
+      const caracteres = Math.ceil((wordLenght - anchoButton) / 7)
+      text = `${text.substring(0, caracteres)}.`
+      const inputButton = ElementGenerator.generateValidButton(
+        text,
+        'VALIDAR',
+        objTrad,
+        'InputButton-transparent',
+        plant,
+        index
+      )
+      type = inputButton
     }
+
     if (i > 2 && tipoDeDato === 'tx') {
       const indexMas = index + 1
       indexMas === cantidadDeRegistros ? (colSpan = 2) : null
@@ -505,7 +523,7 @@ async function traerValorPorDefecto(sqli, tipo, html, url) {
   }
 }
 
-function completaTabla(arrayControl, encabezados, objTrad, url) {
+function completaTabla(arrayControl, encabezados, objTrad, url, plant) {
   const tbody = document.querySelector('tbody')
   const cantidadDeRegistros = arrayControl.length
   const email = arrayControl[0][22]
@@ -534,7 +552,8 @@ function completaTabla(arrayControl, encabezados, objTrad, url) {
       element,
       index,
       cantidadDeRegistros,
-      objTrad
+      objTrad,
+      plant
     )
     tbody.appendChild(newRow)
     fila += 1
@@ -581,11 +600,11 @@ function controlT(objTrad) {
   return url
 }
 
-function loadTabla(arrayControl, encabezados, objTrad, url) {
+function loadTabla(arrayControl, encabezados, objTrad, url, plant) {
   const miAlerta = new Alerta()
   if (arrayControl.length > 0) {
     encabezado(encabezados, objTrad)
-    completaTabla(arrayControl, encabezados, objTrad, url)
+    completaTabla(arrayControl, encabezados, objTrad, url, plant)
     const cantidadDeFilas = document.querySelector('table tbody')
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga
     if (cantidadDeFilas.childElementCount !== arrayControl.length) {
@@ -605,11 +624,11 @@ function loadTabla(arrayControl, encabezados, objTrad, url) {
   }
 }
 
-export default function tablaVacia(arrayControl, encabezados, objTrad) {
+export default function tablaVacia(arrayControl, encabezados, objTrad, plant) {
   // arraysLoadTranslate()
   const url = controlT(objTrad)
-  // console.log(arrayControl)
+  // console.log(url)
   setTimeout(() => {
-    loadTabla(arrayControl, encabezados, objTrad, url)
+    loadTabla(arrayControl, encabezados, objTrad, url, plant)
   }, 200)
 }

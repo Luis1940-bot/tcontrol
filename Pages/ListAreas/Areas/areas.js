@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función para bloquear caracteres
   function bloquearCaracteres(event) {
-    const blockedChars = ['.', ',', '/'] // Caracteres que quieres bloquear
+    const blockedChars = ['.', ',', '/', ':'] // Caracteres que quieres bloquear
     if (blockedChars.includes(event.key)) {
       event.preventDefault() // Prevenir la acción por defecto (evita que se ingrese el carácter)
     }

@@ -3,12 +3,14 @@ import {
   consultaCN,
   consultaQuery,
   eventSelect,
+  validation,
   // eslint-disable-next-line import/extensions
 } from './accionButton.js'
 // eslint-disable-next-line import/extensions
 import buttonImage from './imagenes.js'
 
 import baseUrl from '../../../config.js'
+import { encriptar } from '../../../controllers/cript.js'
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl
 
@@ -52,6 +54,14 @@ class ElementGenerator {
     valorPorDefecto !== undefined
       ? (inputText.value = valorPorDefecto)
       : null
+    function validateInput(event) {
+      const currentValue = event.target.value
+      // Reemplazar caracteres no permitidos
+      event.target.value = currentValue.replace(/[,:/]/g, '')
+    }
+
+    // Agregar evento input al input
+    inputText.addEventListener('input', validateInput)
     return inputText
   }
 
@@ -147,6 +157,14 @@ class ElementGenerator {
     valorPorDefecto !== undefined
       ? (textArea.value = valorPorDefecto)
       : null
+    function validateInput(event) {
+      const currentValue = event.target.value
+      // Reemplazar caracteres no permitidos
+      event.target.value = currentValue.replace(/[,:/]/g, '')
+    }
+
+    // Agregar evento input al input
+    textArea.addEventListener('input', validateInput)
     return textArea
   }
 
@@ -259,6 +277,14 @@ class ElementGenerator {
     div.setAttribute('class', 'button-cn')
     const inputText = document.createElement('input')
     inputText.setAttribute('type', 'text')
+    function validateInput(event) {
+      const currentValue = event.target.value
+      // Reemplazar caracteres no permitidos
+      event.target.value = currentValue.replace(/[,:/]/g, '')
+    }
+
+    // Agregar evento input al input
+    inputText.addEventListener('input', validateInput)
     div.appendChild(inputText)
     const button = document.createElement('button')
     button.textContent = text
@@ -307,6 +333,30 @@ class ElementGenerator {
     radioButton.checked = checked
     name !== '0' ? (radioButton.name = name) : null
     return radioButton
+  }
+
+  static generateValidButton(text, name, objTrad, clase, plant, index) {
+    const div = document.createElement('div')
+    div.setAttribute('class', 'button-cn')
+    const inputText = document.createElement('input')
+    inputText.setAttribute('type', 'password')
+    inputText.autocomplete = 'new-password'
+    div.appendChild(inputText)
+    const button = document.createElement('button')
+    button.textContent = text
+    button.setAttribute('name', name)
+    button.setAttribute('class', clase)
+    // button.style.background = '#97B7E8';
+    div.appendChild(button)
+    button.addEventListener('click', (event) => {
+      event.preventDefault()
+      let encriptado = encriptar(inputText.value.trim())
+      if (inputText.value.trim() === '') {
+        encriptado = null
+      }
+      validation(encriptado, plant, objTrad, div, index)
+    })
+    return div
   }
 }
 

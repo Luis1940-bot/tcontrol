@@ -375,7 +375,7 @@ function leeApp(json) {
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.target.matches('.input-register')) {
-      if (e.key === ',') {
+      if (e.key === ',' || e.key === ':') {
         e.preventDefault()
       }
     }

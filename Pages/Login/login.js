@@ -562,7 +562,7 @@ function generaOverlay() {
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.target.matches('.input-login')) {
-      if (e.key === ',') {
+      if (e.key === ',' || e.key === ':') {
         e.preventDefault()
       }
     }

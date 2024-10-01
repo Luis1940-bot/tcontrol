@@ -217,3 +217,4 @@ Estás trabajando con un control guardado con el número:
 Documento firmado digitalmente.
 Tener en cuenta que se están verificando los emails para su envío.
 Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.
+Validado por

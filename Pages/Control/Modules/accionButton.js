@@ -4,6 +4,10 @@ import traerRegistros from './Controladores/traerRegistros.js'
 import { desencriptar } from '../../../controllers/cript.js'
 import { trO } from '../../../controllers/trOA.js'
 import { arraysLoadTranslate } from '../../../controllers/arraysLoadTranslate.js'
+import traerFirma from './Controladores/traerFirma.js'
+import Alerta from '../../../includes/atoms/alerta.js'
+// eslint-disable-next-line import/extensions
+import arrayGlobal from '../../../controllers/variables.js'
 
 let objTranslate = []
 
@@ -83,7 +87,6 @@ async function consultaQuery(event, consulta) {
 }
 
 async function traerHijo(sql, array) {
-  console.log(sql, array)
   try {
     if (array[0].length === 0) {
       return null
@@ -108,6 +111,45 @@ async function traerHijo(sql, array) {
     // eslint-disable-next-line no-console
     console.error('Error en traerHijo:', error)
     throw error // Re-lanzar el error para que pueda ser manejado en el evento
+  }
+}
+
+async function validation(val, plant, objTrad, div, index) {
+  try {
+    if (!val) {
+      return
+    }
+    const supervisor = await traerFirma(val, plant)
+    if (supervisor.id !== null) {
+      while (div.firstChild) {
+        div.removeChild(div.firstChild)
+      }
+      const tbody = document.querySelector('#tableControl tbody')
+      const row = tbody.rows[index]
+      if (row && row.cells.length >= 3) {
+        row.cells[3].innerHTML = ''
+        const previousCell = row.cells[2]
+        previousCell.colSpan = (previousCell.colSpan || 1) + 1
+        row.removeChild(row.cells[3])
+      }
+      const inputText = document.createElement('input')
+      inputText.setAttribute('type', 'text')
+      inputText.setAttribute('disabled', false)
+      inputText.style.border = 'none'
+      inputText.value = `Validado por ${supervisor.nombre}`
+
+      div.appendChild(inputText)
+    } else {
+      const miAlerta = new Alerta()
+      const obj = arrayGlobal.avisoRojo
+      const texto = arrayGlobal.mensajesVarios.firma.no_encontrado
+      miAlerta.createVerde(obj, texto, objTrad)
+
+      let modal = document.getElementById('modalAlertVerde')
+      modal.style.display = 'block'
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -228,4 +270,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 })
 
-export { consultaCN, consultaQuery, eventSelect }
+export { consultaCN, consultaQuery, eventSelect, validation }

@@ -39,9 +39,11 @@ const encabezados = {
     'Valor por defecto',
     '2do Valor SQL',
     'SQL Consulta dinámica',
+    'Validar',
   ],
   width: [
     '0.2',
+    '1',
     '1',
     '1',
     '1',
@@ -161,6 +163,9 @@ function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   }
   if (tipoDeDato === 'r') {
     tipo = trO('Radio', objTranslate) || 'Radio'
+  }
+  if (tipoDeDato === 'valid') {
+    tipo = trO('Validar', objTranslate) || 'Validar'
   }
   return tipo
 }

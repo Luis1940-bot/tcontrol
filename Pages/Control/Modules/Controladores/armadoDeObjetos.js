@@ -76,7 +76,9 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
         ) {
           let decimal = obj.valueCelda
           decimal === '' ? (decimal = 0) : null
-          const numeroFormateado = decimal.replace(/\./g, '').replace(',', '.')
+          const numeroFormateado = decimal
+            .replace(/\./g, '')
+            .replace(',', '.', ':')
           valor = parseFloat(numeroFormateado)
           c === 4
             ? ((observacion = parseFloat(numeroFormateado)), (valor = null))

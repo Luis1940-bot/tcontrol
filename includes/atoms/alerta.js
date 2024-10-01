@@ -944,9 +944,10 @@ const funcionAreaGuardarCambios = async () => {
 
 async function firmar(firmadoPor, objTrad) {
   try {
-    const pass = document.getElementById('idInputFirma').value
+    const pass = encriptar(document.getElementById('idInputFirma').value)
     const persona = desencriptar(sessionStorage.getItem('user'))
     const { plant } = persona
+
     const supervisor = await traerFirma(pass, plant)
 
     let modal = document.getElementById('modalAlert')
@@ -3303,7 +3304,7 @@ class Alerta {
       obj.input.id = 'idInputArea'
       const input = createInput(obj.input)
       input.addEventListener('keydown', (e) => {
-        if (e.key === ',') {
+        if (e.key === ',' || e.key === ':') {
           e.preventDefault()
         }
       })
@@ -4544,7 +4545,7 @@ class Alerta {
         }
 
         input.addEventListener('keydown', (e) => {
-          if (e.key === ',') {
+          if (e.key === ',' || e.key === ':') {
             e.preventDefault()
           }
         })
@@ -4584,6 +4585,7 @@ class Alerta {
           ['l', 'Leyenda'],
           ['subt', 'Sub.Título'],
           ['title', 'Título'],
+          ['valid', 'Validar'],
         ]
         const params = {
           id: '',
@@ -4901,7 +4903,7 @@ class Alerta {
     obj.input.value = ''
     const input = createInput(obj.input)
     input.addEventListener('keydown', (e) => {
-      if (e.key === ',') {
+      if (e.key === ',' || e.key === ':') {
         e.preventDefault()
       }
     })

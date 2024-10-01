@@ -30,10 +30,10 @@
     "ruta": ["Menu/index.php", "Admin/index.php", "", ""],
     "nivel": [2, 4, 1, 1],
     "Producción": {
-      "name": ["PTA", "TA"],
-      "type": ["btn", "btn"],
-      "ruta": ["", ""],
-      "nivel": [1, 1],
+      "name": ["PTA", "TA", "Servicios Auxiliares"],
+      "type": ["btn", "btn", "btn"],
+      "ruta": ["", "", ""],
+      "nivel": [1, 1, 1],
       "PTA": {
         "name": ["Purificación"],
         "type": ["btn"],
@@ -82,6 +82,54 @@
             ],
             "nivel": [1, 1, 1, 1, 1, 1, 1]
           }
+        }
+      },
+      "TA": {
+        "name": [""],
+        "type": [""],
+        "ruta": [""],
+        "nivel": [1]
+      },
+      "Servicios Auxiliares": {
+        "name": ["Calderas", "Turbinas"],
+        "type": ["btn", "btn"],
+        "ruta": ["", ""],
+        "nivel": [1, 1],
+        "Calderas": {
+          "name": [
+            "Lunes Turno 1",
+            "Lunes Turno 2",
+            "Martes Turno 1",
+            "Martes Turno 2",
+            "Miércoles Turno 1",
+            "Miércoles Turno 2",
+            "Jueves Turno 1",
+            "Jueves Turno 2",
+            "Viernes Turno 1",
+            "Viernes Turno 2",
+            "Sábado Turno 1",
+            "Sábado Turno 2",
+            "Domingo Turno 1",
+            "Domingo Turno 2"
+          ],
+          "type": [
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl"
+          ],
+          "ruta": ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+          "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         }
       }
     },

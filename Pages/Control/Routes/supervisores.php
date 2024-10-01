@@ -15,9 +15,19 @@ if (isset($_SESSION['timezone'])) {
 
 function verifica($q, $sql_i){
   global $q;
-  $pass=urldecode($q);
-  
-  $hash=hash('ripemd160',$pass);
+  // $pass=urldecode($q);
+  // $hash=hash('ripemd160',$pass);
+ 
+  $decoded_q = base64_decode($q);
+  $decoded_q = str_replace('"', '', $decoded_q);
+  $decoded_q = trim($decoded_q);
+  if ($decoded_q === false || is_null($decoded_q)) {
+      $errorResponse = array('error' => 'Error en la desencriptacion de los datos.');
+      echo json_encode($errorResponse);
+      return $errorResponse;
+  }
+
+  $hash=hash('ripemd160',$decoded_q);
 
   include_once BASE_DIR . "/Routes/datos_base.php";
   // include_once $_SERVER['DOCUMENT_ROOT']."/Routes/datos_base.php";
@@ -26,6 +36,7 @@ function verifica($q, $sql_i){
 
     $sql="SELECT u.idusuario, u.nombre, u.mail, u.idtipousuario, u.mi_cfg  FROM usuario u WHERE u.pass=? AND u.idLTYcliente=?";
     $query = $pdo->prepare($sql);
+
     $query->bindParam(1, $hash, PDO::PARAM_STR);
     $query->bindParam(2, $sql_i, PDO::PARAM_INT);
     $query->execute();
@@ -44,7 +55,7 @@ function verifica($q, $sql_i){
             return $response;
         }else{
 
-            $errorResponse = array('error' => 'Uno o más datos son incorrectos, vuelve a intentarlo.');
+            $errorResponse = array('error' => 'Uno o mas datos son incorrectos, vuelve a intentarlo.');
             echo json_encode($errorResponse);
             return $errorResponse;
 
@@ -62,6 +73,7 @@ function verifica($q, $sql_i){
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
 // $datos = '{"q":"4488","ruta":"/traerFirma","rax":"&new=Thu Jul 11 2024 11:07:07 GMT-0300 (hora estándar de Argentina)","sql_i":15}';
+// $datos = '{"q":"IjQ0ODgi","ruta":"/traerFirma","rax":"&new=Fri Sep 27 2024 12:24:09 GMT-0300 (hora estándar de Argentina)","sql_i":15}';
 
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
