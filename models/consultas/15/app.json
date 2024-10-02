@@ -31,15 +31,15 @@
     "operation": [null, null]
   },
   "Producción": {
-    "name": ["PTA", "TA"],
-    "confecha": [null, null],
-    "archivo": ["x", "x"],
-    "active": [1, 1],
-    "button": [1, 1],
-    "procedure": [null, null],
-    "in": [null, null],
-    "out": [null, null],
-    "operation": [null, null]
+    "name": ["PTA", "TA", "Servicios Auxiliares"],
+    "confecha": [null, null, null],
+    "archivo": ["x", "x", "x"],
+    "active": [1, 1, 1],
+    "button": [1, 1, 1],
+    "procedure": [null, null, null],
+    "in": [null, null, null],
+    "out": [null, null, null],
+    "operation": [null, null, null]
   },
   "PTA": {
     "name": ["Purificación"],
@@ -63,12 +63,13 @@
       "Tuno 4 Reacción PH2",
       "Turno 5 Reacción PH2",
       "Turno 4 Preparación",
+      "Turno 5 Preparación",
       "Turno 4 RLM"
     ],
-    "confecha": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    "archivo": ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
-    "active": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    "button": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "confecha": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "archivo": ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    "active": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "button": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     "procedure": [
       "proc_area_preparacion",
       "proc_area_cristalizacion",
@@ -79,10 +80,34 @@
       "proc_turno4_reaccion",
       "proc_turno5_reaccion",
       "proc_turno4_preparacion",
+      "proc_turno5_preparacion",
       "proc_turno4_rlm"
     ],
-    "in": [null, null, null, null, null, null, null, null, null, null],
-    "out": [null, null, null, null, null, null, null, null, null, null],
-    "operation": [null, null, null, null, null, null, null, null, null, null]
+    "in": [null, null, null, null, null, null, null, null, null, null, null],
+    "out": [null, null, null, null, null, null, null, null, null, null, null],
+    "operation": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "Servicios Auxiliares": {
+    "name": ["Calderas", "Turbinas"],
+    "confecha": [null, null],
+    "archivo": ["x", "x"],
+    "active": [1, 1],
+    "button": [1, 1],
+    "procedure": [null, null],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null]
   }
 }

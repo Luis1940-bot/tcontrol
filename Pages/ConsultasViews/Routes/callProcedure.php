@@ -26,6 +26,8 @@ function consultar($call, $desde, $hasta, $operation)
             mysqli_select_db($con,$dbname);
 
             $result = mysqli_query($con,$sql);
+            // var_dump($result);
+            // print_r($result);
             $arr_customers = array();
             $arrayResultdo = array();
             $column_names = array();
@@ -35,6 +37,7 @@ function consultar($call, $desde, $hasta, $operation)
             $arr_customers[] = $column_names;
 
             while ($row = mysqli_fetch_assoc($result)) {
+              // var_dump ($row);
                 $arr_customers[] = array_values($row);
             }
     
@@ -75,7 +78,7 @@ header("Content-Type: application/json; charset=utf-8");
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 $datos = file_get_contents("php://input");
 // $datos = '{"q":"proc_DWTFritasL1","desde":"2024-01-01","hasta":"2024-01-03","operation":"DWTFritas"}';
-// $datos = '{"q":"proc_TnEspecialidades","desde":"2024-01-01","hasta":"2024-01-03","operation": null}';
+// $datos = '{"q":"proc_turno4_preparacion","desde":"2024-01-01","hasta":"2024-10-01","operation":null,"ruta":"/callProcedure","rax":"&new=Tue Oct 01 2024 19:52:19 GMT-0300 (hora estándar de Argentina)"}';
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
     echo json_encode($response);

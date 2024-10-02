@@ -144,9 +144,18 @@ function clonarReporte($datos) {
             $numeroControl = substr($cadena, $longitud - strlen($cadena));
 
             foreach ($campos as &$campo) {
-                // $cadena = $campo['control'];
-                // $longitud = strlen($cadena) - 1;
-                // $numeroControl = substr($cadena, $longitud - strlen($cadena));
+                if (isset($campo['control']) && !is_null($campo['control'])) {
+                    $cadena = $campo['control'];
+                } else {
+                    // Asignar un valor por defecto si es nulo o no está definido
+                    $cadena = '';
+                }
+                if (!empty($cadena)) {
+                    $longitud = strlen($cadena) - 1;
+                    $numeroControl = substr($cadena, $longitud - strlen($cadena));
+                } else {
+                    $numeroControl = 0; // Asignar un valor por defecto en caso de cadena vacía
+                }
                 $numeroControl ++;
                 $campo['control'] = $control . $numeroControl;
                 $campo['idLTYreporte'] = $idDestino;
