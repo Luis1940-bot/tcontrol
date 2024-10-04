@@ -1767,6 +1767,7 @@ function estilosTbodyCellConsulta(
       dato = generarUrlParaEnlace(dato)
       type = 'link'
     }
+
     let alignCenter = 'left'
     let paddingLeft = '5px'
     let colSpan = 0

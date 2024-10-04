@@ -35,6 +35,7 @@ hr {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  table-layout: fixed;
 }
 
 thead {
@@ -43,7 +44,7 @@ thead {
   height: 20px;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 12px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 500;
 }
@@ -65,6 +66,16 @@ tbody tr td {
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
+}
+td {
+  max-height: 7.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5em;
+  word-wrap: break-word;
+  white-space: nowrap;
+  padding-right: 0.5em;
+  position: relative;
 }
 
 table tbody tr td input,
@@ -122,9 +133,25 @@ table tbody tr td div button {
 
 @media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
   /* No hay cambios adicionales */
+  #tableConsultaViews {
+    /* width: 95%; */
+    table-layout: fixed;
+  }
+
   tbody tr td {
     font-size: 12px;
   }
+  td {
+    max-height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    word-wrap: break-word;
+    white-space: nowrap;
+    padding-right: 0.5em;
+    position: relative;
+  }
+
   .nr {
     font-size: 14px;
   }
@@ -134,15 +161,27 @@ table tbody tr td div button {
   /* Cambios para tablets en orientación vertical */
   #tableConsultaViews {
     width: 95%;
+    table-layout: fixed;
   }
   thead {
     height: 30px;
-    font-size: 14px;
+    font-size: 12px;
   }
   tbody tr td {
     height: 30px;
     font-size: 14px;
   }
+  td {
+    max-height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    word-wrap: break-word;
+    white-space: nowrap;
+    padding-right: 0.5em;
+    position: relative;
+  }
+
   .nr {
     font-size: 14px;
   }
@@ -152,15 +191,27 @@ table tbody tr td div button {
   /* Cambios para tablets en orientación landscape */
   #tableConsultaViews {
     width: 95%;
+    table-layout: fixed;
   }
   thead {
     height: 30px;
-    font-size: 14px;
+    font-size: 12px;
   }
   tbody tr td {
     height: 30px;
     font-size: 14px;
   }
+  td {
+    max-height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    word-wrap: break-word;
+    white-space: nowrap;
+    padding-right: 0.5em;
+    position: relative;
+  }
+
   .nr {
     font-size: 14px;
   }
@@ -170,15 +221,27 @@ table tbody tr td div button {
   /* Cambios para pantallas grandes en orientación landscape */
   #tableConsultaViews {
     width: 90%;
+    table-layout: fixed;
   }
   thead {
     height: 30px;
-    font-size: 18px;
+    font-size: 12px;
   }
   tbody tr td {
     height: 30px;
     font-size: 14px;
   }
+  td {
+    max-height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    word-wrap: break-word;
+    white-space: nowrap;
+    padding-right: 0.5em;
+    position: relative;
+  }
+
   .nr {
     font-size: 14px;
   }
@@ -188,15 +251,28 @@ table tbody tr td div button {
   /* Cambios para pantallas grandes en orientación landscape */
   #tableConsultaViews {
     width: 90%;
+    table-layout: fixed;
   }
   thead {
     height: 30px;
-    font-size: 18px;
+    font-size: 14px;
   }
+
   tbody tr td {
     height: 30px;
     font-size: 14px;
   }
+  td {
+    max-height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    word-wrap: break-word;
+    white-space: nowrap;
+    padding-right: 0.5em;
+    position: relative;
+  }
+
   .nr {
     font-size: 14px;
   }
