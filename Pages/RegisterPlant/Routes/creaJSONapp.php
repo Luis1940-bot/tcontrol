@@ -53,11 +53,19 @@
                     "ListAreas/index.php"
                 ]
             ],
+            "Sad" => [
+                "name" => ["AuthUser", "RegisterPlant"],
+                "type" => ["", ""],
+                "ruta" => [
+                    "RegisterAuthUser/index.php",
+                    "RegisterPlant/index.php"
+                ]
+            ],
             "apps" => [
-                "name" => ["SCG", "Admin"],
-                "type" => ["ctrl", "ctrl"],
-                "ruta" => ["Menu/index.php", "Admin/index.php"],
-                "nivel" => [3, 4]
+                "name" => ["SCG", "Admin", "Super Admin"],
+                "type" => ["ctrl", "ctrl", "btn"],
+                "ruta" => ["Menu/index.php", "Admin/index.php", "Sadmin/index.php"],
+                "nivel" => [3, 4, 8]
             ],
         ];
 

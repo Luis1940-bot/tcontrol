@@ -6,7 +6,7 @@ Withou companies
 Version
 You are in
 High User
-Sign up.
+Register (Select company and enter your email).
 Register your company.
 Recover password.
 Name and surname
@@ -218,3 +218,6 @@ Digitally signed document.
 Keep in mind that the emails are being verified for sending.
 The query is being processed, it will take a few seconds. It may be very complex depending on the files involved and the time interval requested. Ensure your internet connection.
 Validated by
+This email is not authorized, please check with the Super Admin or Developer.
+This email has already been authorized.
+You have registered successfully.

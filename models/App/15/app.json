@@ -24,11 +24,16 @@
       "ListAreas/index.php"
     ]
   },
+  "Sad": {
+    "name": ["AuthUser", "RegisterPlant"],
+    "type": ["", ""],
+    "ruta": ["RegisterAuthUser/index.php", "RegisterPlant/index.php"]
+  },
   "apps": {
-    "name": ["SCG", "Admin", "Producción", "Mantenimiento"],
-    "type": ["ctrl", "ctrl", "btn", "btn"],
-    "ruta": ["Menu/index.php", "Admin/index.php", "", ""],
-    "nivel": [2, 4, 1, 1],
+    "name": ["SCG", "Admin", "Producción", "Mantenimiento", "Super Admin"],
+    "type": ["ctrl", "ctrl", "btn", "btn", "btn"],
+    "ruta": ["Menu/index.php", "Admin/index.php", "", "", "Sadmin/index.php"],
+    "nivel": [2, 4, 1, 1, 8],
     "Producción": {
       "name": ["PTA", "TA", "Servicios Auxiliares"],
       "type": ["btn", "btn", "btn"],

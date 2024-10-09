@@ -26,6 +26,7 @@ import enviaMailNuevoCliente from '../../Nodemailer/sendNuevoCliente.js'
 import arrayGlobal from '../../controllers/variables.js'
 import { Alerta } from '../../includes/atoms/alerta.js'
 import createImg from '../../includes/atoms/createImg.js'
+import personModal from '../../controllers/person.js'
 
 const spinner = document.querySelector('.spinner')
 const appJSON = {}
@@ -394,7 +395,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   hamburguesa.style.display = 'none'
 
   const person = document.querySelector('#person')
-  person.style.display = 'none'
+  person.style.display = 'block'
 
   const version = await leeVersion('version')
   document.querySelector('.version').innerText = version
@@ -431,6 +432,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   requestAnimationFrame(verificarElementos) // Inicia la verificación de los elementos
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  const person = document.getElementById('person')
+  person.addEventListener('click', () => {
+    person.style.border = '3px solid #212121'
+    person.style.background = '#212121'
+    person.style.borderRadius = '10px 10px 0px 0px'
+    const persona = desencriptar(sessionStorage.getItem('user'))
+    const user = {
+      person: persona.person,
+      home: 'Inicio',
+      salir: trO('Cerrar sesión', objTranslate),
+    }
+    personModal(user, objTranslate)
+  })
+
+  setTimeout(function () {
+    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.')
+    LogOut()
+  }, 43200000 - 300000)
 })
 
 function goBack() {

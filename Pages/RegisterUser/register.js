@@ -279,6 +279,9 @@ function armadoDeHTML(json) {
       }
       elementoCreado ? div.appendChild(elementoCreado) : null
     })
+    const mailInvitado = desencriptar(sessionStorage.getItem('mailInvitado'))
+    const email = document.getElementById('email')
+    email.value = mailInvitado
   } catch (error) {
     console.log(error)
   }

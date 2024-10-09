@@ -73,19 +73,10 @@
             "id": "idAltaUsuario",
             "className": "a-login",
             "data": "RegisterUser",
-            "textContent": "Regístrese."
+            "textContent": "Regístrese (Seleccione compañía y escriba su email)"
           }
         },
-        {
-          "tag": "a",
-          "config": {
-            "id": "idAltaCompania",
-            "className": "a-login",
-            "data": "RegisterPlant",
-            "textContent": "Registra tu compañía.",
-            "href": "RegisterUser"
-          }
-        },
+
         {
           "tag": "a",
           "config": {

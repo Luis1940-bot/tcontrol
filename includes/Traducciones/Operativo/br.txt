@@ -6,7 +6,7 @@ Sem empresas
 Versão
 Você está em
 Alto usuário
-Inscrever-se.
+Cadastre-se (selecione a empresa e digite seu email).
 Cadastre sua empresa.
 Recuperar senha.
 Nome e sobrenome
@@ -218,3 +218,6 @@ Documento assinado digitalmente.
 Lembre-se de que os e-mails estão sendo verificados para envio.
 A consulta está sendo realizada, levará alguns segundos, pode ser muito complexa dependendo dos arquivos envolvidos e do intervalo de tempo solicitado. Proteja a conexão com a Internet.
 Validado por
+Este e-mail não é autorizado, consulte o Super Admin ou Desenvolvedor.
+Este e-mail já foi autorizado.
+Registrado com sucesso.

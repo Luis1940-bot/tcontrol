@@ -20,7 +20,11 @@
     "operation": [null, null, null]
   },
   "Mantenimiento": {
-    "name": ["Listado de Compañías", "Auditorías M&T"],
+    "name": [
+      "Listado de Compañías",
+      "Auditorías M&T",
+      "Evaluación de Proveedores"
+    ],
     "confecha": [0, 1],
     "archivo": ["x", "x"],
     "active": [1, 1],

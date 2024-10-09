@@ -6,7 +6,7 @@ Sin compañías
 Versión
 Usted está en
 Alta de usuario
-Regístrese.
+Regístrese (Seleccione compañía y escriba su email).
 Registra tu compañía.
 Recuperar contraseña.
 Nombre y apellido
@@ -218,3 +218,6 @@ Documento firmado digitalmente.
 Tener en cuenta que se están verificando los emails para su envío.
 Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.
 Validado por
+Este correo no está autorizado, consulte con el Super Admin o con el Desarrollador.
+Este correo ya fue autorizado.
+Se registró con éxito.

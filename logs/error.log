@@ -61,3 +61,85 @@
 [27-Sep-2024 19:07:40 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 58
 [27-Sep-2024 19:14:18 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 58
 [27-Sep-2024 19:14:18 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 58
+[04-Oct-2024 08:20:37 America/Argentina/Buenos_Aires] Login failed for email: luisglogista@gmail.com, planta: 15
+[04-Oct-2024 15:00:45 America/Argentina/Buenos_Aires] No autorizado: luis@ftm.com, planta: 15
+[04-Oct-2024 15:01:44 America/Argentina/Buenos_Aires] No autorizado: luis@ftm.com, planta: 15
+[04-Oct-2024 19:52:24 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:52:24 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:52:25 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:53:49 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:53:49 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:53:50 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:54:57 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:54:57 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:54:58 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:55:20 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:55:20 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:55:20 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:55:51 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:55:51 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:55:51 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:56:46 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:56:46 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:56:47 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:57:19 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:57:19 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:57:19 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:57:47 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:57:47 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:57:48 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:57:58 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:57:58 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:57:59 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:58:16 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:58:16 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:58:17 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 19:58:42 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:58:42 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:58:42 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[05-Oct-2024 00:59:32 Europe/Berlin] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 59
+[04-Oct-2024 19:59:32 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 19:59:32 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:59:32 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[05-Oct-2024 00:59:55 Europe/Berlin] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 59
+[04-Oct-2024 19:59:55 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 19:59:55 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 72
+[04-Oct-2024 19:59:56 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[05-Oct-2024 01:00:14 Europe/Berlin] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 59
+[04-Oct-2024 20:00:14 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 20:00:14 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 72
+[04-Oct-2024 20:00:15 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[05-Oct-2024 01:00:27 Europe/Berlin] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 59
+[04-Oct-2024 20:00:27 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 20:00:27 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 20:00:28 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 20:00:39 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 20:00:39 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 20:00:40 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 20:05:29 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 20:05:29 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 20:05:30 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 20:06:24 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 70
+[04-Oct-2024 20:06:24 America/Argentina/Buenos_Aires] [Error 8] Undefined index: email in D:\04.DESARROLLOS\tcontrol\Pages\Login\Routes\auth.php on line 71
+[04-Oct-2024 20:06:25 America/Argentina/Buenos_Aires] No autorizado: , planta: 
+[04-Oct-2024 20:15:09 America/Argentina/Buenos_Aires] No autorizado: luis@ftm.com, planta: 15
+[04-Oct-2024 20:15:39 America/Argentina/Buenos_Aires] No autorizado: luis@ftm.com, planta: 15
+[04-Oct-2024 20:16:37 America/Argentina/Buenos_Aires] Login failed for email: luis@ftm.com.ar, planta: 15
+[06-Oct-2024 14:52:23 America/Argentina/Buenos_Aires] No autorizado: luis@fm.com.ar, planta: 15
+[06-Oct-2024 15:04:39 America/Argentina/Buenos_Aires] No autorizado: luis@f.com.ar, planta: 15
+[06-Oct-2024 15:11:22 America/Argentina/Buenos_Aires] No autorizado: luis@f.com, planta: 15
+[06-Oct-2024 15:14:54 America/Argentina/Buenos_Aires] No autorizado: luis@f.com, planta: 15
+[06-Oct-2024 15:14:54 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\AuthUser\Routes\ix.php on line 39
+[06-Oct-2024 15:15:05 America/Argentina/Buenos_Aires] No autorizado: luis@f.com, planta: 15
+[06-Oct-2024 15:15:05 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\AuthUser\Routes\ix.php on line 39
+[06-Oct-2024 15:16:02 America/Argentina/Buenos_Aires] No autorizado: luis@f.com, planta: 15
+[06-Oct-2024 15:16:02 America/Argentina/Buenos_Aires] [Error 8] Undefined index: planta in D:\04.DESARROLLOS\tcontrol\Pages\AuthUser\Routes\ix.php on line 39
+[06-Oct-2024 15:17:00 America/Argentina/Buenos_Aires] No autorizado: luis@f.com, planta: 15
+[06-Oct-2024 15:18:23 America/Argentina/Buenos_Aires] No autorizado: carivera@alpekpolyester.com, planta: 15
+[06-Oct-2024 15:22:19 America/Argentina/Buenos_Aires] No autorizado: carivera@alpekpolyester.com, planta: 15
+[06-Oct-2024 15:23:27 America/Argentina/Buenos_Aires] No autorizado: luis@ftm.com, planta: 15
+[06-Oct-2024 15:25:07 America/Argentina/Buenos_Aires] No autorizado: luis@ftm.com, planta: 15
+[06-Oct-2024 15:25:38 America/Argentina/Buenos_Aires] No autorizado: luis@f.com, planta: 15
+[06-Oct-2024 15:26:15 America/Argentina/Buenos_Aires] No autorizado: luis@w.com, planta: 15
+[06-Oct-2024 15:38:48 America/Argentina/Buenos_Aires] No autorizado: luisfactum@gmail.com, planta: 24
+[06-Oct-2024 15:55:41 America/Argentina/Buenos_Aires] No autorizado: luis@e.com, planta: 25

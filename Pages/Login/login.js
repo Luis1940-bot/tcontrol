@@ -27,6 +27,7 @@ import { trO } from '../../controllers/trOA.js'
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
 import Alerta from '../../includes/atoms/alerta.js'
 import arrayGlobal from '../../controllers/variables.js'
+import traerAuth from './Controllers/traerAuth.js'
 
 const SERVER = baseUrl
 let objTranslate = []
@@ -102,11 +103,12 @@ function validarEmail(email) {
   return regex.test(email)
 }
 
-function RegisterUser(a) {
+function RegisterUser(a, email) {
   const id = a.target.id
   const etiqueta = document.getElementById(id)
   const data = etiqueta.getAttribute('data')
   sessionStorage.setItem('volver', encriptar('Login'))
+  sessionStorage.setItem('mailInvitado', encriptar(email))
   window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`
 }
 
@@ -299,9 +301,19 @@ function cargarSelectCompania(json) {
 
     idAcceso.setAttribute('class', claseButton)
 
-    idAltaUsuario.addEventListener('click', (event) => {
+    idAltaUsuario.addEventListener('click', async (event) => {
       event.preventDefault()
+      const idiomaPreferido = navigator.language || navigator.languages[0]
+      const partesIdioma = idiomaPreferido.split('-')
+      const idioma = partesIdioma[0]
       const plant = desencriptar(sessionStorage.getItem('plant'))
+      const idInput0 = document.getElementById('idInput0')
+
+      if (validarEmail(idInput0.value)) {
+        // console.log('El email es válido.')
+      } else {
+        showAlert(espanolOperativo.alertas.mailError[idioma])
+      }
       const plantValue = plant.value
       if (plantValue === null) {
         const mensaje = document.querySelector('.span-sin-planta')
@@ -310,14 +322,29 @@ function cargarSelectCompania(json) {
         selectPlanta.classList.remove('select-login')
         selectPlanta.classList.add('class', 'select-rojo')
       } else {
-        RegisterUser(event)
+        const auth = await traerAuth(
+          parseInt(plant.value),
+          idInput0.value,
+          '/auth'
+        )
+
+        if (auth.success) {
+          await RegisterUser(event, idInput0.value)
+        } else {
+          const miAlerta = new Alerta()
+          const obj = arrayGlobal.avisoRojo
+          const texto = trO(auth.message, objTranslate) || auth.message
+          miAlerta.createVerde(obj, texto, objTranslate)
+          const modal = document.getElementById('modalAlertVerde')
+          modal.style.display = 'block'
+        }
       }
     })
-    const idAltaCompania = document.getElementById('idAltaCompania')
-    idAltaCompania.addEventListener('click', (event) => {
-      event.preventDefault()
-      RegisterUser(event)
-    })
+    // const idAltaCompania = document.getElementById('idAltaCompania')
+    // idAltaCompania.addEventListener('click', (event) => {
+    //   event.preventDefault()
+    //   RegisterUser(event)
+    // })
     idOlvidoPass.addEventListener('click', (event) => {
       event.preventDefault()
       const plant = desencriptar(sessionStorage.getItem('plant'))
@@ -329,7 +356,7 @@ function cargarSelectCompania(json) {
         selectPlanta.classList.remove('select-login')
         selectPlanta.classList.add('class', 'select-rojo')
       } else {
-        RegisterUser(event)
+        RegisterUser(event, null)
       }
     })
   } catch (error) {
@@ -342,7 +369,7 @@ function leeApp(json) {
     .then((data) => {
       Object.assign(appJSON, data)
       configPHP(data, SERVER)
-
+      console.log(data)
       function checkSelect() {
         const select = document.querySelector('.select-login')
         if (select) {
