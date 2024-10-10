@@ -23,16 +23,21 @@
     "name": [
       "Listado de Compañías",
       "Auditorías M&T",
+      "Evaluación de Proveedores",
       "Evaluación de Proveedores"
     ],
-    "confecha": [0, 1],
-    "archivo": ["x", "x"],
-    "active": [1, 1],
-    "button": [0, 0, 0, 0],
-    "procedure": ["proc_companias", "proc_auditoria_compania"],
-    "in": [null, null],
-    "out": [null, null],
-    "operation": [null, null]
+    "confecha": [0, 1, 1],
+    "archivo": ["x", "x", "x"],
+    "active": [1, 1, 1],
+    "button": [0, 0, 0],
+    "procedure": [
+      "proc_companias",
+      "proc_auditoria_compania",
+      "proc_evaluacion_proveedores"
+    ],
+    "in": [null, null, null],
+    "out": [null, null, null],
+    "operation": [null, null, null]
   },
   "Producción": {
     "name": ["PTA", "TA", "Servicios Auxiliares"],
@@ -45,18 +50,8 @@
     "out": [null, null, null],
     "operation": [null, null, null]
   },
+
   "PTA": {
-    "name": ["Purificación"],
-    "confecha": [null],
-    "archivo": ["x"],
-    "active": [1],
-    "button": [1],
-    "procedure": [null],
-    "in": [null],
-    "out": [null],
-    "operation": [null]
-  },
-  "Purificación": {
     "name": [
       "Área de Preparación",
       "Área de Cristalización",
