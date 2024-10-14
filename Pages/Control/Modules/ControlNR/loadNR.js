@@ -14,14 +14,15 @@ function columna2(
   tagName,
   type,
   tds,
-  valor,
+  val,
   datos,
   i,
   columnaTd,
   selDatos,
   index
 ) {
-  // console.log(tagName, type, tds, valor, datos, i, columnaTd, selDatos, index)
+  // console.log(tagName, type, tds, val, datos, i, columnaTd, selDatos, index)
+  let valor = val
   const td = tds
   if (
     (tagName === 'INPUT' && type === 'date') ||
@@ -49,6 +50,7 @@ function columna2(
       // Función para verificar y seleccionar el valor en el select
       function checkAndSetValues() {
         select = td[columnaTd].childNodes[0] // Seleccionamos el <select> dentro del <td>
+        valor === 's' || valor === 'sd' ? (valor = null) : null
         // Verificar si el select existe y si tiene opciones cargadas
         if (select && select.options.length > 0) {
           for (let m = 0; m < select.options.length; m++) {
@@ -69,6 +71,14 @@ function columna2(
           }
         } else {
           // Si no hay opciones, reintentar hasta que estén disponibles
+          if (valor && select.hasAttribute('selector') === false) {
+            const option = document.createElement('option')
+            option.value = datos.valorS[index] // Asegúrate de que 'datos.valorS[index]' existe
+            option.innerText = valor
+            select.appendChild(option)
+            select.selectedIndex = select.options.length - 1 // Seleccionar la nueva opción
+            return
+          }
           retries++
           if (retries < maxRetries) {
             setTimeout(checkAndSetValues, retryDelay) // Reintentar después de un breve retraso
@@ -203,13 +213,13 @@ async function verSupervisor(idSupervisor, plant) {
   }
 }
 
-function cargarNR(res, plant) {
+async function cargarNR(res, plant) {
   try {
     const objString = res[0][14]
     const datos = JSON.parse(objString)
-
     const idSupervisor = datos.supervisor[0]
-    const tbody = document.querySelector('tbody')
+    const table = document.getElementById('tableControl')
+    const tbody = table.querySelector('tbody')
     const tr = tbody.querySelectorAll('tr')
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length - 0; i++) {
@@ -224,10 +234,12 @@ function cargarNR(res, plant) {
       const tagNameObservaciones = td[4].childNodes[0].tagName
       const typeObservaciones = td[4].childNodes[0].type
       const codigoString = codigo.toString().trim()
+
       const elementoEncontrado = datos.idLTYcontrol.indexOf(codigoString)
-      // console.log(elementoEncontrado)
+
       if (elementoEncontrado !== -1) {
         let valor = datos.valor[elementoEncontrado]
+
         const valorObservaciones = datos.observacion[elementoEncontrado]
         if (valor === 'tx') {
           valor = null

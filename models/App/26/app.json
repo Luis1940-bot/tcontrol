@@ -1,0 +1,99 @@
+{
+    "planta": "Alpek-Altamira",
+    "idiomas": {
+        "bienvenido": [
+            "Bienvenido",
+            "Bem-vindo(Br)",
+            "Welcome"
+        ],
+        "abreviatura": [
+            "es",
+            "bra",
+            "en"
+        ]
+    },
+    "Menu": {
+        "name": [
+            "Controles",
+            "Consultas"
+        ],
+        "type": [
+            "",
+            ""
+        ],
+        "ruta": [
+            "Controles\/index.php",
+            "Consultas\/index.php"
+        ]
+    },
+    "Controles": {
+        "name": [
+            "Controles",
+            "Imprimir control"
+        ],
+        "type": [
+            "",
+            ""
+        ],
+        "ruta": [
+            "Controles\/index.php",
+            ""
+        ]
+    },
+    "Ad": {
+        "name": [
+            "Reportes",
+            "Controles",
+            "Variables",
+            "Areas"
+        ],
+        "type": [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "ruta": [
+            "ListReportes\/index.php",
+            "ListControles\/index.php",
+            "ListVariables\/index.php",
+            "ListAreas\/index.php"
+        ]
+    },
+    "Sad": {
+        "name": [
+            "AuthUser",
+            "RegisterPlant"
+        ],
+        "type": [
+            "",
+            ""
+        ],
+        "ruta": [
+            "RegisterAuthUser\/index.php",
+            "RegisterPlant\/index.php"
+        ]
+    },
+    "apps": {
+        "name": [
+            "SCG",
+            "Admin",
+            "Super Admin"
+        ],
+        "type": [
+            "ctrl",
+            "ctrl",
+            "btn"
+        ],
+        "ruta": [
+            "Menu\/index.php",
+            "Admin\/index.php",
+            "Sadmin\/index.php"
+        ],
+        "nivel": [
+            3,
+            4,
+            8
+        ]
+    }
+}

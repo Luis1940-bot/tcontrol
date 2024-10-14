@@ -209,6 +209,7 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
         'No existen reportes cargados. Comuníquese con el administrador.',
         objTranslate
       ) || 'No existen reportes cargados. Comuníquese con el administrador.'
+    arrayGlobal.avisoRojo.display = 'block'
     miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
 
     let modal = document.getElementById('modalAlertVerde')

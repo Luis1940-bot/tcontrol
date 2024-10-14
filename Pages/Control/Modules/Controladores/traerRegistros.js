@@ -3,7 +3,7 @@ const SERVER = baseUrl
 
 export default function traerRegistros(q, sql_i) {
   // eslint-disable-next-line no-console
-  console.time('traerRegistros')
+
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
     let obj = {

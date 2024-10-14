@@ -217,12 +217,13 @@ class ElementGenerator {
     while (select.firstChild) {
       select.removeChild(select.firstChild)
     }
+
     if (array.length > 0) {
       const emptyOption = document.createElement('option')
       emptyOption.value = ''
       emptyOption.text = ''
       select.appendChild(emptyOption)
-      array.forEach((subarray) => {
+      array.forEach((subarray, index) => {
         const [value, text] = subarray
         const option = document.createElement('option')
         option.value = value

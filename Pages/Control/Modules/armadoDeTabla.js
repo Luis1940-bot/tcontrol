@@ -510,6 +510,7 @@ async function traerValorPorDefecto(sqli, tipo, html, url) {
     }
 
     const sql = encodeURIComponent(sql_i)
+
     if (tipo === 'n') {
       const arrayValor = await traerRegistros(`traer_LTYsql`, `${sql}`) //encodeURIComponent
       ElementGenerator.generateInputNumberQuery(arrayValor, html)
@@ -630,5 +631,5 @@ export default function tablaVacia(arrayControl, encabezados, objTrad, plant) {
   // console.log(url)
   setTimeout(() => {
     loadTabla(arrayControl, encabezados, objTrad, url, plant)
-  }, 200)
+  }, 100)
 }

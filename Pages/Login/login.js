@@ -264,6 +264,16 @@ function cargarSelectCompania(json) {
     } else {
       const nombresPlantas = plantas.map((planta) => [planta.num, planta.name])
       array = [...nombresPlantas]
+      array.sort((a, b) => {
+        // Compara el segundo elemento (índice 1) de cada sub-array
+        if (a[1] < b[1]) {
+          return -1
+        }
+        if (a[1] > b[1]) {
+          return 1
+        }
+        return 0
+      })
       const emptyOption = document.createElement('option')
       emptyOption.value = ''
       emptyOption.text = ''
@@ -369,7 +379,7 @@ function leeApp(json) {
     .then((data) => {
       Object.assign(appJSON, data)
       configPHP(data, SERVER)
-      console.log(data)
+      // console.log(data)
       function checkSelect() {
         const select = document.querySelector('.select-login')
         if (select) {

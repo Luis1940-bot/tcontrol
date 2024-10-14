@@ -154,6 +154,7 @@ async function validation(val, plant, objTrad, div, index) {
 }
 
 function generateOptions(array, select) {
+  console.log(array, select)
   while (select.firstChild) {
     select.removeChild(select.firstChild)
   }

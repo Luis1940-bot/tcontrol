@@ -167,6 +167,11 @@ async function cargaDeRegistros(objTrad, plant) {
     console.warn(error)
     console.log('error por espera de la carga de un modal')
     window.location.reload() // Puedes utilizar una redirección directa en lugar de setTimeout
+    if (nr) {
+      console.log('entró otra vez')
+      const controlNr = await traerNR(nr, plant)
+      await cargarNR(controlNr, plant) // Asegúrate de que cargarNR sea una función async
+    }
   }
 }
 
