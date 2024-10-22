@@ -175,6 +175,10 @@ function columna2(
       div.appendChild(inputText)
     }
   }
+  if (tagName === 'INPUT' && type === 'radio') {
+    const radio = td[columnaTd].childNodes[0]
+    valor === '1' ? (radio.checked = true) : (radio.checked = false)
+  }
 }
 
 async function verSupervisor(idSupervisor, plant) {

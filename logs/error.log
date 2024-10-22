@@ -180,3 +180,4 @@
 [13-Oct-2024 12:19:39 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
 [13-Oct-2024 12:23:53 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 120
 [13-Oct-2024 12:23:53 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[22-Oct-2024 10:59:36 America/Mexico_City] Login failed for email: luisglogista@gmail.com, planta: 26

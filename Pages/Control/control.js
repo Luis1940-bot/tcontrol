@@ -82,7 +82,8 @@ function configuracionLoad(user) {
     ? (nr = '')
     : sessionStorage.setItem('doc', encriptar(nr))
   document.getElementById('doc').innerText = `Doc: ${nr}`
-  document.getElementById('wichC').innerText = controlT
+  document.getElementById('wichC').innerText = `${controlN}-${controlT}`
+
   configPHP(user, SERVER)
   document.querySelector('.header-McCain').style.display = 'none'
   finPerformance()

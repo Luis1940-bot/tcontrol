@@ -467,7 +467,6 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       )
       type = radioButton
     }
-
     const cell = estilosCell(
       alignCenter,
       paddingLeft,
@@ -597,7 +596,10 @@ function controlT(objTrad) {
   // console.log(url)
   // const url = new URL(window.location.href);
   const controlT = url.control_T // url.searchParams.get('control_T');
-  document.getElementById('wichC').innerText = trA(controlT, objTrad)
+  const controlN = url.control_N
+  const controlT_traducido = trA(controlT, objTrad) || controlT
+  const mensaje = `${controlN}-${controlT_traducido}`
+  document.getElementById('wichC').innerText = mensaje
   return url
 }
 

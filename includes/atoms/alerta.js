@@ -498,16 +498,16 @@ function completaObjetoReporte() {
   let fechaObj = new Date(vigencia.value)
   let dia = fechaObj.getUTCDate().toString().padStart(2, '0')
   let mes = (fechaObj.getUTCMonth() + 1).toString().padStart(2, '0')
-  let año = fechaObj.getUTCFullYear()
-  let nuevaFecha = `${dia}/${mes}/${año}`
+  let ano = fechaObj.getUTCFullYear()
+  let nuevaFecha = `${dia}/${mes}/${ano}`
   objetoReporte.vigencia = nuevaFecha
 
   const modificacion = document.getElementById('modificacion')
   fechaObj = new Date(modificacion.value)
   dia = fechaObj.getUTCDate().toString().padStart(2, '0')
   mes = (fechaObj.getUTCMonth() + 1).toString().padStart(2, '0')
-  año = fechaObj.getUTCFullYear()
-  nuevaFecha = `${dia}/${mes}/${año}`
+  ano = fechaObj.getUTCFullYear()
+  nuevaFecha = `${dia}/${mes}/${ano}`
   objetoReporte.modificacion = nuevaFecha
 
   const version = document.getElementById('version')
