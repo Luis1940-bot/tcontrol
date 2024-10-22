@@ -1733,7 +1733,8 @@ async function handleClickEnlace(dato) {
   // window.open(ruta, '_blank')
   let timestamp = new Date().getTime()
   const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`
-  window.location.href = ruta
+  // window.location.href = ruta
+  window.open(ruta, '_blank')
 }
 
 function generarUrlParaEnlace(dato) {
