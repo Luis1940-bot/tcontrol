@@ -69,8 +69,8 @@ hr {
 }
 
 .planos {
-  height: 50px;
-  width: 200px;
+  height: 50vw;
+  width: 80vw;
 }
 .transparent-button:hover {
   font-size: 18px;
@@ -235,8 +235,8 @@ li {
   }
 
   .planos {
-    height: 50px;
-    width: 200px;
+    /* height: 50px; */
+    /* width: 200px; */
   }
   .transparent-button:hover {
     font-size: 18px;
@@ -384,8 +384,8 @@ li {
   }
 
   .planos {
-    height: 100px;
-    width: 300px;
+    /* height: 100px; */
+    /* width: 300px; */
   }
   .transparent-button {
     background: transparent;
@@ -545,8 +545,8 @@ li {
     height: 70%;
   }
   .planos {
-    height: 100px;
-    width: 300px;
+    /* height: 100px; */
+    /* width: 300px; */
   }
   .transparent-button {
     background: transparent;
@@ -714,8 +714,8 @@ li {
   }
 
   .planos {
-    height: 150px;
-    width: 350px;
+    /* height: 150px; */
+    /* width: 350px; */
   }
   .transparent-button {
     background: transparent;
@@ -884,8 +884,8 @@ li {
     height: 70%;
   }
   .planos {
-    height: 200px;
-    width: 400px;
+    /* height: 200px; */
+    /* width: 400px; */
   }
   .transparent-button {
     background: transparent;
@@ -1054,8 +1054,8 @@ li {
     height: 80%;
   }
   .planos {
-    height: 300px;
-    width: 400px;
+    /* height: 300px; */
+    /* width: 400px; */
   }
   .transparent-button {
     background: transparent;
