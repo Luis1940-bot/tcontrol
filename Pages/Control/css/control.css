@@ -234,10 +234,10 @@ li {
     border-radius: 25px;
   }
 
-  .planos {
-    /* height: 50px; */
-    /* width: 200px; */
-  }
+  /* .planos {
+    height: 50px;
+    width: 200px;
+  } */
   .transparent-button:hover {
     font-size: 18px;
   }
@@ -383,10 +383,10 @@ li {
     height: 70%;
   }
 
-  .planos {
-    /* height: 100px; */
-    /* width: 300px; */
-  }
+  /* .planos {
+    height: 100px;
+    width: 300px;
+  } */
   .transparent-button {
     background: transparent;
     border: none;
@@ -544,10 +544,10 @@ li {
     cursor: pointer;
     height: 70%;
   }
-  .planos {
-    /* height: 100px; */
-    /* width: 300px; */
-  }
+  /* .planos {
+    height: 100px;
+    width: 300px;
+  } */
   .transparent-button {
     background: transparent;
     border: none;
@@ -713,10 +713,10 @@ li {
     height: 70%;
   }
 
-  .planos {
-    /* height: 150px; */
-    /* width: 350px; */
-  }
+  /* .planos {
+    height: 150px;
+    width: 350px;
+  } */
   .transparent-button {
     background: transparent;
     border: none;
@@ -883,10 +883,10 @@ li {
     cursor: pointer;
     height: 70%;
   }
-  .planos {
-    /* height: 200px; */
-    /* width: 400px; */
-  }
+  /* .planos {
+    height: 200px;
+    width: 400px;
+  } */
   .transparent-button {
     background: transparent;
     border: none;
@@ -1053,10 +1053,10 @@ li {
     cursor: pointer;
     height: 80%;
   }
-  .planos {
-    /* height: 300px; */
-    /* width: 400px; */
-  }
+  /* .planos {
+    height: 300px;
+    width: 400px;
+  } */
   .transparent-button {
     background: transparent;
     border: none;
