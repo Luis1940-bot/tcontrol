@@ -107,6 +107,8 @@ function estilosCell(
 function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
+  let maxTextarea = null
+  let tipoColSpanTx = null
   for (let i = 0; i < 6; i++) {
     const orden = [0, 3, 4, 6, 7, 1]
     let dato = element[orden[i]]
@@ -240,14 +242,42 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'tx') {
       dato = null
+      let filasTextArea = null
+      let columnasTextArea = null
+
+      maxTextarea = element[17]
+      if (maxTextarea && maxTextarea.trim() !== '') {
+        const ajustada = maxTextarea.replace(
+          /(['"])?([a-zA-Z0-9_]+)(['"])?:/g,
+          '"$2": '
+        )
+
+        const objetoTextarea = JSON.parse(ajustada)
+        filasTextArea = parseInt(objetoTextarea.filaTx)
+        columnasTextArea = parseInt(objetoTextarea.colsTx)
+        tipoColSpanTx = parseInt(objetoTextarea.colSpanTx)
+      }
+
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
-      const textArea = ElementGenerator.generateTextArea(valorXDefecto)
+      const textArea = ElementGenerator.generateTextArea(
+        valorXDefecto,
+        filasTextArea,
+        columnasTextArea
+      )
+
       elementHTML = textArea
       type = textArea
+
       const indexMas = index + 1
-      indexMas === cantidadDeRegistros
-        ? ((colSpan = 1), (alignCenter = 'left'), (paddingLeft = '3px'))
-        : null
+      if (indexMas === cantidadDeRegistros) {
+        colSpan = 1
+        alignCenter = 'left'
+        paddingLeft = '3px'
+      } else if (maxTextarea !== null && tipoColSpanTx) {
+        colSpan = tipoColSpanTx
+        alignCenter = 'left'
+        paddingLeft = '3px'
+      }
       element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'sd') {
       dato = null
@@ -354,6 +384,9 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
     if (i > 2 && tipoDeDato === 'tx') {
       const indexMas = index + 1
       indexMas === cantidadDeRegistros ? (colSpan = 2) : null
+    }
+    if (i > 2 && tipoDeDato === 'tx' && maxTextarea !== null && tipoColSpanTx) {
+      display = 'none'
     }
     if (i === 4 && tipoDeObservacion === 'd') {
       const [valorXDefecto] = element[26] !== '' ? [element[26]] : []
@@ -482,6 +515,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       objTrad,
       enabled
     )
+
     newRow.appendChild(cell)
   }
   return newRow

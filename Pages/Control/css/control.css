@@ -180,7 +180,7 @@ li {
     font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
-    height: 50px;
+    height: auto;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -338,7 +338,7 @@ li {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
-    height: 50px;
+    height: auto;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -498,7 +498,7 @@ li {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
-    height: 50px;
+    height: auto;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -667,7 +667,7 @@ li {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
-    height: 50px;
+    height: auto;
   }
   table tbody tr td button,
   table tbody tr td select {
@@ -836,7 +836,7 @@ li {
     font-size: 14px;
     width: 90%;
     border: 1px solid #000;
-    height: 50px;
+    height: auto;
   }
 
   table tbody tr td button,
@@ -1007,7 +1007,7 @@ li {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
-    height: 50px;
+    height: auto;
   }
   table tbody tr td button,
   table tbody tr td select {

@@ -148,8 +148,10 @@ class ElementGenerator {
     elementoHTML.parentNode.replaceChild(elementoCopia, elementoHTML)
   }
 
-  static generateTextArea(valorPorDefecto) {
+  static generateTextArea(valorPorDefecto, filas = 5, cols = 50) {
     const textArea = document.createElement('textarea')
+    textArea.rows = filas ?? 5
+    textArea.cols = cols ?? 50
     valorPorDefecto ? (textArea.value = valorPorDefecto) : null
     valorPorDefecto !== '' &&
     valorPorDefecto !== ' ' &&
