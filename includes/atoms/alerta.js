@@ -2425,12 +2425,14 @@ class Alerta {
     })
   }
 
-  createModalMenu(objeto, objTranslate) {
+  createModalMenu(objeto, objTranslate, menuSelectivo, controlN) {
     // eslint-disable-next-line no-unused-vars
     const configFirma = desencriptar(sessionStorage.getItem('firma'))
     const configMenu = desencriptar(sessionStorage.getItem('config_menu'))
     const enviaPorEmail = sessionStorage.getItem('envia_por_email') === 'true'
     const obj = objeto
+    const sinMenus = menuSelectivo.sin
+    const conMenus = menuSelectivo.con
     // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div')
     this.modal.id = 'modalAlertM'
@@ -2441,97 +2443,174 @@ class Alerta {
 
     const span = createSpan(obj.close)
     obj.divCajita.hoverColor = null
+    obj.divCajita.position = null
     const divClose = createDiv(obj.divCajita)
     divClose.appendChild(span)
     modalContent.appendChild(divClose)
+    let div
+    let texto
+    let hr
+    let existeSin = false
+    let existeCon = false
 
     //! guardar
-    obj.divCajita.id = 'idDivGuardar'
-    obj.divCajita.onClick = funcionGuardar
-    let div = createDiv(obj.divCajita)
-    const imgGuardar = createIMG(obj.imgGuardar)
-    let texto = trO(obj.guardar.text, objTranslate) || obj.guardar.text
-    const spanGuardar = createSpan(obj.guardar, texto)
-    div.appendChild(imgGuardar)
-    div.appendChild(spanGuardar)
-    modalContent.appendChild(div)
-    obj.divCajita.onClick = null
+    if (sinMenus.sinGuardar && conMenus.sinGuardar) {
+      if (sinMenus.sinGuardar.length > 0) {
+        existeSin = sinMenus.sinGuardar.includes(parseInt(controlN))
+      }
+      if (conMenus.conGuardar.length > 0) {
+        existeCon = conMenus.conGuardar.includes(parseInt(controlN))
+      }
+    }
+    if (
+      (!existeSin && !existeCon) ||
+      (!existeSin && existeCon) ||
+      (existeSin && existeCon)
+    ) {
+      obj.divCajita.id = 'idDivGuardar'
+      obj.divCajita.onClick = funcionGuardar
+      obj.divCajita.hoverColor = '#cecece'
+      div = createDiv(obj.divCajita)
+      const imgGuardar = createIMG(obj.imgGuardar)
+      texto = trO(obj.guardar.text, objTranslate) || obj.guardar.text
+      const spanGuardar = createSpan(obj.guardar, texto)
+      div.appendChild(imgGuardar)
+      div.appendChild(spanGuardar)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
 
-    obj.hr.id = 'idHrGuardar'
-    let hr = createHR(obj.hr)
-    // modalContent.appendChild(hr)
+      obj.hr.id = 'idHrGuardar'
+      hr = createHR(obj.hr)
+      // modalContent.appendChild(hr)
+    }
+    existeSin = false
+    existeCon = false
     //! fin guardar
 
     //! guardar cambio
-    obj.divCajita.id = 'idDivGuardarCambio'
-    obj.divCajita.onClick = funcionGuardarCambio
-    div = createDiv(obj.divCajita)
-    const imgGuardarCambio = createIMG(obj.imgGuardar)
-    texto = trO(obj.guardarCambio.text, objTranslate) || obj.guardarCambio.text
-    const spanGuardarCambio = createSpan(obj.guardarCambio, texto)
-    div.appendChild(imgGuardarCambio)
-    div.appendChild(spanGuardarCambio)
-    modalContent.appendChild(div)
-    obj.divCajita.onClick = null
+    if (sinMenus.sinGuardarCambio && conMenus.conGuardarCambio) {
+      if (sinMenus.sinGuardarCambio.length > 0) {
+        existeSin = sinMenus.sinGuardarCambio.includes(parseInt(controlN))
+      }
+      if (conMenus.conGuardarCambio.length > 0) {
+        existeCon = conMenus.conGuardarCambio.includes(parseInt(controlN))
+      }
+    }
+    if (
+      (!existeSin && !existeCon) ||
+      (!existeSin && existeCon) ||
+      (existeSin && existeCon)
+    ) {
+      obj.divCajita.id = 'idDivGuardarCambio'
+      obj.divCajita.onClick = funcionGuardarCambio
+      obj.divCajita.hoverColor = '#cecece'
+      div = createDiv(obj.divCajita)
+      const imgGuardarCambio = createIMG(obj.imgGuardar)
+      texto =
+        trO(obj.guardarCambio.text, objTranslate) || obj.guardarCambio.text
+      const spanGuardarCambio = createSpan(obj.guardarCambio, texto)
+      div.appendChild(imgGuardarCambio)
+      div.appendChild(spanGuardarCambio)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
 
-    obj.hr.id = 'idHrGuardarCambio'
-    hr = createHR(obj.hr)
-    // modalContent.appendChild(hr)
+      obj.hr.id = 'idHrGuardarCambio'
+      hr = createHR(obj.hr)
+      // modalContent.appendChild(hr)
+    }
+    existeSin = false
+    existeCon = false
+
     //! fin guardar cambio
 
     //! guardar como nuevo
-    obj.divCajita.id = 'idDivGuardarComoNuevo'
-    obj.divCajita.onClick = funcionGuardarComoNuevo
-    div = createDiv(obj.divCajita)
-    const imgGuardarComoNuevo = createIMG(obj.imgGuardar)
-    texto =
-      trO(obj.guardarComoNuevo.text, objTranslate) || obj.guardarComoNuevo.text
-    const spanGuardarComoNuevo = createSpan(obj.guardarComoNuevo, texto)
-    div.appendChild(imgGuardarComoNuevo)
-    div.appendChild(spanGuardarComoNuevo)
-    modalContent.appendChild(div)
-    obj.divCajita.onClick = null
+    if (sinMenus.sinGuardarComoNuevo && conMenus.conGuardarComoNuevo) {
+      if (sinMenus.sinGuardarComoNuevo.length > 0) {
+        existeSin = sinMenus.sinGuardarComoNuevo.includes(parseInt(controlN))
+      }
+      if (conMenus.conGuardarComoNuevo.length > 0) {
+        existeCon = conMenus.conGuardarComoNuevo.includes(parseInt(controlN))
+      }
+    }
+    if (
+      (!existeSin && !existeCon) ||
+      (!existeSin && existeCon) ||
+      (existeSin && existeCon)
+    ) {
+      obj.divCajita.id = 'idDivGuardarComoNuevo'
+      obj.divCajita.onClick = funcionGuardarComoNuevo
+      obj.divCajita.hoverColor = '#cecece'
+      div = createDiv(obj.divCajita)
+      const imgGuardarComoNuevo = createIMG(obj.imgGuardar)
+      texto =
+        trO(obj.guardarComoNuevo.text, objTranslate) ||
+        obj.guardarComoNuevo.text
+      const spanGuardarComoNuevo = createSpan(obj.guardarComoNuevo, texto)
+      div.appendChild(imgGuardarComoNuevo)
+      div.appendChild(spanGuardarComoNuevo)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
 
-    obj.hr.id = 'idHrGuardarComoNuevo'
-    hr = createHR(obj.hr)
-    // modalContent.appendChild(hr)
+      obj.hr.id = 'idHrGuardarComoNuevo'
+      hr = createHR(obj.hr)
+      // modalContent.appendChild(hr)
+    }
+    existeSin = false
+    existeCon = false
     //! fin guaradr como nuevo
-
     //! firmar
-    obj.divCajita.id = 'idDivFirmar'
-    obj.divCajita.onClick = funcionHacerFirmar
-    div = createDiv(obj.divCajita)
-    const imgFirmar = createIMG(obj.imgFirmar)
-    texto = trO(obj.firmar.text, objTranslate) || obj.firmar.text
-    const spanFirmar = createSpan(obj.firmar, texto)
-    const spanFirmado = createSpan(obj.mensajeFirmado, null)
-    div.appendChild(imgFirmar)
-    div.appendChild(spanFirmar)
+    if (sinMenus.sinHacerFirmar && conMenus.conHacerFirmar) {
+      if (sinMenus.sinHacerFirmar.length > 0) {
+        existeSin = sinMenus.sinHacerFirmar.includes(parseInt(controlN))
+      }
+      if (conMenus.conHacerFirmar.length > 0) {
+        existeCon = conMenus.conHacerFirmar.includes(parseInt(controlN))
+      }
+    }
+    if (
+      (!existeSin && !existeCon) ||
+      (!existeSin && existeCon) ||
+      (existeSin && existeCon)
+    ) {
+      obj.divCajita.id = 'idDivFirmar'
+      obj.divCajita.onClick = funcionHacerFirmar
+      obj.divCajita.hoverColor = '#cecece'
+      div = createDiv(obj.divCajita)
+      const imgFirmar = createIMG(obj.imgFirmar)
+      texto = trO(obj.firmar.text, objTranslate) || obj.firmar.text
+      const spanFirmar = createSpan(obj.firmar, texto)
+      const spanFirmado = createSpan(obj.mensajeFirmado, null)
+      div.appendChild(imgFirmar)
+      div.appendChild(spanFirmar)
 
-    modalContent.appendChild(span)
-    modalContent.appendChild(div)
+      modalContent.appendChild(span)
+      modalContent.appendChild(div)
 
-    obj.divCajita.id = 'idDivFirmado'
-    obj.divCajita.hoverBackground = null
-    obj.divCajita.hoverColor = null
-    obj.divCajita.cursor = null
-    div = createDiv(obj.divCajita)
+      obj.divCajita.id = 'idDivFirmado'
+      obj.divCajita.hoverBackground = null
+      obj.divCajita.hoverColor = null
+      obj.divCajita.cursor = null
+      div = createDiv(obj.divCajita)
 
-    div.appendChild(spanFirmado)
-    modalContent.appendChild(div)
-    obj.divCajita.onClick = null
+      div.appendChild(spanFirmado)
+      modalContent.appendChild(div)
+      obj.divCajita.onClick = null
 
-    obj.hr.id = 'idHrFirmar'
-    hr = createHR(obj.hr)
-    // modalContent.appendChild(hr)
-    obj.divCajita.hoverBackground = '#cecece'
-    obj.divCajita.hoverColor = '#cecece'
-    obj.divCajita.cursor = 'pointer'
+      obj.hr.id = 'idHrFirmar'
+      hr = createHR(obj.hr)
+      // modalContent.appendChild(hr)
+      obj.divCajita.hoverBackground = '#cecece'
+      obj.divCajita.hoverColor = '#cecece'
+      obj.divCajita.cursor = 'pointer'
+    }
+    existeSin = false
+    existeCon = false
     //! fin firmar
 
     //! refrescar
     obj.divCajita.id = 'idDivRefrescar'
     obj.divCajita.onClick = funcionRefrescar
+    obj.divCajita.hoverColor = '#cecece'
     div = createDiv(obj.divCajita)
     const imgRefresh = createIMG(obj.imgRefresh)
     texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
@@ -2549,6 +2628,7 @@ class Alerta {
     //! salir
     obj.divCajita.id = 'idDivSalir'
     obj.divCajita.onClick = funcionSalir
+    obj.divCajita.hoverColor = '#cecece'
     div = createDiv(obj.divCajita)
     const imgSalir = createIMG(obj.imgSalir)
     texto = trO(obj.salir.text, objTranslate) || obj.salir.text
@@ -2575,6 +2655,7 @@ class Alerta {
     obj.input.id = 'idCheckBoxEmail'
     obj.input.type = 'checkbox'
     obj.divCajita.id = 'idDivCheckBoxEmail'
+    obj.divCajita.hoverColor = '#cecece'
     div = createDiv(obj.divCajita)
     const inputEmail = createInput(obj.input)
     texto = trO(obj.label.innerText, objTranslate) || obj.label.innerText

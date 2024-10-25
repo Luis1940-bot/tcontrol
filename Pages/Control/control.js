@@ -48,6 +48,7 @@ const encabezados = {
   ],
   width: ['.05', '.15', '.25', '.25', '.25', '0'],
 }
+let menuSelectivo = {}
 
 function leeVersion(json) {
   readJSON(json)
@@ -65,6 +66,7 @@ function leeApp(json) {
     .then((data) => {
       document.getElementById('spanUbicacion').innerText = data.planta
       document.querySelector('.div-encabezado').style.marginTop = '0px'
+      menuSelectivo = data.menuSelectivo
     })
     .catch((error) => {
       console.error('Error al cargar el archivo:', error)
@@ -245,7 +247,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('DOMContentLoaded', () => {
   const hamburguesa = document.getElementById('hamburguesa')
   hamburguesa.addEventListener('click', () => {
-    menuModal(objTranslate)
+    menuModal(objTranslate, menuSelectivo, controlN)
   })
 })
 

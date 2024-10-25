@@ -22,9 +22,14 @@ function closeModal() {
   })
 }
 
-export default function menuModal(objTranslate) {
+export default function menuModal(objTranslate, menuSelectivo, controlN) {
   const miAlertaM = new Alerta()
-  miAlertaM.createModalMenu(objVariables.objMenu, objTranslate)
+  miAlertaM.createModalMenu(
+    objVariables.objMenu,
+    objTranslate,
+    menuSelectivo,
+    controlN
+  )
   const modal = document.getElementById('modalAlertM')
   const closeButton = document.querySelector('.modal-close')
   closeButton.addEventListener('click', closeModal)
