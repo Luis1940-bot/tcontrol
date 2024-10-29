@@ -7,14 +7,20 @@
   "menuSelectivo": {
     "sin": {
       "sinGuardar": [],
-      "sinGuardarCambio": [],
+      "sinGuardarCambio": [62],
       "sinGuardarComoNuevo": [],
       "sinSalir": [],
       "sinVolver": [],
-      "sinHacerFirmar": []
+      "sinHacerFirmar": [62]
     },
     "con": {
-      "conExportar": []
+      "conExportar": [],
+      "conGuardar": [],
+      "conGuardarCambio": [],
+      "conGuardarComoNuevo": [],
+      "conSalir": [],
+      "conVolver": [],
+      "conHacerFirmar": []
     }
   },
   "Menu": {

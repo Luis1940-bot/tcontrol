@@ -22,6 +22,14 @@
       if (!file_exists($directorioImaenes)) {
           mkdir($directorioImaenes, 0777, true);
       }
+      $directorioImaenes = BASE_DIR . '/assets/Logos/' . $clienteNum . '/';
+      if (!file_exists($directorioImaenes)) {
+          mkdir($directorioImaenes, 0777, true);
+      }
+      $directorioImaenes = BASE_DIR . '/models/consultas/' . $clienteNum . '/';
+      if (!file_exists($directorioImaenes)) {
+          mkdir($directorioImaenes, 0777, true);
+      }
       $file = $directorio . 'app.json';
 
       // Comprobar si el archivo app.json existe
