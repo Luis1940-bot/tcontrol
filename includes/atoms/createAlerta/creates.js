@@ -128,13 +128,17 @@ function createSpan(config, text) {
 
 function createInput(config) {
   const input = document.createElement('input')
+  let valor = config.value
   config.id !== null ? (input.id = config.id) : null
   input.type = config.type
   if (config.type === 'password') {
     input.autocomplete = 'new-password'
   }
+  if (config.type === 'number' && valor !== null && valor !== '') {
+    valor = parseFloat(config.value)
+  }
   config.name !== null ? (input.name = config.id) : null
-  config.value !== null ? (input.value = config.value) : null
+  config.value !== null ? (input.value = valor) : null
   config.checked !== null ? (input.style.checked = config.checked) : null
   config.className !== null ? (input.className = config.className) : null
   config.height !== null ? (input.style.height = config.height) : null
@@ -190,6 +194,7 @@ function createInput(config) {
       config.onFocus()
     }
   })
+
   return input
 }
 

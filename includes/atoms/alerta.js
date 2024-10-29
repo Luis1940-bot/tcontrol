@@ -1880,16 +1880,22 @@ function cerrarModal(modal) {
 }
 
 function formatoDivsMedidas(m1, m2, m3, num) {
+  console.log(m1, m2, m3, num)
+  let px = 'px'
+  m1 === 'auto' ? (px = '') : null
+  m2 === 'auto' ? (px = '') : null
   let div = document.getElementById('idDivListControles')
-  div.style.height = `${m1}px`
+  div.style.height = `${m1}${px}`
   div = document.getElementById('idDivSEPARADOR')
-  div.style.height = `${m2}px`
+  div.style.height = `${m2}${px}`
   const divsRadios = document.querySelectorAll('.div-radios')
   divsRadios.forEach((element) => {
-    element.style.height = `${m3}px`
+    element.style.height = `${m3}${px}`
   })
   if (num === 1) {
     // vacio
+    div = document.getElementById('idDivCajitaHWtx')
+    div.style.display = 'none'
     div = document.getElementById('idDivCajitaHW')
     div.style.display = 'none'
     div = document.getElementById('idDivCajitaSeparador')
@@ -1899,13 +1905,15 @@ function formatoDivsMedidas(m1, m2, m3, num) {
       element.style.display = 'none'
       const inputs = element.getElementsByTagName('input')
       Array.from(inputs).forEach((input) => {
-        input.value = 100
+        // input.value = 100
       })
     })
   }
   if (num === 2) {
     // con separador
     div = document.getElementById('idDivCajitaHW')
+    div.style.display = 'none'
+    div = document.getElementById('idDivCajitaHWtx')
     div.style.display = 'none'
     div = document.getElementById('idDivCajitaSeparador')
     div.style.display = 'block'
@@ -1916,13 +1924,33 @@ function formatoDivsMedidas(m1, m2, m3, num) {
       element.style.display = 'none'
       const inputs = element.getElementsByTagName('input')
       Array.from(inputs).forEach((input) => {
-        input.value = 100
+        // input.value = 100
       })
     })
   }
   if (num === 3) {
     // con foto
     div = document.getElementById('idDivCajitaHW')
+    div.style.display = 'block'
+    div = document.getElementById('idDivCajitaHWtx')
+    div.style.display = 'none'
+    div = document.getElementById('idDivCajitaSeparador')
+    div.style.display = 'none'
+    const divsMedidas = document.querySelectorAll('.div-medidas')
+    divsMedidas.forEach((element) => {
+      element.style.display = 'block'
+      const inputs = element.getElementsByTagName('input')
+      Array.from(inputs).forEach((input) => {
+        // input.value = 100
+      })
+    })
+  }
+
+  if (num === 4) {
+    // con foto
+    div = document.getElementById('idDivCajitaHW')
+    div.style.display = 'none'
+    div = document.getElementById('idDivCajitaHWtx')
     div.style.display = 'block'
     div = document.getElementById('idDivCajitaSeparador')
     div.style.display = 'none'
@@ -1931,7 +1959,7 @@ function formatoDivsMedidas(m1, m2, m3, num) {
       element.style.display = 'block'
       const inputs = element.getElementsByTagName('input')
       Array.from(inputs).forEach((input) => {
-        input.value = 100
+        // input.value = 100
       })
     })
   }
@@ -4455,6 +4483,7 @@ class Alerta {
     callback,
     LTYselect
   ) {
+    // console.log(objeto, objTrad, target, table, typeAlert, callback, LTYselect)
     // Crear el elemento modal
     const obj = JSON.parse(JSON.stringify(objeto))
     let datoSeleccionado = null
@@ -4493,7 +4522,7 @@ class Alerta {
     this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
     // Crear el contenido del modal
     obj.divContent.id = 'idDivListControles'
-
+    // console.log(column)
     switch (column) {
       case '3':
       case '5':
@@ -4519,7 +4548,7 @@ class Alerta {
         }
         break
       case '11':
-        obj.divContent.height = '400px'
+        obj.divContent.height = 'auto'
         break
       default:
         break
@@ -4685,7 +4714,7 @@ class Alerta {
         break
 
       case '11':
-        obj.divCajita.height = '150px'
+        obj.divCajita.height = 'auto'
         // obj.divCajita.display = 'flex'
         const divDetalleP = createDiv(obj.divCajita)
         obj.label.id = `idLabel${texto.trim()}`
@@ -4725,7 +4754,7 @@ class Alerta {
         let divCajitaRB = createDiv(obj.divCajita)
         let radio = createRadioButton(paramsRadio)
         radio.addEventListener('change', () => {
-          formatoDivsMedidas(400, 120, 120, 1)
+          formatoDivsMedidas('auto', 120, 120, 1)
           datoSeleccionado = ' '
         })
         obj.span.className = 'radio'
@@ -4744,7 +4773,7 @@ class Alerta {
           trO('Con separador', objTrad) || 'Con separador'
         )
         radio2.addEventListener('change', () => {
-          formatoDivsMedidas(500, 250, 50, 2)
+          formatoDivsMedidas('auto', 250, 50, 2)
           datoSeleccionado = `style="border-bottom: grey 2px solid;"`
         })
         divCajitaRB = createDiv(obj.divCajita)
@@ -4782,7 +4811,7 @@ class Alerta {
 
         let radio3 = createRadioButton(paramsRadio)
         radio3.addEventListener('change', () => {
-          formatoDivsMedidas(500, 250, 150, 3)
+          formatoDivsMedidas('auto', 250, 150, 3)
           const ancho = document.getElementById('idWidth').value
           const alto = document.getElementById('idHeight').value
           const dimensions = {
@@ -4802,7 +4831,7 @@ class Alerta {
         divCajitaRB.appendChild(spanRB)
         obj.divCajita.id = 'idDivCajitaHW'
         obj.divCajita.className = null
-        obj.divCajita.height = '800px'
+        obj.divCajita.height = 'auto' //'800px'
         obj.divCajita.flexDirection = 'column'
         obj.divCajita.display = 'none'
         divDetalleP.appendChild(divCajitaRB)
@@ -4817,31 +4846,129 @@ class Alerta {
         obj.divCajita.textAlign = 'left'
 
         let divHW = createDiv(obj.divCajita)
-        obj.input.type = 'number'
-        obj.input.width = '60%'
-        obj.input.textAlign = 'left'
-        obj.input.fontWeight = 600
-        obj.input.padding = '0px 0px 0px 4px'
-        obj.input.value = 100
+        const objInput3 = { ...obj.input }
+        const inputCols = { ...obj.input }
+        objInput3.type = 'number'
+        objInput3.width = '60%'
+        objInput3.textAlign = 'left'
+        objInput3.fontWeight = 600
+        objInput3.padding = '0px 0px 0px 4px'
+        objInput3.value = 100
+        objInput3.className = 'solonumeros'
         obj.label.id = null
         obj.label.fontSize = '14px'
         obj.label.margin = '15px 0px 0px 10px'
         obj.label.className = 'label-HW'
         obj.label.innerText = 'Width'
-        obj.input.id = 'idWidth'
-        const inputH = createInput(obj.input)
+        objInput3.id = 'idWidth'
+        const inputH = createInput(objInput3)
         const labelH = createLabel(obj.label)
         divHW.appendChild(inputH)
         divHW.appendChild(labelH)
         divCajitaRB.appendChild(divHW)
         divHW = createDiv(obj.divCajita)
-        obj.input.id = 'idHeight'
-        const inputW = createInput(obj.input)
+        objInput3.id = 'idHeight'
+        const inputW = createInput(objInput3)
         obj.label.innerText = 'Height'
         const labelW = createLabel(obj.label)
         divHW.appendChild(inputW)
         divHW.appendChild(labelW)
         divCajitaRB.appendChild(divHW)
+        divDetalleP.appendChild(divCajitaRB)
+        modalContent.appendChild(divDetalleP)
+
+        //* se agrega para texto largo
+        let radio4 = createRadioButton(paramsRadio)
+        radio4.addEventListener('change', () => {
+          formatoDivsMedidas('auto', 250, 150, 4) //500
+          const filaTx = document.getElementById('idWidthTx').value
+          const colsTx = document.getElementById('idHeightTx').value
+          const chkBox = document.getElementById('idboxTx')
+          let colSpanTx = null
+          if (chkBox.checked === true) {
+            colSpanTx = '1'
+            const dimensions = {
+              filaTx,
+              colsTx,
+              colSpanTx,
+            }
+            datoSeleccionado = JSON.stringify(dimensions)
+          } else {
+            datoSeleccionado = ''
+          }
+        })
+        spanRB = createSpan(
+          obj.span,
+          trO('Texto Largo', objTrad) || 'Texto Largo'
+        )
+        obj.divCajita.id = null
+        obj.divCajita.className = 'div-radios'
+        obj.divCajita.display = 'flex'
+        obj.divCajita.width = '100%'
+        divCajitaRB = createDiv(obj.divCajita)
+        divCajitaRB.appendChild(radio4)
+        divCajitaRB.appendChild(spanRB)
+        obj.divCajita.id = 'idDivCajitaHWtx'
+        obj.divCajita.className = null
+        obj.divCajita.height = 'auto' //'800px'
+        obj.divCajita.flexDirection = 'column'
+        obj.divCajita.display = 'none'
+        divDetalleP.appendChild(divCajitaRB)
+
+        //* se agrega otra cajita con los inputs
+        divCajitaRB = createDiv(obj.divCajita)
+        obj.divCajita.className = 'div-medidas'
+        obj.divCajita.id = null
+        obj.divCajita.height = null
+        obj.divCajita.width = '90%'
+        obj.divCajita.flexDirection = null
+        obj.divCajita.textAlign = 'left'
+
+        let divHWtx = createDiv(obj.divCajita)
+        inputCols.type = 'number'
+        inputCols.width = '60%'
+        inputCols.textAlign = 'left'
+        inputCols.fontWeight = 600
+        inputCols.padding = '0px 0px 0px 4px'
+        inputCols.value = 3
+        inputCols.className = 'solonumeros'
+        obj.label.id = null
+        obj.label.fontSize = '14px'
+        obj.label.margin = '15px 0px 0px 10px'
+        obj.label.className = 'label-HW'
+        obj.label.innerText = 'Rows'
+        inputCols.id = 'idWidthTx'
+        const inputHtx = createInput(inputCols)
+        const labelHtx = createLabel(obj.label)
+        divHWtx.appendChild(inputHtx)
+        divHWtx.appendChild(labelHtx)
+        divCajitaRB.appendChild(divHWtx)
+        divHWtx = createDiv(obj.divCajita)
+        inputCols.id = 'idHeightTx'
+        inputCols.value = 50
+        const inputWtx = createInput(inputCols)
+        obj.label.innerText = 'Cols'
+        const labelWtx = createLabel(obj.label)
+        divHWtx.appendChild(inputWtx)
+        divHWtx.appendChild(labelWtx)
+        divCajitaRB.appendChild(divHWtx)
+        divDetalleP.appendChild(divCajitaRB)
+
+        obj.input.type = 'checkbox'
+        obj.input.padding = '0px 0px 0px 4px'
+        obj.label.id = 'idBoxTx'
+        obj.label.fontSize = '14px'
+        obj.label.margin = '15px 0px 0px 10px'
+        obj.label.className = 'label-HW'
+        obj.label.innerText = 'Si tilda ocupa 4 celdas'
+        obj.input.id = 'idboxTx'
+        obj.input.cursor = 'pointer'
+        obj.input.width = '25px'
+        const boxTx = createInput(obj.input)
+        const labelBox = createLabel(obj.label)
+        divCajitaRB.appendChild(boxTx)
+        divCajitaRB.appendChild(labelBox)
+
         divDetalleP.appendChild(divCajitaRB)
         modalContent.appendChild(divDetalleP)
 
@@ -4880,8 +5007,9 @@ class Alerta {
     const divButton = createDiv(obj.divButtons)
     texto = trO(obj.btnaccept.text, objTrad) || obj.btnaccept.text
     obj.btnaccept.text = texto
-    const buttonAceptar = createButton(obj.btnaccept)
 
+    //* ACEPTAR
+    const buttonAceptar = createButton(obj.btnaccept)
     buttonAceptar.addEventListener('click', (e) => {
       e.preventDefault()
       // aceptar el cambio
@@ -4892,12 +5020,14 @@ class Alerta {
         column === '16' ||
         column === '17' ||
         column === '21' ||
-        column === '22'
+        column === '22' ||
+        column === '11'
       ) {
         datoSatinizado = datoSeleccionado
       } else {
         datoSatinizado = sanitiza(datoSeleccionado).trim()
       }
+
       if (datoSeleccionado !== null && datoSatinizado !== valor) {
         response = {
           success: true,
@@ -4907,6 +5037,7 @@ class Alerta {
       } else {
         response = { success: false, response: null }
       }
+      // console.log(response)
       callback(response)
       cerrarModal('modalAlert')
     })
@@ -4940,6 +5071,58 @@ class Alerta {
         cerrarModal('modalAlert')
       }
     })
+    const inputs = document.querySelectorAll('.solonumeros')
+    inputs.forEach((input) => {
+      input.addEventListener('input', () => {
+        input.value = input.value.replace(/\D/g, '') // Remueve cualquier carácter que no sea un dígito
+      })
+    })
+    const chkBox = document.getElementById('idboxTx')
+    const filaTx = document.getElementById('idWidthTx')
+    const colsTx = document.getElementById('idHeightTx')
+    if (filaTx && colsTx && colsTx) {
+      let firstLoad = true
+
+      const handleChange = () => {
+        const colSpanTx = chkBox.checked ? '1' : null
+        const dimensions = {
+          filaTx: filaTx.value,
+          colsTx: colsTx.value,
+          colSpanTx,
+        }
+        if (!firstLoad && colSpanTx) {
+          datoSeleccionado = JSON.stringify(dimensions)
+        }
+        if (!firstLoad && !colSpanTx) {
+          datoSeleccionado = ''
+        }
+        firstLoad = false
+      }
+      // Agrega el evento `change` a ambos elementos
+      filaTx.addEventListener('input', handleChange)
+      colsTx.addEventListener('input', handleChange)
+      chkBox.addEventListener('change', handleChange)
+      handleChange()
+    }
+    const anchoPhoto = document.getElementById('idWidth')
+    const altoPhoto = document.getElementById('idHeight')
+    if (anchoPhoto && altoPhoto) {
+      let firstLoad = true
+      const handleChange = () => {
+        const dimensions = {
+          width: anchoPhoto.value,
+          height: altoPhoto.value,
+        }
+        if (!firstLoad) {
+          datoSeleccionado = JSON.stringify(dimensions)
+        }
+        firstLoad = false
+      }
+      // Agrega el evento `change` a ambos elementos
+      anchoPhoto.addEventListener('input', handleChange)
+      altoPhoto.addEventListener('input', handleChange)
+      handleChange()
+    }
   }
 
   createNewCampo(objeto, objTrad, target, table, callback) {
@@ -5026,6 +5209,7 @@ class Alerta {
         response = { success: false, response: null }
       }
       callback(response)
+      // console.log(response)
       cerrarModal('modalAlert')
     })
 

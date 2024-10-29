@@ -256,8 +256,8 @@ class ElementGenerator {
         const objeto = JSON.parse(ajustada)
         // Verificar si el objeto tiene propiedades width y height
         if (objeto.width && objeto.height) {
-          // img.style.width = `${objeto.width}px`
-          // img.style.height = `${objeto.height}px`
+          img.style.width = `${objeto.width}vw`
+          img.style.height = `${objeto.height}vw`
         } else {
           // eslint-disable-next-line no-console
           console.error(

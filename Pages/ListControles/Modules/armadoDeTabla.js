@@ -298,16 +298,30 @@ function reconoceColumna(
       break
     case 11:
       // separador
-      if (array[4] === 'photo' && array[i] === '') {
-        background = '#ff7659'
-        fontStyle = 'Italic'
-        fontWeight = 700
-        texto = 'Add: {"width":"100","height":"100"}'
+      background = '#ff7659'
+      fontStyle = 'Italic'
+      fontWeight = 700
+      if (array[4] === 'photo' || (array[4] === 'tx' && array[i] === '')) {
+        if (array[i].includes('width')) {
+          texto = 'Add: {"width":"100","height":"100"}'
+        }
+        if (array[i].includes('filatx')) {
+          texto = 'Add: {"filatx":"10","colstx":"50","colspantx":"1"}'
+        }
       }
       if (array[i] && array[i] !== '') {
         if (array[i].trim().charAt(0) === '{') {
           const medidas = JSON.parse(array[i])
-          texto = `width: ${medidas.width} - height: ${medidas.height}`
+          if (array[i].includes('width')) {
+            texto = `width: ${medidas.width} - height: ${medidas.height}`
+          }
+          if (array[i].includes('filatx')) {
+            let celdas = '1'
+            if (medidas.colspantx === '1') {
+              celdas = '4'
+            }
+            texto = `rows: ${medidas.filatx} - cols: ${medidas.colstx} - cells: ${medidas.colstx}`
+          }
         }
         if (array[i].trim().charAt(0) === 's') {
           texto = '--------'
@@ -548,6 +562,7 @@ function subirBajar(target, objTranslate, plant) {
 
 function editCampos(target, objTranslate, LTYselect, plant) {
   try {
+    // console.log(target, objTranslate, LTYselect, plant)
     const table = document.querySelector('.tabla-campos')
     const objeto = { ...arrayGlobal.objAlertaAceptarCancelar }
     const miAlerta = new Alerta()
@@ -670,7 +685,8 @@ function addCeldaFilaCampo(
   cantidadDeRegistros,
   idReporte,
   objTranslate,
-  plant
+  plant,
+  colSpan
 ) {
   try {
     const newRow = document.createElement('tr')
@@ -696,6 +712,7 @@ function addCeldaFilaCampo(
           img.setAttribute('data-item', array[1])
           img.setAttribute('data-column', i)
           img.setAttribute('data-id', idReporte)
+          img.setAttribute('data-colspan', colSpan)
           const valor = array[i] || '0'
           let param = 's'
           img.setAttribute('data-valor', valor)
@@ -735,6 +752,8 @@ function addCeldaFilaCampo(
           img.setAttribute('data-column', i)
           img.setAttribute('data-id', idReporte)
           img.setAttribute('data-col', col)
+          img.setAttribute('data-colspan', colSpan)
+          img.setAttribute('data-type', array[4])
           let param = 's'
           const vacio = trO('Vacío', objTranslate) || 'Vacío'
           img.addEventListener('click', (e) => {
@@ -746,6 +765,8 @@ function addCeldaFilaCampo(
               param,
               id: e.target.getAttribute('data-id'),
               col: e.target.getAttribute('data-col'),
+              colSpan: e.target.getAttribute('data-colspan'),
+              type: e.target.getAttribute('data-type'),
             }
             editCampos(target, objTranslate, selects, plant)
           })
@@ -880,7 +901,8 @@ async function viewer(selector, array, objTranslate, plant) {
           filtrado.length,
           selector,
           objTranslate,
-          plant
+          plant,
+          null
         )
         tbody.appendChild(newRow)
       })

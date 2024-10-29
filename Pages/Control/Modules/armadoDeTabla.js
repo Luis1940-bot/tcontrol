@@ -253,9 +253,9 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         )
 
         const objetoTextarea = JSON.parse(ajustada)
-        filasTextArea = parseInt(objetoTextarea.filaTx)
-        columnasTextArea = parseInt(objetoTextarea.colsTx)
-        tipoColSpanTx = parseInt(objetoTextarea.colSpanTx)
+        filasTextArea = parseInt(objetoTextarea.filatx)
+        columnasTextArea = parseInt(objetoTextarea.colstx)
+        tipoColSpanTx = parseInt(objetoTextarea.colspantx)
       }
 
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
