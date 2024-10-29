@@ -33,6 +33,25 @@
                 "bienvenido" => ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
                 "abreviatura" => ["es", "bra", "en"]
             ],
+            "menuSelectivo" => [
+                "sin" => [
+                  "sinGuardar" => [],
+                  "sinGuardarCambio" => [],
+                  "sinGuardarComoNuevo" => [],
+                  "sinSalir" => [],
+                  "sinVolver" => [],
+                  "sinHacerFirmar" => []
+                ],
+                "con" => [
+                  "conExportar" => [],
+                  "conGuardar" => [],
+                  "conGuardarCambio" => [],
+                  "conGuardarComoNuevo" => [],
+                  "conSalir" => [],
+                  "conVolver" => [],
+                  "conHacerFirmar" => []
+                ]
+            ],
             "Menu" => [
                 "name" => ["Controles", "Consultas"],
                 "type" => ["", ""],
