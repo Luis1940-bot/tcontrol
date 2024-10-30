@@ -301,6 +301,7 @@ function reconoceColumna(
       background = '#ff7659'
       fontStyle = 'Italic'
       fontWeight = 700
+
       if (array[4] === 'photo' || (array[4] === 'tx' && array[i] === '')) {
         if (array[i].includes('width')) {
           texto = 'Add: {"width":"100","height":"100"}'
@@ -326,6 +327,10 @@ function reconoceColumna(
         if (array[i].trim().charAt(0) === 's') {
           texto = '--------'
         }
+      }
+      const separador = array[11].includes('solid')
+      if (separador) {
+        texto = 'con Separador'
       }
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
@@ -875,7 +880,7 @@ async function viewer(selector, array, objTranslate, plant) {
     const span = document.createElement('span')
     span.setAttribute('id', 'idTituloDelReporte')
     div1.innerHTML = ''
-    const tituloDelReporte = `${selector}-${
+    const tituloDelReporte = `#${selector} - ${
       trA(filtrado[0][0], objTranslate) || filtrado[0][0]
     }`
     span.innerText = tituloDelReporte
@@ -993,7 +998,8 @@ function estilosTbodyCell(
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 1; i++) {
-    const dato = trA(element[1], objTranslate) || element[1]
+    let reporte = trA(element[1], objTranslate) || element[1]
+    const dato = `#${id} - ${reporte}`
     const items = element[25]
     const alignCenter = 'left'
     const paddingLeft = '10px'
@@ -1046,6 +1052,7 @@ function completaTabla(arrayControl, objTranslate, plant) {
     trA(fila[0], objTranslate),
     ...fila.slice(0),
   ])
+
   const conteos = {}
   arrayMapeado.forEach((fila) => {
     const primerElemento = fila[0]
@@ -1070,7 +1077,6 @@ function completaTabla(arrayControl, objTranslate, plant) {
 
   arraySinDuplicados.forEach((element, index) => {
     const id = element[24]
-
     const newRow = estilosTbodyCell(
       element,
       index,

@@ -2897,7 +2897,7 @@ class Alerta {
       let typeAlert = 'viewer'
       // texto = trA(texto, objTrad) || texto;
 
-      obj.titulo.text[typeAlert] = `${array[1]} - ${texto}`
+      obj.titulo.text[typeAlert] = `#${array[1]} - ${texto}`
       const title = createH3(obj.titulo, typeAlert)
       title.id = 'idTituloH3'
       title.setAttribute('data-index', array[1])

@@ -60,10 +60,11 @@ function estilosCell(
   // fontSize,
   indice,
   objTranslate,
-  arrayControl
+  arrayControl,
+  id
 ) {
   const cell = document.createElement('td')
-  cell.textContent = datos
+  cell.textContent = `#${id} - ${datos}`
   cell.style.borderBottom = '1px solid #cecece'
   cell.style.zIndex = 2
   cell.style.textAlign = alignCenter
@@ -112,6 +113,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 1; i++) {
     const dato = element[0]
+    const id = element[1]
     const ultimo = element[3]
     const primero = element[16]
     const alignCenter = 'left'
@@ -140,7 +142,8 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
       // fontSize,
       indice,
       objTranslate,
-      arrayControl
+      arrayControl,
+      id
     )
     newRow.appendChild(cell)
   }
