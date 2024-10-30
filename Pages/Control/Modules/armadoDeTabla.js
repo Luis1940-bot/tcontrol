@@ -66,7 +66,8 @@ function estilosCell(
   requerido,
   display,
   objTrad,
-  enabled
+  enabled,
+  borde
 ) {
   const cell = document.createElement('td')
   let dato = ''
@@ -87,7 +88,11 @@ function estilosCell(
       type.disabled = false // Asegura que esté habilitado si enabled no es 1
     }
   }
-  cell.style.borderBottom = '1px solid #cecece'
+  let bordeStandar = '1px solid #cecece'
+  if (borde) {
+    bordeStandar = borde
+  }
+  cell.style.borderBottom = bordeStandar
   // cell.style.background = background;
   cell.style.zIndex = 2
   cell.style.textAlign = alignCenter
@@ -95,6 +100,7 @@ function estilosCell(
   cell.style.fontStyle = fontStyle
   cell.style.fontWeight = fontWeight
   cell.style.color = colorText
+  // cell.style.borderBottom = border
   colSpan === 1 ? (cell.colSpan = 4) : null
   colSpan === 2 ? (cell.style.display = 'none') : null
   colSpan === 3 ? (cell.colSpan = 3) : null
@@ -126,6 +132,11 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
     let colorText = '#000000'
     let requerido = ''
     let display = null
+    const separador = element[17].includes('solid')
+    let borde = null
+    if (separador) {
+      borde = element[17]
+    }
 
     if (i === 0) {
       ID += 1
@@ -246,7 +257,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       let columnasTextArea = null
 
       maxTextarea = element[17]
-      if (maxTextarea && maxTextarea.trim() !== '') {
+      if (maxTextarea && maxTextarea.trim() !== '' && separador === false) {
         const ajustada = maxTextarea.replace(
           /(['"])?([a-zA-Z0-9_]+)(['"])?:/g,
           '"$2": '
@@ -513,7 +524,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       requerido,
       display,
       objTrad,
-      enabled
+      enabled,
+      borde
     )
 
     newRow.appendChild(cell)
