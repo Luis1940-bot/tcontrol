@@ -86,7 +86,7 @@
                           $sql = str_replace("+","%2B",$sql);
                           // $sql = urldecode($sql);
                           $sql = rawurldecode($sql);
-                          $sql = filter_var($sql, FILTER_SANITIZE_URL);
+                          // $sql = filter_var($sql, FILTER_SANITIZE_URL);
                         // echo $sql.'<br>';
                       break;
 

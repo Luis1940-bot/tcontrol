@@ -184,3 +184,15 @@
 [25-Oct-2024 15:57:17 America/Mexico_City] Login failed for email: luisglogista@gmail.comm, planta: 26
 [25-Oct-2024 15:57:26 America/Mexico_City] Login failed for email: luisglogista@gmail.comm, planta: 26
 [28-Oct-2024 17:11:41 America/Argentina/Buenos_Aires] Login failed for email: luisglogista@gmail.com, planta: 26
+[30-Oct-2024 11:59:43 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[30-Oct-2024 11:59:43 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[30-Oct-2024 12:00:12 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[30-Oct-2024 12:00:12 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[30-Oct-2024 12:01:22 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[30-Oct-2024 12:01:22 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[30-Oct-2024 12:01:52 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[30-Oct-2024 12:01:52 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[30-Oct-2024 12:03:09 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[30-Oct-2024 12:03:09 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[30-Oct-2024 13:03:35 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[30-Oct-2024 13:03:35 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124

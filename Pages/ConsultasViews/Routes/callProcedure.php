@@ -17,6 +17,8 @@ function consultar($call, $desde, $hasta, $operation)
         if ($desde === null || $hasta === null) {
           $sql = "CALL ".$call."()";
         }
+        // echo $sql;
+        // echo $dbname;
         $con = mysqli_connect($host,$user,$password,$dbname);
             if (!$con) {
                 // die('Could not connect: ' . mysqli_error($con));
@@ -26,6 +28,11 @@ function consultar($call, $desde, $hasta, $operation)
             mysqli_select_db($con,$dbname);
 
             $result = mysqli_query($con,$sql);
+            if (!$result) {
+                echo "Error en la consulta SQL: " . mysqli_error($con);
+                mysqli_close($con);
+                exit;
+            }
             // var_dump($result);
             // print_r($result);
             $arr_customers = array();
@@ -78,7 +85,7 @@ header("Content-Type: application/json; charset=utf-8");
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 $datos = file_get_contents("php://input");
 // $datos = '{"q":"proc_DWTFritasL1","desde":"2024-01-01","hasta":"2024-01-03","operation":"DWTFritas"}';
-// $datos = '{"q":"proc_evaluacion_proveedores","desde":"2024-01-01","hasta":"2024-10-10","operation":null,"ruta":"/callProcedure","rax":"&new=Tue Oct 01 2024 19:52:19 GMT-0300 (hora estándar de Argentina)"}';
+// $datos = '{"q":"proc_15_cuali_proveedores","desde":"2024-01-01","hasta":"2024-12-10","operation":null,"ruta":"/callProcedure","rax":"&new=Tue Oct 01 2024 19:52:19 GMT-0300 (hora estándar de Argentina)"}';
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
     echo json_encode($response);

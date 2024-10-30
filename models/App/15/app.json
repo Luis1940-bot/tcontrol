@@ -6,12 +6,12 @@
   },
   "menuSelectivo": {
     "sin": {
-      "sinGuardar": [],
-      "sinGuardarCambio": [62],
-      "sinGuardarComoNuevo": [],
+      "sinGuardar": [63],
+      "sinGuardarCambio": [62, 63],
+      "sinGuardarComoNuevo": [63],
       "sinSalir": [],
       "sinVolver": [],
-      "sinHacerFirmar": [62]
+      "sinHacerFirmar": [62, 63]
     },
     "con": {
       "conExportar": [],

@@ -24,20 +24,21 @@
       "Listado de Compañías",
       "Auditorías M&T",
       "Evaluación de Proveedores",
-      "Evaluación de Proveedores"
+      "Calificación de Proveedores"
     ],
-    "confecha": [0, 1, 1],
-    "archivo": ["x", "x", "x"],
-    "active": [1, 1, 1],
-    "button": [0, 0, 0],
+    "confecha": [0, 1, 1, 1],
+    "archivo": ["x", "x", "x", "x"],
+    "active": [1, 1, 1, 1],
+    "button": [0, 0, 0, 0],
     "procedure": [
       "proc_companias",
       "proc_auditoria_compania",
-      "proc_evaluacion_proveedores"
+      "proc_evaluacion_proveedores",
+      "proc_15_cuali_proveedores"
     ],
-    "in": [null, null, null],
-    "out": [null, null, null],
-    "operation": [null, null, null]
+    "in": [null, null, null, null],
+    "out": [null, null, null, null],
+    "operation": [null, null, null, null]
   },
   "Producción": {
     "name": ["PTA", "TA", "Servicios Auxiliares"],

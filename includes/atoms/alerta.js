@@ -2482,7 +2482,7 @@ class Alerta {
     let existeCon = false
 
     //! guardar
-    if (sinMenus.sinGuardar && conMenus.sinGuardar) {
+    if (sinMenus.sinGuardar || conMenus.sinGuardar) {
       if (sinMenus.sinGuardar.length > 0) {
         existeSin = sinMenus.sinGuardar.includes(parseInt(controlN))
       }
@@ -2490,6 +2490,7 @@ class Alerta {
         existeCon = conMenus.conGuardar.includes(parseInt(controlN))
       }
     }
+
     if (
       (!existeSin && !existeCon) ||
       (!existeSin && existeCon) ||
@@ -2516,7 +2517,7 @@ class Alerta {
     //! fin guardar
 
     //! guardar cambio
-    if (sinMenus.sinGuardarCambio && conMenus.conGuardarCambio) {
+    if (sinMenus.sinGuardarCambio || conMenus.conGuardarCambio) {
       if (sinMenus.sinGuardarCambio.length > 0) {
         existeSin = sinMenus.sinGuardarCambio.includes(parseInt(controlN))
       }
@@ -2524,6 +2525,7 @@ class Alerta {
         existeCon = conMenus.conGuardarCambio.includes(parseInt(controlN))
       }
     }
+
     if (
       (!existeSin && !existeCon) ||
       (!existeSin && existeCon) ||
@@ -2552,7 +2554,7 @@ class Alerta {
     //! fin guardar cambio
 
     //! guardar como nuevo
-    if (sinMenus.sinGuardarComoNuevo && conMenus.conGuardarComoNuevo) {
+    if (sinMenus.sinGuardarComoNuevo || conMenus.conGuardarComoNuevo) {
       if (sinMenus.sinGuardarComoNuevo.length > 0) {
         existeSin = sinMenus.sinGuardarComoNuevo.includes(parseInt(controlN))
       }
@@ -2560,6 +2562,7 @@ class Alerta {
         existeCon = conMenus.conGuardarComoNuevo.includes(parseInt(controlN))
       }
     }
+
     if (
       (!existeSin && !existeCon) ||
       (!existeSin && existeCon) ||
@@ -2587,7 +2590,7 @@ class Alerta {
     existeCon = false
     //! fin guaradr como nuevo
     //! firmar
-    if (sinMenus.sinHacerFirmar && conMenus.conHacerFirmar) {
+    if (sinMenus.sinHacerFirmar || conMenus.conHacerFirmar) {
       if (sinMenus.sinHacerFirmar.length > 0) {
         existeSin = sinMenus.sinHacerFirmar.includes(parseInt(controlN))
       }
@@ -2595,6 +2598,7 @@ class Alerta {
         existeCon = conMenus.conHacerFirmar.includes(parseInt(controlN))
       }
     }
+
     if (
       (!existeSin && !existeCon) ||
       (!existeSin && existeCon) ||

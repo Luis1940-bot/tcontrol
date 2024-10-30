@@ -438,7 +438,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
     } else if (i === 4 && tipoDeObservacion === 'tx') {
       dato = null
       const [valorXDefecto] = element[26] !== '' ? [element[26]] : []
-      const textArea = ElementGenerator.generateTextArea(valorXDefecto)
+      const textArea = ElementGenerator.generateTextArea(valorXDefecto, 3, 30)
       elementHTML = textArea
       type = textArea
       const indexMas = index + 1
