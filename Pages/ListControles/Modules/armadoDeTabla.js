@@ -298,9 +298,6 @@ function reconoceColumna(
       break
     case 11:
       // separador
-      background = '#ff7659'
-      fontStyle = 'Italic'
-      fontWeight = 700
 
       if (array[4] === 'photo' || (array[4] === 'tx' && array[i] === '')) {
         if (array[i].includes('width')) {
@@ -309,6 +306,9 @@ function reconoceColumna(
         if (array[i].includes('filatx')) {
           texto = 'Add: {"filatx":"10","colstx":"50","colspantx":"1"}'
         }
+        background = '#ff7659'
+        fontStyle = 'Italic'
+        fontWeight = 700
       }
       if (array[i] && array[i] !== '') {
         if (array[i].trim().charAt(0) === '{') {
@@ -327,10 +327,16 @@ function reconoceColumna(
         if (array[i].trim().charAt(0) === 's') {
           texto = '--------'
         }
+        background = '#ff7659'
+        fontStyle = 'Italic'
+        fontWeight = 700
       }
       const separador = array[11].includes('solid')
       if (separador) {
         texto = 'con Separador'
+        background = '#ff7659'
+        fontStyle = 'Italic'
+        fontWeight = 700
       }
       buttonEditar = addEditar(indice, cantidadDeRegistros)
       break
@@ -880,7 +886,7 @@ async function viewer(selector, array, objTranslate, plant) {
     const span = document.createElement('span')
     span.setAttribute('id', 'idTituloDelReporte')
     div1.innerHTML = ''
-    const tituloDelReporte = `#${selector} - ${
+    const tituloDelReporte = `${selector} - ${
       trA(filtrado[0][0], objTranslate) || filtrado[0][0]
     }`
     span.innerText = tituloDelReporte

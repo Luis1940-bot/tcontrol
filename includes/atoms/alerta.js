@@ -4778,7 +4778,7 @@ class Alerta {
         )
         radio2.addEventListener('change', () => {
           formatoDivsMedidas('auto', 250, 50, 2)
-          datoSeleccionado = `grey 2px solid;"`
+          datoSeleccionado = `grey 2px solid`
         })
         divCajitaRB = createDiv(obj.divCajita)
         divCajitaRB.appendChild(radio2)

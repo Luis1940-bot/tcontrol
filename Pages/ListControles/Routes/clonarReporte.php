@@ -30,6 +30,7 @@ function clonarReporte($datos) {
     $idDestino = $objeto_json['destino'];
     $response = '';
 
+
     $mysqli = new mysqli($host, $user, $password, $dbname, $port);
 
     if ($mysqli->connect_error) {
@@ -43,18 +44,20 @@ function clonarReporte($datos) {
         // PRIMER SELECT
         $sqlSelect = "SELECT con.control FROM LTYcontrol con WHERE con.idLTYreporte=? ORDER BY con.idLTYcontrol ASC LIMIT 1";
         $stmtSelect = $mysqli->prepare($sqlSelect);
-
+     
         if ($stmtSelect === false) {
             throw new Exception('Error al preparar la consulta: ' . $mysqli->error);
         }
 
         $stmtSelect->bind_param("i", $idDestino);
 
+
         if (!$stmtSelect->execute()) {
             throw new Exception('Error al ejecutar la consulta: ' . $stmtSelect->error);
         }
 
         $result = $stmtSelect->get_result();
+
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $control = $row['control'];
@@ -123,6 +126,7 @@ function clonarReporte($datos) {
             while ($rowColumn = $resultColumns->fetch_assoc()) {
                 $fieldNames[] = $rowColumn['Field'];
             }
+  
             $fieldsSinPrimerElemento = array_slice($fieldNames, 1);
             $fields = implode(', ', $fieldsSinPrimerElemento);
 
@@ -139,23 +143,25 @@ function clonarReporte($datos) {
             $stmtDelete->close();
             $interrogantes = "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
             $parametros = "sssissiiisssssssssiisii";
-            $cadena = $campo['control'];
-            $longitud = strlen($cadena) - 1;
-            $numeroControl = substr($cadena, $longitud - strlen($cadena));
+           
+            // $cadena = $campos['control'];
+            // $longitud = strlen($cadena) - 1;
+            // $numeroControl = substr($cadena, $longitud - strlen($cadena));
 
             foreach ($campos as &$campo) {
-                if (isset($campo['control']) && !is_null($campo['control'])) {
-                    $cadena = $campo['control'];
-                } else {
-                    // Asignar un valor por defecto si es nulo o no está definido
-                    $cadena = '';
-                }
-                if (!empty($cadena)) {
-                    $longitud = strlen($cadena) - 1;
-                    $numeroControl = substr($cadena, $longitud - strlen($cadena));
-                } else {
-                    $numeroControl = 0; // Asignar un valor por defecto en caso de cadena vacía
-                }
+                // if (isset($campo['control']) && !is_null($campo['control'])) {
+                //     $cadena = $campo['control'];
+                    
+                // } else {
+                //     // Asignar un valor por defecto si es nulo o no está definido
+                //     $cadena = '';
+                // }
+                // if (!empty($cadena)) {
+                //     $longitud = strlen($cadena) - 1;
+                //     $numeroControl = substr($cadena, $longitud - strlen($cadena));
+                // } else {
+                //     $numeroControl = 0; // Asignar un valor por defecto en caso de cadena vacía
+                // }
                 $numeroControl ++;
                 $campo['control'] = $control . $numeroControl;
                 $campo['idLTYreporte'] = $idDestino;
@@ -190,6 +196,7 @@ function clonarReporte($datos) {
                     $campo['enable1'],
                     $campo['idLTYcliente']
                 ];
+               
                 $stmtInsert->bind_param($parametros, ...$datosAdd);
     
                 if (!$stmtInsert->execute()) {
@@ -221,7 +228,7 @@ function clonarReporte($datos) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"q":"%7B%22origen%22%3A4%2C%22destino%22%3A10%7D","ruta":"/clonarReporte","rax":"&new=Mon Jul 08 2024 10:24:20 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
+// $datos = '{"q":"%7B%22origen%22%3A67%2C%22destino%22%3A68%7D","ruta":"/clonarReporte","rax":"&new=Thu Oct 31 2024 20:51:28 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
 
 if (empty($datos)) {
     $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
