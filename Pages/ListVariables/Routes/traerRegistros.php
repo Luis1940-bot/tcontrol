@@ -48,7 +48,7 @@
                           WHERE 
                             rep.idLTYcliente = ". $sql_i ." AND
                             rep.activo = 's'
-                          ORDER BY reporte ASC;";
+                          ORDER BY id ASC;";
               break;
               
               default:

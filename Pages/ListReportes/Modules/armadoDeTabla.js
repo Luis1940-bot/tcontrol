@@ -132,7 +132,7 @@ function estilosTbodyCell(element, index, objTranslate, arrayControl) {
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 1; i++) {
-    const dato = element[0]
+    const dato = `#${element[1]} - ${element[0]}`
     const ultimo = element[3]
     const primero = element[16]
     const status = element[20]

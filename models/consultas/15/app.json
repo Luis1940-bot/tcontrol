@@ -41,15 +41,15 @@
     "operation": [null, null, null, null]
   },
   "Producción": {
-    "name": ["PTA", "TA", "Servicios Auxiliares"],
-    "confecha": [null, null, null],
-    "archivo": ["x", "x", "x"],
-    "active": [1, 1, 1],
-    "button": [1, 1, 1],
-    "procedure": [null, null, null],
-    "in": [null, null, null],
-    "out": [null, null, null],
-    "operation": [null, null, null]
+    "name": ["PTA", "TA", "Servicios Auxiliares", "TAGS"],
+    "confecha": [null, null, null, 0],
+    "archivo": ["x", "x", "x", "x"],
+    "active": [1, 1, 1, 1],
+    "button": [1, 1, 1, 0],
+    "procedure": [null, null, null, "proc_15_tags_operaciones"],
+    "in": [null, null, null, null],
+    "out": [null, null, null, null],
+    "operation": [null, null, null, null]
   },
 
   "PTA": {

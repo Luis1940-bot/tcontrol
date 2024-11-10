@@ -49,66 +49,210 @@
     "ruta": ["RegisterAuthUser/index.php", "RegisterPlant/index.php"]
   },
   "apps": {
-    "name": ["SCG", "Admin", "Producción", "Mantenimiento", "Super Admin"],
-    "type": ["ctrl", "ctrl", "btn", "btn", "btn"],
-    "ruta": ["Menu/index.php", "Admin/index.php", "", "", "Sadmin/index.php"],
-    "nivel": [2, 4, 1, 1, 8],
+    "name": [
+      "SCG",
+      "Admin",
+      "Mantenimiento",
+      "Producción",
+      "Servicios Auxiliares",
+      "Super Admin"
+    ],
+    "type": ["ctrl", "ctrl", "btn", "btn", "btn", "btn"],
+    "ruta": [
+      "Menu/index.php",
+      "Admin/index.php",
+      "",
+      "",
+      "",
+      "Sadmin/index.php"
+    ],
+    "nivel": [2, 4, 1, 1, 1, 8],
     "Producción": {
-      "name": ["PTA", "TA", "Servicios Auxiliares"],
-      "type": ["btn", "btn", "btn"],
-      "ruta": ["", "", ""],
-      "nivel": [1, 1, 1],
+      "name": ["PTA", "TA"],
+      "type": ["btn", "btn"],
+      "ruta": ["", ""],
+      "nivel": [1, 1],
       "PTA": {
-        "name": ["Check List Energía", "Actividades PTA"],
+        "name": ["FACILITADORES", "OPERADORES"],
         "type": ["btn", "btn"],
         "ruta": [],
         "nivel": [1, 1],
-        "Check List Energía": {
-          "name": [
-            "ÁREA DE PREPARACIÓN",
-            "ÁREA DE CRISTALIZACIÓN",
-            "ÁREA DE FILTROS",
-            "ÁREA DE RLM"
-          ],
-          "type": ["ctrl", "ctrl", "ctrl", "ctrl"],
-          "ruta": [
-            "control_N=26&control_T=ÁREA%20DE%20PREPARACIÓN&nr=",
-            "control_N=27&control_T=ÁREA%20DE%20CRISTALIZACIÓN&nr=",
-            "control_N=28&control_T=ÁREA%20DE%20FILTROS&nr=",
-            "control_N=29&control_T=ÁREA%20DE%20RLM&nr="
-          ],
-          "nivel": [1, 1, 1, 1]
+        "FACILITADORES": {
+          "name": [],
+          "type": [],
+          "ruta": [],
+          "nivel": []
         },
-        "Actividades PTA": {
-          "name": [
-            "TURNO 4 FILTROS",
-            "TURNO 5 FILTROS",
-            "TURNO 4 REACCIÓN PH2",
-            "TURNO 5 REACCIÓN PH2",
-            "TURNO 4 PREPARACIÓN",
-            "TURNO 5 PREPARACIÓN",
-            "TURNO 4 RLM"
-          ],
-          "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
-          "ruta": [
-            "control_N=19&control_T=TURNO%204%20FILTROS&nr=",
-            "control_N=20&control_T=TURNO%205%20FILTROS&nr=",
-            "control_N=21&control_T=TURNO%204%20REACCIÓN%20PH2&nr=",
-            "control_N=22&control_T=TURNO%205%20REACCIÓN%20PH2&nr=",
-            "control_N=23&control_T=TURNO%204%20PREPARACIÓN&nr=",
-            "control_N=24&control_T=TURNO%205%20PREPARACIÓN&nr=",
-            "control_N=25&control_T=TURNO%204%20RLM&nr="
-          ],
-          "nivel": [1, 1, 1, 1, 1, 1, 1]
+        "OPERADORES": {
+          "name": ["TABLEROS", "REACCIÓN", "FILTROS", "PREPARACIÓN", "RLM"],
+          "type": ["btn", "btn", "btn", "btn", "btn"],
+          "ruta": [],
+          "nivel": [1, 1, 1, 1, 1],
+          "TABLEROS": {
+            "name": [],
+            "type": [],
+            "ruta": [],
+            "nivel": []
+          },
+          "REACCIÓN": {
+            "name": [
+              "Check List Energía",
+              "TURNO 4 REACCIÓN PH2",
+              "TURNO 5 REACCIÓN PH2"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=27&control_T=ÁREA%20DE%20CRISTALIZACIÓN&nr=",
+              "control_N=21&control_T=TURNO%204%20REACCIÓN%20PH2&nr=",
+              "control_N=22&control_T=TURNO%205%20REACCIÓN%20PH2&nr="
+            ],
+            "nivel": [1, 1, 1]
+          },
+          "FILTROS": {
+            "name": [
+              "Check List Energía",
+              "TURNO 4 FILTROS",
+              "TURNO 5 FILTROS"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=28&control_T=Check%20List%20ÁREA%20DE%20FILTROS&nr=",
+              "control_N=19&control_T=TURNO%204%20FILTROS&nr=",
+              "control_N=20&control_T=TURNO%205%20FILTROS&nr="
+            ],
+            "nivel": [1, 1, 1]
+          },
+          "PREPARACIÓN": {
+            "name": [
+              "Check List Energía",
+              "TURNO 4 PREPARACIÓN",
+              "TURNO 5 PREPARACIÓN"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=26&control_T=Check%20List%20ÁREA%20DE%20PREPARACIÓN&nr=",
+              "control_N=23&control_T=TURNO%204%20PREPARACIÓN&nr=",
+              "control_N=24&control_T=TURNO%205%20PREPARACIÓN&nr="
+            ],
+            "nivel": [1, 1, 1]
+          },
+          "RLM": {
+            "name": ["Check List Energía", "TURNO 4 RLM"],
+            "type": ["ctrl", "ctrl"],
+            "ruta": [
+              "control_N=29&control_T=Check%20List%20ÁREA%20DE%20RLM&nr=",
+              "control_N=25&control_T=TURNO%204%20RLM&nr="
+            ],
+            "nivel": [1, 1]
+          }
         }
       },
       "TA": {
-        "name": [""],
-        "type": [""],
-        "ruta": [""],
+        "name": ["FACILITADORES", "OPERADORES"],
+        "type": ["btn", "btn"],
+        "ruta": [],
+        "nivel": [1, 1],
+        "FACILITADORES": {
+          "name": [],
+          "type": [],
+          "ruta": [],
+          "nivel": []
+        },
+        "OPERADORES": {
+          "name": [
+            "TABLEROS",
+            "REACCIÓN",
+            "FILTROS",
+            "RECUPERACIÓN DE SOLVENTES",
+            "ACEITE CALIENTE"
+          ],
+          "type": ["btn", "btn", "btn", "btn", "btn"],
+          "ruta": [],
+          "nivel": [1, 1, 1, 1, 1],
+          "TABLEROS": {
+            "name": [],
+            "type": [],
+            "ruta": [],
+            "nivel": []
+          },
+          "REACCIÓN": {
+            "name": [],
+            "type": [],
+            "ruta": [],
+            "nivel": []
+          },
+          "FILTROS": {
+            "name": ["Filtros"],
+            "type": ["ctrl"],
+            "ruta": ["control_N=77&control_T=TA%20-%20FILTROS&nr="],
+            "nivel": [1]
+          },
+          "RECUPERACIÓN DE SOLVENTES": {
+            "name": [],
+            "type": [],
+            "ruta": [],
+            "nivel": []
+          },
+          "ACEITE CALIENTE": {
+            "name": ["Aceite Caliente"],
+            "type": ["ctrl"],
+            "ruta": [
+              "control_N=76&control_T=TA%20-%20ACEITE%20CALIENTE%20ÁREA%20DE%20TANQUES%20Y%20SERVICIOS&nr="
+            ],
+            "nivel": [1]
+          }
+        }
+      }
+    },
+    "Mantenimiento": {
+      "name": ["Ingeniería", "Planeación", "Mec & Tub", "Elec & Inst"],
+      "type": ["btn", "btn", "btn", "btn"],
+      "ruta": ["", "", "", ""],
+      "nivel": [1, 1, 1, 1],
+      "Ingeniería": {
+        "name": ["Confiabilidad", "Integridad"],
+        "type": ["btn", "btn"],
+        "ruta": ["", ""],
+        "nivel": [1, 1]
+      },
+      "Planeación": {
+        "name": [],
+        "type": [],
+        "ruta": [],
+        "nivel": []
+      },
+      "Mec & Tub": {
+        "name": ["AUDITORÍA COMPAÑÍA"],
+        "type": ["ctrl"],
+        "ruta": [
+          "control_N=17&control_T=AUDITORÍA%20TUBERÍA%20-%20SOLDADURA%20-%20SERVICIOS%20GENERALES&nr="
+        ],
         "nivel": [1]
       },
-      "Servicios Auxiliares": {
+      "Elec & Inst": {
+        "name": [],
+        "type": [],
+        "ruta": [],
+        "nivel": []
+      }
+    },
+    "Servicios Auxiliares": {
+      "name": [
+        "FACILITADORES SA",
+        "OPERADORES SA",
+        "EFLUENTES SA",
+        "TRATAMIENTO DE AGUAS"
+      ],
+      "type": ["btn", "btn", "btn", "btn"],
+      "ruta": ["", "", "", ""],
+      "nivel": [1, 1, 1, 1],
+      "FACILITADORES SA": {
+        "name": [],
+        "type": [],
+        "ruta": [],
+        "nivel": []
+      },
+      "OPERADORES SA": {
         "name": ["Calderas", "Turbinas"],
         "type": ["btn", "btn"],
         "ruta": ["", ""],
@@ -215,38 +359,6 @@
           ],
           "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         }
-      }
-    },
-    "Mantenimiento": {
-      "name": ["Ingeniería", "Planeación", "Mec & Tub", "Elec & Inst"],
-      "type": ["btn", "btn", "btn", "btn"],
-      "ruta": ["", "", "", ""],
-      "nivel": [1, 1, 1, 1],
-      "Ingeniería": {
-        "name": ["Confiabilidad", "Integridad"],
-        "type": ["btn", "btn"],
-        "ruta": ["", ""],
-        "nivel": [1, 1]
-      },
-      "Planeación": {
-        "name": [],
-        "type": [],
-        "ruta": [],
-        "nivel": []
-      },
-      "Mec & Tub": {
-        "name": ["AUDITORÍA COMPAÑÍA"],
-        "type": ["ctrl"],
-        "ruta": [
-          "control_N=17&control_T=AUDITORÍA%20TUBERÍA%20-%20SOLDADURA%20-%20SERVICIOS%20GENERALES&nr="
-        ],
-        "nivel": [1]
-      },
-      "Elec & Inst": {
-        "name": [],
-        "type": [],
-        "ruta": [],
-        "nivel": []
       }
     }
   }

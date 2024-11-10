@@ -577,7 +577,7 @@ buttonVincular.addEventListener('click', (e) => {
         const text = element[1]
         const option = document.createElement('option')
         option.value = value
-        option.text = text
+        option.text = `#${value}-${text}`
         select.appendChild(option)
       })
     }

@@ -160,6 +160,7 @@ function llamarCtrl(control) {
 
       if (tipoDeArchivo === '') {
         const [subcadena, parametros] = url.split('?')
+        // console.log(url)
         const pares = parametros.split('&')
         const objeto = pares.reduce((objs, par) => {
           const obj = objs
