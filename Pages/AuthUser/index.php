@@ -4,6 +4,10 @@ session_start();
 // if (!SSO) {
 //   $_SESSION['login_sso']['sso'] = 'null';
 // }
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 header('Content-Type: text/html;charset=utf-8');
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
@@ -16,7 +20,9 @@ if (isset($_SESSION['timezone'])) {
 }
 // echo "Zona horaria actual: " . date_default_timezone_get() . "<br>";
 // echo "Fecha y hora actual: " . date('Y-m-d H:i:s') . "<br>";
+
 ?>
+
 <!DOCTYPE html>
 <!-- <html lang='br'> -->
 <head>
@@ -25,9 +31,9 @@ if (isset($_SESSION['timezone'])) {
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type = 'image / x-icon' href='../../assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='../../Pages/AuthUser/auth.css?v=<?php echo(time()); ?>' media='screen'>
-  <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/AuthUser/auth.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
   <title>Tenki</title>
 </head>
 <body>
@@ -41,9 +47,8 @@ if (isset($_SESSION['timezone'])) {
     ?>
   </header>
   <main>
-  <div class="div-auth">
-</div>
-
+    <div class="div-auth">
+    </div>
   </main>
   <footer>
     <?php

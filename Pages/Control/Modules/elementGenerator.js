@@ -57,7 +57,7 @@ class ElementGenerator {
     function validateInput(event) {
       const currentValue = event.target.value
       // Reemplazar caracteres no permitidos
-      event.target.value = currentValue.replace(/[,:/]/g, '')
+      event.target.value = currentValue.replace(/[,:]/g, '')
     }
 
     // Agregar evento input al input
@@ -75,34 +75,46 @@ class ElementGenerator {
 
   static generateInputNumber(width, valorPorDefecto) {
     const inputNumber = document.createElement('input')
-    inputNumber.setAttribute('type', 'text')
-    inputNumber.setAttribute('inputmode', 'decimal')
-    inputNumber.setAttribute('pattern', '^[0-9]{0,10}(\\.[0-9]{0,2})?$')
-    width ? (inputNumber.style.width = width) : null
-    valorPorDefecto !== '' &&
-    valorPorDefecto !== ' ' &&
-    valorPorDefecto !== null &&
-    valorPorDefecto !== undefined
-      ? (inputNumber.value = valorPorDefecto)
-      : null
+    inputNumber.setAttribute('type', 'text') // Cambiado a 'text' para compatibilidad con inputmode
+    inputNumber.setAttribute('inputmode', 'decimal') // Sugerir teclado numérico con punto decimal
+    inputNumber.setAttribute('placeholder', '0.00') // Guía para el usuario
 
-    inputNumber.addEventListener('input', function handleInput() {
+    // Aplicar ancho si se especifica
+    if (width) inputNumber.style.width = width
+
+    // Establecer valor por defecto si es válido
+    if (valorPorDefecto?.toString().trim()) {
+      inputNumber.value = valorPorDefecto
+    }
+
+    // Validar entrada en tiempo real
+    inputNumber.addEventListener('input', function () {
       // Permitir solo dígitos y un único punto decimal
-      const sanitizedValue = this.value.replace(/[^\d.]/g, '')
+      let sanitizedValue = this.value.replace(/[^\d.]/g, '')
 
-      // Verifica si el valor contiene más de un punto decimal
+      // Limitar a un solo punto decimal
       const parts = sanitizedValue.split('.')
       if (parts.length > 2) {
-        this.value = parts[0] + '.' + parts[1] // Permitir solo la primera parte decimal
-      } else {
-        this.value = sanitizedValue // Si es válido, actualiza el valor del input
+        sanitizedValue = parts[0] + '.' + parts[1]
       }
+
+      // Limitar a 2 decimales
+      if (parts[1]?.length > 2) {
+        sanitizedValue = parts[0] + '.' + parts[1].slice(0, 2)
+      }
+
+      // Corregir ".5" a "0.5"
+      if (sanitizedValue.startsWith('.')) {
+        sanitizedValue = '0' + sanitizedValue
+      }
+
+      this.value = sanitizedValue
     })
 
-    inputNumber.addEventListener('blur', function handleBlur() {
-      // Validar el valor cuando el input pierde el foco
+    // Validar valor final al perder el foco
+    inputNumber.addEventListener('blur', function () {
       if (this.value === '' || isNaN(Number(this.value))) {
-        this.value = '' // Si es vacío o no es número, dejarlo vacío en vez de NaN
+        this.value = '' // Si el valor no es válido, limpiar el input
       }
     })
 
@@ -162,7 +174,7 @@ class ElementGenerator {
     function validateInput(event) {
       const currentValue = event.target.value
       // Reemplazar caracteres no permitidos
-      event.target.value = currentValue.replace(/[,:/]/g, '')
+      event.target.value = currentValue.replace(/[,:]/g, '')
     }
 
     // Agregar evento input al input
@@ -275,11 +287,13 @@ class ElementGenerator {
     return img
   }
 
-  static generateInputButton(text, name, consulta, clase) {
+  static generateInputButton(text, name, consulta, clase, index) {
     const div = document.createElement('div')
     div.setAttribute('class', 'button-cn')
     const inputText = document.createElement('input')
     inputText.setAttribute('type', 'text')
+    const id = `${index}-buttonCn`
+    inputText.setAttribute('id', id)
     function validateInput(event) {
       const currentValue = event.target.value
       // Reemplazar caracteres no permitidos
@@ -293,6 +307,7 @@ class ElementGenerator {
     button.textContent = text
     button.setAttribute('name', name)
     button.setAttribute('class', clase)
+    button.setAttribute('data-input', id)
     // button.style.background = '#97B7E8';
     div.appendChild(button)
     button.addEventListener('click', (event) => {

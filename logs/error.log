@@ -345,3 +345,81 @@
 [10-Nov-2024 12:14:13 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
 [10-Nov-2024 12:26:17 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
 [10-Nov-2024 14:00:09 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[11-Nov-2024 18:06:48 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[11-Nov-2024 20:01:25 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[11-Nov-2024 20:14:56 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[12-Nov-2024 13:06:40 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[12-Nov-2024 13:06:50 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[12-Nov-2024 13:07:04 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[13-Nov-2024 14:47:27 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[13-Nov-2024 17:41:34 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[13-Nov-2024 17:57:48 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[13-Nov-2024 18:10:21 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[13-Nov-2024 18:25:40 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[13-Nov-2024 18:37:24 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[13-Nov-2024 18:53:42 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[19-Nov-2024 20:41:48 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 20:41:48 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[19-Nov-2024 20:45:22 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 20:45:22 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[19-Nov-2024 20:46:11 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 20:46:11 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[19-Nov-2024 20:46:40 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 20:46:40 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[19-Nov-2024 20:46:45 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 20:46:45 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[19-Nov-2024 22:05:32 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 22:05:32 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[19-Nov-2024 22:05:45 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 22:05:45 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[19-Nov-2024 22:05:51 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 122
+[19-Nov-2024 22:05:51 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 124
+[25-Nov-2024 09:59:55 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in D:\04.DESARROLLOS\tcontrol\Pages\ControlsView\Routes\traerRegistros.php on line 112
+[25-Nov-2024 11:42:47 America/Argentina/Buenos_Aires] No autorizado: eacancino@alpekpolyester.com, planta: 15
+[25-Nov-2024 11:45:29 America/Argentina/Buenos_Aires] No autorizado: eacancino@alpekpolyester.com, planta: 15
+[25-Nov-2024 11:46:57 America/Argentina/Buenos_Aires] No autorizado: eacancino@alpekpolyester.com, planta: 15
+[25-Nov-2024 11:48:07 America/Argentina/Buenos_Aires] No autorizado: eacancino@alpekpolyester.com, planta: 15
+[25-Nov-2024 11:48:44 America/Argentina/Buenos_Aires] No autorizado: eacancino@alpekpolyester.com, planta: 15
+[25-Nov-2024 12:00:54 America/Argentina/Buenos_Aires] No autorizado: Pedro.Cruz@alpekpolyester.com, planta: 15
+[25-Nov-2024 12:02:27 America/Argentina/Buenos_Aires] No autorizado: Pedro.Cruz@alpekpolyester.com, planta: 15
+[25-Nov-2024 12:03:30 America/Argentina/Buenos_Aires] No autorizado: gjguzman@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:22:07 America/Argentina/Buenos_Aires] No autorizado: LUIS.GONZALEZR@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:22:19 America/Argentina/Buenos_Aires] No autorizado: FAANTONIOG@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:22:31 America/Argentina/Buenos_Aires] No autorizado: datorresa@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:22:42 America/Argentina/Buenos_Aires] No autorizado: JOSE.XALA@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:22:52 America/Argentina/Buenos_Aires] No autorizado: rewright@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:23:03 America/Argentina/Buenos_Aires] No autorizado: camaldonado@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:23:17 America/Argentina/Buenos_Aires] No autorizado: Job.Ruiz@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:23:32 America/Argentina/Buenos_Aires] No autorizado: ERICK.RUPERTOS@alpekpolyester.com, planta: 15
+[25-Nov-2024 14:36:16 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[25-Nov-2024 14:43:45 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[25-Nov-2024 14:47:33 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[25-Nov-2024 14:51:57 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[25-Nov-2024 14:57:16 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[25-Nov-2024 15:20:57 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 07:34:48 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 07:41:26 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 07:45:41 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 07:51:11 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 07:57:32 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:03:23 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:22:20 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:25:40 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:29:26 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:32:23 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:36:33 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:41:09 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:45:27 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:50:04 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 08:53:28 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:00:22 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:05:23 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:09:06 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:11:47 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:15:07 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:17:57 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:20:16 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:22:51 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:25:20 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 09:54:02 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[26-Nov-2024 10:10:44 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in D:\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165

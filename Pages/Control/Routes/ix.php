@@ -8,7 +8,7 @@ if (isset($_SESSION['timezone'])) {
 } else {
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
-// include('datos.php');
+// include('datos.php');//! MUTEAAAARRRR
 
 function convertToValidJson($dataString) {
 
@@ -171,7 +171,7 @@ function insertar_registro($datos, $idLTYcliente) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = $datox;
+// $datos = $datox; //! MUTEAAAAAARRRRR
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
   echo json_encode($response);

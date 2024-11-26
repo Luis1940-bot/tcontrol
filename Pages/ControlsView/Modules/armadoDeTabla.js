@@ -487,7 +487,7 @@ function estilosCell(
 
   // Agregar la imagen a la celda
   cell.appendChild(imagen)
-  if (tipo === 4 || tipo === 7) {
+  if (tipo === 4 || tipo === 7 || tipo === 8) {
     const trash = document.createElement('img')
     trash.setAttribute('class', 'img-trash')
     trash.setAttribute('name', 'trash')

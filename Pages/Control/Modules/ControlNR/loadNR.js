@@ -19,9 +19,13 @@ function columna2(
   i,
   columnaTd,
   selDatos,
-  index
+  index,
+  valor_sql
 ) {
   // console.log(tagName, type, tds, val, datos, i, columnaTd, selDatos, index)
+  if (valor_sql !== null) {
+    return
+  }
   let valor = val
   const td = tds
   if (
@@ -217,18 +221,33 @@ async function verSupervisor(idSupervisor, plant) {
   }
 }
 
-async function cargarNR(res, plant) {
+async function cargarNR(res, plant, data) {
   try {
     const objString = res[0][14]
+
     const datos = JSON.parse(objString)
     const idSupervisor = datos.supervisor[0]
     const table = document.getElementById('tableControl')
+    // console.log(
+    //   'HTML de tableControl:',
+    //   table ? table.outerHTML : 'No existe tableControl'
+    // )
+
+    if (!table) {
+      console.error('tableControl no está disponible')
+      return
+    }
     const tbody = table.querySelector('tbody')
+    if (!table) {
+      console.error('tableControl no está disponible')
+      return
+    }
     const tr = tbody.querySelectorAll('tr')
+    // console.log(tr.length)
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length - 0; i++) {
       const row = tr[i]
-      // console.log(row)
+      const valor_sql = data[i][23]
       const td = row.querySelectorAll('td')
 
       const codigo = td[5].innerText
@@ -248,7 +267,19 @@ async function cargarNR(res, plant) {
         if (valor === 'tx') {
           valor = null
         }
-        columna2(tagName, type, td, valor, datos, i, 2, 12, elementoEncontrado)
+
+        columna2(
+          tagName,
+          type,
+          td,
+          valor,
+          datos,
+          i,
+          2,
+          12,
+          elementoEncontrado,
+          valor_sql
+        )
         columna2(
           tagNameObservaciones,
           typeObservaciones,
@@ -258,7 +289,8 @@ async function cargarNR(res, plant) {
           i,
           4,
           13,
-          elementoEncontrado
+          elementoEncontrado,
+          valor_sql
         )
       }
     }

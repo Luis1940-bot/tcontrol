@@ -81,6 +81,7 @@ async function autorizarCorreo() {
           email: envia.objeto.email.trim(),
           plant: parseInt(plant.value),
         }
+
         const insert = await nuevoCorreoAuth(q, '/nuevoAuth')
 
         if (insert.success) {

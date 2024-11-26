@@ -325,7 +325,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         text,
         element[orden[1]].toUpperCase(),
         consulta,
-        'InputButton-transparent'
+        'InputButton-transparent',
+        index
       )
       type = inputButton
     } else if (i === 2 && tipoDeDato === 'btnqwery') {

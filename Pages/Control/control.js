@@ -134,6 +134,35 @@ function actualizarProgreso(porcentaje) {
   })
 }
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function esperarTablaLista(callback) {
+  const table = document.getElementById('tableControl')
+  const tbody = table.querySelector('tbody')
+  const tr = tbody.querySelectorAll('tr')
+
+  // Si ya hay filas, ejecuta inmediatamente el callback
+  if (tr.length > 0) {
+    // console.log('Tabla ya lista con filas:', tr.length)
+    callback()
+    return
+  }
+
+  // Si no hay filas, activa el observador
+  const observer = new MutationObserver(() => {
+    const tr = tbody.querySelectorAll('tr')
+    if (tr.length > 0) {
+      // console.log('Tabla lista con filas:', tr.length)
+      observer.disconnect() // Detén el observador
+      callback() // Llama al callback
+    }
+  })
+
+  observer.observe(tbody, { childList: true })
+}
+
 async function cargaDeRegistros(objTrad, plant) {
   try {
     inicioPerformance()
@@ -157,14 +186,19 @@ async function cargaDeRegistros(objTrad, plant) {
       null
     )
     arrayGlobal.arrayControl = [...nuevoControlData]
-
+    const valor_sql = nuevoControlData
     tablaVacia(nuevoControlData, encabezados, objTrad, plant)
+    await delay(100)
     finPerformance()
     // Ajustar el porcentaje a 100%
     // console.log(nr)
     if (nr) {
       const controlNr = await traerNR(nr, plant)
-      await cargarNR(controlNr, plant) // Asegúrate de que cargarNR sea una función async
+      // await cargarNR(controlNr, plant) // Asegúrate de que cargarNR sea una función async
+      esperarTablaLista(() => {
+        console.log('Ejecutando cargarNR después de que la tabla está lista')
+        cargarNR(controlNr, plant, valor_sql)
+      })
     }
   } catch (error) {
     console.warn(error)

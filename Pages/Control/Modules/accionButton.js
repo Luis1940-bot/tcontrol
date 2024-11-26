@@ -11,12 +11,13 @@ import arrayGlobal from '../../../controllers/variables.js'
 
 let objTranslate = []
 
-async function cargaModal(respuesta, input, haceClick) {
+async function cargaModal(respuesta, input, haceClick, idInput) {
   try {
     const etiquetaInput = input
     const table = document.querySelector('.modal-content table')
     const thead = table.querySelector('.modal-content table thead')
     const tbody = table.querySelector('.modal-content table tbody')
+
     while (thead.firstChild) {
       thead.removeChild(thead.firstChild)
     }
@@ -41,15 +42,21 @@ async function cargaModal(respuesta, input, haceClick) {
       tbody.appendChild(row)
     })
 
-    tbody.addEventListener('click', (e) => {
-      const cell = e.target.closest('td') // Encuentra la celda más cercana al elemento clicado
-      if (cell && haceClick) {
-        const cellText = cell.textContent
-        etiquetaInput.value = cellText
-        const modal = document.getElementById('myModal')
-        modal.style.display = 'none'
-      }
-    })
+    tbody.replaceWith(tbody.cloneNode(true))
+    const newTbody = table.querySelector('.modal-content table tbody')
+    newTbody.addEventListener(
+      'click',
+      (e) => {
+        if (haceClick && e.target.tagName === 'TD') {
+          const id = idInput
+          const input = document.getElementById(id)
+          input.value = e.target.textContent
+          const modal = document.getElementById('myModal')
+          modal.style.display = 'none'
+        }
+      },
+      { once: true } // Este listener solo se ejecutará una vez
+    )
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error)
@@ -57,6 +64,7 @@ async function cargaModal(respuesta, input, haceClick) {
 }
 
 async function consultaCN(event, consulta) {
+  let idButton = event.target.dataset.input
   const button = event.target
   const cell = button.closest('td')
   const div = cell.querySelector('div')
@@ -70,7 +78,7 @@ async function consultaCN(event, consulta) {
     `traer_LTYsql`,
     `${encodeURIComponent(consulta)}`
   )
-  resultado.length > 0 ? cargaModal(resultado, input, true) : null
+  resultado.length > 0 ? cargaModal(resultado, input, true, idButton) : null
 }
 
 async function consultaQuery(event, consulta) {

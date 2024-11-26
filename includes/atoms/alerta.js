@@ -195,6 +195,21 @@ const funcionSalir = () => {
 const funcionExportarExcel = () => {
   try {
     const tabla = document.getElementById('tableConsultaViews')
+    // Convertir fechas a texto para evitar conversiones no deseadas
+    const rows = tabla.getElementsByTagName('tr')
+    for (const row of rows) {
+      const cells = row.getElementsByTagName('td')
+      for (const cell of cells) {
+        // Si la celda contiene una fecha, convertirla a texto en formato dd-mm-yyyy
+        if (Date.parse(cell.textContent)) {
+          const fecha = new Date(cell.textContent)
+          const dia = fecha.getDate().toString().padStart(2, '0')
+          const mes = (fecha.getMonth() + 1).toString().padStart(2, '0')
+          const anio = fecha.getFullYear()
+          cell.textContent = `${dia}-${mes}-${anio}`
+        }
+      }
+    }
     const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Sheet JS' })
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
     const blob = new Blob([wbout], { type: 'application/octet-stream' })

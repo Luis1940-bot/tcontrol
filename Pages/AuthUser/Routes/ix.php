@@ -14,6 +14,7 @@ require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 
 
 function insertarCorreo($datos) {
+
     $dato_decodificado =urldecode($datos);
     $objeto_json = json_decode($dato_decodificado, true);
     if (json_last_error() !== JSON_ERROR_NONE) {
@@ -37,12 +38,13 @@ function insertarCorreo($datos) {
     try {
         $email = $objeto_json['email'];
         $plant = $objeto_json['plant'];
-        
+
+  
 
         $campos = "plant, mail";
         $interrogantes = "?, ?";
 
-        $pdo = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $user, $password);
+        $pdo = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8mb4", $user, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->exec("SET NAMES utf8");
 
@@ -51,22 +53,22 @@ function insertarCorreo($datos) {
         $stmt = $pdo->prepare($sql);
 
         // Vinculación de parámetros.
-        $stmt->bindParam(1, $plant);
-        $stmt->bindParam(2, $email);
+        $stmt->bindParam(1, $plant, PDO::PARAM_INT);
+        $stmt->bindParam(2, $email, PDO::PARAM_STR);
         
         // Ejecución de la transacción.
         $pdo->beginTransaction();
         $stmt->execute();
         $lastInsertedId = $pdo->lastInsertId();
-        $cantidad_insert = $stmt->rowCount();
+        // $cantidad_insert = $stmt->rowCount();
         $pdo->commit();
 
         // Respuesta dependiendo del resultado de la inserción.
-        if ($cantidad_insert > 0) {
+        if ($lastInsertedId) {
             $response = [
                 'success' => true,
                 'message' => 'La operación fue exitosa!',
-                'registros' => $cantidad_insert,
+                'registros' => 1,
                 'last_insert_id' => $lastInsertedId
             ];
         } else {
@@ -94,7 +96,7 @@ function insertarCorreo($datos) {
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"q":{"idLTYarea":"","area":"desarrollo","idLTYcliente":7,"activo":"s","visible":"s"},"ruta":"/guardarAreaNuevo","rax":"&new=Tue Jul 02 2024 16:09:17 GMT-0300 (hora estándar de Argentina)"}';
+// $datos = '{"q":{"email":"eacancino@alpekpolyester.com","plant":15},"ruta":"/nuevoAuth","rax":"&new=Mon Nov 25 2024 11:48:44 GMT-0300 (hora estándar de Argentina)"}';
 
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
