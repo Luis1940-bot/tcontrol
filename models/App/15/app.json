@@ -365,25 +365,24 @@
             "Check List de Actividades Reacc. RLM",
             "Lecturas de Campo Reacc. RLM",
             "Check List Energía Reacc. RLM",
-            "GPT-F-710 Reacc. RLM"
+            "GPT-F-710 Reacc. RLM",
+            "Lecturas RLM"
           ],
-          "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl"],
+          "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "control_N=68&control_T=5S%20PTA%20-%20RLM&nr=",
             "",
             "control_N=29&control_T=Check%20List%20ÁREA%20DE%20RLM&nr=",
             "control_N=105&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(RLM)&nr=",
-            "control_N=99&control_T=INSPECCIÓN%20DIARIA%20DE%20LOS%20FILTROS%20FUNDA%20CM-417%20A,%20B%20Y%20C&nr="
+            "control_N=99&control_T=INSPECCIÓN%20DIARIA%20DE%20LOS%20FILTROS%20FUNDA%20CM-417%20A,%20B%20Y%20C&nr=",
+            "control_N=85&control_T=PTA%20-%20LECTURAS%20RLM&nr="
           ],
-          "nivel": [1, 1, 1, 1, 1],
+          "nivel": [1, 1, 1, 1, 1, 1],
           "Check List de Actividades Reacc. RLM": {
-            "name": ["Turno 4 RLM", "Lecturas RLM"],
-            "type": ["ctrl", "ctrl"],
-            "ruta": [
-              "control_N=25&control_T=PTA%20-%20TURNO%204%20RLM&nr=",
-              "control_N=85&control_T=PTA%20-%20LECTURAS%20RLM&nr="
-            ],
-            "nivel": [1, 1]
+            "name": ["Turno 4 RLM"],
+            "type": ["ctrl"],
+            "ruta": ["control_N=25&control_T=PTA%20-%20TURNO%204%20RLM&nr="],
+            "nivel": [1]
           }
         }
       },

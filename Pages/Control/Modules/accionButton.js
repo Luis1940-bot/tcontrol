@@ -8,6 +8,7 @@ import traerFirma from './Controladores/traerFirma.js'
 import Alerta from '../../../includes/atoms/alerta.js'
 // eslint-disable-next-line import/extensions
 import arrayGlobal from '../../../controllers/variables.js'
+import fechasGenerator from '../../../controllers/fechas.js'
 
 let objTranslate = []
 
@@ -161,6 +162,32 @@ async function validation(val, plant, objTrad, div, index) {
   }
 }
 
+async function checkHour(div, index) {
+  try {
+    while (div.firstChild) {
+      div.removeChild(div.firstChild)
+    }
+    const tbody = document.querySelector('#tableControl tbody')
+    const row = tbody.rows[index]
+    if (row && row.cells.length >= 3) {
+      row.cells[3].innerHTML = ''
+      const previousCell = row.cells[2]
+      previousCell.colSpan = (previousCell.colSpan || 1) + 1
+      row.removeChild(row.cells[3])
+    }
+    const inputText = document.createElement('input')
+    inputText.setAttribute('type', 'text')
+    inputText.setAttribute('disabled', false)
+    inputText.style.display = 'block'
+    inputText.style.border = 'none'
+    inputText.value = fechasGenerator.hora_actual(new Date())
+
+    div.appendChild(inputText)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 function generateOptions(array, select) {
   while (select.firstChild) {
     select.removeChild(select.firstChild)
@@ -278,4 +305,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 })
 
-export { consultaCN, consultaQuery, eventSelect, validation }
+export { consultaCN, consultaQuery, eventSelect, validation, checkHour }

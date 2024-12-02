@@ -391,6 +391,16 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         index
       )
       type = inputButton
+    } else if (i === 2 && tipoDeDato === 'checkhour') {
+      dato = null
+      let text = 'AHORA'
+      const inputButton = ElementGenerator.generateButtonCheckHour(
+        text,
+        'AHORA',
+        'InputButton-transparent',
+        index
+      )
+      type = inputButton
     }
 
     if (i > 2 && tipoDeDato === 'tx') {

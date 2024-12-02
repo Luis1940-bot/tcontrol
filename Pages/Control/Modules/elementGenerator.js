@@ -4,6 +4,7 @@ import {
   consultaQuery,
   eventSelect,
   validation,
+  checkHour,
   // eslint-disable-next-line import/extensions
 } from './accionButton.js'
 // eslint-disable-next-line import/extensions
@@ -373,6 +374,28 @@ class ElementGenerator {
         encriptado = null
       }
       validation(encriptado, plant, objTrad, div, index)
+    })
+    return div
+  }
+
+  static generateButtonCheckHour(text, name, clase, index) {
+    const div = document.createElement('div')
+    div.setAttribute('class', 'button-cn')
+    const inputText = document.createElement('input')
+    inputText.setAttribute('type', 'checkHour')
+    inputText.style.display = 'none'
+    inputText.disabled = true
+
+    div.appendChild(inputText)
+    const button = document.createElement('button')
+    button.textContent = text
+    button.setAttribute('name', name)
+    button.setAttribute('class', clase)
+    // button.style.background = '#97B7E8';
+    div.appendChild(button)
+    button.addEventListener('click', (event) => {
+      event.preventDefault()
+      checkHour(div, index)
     })
     return div
   }

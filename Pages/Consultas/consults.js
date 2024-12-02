@@ -98,7 +98,7 @@ function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
 }
 
 /* eslint-enable no-use-before-define */
-function completaButtons(obj) {
+function completaButtons(obj, tipodeusuario) {
   if (!obj) {
     return
   }
@@ -107,6 +107,10 @@ function completaButtons(obj) {
   // document.getElementById('spanUbicacion').innerText = objButtons.planta
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < objButtons[obj].name.length; i++) {
+    let aprobado = true
+    if (tipodeusuario < objButtons[obj].nivel[i]) {
+      aprobado = false
+    }
     const element = objButtons[obj].name[i]
     const active = objButtons[obj].active[i]
     let procedure,
@@ -150,7 +154,7 @@ function completaButtons(obj) {
       operation,
       onClick: funcionDeClick,
     }
-    if (active === 1) {
+    if (active === 1 && aprobado) {
       const newButton = createButton(params)
       divButtons.appendChild(newButton)
     }
@@ -160,10 +164,11 @@ function completaButtons(obj) {
 const funcionDeClick = (e) => {
   const claveBuscada = e.target.name
   const tipoValue = e.target.getAttribute('tipo')
-
+  const persona = desencriptar(sessionStorage.getItem('user'))
+  const tipodeusuario = parseInt(persona.tipo)
   if (tipoValue === '1') {
     localizador(e)
-    completaButtons(claveBuscada)
+    completaButtons(claveBuscada, tipodeusuario)
   } else if (tipoValue === '0') {
     const procedure = e.target.getAttribute('procedure')
     const name = e.target.getAttribute('name')
@@ -175,14 +180,14 @@ const funcionDeClick = (e) => {
   }
 }
 
-function leeApp(json, complit) {
+function leeApp(json, complit, tipodeusuario) {
   readJSON(json)
     .then((data) => {
       Object.assign(objButtons, data)
       navegador.estadoAnteriorButton = 'Consultas'
       navegador.estadoAnteriorWhereUs.push('Consultas')
       document.getElementById('spanUbicacion').innerText = objButtons.planta
-      complit ? completaButtons('Consultas') : null
+      complit ? completaButtons('Consultas', tipodeusuario) : null
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
@@ -216,12 +221,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase()
     await leeVersion('version')
+    const tipodeusuario = parseInt(persona.tipo)
 
     async function iniciarAplicacion() {
       objTranslate = await arraysLoadTranslate()
       dondeEstaEn()
-      await leeApp(`App/${plant}/app`, false)
-      await leeApp(`consultas/${plant}/app`, true)
+      await leeApp(`App/${plant}/app`, false, tipodeusuario)
+      await leeApp(`consultas/${plant}/app`, true, tipodeusuario)
 
       spinner.style.visibility = 'hidden'
       finPerformance()

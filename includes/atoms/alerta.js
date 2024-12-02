@@ -4717,6 +4717,7 @@ class Alerta {
           ['subt', 'Sub.Título'],
           ['title', 'Título'],
           ['valid', 'Validar'],
+          ['checkhour', 'Check Hora'],
         ]
         const params = {
           id: '',

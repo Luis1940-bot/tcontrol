@@ -40,9 +40,11 @@ const encabezados = {
     '2do Valor SQL',
     'SQL Consulta dinámica',
     'Validar',
+    'Check Hora',
   ],
   width: [
     '0.2',
+    '1',
     '1',
     '1',
     '1',
@@ -166,6 +168,9 @@ function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   }
   if (tipoDeDato === 'valid') {
     tipo = trO('Validar', objTranslate) || 'Validar'
+  }
+  if (tipoDeDato === 'checkhour') {
+    tipo = trO('Check Hora', objTranslate) || 'Check Hora'
   }
   return tipo
 }

@@ -2,22 +2,30 @@
   "Consultas": {
     "name": ["Gestión", "Mantenimiento", "Producción"],
     "active": [1, 1, 1],
-    "button": [1, 1, 1]
+    "button": [1, 1, 1],
+    "nivel": [3, 1, 1]
   },
   "Gestión": {
-    "name": ["PA Facilitador", "PA Jefatura", "PA Gerencia"],
-    "confecha": [1, 1, 1],
-    "archivo": ["x", "x", "x"],
-    "active": [1, 1, 1],
-    "button": [0, 0, 0],
+    "name": [
+      "PA Facilitador",
+      "PA Jefatura",
+      "PA Gerencia",
+      "Control Interno 1"
+    ],
+    "confecha": [1, 1, 1, 1],
+    "archivo": ["x", "x", "x", "x"],
+    "active": [1, 1, 1, 1],
+    "button": [0, 0, 0, 0],
     "procedure": [
       "proc_pa_facilitador",
       "proc_pa_jefatura",
-      "proc_pa_gerencia"
+      "proc_pa_gerencia",
+      "proc_15_control_interno1"
     ],
-    "in": [null, null, null],
-    "out": [null, null, null],
-    "operation": [null, null, null]
+    "in": [null, null, null, null],
+    "out": [null, null, null, null],
+    "operation": [null, null, null, null],
+    "nivel": [2, 3, 5, 3]
   },
   "Mantenimiento": {
     "name": [
@@ -25,22 +33,29 @@
       "Auditorías M&T",
       "Evaluación de Proveedores",
       "Calificación de Proveedores",
-      "Operarios de Mantenimiento"
+      "Operarios de Mantenimiento",
+      "Estatus Repuestos 1",
+      "Estatus BD-402 A/B",
+      "Estatus BD-204"
     ],
-    "confecha": [0, 1, 1, 1, 0],
-    "archivo": ["x", "x", "x", "x", "x"],
-    "active": [1, 1, 1, 1, 1],
-    "button": [0, 0, 0, 0, 0],
+    "confecha": [0, 1, 1, 1, 0, 0, 0, 0],
+    "archivo": ["x", "x", "x", "x", "x", "x", "x", "x"],
+    "active": [1, 1, 1, 1, 1, 1, 1, 1],
+    "button": [0, 0, 0, 0, 0, 0, 0, 0],
     "procedure": [
       "proc_companias",
       "proc_auditoria_compania",
       "proc_evaluacion_proveedores",
       "proc_15_cuali_proveedores",
-      "proc_15_operarios_mantto"
+      "proc_15_operarios_mantto",
+      "proc_15_estatus_repuestos1",
+      "proc_15_estatus_BD402",
+      "proc_15_estatus_BD204"
     ],
-    "in": [null, null, null, null],
-    "out": [null, null, null, null],
-    "operation": [null, null, null, null]
+    "in": [null, null, null, null, null, null, null],
+    "out": [null, null, null, null, null, null, null],
+    "operation": [null, null, null, null, null, null, null],
+    "nivel": [1, 1, 1, 1, 1, 5, 5, 5]
   },
   "Producción": {
     "name": ["PTA", "TA", "Servicios Auxiliares", "TAGS en Lecturas de Campo"],
@@ -51,7 +66,8 @@
     "procedure": [null, null, null, "proc_15_tags_operaciones"],
     "in": [null, null, null, null],
     "out": [null, null, null, null],
-    "operation": [null, null, null, null]
+    "operation": [null, null, null, null],
+    "nivel": [1, 1, 1, 1]
   },
 
   "PTA": {
@@ -99,7 +115,8 @@
       null,
       null,
       null
-    ]
+    ],
+    "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   },
   "Servicios Auxiliares": {
     "name": ["Calderas", "Turbinas"],
@@ -110,6 +127,7 @@
     "procedure": [null, null],
     "in": [null, null],
     "out": [null, null],
-    "operation": [null, null]
+    "operation": [null, null],
+    "nivel": [1, 1]
   }
 }

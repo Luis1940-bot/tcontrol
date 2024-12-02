@@ -17,6 +17,7 @@ function insertarRegistro(objeto, plant) {
   // console.log(objeto)
   const objLimpio = limpiarObjeto(objeto)
   // console.log(objLimpio)
+
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio))
 
   const rax = `&new=${new Date()}`

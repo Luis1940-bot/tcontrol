@@ -16,20 +16,40 @@ function convertToValidJson($dataString) {
     // Añadir comillas dobles alrededor de las claves
   $dataString = preg_replace('/(\w+):/', '"$1":', $dataString);
 
-  // Corregir formato del campo "valor"
-  $dataString = preg_replace_callback('/"valor":\s*\[(.*?)\]/', function($matches) {
-      $content = $matches[1];
-      $pattern = '/""(\d{2})":(\d{2})"/';
-      $match = [];
-      preg_match_all($pattern, $content, $match);
-      // Corregir el formato de la hora dentro de "valor"
-      $content = preg_replace($pattern, '"' . $match[1][0] . ':' . $match[2][0] . '"', $content); // Corregir el formato de la hora ""HH:MM  
-      // Reemplazar comillas dobles por comillas simples dentro de los objetos
-      $content = preg_replace_callback('/\{(.*?)\}/', function($submatches) {
-          return '{' . str_replace('"', "'", $submatches[1]) . '}';
-      }, $content);
-      return '"valor": [' . $content . ']';
-  }, $dataString);
+// Corregir el formato del campo "valor"
+$dataString = preg_replace_callback(
+    '/"valor":\s*\[(.*?)\]/',
+    function ($matches) {
+        $content = $matches[1];
+
+        // Buscar los patrones del formato de tiempo ""HH":MM"
+        $pattern = '/""(\d{2})":(\d{2})"/';
+        $match = [];
+        preg_match_all($pattern, $content, $match);
+
+        // Corregir el formato de las horas encontradas
+        if (!empty($match[0])) {
+            foreach ($match[0] as $key => $originalTime) {
+                $correctedTime = '"' . $match[1][$key] . ':' . $match[2][$key] . '"';
+                $content = str_replace($originalTime, $correctedTime, $content);
+            }
+        }
+
+        // Reemplazar comillas dobles por comillas simples dentro de los objetos JSON válidos
+        $content = preg_replace_callback(
+            '/\{(.*?)\}/',
+            function ($submatches) {
+                return '{' . str_replace('"', "'", $submatches[1]) . '}';
+            },
+            $content
+        );
+
+        return '"valor": [' . $content . ']';
+    },
+    $dataString
+);
+
+
 
   // Corregir formato del campo "imagenes"
   $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?)\]/', function($matches) {
@@ -127,7 +147,6 @@ function insertar_registro($datos, $idLTYcliente) {
   $jsonString = rtrim($jsonString, '}');
 
   $nuevoObjetoJSON = convertToValidJson($jsonString); 
-
 
   $fecha = $objeto_json->fecha[0];
   $hora = $objeto_json->hora[0];
