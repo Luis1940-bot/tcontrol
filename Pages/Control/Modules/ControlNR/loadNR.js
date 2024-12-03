@@ -179,7 +179,12 @@ function columna2(
       div.appendChild(inputText)
     }
   }
-  if (tagName === 'DIV' && tipodedato === 'checkhour') {
+  if (
+    tagName === 'DIV' &&
+    (tipodedato === 'checkhour' ||
+      tipodedato === 'checkdate' ||
+      tipodedato === 'checkdateh')
+  ) {
     if (valor !== '') {
       const div = tds[2]
       while (div.firstChild) {

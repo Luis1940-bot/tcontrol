@@ -4718,6 +4718,8 @@ class Alerta {
           ['title', 'Título'],
           ['valid', 'Validar'],
           ['checkhour', 'Check Hora'],
+          ['checkdate', 'Check Date'],
+          ['checkdatehour', 'Check Date Hora'],
         ]
         const params = {
           id: '',

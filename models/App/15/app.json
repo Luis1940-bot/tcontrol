@@ -134,12 +134,12 @@
         },
         "FILTROS TA": {
           "name": [
-            "Formato Orden y Limpieza Fil. TA",
-            "Check List de Actividades Fil. TA",
-            "Lecturas de Campo Fil. TA",
-            "GPT-F-589 Fil. TA",
-            "GPT-F-587 Fil. TA",
-            "GPT-F-599 Fil. TA"
+            "Formato Orden y Limpieza Filtros TA",
+            "Check List de Actividades Filtros TA",
+            "Lecturas de Campo Filtros TA",
+            "GPT-F-589 Filtros TA",
+            "GPT-F-587 Filtros TA",
+            "GPT-F-599 Filtros TA"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
@@ -151,7 +151,7 @@
             "control_N=116&control_T=TA%20-%20INSPECCIÓN%20VISUAL%20DE%20MUESTRAS%20EN%20PUNTOS%20ESTRATÉGICOS%20DE%20OXIDACIÓN(FILTROS)&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1],
-          "Check List de Actividades Fil. TA": {
+          "Check List de Actividades Filtros TA": {
             "name": ["TA - TURNO 4 FILTROS", "TA - TURNO 5 FILTROS"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
@@ -303,13 +303,13 @@
         },
         "FILTROS PTA": {
           "name": [
-            "Formato Orden y Limpieza Reacc. Fil.",
-            "Check List de Actividades Reacc. Fil.",
-            "Lecturas de Campo Reacc. Fil.",
-            "Check List Energía Reacc. Fil.",
-            "GPT-F-782 Reacc. Fil.",
-            "GPT-F-780 Reacc. Fil.",
-            "GPT-F-785 Reacc. Fil."
+            "Formato Orden y Limpieza Reacc. Filtros",
+            "Check List de Actividades Reacc. Filtros",
+            "Lecturas de Campo Reacc. Filtros",
+            "Check List Energía Reacc. Filtros",
+            "GPT-F-782 Reacc. Filtros",
+            "GPT-F-780 Reacc. Filtros",
+            "GPT-F-785 Reacc. Filtros"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
@@ -322,7 +322,7 @@
             "control_N=104&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(FILTROS)&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1, 1],
-          "Check List de Actividades Reacc. Fil.": {
+          "Check List de Actividades Reacc. Filtros": {
             "name": ["Turno 4", "Turno 5"],
             "type": ["ctrl", "ctrl"],
             "ruta": [

@@ -41,9 +41,14 @@ const encabezados = {
     'SQL Consulta dinámica',
     'Validar',
     'Check Hora',
+    'Check Date',
+    'Check Date Hora',
   ],
   width: [
     '0.2',
+    '1',
+    '1',
+    '1',
     '1',
     '1',
     '1',
@@ -171,6 +176,12 @@ function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   }
   if (tipoDeDato === 'checkhour') {
     tipo = trO('Check Hora', objTranslate) || 'Check Hora'
+  }
+  if (tipoDeDato === 'checkdate') {
+    tipo = trO('Check Date', objTranslate) || 'Check Date'
+  }
+  if (tipoDeDato === 'checkdatehour') {
+    tipo = trO('Check Date Hora', objTranslate) || 'Check Date Hora'
   }
   return tipo
 }

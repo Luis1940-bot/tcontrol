@@ -49,8 +49,6 @@ $dataString = preg_replace_callback(
     $dataString
 );
 
-
-
   // Corregir formato del campo "imagenes"
   $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?)\]/', function($matches) {
       $content = $matches[1];

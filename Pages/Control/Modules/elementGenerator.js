@@ -5,6 +5,8 @@ import {
   eventSelect,
   validation,
   checkHour,
+  checkDate,
+  checkDateHour,
   // eslint-disable-next-line import/extensions
 } from './accionButton.js'
 // eslint-disable-next-line import/extensions
@@ -396,6 +398,50 @@ class ElementGenerator {
     button.addEventListener('click', (event) => {
       event.preventDefault()
       checkHour(div, index)
+    })
+    return div
+  }
+
+  static generateButtonCheckDate(text, name, clase, index) {
+    const div = document.createElement('div')
+    div.setAttribute('class', 'button-cn')
+    const inputText = document.createElement('input')
+    inputText.setAttribute('type', 'checkDate')
+    inputText.style.display = 'none'
+    inputText.disabled = true
+
+    div.appendChild(inputText)
+    const button = document.createElement('button')
+    button.textContent = text
+    button.setAttribute('name', name)
+    button.setAttribute('class', clase)
+    // button.style.background = '#97B7E8';
+    div.appendChild(button)
+    button.addEventListener('click', (event) => {
+      event.preventDefault()
+      checkDate(div, index)
+    })
+    return div
+  }
+
+  static generateButtonCheckDateHour(text, name, clase, index) {
+    const div = document.createElement('div')
+    div.setAttribute('class', 'button-cn')
+    const inputText = document.createElement('input')
+    inputText.setAttribute('type', 'checkDateHour')
+    inputText.style.display = 'none'
+    inputText.disabled = true
+
+    div.appendChild(inputText)
+    const button = document.createElement('button')
+    button.textContent = text
+    button.setAttribute('name', name)
+    button.setAttribute('class', clase)
+    // button.style.background = '#97B7E8';
+    div.appendChild(button)
+    button.addEventListener('click', (event) => {
+      event.preventDefault()
+      checkDateHour(div, index)
     })
     return div
   }
