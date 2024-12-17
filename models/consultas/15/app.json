@@ -58,16 +58,22 @@
     "nivel": [1, 1, 1, 1, 1, 5, 5, 5]
   },
   "Producción": {
-    "name": ["PTA", "TA", "Servicios Auxiliares", "TAGS en Lecturas de Campo"],
-    "confecha": [null, null, null, 0],
-    "archivo": ["x", "x", "x", "x"],
-    "active": [1, 1, 1, 1],
-    "button": [1, 1, 1, 0],
-    "procedure": [null, null, null, "proc_15_tags_operaciones"],
-    "in": [null, null, null, null],
-    "out": [null, null, null, null],
-    "operation": [null, null, null, null],
-    "nivel": [1, 1, 1, 1]
+    "name": [
+      "PTA",
+      "TA",
+      "Servicios Auxiliares",
+      "TAGS en Lecturas de Campo",
+      "5S-Producción"
+    ],
+    "confecha": [null, null, null, null, null],
+    "archivo": ["x", "x", "x", "x", "x"],
+    "active": [1, 1, 1, 1, 1],
+    "button": [1, 1, 1, 0, 1],
+    "procedure": [null, null, null, "proc_15_tags_operaciones", null],
+    "in": [null, null, null, null, null],
+    "out": [null, null, null, null, null],
+    "operation": [null, null, null, null, null],
+    "nivel": [1, 1, 1, 1, 3]
   },
 
   "PTA": {
@@ -129,5 +135,29 @@
     "out": [null, null],
     "operation": [null, null],
     "nivel": [1, 1]
+  },
+  "5S-Producción": {
+    "name": ["5S-PTA", "5S-TA"],
+    "confecha": [null, null],
+    "archivo": ["x", "x"],
+    "active": [1, 1],
+    "button": [1, 1],
+    "procedure": [null, null],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null],
+    "nivel": [3, 3]
+  },
+  "5S-TA": {
+    "name": ["5S-TA-Operarios", "5S-TA-EDE"],
+    "confecha": [1, 1],
+    "archivo": ["x", "x"],
+    "active": [1, 1],
+    "button": [0, 0],
+    "procedure": ["proc_average_5s_ta", "proc_average_5s_ta_ede"],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null],
+    "nivel": [3, 3]
   }
 }

@@ -21,7 +21,7 @@
                           LTYcontrol.selector2 AS SELECTOR2,'valorSEL2', LTYcontrol.separador AS SEPARADOR, LTYreporte.botonesaccion, IFNULL(LTYcontrol.rutinasql,'') AS RUTINA, IFNULL(LTYcontrol.valor_defecto,'') AS VALOR_DEFECTO
                           ,LTYcontrol.requerido AS REQUERIDO,LTYreporte.envio_mail AS X_MAIL,LTYcontrol.valor_sql AS VALOR_SQL
                           , LTYcontrol.tiene_hijo AS HIJO, LTYcontrol.rutina_hijo AS SQL_HIJO, LTYcontrol.valor_defecto22 AS VALOR_DEFECTO22, LTYcontrol.sql_valor_defecto22 AS SQL_VALOR_DEFECTO22, LTYreporte.direcciones_mail AS DIR_MAIL
-                          ,LTYcontrol.enable1 AS ENABLE, RAND(),NOW(),'idLTY'
+                          ,LTYcontrol.enable1 AS ENABLE, RAND(),NOW(),'idLTY' ,LTYcontrol.tipoDatoDetalle AS TIPO_DATO_DETALLE
                           FROM LTYcontrol  
                           RIGHT JOIN LTYreporte ON LTYcontrol.idLTYreporte=LTYreporte.idLTYreporte
                           WHERE LTYcontrol.idLTYreporte=".$porciones[1]."  AND LTYcontrol.activo='s'

@@ -22,14 +22,14 @@ function actualizar($target, $plantx) {
       if (!isset($host, $user, $password, $dbname)) {
           die("Variables de conexión no definidas.");
       }
-
+      // var_dump($target);
       $id = $target['item'];
       $column = $target['column'];
       $valor = $target['valor'];
       $param = $target['param'];
       $operation = $target['operation'];
       $idLTYcliente = $plantx;
-      $arrayCampo = ['reporte', 'id', 'control', 'nombre', 'tipodato', 'detalle', 'activo', 'requerido', 'visible', 'enable1', 'orden', 'separador', 'ok', 'valor_defecto', 'selector', 'tiene_hijo', 'rutina_hijo', 'valor_sql', 'tpdeobserva', 'selector2', 'valor_defecto22', 'sql_valor_defecto22', 'rutinasql', 'idLTYreporte, idLTYcliente'];
+      $arrayCampo = ['reporte', 'id', 'control', 'nombre', 'tipodato', 'detalle', 'activo', 'requerido', 'visible', 'enable1', 'orden', 'separador', 'ok', 'valor_defecto', 'selector', 'tiene_hijo', 'rutina_hijo', 'valor_sql', 'tpdeobserva', 'selector2', 'valor_defecto22', 'sql_valor_defecto22', 'rutinasql', 'idLTYreporte', 'tipoDatoDetalle', 'idLTYcliente'];
 
       // Verificar si el índice existe en el array
       if (!isset($arrayCampo[$column])) {
@@ -134,7 +134,7 @@ header("Content-Type: application/json; charset=utf-8");
 include('traerLTYcontrol.php');
 // require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 $datos = file_get_contents("php://input");
-// $datos = '{"q":{"item":"31","column":4,"valor":"s","param":"s","id":"4","operation":"turnOnOff"},"ruta":"/turnOnOff","rax":"&new=Fri Jul 05 2024 07:56:45 GMT-0300 (hora estándar de Argentina)","sql_i":13}';
+// $datos = '{"q":{"item":"6785","column":24,"valor":"checkhour","param":"s","id":"14","operation":"turnOnOff"},"ruta":"/turnOnOff","rax":"&new=Tue Dec 17 2024 08:51:13 GMT-0300 (hora estándar de Argentina)","sql_i":15}';
 
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

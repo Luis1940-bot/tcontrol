@@ -39,17 +39,10 @@ const encabezados = {
     'Valor por defecto',
     '2do Valor SQL',
     'SQL Consulta dinámica',
-    'Validar',
-    'Check Hora',
-    'Check Date',
-    'Check Date Hora',
+    'Tipo de Detalle',
   ],
   width: [
     '0.2',
-    '1',
-    '1',
-    '1',
-    '1',
     '1',
     '1',
     '1',
@@ -110,8 +103,14 @@ function encabezadoCampos(encabezados, objTranslate) {
   const thead = document.createElement('thead')
   const newRow = document.createElement('tr')
   arrayWidthEncabezado = [...encabezados.width]
+  const cantidadDeColumnas = 22
   encabezados.title.forEach((element, index) => {
-    const cell = estilosTheadCell(element, index, 21, objTranslate)
+    const cell = estilosTheadCell(
+      element,
+      index,
+      cantidadDeColumnas,
+      objTranslate
+    )
     newRow.appendChild(cell)
   })
   thead.appendChild(newRow)
@@ -493,6 +492,12 @@ function reconoceColumna(
       // xxx
       add = false
       break
+    case 24:
+      // tipoDatoDetalle
+      texto = reconoceTipoDeDato(array[i], objTranslate)
+      buttonEditar = addEditar(indice, cantidadDeRegistros)
+      break
+
     default:
       // Código para manejar casos inesperados, si es necesario
       break
@@ -620,6 +625,7 @@ function editCampos(target, objTranslate, LTYselect, plant) {
             id: target.id,
             operation: 'turnOnOff',
           }
+          // console.log(nuevoTarget)
           turnOnOff(nuevoTarget, objTranslate, plant)
         }
       },
@@ -718,6 +724,7 @@ function addCeldaFilaCampo(
   try {
     const newRow = document.createElement('tr')
     let col = 0
+    // console.log(array, index, array.length)
     for (let i = 0; i < array.length; i++) {
       const celda = reconoceColumna(
         i,
@@ -897,6 +904,7 @@ async function viewer(selector, array, objTranslate, plant) {
       '/traerLTYcontrol',
       plant
     )
+
     const elemento = document.querySelector('.div-encabezadoPastillas')
     const div1 = document.querySelector('.div1')
     const span = document.createElement('span')
@@ -920,6 +928,7 @@ async function viewer(selector, array, objTranslate, plant) {
       tabla.appendChild(thead)
       div.appendChild(tabla)
       const tbody = document.createElement('tbody')
+      // console.log(filtrado)
       filtrado.forEach((element, index) => {
         const newRow = addCeldaFilaCampo(
           element,

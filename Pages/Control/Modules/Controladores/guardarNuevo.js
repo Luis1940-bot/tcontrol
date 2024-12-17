@@ -88,7 +88,9 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
     const controlN = url.control_N // url.searchParams.get('control_N');
     // const controlT = url.searchParams.get('control_T');
     // const numberDoc = document.getElementById('numberDoc').textContent;
-    const tbody = document.querySelector('tbody')
+    // const tbody = document.querySelector('tbody')
+    const table = document.getElementById('tableControl')
+    const tbody = table.querySelector('tbody')
     const tr = tbody.querySelectorAll('tr')
     let estanTodosLosRequeridos = true
     let emailSupervisor = null
@@ -129,7 +131,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
       // eslint-disable-next-line no-unused-vars
       const displayRow = window.getComputedStyle(tr[i]).display
       // eslint-disable-next-line no-plusplus
-      for (let c = 2; c <= 4; c += 2) {
+      for (let c = 2; c <= 4; c += 1) {
         const displayCell = window.getComputedStyle(td[c]).display
         const element = td[c]
         const campo = td[1]
@@ -210,7 +212,6 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
           ;({ selector2, valorOBS, familiaselector, imagenes, observacion } =
             respuesta)
         }
-
         if (c === 4) {
           const tdCount = tr[i].cells.length
           let valorFounded = 0
@@ -262,7 +263,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
             objetoControl.imagenes.push('')
           }
           objetoControl.displayRow.push(displayRow)
-          objetoControl.detalle.push(terceraColumna.textContent)
+          // objetoControl.detalle.push(terceraColumna.textContent)
 
           // console.log(typeof founded[21], founded[21], valor);
           if (
@@ -285,6 +286,18 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
             sessionStorage.setItem('requerido', encriptar(requerido))
             return false
             // eslint-disable-next-line max-len
+          }
+        }
+        if (c === 3) {
+          const tipoDatoDetalle = arrayControl[i][33]
+          objetoControl.tipoDatoDetalle.push(tipoDatoDetalle)
+          if (tipoDatoDetalle === 'checkhour') {
+            const inputElement = td[3].querySelector('div > input')
+            let detalle = inputElement.value
+            detalle = detalle.replace(':', '.')
+            objetoControl.detalle.push(detalle)
+          } else if (tipoDatoDetalle === 'x') {
+            objetoControl.detalle.push(terceraColumna.textContent)
           }
         }
       }
@@ -327,6 +340,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
 }
 function guardarNuevo(objetoControl, arrayControl, nuxpedido, planta, carpeta) {
   // console.log(objetoControl, arrayControl, nuxpedido)
+
   return recorroTable(objetoControl, arrayControl, nuxpedido, planta, carpeta)
 }
 

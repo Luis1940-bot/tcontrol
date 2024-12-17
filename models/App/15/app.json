@@ -93,9 +93,9 @@
         "nivel": [1, 1, 1, 1, 1],
         "TABLERO TA": {
           "name": [
-            "Formato Orden y Limpieza Tabl. TA",
-            "Lecturas L1/L2 Tabl. TA",
-            "GPT-F-027 Tabl. TA"
+            "Formato Orden y Limpieza Tablero",
+            "Lecturas L1/L2 Tablero",
+            "GPT-F-027 Tablero"
           ],
           "type": ["ctrl", "ctrl", "ctrl"],
           "ruta": [
@@ -227,9 +227,9 @@
         "nivel": [1, 1, 1, 1, 1],
         "TABLERO PTA": {
           "name": [
-            "Formato Orden y Limpieza Tabl. PTA",
-            "Lecturas L1/L2 Tabl. PTA",
-            "GPT-F-016 Tabl. PTA"
+            "Formato Orden y Limpieza Tablero",
+            "Lecturas L1/L2 Tablero",
+            "GPT-F-016 HOJA DE VERIFICACIÓN DE LA UNIDAD DE PURIFICACIÓN LINEA 1/2 Tablero"
           ],
           "type": ["ctrl", "btn", "ctrl"],
           "ruta": [
@@ -238,7 +238,7 @@
             "control_N=97&control_T=HOJA%20DE%20VERIFICACIÓN%20DE%20LA%20UNIDAD%20DE%20PURIFICACIÓN%20LINEA%201%20-%202&nr="
           ],
           "nivel": [1, 1, 1],
-          "Lecturas L1/L2 Tabl. PTA": {
+          "Lecturas L1/L2 Tablero": {
             "name": ["Línea 1", "Línea 2"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
@@ -250,12 +250,12 @@
         },
         "REACCIÓN PTA": {
           "name": [
-            "Formato Orden y Limpieza Reacc. PTA",
-            "Check List de Actividades Reacc. PTA",
-            "Lecturas de Campo Reacc. PTA",
-            "Check List Energía Reacc. PTA",
-            "GPT-F-035 Reacc. PTA",
-            "GPT-F-785 Reacc. PTA"
+            "Formato Orden y Limpieza Reacción",
+            "Check List de Actividades Reacción",
+            "Lecturas de Campo Reacción",
+            "Check List Energía Reacción",
+            "GPT-F-035  HOJA DE VERIFICACIÓN PLANTA DE HIDRÓGENO CM-703 Reacción",
+            "GPT-F-785 Reacción"
           ],
           "type": ["btn", "btn", "btn", "ctrl", "ctrl", "ctrl"],
           "ruta": [

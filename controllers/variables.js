@@ -41,6 +41,7 @@ let objetoControl = {
   detalle: [],
   objImagen: [],
   hora: [],
+  tipoDatoDetalle: [],
 }
 let objetoMemoria = {
   fecha: [],

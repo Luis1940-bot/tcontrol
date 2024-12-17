@@ -111,6 +111,7 @@ function estilosCell(
 }
 
 function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
+  // console.log(element, index, cantidadDeRegistros)
   const newRow = document.createElement('tr')
   // eslint-disable-next-line no-plusplus
   let maxTextarea = null
@@ -121,6 +122,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
 
     const tipoDeDato = element[5]
     const tipoDeObservacion = element[9]
+    const tipoDatoDetalle = element[33]
     let enabled = 0
     let alignCenter = 'left'
     let paddingLeft = '0px'
@@ -398,7 +400,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         text,
         'AHORA',
         'InputButton-transparent',
-        index
+        index,
+        i
       )
       type = inputButton
     } else if (i === 2 && tipoDeDato === 'checkdate') {
@@ -541,6 +544,19 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         name
       )
       type = radioButton
+    }
+
+    if (i === 3 && tipoDatoDetalle === 'checkhour') {
+      dato = null
+      let text = 'AHORA'
+      const inputButton = ElementGenerator.generateButtonCheckHour(
+        text,
+        'AHORA',
+        'InputButton-transparent',
+        index,
+        i
+      )
+      type = inputButton
     }
     const cell = estilosCell(
       alignCenter,

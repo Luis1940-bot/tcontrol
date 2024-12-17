@@ -84,6 +84,7 @@ function procesoStyleDisplay(elementosStyle) {
 
 const funcionGuardar = async () => {
   const { habilitadoGuardar } = arrayGlobal
+
   if (habilitadoGuardar) {
     let objTraductor = await arraysLoadTranslate()
     // eslint-disable-next-line no-use-before-define
@@ -2135,7 +2136,7 @@ class Alerta {
         : null
       procesoStyleDisplay(elementosStyle)
       limpiaArrays()
-
+      // console.log(arrayGlobal.objetoControl)
       const okGuardar = guardarNuevo(
         arrayGlobal.objetoControl,
         arrayGlobal.arrayControl,
@@ -4532,7 +4533,8 @@ class Alerta {
       's',
       's',
       's',
-      'i',
+      's',
+      's',
     ]
     const tipoDeParametro = bindParam[parseInt(column)]
     this.modal = document.createElement('div')
@@ -4556,6 +4558,7 @@ class Alerta {
       case '21':
       case '19':
       case '22':
+      case '24':
         obj.divContent.height = '300px'
         if (
           column === '5' ||
@@ -4572,7 +4575,7 @@ class Alerta {
       default:
         break
     }
-
+    // console.log(obj)
     const modalContent = createDiv(obj.divContent)
     const spanClose = createSpan(obj.close)
     spanClose.addEventListener('click', () => {
@@ -4690,6 +4693,7 @@ class Alerta {
         break
       case '4':
       case '18':
+      case '24':
         obj.divCajita.height = null
         obj.divCajita.alignItems = 'center'
         const divDetalleS = createDiv(obj.divCajita)

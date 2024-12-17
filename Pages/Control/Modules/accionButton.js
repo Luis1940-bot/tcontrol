@@ -162,14 +162,14 @@ async function validation(val, plant, objTrad, div, index) {
   }
 }
 
-async function checkHour(div, index) {
+async function checkHour(div, index, columna) {
   try {
+    const tbody = document.querySelector('#tableControl tbody')
+    const row = tbody.rows[index]
     while (div.firstChild) {
       div.removeChild(div.firstChild)
     }
-    const tbody = document.querySelector('#tableControl tbody')
-    const row = tbody.rows[index]
-    if (row && row.cells.length >= 3) {
+    if (row && row.cells.length >= 3 && columna === 2) {
       row.cells[3].innerHTML = ''
       const previousCell = row.cells[2]
       previousCell.colSpan = (previousCell.colSpan || 1) + 1
@@ -181,7 +181,6 @@ async function checkHour(div, index) {
     inputText.style.display = 'block'
     inputText.style.border = 'none'
     inputText.value = fechasGenerator.hora_actual(new Date())
-
     div.appendChild(inputText)
   } catch (error) {
     console.log(error)

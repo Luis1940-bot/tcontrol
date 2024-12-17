@@ -380,7 +380,7 @@ class ElementGenerator {
     return div
   }
 
-  static generateButtonCheckHour(text, name, clase, index) {
+  static generateButtonCheckHour(text, name, clase, index, columna) {
     const div = document.createElement('div')
     div.setAttribute('class', 'button-cn')
     const inputText = document.createElement('input')
@@ -397,7 +397,7 @@ class ElementGenerator {
     div.appendChild(button)
     button.addEventListener('click', (event) => {
       event.preventDefault()
-      checkHour(div, index)
+      checkHour(div, index, columna)
     })
     return div
   }

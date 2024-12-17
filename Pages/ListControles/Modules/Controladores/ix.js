@@ -8,6 +8,7 @@ function agregarCampoNuevo(objeto, ruta, sql_i) {
   // const ruta = `${SERVER}/Pages/Control/Routes/insert.php?v=${Math.round(
   //   Math.random() * 10
   // )}`
+  // console.log(nuevoObjeto)
   const rax = `&new=${new Date()}`
   let obj = {
     q: nuevoObjeto,

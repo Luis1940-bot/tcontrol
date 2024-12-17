@@ -32,7 +32,8 @@ function traerControlActualizado($conn, $plant) {
                 IFNULL(con.valor_defecto22, '') AS valorDefecto22,
                 IFNULL(con.sql_valor_defecto22, '') AS sqlValorDefecto,
                 IFNULL(con.rutinasql, '') AS rutinaSql,
-                IFNULL(rep.idLTYreporte, '') AS idLTYreporte
+                IFNULL(rep.idLTYreporte, '') AS idLTYreporte,
+                IFNULL(con.tipoDatoDetalle, '') AS tipoDatoDetalle
             FROM LTYreporte rep
             LEFT JOIN LTYcontrol con ON con.idLTYreporte = rep.idLTYreporte
             WHERE rep.activo = 's' AND rep.idLTYcliente = " . $plant . "

@@ -20,9 +20,21 @@ function columna2(
   columnaTd,
   selDatos,
   index,
-  valor_sql
+  valor_sql,
+  tipoDatoDetalle
 ) {
-  // console.log(tagName, type, tds, val, datos, i, columnaTd, selDatos, index)
+  // console.log(
+  //   tagName,
+  //   type,
+  //   tds,
+  //   val,
+  //   datos,
+  //   i,
+  //   columnaTd,
+  //   selDatos,
+  //   index,
+  //   tipoDatoDetalle
+  // )
   if (valor_sql !== null) {
     return
   }
@@ -211,6 +223,25 @@ function columna2(
     const radio = td[columnaTd].childNodes[0]
     valor === '1' ? (radio.checked = true) : (radio.checked = false)
   }
+  if (tipoDatoDetalle === 'checkhour' && columnaTd === 2) {
+    let checkhour = datos.detalle[index].replace('.', ':')
+    const td_3 = tds[3]
+    const td_2 = tds[2]
+    const buttonElement = td_3.querySelector('div > button')
+    buttonElement.remove()
+    const inputElement = td_3.querySelector('div > input')
+    inputElement.value = checkhour
+    inputElement.style.border = 'none'
+    inputElement.style.display = 'block'
+    if (type === 'text') {
+      const inputElement_2 = td_2.querySelector('input')
+      inputElement_2.disabled = true
+    }
+    if (type === 'checkbox') {
+      const inputElement_2 = td_2.querySelector('input')
+      inputElement_2.disabled = true
+    }
+  }
 }
 
 async function verSupervisor(idSupervisor, plant) {
@@ -252,7 +283,6 @@ async function verSupervisor(idSupervisor, plant) {
 async function cargarNR(res, plant, data) {
   try {
     const objString = res[0][14]
-
     const datos = JSON.parse(objString)
     const idSupervisor = datos.supervisor[0]
     const table = document.getElementById('tableControl')
@@ -277,7 +307,7 @@ async function cargarNR(res, plant, data) {
       const row = tr[i]
       const valor_sql = data[i][23]
       const td = row.querySelectorAll('td')
-
+      const tipoDatoDetalle = data[i][33]
       const codigo = td[5].innerText
 
       const { tagName } = td[2].childNodes[0]
@@ -306,7 +336,8 @@ async function cargarNR(res, plant, data) {
           2,
           12,
           elementoEncontrado,
-          valor_sql
+          valor_sql,
+          tipoDatoDetalle
         )
         columna2(
           tagNameObservaciones,
@@ -318,7 +349,8 @@ async function cargarNR(res, plant, data) {
           4,
           13,
           elementoEncontrado,
-          valor_sql
+          valor_sql,
+          tipoDatoDetalle
         )
       }
     }

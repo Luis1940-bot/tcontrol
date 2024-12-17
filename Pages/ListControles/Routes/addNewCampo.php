@@ -37,12 +37,13 @@ function addCampo($datos, $plant) {
     $idLTYreporte = $objeto_json['idLTYreporte'];
     $idObservacion = $objeto_json['idObservacion'];
     $idLTYcliente = $plant;
+    $tipoDatoDetalle = $objeto_json['tipoDatoDetalle'];
     
     $codigoBase = generarCodigoAlfabetico($reporte);
     $i = $orden + 1;
     $codigo = $codigoBase . $i;
-    $campos = "control, nombre, tipodato, detalle, tpdeobserva, idLTYreporte, orden, visible, requerido, idLTYcliente";
-    $interrogantes = "?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
+    $campos = "control, nombre, tipodato, detalle, tpdeobserva, idLTYreporte, orden, visible, requerido, idLTYcliente, tipoDatoDetalle";
+    $interrogantes = "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
     $tipoDeDato = 'x';
     $detalle = '------';
 
@@ -78,7 +79,7 @@ function addCampo($datos, $plant) {
         }
 
         // Ejecución del INSERT
-        $datosAdd = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $idLTYreporte, $orden, 's', 0, $idLTYcliente];
+        $datosAdd = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $idLTYreporte, $orden, 's', 0, $idLTYcliente, $tipoDatoDetalle];
         $sqlInsert = "INSERT INTO LTYcontrol ($campos) VALUES ($interrogantes)";
         $stmtInsert = $mysqli->prepare($sqlInsert);
 
@@ -86,7 +87,7 @@ function addCampo($datos, $plant) {
             throw new Exception('Error al preparar la consulta de INSERT: ' . $mysqli->error);
         }
 
-        $stmtInsert->bind_param("sssssiisis", ...$datosAdd);
+        $stmtInsert->bind_param("sssssiisiss", ...$datosAdd);
 
         if (!$stmtInsert->execute()) {
             throw new Exception('Error al ejecutar la consulta de INSERT: ' . $stmtInsert->error);

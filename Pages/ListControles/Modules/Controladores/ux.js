@@ -4,6 +4,7 @@ const SERVER = baseUrl
 function turnControl(target, sql_i) {
   // eslint-disable-next-line no-console
   console.time('update_time')
+  // console.log(target)
   const rax = `&new=${new Date()}`
   let obj = {
     q: target,
