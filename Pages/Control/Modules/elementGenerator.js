@@ -92,8 +92,13 @@ class ElementGenerator {
 
     // Validar entrada en tiempo real
     inputNumber.addEventListener('input', function () {
-      // Permitir solo dígitos y un único punto decimal
-      let sanitizedValue = this.value.replace(/[^\d.]/g, '')
+      // Permitir solo dígitos, un único punto decimal y un signo negativo al principio
+      let sanitizedValue = this.value.replace(/(?!^-)[^\d.-]/g, '')
+
+      // Limitar el signo negativo al principio
+      if (sanitizedValue.indexOf('-') > 0) {
+        sanitizedValue = sanitizedValue.replace('-', '')
+      }
 
       // Limitar a un solo punto decimal
       const parts = sanitizedValue.split('.')
@@ -111,8 +116,36 @@ class ElementGenerator {
         sanitizedValue = '0' + sanitizedValue
       }
 
+      // Corregir "-.5" a "-0.5"
+      if (sanitizedValue.startsWith('-.')) {
+        sanitizedValue = '-0' + sanitizedValue.slice(1)
+      }
+
       this.value = sanitizedValue
     })
+
+    // inputNumber.addEventListener('input', function () {
+    //   // Permitir solo dígitos y un único punto decimal
+    //   let sanitizedValue = this.value.replace(/[^\d.]/g, '')
+
+    //   // Limitar a un solo punto decimal
+    //   const parts = sanitizedValue.split('.')
+    //   if (parts.length > 2) {
+    //     sanitizedValue = parts[0] + '.' + parts[1]
+    //   }
+
+    //   // Limitar a 2 decimales
+    //   if (parts[1]?.length > 2) {
+    //     sanitizedValue = parts[0] + '.' + parts[1].slice(0, 2)
+    //   }
+
+    //   // Corregir ".5" a "0.5"
+    //   if (sanitizedValue.startsWith('.')) {
+    //     sanitizedValue = '0' + sanitizedValue
+    //   }
+
+    //   this.value = sanitizedValue
+    // })
 
     // Validar valor final al perder el foco
     inputNumber.addEventListener('blur', function () {
