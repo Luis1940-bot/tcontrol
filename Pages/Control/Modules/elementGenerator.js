@@ -228,7 +228,7 @@ class ElementGenerator {
     return selectDinamic
   }
 
-  static generateSelect(array, valorXDefecto) {
+  static generateSelect(array, valorXDefecto, hijo, sqlHijo) {
     const select = document.createElement('select')
     while (select.firstChild) {
       select.removeChild(select.firstChild)
@@ -236,6 +236,10 @@ class ElementGenerator {
     const nuevoArray = [...array]
     nuevoArray.forEach((element, index) => {
       index === 1 ? select.setAttribute('selector', element[2]) : null
+    })
+
+    select.addEventListener('change', (event) => {
+      eventSelect(event, hijo, sqlHijo)
     })
 
     if (array.length > 0) {

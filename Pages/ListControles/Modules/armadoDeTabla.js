@@ -1031,7 +1031,7 @@ function estilosTbodyCell(
   for (let i = 0; i < 1; i++) {
     let reporte = trA(element[1], objTranslate) || element[1]
     const dato = `#${id} - ${reporte}`
-    const items = element[25]
+    const items = element[26]
     const alignCenter = 'left'
     const paddingLeft = '10px'
     const fontStyle = 'normal'
@@ -1108,6 +1108,7 @@ function completaTabla(arrayControl, objTranslate, plant) {
 
   arraySinDuplicados.forEach((element, index) => {
     const id = element[24]
+
     const newRow = estilosTbodyCell(
       element,
       index,

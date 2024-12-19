@@ -95,25 +95,52 @@ async function consultaQuery(event, consulta) {
   resultado.length > 0 ? cargaModal(resultado, '', false) : null
 }
 
+function cambioDeVariables(sql, array) {
+  try {
+    const objTraerHijo = {
+      filaInserta: sql.substring(0, 4).replace(/@/g, ''),
+      tipoDeElemento: sql.substring(5, 8).replace(/@/g, ''),
+      columnas: sql.substring(9, 12).replace(/@/g, ''),
+      variables: parseInt(sql.substring(13, 16).replace(/@/g, '')), // Número de reemplazos (3 en este caso)
+      posicionReferencia: parseInt(sql.substring(17, 20).replace(/@/g, '')),
+      res: [],
+      query: '',
+    }
+    let replacements = array.slice(0, objTraerHijo.variables) // Obtener tantos valores como `variables`
+    let replacedQuery = sql
+    let currentIndex = 0
+    for (let i = 0; i < objTraerHijo.variables; i++) {
+      // Encontrar la posición del siguiente "?"
+      let questionMarkPosition = replacedQuery.indexOf('?', currentIndex)
+
+      if (questionMarkPosition === -1) break // Si no hay más "?", salir del bucle
+
+      // Reemplazar el "?" en la posición encontrada
+      replacedQuery =
+        replacedQuery.slice(0, questionMarkPosition) +
+        (replacements[0] || 'undefined') +
+        replacedQuery.slice(questionMarkPosition + 1)
+
+      // Actualizar el índice actual para buscar el próximo "?"
+      currentIndex = questionMarkPosition + 1
+    }
+    objTraerHijo.query = replacedQuery.split('$')[1]
+    return objTraerHijo
+  } catch (error) {
+    console.log('Error en cambiar las ?: ', error)
+  }
+}
+
 async function traerHijo(sql, array) {
   try {
     if (array[0].length === 0) {
       return null
     }
-    const objTraerHijo = {
-      filaInserta: sql.substring(0, 4).replace(/@/g, ''),
-      tipoDeElemento: sql.substring(5, 8).replace(/@/g, ''),
-      columnas: sql.substring(9, 12).replace(/@/g, ''),
-      variables: sql.substring(13, 16).replace(/@/g, ''),
-      posicionReferencia: sql.substring(17, 20).replace(/@/g, ''),
-      res: [],
-    }
-    const resultado = sql.substring(21, sql.length)
-    const textoDespuesDelDolar = resultado.replace(/\?/g, () => array.shift())
 
+    const objTraerHijo = cambioDeVariables(sql, array)
     objTraerHijo.res = await traerRegistros(
       `traer_LTYsql`,
-      `${encodeURIComponent(textoDespuesDelDolar)}`
+      `${encodeURIComponent(objTraerHijo.query)}`
     )
     return objTraerHijo
   } catch (error) {

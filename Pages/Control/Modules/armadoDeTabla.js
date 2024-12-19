@@ -301,11 +301,18 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 's') {
       dato = null
+      const hijo = element[24]
+      const sqlHijo = element[25]
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : []
       const arraySel = arrayGlobal.arraySelect.filter(
         (ele) => ele[2] === element[12]
       )
-      const select = ElementGenerator.generateSelect(arraySel, valorXDefecto)
+      const select = ElementGenerator.generateSelect(
+        arraySel,
+        valorXDefecto,
+        hijo,
+        sqlHijo
+      )
       type = select
       element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null
     } else if (i === 2 && tipoDeDato === 'img') {

@@ -255,7 +255,7 @@
             "Lecturas de Campo Reacción",
             "Check List Energía Reacción",
             "GPT-F-035  HOJA DE VERIFICACIÓN PLANTA DE HIDRÓGENO CM-703 Reacción",
-            "GPT-F-785 Reacción"
+            "GPT-F-785 Lista de Chequeos de Puntos Estratégicos en Reacción"
           ],
           "type": ["btn", "btn", "btn", "ctrl", "ctrl", "ctrl"],
           "ruta": [
@@ -267,7 +267,7 @@
             "control_N=103&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(CRISTALIZACIÓN)&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1],
-          "Formato Orden y Limpieza Reacc. PTA": {
+          "Formato Orden y Limpieza Reacción": {
             "name": ["Cristalización", "Planta de Hidrógeno"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
@@ -276,7 +276,7 @@
             ],
             "nivel": [1, 1]
           },
-          "Check List de Actividades Reacc. PTA": {
+          "Check List de Actividades Reacción": {
             "name": ["Reacción / PH2"],
             "type": ["btn"],
             "ruta": [""],
@@ -291,7 +291,7 @@
               "nivel": [1, 1]
             }
           },
-          "Lecturas de Campo Reacc. PTA": {
+          "Lecturas de Campo Reacción": {
             "name": ["Cristalización", "Compresores Planta de Hidrógeno"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
@@ -303,13 +303,13 @@
         },
         "FILTROS PTA": {
           "name": [
-            "Formato Orden y Limpieza Reacc. Filtros",
-            "Check List de Actividades Reacc. Filtros",
-            "Lecturas de Campo Reacc. Filtros",
-            "Check List Energía Reacc. Filtros",
-            "GPT-F-782 Reacc. Filtros",
-            "GPT-F-780 Reacc. Filtros",
-            "GPT-F-785 Reacc. Filtros"
+            "Formato Orden y Limpieza Filtros PTA",
+            "Check List de Actividades Filtros PTA",
+            "Lecturas de Campo Filtros PTA",
+            "Check List Energía Filtros PTA",
+            "GPT-F-782 Lista de Verificación del Filtro BHS CM-407 A/B Filtros PTA",
+            "GPT-F-780 Inspección Diaria de Filtros de Gas de Transporte Filtros PTA",
+            "GPT-F-785 Lista de Chequeos de Puntos Estratégicos Filtros PTA"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
@@ -322,7 +322,7 @@
             "control_N=104&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(FILTROS)&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1, 1],
-          "Check List de Actividades Reacc. Filtros": {
+          "Check List de Actividades Filtros PTA": {
             "name": ["Turno 4", "Turno 5"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
@@ -334,11 +334,11 @@
         },
         "PREPARACIÓN PTA": {
           "name": [
-            "Formato Orden y Limpieza Reacc. Prep.",
-            "Check List de Actividades Reacc. Prep.",
-            "Lecturas de Campo Reacc. Prep.",
-            "Check List Energía Reacc. Prep.",
-            "GPT-F-780 Reacc. Prep."
+            "Formato Orden y Limpieza Preparación",
+            "Check List de Actividades Preparación",
+            "Lecturas de Campo Preparación",
+            "Check List Energía Preparación",
+            "GPT-F-780 Inspección Diaria de Filtros de Gas de Transporte Preparación"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl"],
           "ruta": [
@@ -349,7 +349,7 @@
             "control_N=101&control_T=PURIFICACIÓN%20-%20INSPECCIÓN%20DIARIA%20DE%20FILTROS%20DE%20GAS%20DE%20TRANSPORTE&nr="
           ],
           "nivel": [1, 1, 1, 1, 1],
-          "Check List de Actividades Reacc. Prep.": {
+          "Check List de Actividades Preparación": {
             "name": ["Turno 4", "Turno 5"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
@@ -361,12 +361,12 @@
         },
         "RLM PTA": {
           "name": [
-            "Formato Orden y Limpieza Reacc. RLM",
-            "Check List de Actividades Reacc. RLM",
-            "Lecturas de Campo Reacc. RLM",
-            "Check List Energía Reacc. RLM",
-            "GPT-F-710 Reacc. RLM",
-            "Lecturas RLM"
+            "Formato Orden y Limpieza RLM",
+            "Check List de Actividades RLM",
+            "Check List Energía RLM",
+            "GPT-F-785 Lista de Chequeos de Puntos Estratégicos en RLM",
+            "GPT-F-710 Inspección diaria de los filtros funda CM-417 A/B/C RLM",
+            "Lecturas de Campo RLM"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
@@ -378,7 +378,7 @@
             "control_N=85&control_T=PTA%20-%20LECTURAS%20RLM&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1],
-          "Check List de Actividades Reacc. RLM": {
+          "Check List de Actividades RLM": {
             "name": ["Turno 4 RLM"],
             "type": ["ctrl"],
             "ruta": ["control_N=25&control_T=PTA%20-%20TURNO%204%20RLM&nr="],

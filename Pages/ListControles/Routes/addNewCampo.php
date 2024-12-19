@@ -79,7 +79,7 @@ function addCampo($datos, $plant) {
         }
 
         // Ejecución del INSERT
-        $datosAdd = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $idLTYreporte, $orden, 's', 0, $idLTYcliente, $tipoDatoDetalle];
+        $datosAdd = [$codigo, $nombreCampo, $tipoDeDato, $detalle, 'x', $idLTYreporte, $orden, 's', 0, $idLTYcliente, 'x'];
         $sqlInsert = "INSERT INTO LTYcontrol ($campos) VALUES ($interrogantes)";
         $stmtInsert = $mysqli->prepare($sqlInsert);
 
