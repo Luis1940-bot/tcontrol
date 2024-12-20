@@ -310,12 +310,44 @@ function insertarDatoEnFila(obj) {
   }
 }
 
+// async function eventSelect(event, hijo, sqlHijo) {
+//   const select = event.target
+//   const selectedOptions = select.selectedOptions
+
+//   const indexTextPairs = []
+
+//   for (let i = 0; i < selectedOptions.length; i++) {
+//     const option = selectedOptions[i]
+//     indexTextPairs.push([option.value, option.textContent])
+//   }
+
+//   let obj
+//   if (hijo === '1' && indexTextPairs.length > 0) {
+//     try {
+//       // Aquí puedes usar indexTextPairs para acceder a los índices y textos
+//       obj = await traerHijo(sqlHijo, indexTextPairs[0])
+//       if (obj === null) {
+//         return
+//       }
+
+//       insertarDatoEnFila(obj)
+//     } catch (error) {
+//       console.error('Error al llamar a traerHijo:', error)
+//     }
+//   }
+// }
+
 async function eventSelect(event, hijo, sqlHijo) {
   const select = event.target
   const selectedOptions = select.selectedOptions
 
-  const indexTextPairs = []
+  // Asegúrate de que hay opciones seleccionadas válidas
+  if (selectedOptions.length === 0) {
+    console.warn('No hay opciones seleccionadas.')
+    return
+  }
 
+  const indexTextPairs = []
   for (let i = 0; i < selectedOptions.length; i++) {
     const option = selectedOptions[i]
     indexTextPairs.push([option.value, option.textContent])
@@ -327,6 +359,7 @@ async function eventSelect(event, hijo, sqlHijo) {
       // Aquí puedes usar indexTextPairs para acceder a los índices y textos
       obj = await traerHijo(sqlHijo, indexTextPairs[0])
       if (obj === null) {
+        console.warn('No se encontraron datos para la selección.')
         return
       }
 

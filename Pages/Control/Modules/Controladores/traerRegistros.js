@@ -36,8 +36,13 @@ export default function traerRegistros(q, sql_i) {
         const modal = document.getElementById('modalAlertCarga')
 
         if (vecesLoad > Number(cantidadProcesos)) {
-          modal.style.display = 'none'
-          modal.remove()
+          if (!modal) {
+            console.warn('El elemento modal no se encontró.')
+          } else {
+            modal.style.display = 'none'
+            modal.remove()
+          }
+
           document.getElementById('wichC').style.display = 'inline'
           sessionStorage.setItem('loadSystem', '1')
         }
