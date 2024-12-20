@@ -32,8 +32,10 @@ export default function traerRegistros(q, sql_i) {
         const modal = document.getElementById('modalAlertCarga')
         if (modal && modal.style.display !== 'none') {
           // El modal está abierto, entonces lo ocultamos y lo eliminamos
-          modal.style.display = 'none'
-          modal.remove()
+          if (modal !== null) {
+            modal.style.display = 'none'
+            modal.remove()
+          }
         }
 
         // eslint-disable-next-line no-console

@@ -299,8 +299,14 @@ function loadTabla(arrayControl, encabezados, objTranslate) {
       ) || 'No existen áreas cargadas. Comuníquese con el administrador.'
     miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
     let modal = document.getElementById('modalAlertVerde')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'block'
     modal = document.querySelector('.div-ubicacionSearch')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
   }
 }

@@ -583,6 +583,9 @@ const funcionReporteGuardarNuevo = async () => {
     )
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
 
@@ -624,6 +627,9 @@ const funcionReporteGuardarNuevo = async () => {
     modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
     modal = document.getElementById('modalAlertM')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
   } catch (error) {
@@ -645,7 +651,9 @@ const funcionReporteGuardarCambios = async () => {
       '/guardarReporteCambios'
     )
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
 
@@ -664,6 +672,9 @@ const funcionReporteGuardarCambios = async () => {
     modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
     modal = document.getElementById('modalAlertM')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
   } catch (error) {
@@ -687,7 +698,9 @@ const funcionReporteGuardarComo = async () => {
       '/guardarReporteNuevo'
     )
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
 
@@ -729,6 +742,9 @@ const funcionReporteGuardarComo = async () => {
     modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
     modal = document.getElementById('modalAlertM')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
   } catch (error) {
@@ -759,6 +775,9 @@ const funcionSelectorGuardarNuevo = async () => {
       const modal = document.getElementById('modalAlertVerde')
       modal.style.display = 'block'
       modal.addEventListener('click', (e) => {
+        if (!modal) {
+          console.warn('Error de carga en el modal')
+        }
         modal.style.display = 'none' // Cerrar el modal
         const url = `${SERVER}/Pages/ListVariables`
         window.location.href = url // Redireccionar
@@ -888,7 +907,9 @@ const funcionAreaGuardarNuevo = async () => {
       '/guardarAreaNuevo'
     )
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
 
@@ -913,6 +934,9 @@ const funcionAreaGuardarNuevo = async () => {
     modal = document.getElementById('modalAlertVerde')
     modal.style.display = 'block'
     modal = document.getElementById('modalAlertM')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
   } catch (error) {
@@ -935,7 +959,9 @@ const funcionAreaGuardarCambios = async () => {
       '/guardarCambioArea'
     )
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
 
@@ -967,6 +993,9 @@ async function firmar(firmadoPor, objTrad) {
     const supervisor = await traerFirma(pass, plant)
 
     let modal = document.getElementById('modalAlert')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
 
@@ -1867,6 +1896,9 @@ async function eliminarR(objTraductor) {
   registro = matches ? parseInt(matches[0], 10) : null
   const deleteados = await eliminarRegistro(registro)
   let modal = document.getElementById('modalAlert')
+  if (!modal) {
+    console.warn('Error de carga en el modal')
+  }
   modal.style.display = 'none'
   modal.remove()
   const miAlerta = new Alerta()

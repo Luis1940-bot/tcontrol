@@ -188,6 +188,9 @@ async function envioEmailPlanta() {
           '/sendNuevoUsuario'
         )
         if (mailEnviado.success) {
+          if (!modal) {
+            console.warn('Error de carga en el modal')
+          }
           modal.style.display = 'none'
           modal.remove()
           const url = `${SERVER}/Pages/Login`

@@ -53,6 +53,9 @@ async function cargaModal(respuesta, input, haceClick, idInput) {
           const input = document.getElementById(id)
           input.value = e.target.textContent
           const modal = document.getElementById('myModal')
+          if (!modal) {
+            console.warn('Error de carga en el modal')
+          }
           modal.style.display = 'none'
         }
       },

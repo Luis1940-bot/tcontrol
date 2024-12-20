@@ -177,7 +177,9 @@ async function nuevaCompania() {
 
         const id = document.getElementById('id')
         id.value = response.id
-
+        if (!modal) {
+          console.warn('Error de carga en el modal')
+        }
         modal.style.display = 'none'
 
         // Espera a que el modal sea removido del DOM antes de redirigir

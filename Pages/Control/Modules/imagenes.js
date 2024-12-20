@@ -191,6 +191,9 @@ imageInput.addEventListener('change', async (event) => {
   } else {
     // No se seleccionaron archivos (se presionó "Cancelar")
     const modal = document.getElementById('modalAlertVerde')
+    if (!modal) {
+      console.warn('Error de carga en el modal')
+    }
     modal.style.display = 'none'
     modal.remove()
   }
