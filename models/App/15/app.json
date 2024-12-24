@@ -94,7 +94,7 @@
         "TABLERO TA": {
           "name": [
             "Formato Orden y Limpieza Tablero",
-            "Lecturas L1/L2 Tablero",
+            "Lecturas L1/L2 Tablero TA",
             "GPT-F-027 Tablero"
           ],
           "type": ["ctrl", "ctrl", "ctrl"],
@@ -242,7 +242,7 @@
             "name": ["Línea 1", "Línea 2"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=86&control_T=PTA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20LA%20UNIDAD%20DE%20PURIFICACIÓN%20LÍNEA%201&nr=",
+              "control_N=86&control_T=PTA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20LA%20UNIDAD%20DE%20PURIFICACIÓN&nr=",
               "control_N=87&control_T=PTA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20LA%20UNIDAD%20DE%20PURIFICACIÓN%20LÍNEA%202&nr="
             ],
             "nivel": [1, 1, 1]
@@ -295,7 +295,7 @@
             "name": ["Cristalización", "Compresores Planta de Hidrógeno"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=83&control_T=PTA%20-%20CRISTALIZACIÓN%20LÍNEA%201&nr=",
+              "control_N=83&control_T=PTA%20-%20CRISTALIZACIÓN&nr=",
               "control_N=81&control_T=PTA%20-%20COMPRESORES%20DE%20PLANTA%20DE%20LA%20HIDRÓGENO%20CC-701A-B-E&nr="
             ],
             "nivel": [1, 1]
@@ -316,7 +316,7 @@
             "control_N=69&control_T=5S%20PTA520-520FILTROS520Y%20SECADORES&nr=",
             "",
             "control_N=84&control_T=PTA%20-%20LECTURA%20DE%20FILTROS%20BHS%20CM-407A-B%20Y%20CM-406&nr=",
-            "control_N=28&control_T=5S%20PTA%20-%20FILTROS%20Y%20SECADORES&nr=",
+            "control_N=28&control_T=Check%20List%20ÁREA%20DE%20FILTROS&nr=",
             "control_N=102&control_T=LISTA%20DE%20VERIFICACIÓN%20DEL%20FILTRO%20BHS%20CM-407%20A-B&nr=",
             "control_N=100&control_T=FILTROS%20-%20INSPECCIÓN%20DIARIA%20DE%20FILTROS%20DE%20GAS%20DE%20TRANSPORTE&nr=",
             "control_N=104&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(FILTROS)&nr="
@@ -344,8 +344,8 @@
           "ruta": [
             "control_N=65&control_T=5S%20PTA%20-%20PREPARACIÓN&nr=",
             "",
-            "control_N=26&control_T=Check%20List%20ÁREA%20DE%20PREPARACIÓN&nr=",
             "control_N=106&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(PREPARACIÓN)&nr=",
+            "control_N=26&control_T=Check%20List%20ÁREA%20DE%20PREPARACIÓN&nr=",
             "control_N=101&control_T=PURIFICACIÓN%20-%20INSPECCIÓN%20DIARIA%20DE%20FILTROS%20DE%20GAS%20DE%20TRANSPORTE&nr="
           ],
           "nivel": [1, 1, 1, 1, 1],

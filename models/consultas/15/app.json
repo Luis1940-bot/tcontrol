@@ -137,16 +137,16 @@
     "nivel": [1, 1]
   },
   "5S-Producción": {
-    "name": ["5S-PTA", "5S-TA"],
-    "confecha": [null, null],
-    "archivo": ["x", "x"],
-    "active": [1, 1],
-    "button": [1, 1],
-    "procedure": [null, null],
-    "in": [null, null],
-    "out": [null, null],
-    "operation": [null, null],
-    "nivel": [3, 3]
+    "name": ["5S-PTA", "5S-TA", "Factor de Corrección"],
+    "confecha": [null, null, 1],
+    "archivo": ["x", "x", "x"],
+    "active": [1, 1, 1],
+    "button": [1, 1, 0],
+    "procedure": [null, null, "proc_15_5s_fc"],
+    "in": [null, null, null],
+    "out": [null, null, null],
+    "operation": [null, null, null],
+    "nivel": [3, 3, 3]
   },
   "5S-TA": {
     "name": ["5S-TA-Operarios", "5S-TA-EDE"],

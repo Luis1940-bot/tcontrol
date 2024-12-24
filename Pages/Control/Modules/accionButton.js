@@ -98,7 +98,7 @@ async function consultaQuery(event, consulta) {
   resultado.length > 0 ? cargaModal(resultado, '', false) : null
 }
 
-function cambioDeVariables(sql, array) {
+async function cambioDeVariables(sql, array) {
   try {
     const objTraerHijo = {
       filaInserta: sql.substring(0, 4).replace(/@/g, ''),
@@ -140,7 +140,7 @@ async function traerHijo(sql, array) {
       return null
     }
 
-    const objTraerHijo = cambioDeVariables(sql, array)
+    const objTraerHijo = await cambioDeVariables(sql, array)
     objTraerHijo.res = await traerRegistros(
       `traer_LTYsql`,
       `${encodeURIComponent(objTraerHijo.query)}`

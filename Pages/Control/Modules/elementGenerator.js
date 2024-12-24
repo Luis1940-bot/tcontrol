@@ -221,8 +221,25 @@ class ElementGenerator {
   static generateSelectDinamic(hijo, sqlHijo) {
     const selectDinamic = document.createElement('select')
     selectDinamic.setAttribute('selector', 'selectDinamic')
-    selectDinamic.addEventListener('change', (event) => {
-      eventSelect(event, hijo, sqlHijo)
+    // selectDinamic.addEventListener('change', (event) => {
+    //   eventSelect(event, hijo, sqlHijo)
+    // })
+    selectDinamic.addEventListener('change', async (event) => {
+      // Prevenir cambios simultáneos
+      if (selectDinamic.dataset.loading === 'true') return
+
+      try {
+        // Indicar que se está cargando
+        selectDinamic.dataset.loading = 'true'
+
+        // Llamar a la función y pasar los parámetros necesarios
+        await eventSelect(event, hijo, sqlHijo)
+      } catch (error) {
+        console.error('Error en el evento change:', error)
+      } finally {
+        // Finalizar el estado de carga
+        selectDinamic.dataset.loading = 'false'
+      }
     })
 
     return selectDinamic
@@ -238,8 +255,26 @@ class ElementGenerator {
       index === 1 ? select.setAttribute('selector', element[2]) : null
     })
 
-    select.addEventListener('change', (event) => {
-      eventSelect(event, hijo, sqlHijo)
+    // select.addEventListener('change', (event) => {
+    //   eventSelect(event, hijo, sqlHijo)
+    // })
+
+    select.addEventListener('change', async (event) => {
+      // Prevenir cambios simultáneos
+      if (select.dataset.loading === 'true') return
+
+      try {
+        // Indicar que se está cargando
+        select.dataset.loading = 'true'
+
+        // Llamar a la función y pasar los parámetros necesarios
+        await eventSelect(event, hijo, sqlHijo)
+      } catch (error) {
+        console.error('Error en el evento change:', error)
+      } finally {
+        // Finalizar el estado de carga
+        select.dataset.loading = 'false'
+      }
     })
 
     if (array.length > 0) {
