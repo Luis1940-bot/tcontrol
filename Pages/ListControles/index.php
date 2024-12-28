@@ -1,9 +1,15 @@
 <?php
-header('Content-Type: text/html;charset=utf-8');
 session_start([
-    // 'cookie_samesite' => 'None',
-    'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
+    'cookie_secure' => true, // Asegura que la cookie solo se envía sobre HTTPS 
+    'cookie_httponly' => true, // Evita el acceso de JavaScript a la cookie 
+    'cookie_samesite' => 'Strict' // Previene ataques CSRF
 ]);
+header('Content-Type: text/html;charset=utf-8');
+header("Content-Security-Policy: default-src 'self'; img-src 'self' https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"); 
+header("X-Content-Type-Options: nosniff"); 
+header("X-Frame-Options: DENY"); 
+header("X-XSS-Protection: 1; mode=block");
 
 // Tiempo de inactividad en segundos (12 horas)
 $inactive = 43200;
@@ -27,7 +33,7 @@ define('SSO', $_SESSION['login_sso']['sso']);
   } else {
     if ( SSO === null || SSO === 's_sso' ) {
       $url = "https://tenkiweb.com/tcontrol/index.php";
-      $url = "'http://localhost:8080";
+      $url = "'http://localhost:3000";
     }
 
     header("Location: ". $url ."");

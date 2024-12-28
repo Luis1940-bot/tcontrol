@@ -18,14 +18,14 @@ define('ADD_BCC', 'luisglogista@gmail.com');
 // Verificar si se está ejecutando en CLI o en un servidor web
 if (php_sapi_name() == 'cli') {
     // Configuración para CLI
-    define('BASE_URL', 'http://localhost:8080');
+    define('BASE_URL', 'http://localhost:3000');
     define('BASE_PLANOS', BASE_URL . '/tcontrol/assets/img/planos/');
     define('BASE_IMAGENES', BASE_URL . '/tcontrol/assets/Imagenes/');
     define('IMAGE', BASE_DIR . '/assets/');
     define('PLANOS', BASE_URL . '/assets/img/planos/');
 } else {
     // Configuración para entorno web
-    $base = 'http://localhost:8080';
+    $base = 'http://localhost:3000';
     if ($_SERVER['HTTP_HOST'] === 'tenkiweb.com') {
         $base = 'https://tenkiweb.com/tcontrol';
     }

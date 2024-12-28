@@ -9,7 +9,7 @@ const isLocalhost =
 let baseUrl
 
 if (isLocalhost) {
-  baseUrl = 'http://localhost:8080'
+  baseUrl = 'http://localhost:3000'
 } else {
   // En producción
   baseUrl = 'https://tenkiweb.com/tcontrol'

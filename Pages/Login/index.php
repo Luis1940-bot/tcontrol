@@ -1,6 +1,16 @@
 <?php
-session_start();
+// session_start();
+session_start([
+    'cookie_secure' => true, // Asegura que la cookie solo se envía sobre HTTPS 
+    'cookie_httponly' => true, // Evita el acceso de JavaScript a la cookie 
+    'cookie_samesite' => 'Strict' // Previene ataques CSRF
+]);
 header('Content-Type: text/html;charset=utf-8');
+header("Content-Security-Policy: default-src 'self'; img-src 'self' https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"); 
+header("X-Content-Type-Options: nosniff"); 
+header("X-Frame-Options: DENY"); 
+header("X-XSS-Protection: 1; mode=block");
 
 // if (isset($_SESSION['login_sso'])) {
 //     define('SSO', $_SESSION['login_sso']['sso'] ?? null);

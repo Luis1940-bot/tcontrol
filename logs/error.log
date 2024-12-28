@@ -103,3 +103,11 @@
 [23-Dec-2024 15:52:58 America/Argentina/Buenos_Aires] No autorizado: raul.ramos@alpekpolyester.com, planta: 15
 [23-Dec-2024 15:53:11 America/Argentina/Buenos_Aires] No autorizado: alexis.garcia@alpekpolyester.com, planta: 15
 [23-Dec-2024 15:53:22 America/Argentina/Buenos_Aires] No autorizado: derby.gonzalez@alpekpolyester.co, planta: 15
+[24-Dec-2024 10:10:26 America/Argentina/Buenos_Aires] Login failed for email: lala@gmail.com, planta: 15
+[24-Dec-2024 10:10:29 America/Argentina/Buenos_Aires] Login failed for email: lala@gmail.com, planta: 15
+[24-Dec-2024 10:26:09 America/Argentina/Buenos_Aires] Login failed for email: select * from usuario, planta: 15
+[24-Dec-2024 10:26:20 America/Argentina/Buenos_Aires] Login failed for email: select * from usuario, planta: 15
+[26-Dec-2024 12:34:47 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, bool given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListAreas\Routes\traerRegistros.php on line 59
+[26-Dec-2024 12:34:47 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListAreas\Routes\traerRegistros.php on line 61
+[26-Dec-2024 12:35:00 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, bool given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListAreas\Routes\traerRegistros.php on line 59
+[26-Dec-2024 12:35:00 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListAreas\Routes\traerRegistros.php on line 61

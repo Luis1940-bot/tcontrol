@@ -1,9 +1,9 @@
 <?php
 // Archivo: config.php
-$base = 'http://localhost:8080';
+$base = 'http://localhost:3000';
 // Define la ruta base según el entorno
 if (isLocalhost()) {
-    $base = 'http://localhost:8080';
+    $base = 'http://localhost:3000';
     $baseDir = __DIR__; 
     define('BASE_URL', $base); //* sirve para localizar componentes como otros php renderizables o css
     define('BASE_DIR', str_replace('\\', '/', $baseDir)); //* sirve para conectar con php que no son renderizables

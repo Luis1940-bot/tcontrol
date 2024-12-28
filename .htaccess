@@ -1,35 +1,37 @@
 ## Habilitar mod_rewrite ##
-<IfModule mod_rewrite.c>
+<IfModule mod_rewrite.c> 
     RewriteEngine On
+    ## Redirigir a HTTPS ## 
+    RewriteCond %{HTTPS} off 
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301] 
+    ## Excepciones para API ## 
+    RewriteCond %{REQUEST_URI} ^/tcontrol/Pages/Api/api.php [NC] 
+    RewriteRule .* - [E=SKIP_SGCAPTCHA:1] 
+ </IfModule>
 
-    ## Redirigir a HTTPS ##
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-</IfModule>
-
-## Aprovechar la cachÈ del navegador ##
+## Aprovechar la cach√© del navegador ##
 <IfModule mod_expires.c>
     ExpiresActive On
 
-    ## ConfiguraciÛn de expiraciÛn para im·genes ##
+    ## Configuraci√≥n de expiraci√≥n para im√°genes ##
     ExpiresByType image/jpg "access 1 year"
     ExpiresByType image/jpeg "access 1 year"
     ExpiresByType image/gif "access 1 year"
     ExpiresByType image/png "access 1 year"
     ExpiresByType image/x-icon "access 1 year"
     
-    ## ConfiguraciÛn de expiraciÛn para otros tipos de contenido ##
+    ## Configuraci√≥n de expiraci√≥n para otros tipos de contenido ##
     ExpiresByType text/css "access 1 month"
     ExpiresByType application/pdf "access 1 month"
     ExpiresByType application/javascript "access 1 month"
     ExpiresByType application/x-javascript "access 1 month"
     ExpiresByType application/x-shockwave-flash "access 1 month"
 
-    ## ExpiraciÛn predeterminada para otros contenidos ##
+    ## Expiraci√≥n predeterminada para otros contenidos ##
     ExpiresDefault "access 2 days"
 </IfModule>
 
-## ConfiguraciÛn de PHP ##
+## Configuraci√≥n de PHP ##
 <IfModule mod_php7.c>
     php_value upload_max_filesize 64M
     php_value post_max_size 64M
@@ -52,8 +54,8 @@
     AddType image/x-icon .ico
 </IfModule>
 
-<IfModule mod_headers.c> 
-	Header set Access-Control-Allow-Origin "*" 
-	Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, DELETE, PUT" 
-	Header set Access-Control-Allow-Headers "Content-Type, Authorization" 
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, DELETE, PUT"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
 </IfModule>

@@ -1,15 +1,21 @@
 <?php
-session_start();
-// define('SSO', $_SESSION['login_sso']['sso']);
-// if (!SSO) {
-//   $_SESSION['login_sso']['sso'] = 'null';
-// }
+session_start([
+    'cookie_secure' => true, // Asegura que la cookie solo se envía sobre HTTPS 
+    'cookie_httponly' => true, // Evita el acceso de JavaScript a la cookie 
+    'cookie_samesite' => 'Strict' // Previene ataques CSRF
+]);
+header('Content-Type: text/html;charset=utf-8');
+header("Content-Security-Policy: default-src 'self'; img-src 'self' https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"); 
+header("X-Content-Type-Options: nosniff"); 
+header("X-Frame-Options: DENY"); 
+header("X-XSS-Protection: 1; mode=block");
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-header('Content-Type: text/html;charset=utf-8');
+
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
 require_once dirname(dirname(__DIR__)) . '/config.php';
