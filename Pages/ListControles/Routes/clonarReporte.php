@@ -91,7 +91,8 @@ function clonarReporte($datos) {
                 con.tiene_hijo,
                 con.rutina_hijo,
                 con.enable1,
-                con.idLTYcliente
+                con.idLTYcliente,
+                con.tipoDatoDetalle
             FROM LTYcontrol con
             WHERE con.idLTYreporte=? ORDER BY con.orden ASC";
 
@@ -141,8 +142,8 @@ function clonarReporte($datos) {
                 throw new Exception('Error al ejecutar la consulta de DELETE: ' . $stmtDelete->error);
             }
             $stmtDelete->close();
-            $interrogantes = "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
-            $parametros = "sssissiiisssssssssiisii";
+            $interrogantes = "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
+            $parametros = "sssissiiisssssssssiisiis";
            
             // $cadena = $campos['control'];
             // $longitud = strlen($cadena) - 1;
@@ -194,7 +195,8 @@ function clonarReporte($datos) {
                     $campo['tiene_hijo'],
                     $campo['rutina_hijo'] ?? null,
                     $campo['enable1'],
-                    $campo['idLTYcliente']
+                    $campo['idLTYcliente'],
+                    $campo['tipoDatoDetalle'] ?? 'x'
                 ];
                
                 $stmtInsert->bind_param($parametros, ...$datosAdd);

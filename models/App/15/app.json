@@ -95,39 +95,39 @@
           "name": [
             "Formato Orden y Limpieza Tablero",
             "Lecturas L1/L2 Tablero TA",
-            "GPT-F-027 Tablero"
+            "GPT-F-027 Hoja de verificación de la unidad de oxidación Tablero"
           ],
           "type": ["ctrl", "ctrl", "ctrl"],
           "ruta": [
             "control_N=75&control_T=5S%20TA%20-%20TABLERO&nr=",
-            "control_N=80&control_T=TA%20-%20TABLERO%20SÁBANA&nr=",
-            "control_N=107&control_T=TA%20-%20HOJA%20DE%20VERIFICACION%20DE%20LA%20UNIDAD%20DE%20OXIDACION&nr="
+            "control_N=80&control_T=TA%20-%20Lecturas%20Tablero%20L1/L2&nr=",
+            "control_N=107&control_T=TA%20-%20Lecturas%20de%20Campo%20-%20Reacción%20y%20Cristalización&nr="
           ],
           "nivel": [1, 1, 1]
         },
         "REACCIÓN TA": {
           "name": [
-            "Formato Orden y Limpieza Reacc. TA",
-            "Check List de Actividades Reacc. TA",
-            "Lecturas de Campo Reacc. TA",
-            "GPT-F-587 Reacc. TA",
-            "GPT-F-599 Reacc. TA"
+            "Formato Orden y Limpieza Reacción TA",
+            "Check List de Actividades-Reacción TA",
+            "Lecturas de Campo-Reacción y Cristalización TA",
+            "GPT-F-587 Check List de Energía-Reacción TA",
+            "GPT-F 599 Lista de chequeo de puntos estratégicos-Reacción TA"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "control_N=71&control_T=5S%20TA%20-%20REACCIÓN&nr=",
             "",
             "control_N=78&control_T=TA%20-%20REACCIÓN%20Y%20CRISTALIZACIÓN&nr=",
-            "control_N=109&control_T=TA%20-%20CHECK%20LIST%20DE%20ENERGIA%20DE%20OXIDACION(ÁREA%20DE%20REACIÓN)&nr=",
-            "control_N=115&control_T=TA%20-%20INSPECCIÓN%20VISUAL%20DE%20MUESTRAS%20EN%20PUNTOS%20ESTRATÉGICOS%20DE%20OXIDACIÓN(REACCIÓN)&nr="
+            "control_N=109&control_T=TA%20-%20GPT-F-587%20Check%20List%20de%20Energía%20-%20Reacción&nr=",
+            "control_N=115&control_T=TA%20-%20GPT-F 599%20Lista%20de%20chequeo%20de%20puntos%20estratégicos%20-%20Reacción&nr="
           ],
           "nivel": [1, 1, 1, 1, 1],
           "Check List de Actividades Reacc. TA": {
             "name": ["TURNO 4 REACCIÓN", "TURNO 5 REACCIÓN"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=123&control_T=TA%20-%20TURNO%204%20REACCIÓN&nr=",
-              "control_N=124&control_T=TA%20-%20TURNO%205%20REACCIÓN&nr="
+              "control_N=123&control_T=TA%20-%20Check%20List%20de%20Actividades%20Turno%204%20-%20Reacción&nr=",
+              "control_N=124&control_T=TA%20-%20Check%20List%20de%20Actividades%20Turno%205%20-%20Reacción&nr="
             ],
             "nivel": [1, 1]
           }
@@ -137,45 +137,45 @@
             "Formato Orden y Limpieza Filtros TA",
             "Check List de Actividades Filtros TA",
             "Lecturas de Campo Filtros TA",
-            "GPT-F-589 Filtros TA",
-            "GPT-F-587 Filtros TA",
-            "GPT-F-599 Filtros TA"
+            "GPT-F-589 Check List de Inspección Visual a Filtros BHS TA",
+            "GPT-F 587 Check List de Energía - Filtros TA",
+            "GPT-F-599 Lista de chequeo de puntos estratégicos - Filtros TA"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "control_N=72&control_T=TA%20-%20FILTROS&nr=",
             "",
-            "control_N=77&control_T=TA%20-%20FILTROS&nr=",
-            "control_N=114&control_T=TA%20-%20CHECK%20LIST%20DE%20INSPECCIÓN%20VISUAL%20A%20FILTROS%20BHS%20OXIDACIÓN&nr=",
-            "control_N=110&control_T=TA%20-%20CHECK%20LIST%20DE%20ENERGIA%20DE%20OXIDACION(ÁREA%20DE%20FILTROS)&nr=",
-            "control_N=116&control_T=TA%20-%20INSPECCIÓN%20VISUAL%20DE%20MUESTRAS%20EN%20PUNTOS%20ESTRATÉGICOS%20DE%20OXIDACIÓN(FILTROS)&nr="
+            "control_N=77&control_T=TA%20-%20Lecturas%20de%20Campo%20-%20Filtración%20y%20Secado&nr=",
+            "control_N=114&control_T=TA%20-%20GPT-F-589%20Check%20List%20de%20Inspección%20Visual%20a%20Filtros%20BHS&nr=",
+            "control_N=110&control_T=TA%20-%20GPT-F 587%20Check%20List%20de%20Energía%20-%20Filtros&nr=",
+            "control_N=116&control_T=TA%20-%20GPT-F-599%20Lista%20de%20chequeo%20de%20puntos%20estratégicos%20-%20Filtros&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1],
           "Check List de Actividades Filtros TA": {
             "name": ["TA - TURNO 4 FILTROS", "TA - TURNO 5 FILTROS"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=119&control_T=TA%20-%20TURNO%204%20FILTROS%20PH2&nr=",
-              "control_N=120&control_T=TA%20-%20TURNO%205%20FILTROS%20PH2&nr="
+              "control_N=119&control_T=TA - Check List de Actividades Turno 4 - Filtros&nr=",
+              "control_N=120&control_T=TA - Check List de Actividades Turno 5 - Filtros&nr="
             ],
             "nivel": [1, 1]
           }
         },
         "RECUPERACIÓN DE SOLVENTES TA": {
           "name": [
-            "Formato Orden y Limpieza Solv. TA",
-            "Check List de Actividades Solv. TA",
-            "Lecturas de Campo Solv. TA",
-            "GPT-F-587 Solv. TA",
-            "GPT-F-599 Solv. TA"
+            "Formato Orden y Limpieza Rec. Solv. TA",
+            "Check List de Actividades Rec. Solv. TA",
+            "Lecturas de Campo Rec. Solv. TA",
+            "GPT-F-587 Check List de Energía Rec. Solv. TA",
+            "GPT-F-599 Lista de chequeo de puntos estratégicos Rec. Solv. TA"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "control_N=74&control_T=5S%20TA%20-%20RECUPERACIÓN%20DE%20SOLVENTES&nr=",
             "",
-            "control_N=79&control_T=TA%20-%20RECUPERACIÓN%20DE%20SOLVENTES&nr=",
-            "control_N=111&control_T=TA%20-%20CHECK%20LIST%20DE%20ENERGIA%20DE%20OXIDACION(ÁREA%20RECUPERACIÓN%20DE%20SOLVENTES)&nr=",
-            "control_N=117&control_T=TA%20-%20INSPECCIÓN%20VISUAL%20DE%20MUESTRAS%20EN%20PUNTOS%20ESTRATÉGICOS%20DE%20OXIDACIÓN(RECUPERACIÓN)&nr="
+            "control_N=79&control_T=TA%20-%20Lecturas%20de%20Campo%20-%20Recuperación%20de%20Solventes&nr=",
+            "control_N=111&control_T=TA%20-%20GPT-F-587%20Check%20List%20de%20Energía%20-%20Recuperación%20de%20Solventes&nr=",
+            "control_N=117&control_T=TA%20-%20GPT-F-599%20Lista%20de%20chequeo%20de%20puntos%20estratégicos%20-%20Recuperación%20de%20Solventes&nr="
           ],
           "nivel": [1, 1, 1, 1, 1],
           "Check List de Actividades Solv. TA": {
@@ -185,8 +185,8 @@
             ],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=121&control_T=TA%20-%20TURNO%204%20RECUPERACIÓN%20DE%20SOLVENTES&nr=",
-              "control_N=122&control_T=TA%20-%20TURNO%205%20RECUPERACIÓN%20DE%20SOLVENTES&nr="
+              "control_N=121&control_T=TA%20-%20Check%20List%20de%20Actividades%20Turno%204%20-%20Recuperación%20de%20Solventes&nr=",
+              "control_N=122&control_T=TA%20-%20Check%20List%20de%20Actividades%20Turno%205%20-%20Recuperación%20de%20Solventes&nr="
             ],
             "nivel": [1, 1]
           }
@@ -196,20 +196,20 @@
             "Formato Orden y Limpieza Aceite TA",
             "Check List de Actividades Aceite TA",
             "Lecturas de Campo Aceite TA",
-            "GPT-F-597 Aceite TA",
-            "GPT-F-140 Aceite TA",
-            "GPT-F-587 Aceite TA",
-            "GPT-F-599 Aceite TA"
+            "GPT-F-597 Registro de datos de pH del condensado de la Unidad - Aceite TA",
+            "GPT-F-140 Check List de las Secadoras de Gas inerte - Aceite TA",
+            "GPT-F 587 Check List de Energía - Aceite TA",
+            "GPT-F-599 Lista de chequeo de puntos estratégicos - Aceite TA"
           ],
           "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "control_N=73&control_T=5S%20TA%20-%20ACEITE%20CALIENTE&nr=",
-            "control_N=125&control_T=TA%20-%20TURNO%204%20ACEITE%20CALIENTE&nr=",
-            "control_N=76&control_T=TA%20-%20ACEITE%20CALIENTE%20ÁREA%20DE%20TANQUES%20Y%20SERVICIOS&nr=",
-            "control_N=113&control_T=TA%20-%20REGISTRO%20DE%20DATOS%20DE520PH%20DEL%20CONDENSADO%20DE%20LA%20UNIDAD%20DE%20OXIDACIÓN%20EN%20CONDICIONES%20NORMALES%20DE%20OPE&nr=",
-            "control_N=108&control_T=TA%20-%20CHECK%20LIST%20DE%20LAS%20SECADORAS%20DE%20GAS%20INERTE%20BM-1101,%20BM-1111,%20BM-1121%20Y%20BM-1131&nr=",
-            "control_N=112&control_T=TA%20-%20CHECK%20LIST%20DE%20ENERGIA%20DE%20OXIDACION(ÁREA%20DE%20ACEITE%20CALIENTE)&nr=",
-            "control_N=118&control_T=TA%20-%20INSPECCIÓN%20VISUAL%20DE%20MUESTRAS%20EN%20PUNTOS%20ESTRATÉGICOS%20DE%20OXIDACIÓN(ACEITE%20CALIENTE)&nr="
+            "control_N=125&control_T=TA%20-%20Check%20List%20de%20Actividades%20Turno%204%20-%20Aceite%20Caliente&nr=",
+            "control_N=76&control_T=TA%20-%20Lecturas%20de%20campo%20-%20Aceite%20caliente&nr=",
+            "control_N=113&control_T=TA%20-%20GPT-F-597%20Registro%20de%20datos%20de%20pH%20del%20condensado%20de%20la%20Unidad%20-%20Aceite%20Caliente&nr=",
+            "control_N=108&control_T=TA%20-%20GPT-F-140%20Check%20List%20de%20las%20Secadoras%20de%20Gas%20inerte%20-%20Aceite%20Caliente&nr=",
+            "control_N=112&control_T=TA%20-%20GPT-F%20587%20Check%20List%20de%20Energía%20-%20Aceite%20Caliente&nr=",
+            "control_N=118&control_T=TA%20-%20GPT-F-599%20Lista%20de%20chequeo%20de%20puntos%20estratégicos%20-%20Aceite%20Caliente&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1, 1]
         }
@@ -562,13 +562,8 @@
       },
       "OPERADORES SA": {
         "name": ["TURBINAS", "CALDERAS", "TRATAMIENTO DE AGUAS", "EFLUENTES"],
-        "type": ["btn", "ctrl", "ctrl", "btn"],
-        "ruta": [
-          "",
-          "control_N=131&control_T=SA%20-%20LECTURAS%20DE%20CAMPO%20OSBL%20CALDERAS&nr=",
-          "control_N=130&control_T=SA%20-%20LECTURAS%20DE%20CAMPO%20OSBL%20TRATAMIENTO%20DE%20AGUAS&nr=",
-          ""
-        ],
+        "type": ["btn", "btn", "btn", "btn"],
+        "ruta": ["", "", "", ""],
         "nivel": [1, 1, 1, 1],
         "TURBINAS": {
           "name": [
@@ -652,67 +647,154 @@
           }
         },
         "EFLUENTES": {
-          "name": [
-            "Lecturas de Campo ANAEROBIO AM-7202 AB",
-            "Lecturas de Campo Efluentes OSBL"
-          ],
-          "type": ["ctrl", "ctrl"],
-          "ruta": [
-            "control_N=133&control_T=SA%20-%20HOJA%20DE%20LECTURAS%20REACTOR%20ANAEROBIO%20AM-7202%20AB&nr=",
-            "control_N=132&control_T=SA%20-%20LECTURAS%20DE%20CAMPO%20OSBL%20EFLUENTES&nr="
-          ],
-          "nivel": [1, 1]
+          "name": ["SA - 5S EFLUENTES", "Lecturas de Campo Efluentes OSBL"],
+          "type": ["ctrl", "btn"],
+          "ruta": ["control_N=140&control_T=SA%20-%205S%20EFLUENTES&nr=", ""],
+          "nivel": [1, 1],
+          "Lecturas de Campo Efluentes OSBL": {
+            "name": [
+              "SA - LECTURAS DE CAMPO OSBL EFLUENTES",
+              "SA - HOJA DE LECTURAS REACTOR ANAEROBIO AM-7202 AB",
+              "SA - HOJA DE LECTURAS MEDIDOR DE DESCARGA FINAL AM-710"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=132&control_T=SA - LECTURAS DE CAMPO OSBL EFLUENTES&nr=",
+              "control_N=133&control_T=SA - HOJA DE LECTURAS REACTOR ANAEROBIO AM-7202 AB&nr=",
+              "control_N=134&control_T=SA - HOJA DE LECTURAS MEDIDOR DE DESCARGA FINAL AM-710&nr="
+            ],
+            "nivel": [1, 1, 1]
+          }
         },
         "CALDERAS": {
           "name": [
-            "Lunes Turno 1",
-            "Lunes Turno 2",
-            "Martes Turno 1",
-            "Martes Turno 2",
-            "Miércoles Turno 1",
-            "Miércoles Turno 2",
-            "Jueves Turno 1",
-            "Jueves Turno 2",
-            "Viernes Turno 1",
-            "Viernes Turno 2",
-            "Sábado Turno 1",
-            "Sábado Turno 2",
-            "Domingo Turno 1",
-            "Domingo Turno 2"
+            "Check List de Actividades Calderas",
+            "5S Calderas",
+            "Lecturas Calderas"
           ],
-          "type": [
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl",
-            "ctrl"
-          ],
+          "type": ["btn", "ctrl", "ctrl"],
           "ruta": [
-            "control_N=33&control_T=SA-Calderas%20LUNES%20TURNO%201&nr=",
-            "control_N=34&control_T=SA-Calderas%20LUNES%20TURNO%202&nr=",
-            "control_N=35&control_T=SA-Calderas%20MARTES%20TURNO%201&nr=",
-            "control_N=36&control_T=SA-Calderas%20MARTES%20TURNO%202&nr=",
-            "control_N=37&control_T=SA-Calderas%20MIÉRCOLES%20TURNO%201&nr=",
-            "control_N=38&control_T=SA-Calderas%20MIÉRCOLES%20TURNO%202&nr=",
-            "control_N=39&control_T=SA-Calderas%20JUEVES%20TURNO%201&nr=",
-            "control_N=40&control_T=SA-Calderas%20JUEVES%20TURNO%202&nr=",
-            "control_N=41&control_T=SA-Calderas%20VIERNES%20TURNO%201&nr=",
-            "control_N=42&control_T=SA-Calderas%20VIERNES%20TURNO%202&nr=",
-            "control_N=43&control_T=SA-Calderas%20SÁBADO%20TURNO%201&nr=",
-            "control_N=44&control_T=SA-Calderas%20SÁBADO%20TURNO%202&nr=",
-            "control_N=45&control_T=SA-Calderas%20DOMINGO%20TURNO%201&nr=",
-            "control_N=46&control_T=SA-Calderas%20DOMINGO%20TURNO%202&nr="
+            "",
+            "control_N=139&control_T=SA%20-%205S%20CALDERAS&nr=",
+            "control_N=131&control_T=SA%20-%20LECTURAS%20DE%20CAMPO%20OSBL520CALDERAS&nr="
           ],
-          "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+          "nivel": [1, 1, 1],
+          "Check List de Actividades Calderas": {
+            "name": [
+              "SA-Calderas Lunes Turno 1",
+              "SA-Calderas Lunes Turno 2",
+              "SA-Calderas Martes Turno 1",
+              "SA-Calderas Martes Turno 2",
+              "SA-Calderas Miércoles Turno 1",
+              "SA-Calderas Miércoles Turno 2",
+              "SA-Calderas Jueves Turno 1",
+              "SA-Calderas Jueves Turno 2",
+              "SA-Calderas Viernes Turno 1",
+              "SA-Calderas Viernes Turno 2",
+              "SA-Calderas Sábado Turno 1",
+              "SA-Calderas Sábado Turno 2",
+              "SA-Calderas Domingo Turno 1",
+              "SA-Calderas Domingo Turno 2"
+            ],
+            "type": [
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl"
+            ],
+            "ruta": [
+              "control_N=33&control_T=SA-Calderas%20LUNES%20TURNO%201&nr=",
+              "control_N=34&control_T=SA-Calderas%20LUNES%20TURNO%202&nr=",
+              "control_N=35&control_T=SA-Calderas%20MARTES%20TURNO%201&nr=",
+              "control_N=36&control_T=SA-Calderas%20MARTES%20TURNO%202&nr=",
+              "control_N=37&control_T=SA-Calderas%20MIÉRCOLES%20TURNO%201&nr=",
+              "control_N=38&control_T=SA-Calderas%20MIÉRCOLES%20TURNO%202&nr=",
+              "control_N=39&control_T=SA-Calderas%20JUEVES%20TURNO%201&nr=",
+              "control_N=40&control_T=SA-Calderas%20JUEVES%20TURNO%202&nr=",
+              "control_N=41&control_T=SA-Calderas%20VIERNES%20TURNO%201&nr=",
+              "control_N=42&control_T=SA-Calderas%20VIERNES%20TURNO%202&nr=",
+              "control_N=43&control_T=SA-Calderas%20SÁBADO%20TURNO%201&nr=",
+              "control_N=44&control_T=SA-Calderas%20SÁBADO%20TURNO%202&nr=",
+              "control_N=45&control_T=SA-Calderas%20DOMINGO%20TURNO%201&nr=",
+              "control_N=46&control_T=SA-Calderas%20DOMINGO%20TURNO%202&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+          }
+        },
+        "TRATAMIENTO DE AGUAS": {
+          "name": [
+            "SA - 5S AGUAS",
+            "SA - LECTURAS DE CAMPO OSBL TRATAMIENTO DE AGUAS",
+            "SA - Check List de Tratamiento de Aguas"
+          ],
+          "type": ["ctrl", "ctrl", "btn"],
+          "ruta": [
+            "control_N=138&control_T=SA%20-%205S%20AGUAS&nr=",
+            "control_N=130&control_T=SA%20-%20LECTURAS%20DE%20CAMPO%20OSBL%20TRATAMIENTO%20DE%20AGUAS&nr=",
+            ""
+          ],
+          "nivel": [1, 1, 1],
+          "SA - Check List de Tratamiento de Aguas": {
+            "name": [
+              "LUNES TURNO 1",
+              "LUNESR TURNO 2",
+              "MARTES TURNO 1",
+              "MARTES TURNO 2",
+              "MIÉRCOLES TURNO 1",
+              "MIÉRCOLES TURNO 2",
+              "JUEVES TURNO 1",
+              "JUEVES TURNO 2",
+              "VIERNES TURNO 1",
+              "VIERNES TURNO 2",
+              "SÁBADO TURNO 1",
+              "SÁBADO TURNO 2",
+              "DOMINGO TURNO 1",
+              "DOMINGO TURNO 2"
+            ],
+            "type": [
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl",
+              "ctrl"
+            ],
+            "ruta": [
+              "control_N=204&control_T=LUNES%20TURNO%201%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=205&control_T=LUNES%20TURNO%202%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=198&control_T=MARTES%20TURNO%201%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=206&control_T=MARTES%20TURNO%202%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=199&control_T=MIÉRCOLES%20TURNO%201%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=207&control_T=MIÉRCOLES%20TURNO%202%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=200&control_T=JUEVES%20TURNO%201%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=208&control_T=JUEVES%20TURNO%202%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=201&control_T=VIERNES%20TURNO%201%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=209&control_T=VIERNES%20TURNO%202%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=202&control_T=SÁBADO%20TURNO%201%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=210&control_T=SÁBADO%20TURNO%202%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=203&control_T=DOMINGO%20TURNO%201%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUAS&nr=",
+              "control_N=211&control_T=DOMINGO%20TURNO%202%20-%20CHECK%20LIST%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20TRATAMIENTO%20DE%20AGUASS&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+          }
         }
       }
     }

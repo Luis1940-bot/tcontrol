@@ -111,3 +111,98 @@
 [26-Dec-2024 12:34:47 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListAreas\Routes\traerRegistros.php on line 61
 [26-Dec-2024 12:35:00 America/Argentina/Buenos_Aires] [Error 2] mysqli_num_fields() expects parameter 1 to be mysqli_result, bool given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListAreas\Routes\traerRegistros.php on line 59
 [26-Dec-2024 12:35:00 America/Argentina/Buenos_Aires] [Error 2] mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListAreas\Routes\traerRegistros.php on line 61
+[29-Dec-2024 19:03:29 America/Argentina/Buenos_Aires] No autorizado: jphernandez@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:03:44 America/Argentina/Buenos_Aires] No autorizado: zlopez@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:03:54 America/Argentina/Buenos_Aires] No autorizado: jlmolina@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:04:05 America/Argentina/Buenos_Aires] No autorizado: frodriguez@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:04:17 America/Argentina/Buenos_Aires] No autorizado: erojasp@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:04:27 America/Argentina/Buenos_Aires] No autorizado: jlrudo@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:04:37 America/Argentina/Buenos_Aires] No autorizado: fgonzalezp@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:04:48 America/Argentina/Buenos_Aires] No autorizado: oluria@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:04:57 America/Argentina/Buenos_Aires] No autorizado: adleon@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:05:07 America/Argentina/Buenos_Aires] No autorizado: oreyes@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:05:17 America/Argentina/Buenos_Aires] No autorizado: irquiroz@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:05:30 America/Argentina/Buenos_Aires] No autorizado: fabaxin@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:05:39 America/Argentina/Buenos_Aires] No autorizado: kjbasurto@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:05:50 America/Argentina/Buenos_Aires] No autorizado: jatorresm@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:06:01 America/Argentina/Buenos_Aires] No autorizado: msanchezr@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:06:12 America/Argentina/Buenos_Aires] No autorizado: okgomez@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:08:00 America/Argentina/Buenos_Aires] No autorizado: latorres@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:08:09 America/Argentina/Buenos_Aires] No autorizado: jurena@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:08:17 America/Argentina/Buenos_Aires] No autorizado: oalfonseca@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:08:25 America/Argentina/Buenos_Aires] No autorizado: pmartinezm@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:08:33 America/Argentina/Buenos_Aires] No autorizado: jgonzalezgo@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:08:42 America/Argentina/Buenos_Aires] No autorizado: yantonioc@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:08:50 America/Argentina/Buenos_Aires] No autorizado: jjtalamantes@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:09:02 America/Argentina/Buenos_Aires] No autorizado: jhernandezg@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:09:12 America/Argentina/Buenos_Aires] No autorizado: bamartinez@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:09:22 America/Argentina/Buenos_Aires] No autorizado: rsalinas@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:09:30 America/Argentina/Buenos_Aires] No autorizado: Jjimenez@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:09:37 America/Argentina/Buenos_Aires] No autorizado: ojuarez@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:09:45 America/Argentina/Buenos_Aires] No autorizado: resteban@alpekpolyester.com, planta: 15
+[29-Dec-2024 19:09:55 America/Argentina/Buenos_Aires] No autorizado: isibaja@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:14:57 America/Argentina/Buenos_Aires] No autorizado: arosas@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:16:45 America/Argentina/Buenos_Aires] No autorizado: abluna@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:16:55 America/Argentina/Buenos_Aires] No autorizado: aazamar@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:17:14 America/Argentina/Buenos_Aires] No autorizado: cavazquez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:17:24 America/Argentina/Buenos_Aires] No autorizado: cemartinezc@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:17:48 America/Argentina/Buenos_Aires] No autorizado: eygonzalez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:17:59 America/Argentina/Buenos_Aires] No autorizado: igomez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:18:09 America/Argentina/Buenos_Aires] No autorizado: jmrodriguez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:18:22 America/Argentina/Buenos_Aires] No autorizado: javier.ramirez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:18:33 America/Argentina/Buenos_Aires] No autorizado: jmurga@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:18:44 America/Argentina/Buenos_Aires] No autorizado: jmateos@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:18:54 America/Argentina/Buenos_Aires] No autorizado: jose.sanchez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:19:06 America/Argentina/Buenos_Aires] No autorizado: jfmateos@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:19:18 America/Argentina/Buenos_Aires] No autorizado: jlgarduza@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:19:28 America/Argentina/Buenos_Aires] No autorizado: jomartinez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:19:39 America/Argentina/Buenos_Aires] No autorizado: jhernandezma@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:19:49 America/Argentina/Buenos_Aires] No autorizado: mmartinezl@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:19:57 America/Argentina/Buenos_Aires] No autorizado: mirodriguez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:20:08 America/Argentina/Buenos_Aires] No autorizado: oscar.perezr@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:20:23 America/Argentina/Buenos_Aires] No autorizado: rigoberto.concepcion@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:20:39 America/Argentina/Buenos_Aires] No autorizado: asalas@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:20:51 America/Argentina/Buenos_Aires] No autorizado: arramirez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:21:53 America/Argentina/Buenos_Aires] No autorizado: arodriguezs@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:22:07 America/Argentina/Buenos_Aires] No autorizado: csanchez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:22:18 America/Argentina/Buenos_Aires] No autorizado: ecortezb@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:22:33 America/Argentina/Buenos_Aires] No autorizado: gerardo.rosales@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:22:45 America/Argentina/Buenos_Aires] No autorizado: gecruz@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:23:03 America/Argentina/Buenos_Aires] No autorizado: inicolas@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:23:13 America/Argentina/Buenos_Aires] No autorizado: jmmartinez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:23:24 America/Argentina/Buenos_Aires] No autorizado: jjcruz@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:23:41 America/Argentina/Buenos_Aires] No autorizado: jccardenas@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:23:57 America/Argentina/Buenos_Aires] No autorizado: jcluna@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:24:27 America/Argentina/Buenos_Aires] No autorizado: jtorres@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:24:45 America/Argentina/Buenos_Aires] No autorizado: lmontalvo@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:25:00 America/Argentina/Buenos_Aires] No autorizado: lasantiago@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:25:14 America/Argentina/Buenos_Aires] No autorizado: lgvela@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:25:37 America/Argentina/Buenos_Aires] No autorizado: lmitz@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:25:47 America/Argentina/Buenos_Aires] No autorizado: masanchez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:25:56 America/Argentina/Buenos_Aires] No autorizado: pagomez@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:26:08 America/Argentina/Buenos_Aires] No autorizado: rarias@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:28:05 America/Argentina/Buenos_Aires] No autorizado: jpineda@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:28:17 America/Argentina/Buenos_Aires] No autorizado: grosaldo@alpekpolyester.com, planta: 15
+[02-Jan-2025 20:28:47 America/Argentina/Buenos_Aires] No autorizado: jarivera@alpekpolyester.com, planta: 15
+[03-Jan-2025 13:16:53 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 165
+[03-Jan-2025 13:16:53 America/Argentina/Buenos_Aires] Error al clonar reporte. Error: Exception: Error al preparar la consulta de INSERT: Column count doesn't match value count at row 1 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php:172
+Stack trace:
+#0 C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php(244): clonarReporte('%7B%22origen%22...')
+#1 C:\DATOS\04.DESARROLLOS\tcontrol\Routes\index.php(173): include_once('C:\\DATOS\\04.DES...')
+#2 {main}
+[04-Jan-2025 17:00:03 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[04-Jan-2025 18:06:55 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 12:07:37 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 12:19:28 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 12:29:23 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 12:38:50 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 12:45:07 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 12:50:05 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 13:06:05 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 13:07:35 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 14:31:47 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 14:34:21 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 14:37:05 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 14:39:00 America/Argentina/Buenos_Aires] [Error 8] Undefined variable: numeroControl in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\clonarReporte.php on line 166
+[07-Jan-2025 15:06:44 America/Argentina/Buenos_Aires] No autorizado: Grisselle.Mendez@alpekpolyester.com, planta: 15
+[07-Jan-2025 15:06:59 America/Argentina/Buenos_Aires] No autorizado: Isabel.Ramirez@alpekpolyester.com, planta: 15

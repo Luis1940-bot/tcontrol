@@ -665,7 +665,7 @@ export function nuevoCampo(objTranslate, target, plant) {
 const filtrarSubarrays = (arrayPrincipal) => {
   const arrayResultante = arrayPrincipal
     .map((subarray) => {
-      if (subarray.length > 2 && subarray[24] !== '' && subarray[25] === 3) {
+      if (subarray.length > 2 && subarray[24] !== '' && subarray[26] === 3) {
         const reporte = `${subarray[24]}-${subarray[0]}`
         return [subarray[24], reporte]
       } else {
