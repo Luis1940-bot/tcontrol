@@ -205,6 +205,17 @@ async function checkHour(div, index, columna) {
       previousCell.colSpan = (previousCell.colSpan || 1) + 1
       row.removeChild(row.cells[3])
     }
+
+    // Encontrar y deshabilitar el input en la celda anterior
+    if (row && row.cells.length > 0) {
+      const previousInputCell = row.cells[columna - 1]
+      const previousInput =
+        previousInputCell.querySelector('input[type="text"]')
+      if (previousInput) {
+        previousInput.disabled = true
+      }
+    }
+
     const inputText = document.createElement('input')
     inputText.setAttribute('type', 'text')
     inputText.setAttribute('disabled', false)

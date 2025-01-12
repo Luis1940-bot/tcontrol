@@ -227,12 +227,19 @@ function columna2(
     let checkhour = datos.detalle[index].replace('.', ':')
     const td_3 = tds[3]
     const td_2 = tds[2]
+    // const buttonElement = td_3.querySelector('div > button')
+    // buttonElement.remove()
     const buttonElement = td_3.querySelector('div > button')
-    buttonElement.remove()
+    if (buttonElement) {
+      buttonElement.remove()
+    }
     const inputElement = td_3.querySelector('div > input')
-    inputElement.value = checkhour
-    inputElement.style.border = 'none'
-    inputElement.style.display = 'block'
+    if (inputElement) {
+      inputElement.value = checkhour
+      inputElement.style.border = 'none'
+      inputElement.style.display = 'block'
+    }
+
     if (type === 'text') {
       const inputElement_2 = td_2.querySelector('input')
       inputElement_2.disabled = true
