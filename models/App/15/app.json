@@ -228,75 +228,69 @@
         "TABLERO PTA": {
           "name": [
             "Formato Orden y Limpieza Tablero",
-            "Lecturas L1/L2 Tablero",
-            "GPT-F-016 HOJA DE VERIFICACIÓN DE LA UNIDAD DE PURIFICACIÓN LINEA 1/2 Tablero"
+            "Lecturas L1/L2 Tablero PTA",
+            "GPT-F-016 Hoja De Verificación De La Unidad, Línea 1/2 Tablero"
           ],
           "type": ["ctrl", "btn", "ctrl"],
           "ruta": [
-            "control_N=70&control_T=5S%20PTA%20-%20TABLEROS&nr=",
+            "control_N=70&control_T=5S%20PTA%20-%20TABLERO&nr=",
             "",
-            "control_N=97&control_T=HOJA%20DE%20VERIFICACIÓN%20DE%20LA%20UNIDAD%20DE%20PURIFICACIÓN%20LINEA%201%20-%202&nr="
+            "control_N=97&control_T=PTA%20-%20GPT-F-016%20Hoja%20de%20verificación%20de%20la%20Unidad,%20Línea%201/2%20-%20TABLE&nr="
           ],
           "nivel": [1, 1, 1],
-          "Lecturas L1/L2 Tablero": {
+          "Lecturas L1/L2 Tablero PTA": {
             "name": ["Línea 1", "Línea 2"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=86&control_T=PTA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20LA%20UNIDAD%20DE%20PURIFICACIÓN&nr=",
-              "control_N=87&control_T=PTA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20LA%20UNIDAD%20DE%20PURIFICACIÓN%20LÍNEA%202&nr="
+              "control_N=86&control_T=PTA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20LA%20UNIDAD%20DE%20PURIFICACION%20LÍNEA%201&nr=",
+              "control_N=87&control_T=PTA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20LA%20UNIDAD%20DE%20PURIFICACION%20LÍNEA%202&nr="
             ],
             "nivel": [1, 1, 1]
           }
         },
         "REACCIÓN PTA": {
           "name": [
-            "Formato Orden y Limpieza Reacción",
-            "Check List de Actividades Reacción",
-            "Lecturas de Campo Reacción",
-            "Check List Energía Reacción",
-            "GPT-F-035  HOJA DE VERIFICACIÓN PLANTA DE HIDRÓGENO CM-703 Reacción",
-            "GPT-F-785 Lista de Chequeos de Puntos Estratégicos en Reacción"
+            "Formato Orden y Limpieza - Reacción PTA",
+            "Check List de Actividades - Reacción PTA",
+            "Lecturas de campo - Reacción PTA",
+            "Check List de Energía - Reacción PTA",
+            "GPT-F-035 Hoja de Lectura Planta de Hidrógeno CM-703 - Reacción PTA",
+            "GPT-F-785 Lista de Chequeos de Puntos Estratégicos - Reacción PTA"
           ],
           "type": ["btn", "btn", "btn", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "",
             "",
             "",
-            "control_N=27&control_T=Check List ÁREA DE CRISTALIZACIÓN&nr=",
-            "control_N=98&control_T=HOJA%20DE%20VERIFICACIÓN%20PLANTA520DE%20HIDRÓGENO%20CM-703&nr=",
-            "control_N=103&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(CRISTALIZACIÓN)&nr="
+            "control_N=27&control_T=PTA%20-%20CHECK%20LIST%20DE%20ENERGÍA%20-%20CRISTALIZACIÓN&nr=",
+            "control_N=98&control_T=PTA%20-%20GPT-F-035%20HOJA%20DE%20LECTURA%20PLANTA%20DE%20HIDRÓGENO%20CM-703%20-%20REACCIÓN&nr=",
+            "control_N=103&control_T=PTA%20-%20GPT-F-785%20LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20-%20CRISTALIZACION&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1],
-          "Formato Orden y Limpieza Reacción": {
+          "Formato Orden y Limpieza - Reacción PTA": {
             "name": ["Cristalización", "Planta de Hidrógeno"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
               "control_N=66&control_T=5S%20PTA%20-%20CRISTALIZACIÓN&nr=",
-              "control_N=67&control_T=5S%67PTA%67-%67PLANTA%67DE%67HIDRÓGENO&nr="
+              "control_N=67&control_T=5S%20PTA%20-%20Planta%20de%20Hidrógeno&nr="
             ],
             "nivel": [1, 1]
           },
-          "Check List de Actividades Reacción": {
-            "name": ["Reacción / PH2"],
-            "type": ["btn"],
-            "ruta": [""],
-            "nivel": [1, 1],
-            "Reacción / PH2": {
-              "name": ["Turno 4", "Turno 5"],
-              "type": ["ctrl", "ctrl"],
-              "ruta": [
-                "control_N=21&control_T=PTA%20-%20TURNO%204%20REACCIÓN%20PH2&nr=",
-                "control_N=22&control_T=PTA%20-%20TURNO%205%20REACCIÓN%20PH2&nr="
-              ],
-              "nivel": [1, 1]
-            }
+          "Check List de Actividades - Reacción PTA": {
+            "name": ["Turno 4", "Turno 5"],
+            "type": ["ctrl", "ctrl"],
+            "ruta": [
+              "control_N=21&control_T=PTA%20-%20CHECK%20LIST%20DE%20ACTIVIDADES%20REACCIÓN%20/%20PH2%20-%20TURNO%204&nr=",
+              "control_N=22&control_T=PTA%20-%20CHECK%20LIST%20DE%20ACTIVIDADES%20REACCIÓN%20/%20PH2%20-%20TURNO%205&nr="
+            ],
+            "nivel": [1, 1]
           },
-          "Lecturas de Campo Reacción": {
+          "Lecturas de campo - Reacción PTA": {
             "name": ["Cristalización", "Compresores Planta de Hidrógeno"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=83&control_T=PTA%20-%20CRISTALIZACIÓN&nr=",
-              "control_N=81&control_T=PTA%20-%20COMPRESORES%20DE%20PLANTA%20DE%20LA%20HIDRÓGENO%20CC-701A-B-E&nr="
+              "control_N=83&control_T=PTA%20-%20LECTURAS%20DE%20CAMPO%20-%20CRISTALIZACIÓN&nr=",
+              "control_N=81&control_T=PTA%20-%20LECTURAS%20DE%20CAMPO%20-%20COMPRESORES%20PLANTA%20DE%20HIDRÓGENO&nr="
             ],
             "nivel": [1, 1]
           }
@@ -315,19 +309,19 @@
           "ruta": [
             "control_N=69&control_T=5S%20PTA520-520FILTROS520Y%20SECADORES&nr=",
             "",
-            "control_N=84&control_T=PTA%20-%20LECTURA%20DE%20FILTROS%20BHS%20CM-407A-B%20Y%20CM-406&nr=",
-            "control_N=28&control_T=Check%20List%20ÁREA%20DE%20FILTROS&nr=",
-            "control_N=102&control_T=LISTA%20DE%20VERIFICACIÓN%20DEL%20FILTRO%20BHS%20CM-407%20A-B&nr=",
+            "control_N=84&control_T=PTA%20-%20LECTURAS%20DE%20CAMPOv-%20FILTROS&nr=",
+            "control_N=28&control_T=PTA%20-%20CHECK%20LIST%20DE%20ENERGÍA%20-%20FILTROS&nr=",
+            "control_N=102&control_T=PTA%20-%20GPT-F-782%20LISTA%20DE%20VERIFICACIÓN%20DEL%20FILTRO%20BHS%20CM-407A/B%20-%20FILTROS&nr=",
             "control_N=100&control_T=FILTROS%20-%20INSPECCIÓN%20DIARIA%20DE%20FILTROS%20DE%20GAS%20DE%20TRANSPORTE&nr=",
-            "control_N=104&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(FILTROS)&nr="
+            "control_N=104&control_T=PTA%20-%20GPT-F-785%20LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20-%20FILTROS&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1, 1],
           "Check List de Actividades Filtros PTA": {
             "name": ["Turno 4", "Turno 5"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=19&control_T=PTA%20-%20TURNO%204520FILTROS&nr=",
-              "control_N=20&control_T=PTA%20-%20TURNO%205520FILTROS&nr="
+              "control_N=19&control_T=PTA%20-%20CHECK%20LIST%20DE%20ACTIVIDADES%20FILTROS%20-%20TURNO%204&nr=",
+              "control_N=20&control_T=PTA%20-%20CHECK%20LIST%20DE%20ACTIVIDADES%20FILTROS%20-%20TURNO%205&nr="
             ],
             "nivel": [1, 1]
           }
@@ -336,25 +330,27 @@
           "name": [
             "Formato Orden y Limpieza Preparación",
             "Check List de Actividades Preparación",
-            "Lecturas de Campo Preparación",
+            "GPT-F-785 Lista de chequeos de puntos estratégicos Preparación",
             "Check List Energía Preparación",
-            "GPT-F-780 Inspección Diaria de Filtros de Gas de Transporte Preparación"
+            "GPT-F-780 Inspección Diaria de Filtros de Gas de Transporte Preparación",
+            "Lecturas de campo Preparación"
           ],
-          "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl"],
+          "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
             "control_N=65&control_T=5S%20PTA%20-%20PREPARACIÓN&nr=",
             "",
-            "control_N=106&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(PREPARACIÓN)&nr=",
-            "control_N=26&control_T=Check%20List%20ÁREA%20DE%20PREPARACIÓN&nr=",
-            "control_N=101&control_T=PURIFICACIÓN%20-%20INSPECCIÓN%20DIARIA%20DE%20FILTROS%20DE%20GAS%20DE%20TRANSPORTE&nr="
+            "control_N=106&control_T=PTA%20-%20GPT-F%20785%20LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20-%20PREPARACIÓN&nr=",
+            "control_N=26&control_T=PTA%20-%20CHECK%20LIST%20DE%20ENERGÍA%20-%20PREPARACION&nr=",
+            "control_N=101&control_T=PTA%20-%20GPT-F-780%20INSPECCIÓN%20DIARIA%20DE%20FILTROS%20DE%20GAS%20DE%20TRANSPORTE%20-%20PREPARACIÓN&nr=",
+            "control_N=82&control_T=PTA%20-%20LECTURAS%20DE%20PREPARACIÓN&nr="
           ],
-          "nivel": [1, 1, 1, 1, 1],
+          "nivel": [1, 1, 1, 1, 1, 1],
           "Check List de Actividades Preparación": {
             "name": ["Turno 4", "Turno 5"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
-              "control_N=23&control_T=PTA - TURNO%204%20PREPARACIÓN&nr=",
-              "control_N=24&control_T=PTA - TURNO%205%20PREPARACIÓN&nr="
+              "control_N=23&control_T=PTA%20-%20CHECK%20LIST%20DE%20ACTIVIDADES%20PREPARACIÓN%20-%20TURNO%204&nr=",
+              "control_N=24&control_T=PTA%20-%20CHECK%20LIST%20DE%20ACTIVIDADES%20PREPARACIÓN%20-%20TURNO%205&nr="
             ],
             "nivel": [1, 1]
           }
@@ -372,16 +368,18 @@
           "ruta": [
             "control_N=68&control_T=5S%20PTA%20-%20RLM&nr=",
             "",
-            "control_N=29&control_T=Check%20List%20ÁREA%20DE%20RLM&nr=",
-            "control_N=105&control_T=LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATÉGICOS%20EN%20PURIFICACIÓN(RLM)&nr=",
+            "control_N=29&control_T=PTA%20-%20CHECK%20LIST%20DE%20ENERGÍA%20-%20RLM&nr=",
+            "control_N=105&control_T=PTA%20-%20GPT-F-785%20LISTA%20DE%20CHEQUEOS%20DE%20PUNTOS%20ESTRATEGICOS%20-%20RLM&nr=",
             "control_N=99&control_T=INSPECCIÓN%20DIARIA%20DE%20LOS%20FILTROS%20FUNDA%20CM-417%20A,%20B%20Y%20C&nr=",
-            "control_N=85&control_T=PTA%20-%20LECTURAS%20RLM&nr="
+            "control_N=85&control_T=PTA%20-%20Lecturas%20de%20campo%20-%20RLM&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1],
           "Check List de Actividades RLM": {
             "name": ["Turno 4 RLM"],
             "type": ["ctrl"],
-            "ruta": ["control_N=25&control_T=PTA%20-%20TURNO%204%20RLM&nr="],
+            "ruta": [
+              "control_N=25&control_T=PTA%20-%20CHECK%20LIST%20DE%20ACTIVIDADES%20RLM%20-%20TURNO%204&nr="
+            ],
             "nivel": [1]
           }
         }

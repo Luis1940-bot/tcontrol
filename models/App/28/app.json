@@ -130,16 +130,20 @@
         }
       },
       "SSP": {
-        "name": [],
-        "type": [],
-        "ruta": [],
-        "nivel": []
+        "name": ["BITÁCORA DEL DCS SÓLIDO (SSP)"],
+        "type": ["ctrl"],
+        "ruta": [
+          "control_N=177&control_T=BITACORA%20DEL%20DCS%20SÓLIDO%20(SSP)&nr="
+        ],
+        "nivel": [1]
       },
       "SERVICIOS": {
-        "name": [],
-        "type": [],
-        "ruta": [],
-        "nivel": []
+        "name": ["BITÁCORA DEL DCS SERVICIOS (UTILITIES)"],
+        "type": ["ctrl"],
+        "ruta": [
+          "control_N=176&control_T=BITACORA%20DE%20DCS%20SERVICIOS%20(UTILITIES)&nr="
+        ],
+        "nivel": [1]
       }
     }
   }

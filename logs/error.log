@@ -633,3 +633,4 @@ Stack trace:
 [10-Jan-2025 18:18:04 America/Argentina/Buenos_Aires] [Error 8] Undefined index: tipoDatoDetalle in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php on line 40
 [10-Jan-2025 18:18:40 America/Argentina/Buenos_Aires] [Error 8] Undefined index: tipoDatoDetalle in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php on line 40
 [10-Jan-2025 18:18:52 America/Argentina/Buenos_Aires] [Error 8] Undefined index: tipoDatoDetalle in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php on line 40
+[13-Jan-2025 14:53:16 America/Argentina/Buenos_Aires] [Error 8] Undefined index: tipoDatoDetalle in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php on line 40
