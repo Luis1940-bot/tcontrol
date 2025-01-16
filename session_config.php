@@ -9,7 +9,7 @@ session_set_cookie_params([
 ]);
 
 // Start or resume the session
-session_start();
+if (session_status() == PHP_SESSION_NONE) { session_start(); };
 
 // Regenerate session ID to prevent session fixation attacks
 session_regenerate_id(true);

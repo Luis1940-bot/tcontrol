@@ -3,15 +3,12 @@ const SERVER = baseUrl
 
 export default function enviarLogin(objeto) {
   let obj = { ...objeto }
-  // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`
     obj.rax = rax
     const datos = JSON.stringify(obj)
-    // console.log(datos)
 
     const ruta = `${SERVER}/Routes/index.php`
-    // console.log(ruta)
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -26,11 +23,18 @@ export default function enviarLogin(objeto) {
             `Error en la solicitud: ${res.status} ${res.statusText}`
           )
         }
-        return res.json()
+        // Registrar el tipo de contenido
+        console.log('Content-Type:', res.headers.get('Content-Type'))
+        return res.text() // Cambiar a res.text() temporalmente para registro
       })
-      .then((data) => {
-        // console.log(data)
-        resolve(data)
+      .then((text) => {
+        // console.log('Respuesta del servidor:', text)
+        try {
+          const data = JSON.parse(text)
+          resolve(data)
+        } catch (error) {
+          reject(`Error al parsear JSON: ${error.message}`)
+        }
       })
       .catch((error) => {
         console.error('Error en la solicitud:', error)

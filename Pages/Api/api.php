@@ -145,16 +145,6 @@ if (!verificarToken($token, $data, $clave_secreta)) {
 }
 
 header("Content-Type: application/json; charset=utf-8");
-// header("Content-Security-Policy: default-src 'self'; img-src 'self' https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
-// header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
-// header("X-Content-Type-Options: nosniff");
-// header("X-Frame-Options: DENY");
-// header("X-XSS-Protection: 1; mode=block");
-// header('Access-Control-Allow-Origin: *');
-// header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-// header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
 
 $http_host = $_SERVER['HTTP_HOST'];
 $url = htmlentities($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], ENT_QUOTES, 'UTF-8');

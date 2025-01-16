@@ -4,6 +4,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 // Inicializar el logger con la ruta deseada
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
+
 if (isset($_SESSION['timezone'])) {
     date_default_timezone_set($_SESSION['timezone']);
 } else {
@@ -11,14 +12,9 @@ if (isset($_SESSION['timezone'])) {
 }
 // Configura las opciones de sesión segura
 // Inicia la sesión de PHP
-session_start();
- if (!isset($_SESSION['login_sso']['email'] )) {
-      unset($_SESSION['login_sso']['email'] ); 
-      require_once dirname(dirname(__DIR__)) . '/config.php';
-      header("Location: " . BASE_URL);
 
-  }
 
+ if (session_status() == PHP_SESSION_NONE) { session_start(); };
 $url_base  = BASE_URL;
 
 // Genera una cadena aleatoria basada en el tiempo y un número aleatorio
@@ -36,92 +32,93 @@ $url = '';
 if(isset($_GET['ruta'])) {
     // Obtener el valor de 'ruta'
     $ruta = $_GET['ruta'];
+    
     switch ($ruta) {
       case 'login':
         $url = $url_base . '/Pages/Login/';
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'home':
         $url = $url_base . '/Pages/Home/';
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case '404':
         $url = $url_base . '/404.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'control':
         $url = $url_base . '/Pages/Control/index.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'rove':
         $rove = $_GET['rove'];
         $url = $url_base . '/Pages/Rove/index.php?rove='.$rove.'t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'menu':
         // $rove = $_GET['menu'];
         $url = $url_base . '/Pages/Menu/index.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'controlView':
         $url = $url_base . '/Pages/ControlsView/index.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'consultasViews':
         $url = $url_base . '/Pages/ConsultasViews/viewsGral.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'admin':
         $url = $url_base . '/Pages/Admin/index.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'sadmin':
         $url = $url_base . '/Pages/Sadmin/index.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'reporte':
         $url = $url_base . '/Pages/ListReportes/reporte.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'reporteOnOff':
         $url = $url_base . '/Pages/ListReportes/Routes/reporteOnOff.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'variables':
         $url = $url_base . '/Pages/ListVariables/variables.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'RegisterUser':
         $url = $url_base . '/Pages/RegisterUser/';
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'RegisterPlant':
         $url = $url_base . '/Pages/RegisterPlant/';
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'RecoveryPass':
         $url = $url_base . '/Pages/RecoveryPass/';
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
 
       case 'areas':
         $url = $url_base . '/Pages/ListAreas/areas.php?t='.$time;
-        header("Location: $url");
+        header("Location: $url", true, 302);
         break;
       
       default:

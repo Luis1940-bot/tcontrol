@@ -2,29 +2,42 @@
 mb_internal_encoding('UTF-8');
 require_once  dirname(__DIR__) . '/config.php';
 
-// Define las opciones de sesión segura
-$sessionOptions = [
-    'use_only_cookies' => 1, // Solo usar cookies para almacenar el identificador de sesión
-    'cookie_lifetime' => 14400, // Tiempo de vida de la cookie de sesión en segundos (1 hora)
-    'cookie_secure' => 1, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
-    'cookie_httponly' => 1, // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
-    'cookie_samesite' => 'Strict' // Evita ataques de CSRF (Cross-Site Request Forgery)
-];
+// // Define las opciones de sesión segura
+// $sessionOptions = [
+//     'use_only_cookies' => 1, // Solo usar cookies para almacenar el identificador de sesión
+//     'cookie_lifetime' => 14400, // Tiempo de vida de la cookie de sesión en segundos (1 hora)
+//     'cookie_secure' => 1, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
+//     'cookie_httponly' => 1, // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
+//     'cookie_samesite' => 'Strict' // Evita ataques de CSRF (Cross-Site Request Forgery)
+// ];
 
 
-// Configura las opciones de sesión segura
-session_set_cookie_params(
-    $sessionOptions['cookie_lifetime'], // Tiempo de vida de la cookie de sesión en segundos (1 hora)
-    '/', // Ruta de la cookie (puedes cambiarla según tus necesidades)
-    $_SERVER['HTTP_HOST'], // Dominio de la cookie (usando el dominio actual)
-    true, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
-    true // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
-);
-// Inicia la sesión de PHP
+// // Configura las opciones de sesión segura
+// session_set_cookie_params(
+//     $sessionOptions['cookie_lifetime'], // Tiempo de vida de la cookie de sesión en segundos (1 hora)
+//     '/', // Ruta de la cookie (puedes cambiarla según tus necesidades)
+//     $_SERVER['HTTP_HOST'], // Dominio de la cookie (usando el dominio actual)
+//     true, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
+//     true // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
+// );
+// // Inicia la sesión de PHP
+// if (session_status() == PHP_SESSION_NONE) {
+//     session_start();
+// }
+
+// Verificar si la sesión ya ha sido iniciada
 if (session_status() == PHP_SESSION_NONE) {
+    // Configura las opciones de sesión segura
+    session_set_cookie_params([
+        'lifetime' => 14400, // Tiempo de vida de la cookie de sesión en segundos (4 horas)
+        'path' => '/',
+        'domain' => $_SERVER['HTTP_HOST'], // Dominio de la cookie (usando el dominio actual)
+        'secure' => true, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
+        'httponly' => true, // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
+        'samesite' => 'Strict' // Evita ataques de CSRF (Cross-Site Request Forgery)
+    ]);
     session_start();
 }
-
 
 
 // Verifica si la solicitud se está realizando en localhost

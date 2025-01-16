@@ -223,6 +223,8 @@ async function enviar() {
     setTimeout(() => {
       session(login)
     }, 200)
+    email.value = ''
+    password.value = ''
   } catch (error) {
     console.log(error)
   }
@@ -414,6 +416,12 @@ function creador(element) {
     }
     if (element.tag === 'input') {
       elemento = createInput(element.config)
+      if (element.config['type'] === 'email') {
+        elemento.setAttribute('autocomplete', 'off')
+      }
+      if (element.config['type'] === 'pasword') {
+        elemento.setAttribute('autocomplete', 'new-password')
+      }
     }
     if (element.tag === 'a') {
       element.config.textContent =

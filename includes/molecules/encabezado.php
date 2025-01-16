@@ -1,5 +1,5 @@
 <?php
-// header('Content-Type: text/html;charset=utf-8');
+
 require_once dirname(dirname(__DIR__)) . '/config.php';
 ?>
 <!DOCTYPE html>

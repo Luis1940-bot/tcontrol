@@ -6,28 +6,26 @@ session_start([
     'cookie_samesite' => 'Strict' // Previene ataques CSRF
 ]);
 header('Content-Type: text/html;charset=utf-8');
-header("Content-Security-Policy: default-src 'self'; img-src 'self' https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+$nonce = base64_encode(random_bytes(16));
+header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: example.com; script-src 'self' 'nonce-$nonce' cdn.example.com; style-src 'self' 'nonce-$nonce' cdn.example.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+
+
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"); 
 header("X-Content-Type-Options: nosniff"); 
 header("X-Frame-Options: DENY"); 
 header("X-XSS-Protection: 1; mode=block");
 
-// if (isset($_SESSION['login_sso'])) {
-//     define('SSO', $_SESSION['login_sso']['sso'] ?? null);
-//     define('EMAIL', $_SESSION['login_sso']['email'] ?? null);
-// } else {
-//     define('SSO', null);
-//     define('EMAIL', null);
-// }
+header("Access-Control-Allow-Origin: https://tenkiweb.com"); 
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE"); 
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); 
+header("Access-Control-Allow-Credentials: true"); 
 
-// if (!isset($_SESSION['login_sso']['email']) && (SSO === null || SSO === 's_sso')) {
-//     $url = "https://tenkiweb.com/tcontrol/Pages/Login/index.php";
-//     // header("Location: ". $url ."");
-// }
 
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
 require_once dirname(dirname(__DIR__)) . '/config.php';
+
+
 
 ?>
 <!DOCTYPE html>

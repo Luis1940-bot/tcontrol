@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     // Realiza el redireccionamiento
+    // console.log(`${SERVER}/Pages/Router/rutas.php?ruta=login`)
     window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=login`
 
     // Alternativamente, si necesitas redirigir a otra página

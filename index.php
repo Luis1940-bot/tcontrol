@@ -1,15 +1,23 @@
 <?php
-session_start([
-    'cookie_secure' => true, // Asegura que la cookie solo se envía sobre HTTPS 
-    'cookie_httponly' => true, // Evita el acceso de JavaScript a la cookie 
-    'cookie_samesite' => 'Strict' // Previene ataques CSRF
-]);
+// session_start([
+//     'cookie_secure' => true, // Asegura que la cookie solo se envía sobre HTTPS 
+//     'cookie_httponly' => true, // Evita el acceso de JavaScript a la cookie 
+//     'cookie_samesite' => 'Strict' // Previene ataques CSRF
+// ]);
+
 header('Content-Type: text/html;charset=utf-8');
-header("Content-Security-Policy: default-src 'self'; img-src 'self' https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+$nonce = base64_encode(random_bytes(16));
+header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: example.com; script-src 'self' 'nonce-$nonce' cdn.example.com; style-src 'self' 'nonce-$nonce' cdn.example.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"); 
 header("X-Content-Type-Options: nosniff"); 
 header("X-Frame-Options: DENY"); 
 header("X-XSS-Protection: 1; mode=block");
+
+header("Access-Control-Allow-Origin: https://tenkiweb.com"); 
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE"); 
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); 
+header("Access-Control-Allow-Credentials: true"); 
 
 $url = "https://tenkiweb.com/tcontrol/index.php";
 
@@ -43,6 +51,8 @@ require_once './config.php';
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/style.css?v=<?php echo(time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
   <title></title>
+  <script nonce="<?= $nonce ?>"> // Código JavaScript seguro </script> 
+  <style nonce="<?= $nonce ?>"> /* Código CSS seguro */ </style>
 </head>
 <body>
   <input type="hidden" id="email" value="<?php echo EMAIL; ?>">

@@ -122,6 +122,9 @@ li {
 .custom-checkbox {
   width: 2rem;
 }
+#imageInput {
+  display: none;
+}
 /* Estilos para dispositivos móviles */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   /* Agrega estilos para dispositivos móviles aquí */

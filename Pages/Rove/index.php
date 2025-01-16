@@ -1,9 +1,9 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
-session_start([
-    // 'cookie_samesite' => 'None',
-    'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
-]);
+// session_start([
+//     // 'cookie_samesite' => 'None',
+//     'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
+// ]);
 
 // Tiempo de inactividad en segundos (12 horas)
 $inactive = 43200;
@@ -38,6 +38,7 @@ if (isset($_SESSION['timezone'])) {
 } else {
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
+if (session_status() == PHP_SESSION_NONE) { session_start(); };
 // echo "Zona horaria actual: " . date_default_timezone_get() . "<br>";
 // echo "Fecha y hora actual: " . date('Y-m-d H:i:s') . "<br>";
 ?>

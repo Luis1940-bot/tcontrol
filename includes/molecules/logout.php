@@ -1,5 +1,5 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) { session_start(); };
 require_once dirname(dirname(__DIR__)) . '/config.php';
 $url = "https://tenkiweb.com/tcontrol/index.php";
 define('SSO', $_SESSION['login_sso']['sso']);
