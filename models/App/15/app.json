@@ -645,11 +645,19 @@
           }
         },
         "EFLUENTES": {
-          "name": ["SA - 5S EFLUENTES", "Lecturas de Campo Efluentes OSBL"],
-          "type": ["ctrl", "btn"],
-          "ruta": ["control_N=140&control_T=SA%20-%205S%20EFLUENTES&nr=", ""],
-          "nivel": [1, 1],
-          "Lecturas de Campo Efluentes OSBL": {
+          "name": [
+            "SA - 5S EFLUENTES",
+            "SA - Lecturas de Campo Efluentes",
+            "SA - Check List de Efluentes"
+          ],
+          "type": ["ctrl", "btn", "btn"],
+          "ruta": [
+            "control_N=140&control_T=SA%20-%205S%20EFLUENTES&nr=",
+            "",
+            ""
+          ],
+          "nivel": [1, 1, 1],
+          "SA - Lecturas de Campo Efluentes": {
             "name": [
               "SA - LECTURAS DE CAMPO OSBL EFLUENTES",
               "SA - HOJA DE LECTURAS REACTOR ANAEROBIO AM-7202 AB",
@@ -662,6 +670,28 @@
               "control_N=134&control_T=SA - HOJA DE LECTURAS MEDIDOR DE DESCARGA FINAL AM-710&nr="
             ],
             "nivel": [1, 1, 1]
+          },
+          "SA - Check List de Efluentes": {
+            "name": [
+              "LUNES - Check List ACTIVIDADES DEL PROGRAMA MENSUAL PREVENTIVO EFLUENTES",
+              "MARTES - Check List ACTIVIDADES DEL PROGRAMA MENSUAL PREVENTIVO EFLUENTES",
+              "MIÉRCOLES - Check List ACTIVIDADES DEL PROGRAMA MENSUAL PREVENTIVO EFLUENTES",
+              "JUEVES - Check List ACTIVIDADES DEL PROGRAMA MENSUAL PREVENTIVO EFLUENTES",
+              "VIERNES - Check List ACTIVIDADES DEL PROGRAMA MENSUAL PREVENTIVO EFLUENTES",
+              "SÁBADO - Check List ACTIVIDADES DEL PROGRAMA MENSUAL PREVENTIVO EFLUENTES",
+              "DOMINGO - Check List ACTIVIDADES DEL PROGRAMA MENSUAL PREVENTIVO EFLUENTES"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=88&control_T=LUNES%20-%20Check%20List%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20EFLUENTES&nr=",
+              "control_N=89&control_T=MARTES%20-%20Check%20List%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20EFLUENTES&nr=",
+              "control_N=90&control_T=MIÉRCOLES%20-%20Check%20List%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20EFLUENTES&nr=",
+              "control_N=91&control_T=JUEVES%20-%20Check%20List%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20EFLUENTES&nr=",
+              "control_N=92&control_T=VIERNES%20-%20Check%20List%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20EFLUENTES&nr=",
+              "control_N=93&control_T=SÁBADO%20-%20Check%20List%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20EFLUENTES&nr=",
+              "control_N=94&control_T=DOMINGO%20-%20Check%20List%20ACTIVIDADES%20DEL%20PROGRAMA%20MENSUAL%20PREVENTIVO%20EFLUENTES&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1, 1, 1]
           }
         },
         "CALDERAS": {
