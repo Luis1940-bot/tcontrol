@@ -60,7 +60,7 @@ try {
     $observacion = $encabezados['observacion'];
     $subject = $encabezados['subject'];
     $idLTYreporte = $encabezados['idLTYreporte'];
-    $reporte = $idLTYreporte . '-' . $encabezados['reporte'];
+    $reporte = $encabezados['reporte'];
     $cliente = $plant . '-' . $planta;
     $idPlanta = $plant;
 
