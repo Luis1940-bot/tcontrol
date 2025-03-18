@@ -1,11 +1,265 @@
-
-
-[16-Jan-2025 11:06:05 America/Argentina/Buenos_Aires] Login failed for email: luisglogista@gmailcom, planta: 15
-[16-Jan-2025 11:06:18 America/Argentina/Buenos_Aires] Login failed for email: luisglogista@gmailcom, planta: 15
-[16-Jan-2025 15:36:41 Europe/Berlin] [Error 8] Undefined index: login_sso in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Menu\index.php on line 38
-[16-Jan-2025 15:36:41 Europe/Berlin] [Error 8] Trying to access array offset on value of type null in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Menu\index.php on line 38
-[16-Jan-2025 15:38:28 Europe/Berlin] [Error 8] Undefined index: login_sso in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Controles\index.php on line 37
-[16-Jan-2025 15:38:28 Europe/Berlin] [Error 8] Trying to access array offset on value of type null in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Controles\index.php on line 37
-[16-Jan-2025 15:47:39 Europe/Berlin] [Error 8] Undefined index: login_sso in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\index.php on line 37
-[16-Jan-2025 15:47:39 Europe/Berlin] [Error 8] Trying to access array offset on value of type null in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\index.php on line 37
-[16-Jan-2025 11:56:08 America/Argentina/Buenos_Aires] [Error 8] Undefined index: tipoDatoDetalle in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php on line 40
+[18-Feb-2025 11:06:39 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 11:48:33 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 11:49:44 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 11:51:16 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 11:55:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 11:55:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 12:07:58 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 12:07:58 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 12:11:03 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 12:17:41 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 12:17:54 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 12:17:57 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 12:20:57 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 12:20:57 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 12:35:12 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 12:35:12 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 91
+[18-Feb-2025 12:40:14 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 13:45:13 America/Argentina/Buenos_Aires] [Error 2] urldecode() expects parameter 1 to be string, array given in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 277
+[18-Feb-2025 13:45:13 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 13:46:47 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 13:52:48 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 249
+[18-Feb-2025 13:53:47 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 251
+[18-Feb-2025 13:56:34 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 253
+[18-Feb-2025 13:56:48 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 253
+[18-Feb-2025 13:57:13 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 253
+[18-Feb-2025 13:57:27 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 253
+[18-Feb-2025 14:03:11 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 253
+[18-Feb-2025 14:04:35 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 254
+[18-Feb-2025 14:16:23 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 253
+[18-Feb-2025 14:17:55 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 254
+[18-Feb-2025 14:19:10 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 254
+[18-Feb-2025 14:27:49 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 14:27:49 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 14:27:49 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 14:27:49 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 14:27:50 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 255
+[18-Feb-2025 14:52:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 14:52:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 14:52:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 14:52:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:50:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:50:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:50:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:50:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:50:55 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 343
+[18-Feb-2025 18:52:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:52:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:52:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:52:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:52:17 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 347
+[18-Feb-2025 18:53:58 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:53:58 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:53:58 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:53:58 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:53:58 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 347
+[18-Feb-2025 18:55:04 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:55:04 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:55:04 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:55:04 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 123
+[18-Feb-2025 18:55:05 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 347
+[18-Feb-2025 18:56:48 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:56:48 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 18:56:48 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 18:56:48 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 18:56:48 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 349
+[18-Feb-2025 20:44:16 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 20:44:16 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 20:44:16 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 20:44:16 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 20:50:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 20:50:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 20:50:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 20:50:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 20:52:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 20:52:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[18-Feb-2025 20:52:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 20:52:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[18-Feb-2025 20:55:03 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 217
+[18-Feb-2025 20:55:03 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 217
+[18-Feb-2025 20:55:03 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 253
+[18-Feb-2025 20:55:03 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 253
+[18-Feb-2025 20:55:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 217
+[18-Feb-2025 20:55:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 217
+[18-Feb-2025 20:55:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 253
+[18-Feb-2025 20:55:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 253
+[18-Feb-2025 20:55:46 America/Argentina/Buenos_Aires] ix-JSON response: No se actualizo el control250218205233421
+[19-Feb-2025 15:17:18 America/Mexico_City] Login failed for email: ajmateo@alpekpolyester.com, planta: 15
+[19-Feb-2025 19:03:28 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[19-Feb-2025 19:03:28 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[19-Feb-2025 19:03:28 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[19-Feb-2025 19:03:28 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[20-Feb-2025 23:23:14 Europe/Berlin] [Error 2] session_destroy(): Trying to destroy uninitialized session in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Admin\index.php on line 33
+[20-Feb-2025 23:23:43 Europe/Berlin] [Error 2] session_destroy(): Trying to destroy uninitialized session in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Admin\index.php on line 33
+[20-Feb-2025 23:39:34 Europe/Berlin] [Error 2] session_destroy(): Trying to destroy uninitialized session in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Admin\index.php on line 33
+[20-Feb-2025 23:39:55 Europe/Berlin] [Error 2] session_destroy(): Trying to destroy uninitialized session in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Admin\index.php on line 33
+[21-Feb-2025 00:13:43 Europe/Berlin] [Error 2] session_destroy(): Trying to destroy uninitialized session in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Admin\index.php on line 33
+[21-Feb-2025 00:18:16 Europe/Berlin] [Error 2] session_destroy(): Trying to destroy uninitialized session in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Admin\index.php on line 33
+[20-Feb-2025 21:31:25 America/Argentina/Buenos_Aires] No autorizado: jose.rodriguez@alpekpolyester.com, planta: 15
+[21-Feb-2025 17:56:03 America/Argentina/Buenos_Aires] No autorizado: Kevin.Hernandez@alpekpolyester.com, planta: 15
+[21-Feb-2025 18:29:23 America/Argentina/Buenos_Aires] No autorizado: Manuel.ParedesR@alpekpolyester.com, planta: 15
+[22-Feb-2025 12:00:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[22-Feb-2025 12:00:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[22-Feb-2025 12:00:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[22-Feb-2025 12:00:39 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[22-Feb-2025 12:14:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[22-Feb-2025 12:14:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[22-Feb-2025 12:14:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[22-Feb-2025 12:14:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[24-Feb-2025 11:02:06 America/Argentina/Buenos_Aires] No autorizado: luis@gmail.com, planta: 15
+[24-Feb-2025 11:02:15 America/Argentina/Buenos_Aires] No autorizado: luisglogista@gmail.com, planta: 15
+[24-Feb-2025 12:11:32 America/Argentina/Buenos_Aires] No autorizado: derby.gonzalez@alpekpolyester.com, planta: 15
+[24-Feb-2025 14:51:14 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 37
+[24-Feb-2025 14:53:10 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 37
+[24-Feb-2025 14:55:01 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 37
+[24-Feb-2025 14:56:10 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 40
+[24-Feb-2025 14:56:28 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 40
+[24-Feb-2025 14:57:35 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 39
+[24-Feb-2025 14:58:21 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 39
+[24-Feb-2025 15:03:55 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 39
+[24-Feb-2025 15:04:32 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 40
+[24-Feb-2025 15:05:03 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 41
+[24-Feb-2025 15:05:28 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 41
+[24-Feb-2025 15:06:16 America/Argentina/Buenos_Aires] [Exception] El JSON recibido no es válido. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListReportes\Routes\guardarReporteNuevo.php on line 40
+[25-Feb-2025 13:39:32 America/Argentina/Buenos_Aires] No autorizado: Ricardo.Vazquez@alpekpolyester.com, planta: 15
+[25-Feb-2025 19:27:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:27:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:27:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:27:46 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:31:27 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:31:27 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:31:27 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:31:27 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:33:52 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:33:52 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:33:52 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:33:52 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:33:53 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 272
+[25-Feb-2025 19:41:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:41:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:41:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:41:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:43:05 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:43:05 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:43:05 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:43:05 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:48:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:48:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:48:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:48:00 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:48:01 America/Argentina/Buenos_Aires] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 272
+[25-Feb-2025 19:50:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:50:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:50:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:50:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:53:10 America/Argentina/Buenos_Aires] [Error 2] mysqli_connect(): (HY000/2002): Se ha intentado una operación de socket en un host no accesible.
+ in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 139
+[25-Feb-2025 19:53:10 America/Argentina/Buenos_Aires] [Exception] Error al conectar con la base de datos: Se ha intentado una operación de socket en un host no accesible.
+ in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 142
+[25-Feb-2025 19:53:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:53:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[25-Feb-2025 19:53:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[25-Feb-2025 19:53:33 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[26-Feb-2025 11:18:37 America/Argentina/Buenos_Aires] No autorizado: LUIS@PEPE.COM, planta: 15
+[26-Feb-2025 11:19:26 America/Argentina/Buenos_Aires] No autorizado: gmartinez@alpekpolyester.com, planta: 15
+[26-Feb-2025 08:58:01 America/Mexico_City] Login failed for email: mgonzalezg@alpekpolyester.com, planta: 15
+[27-Feb-2025 07:37:25 America/Mexico_City] Login failed for email: luisglgoista@gmail.com, planta: 28
+[27-Feb-2025 18:05:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[27-Feb-2025 18:05:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[27-Feb-2025 18:05:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[27-Feb-2025 18:05:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[27-Feb-2025 18:06:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:06:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:06:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:06:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:11:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:11:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:11:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:11:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:12:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:12:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:12:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:12:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:12:38 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:12:38 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:12:38 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:12:38 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:39:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:39:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:39:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:39:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:39:53 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:39:53 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:39:53 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:39:53 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:40:19 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:40:19 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[27-Feb-2025 18:40:19 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[27-Feb-2025 18:40:19 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[01-Mar-2025 21:05:20 America/Argentina/Buenos_Aires] Error al agregar nuevo campo. Error: Exception: Error al ejecutar la consulta de INSERT: Conversion from collation utf8mb4_0900_ai_ci into utf8mb3_general_ci impossible for parameter in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php:132
+Stack trace:
+#0 C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php(178): addCampo('%7B%22reporte%2...', '1')
+#1 C:\DATOS\04.DESARROLLOS\tcontrol\Routes\index.php(133): include_once('C:\\DATOS\\04.DES...')
+#2 {main}
+[01-Mar-2025 21:07:49 America/Argentina/Buenos_Aires] Error al agregar nuevo campo. Error: Exception: Error al ejecutar la consulta de INSERT: Conversion from collation utf8mb4_0900_ai_ci into utf8mb3_general_ci impossible for parameter in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php:132
+Stack trace:
+#0 C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListControles\Routes\addNewCampo.php(178): addCampo('%7B%22reporte%2...', '1')
+#1 C:\DATOS\04.DESARROLLOS\tcontrol\Routes\index.php(133): include_once('C:\\DATOS\\04.DES...')
+#2 {main}
+[03-Mar-2025 07:40:41 America/Mexico_City] Login failed for email: luisglgoista@gmail.com, planta: 28
+[03-Mar-2025 20:47:06 America/Argentina/Buenos_Aires] Error al actualizar variable. Error: RuntimeException: No se recibieron datos para actualizar. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php:51
+Stack trace:
+#0 C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php(131): updateVariable(Array)
+#1 C:\DATOS\04.DESARROLLOS\tcontrol\Routes\index.php(133): include_once('C:\\DATOS\\04.DES...')
+#2 {main}
+[03-Mar-2025 20:48:31 America/Argentina/Buenos_Aires] Error al actualizar variable. Error: RuntimeException: No se recibieron datos para actualizar. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php:51
+Stack trace:
+#0 C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php(131): updateVariable(Array)
+#1 C:\DATOS\04.DESARROLLOS\tcontrol\Routes\index.php(133): include_once('C:\\DATOS\\04.DES...')
+#2 {main}
+[03-Mar-2025 21:01:44 America/Argentina/Buenos_Aires] Error al actualizar variable. Error: RuntimeException: No se recibieron datos para actualizar. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php:51
+Stack trace:
+#0 C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php(132): updateVariable(Array)
+#1 C:\DATOS\04.DESARROLLOS\tcontrol\Routes\index.php(133): include_once('C:\\DATOS\\04.DES...')
+#2 {main}
+[03-Mar-2025 21:02:00 America/Argentina/Buenos_Aires] Error al actualizar variable. Error: RuntimeException: No se recibieron datos para actualizar. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php:51
+Stack trace:
+#0 C:\DATOS\04.DESARROLLOS\tcontrol\Pages\ListVariables\Routes\updateVariable.php(132): updateVariable(Array)
+#1 C:\DATOS\04.DESARROLLOS\tcontrol\Routes\index.php(133): include_once('C:\\DATOS\\04.DES...')
+#2 {main}
+[05-Mar-2025 09:33:36 America/Mexico_City] Login failed for email: rsalinas@alpekpolyester.com, planta: 28
+[05-Mar-2025 09:33:51 America/Mexico_City] Login failed for email: rsalinas@alpekpolyester.com, planta: 28
+[05-Mar-2025 09:34:05 America/Mexico_City] Login failed for email: rsalinas@alpekpolyester.com, planta: 28
+[06-Mar-2025 11:53:47 America/Mexico_City] Login failed for email: alexis.garcia@alpekpolyester.com, planta: 28
+[06-Mar-2025 11:55:13 America/Mexico_City] Login failed for email: alexis.garcia@alpekpolyester.com, planta: 28
+[10-Mar-2025 20:03:21 America/Argentina/Buenos_Aires] No autorizado: Jesus.Concepcion@alpekpolyester.com, planta: 15
+[11-Mar-2025 10:53:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[11-Mar-2025 10:53:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[11-Mar-2025 10:53:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[11-Mar-2025 10:53:56 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[13-Mar-2025 09:10:19 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[13-Mar-2025 09:10:19 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[13-Mar-2025 09:10:19 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[13-Mar-2025 09:10:20 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[13-Mar-2025 09:12:12 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[13-Mar-2025 09:12:12 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[13-Mar-2025 09:12:12 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[13-Mar-2025 09:12:12 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[13-Mar-2025 09:13:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[13-Mar-2025 09:13:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92
+[13-Mar-2025 09:13:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[13-Mar-2025 09:13:17 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128
+[14-Mar-2025 09:53:09 America/Argentina/Buenos_Aires] Login failed for email: jphernandez@alpekpolyester.com, planta: 28
+[14-Mar-2025 18:07:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[14-Mar-2025 18:07:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[14-Mar-2025 18:07:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[14-Mar-2025 18:07:55 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[14-Mar-2025 18:18:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[14-Mar-2025 18:18:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[14-Mar-2025 18:18:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[14-Mar-2025 18:18:37 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[14-Mar-2025 20:05:39 America/Argentina/Buenos_Aires] Login failed for email: luisglogista@gmail, planta: 15
+[17-Mar-2025 18:09:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[17-Mar-2025 18:09:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 93
+[17-Mar-2025 18:09:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
+[17-Mar-2025 18:09:01 America/Argentina/Buenos_Aires] [Error 8] Undefined offset: 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 125
