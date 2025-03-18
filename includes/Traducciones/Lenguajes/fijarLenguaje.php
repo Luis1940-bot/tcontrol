@@ -1,59 +1,85 @@
 <?php
+// ini_set('display_errors', '1');
+// ini_set('display_startup_errors', '1');
+// error_reporting(E_ALL);
+declare(strict_types=1); // Forzar uso de tipos estrictos
 mb_internal_encoding('UTF-8');
-function fijarLenguaje($id, $mi_cfg) {
+
+/**
+ * Función para actualizar el lenguaje del usuario en la base de datos.
+ *
+ * @param int $id      ID del usuario
+ * @param string $mi_cfg Configuración del lenguaje
+ */
+function fijarLenguaje(int $id, string $mi_cfg): void
+{
   try {
-    include_once BASE_DIR . "/Routes/datos_base.php";
-    // include_once $_SERVER['DOCUMENT_ROOT'].'/Routes/datos_base.php';
-    $conn = mysqli_connect($host,$user,$password,$dbname);
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
+    if (!defined('BASE_DIR')) {
+      die(json_encode(['success' => false, 'message' => 'BASE_DIR no está definido.']));
     }
+
+    if (defined('BASE_DIR')) {
+      include_once BASE_DIR . "/Routes/datos_base.php";
+    } else {
+      die(json_encode(['success' => false, 'message' => 'BASE_DIR no está definido correctamente.']));
+    }
+
+
+    if (
+      !isset($host, $user, $password, $dbname) ||
+      !is_string($host) || !is_string($user) || !is_string($password) || !is_string($dbname)
+    ) {
+      die(json_encode(['success' => false, 'message' => 'Parámetros de conexión a la base de datos no definidos.']));
+    }
+
+    $conn = mysqli_connect($host, $user, $password, $dbname);
+
+    if (!$conn) {
+      die(json_encode(['success' => false, 'message' => 'Conexión fallida: ' . mysqli_connect_error()]));
+    }
+
     $sql = "UPDATE usuario SET mi_cfg = ? WHERE idusuario = ?";
     $stmt = $conn->prepare($sql);
-    if ($stmt === false) {
-        die("Error al preparar la consulta: " . $conn->error);
+
+    if (!$stmt) {
+      die(json_encode(['success' => false, 'message' => 'Error al preparar la consulta: ' . $conn->error]));
     }
+
     $stmt->bind_param("si", $mi_cfg, $id);
-  
-    if ($stmt->execute() === true) {
-        $response = array('success' => true, 'message' => 'Se actualizo el lenguaje.');
-    } else {
-        $response = array('success' => false, 'message' => 'No se actualizo el lenguaje.');
-    }
+
+    $response = [
+      'success' => $stmt->execute(),
+      'message' => $stmt->execute() ? 'Se actualizó el lenguaje.' : 'No se actualizó el lenguaje.'
+    ];
+
     $stmt->close();
     $conn->close();
 
-      header('Content-Type: application/json');
-      echo  json_encode($response);
-    // Cerrar la declaración y la conexión
-
-    
-  } catch (\Throwable $e) {
-     print "Error!: ".$e->getMessage()."<br>";
-     die();
+    header('Content-Type: application/json');
+    echo json_encode($response);
+  } catch (Throwable $e) {
+    die(json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]));
   }
 }
 
 header("Content-Type: application/json; charset=utf-8");
-require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+require_once dirname(__DIR__, 3) . '/config.php';
+
 $datos = file_get_contents("php://input");
-// $datos = '{"leng":"br","id":5,"ruta":"/mi_cfg","rax":"&new=Fri Apr 05 2024 19:00:01 GMT-0300 (hora estándar de Argentina)"}';
 
 if (empty($datos)) {
-    $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
-    echo json_encode($response);
-    exit;
+  echo json_encode(['success' => false, 'message' => 'Faltan datos necesarios.']);
+  exit;
 }
+
 $data = json_decode($datos, true);
-// error_log('JSON response: ' . json_encode($data));
-// Verifica si la decodificación fue exitosa
-if ($data !== null) {
-  // Accede a los valores
-  $id = $data['id'];
-  $mi_cfg = 'd-'.$data['leng'];
- 
-  fijarLenguaje($id, $mi_cfg);
-} else {
-  echo "Error al decodificar la cadena JSON";
+
+if (!is_array($data) || !isset($data['id'], $data['leng']) || !is_int($data['id']) || !is_string($data['leng'])) {
+  echo json_encode(['success' => false, 'message' => 'Datos inválidos o faltantes.']);
+  exit;
 }
-?>
+
+$id = (int) $data['id'];
+$mi_cfg = 'd-' . $data['leng'];
+
+fijarLenguaje($id, $mi_cfg);
