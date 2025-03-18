@@ -1,79 +1,106 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) { session_start(); };
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+};
 header('Content-Type: text/html;charset=utf-8');
 $nonce = base64_encode(random_bytes(16));
 header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: example.com; script-src 'self' 'nonce-$nonce' cdn.example.com; style-src 'self' 'nonce-$nonce' cdn.example.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
 
-header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"); 
-header("X-Content-Type-Options: nosniff"); 
-header("X-Frame-Options: DENY"); 
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
 header("X-XSS-Protection: 1; mode=block");
 
-header("Access-Control-Allow-Origin: https://tenkiweb.com"); 
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE"); 
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); 
-header("Access-Control-Allow-Credentials: true"); 
+header("Access-Control-Allow-Origin: https://tenkiweb.com");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
 
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
 require_once dirname(dirname(__DIR__)) . '/config.php';
-
+/** @var string $baseUrl */
+$baseUrl = BASE_URL;
 // Tiempo de inactividad en segundos (12 horas)
 $inactive = 43200;
-
+$lastActivity = $_SESSION['last_activity'] ?? 0;
 // Verifica si la sesión ha estado inactiva por más de 12 horas
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $inactive) {
-    session_unset();     // Elimina los datos de sesión
-    session_destroy();   // Destruye la sesión
-    header("Location:  https://tenkiweb.com/tcontrol/index.php"); // Redirige al login o logout
-    exit();
+if (is_int($lastActivity) && (time() - $lastActivity) > $inactive) {
+  session_unset();
+  session_destroy();
+  header("Location: https://tenkiweb.com/tcontrol/index.php");
+  exit();
 }
 
 // Actualiza la última actividad
 $_SESSION['last_activity'] = time();
 
-$url = BASE_URL . "/index.php"; //*"https://tenkiweb.com/tcontrol/index.php";
-define('SSO', $_SESSION['login_sso']['sso']);
- if (isset($_SESSION['login_sso']['email'] )) {
-      define('EMAIL', $_SESSION['login_sso']['email']);
-      
-  } else {
-    if ( SSO === null || SSO === 's_sso' ) {
-      $url = BASE_URL . "/Pages/Login/index.php"; //*"https://tenkiweb.com/tcontrol/index.php";
-    }
-    //! ESTO ES NECESARIOCUANDO SE TRABAJA CON SSO
-    header("Location: ". $url ."");
-  }
+/** 
+ * @var array{
+ *     login_sso?: array{
+ *         sso?: string|null,
+ *         email?: string|null
+ *     }
+ * } $_SESSION 
+ */
 
-  if (isset($_SESSION['timezone'])) {
-    date_default_timezone_set($_SESSION['timezone']);
+$url = $baseUrl . "/index.php"; //*"https://tenkiweb.com/tcontrol/index.php";
+// Validar si 'login_sso' está definido y es un array
+if (isset($_SESSION['login_sso']) && is_array($_SESSION['login_sso'])) {
+  $sso = $_SESSION['login_sso']['sso'] ?? null;
+  $email = $_SESSION['login_sso']['email'] ?? null;
+
+  define('SSO', $sso);
+  if ($email !== null) {
+    define('EMAIL', $email);
+  } else {
+    if (SSO === null || SSO === 's_sso') {
+      $url = BASE_URL . "/Pages/Login/index.php";
+    }
+    //! ESTO ES NECESARIO CUANDO SE TRABAJA CON SSO
+    header("Location: " . $url);
+    exit; // Agregar exit para evitar continuar después de la redirección
+  }
 } else {
-    date_default_timezone_set('America/Argentina/Buenos_Aires');
+  http_response_code(400);
+  echo json_encode(['success' => false, 'message' => 'SSO no está configurado correctamente.']);
+  exit;
 }
+
+// Validar y establecer la zona horaria
+if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
+  date_default_timezone_set($_SESSION['timezone']);
+} else {
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
+
 
 ?>
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
+
 <head>
   <meta charset='UTF-8'>
   <meta name='description'>
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type = 'image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
-  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/Consultas/consults.css?v=<?php echo(time()); ?>' media='screen'>
-  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo(time()); ?>' media='screen'>
+  <link rel='shortcut icon' type='image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/Consultas/consults.css?v=<?php echo (time()); ?>' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo (time()); ?>' media='screen'>
   <title></title>
+  <script src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
 </head>
+
 <body>
   <div class="spinner"></div>
   <header>
-    
+
     <?php
-      include_once('../../includes/molecules/header.php');
-      include_once('../../includes/molecules/encabezado.php');
-      include_once('../../includes/molecules/whereUs.php');
-      
+    include_once('../../includes/molecules/header.php');
+    include_once('../../includes/molecules/encabezado.php');
+    include_once('../../includes/molecules/whereUs.php');
+
     ?>
   </header>
   <main>
@@ -83,10 +110,11 @@ define('SSO', $_SESSION['login_sso']['sso']);
   </main>
   <footer>
     <?php
-      include_once('../../includes/molecules/footer.php');
+    include_once('../../includes/molecules/footer.php');
     ?>
   </footer>
-  <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo(time()); ?>'></script>
-  <script type='module' src='<?php echo BASE_URL ?>/Pages/Consultas/consults.js?v=<?php echo(time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo (time()); ?>'></script>
+  <script type='module' src='<?php echo BASE_URL ?>/Pages/Consultas/consults.js?v=<?php echo (time()); ?>'></script>
 </body>
+
 </html>

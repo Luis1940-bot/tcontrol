@@ -1,84 +1,86 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
-import readJSON from '../../controllers/read-JSON.js'
+import readJSON from '../../controllers/read-JSON.js';
 // eslint-disable-next-line import/extensions
-import createButton from '../../includes/atoms/createButton.js'
+import createButton from '../../includes/atoms/createButton.js';
 
 // eslint-disable-next-line import/extensions
-import personModal from '../../controllers/person.js'
+import personModal from '../../controllers/person.js';
 // eslint-disable-next-line import/extensions
 import {
   inicioPerformance,
   finPerformance,
-} from '../../includes/Conection/conection.js'
+} from '../../includes/Conection/conection.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { desencriptar, encriptar } from '../../controllers/cript.js'
+import { desencriptar, encriptar } from '../../controllers/cript.js';
 
-import baseUrl from '../../config.js'
-import { configPHP } from '../../controllers/configPHP.js'
-import { trO, trA } from '../../controllers/trOA.js'
-import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
-import Alerta from '../../includes/atoms/alerta.js'
-import arrayGlobal from '../../controllers/variables.js'
-import LogOut from '../../controllers/logout.js'
-const SERVER = baseUrl
-let objTranslate = []
+import baseUrl from '../../config.js';
+import { configPHP } from '../../controllers/configPHP.js';
+import { trO, trA } from '../../controllers/trOA.js';
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
+import Alerta from '../../includes/atoms/alerta.js';
+import arrayGlobal from '../../controllers/variables.js';
+import LogOut from '../../controllers/logout.js';
+import { mostrarMensajeError } from '../../controllers/utils.js';
 
-const spinner = document.querySelector('.spinner')
-const objButtons = {}
+const SERVER = baseUrl;
+let objTranslate = [];
+
+const spinner = document.querySelector('.spinner');
+const objButtons = {};
 const navegador = {
   estadoAnteriorButton: '',
   estadoAnteriorWhereUs: [],
-}
+};
 
-const espacio = ' > '
+const espacio = ' > ';
 
 function leeVersion(json) {
   readJSON(json)
     .then((data) => {
-      document.querySelector('.version').innerText = data.version
+      document.querySelector('.version').innerText = data.version;
     })
-    .catch((error) => {
+    .catch(() => {
       // eslint-disable-next-line no-console
-      // console.error('Error al cargar el archivo:', error)
-      const miAlerta = new Alerta()
-      const obj = arrayGlobal.avisoRojo
+      // console.error('Error al cargar el archivo:', error);
+      const miAlerta = new Alerta();
+      const obj = arrayGlobal.avisoRojo;
       const texto =
         trO('Error al cargar el archivo.', objTranslate) ||
-        'Error al cargar el archivo.'
-      miAlerta.createVerde(obj, texto, objTranslate)
-      const modal = document.getElementById('modalAlertVerde')
-      modal.style.display = 'block'
-    })
+        'Error al cargar el archivo.';
+      miAlerta.createVerde(obj, texto, objTranslate);
+      const modal = document.getElementById('modalAlertVerde');
+      modal.style.display = 'block';
+    });
 }
 
 function localizador(e) {
-  const lugar = trO(e.target.innerText, objTranslate) || e.target.innerText
-  document.getElementById('whereUs').innerText += `${espacio}${lugar}`
-  let textContent = document.getElementById('whereUs').textContent
-  textContent = textContent.replace('<br>', '')
-  document.getElementById('whereUs').innerText = textContent
-  document.getElementById('volver').style.display = 'block'
-  document.getElementById('whereUs').style.display = 'inline'
-  navegador.estadoAnteriorButton = e.target.name
-  navegador.estadoAnteriorWhereUs.push(e.target.name)
+  const lugar = trO(e.target.innerText, objTranslate) || e.target.innerText;
+  document.getElementById('whereUs').innerText += `${espacio}${lugar}`;
+  let { textContent } = document.getElementById('whereUs');
+  textContent = textContent.replace('<br>', '');
+  document.getElementById('whereUs').innerText = textContent;
+  document.getElementById('volver').style.display = 'block';
+  document.getElementById('whereUs').style.display = 'inline';
+  navegador.estadoAnteriorButton = e.target.name;
+  navegador.estadoAnteriorWhereUs.push(e.target.name);
 }
 
 function dondeEstaEn() {
-  let lugar = trO('Consultas', objTranslate) || 'Consultas'
-  lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`
-  document.getElementById('whereUs').innerHTML = lugar
-  document.getElementById('whereUs').style.display = 'inline'
-  document.getElementById('volver').style.display = 'block'
+  let lugar = trO('Consultas', objTranslate) || 'Consultas';
+  lugar = `<img src='${SERVER}/assets/img/icons8-brick-wall-50.png' height='10px' width='10px'> ${lugar}`;
+  document.getElementById('whereUs').innerHTML = lugar;
+  document.getElementById('whereUs').style.display = 'inline';
+  document.getElementById('volver').style.display = 'block';
 }
 
 function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
   try {
     if (procedure) {
-      let timestamp = new Date().getTime()
+      const timestamp = new Date().getTime();
       // const ruta = `../../Pages/ConsultasViews/viewsGral.php?v=${Math.round(
       //   Math.random() * 10
       // )}`
-      const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=consultasViews&v=${timestamp}`
+      const ruta = `${SERVER}/Pages/Router/rutas.php?ruta=consultasViews&v=${timestamp}`;
       let contenido = {
         name,
         confecha,
@@ -86,47 +88,69 @@ function llamarProcedure(name, confecha, ini, outi, procedure, operation) {
         outi,
         procedure,
         operation,
-      }
-      contenido = encriptar(contenido)
-      sessionStorage.setItem('procedure', contenido)
+      };
+      contenido = encriptar(contenido);
+      sessionStorage.setItem('procedure', contenido);
       // window.open(ruta, '_blank')
-      window.location.href = ruta
+      window.location.href = ruta;
     }
   } catch (error) {
-    console.log(error)
+    // console.log(error);
   }
 }
+
+const funcionDeClick = (e) => {
+  const claveBuscada = e.target.name;
+  const tipoValue = e.target.getAttribute('tipo');
+  const persona = desencriptar(sessionStorage.getItem('user'));
+  const quienEs = document.getElementById('spanPerson');
+  quienEs.innerText = persona.person;
+  const tipodeusuario = parseInt(persona.tipo, 10);
+  if (tipoValue === '1') {
+    localizador(e);
+    // eslint-disable-next-line no-use-before-define
+    completaButtons(claveBuscada, tipodeusuario);
+  } else if (tipoValue === '0') {
+    const procedure = e.target.getAttribute('procedure');
+    const name = e.target.getAttribute('name');
+    const ini = e.target.getAttribute('ini');
+    const outi = e.target.getAttribute('outi');
+    const confecha = e.target.getAttribute('confecha');
+    const operation = e.target.getAttribute('operation');
+    llamarProcedure(name, confecha, ini, outi, procedure, operation);
+  }
+};
 
 /* eslint-enable no-use-before-define */
 function completaButtons(obj, tipodeusuario) {
   if (!obj) {
-    return
+    return;
   }
-  const divButtons = document.querySelector('.div-consultas-buttons')
-  divButtons.innerHTML = ''
+  const divButtons = document.querySelector('.div-consultas-buttons');
+  divButtons.innerHTML = '';
   // document.getElementById('spanUbicacion').innerText = objButtons.planta
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < objButtons[obj].name.length; i++) {
-    let aprobado = true
+    let aprobado = true;
     if (tipodeusuario < objButtons[obj].nivel[i]) {
-      aprobado = false
+      aprobado = false;
     }
-    const element = objButtons[obj].name[i]
-    const active = objButtons[obj].active[i]
-    let procedure,
-      ini,
-      outi,
-      confecha = null,
-      operation = null
-    const boton = objButtons[obj].button[i]
+    const element = objButtons[obj].name[i];
+    const active = objButtons[obj].active[i];
+    let procedure;
+    let ini;
+    let outi;
+    let confecha = null;
+    let operation = null;
+    const boton = objButtons[obj].button[i];
     if (boton === 0) {
-      procedure = objButtons[obj].procedure[i]
-      ini = JSON.stringify(objButtons[obj].in[i])
-      outi = JSON.stringify(objButtons[obj].out[i])
-      confecha = objButtons[obj].confecha[i]
-      operation = objButtons[obj].operation[i]
+      procedure = objButtons[obj].procedure[i];
+      ini = JSON.stringify(objButtons[obj].in[i]);
+      outi = JSON.stringify(objButtons[obj].out[i]);
+      confecha = objButtons[obj].confecha[i];
+      operation = objButtons[obj].operation[i];
     }
-    const name = objButtons[obj].name[i]
+    const name = objButtons[obj].name[i];
     const params = {
       text: trA(element, objTranslate) || element,
       name,
@@ -153,112 +177,103 @@ function completaButtons(obj, tipodeusuario) {
       outi,
       operation,
       onClick: funcionDeClick,
-    }
+    };
     if (active === 1 && aprobado) {
-      const newButton = createButton(params)
-      divButtons.appendChild(newButton)
+      const newButton = createButton(params);
+      divButtons.appendChild(newButton);
     }
-  }
-}
-
-const funcionDeClick = (e) => {
-  const claveBuscada = e.target.name
-  const tipoValue = e.target.getAttribute('tipo')
-  const persona = desencriptar(sessionStorage.getItem('user'))
-  const tipodeusuario = parseInt(persona.tipo)
-  if (tipoValue === '1') {
-    localizador(e)
-    completaButtons(claveBuscada, tipodeusuario)
-  } else if (tipoValue === '0') {
-    const procedure = e.target.getAttribute('procedure')
-    const name = e.target.getAttribute('name')
-    const ini = e.target.getAttribute('ini')
-    const outi = e.target.getAttribute('outi')
-    const confecha = e.target.getAttribute('confecha')
-    const operation = e.target.getAttribute('operation')
-    llamarProcedure(name, confecha, ini, outi, procedure, operation)
   }
 }
 
 function leeApp(json, complit, tipodeusuario) {
   readJSON(json)
     .then((data) => {
-      Object.assign(objButtons, data)
-      navegador.estadoAnteriorButton = 'Consultas'
-      navegador.estadoAnteriorWhereUs.push('Consultas')
-      document.getElementById('spanUbicacion').innerText = objButtons.planta
-      complit ? completaButtons('Consultas', tipodeusuario) : null
+      Object.assign(objButtons, data);
+      navegador.estadoAnteriorButton = 'Consultas';
+      navegador.estadoAnteriorWhereUs.push('Consultas');
+      document.getElementById('spanUbicacion').innerText = objButtons.planta;
+      complit ? completaButtons('Consultas', tipodeusuario) : null;
     })
-    .catch((error) => {
+    .catch(() => {
       // eslint-disable-next-line no-console
       // console.error('Error al cargar el archivo:', error)
-      const miAlerta = new Alerta()
-      const obj = arrayGlobal.avisoRojo
+      const miAlerta = new Alerta();
+      const obj = arrayGlobal.avisoRojo;
       const texto =
         trO('Error al cargar el archivo.', objTranslate) ||
-        'Error al cargar el archivo.'
-      miAlerta.createVerde(obj, texto, objTranslate)
-      const modal = document.getElementById('modalAlertVerde')
-      modal.style.display = 'block'
-    })
+        'Error al cargar el archivo.';
+      miAlerta.createVerde(obj, texto, objTranslate);
+      const modal = document.getElementById('modalAlertVerde');
+      modal.style.display = 'block';
+    });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const user = desencriptar(sessionStorage.getItem('user'))
-  const { plant } = user
+  const user = desencriptar(sessionStorage.getItem('user'));
+  const { plant } = user;
 
-  inicioPerformance()
-  configPHP(user, SERVER)
-  spinner.style.visibility = 'visible'
+  inicioPerformance();
+  configPHP(user, SERVER);
+  spinner.style.visibility = 'visible';
 
-  const hamburguesa = document.querySelector('#hamburguesa')
-  hamburguesa.style.display = 'none'
-  document.querySelector('.header-McCain').style.display = 'none'
-  document.querySelector('.div-encabezado').style.marginTop = '5px'
+  const hamburguesa = document.querySelector('#hamburguesa');
+  hamburguesa.style.display = 'none';
+  document.querySelector('.header-McCain').style.display = 'none';
+  document.querySelector('.div-encabezado').style.marginTop = '5px';
 
-  const persona = desencriptar(sessionStorage.getItem('user'))
+  const persona = desencriptar(sessionStorage.getItem('user'));
+
+  // ✅ Declarar la función antes del `if`
+  async function iniciarAplicacion(tipodeusuario) {
+    objTranslate = await arraysLoadTranslate();
+    dondeEstaEn();
+    await leeApp(`App/${plant}/app`, false, tipodeusuario);
+    await leeApp(`consultas/${plant}/app`, true, tipodeusuario);
+
+    spinner.style.visibility = 'hidden';
+    finPerformance();
+  }
+
   if (persona) {
     document.querySelector('.custom-button').innerText =
-      persona.lng.toUpperCase()
-    await leeVersion('version')
-    const tipodeusuario = parseInt(persona.tipo)
+      persona.lng.toUpperCase();
+    await leeVersion('version');
+    const tipodeusuario = parseInt(persona.tipo, 10);
 
-    async function iniciarAplicacion() {
-      objTranslate = await arraysLoadTranslate()
-      dondeEstaEn()
-      await leeApp(`App/${plant}/app`, false, tipodeusuario)
-      await leeApp(`consultas/${plant}/app`, true, tipodeusuario)
-
-      spinner.style.visibility = 'hidden'
-      finPerformance()
-    }
-
-    requestAnimationFrame(iniciarAplicacion)
+    // ✅ Ahora la función ya está definida antes de usarla
+    requestAnimationFrame(() => iniciarAplicacion(tipodeusuario));
   } else {
-    spinner.style.visibility = 'hidden'
-    finPerformance()
+    spinner.style.visibility = 'hidden';
+    finPerformance();
   }
-})
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-  const person = document.getElementById('person')
+  const person = document.getElementById('person');
   person.addEventListener('click', () => {
-    person.style.border = '3px solid #212121'
-    person.style.background = '#212121'
-    person.style.borderRadius = '10px 10px 0px 0px'
-    const persona = desencriptar(sessionStorage.getItem('user'))
+    person.style.border = '3px solid #212121';
+    person.style.background = '#212121';
+    person.style.borderRadius = '10px 10px 0px 0px';
+    const persona = desencriptar(sessionStorage.getItem('user'));
     const user = {
       person: persona.person,
       home: 'Inicio',
       salir: trO('Cerrar sesión', objTranslate),
-    }
-    personModal(user, objTranslate)
-  })
-  setTimeout(function () {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.')
-    LogOut()
-  }, 43200000 - 300000)
-})
+    };
+    personModal(user, objTranslate);
+  });
+  setTimeout(() => {
+    mostrarMensajeError(
+      'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+    );
+    LogOut();
+  }, 43200000 - 300000);
+});
+
+function goMenu() {
+  const url = `${SERVER}/Pages/Menu`;
+  window.location.href = url;
+}
 
 function goBack() {
   try {
@@ -266,65 +281,59 @@ function goBack() {
       navegador.estadoAnteriorWhereUs[
         navegador.estadoAnteriorWhereUs.length - 1
       ]
-    }`
+    }`;
 
-    navegador.estadoAnteriorWhereUs.pop()
+    navegador.estadoAnteriorWhereUs.pop();
     navegador.estadoAnteriorButton =
       navegador.estadoAnteriorWhereUs[
         navegador.estadoAnteriorWhereUs.length - 1
-      ]
+      ];
     const clave =
       navegador.estadoAnteriorWhereUs[
         navegador.estadoAnteriorWhereUs.length - 1
-      ]
+      ];
 
     // console.log(navegador.estadoAnteriorButton)
     // console.log(navegador.estadoAnteriorWhereUs)
     // console.log(navegador.estadoAnteriorWhereUs.length)
-    completaButtons(clave)
-    const cadena = `${document.getElementById('whereUs').innerText}`
-    quitarCadena = quitarCadena.replace('>', '')
-    quitarCadena = trO(quitarCadena, objTranslate) || quitarCadena
-    let nuevaCadena = cadena.replace(quitarCadena, '')
-    const ultimoIndice = nuevaCadena.lastIndexOf('>')
+    completaButtons(clave);
+    const cadena = `${document.getElementById('whereUs').innerText}`;
+    quitarCadena = quitarCadena.replace('>', '');
+    quitarCadena = trO(quitarCadena, objTranslate) || quitarCadena;
+    let nuevaCadena = cadena.replace(quitarCadena, '');
+    const ultimoIndice = nuevaCadena.lastIndexOf('>');
     if (ultimoIndice === -1) {
-      goMenu()
+      goMenu();
     }
     nuevaCadena =
-      nuevaCadena.slice(0, ultimoIndice) + nuevaCadena.slice(ultimoIndice + 1)
+      nuevaCadena.slice(0, ultimoIndice) + nuevaCadena.slice(ultimoIndice + 1);
     if (clave === 'Consultas') {
-      dondeEstaEn()
-      return
+      dondeEstaEn();
+      return;
     }
-    document.getElementById('whereUs').innerText = `${nuevaCadena}`
-    let textContent = document.getElementById('whereUs').textContent
-    textContent = textContent.replace('<br>', '')
-    document.getElementById('whereUs').innerText = textContent
+    document.getElementById('whereUs').innerText = `${nuevaCadena}`;
+    let { textContent } = document.getElementById('whereUs');
+    textContent = textContent.replace('<br>', '');
+    document.getElementById('whereUs').innerText = textContent;
   } catch (error) {
-    console.log(error)
+    // console.log(error);
   }
 }
 
-const volver = document.getElementById('volver')
+const volver = document.getElementById('volver');
 volver.addEventListener('click', () => {
-  goBack(null)
-})
+  goBack(null);
+});
 
-const goLanding = document.querySelector('.custom-button')
+const goLanding = document.querySelector('.custom-button');
 goLanding.addEventListener('click', () => {
-  const url = `${SERVER}/Pages/Landing`
-  window.location.href = url
-})
-
-function goMenu() {
-  const url = `${SERVER}/Pages/Menu`
-  window.location.href = url
-  return
-}
+  const url = `${SERVER}/Pages/Landing`;
+  window.location.href = url;
+});
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    event.preventDefault()
-    goMenu()
+    event.preventDefault();
+    goMenu();
   }
-})
+});
