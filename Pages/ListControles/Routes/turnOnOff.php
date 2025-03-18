@@ -1,140 +1,176 @@
 <?php
+// ini_set('display_errors', '1');
+// ini_set('display_startup_errors', '1');
+// error_reporting(E_ALL);
 mb_internal_encoding('UTF-8');
 require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
-if (isset($_SESSION['timezone'])) {
-    date_default_timezone_set($_SESSION['timezone']);
+/** 
+ * @var array{timezone?: string} $_SESSION 
+ */
+if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
+  date_default_timezone_set($_SESSION['timezone']);
 } else {
-    date_default_timezone_set('America/Argentina/Buenos_Aires');
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
 
-function actualizar($target, $plantx) {
+/**
+ * @return array{success: bool, actualizado?: array<int|string, mixed>, message?: string}
+ */
 
-      require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
-      include_once BASE_DIR . "/Routes/datos_base.php";
+function actualizar(string $target, int $plantx): array
+{
+  require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+  /** @var string $baseDir */
+  $baseDir = BASE_DIR;
+  include_once $baseDir . "/Routes/datos_base.php";
+  include_once $baseDir .  "/Pages/ListControles/Routes/traerLTYcontrol.php";
+  $response = ['success' => false, 'message' => 'Error desconocido.']; // Valor por defecto
 
-    try {
-    // $host = "68.178.195.199"; 
-    // $user = "developers";
-    // $password = "6vLB#Q0bOVo4";
-    // $dbname = "tc1000";
-      // Verificar si las variables de conexión están definidas
-      if (!isset($host, $user, $password, $dbname)) {
-          die("Variables de conexión no definidas.");
-      }
-      // var_dump($target);
-      $id = $target['item'];
-      $column = $target['column'];
-      $valor = $target['valor'];
-      $param = $target['param'];
-      $operation = $target['operation'];
-      $idLTYcliente = $plantx;
-      $arrayCampo = ['reporte', 'id', 'control', 'nombre', 'tipodato', 'detalle', 'activo', 'requerido', 'visible', 'enable1', 'orden', 'separador', 'ok', 'valor_defecto', 'selector', 'tiene_hijo', 'rutina_hijo', 'valor_sql', 'tpdeobserva', 'selector2', 'valor_defecto22', 'sql_valor_defecto22', 'rutinasql', 'idLTYreporte', 'tipoDatoDetalle', 'idLTYcliente'];
+  try {
+    /** @var string $charset */
+    /** @var string $dbname */
+    /** @var string $host */
+    /** @var int $port */
+    /** @var string $password */
+    /** @var string $user */
+    /** @var PDO $pdo */
+    $host = "34.174.211.66";
+    $user = "uumwldufguaxi";
+    $password = "5lvvumrslp0v";
+    $dbname = "db5i8ff3wrjzw3";
+    $port = 3306;
+    $charset = "utf8mb4";
 
-      // Verificar si el índice existe en el array
-      if (!isset($arrayCampo[$column])) {
-          die("Índice de columna no válido.");
-      }
-
-      $campo = $arrayCampo[$column];
-
-      $conn = mysqli_connect($host,$user,$password,$dbname);
-      if (!$conn) {
-          die("Conexión fallida: " . mysqli_connect_error());
-      }
-      mysqli_query ($conn,"SET NAMES 'utf8'");
-      
-
-      // if ($conn->connect_error) {
-      //     die("Conexión fallida: " . $conn->connect_error);
-      // }
-
-      $sql = "UPDATE LTYcontrol SET " . $campo . " = ? WHERE idLTYcontrol = ? ";
-    
-      $stmt = $conn->prepare($sql);
-      if ($stmt === false) {
-          die("Error al preparar la consulta: " . $conn->error);
-      }
-
-      if ($operation === 'turnOnOff') {
-         $stmt->bind_param( $param . "i", $valor , $id);
-        if ($stmt->execute() === true) {
-        
-            $actualizadoJson = traerControlActualizado($conn, $idLTYcliente);
-
-            if ($actualizadoJson) {
-                $actualizadoArray = json_decode($actualizadoJson, true);
-
-                // Verificar si el JSON decodificado es válido y contiene datos
-                if ($actualizadoArray && isset($actualizadoArray['success']) && $actualizadoArray['success'] === true) {
-                    $response = array('success' => true, 'actualizado' => $actualizadoArray['data']);
-                } else {
-                    $response = array('success' => false, 'actualizado' => false, 'message' => 'Error al actualizar los datos.');
-                }
-            } else {
-                $response = array('success' => false, 'actualizado' => false, 'message' => 'No se pudo obtener la respuesta actualizada.');
-            }
-            // $response = array('success' => true, 'actualizado' => $actualizado);
-        } else {
-            $response = array('success' => false, 'message' => 'No se actualizo la situación del concepto de la variable.');
-        }
-      }
-      if ($operation === 'upDown') {
-        $resultado = false;
-        foreach ($valor as  $value) {
-          $id = $value['id'];
-          $orden = $value['orden']; 
-          $stmt->bind_param( $param . "i", $orden , $id);
-          if ($stmt->execute() === true) {
-              $resultado = true;
-          } else {
-              $response = array('success' => false, 'message' => 'No se actualizo la situación del concepto de la variable.');
-              break;
-          }
-        }
-        if ($resultado) {
-          // $actualizado = traerControlActualizado($conn, $idLTYcliente);
-          // $response = array('success' => true, 'actualizado' => $actualizado);
-                      $actualizadoJson = traerControlActualizado($conn, $idLTYcliente);
-
-            if ($actualizadoJson) {
-                $actualizadoArray = json_decode($actualizadoJson, true);
-
-                // Verificar si el JSON decodificado es válido y contiene datos
-                if ($actualizadoArray && isset($actualizadoArray['success']) && $actualizadoArray['success'] === true) {
-                    $response = array('success' => true, 'actualizado' => $actualizadoArray['data']);
-                } else {
-                    $response = array('success' => false, 'actualizado' => false, 'message' => 'Error al actualizar los datos.');
-                }
-            } else {
-                $response = array('success' => false, 'actualizado' => false, 'message' => 'No se pudo obtener la respuesta actualizada.');
-            }
-          
-        }
-      }
-
-
-      $stmt->close();
-      $conn->close();
-      
-        // header('Content-Type: application/json');
-        echo  json_encode($response);
-      // Cerrar la declaración y la conexión
-      
-      
-    } catch (\Throwable $e) {
-       error_log("Error en on off en campo: " . $e);
-      print "Error!: ".$e->getMessage()."<br>";
-      die();
+    // 🔹 Decodificar `$target` como JSON
+    $targetArray = json_decode($target, true);
+    if (!is_array($targetArray)) {
+      return ['success' => false, 'message' => 'Error: `$target` debe ser un JSON válido.'];
     }
+
+    // 🔹 Asegurar que los valores existen y son del tipo correcto
+    $id = $targetArray['item'] ?? null;
+    $column = $targetArray['column'] ?? null;
+    $valor = $targetArray['valor'] ?? null;
+    $param = $targetArray['param'] ?? null;
+    $operation = $targetArray['operation'] ?? null;
+    $idLTYcliente = $plantx;
+
+    $arrayCampo = [
+      'reporte',
+      'id',
+      'control',
+      'nombre',
+      'tipodato',
+      'detalle',
+      'activo',
+      'requerido',
+      'visible',
+      'enable1',
+      'orden',
+      'separador',
+      'ok',
+      'valor_defecto',
+      'selector',
+      'tiene_hijo',
+      'rutina_hijo',
+      'valor_sql',
+      'tpdeobserva',
+      'selector2',
+      'valor_defecto22',
+      'sql_valor_defecto22',
+      'rutinasql',
+      'idLTYreporte',
+      'tipoDatoDetalle',
+      'idLTYcliente'
+    ];
+
+    if (!isset($arrayCampo[$column])) {
+      return ['success' => false, 'message' => 'Índice de columna inválido.'];
+    }
+
+    $campo = $arrayCampo[$column];
+
+    // 🔹 Conexión a la base de datos
+    $conn = mysqli_connect($host, $user, $password, $dbname);
+    if (!$conn) {
+      return ['success' => false, 'message' => 'Error en la conexión a la base de datos.'];
+    }
+    mysqli_query($conn, "SET NAMES 'utf8'");
+
+    $sql = "UPDATE LTYcontrol SET " . $campo . " = ? WHERE idLTYcontrol = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+      return ['success' => false, 'message' => 'Error al preparar la consulta.'];
+    }
+
+    // 🔹 Manejo de operación "turnOnOff"
+    if ($operation === 'turnOnOff') {
+      $param = is_string($param) ? $param : '';
+      $stmt->bind_param($param . "i", $valor, $id);
+      if ($stmt->execute()) {
+
+        $actualizado = traerControlActualizado($conn, $idLTYcliente);
+        /** @var array{success: bool, data: string} $actualizadoArray */
+        $actualizadoArray = json_decode($actualizado, true);
+        $actualizadoArray = $actualizadoArray['data'];
+        $response = array('success' => true, 'actualizado' => $actualizadoArray);
+      } else {
+        $response = ['success' => false, 'message' => 'No se actualizó la variable.'];
+      }
+    }
+
+    // 🔹 Manejo de operación "upDown"
+    elseif ($operation === 'upDown') {
+      $resultado = false;
+      if (!is_array($valor)) {
+        return ['success' => false, 'message' => 'Error: `$valor` debe ser un array válido.'];
+      }
+
+      /** @var array<int, array{id: int, orden: int}> $valor */
+      foreach ($valor as $value) {
+        $param = is_string($param) ? $param : '';
+        $stmt->bind_param($param . "i", $value['orden'], $value['id']);
+        if ($stmt->execute()) {
+          $resultado = true;
+        } else {
+          return ['success' => false, 'message' => 'No se pudo actualizar la variable.'];
+        }
+      }
+
+      if ($resultado) {
+        $actualizado = traerControlActualizado($conn, $idLTYcliente);
+        $actualizadoArray = json_decode($actualizado, true);
+
+        $actualizado = traerControlActualizado($conn, $idLTYcliente);
+        /** @var array{success: bool, data: string} $actualizadoArray */
+        $actualizadoArray = json_decode($actualizado, true);
+        $actualizadoArray = $actualizadoArray['data'];
+        $response = array('success' => true, 'actualizado' => $actualizadoArray);
+      }
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    // 🔹 Retornar JSON válido al cliente
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    exit;
+  } catch (\Throwable $e) {
+    error_log("Error en actualizar(): " . $e->getMessage());
+    return ['success' => false, 'message' => 'Error al actualizar los datos.'];
+  }
 }
+
 
 
 header("Content-Type: application/json; charset=utf-8");
-include('traerLTYcontrol.php');
+
 // require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 $datos = file_get_contents("php://input");
-// $datos = '{"q":{"item":"6785","column":24,"valor":"checkhour","param":"s","id":"14","operation":"turnOnOff"},"ruta":"/turnOnOff","rax":"&new=Tue Dec 17 2024 08:51:13 GMT-0300 (hora estándar de Argentina)","sql_i":15}';
+// $datos = '{"q":{"item":"7813","column":14,"valor":10,"param":"i","id":"212","operation":"turnOnOff"},"ruta":"/turnOnOff","rax":"&new=Mon Feb 24 2025 15:44:08 GMT-0600 (hora estándar central)","sqlI":15}'; //campo
+// $datos = '{"q":{"item":"7808","column":4,"valor":"t","param":"s","id":"14","operation":"turnOnOff"},"ruta":"/turnOnOff","rax":"&new=Sun Feb 02 2025 20:20:40 GMT-0300 (hora estándar de Argentina)","sqlI":15}';//tipodedato
+// $datos = '{"q":{"item":"7808","column":"10","valor":[{"id":"70","orden":3},{"id":"71","orden":4},{"id":"72","orden":5},{"id":"73","orden":6},{"id":"75","orden":7},{"id":"74","orden":8},{"id":"82","orden":9},{"id":"83","orden":10},{"id":"76","orden":11},{"id":"81","orden":12},{"id":"84","orden":13},{"id":"85","orden":14},{"id":"86","orden":15},{"id":"87","orden":16},{"id":"88","orden":17},{"id":"89","orden":18},{"id":"90","orden":19},{"id":"459","orden":20},{"id":"460","orden":21},{"id":"6697","orden":22},{"id":"6698","orden":23},{"id":"6784","orden":24},{"id":"6785","orden":25},{"id":"6889","orden":26},{"id":"6921","orden":27},{"id":"7801","orden":28},{"id":"7802","orden":29},{"id":"7805","orden":29},{"id":"7806","orden":29},{"id":"7807","orden":29},{"id":"69","orden":30},{"id":"7803","orden":31},{"id":"7808","orden":30}],"param":"i","id":"14","operation":"upDown"},"ruta":"/turnOnOff","rax":"&new=Mon Feb 03 2025 10:06:58 GMT-0300 (hora estándar de Argentina)","sqlI":15}';
 
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
@@ -143,13 +179,21 @@ if (empty($datos)) {
 }
 $data = json_decode($datos, true);
 
-// error_log('Pages/ListControles/Routes/turnOnOff-JSON response: ' . json_encode($data));
+if (is_array($data) && isset($data['q'], $data['sqlI'])) {
+  $target = json_encode($data['q']);
 
-if ($data !== null) {
-  $target = $data['q'];
-  $plantx = $data['sql_i'];
-  actualizar($target, $plantx);
+  if ($target === false) {
+    echo json_encode(['success' => false, 'message' => 'Error al convertir `$target` a JSON.']);
+    exit;
+  }
+
+  $plantx = filter_var($data['sqlI'], FILTER_VALIDATE_INT);
+
+  if ($plantx !== false) {
+    actualizar($target, $plantx);
+  } else {
+    echo json_encode(['success' => false, 'message' => "'sqlI' no es un número válido."]);
+  }
 } else {
-  echo "Error al decodificar la cadena JSON";
+  echo json_encode(['success' => false, 'message' => 'Error al decodificar la cadena JSON o datos faltantes.']);
 }
-?>

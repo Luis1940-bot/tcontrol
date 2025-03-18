@@ -1,14 +1,21 @@
 <?php
+// ini_set('display_errors', '1');
+// ini_set('display_startup_errors', '1');
+// error_reporting(E_ALL);
 mb_internal_encoding('UTF-8');
 ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
-if (isset($_SESSION['timezone'])) {
-    date_default_timezone_set($_SESSION['timezone']);
+/** 
+ * @var array{timezone?: string} $_SESSION 
+ */
+if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
+  date_default_timezone_set($_SESSION['timezone']);
 } else {
-    date_default_timezone_set('America/Argentina/Buenos_Aires');
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
 
-function traerControlActualizado($conn, $plant) {
-    $sql = "SELECT 
+function traerControlActualizado(mysqli $conn, int $plant): string
+{
+  $sql = "SELECT 
                 UPPER(rep.nombre) AS reporte,
                 IFNULL(con.idLTYcontrol, '') AS id,
                 IFNULL(con.control, '') AS control,
@@ -36,67 +43,66 @@ function traerControlActualizado($conn, $plant) {
                 IFNULL(con.tipoDatoDetalle, '') AS tipoDatoDetalle
             FROM LTYreporte rep
             LEFT JOIN LTYcontrol con ON con.idLTYreporte = rep.idLTYreporte
-            WHERE rep.activo = 's' AND rep.idLTYcliente = " . $plant . "
+            WHERE rep.activo = 's' AND rep.idLTYcliente = ?
             ORDER BY rep.nombre ASC, con.orden ASC;";
-    
-    try {
-     
-        
-        // mysqli_set_charset($conn, 'utf8mb4');
-        // mysqli_query ($conn,"SET NAMES 'utf8'");
-        // mysqli_select_db($conn,$dbname);
-        $result = mysqli_query($conn, $sql);
-        if (!$result) {
-            throw new Exception("Error en la consulta SQL: " . mysqli_error($conn));
-        }
 
-        $arr_customers = [];
-        // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        //     $arr_customers[] = $row; //mb_convert_encoding($row, 'UTF-8', 'auto');
-        // }
-        $cantidadcampos = mysqli_num_fields($result);
-        $contador = 0;
-        while($row=mysqli_fetch_array($result)) {
-            
-            //******************************************** */
-            for ($x = 0; $x <= $cantidadcampos-1; $x++) {
-                $sincorchetes=$row[$x];
-                $arr_customers[$contador][$x] = $row[$x];
-            }
-            $contador++;
-        }
-           
-        $json = json_encode(array('success' => true, 'data' => json_encode($arr_customers)), JSON_UNESCAPED_UNICODE);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception("Error al codificar JSON: " . json_last_error_msg());
-        }
-    
-        return $json;
-
-    } catch (Exception $e) {
-       error_log("Error al traer control. Error: " . $e);
-        $errorJson = json_encode(array('success' => false, 'message' => $e->getMessage()));
-        // echo $errorJson;
-        return $errorJson;
+  try {
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+      throw new Exception("Error al preparar la consulta: " . $conn->error);
     }
-}
 
+    // ✅ Usar `bind_param` para evitar inyección SQL
+    $stmt->bind_param("i", $plant);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (!$result) {
+      throw new Exception("Error en la consulta SQL: " . $conn->error);
+    }
+
+    $arr_customers = [];
+    $cantidadcampos = mysqli_num_fields($result);
+
+    $contador = 0;
+    while ($row = mysqli_fetch_array($result)) {
+      //******************************************** */
+      for ($x = 0; $x <= $cantidadcampos - 1; $x++) {
+        $sincorchetes = $row[$x];
+        $arr_customers[$contador][$x] = $row[$x];
+      }
+      $contador++;
+    }
+
+    $stmt->close();
+
+
+    $json = json_encode(array('success' => true, 'data' => json_encode($arr_customers)), JSON_UNESCAPED_UNICODE);
+
+    return $json !== false ? $json : '{"success":false,"message":"Error desconocido al codificar JSON"}';
+  } catch (Exception $e) {
+    $errorJson = json_encode(['success' => false, 'message' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+    return $errorJson !== false ? $errorJson : '{"success":false,"message":"Error desconocido al codificar JSON"}';
+  }
+}
 if (isset($_POST['traerLTYcontrol']) && $_POST['traerLTYcontrol'] === true) {
-    header("Content-Type: application/json;charset=utf-8");
-    // require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
-    // include_once BASE_DIR . "/Routes/datos_base.php";
-    // $conn = mysqli_connect($host, $user, $password, $dbname);
-    // mysqli_query ($conn,"SET NAMES 'utf8'");
-    // mysqli_select_db($conn,$dbname);
-    if (!$conn) {
-        die('Could not connect: ' . mysqli_error($con));
-    };
+  header("Content-Type: application/json;charset=utf-8");
 
-    if ($conn && !$conn->connect_error) {
-         traerControlActualizado($conn, $plant);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Conexión a la base de datos no válida.']);
-    }
+  // 📌 Verificar que `$conn` ya está disponible antes de usarlo
+  if (!isset($conn) || !$conn instanceof mysqli) {
+    die(json_encode(['success' => false, 'message' => 'Error: Conexión no válida o no establecida.'], JSON_UNESCAPED_UNICODE));
+  }
 
+  // 📌 Verificar si la conexión es válida antes de ejecutar la consulta
+  if ($conn->connect_error) {
+    echo json_encode(['success' => false, 'message' => 'Conexión a la base de datos no válida: ' . $conn->connect_error], JSON_UNESCAPED_UNICODE);
+    exit;
+  }
+
+  // 📌 Ejecutar la función con la conexión existente
+  // $plant = $plant ?? 0; // Asignar valor predeterminado si `$plant` no está definido
+  $plant = isset($_POST['plant']) && is_numeric($_POST['plant']) ? (int) $_POST['plant'] : 0;
+
+
+  traerControlActualizado($conn, (int) $plant);
 }
-?>
