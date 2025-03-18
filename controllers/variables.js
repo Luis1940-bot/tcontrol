@@ -1,10 +1,11 @@
-import baseUrl from '../config.js'
-const SERVER = baseUrl
+import baseUrl from '../config.js';
+
+const SERVER = baseUrl;
 /* eslint-disable prefer-const */
 // eslint-disable-next-line prefer-const, import/no-mutable-exports
-let arraySelect = []
-let arrayEmpresa = []
-let arrayControl = []
+let arraySelect = [];
+let arrayEmpresa = [];
+let arrayControl = [];
 let objetoControl = {
   fecha: [],
   nuxpedido: [],
@@ -42,7 +43,7 @@ let objetoControl = {
   objImagen: [],
   hora: [],
   tipoDatoDetalle: [],
-}
+};
 let objetoMemoria = {
   fecha: [],
   nuxpedido: [],
@@ -62,111 +63,111 @@ let objetoMemoria = {
   observacion: [],
   imagenes: [],
   displayRow: [],
-}
-let arrayReportes = []
+};
+let arrayReportes = [];
 
-let habilitadoGuardar = false
-let guardarReporteComo = false
-let guardarSelectorComo = false
+let habilitadoGuardar = false;
+let guardarReporteComo = false;
+let guardarSelectorComo = false;
 function removeModal(mod) {
-  const modal = mod
+  const modal = mod;
   if (modal) {
-    modal.style.display = 'none'
-    modal.remove()
+    modal.style.display = 'none';
+    modal.remove();
   }
 }
 
 const funcionDeCancelar = () => {
-  const modal = document.getElementById('modalAlert')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalAlert');
+  removeModal(modal);
+};
 const funcionDeOk = () => {
-  const modal = document.getElementById('modalAlert')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalAlert');
+  removeModal(modal);
+};
 const funcionDeClose = () => {
-  const modal = document.getElementById('modalAlert')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalAlert');
+  removeModal(modal);
+};
 const funcionDeCloseP = () => {
-  const modal = document.getElementById('modalAlertP')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalAlertP');
+  removeModal(modal);
+};
 const funcionDeCloseM = () => {
-  const modal = document.getElementById('modalAlertM')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalAlertM');
+  removeModal(modal);
+};
 const cierraModalTabla = () => {
-  const modal = document.getElementById('modalTablaView')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalTablaView');
+  removeModal(modal);
+};
 const cierraModalTablaFecha = () => {
-  const modal = document.getElementById('modalTablaViewFecha')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalTablaViewFecha');
+  removeModal(modal);
+};
 const closeVentanaVerdeRoja = (e) => {
-  let modal = document.getElementById('modalAlertVerde')
-  removeModal(modal)
-  modal = document.getElementById('modalAlertM')
-  removeModal(modal)
+  let modal = document.getElementById('modalAlertVerde');
+  removeModal(modal);
+  modal = document.getElementById('modalAlertM');
+  removeModal(modal);
   if (e.target.id === 'idCloseAvisoAmarillo') {
-    const url = `${SERVER}/Pages/Controles/index.php?simulateAsignarEventos=true`
-    window.location.href = url
+    const url = `${SERVER}/Pages/Controles/index.php?simulateAsignarEventos=true`;
+    window.location.href = url;
   }
-}
+};
 
 const closeVentanaImagen = () => {
-  let modal = document.getElementById('modalAlert')
-  removeModal(modal)
-}
+  let modal = document.getElementById('modalAlert');
+  removeModal(modal);
+};
 
 const funcionDeCloseViewer = () => {
-  const modal = document.getElementById('modalAlertView')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalAlertView');
+  removeModal(modal);
+};
 
 const eliminaImagen = () => {
-  const visualizador = document.getElementById('idVisualizador')
+  const visualizador = document.getElementById('idVisualizador');
   const dataFilename = visualizador.getAttribute(
-    'data-filenamewithoutextension'
-  )
-  const liElement = document.getElementById(`li_${dataFilename}`)
-  liElement.parentNode.removeChild(liElement)
-  let modal = document.getElementById('modalAlert')
-  removeModal(modal)
-}
+    'data-filenamewithoutextension',
+  );
+  const liElement = document.getElementById(`li_${dataFilename}`);
+  liElement.parentNode.removeChild(liElement);
+  let modal = document.getElementById('modalAlert');
+  removeModal(modal);
+};
 
 const closeVentanaVerdeRojaImg = () => {
-  const modal = document.getElementById('modalAlertVerde')
-  removeModal(modal)
-}
+  const modal = document.getElementById('modalAlertVerde');
+  removeModal(modal);
+};
 
 const funcionLogOut = () => {
   // eslint-disable-next-line no-plusplus
 
   for (let i = 0; i < sessionStorage.length; i++) {
-    const key = sessionStorage.key(i)
-    sessionStorage.removeItem(key)
+    const key = sessionStorage.key(i);
+    sessionStorage.removeItem(key);
   }
-  const url = `${SERVER}/includes/molecules/logout.php`
-  window.location.href = url
-}
+  const url = `${SERVER}/includes/molecules/logout.php`;
+  window.location.href = url;
+};
 
 const funcionHome = () => {
-  const url = `${SERVER}/Pages/Home/`
-  window.location.href = url
-}
+  const url = `${SERVER}/Pages/Home/`;
+  window.location.href = url;
+};
 
 const enviaPorEmail = (event) => {
-  const { checked } = event.target
-  sessionStorage.setItem('envia_por_email', checked)
-  const sobrecito = document.getElementById('wichCEmail')
+  const { checked } = event.target;
+  sessionStorage.setItem('envia_por_email', checked);
+  const sobrecito = document.getElementById('wichCEmail');
   if (checked) {
-    sobrecito.style.display = 'inline-block'
+    sobrecito.style.display = 'inline-block';
   } else {
-    sobrecito.style.display = 'none'
+    sobrecito.style.display = 'none';
   }
-}
+};
 
 const arrayGlobal = {
   arraySelect,
@@ -174,7 +175,7 @@ const arrayGlobal = {
   arrayReportes,
   guardarReporteComo,
   guardarSelectorComo,
-}
+};
 
 const objAlertaAceptarCancelar = {
   titulo: {
@@ -444,7 +445,7 @@ const objAlertaAceptarCancelar = {
     innerHTML: null,
     cursor: null,
   },
-}
+};
 
 const avisoVerde = {
   close: {
@@ -498,7 +499,7 @@ const avisoVerde = {
   span: {
     id: null,
     text: '¡Proceso completado con éxito! Todos los pasos del procedimiento se han ejecutado correctamente.',
-    fontSize: null, //'12px',
+    fontSize: null, // '12px',
     fontColor: '#ECECEC',
     marginTop: '0px',
     display: 'block',
@@ -518,7 +519,7 @@ const avisoVerde = {
     margin: null,
     fontStyle: null,
   },
-}
+};
 const avisoAmarillo = {
   close: {
     id: null,
@@ -591,7 +592,7 @@ const avisoAmarillo = {
     margin: null,
     fontStyle: null,
   },
-}
+};
 const avisoImagenes = {
   close: {
     id: 'idClose',
@@ -664,7 +665,7 @@ const avisoImagenes = {
     margin: null,
     fontStyle: null,
   },
-}
+};
 const avisoRojo = {
   close: {
     id: null,
@@ -737,7 +738,7 @@ const avisoRojo = {
     margin: null,
     fontStyle: null,
   },
-}
+};
 const avisoCargandoControl = {
   close: {
     id: null,
@@ -846,7 +847,7 @@ const avisoCargandoControl = {
     margin: null,
     fontStyle: null,
   },
-}
+};
 const objPerson = {
   titulo: {
     text: 'Ejemplo de Alerta',
@@ -1008,7 +1009,7 @@ const objPerson = {
     backgroundColor: '#cecece',
     marginTop: null,
   },
-}
+};
 const objMenu = {
   titulo: {
     text: 'Ejemplo de Alerta',
@@ -1416,7 +1417,7 @@ const objMenu = {
     backgroundColor: '#cecece',
     marginTop: null,
   },
-}
+};
 const objMenuCView = {
   titulo: {
     text: 'Ejemplo de Alerta',
@@ -1753,7 +1754,7 @@ const objMenuCView = {
     backgroundColor: '#cecece',
     marginTop: null,
   },
-}
+};
 const mensajesVarios = {
   guardar: {
     esperaAmarillo:
@@ -1806,7 +1807,7 @@ const mensajesVarios = {
     no_encontrado:
       'No se pudo completar su firma digital, hay un error en su clave. Verifique por favor y vuelva a intentarlo. Gracias',
   },
-}
+};
 const objInforme = {
   titulo: {
     text: 'Informe:',
@@ -1999,7 +2000,7 @@ const objInforme = {
       'Este control se enviará por email de acuerdo a la configuración de correos.',
     noEnvia: 'Este control NO se enviará por email.',
   },
-}
+};
 const procesoExitoso = {
   close: {
     id: null,
@@ -2117,7 +2118,7 @@ const procesoExitoso = {
     cursor: null,
     marginRight: null,
   },
-}
+};
 const modalImagen = {
   close: {
     id: null,
@@ -2187,7 +2188,7 @@ const modalImagen = {
     marginLeft: null,
     onClick: eliminaImagen,
   },
-}
+};
 const avisoListandoControles = {
   close: {
     id: null,
@@ -2296,7 +2297,7 @@ const avisoListandoControles = {
     margin: null,
     fontStyle: null,
   },
-}
+};
 const objAlertaViewer = {
   titulo: {
     text: {
@@ -2449,7 +2450,7 @@ const objAlertaViewer = {
     background: '#ffffff',
     border: '3px solid #000000',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-    margin: null, //'20% auto',
+    margin: null, // '20% auto',
     display: 'flex',
     flexDirection: 'column',
     padding: '10px',
@@ -2536,7 +2537,7 @@ const objAlertaViewer = {
     innerHTML: null,
     cursor: 'pointer',
   },
-}
+};
 const tablaEnModal = {
   close: {
     id: 'idCloseModal',
@@ -2684,7 +2685,7 @@ const tablaEnModal = {
     backgroundColor: '#cecece',
     marginTop: null,
   },
-}
+};
 const porFechaEnModal = {
   close: {
     id: 'idCloseModalFecha',
@@ -2938,7 +2939,7 @@ const porFechaEnModal = {
     innerHTML: null,
     cursor: 'pointer',
   },
-}
+};
 const objMenuRove = {
   titulo: {
     text: 'Ejemplo de Alerta',
@@ -3122,7 +3123,7 @@ const objMenuRove = {
     innerHTML: null,
     cursor: 'pointer',
   },
-}
+};
 
 export default {
   arrayGlobal,
@@ -3148,4 +3149,4 @@ export default {
   tablaEnModal,
   porFechaEnModal,
   objMenuRove,
-}
+};

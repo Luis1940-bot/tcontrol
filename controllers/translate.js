@@ -1,33 +1,33 @@
 // eslint-disable-next-line no-unused-vars
-const arrayTranslateOperativo = []
-// eslint-disable-next-line no-unused-vars
-const arrayEspanolOperativo = []
-// eslint-disable-next-line no-unused-vars
-const arrayTranslateArchivo = []
-// eslint-disable-next-line no-unused-vars
-const arrayEspanolArchivo = []
+import baseUrl from '../config.js';
 
-import baseUrl from '../config.js'
-const SERVER = baseUrl
-const OperativoURL = `${SERVER}/includes/Traducciones/Operativo/`
-const FileURL = `${SERVER}/includes/Traducciones/Archivos/`
+const arrayTranslateOperativo = [];
+// eslint-disable-next-line no-unused-vars
+const arrayEspanolOperativo = [];
+// eslint-disable-next-line no-unused-vars
+const arrayTranslateArchivo = [];
+// eslint-disable-next-line no-unused-vars
+const arrayEspanolArchivo = [];
+const SERVER = baseUrl;
+const OperativoURL = `${SERVER}/includes/Traducciones/Operativo/`;
+const FileURL = `${SERVER}/includes/Traducciones/Archivos/`;
 
 async function leerArchivo(url) {
   try {
-    const response = await fetch(url)
+    const response = await fetch(url);
     if (response.ok) {
-      const text = await response.text()
+      const text = await response.text();
       // Limpia las líneas eliminando caracteres \r y recortando espacios innecesarios
       return text
         .trim()
         .split('\n')
-        .map((line) => line.replace(/\r/g, '').trim())
+        .map((line) => line.replace(/\r/g, '').trim());
     }
-    return null
+    return null;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error:', error)
-    throw error
+    console.error('Error:', error);
+    throw error;
   }
 }
 
@@ -41,20 +41,20 @@ const translate = async (leng) => {
         leerArchivo(`${OperativoURL}${leng}.txt`),
         leerArchivo(`${FileURL}es.txt`),
         leerArchivo(`${FileURL}${leng}.txt`),
-      ])
+      ]);
 
     return {
       arrayEspanolOperativo: [...operatiEspanol],
       arrayTranslateOperativo: [...operativoOther],
       arrayEspanolArchivo: [...archivoEspanol],
       arrayTranslateArchivo: [...archivoOther],
-    }
+    };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error al cargar palabras:', error)
-    throw error
+    console.error('Error al cargar palabras:', error);
+    throw error;
   }
-}
+};
 // };
 
 export {
@@ -63,5 +63,5 @@ export {
   arrayTranslateArchivo,
   arrayEspanolArchivo,
   translate,
-}
-export default translate
+};
+export default translate;

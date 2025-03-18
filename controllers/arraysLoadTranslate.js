@@ -1,17 +1,17 @@
-import { desencriptar } from './cript.js'
-import translate from './translate.js'
+import { desencriptar } from './cript.js';
+import translate from './translate.js';
 
 function obtenerIdiomaPreferido() {
   // Obtener el idioma desde navigator.languages si está disponible
-  let idioma =
+  const idioma =
     navigator.languages && navigator.languages.length
       ? navigator.languages[0]
-      : navigator.language || navigator.userLanguage
+      : navigator.language || navigator.userLanguage;
 
   // Normalizar para obtener el idioma completo (ej. es-ES) y solo el código de idioma (ej. es)
-  let codigoIdioma = idioma.split('-')[0] // Solo el código de idioma, ej. es
+  const codigoIdioma = idioma.split('-')[0]; // Solo el código de idioma, ej. es
   // let regionIdioma = idioma.split('-')[1] || '' // La región si está disponible, ej. ES
-  return codigoIdioma
+  return codigoIdioma;
   // return {
   //   idiomaCompleto: idioma, // Ej. es-ES, en-US, es
   //   codigoIdioma: codigoIdioma, // Ej. es, en
@@ -20,28 +20,28 @@ function obtenerIdiomaPreferido() {
 }
 
 async function arraysLoadTranslate() {
-  let idiomaPreferido = obtenerIdiomaPreferido()
+  let idiomaPreferido = obtenerIdiomaPreferido();
 
-  const user = sessionStorage.getItem('user')
+  const user = sessionStorage.getItem('user');
 
   if (user) {
-    const persona = desencriptar(sessionStorage.getItem('user'))
-    idiomaPreferido = persona.lng
+    const persona = desencriptar(sessionStorage.getItem('user'));
+    idiomaPreferido = persona.lng;
   }
-  const data = await translate(idiomaPreferido)
-  let translateOperativo = data.arrayTranslateOperativo
-  let espanolOperativo = data.arrayEspanolOperativo
-  let translateArchivo = data.arrayTranslateArchivo
-  let espanolArchivo = data.arrayEspanolArchivo
+  const data = await translate(idiomaPreferido);
+  const translateOperativo = data.arrayTranslateOperativo;
+  const espanolOperativo = data.arrayEspanolOperativo;
+  const translateArchivo = data.arrayTranslateArchivo;
+  const espanolArchivo = data.arrayEspanolArchivo;
   const objTranslate = {
     operativoES: [],
     operativoTR: [],
     archivosES: [],
     archivosTR: [],
-  }
-  objTranslate.operativoES = [...espanolOperativo]
-  objTranslate.operativoTR = [...translateOperativo]
-  return objTranslate
+  };
+  objTranslate.operativoES = [...espanolOperativo];
+  objTranslate.operativoTR = [...translateOperativo];
+  return objTranslate;
 }
 
-export { arraysLoadTranslate }
+export { arraysLoadTranslate };
