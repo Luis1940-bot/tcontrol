@@ -1,22 +1,22 @@
-import baseUrl from '../../../../config.js'
+import baseUrl from '../../../../config.js';
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = baseUrl
+const SERVER = baseUrl;
 
-export default function traerRegistros(q, rut, sql_i) {
+export default function traerRegistros(q, rut, sqlI) {
   // eslint-disable-next-line no-console
-  console.time('traerRegistros-Variables')
+  console.time('traerRegistros-Variables');
   return new Promise((resolve, reject) => {
-    const rax = `&new=${new Date()}`
-    let obj = {
+    const rax = `&new=${new Date()}`;
+    const obj = {
       q,
       ruta: rut,
       rax,
-      sql_i,
-    }
-    const datos = JSON.stringify(obj)
+      sqlI,
+    };
+    const datos = JSON.stringify(obj);
     // console.log(datos)
     // const ruta = `${SERVER}/Pages/Controles/Routes/traerRegistros.php?q=${sql}${rax}`
-    const ruta = `${SERVER}/Routes/index.php`
+    const ruta = `${SERVER}/Routes/index.php`;
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -29,21 +29,21 @@ export default function traerRegistros(q, rut, sql_i) {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data)
-        const modal = document.getElementById('modalAlertCarga')
+        const modal = document.getElementById('modalAlertCarga');
         if (modal !== null) {
-          modal.style.display = 'none'
-          modal.remove()
+          modal.style.display = 'none';
+          modal.remove();
         }
 
-        resolve(data)
+        resolve(data);
         // eslint-disable-next-line no-console
-        console.timeEnd('traerRegistros-Variables')
+        console.timeEnd('traerRegistros-Variables');
       })
       .catch((error) => {
-        console.timeEnd('traerRegistros-Variables')
-        console.error('Error en la solicitud:', error)
-        reject(error)
-        alert('No se pudo establecer conexión con el servidor')
-      })
-  })
+        console.timeEnd('traerRegistros-Variables');
+        console.error('Error en la solicitud:', error);
+        reject(error);
+        alert('No se pudo establecer conexión con el servidor');
+      });
+  });
 }

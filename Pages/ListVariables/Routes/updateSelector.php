@@ -1,73 +1,102 @@
 <?php
+// ini_set('display_errors', '1');
+// ini_set('display_startup_errors', '1');
+// error_reporting(E_ALL);
+mb_internal_encoding('UTF-8');
+require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
+ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
+/** 
+ * @var array{timezone?: string} $_SESSION 
+ */
+if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
+  date_default_timezone_set($_SESSION['timezone']);
+} else {
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
+}
 
-        mb_internal_encoding('UTF-8');
-        require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
-        ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
-        if (isset($_SESSION['timezone'])) {
-            date_default_timezone_set($_SESSION['timezone']);
-        } else {
-            date_default_timezone_set('America/Argentina/Buenos_Aires');
-        }
-        function updateSelector($q) {
+/**
+ * Agrega un nuevo selector en la base de datos y devuelve el estado de la operación.
+ *
+ * @param array<string, mixed> $q Datos del selector a agregar.
+ * @return array{success: bool, message: string, id?: int}
+ */
+function updateSelector(array $q): array
+{
 
-          try {
-            include_once BASE_DIR . "/Routes/datos_base.php";
-          $detalle = $q['detalle'];
-          $selector = $q['selector'];
-          $nivel = $q['nivel']; 
-           
-            $conn = mysqli_connect($host,$user,$password,$dbname);
-            if ($conn->connect_error) {
-                die("Conexión fallida: " . $conn->connect_error);
-            }
-            mysqli_set_charset($conn, "utf8");
-            $sql = "UPDATE LTYselect SET detalle = ?, nivel = ? WHERE selector = ?";
-          
-            $stmt = $conn->prepare($sql);
-            if ($stmt === false) {
-                die("Error al preparar la consulta: " . $conn->error);
-            }
-            $stmt->bind_param("sii", $detalle , $nivel, $selector);
-          
-            if ($stmt->execute() === true) {
-                $response = array('success' => true, 'message' => 'Se actualizo el selector.');
-            } else {
-                $response = array('success' => false, 'message' => 'No se actualizo el selector.');
-            }
-            $stmt->close();
-            $conn->close();
-            
-              header('Content-Type: application/json');
-              echo  json_encode($response);
-            // Cerrar la declaración y la conexión
+  try {
+    require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
+    /** @var string $baseDir */
+    $baseDir = BASE_DIR;
+    include_once $baseDir . "/Routes/datos_base.php";
+    /** @var string $charset */
+    /** @var string $dbname */
+    /** @var string $host */
+    /** @var int $port */
+    /** @var string $password */
+    /** @var string $user */
+    /** @var PDO $pdo */
+    // $host = "34.174.211.66";
+    // $user = "uumwldufguaxi";
+    // $password = "5lvvumrslp0v";
+    // $dbname = "db5i8ff3wrjzw3";
+    // $port = 3306;
+    $charset = "utf8mb4";
 
-            
-          } catch (\Throwable $e) {
-             error_log("Error al actualizar selector. Error: " . $e);
-            print "Error!: ".$e->getMessage()."<br>";
-            die();
-          }
-        }
+    $detalle = isset($q['detalle']) && is_string($q['detalle']) ? $q['detalle'] : '';
+    $nivel = isset($q['nivel']) && is_numeric($q['nivel']) ? (int) $q['nivel'] : 0;
+    $selector = isset($q['selector']) && is_string($q['selector']) ? $q['selector'] : '';
 
-        header("Content-Type: application/json; charset=utf-8");
-        require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
-        $datos = file_get_contents("php://input");
-        // $datos = '{"q":"200","ruta":"/variableOnOff","rax":"&new=Fri May 03 2024 08:54:56 GMT-0300 (hora estándar de Argentina)","activo":"n"}';
+    $conn = mysqli_connect($host, $user, $password, $dbname);
+    if (!$conn) {
+      throw new RuntimeException('Error al conectar con la base de datos: ' . mysqli_connect_error());
+    }
+    mysqli_set_charset($conn, "utf8");
+    $sql = "UPDATE LTYselect SET detalle = ?, nivel = ? WHERE selector = ?";
 
-        if (empty($datos)) {
-          $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
-          echo json_encode($response);
-          exit;
-        }
-        $data = json_decode($datos, true);
-        // error_log('Pages/ListVariables/Routes/updateSelector-JSON response: ' . json_encode($data));
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+      throw new RuntimeException("Error al preparar la consulta: " . $conn->error);
+    }
+    $stmt->bind_param("sii", $detalle, $nivel, $selector);
 
-        if ($data !== null) {
-          $q = $data['q'];
-          updateSelector($q);
-        } else {
-          echo "Error al decodificar la cadena JSON";
-        }
+    if ($stmt->execute() === true) {
+      $response = array('success' => true, 'message' => 'Se actualizo el selector.');
+    } else {
+      $response = array('success' => false, 'message' => 'No se actualizo el selector.');
+    }
+    $stmt->close();
+    $conn->close();
+
+    header('Content-Type: application/json');
+    echo  json_encode($response);
+    return $response;
+    // Cerrar la declaración y la conexión
 
 
-?>
+  } catch (\Throwable $e) {
+    error_log("Error al actualizar selector. Error: " . $e);
+    print "Error!: " . $e->getMessage() . "<br>";
+    return ['success' => false, 'message' => "Error en la ejecución de la consulta: " . $e->getMessage()];
+  }
+}
+
+header("Content-Type: application/json; charset=utf-8");
+$datos = file_get_contents("php://input");
+// $datos = '{"q":"200","ruta":"/variableOnOff","rax":"&new=Fri May 03 2024 08:54:56 GMT-0300 (hora estándar de Argentina)","activo":"n"}';
+if ($datos === false) {
+  $datos = '';
+}
+if (empty($datos)) {
+  $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
+  echo json_encode($response);
+  exit;
+}
+$data = json_decode($datos, true);
+if (!is_array($data)) {
+  echo json_encode(['success' => false, 'message' => 'Formato de datos incorrecto.']);
+  exit;
+}
+$q = isset($data['q']) && is_array($data['q'])
+  ? array_filter($data['q'], fn($key) => is_string($key), ARRAY_FILTER_USE_KEY)
+  : [];
+updateSelector($q);
