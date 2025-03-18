@@ -14,11 +14,17 @@
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $inputText = $_POST["inputText"];
-        $hash = hash('ripemd160', $inputText);
+    $inputText = $_POST["inputText"] ?? '';
+    if (is_string($inputText) || is_numeric($inputText)) {
+        $hash = hash('ripemd160', strval($inputText));
         echo "<h3>Resultado del Hash:</h3>";
         echo "<p>$hash</p>";
+    } else {
+        echo "<h3>Error:</h3>";
+        echo "<p>El valor de inputText no es válido.</p>";
     }
+}
+
     ?>
 </body>
 </html>
