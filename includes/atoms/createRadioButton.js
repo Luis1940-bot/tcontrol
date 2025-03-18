@@ -1,59 +1,59 @@
 function createRadioButton(params) {
-  const nuevoRadioButton = document.createElement('input')
-  nuevoRadioButton.setAttribute('type', 'radio')
-  nuevoRadioButton.setAttribute('class', params.class)
-  nuevoRadioButton.setAttribute('name', params.name)
+  const nuevoRadioButton = document.createElement('input');
+  nuevoRadioButton.setAttribute('type', 'radio');
+  nuevoRadioButton.setAttribute('class', params.class);
+  nuevoRadioButton.setAttribute('name', params.name);
   params.value !== null && params.value !== undefined
     ? nuevoRadioButton.setAttribute('value', params.value)
-    : null
+    : null;
   params.id !== null && params.id !== undefined
     ? nuevoRadioButton.setAttribute('id', params.id)
-    : null
+    : null;
   params.width !== null && params.width !== undefined
     ? (nuevoRadioButton.style.width = params.width)
-    : null
+    : null;
   params.heigth !== null && params.heigth !== undefined
     ? (nuevoRadioButton.style.height = params.height)
-    : null
+    : null;
   params.background !== null && params.background !== undefined
     ? (nuevoRadioButton.style.backgroundColor = params.background)
-    : null
+    : null;
   params.border !== null && params.border !== undefined
     ? (nuevoRadioButton.style.border = params.border)
-    : null
+    : null;
   params.marginLeft !== null && params.marginLeft !== undefined
     ? (nuevoRadioButton.style.marginLeft = params.marginLeft)
-    : null
+    : null;
   params.marginRight !== null && params.marginRight !== undefined
     ? (nuevoRadioButton.style.marginRight = params.marginRight)
-    : null
+    : null;
   params.marginTop !== null && params.marginTop !== undefined
     ? (nuevoRadioButton.style.marginTop = params.marginTop)
-    : null
+    : null;
   params.marginBotton !== null && params.marginBotton !== undefined
     ? (nuevoRadioButton.style.marginBotton = params.marginBotton)
-    : null
+    : null;
   params.paddingLeft !== null && params.paddingLeft !== undefined
     ? (nuevoRadioButton.style.paddingLeft = params.paddingLeft)
-    : null
+    : null;
   params.paddingRight !== null && params.paddingRight !== undefined
     ? (nuevoRadioButton.style.paddingRight = params.paddingRight)
-    : null
+    : null;
   params.paddingTop !== null && params.paddingTop !== undefined
     ? (nuevoRadioButton.style.paddingTop = params.paddingTop)
-    : null
+    : null;
   // eslint-disable-next-line max-len
   params.paddingBotton !== null && params.paddingBotton !== undefined
     ? (nuevoRadioButton.style.paddingBotton = params.paddingBotton)
-    : null
+    : null;
   params.disabled !== null && params.disabled !== undefined
     ? nuevoRadioButton.setAttribute('disabled', params.disabled)
-    : null
+    : null;
   params.dataCustom !== null && params.dataCustom !== undefined
     ? nuevoRadioButton.setAttribute('data-custom', params.dataCustom)
-    : null
+    : null;
 
-  return nuevoRadioButton
+  return nuevoRadioButton;
 }
 
-export default createRadioButton
+export default createRadioButton;

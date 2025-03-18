@@ -1,85 +1,85 @@
 function createButton(params) {
   // console.log(params)
-  const nuevoBoton = document.createElement('button')
+  const nuevoBoton = document.createElement('button');
   params.text !== null && params.text !== undefined
     ? (nuevoBoton.textContent = params.text)
-    : null
+    : null;
   params.id !== null && params.id !== undefined
     ? (nuevoBoton.id = params.id)
-    : null
+    : null;
   params.class !== null && params.class !== undefined
     ? nuevoBoton.setAttribute('class', params.class)
-    : null
+    : null;
   params.name !== null && params.name !== undefined
     ? nuevoBoton.setAttribute('name', params.name)
-    : null
+    : null;
   params.tipo !== null && params.tipo !== undefined
     ? nuevoBoton.setAttribute('tipo', params.tipo)
-    : null
+    : null;
   params.procedure !== null && params.procedure !== undefined
     ? nuevoBoton.setAttribute('procedure', params.procedure)
-    : null
+    : null;
   params.confecha !== null && params.confecha !== undefined
     ? nuevoBoton.setAttribute('confecha', params.confecha)
-    : null
+    : null;
   params.operation !== null && params.operation !== undefined
     ? nuevoBoton.setAttribute('operation', params.operation)
-    : null
+    : null;
   params.ini !== null && params.ini !== undefined
     ? nuevoBoton.setAttribute('ini', params.ini)
-    : null
+    : null;
   params.outi !== null && params.outi !== undefined
     ? nuevoBoton.setAttribute('outi', params.outi)
-    : null
+    : null;
   params.innerHTML !== null && params.innerHTML !== undefined
     ? (nuevoBoton.innerHTML = params.innerHTML)
-    : null
+    : null;
   params.height !== null && params.height !== undefined
     ? (nuevoBoton.style.height = params.height)
-    : null
+    : null;
   params.width !== null && params.width !== undefined
     ? (nuevoBoton.style.width = params.width)
-    : null
+    : null;
   params.borderRadius !== null && params.borderRadius !== undefined
     ? (nuevoBoton.style.borderRadius = params.borderRadius)
-    : null
+    : null;
   params.border !== null && params.border !== undefined
     ? (nuevoBoton.style.border = params.border)
-    : null
+    : null;
   params.textAlign !== null && params.textAlign !== undefined
     ? (nuevoBoton.style.textAlign = params.textAlign)
-    : null
+    : null;
   params.marginLeft !== null && params.marginLeft !== undefined
     ? (nuevoBoton.style.marginLeft = params.marginLeft)
-    : null
+    : null;
   params.marginRight !== null && params.marginRight !== undefined
     ? (nuevoBoton.style.marginRight = params.marginRight)
-    : null
+    : null;
   params.marginTop !== null && params.marginTop !== undefined
     ? (nuevoBoton.style.marginTop = params.marginTop)
-    : null
+    : null;
   params.marginBotton !== null && params.marginBotton !== undefined
     ? (nuevoBoton.style.marginBotton = params.marginBotton)
-    : null
+    : null;
   params.paddingLeft !== null && params.paddingLeft !== undefined
     ? (nuevoBoton.style.paddingLeft = params.paddingLeft)
-    : null
+    : null;
   params.paddingRight !== null && params.paddingRight !== undefined
     ? (nuevoBoton.style.paddingRight = params.paddingRight)
-    : null
+    : null;
   params.paddingTop !== null && params.paddingTop !== undefined
     ? (nuevoBoton.style.paddingTop = params.paddingTop)
-    : null
+    : null;
   params.paddingBotton !== null && params.paddingBotton !== undefined
     ? (nuevoBoton.style.paddingBotton = params.paddingBotton)
-    : null
+    : null;
   params.background !== null && params.background !== undefined
     ? (nuevoBoton.style.backgroundColor = params.background)
-    : null
+    : null;
   params.onClick !== null && params.onClick !== undefined
     ? nuevoBoton.addEventListener('click', params.onClick)
-    : null
-  return nuevoBoton
+    : null;
+  return nuevoBoton;
 }
 
-export default createButton
+export default createButton;

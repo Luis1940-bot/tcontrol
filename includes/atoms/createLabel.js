@@ -1,83 +1,83 @@
 function createLabel(config) {
-  const label = document.createElement('label')
-  config.id !== null && config.id !== undefined ? (label.id = config.id) : null
+  const label = document.createElement('label');
+  config.id !== null && config.id !== undefined ? (label.id = config.id) : null;
   config.htmlFor !== null && config.htmlFor !== undefined
     ? (label.htmlFor = config.htmlFor)
-    : null
+    : null;
   config.innerText !== null && config.innerText !== undefined
     ? (label.innerText = config.innerText)
-    : null
+    : null;
   config.className !== null && config.className !== undefined
     ? (label.className = config.className)
-    : null
+    : null;
   config.height !== null && config.height !== undefined
     ? (label.style.height = config.height)
-    : null
+    : null;
   config.width !== null && config.width !== undefined
     ? (label.style.width = config.width)
-    : null
+    : null;
   config.color !== null && config.color !== undefined
     ? (label.color = config.color)
-    : null
+    : null;
   config.backgroundColor !== null && config.backgroundColor !== undefined
     ? (label.style.backgroundColor = config.backgroundColor)
-    : null
+    : null;
   config.padding !== null && config.padding !== undefined
     ? (label.style.padding = config.padding)
-    : null
+    : null;
   config.margin !== null && config.margin !== undefined
     ? (label.style.margin = config.margin)
-    : null
+    : null;
   config.cursor !== null && config.cursor !== undefined
     ? (label.style.cursor = config.cursor)
-    : null
+    : null;
   config.borderRadius !== null && config.borderRadius !== undefined
     ? (label.style.borderRadius = config.borderRadius)
-    : null
+    : null;
   config.boxShadow !== null && config.boxShadow !== undefined
     ? (label.style.boxShadow = config.boxShadow)
-    : null
+    : null;
   config.textAlign !== null && config.textAlign !== undefined
     ? (label.style.textAlign = config.textAlign)
-    : null
+    : null;
   config.fontSize !== null && config.fontSize !== undefined
     ? (label.style.fontSize = config.fontSize)
-    : null
+    : null;
   config.fontColor !== null && config.fontColor !== undefined
     ? (label.style.fontColor = config.fontColor)
-    : null
+    : null;
   config.fontFamily !== null &&
   config.fontFamily !== undefined &&
   config.fontFamily !== undefined
     ? (label.style.fontFamily = config.fontFamily)
-    : null
+    : null;
   config.fontWeight !== null && config.fontWeight !== undefined
     ? (label.style.fontWeight = config.fontWeight)
-    : null
+    : null;
   config.innerHTML !== null && config.innerHTML !== undefined
     ? (label.innerHTML = config.innerHTML)
-    : null
+    : null;
   config.placeolder !== null && config.placeolder !== undefined
     ? (label.placeHolder = config.placeHolder)
-    : null
+    : null;
   config.onClick !== null && config.onClick !== undefined
     ? (label.style.transition = 'background-color 0.3s')
-    : null
+    : null;
   config.hoverColor !== null && config.hoverColor !== undefined
     ? label.addEventListener('mouseover', () => {
-        label.style.color = config.hoverColor
+        label.style.color = config.hoverColor;
       })
-    : null
+    : null;
   config.hoverColor !== null && config.hoverColor !== undefined
     ? label.addEventListener('mouseout', () => {
-        label.style.color = config.fontColor
+        label.style.color = config.fontColor;
       })
-    : null
+    : null;
   config.onClick !== null && config.onClick !== undefined
     ? label.addEventListener('click', config.onClick)
-    : null
+    : null;
 
-  return label
+  return label;
 }
 
-export default createLabel
+export default createLabel;

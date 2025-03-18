@@ -1,34 +1,34 @@
 function createImg(params) {
-  const nuevoImagen = document.createElement('img')
+  const nuevoImagen = document.createElement('img');
   params.id !== null && params.id !== undefined
     ? (nuevoImagen.id = params.id)
-    : null
+    : null;
   params.class !== null && params.class !== undefined
     ? nuevoImagen.setAttribute('class', params.class)
-    : null
+    : null;
   params.name !== null && params.name !== undefined
     ? nuevoImagen.setAttribute('name', params.name)
-    : null
+    : null;
 
   params.float !== null && params.float !== undefined
     ? (nuevoImagen.style.float = params.float)
-    : null
+    : null;
   params.src !== null && params.src !== undefined
     ? (nuevoImagen.src = params.src)
-    : null
+    : null;
   params.alt !== null && params.alt !== undefined
     ? (nuevoImagen.alt = params.alt)
-    : null
+    : null;
   params.height !== null && params.height !== undefined
     ? (nuevoImagen.style.height = params.height)
-    : null
+    : null;
   params.width !== null && params.width !== undefined
     ? (nuevoImagen.style.width = params.width)
-    : null
+    : null;
   params.margin !== null && params.margin !== undefined
     ? (nuevoImagen.style.margin = params.margin)
-    : null
-  return nuevoImagen
+    : null;
+  return nuevoImagen;
 }
 
-export default createImg
+export default createImg;
