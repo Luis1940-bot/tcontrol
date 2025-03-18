@@ -1,19 +1,22 @@
 <?php
 require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
-if (isset($_SESSION['timezone'])) {
+/** 
+ * @var array{timezone?: string} $_SESSION 
+ */
+if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
     date_default_timezone_set($_SESSION['timezone']);
 } else {
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
 error_reporting(E_ALL); // Muestra todos los errores y warnings
-ini_set('display_errors', 1); // Asegúrate de que los errores sean mostrados (no usar en producción)
+ini_set('display_errors', '1'); // Asegúrate de que los errores sean mostrados (no usar en producción)
 
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 // include('datos.php');
 
 
-function insertarCorreo($datos) {
+function insertarCorreo(string $datos): void {
 
     $dato_decodificado =urldecode($datos);
     $objeto_json = json_decode($dato_decodificado, true);
@@ -36,14 +39,30 @@ function insertarCorreo($datos) {
       // $port = 3306;
       // $charset = "utf-8";
     try {
-        $email = $objeto_json['email'];
-        $plant = $objeto_json['plant'];
+        /** @var array{email?: string, plant?: string} $objeto_json */
 
-  
+        if (isset($objeto_json['email'], $objeto_json['plant'])) {
+            $email = $objeto_json['email'];
+            $plant = $objeto_json['plant'];
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Faltan datos requeridos: email o plant'
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
 
         $campos = "plant, mail";
         $interrogantes = "?, ?";
 
+        /** @var string $host */
+        /** @var string $dbname */
+        /** @var string $user */
+        /** @var string $password */
+        /** @var PDO $pdo */
+        
         $pdo = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8mb4", $user, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->exec("SET NAMES utf8");
@@ -80,7 +99,11 @@ function insertarCorreo($datos) {
     } catch (PDOException $e) {
          error_log("Error al guardar nueva area. Error: " . $e);
         // En caso de error, revertir la transacción y mostrar el mensaje de error.
-        $pdo->rollBack();
+        /** @var PDO $pdo */
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+
         $response = [
             'success' => false,
             'message' => 'Error de base de datos: ' . $e->getMessage()
@@ -106,13 +129,15 @@ if (empty($datos)) {
 $data = json_decode($datos, true);
 
 // error_log('JSON response: ' . json_encode($data));
+/** @var array{q: mixed} $data */
 
-if ($data !== null) {
-  $datos = json_encode($data['q']);
-  insertarCorreo($datos);
-} else {
-  echo "Error al decodificar la cadena JSON";
-  
+$datos = json_encode($data['q']);
+
+if ($datos === false) {
+    echo "Error al codificar la cadena JSON.";
+    exit;
 }
-?>
 
+insertarCorreo($datos);
+
+?>
