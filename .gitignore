@@ -1,7 +1,37 @@
-eslint-main/
+# ⚡ Carpetas y archivos de Node.js que no deben subirse
 node_modules/
+eslint-main/
+
+# ⚡ Dependencias de PHP
+vendor/
+composer.lock
+
+# ⚡ Configuraciones locales y archivos de herramientas
+.eslintignore
+.eslintrc.json
+.prettierrc
+phpstan-report.json
+phpstan.neon
+eslint-comandos.txt
+eslint-reporte.txt
+phpstan-comandos.text
+
+# ⚡ Archivos de logs y archivos temporales
+*.log
+debug.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# ⚡ Archivos de configuración sensibles
+.env
+
+# ⚡ Recursos de imagen que pueden regenerarse o no son parte del código fuente
 Libraries/
 Imagenes/
 Logos/
 
-.env
+# ⚡ Archivos antiguos o de respaldo
+configOLD.php
+Pages/Rove_OLD/
+z_hosting/
