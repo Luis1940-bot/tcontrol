@@ -1,51 +1,51 @@
 // eslint-disable-next-line no-unused-vars, import/extensions
-import readJSON from '../../controllers/read-JSON.js'
+import readJSON from '../../controllers/read-JSON.js';
 // eslint-disable-next-line import/extensions
-import createButton from '../../includes/atoms/createButton.js'
+import createButton from '../../includes/atoms/createButton.js';
 // eslint-disable-next-line import/extensions
-import createDiv from '../../includes/atoms/createDiv.js'
+import createDiv from '../../includes/atoms/createDiv.js';
 // eslint-disable-next-line import/extensions
-import createRadioButton from '../../includes/atoms/createRadioButton.js'
+import createRadioButton from '../../includes/atoms/createRadioButton.js';
 // eslint-disable-next-line import/extensions, import/no-named-as-default
-import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js'
+import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 // eslint-disable-next-line import/extensions
 import {
   inicioPerformance,
   finPerformance,
-} from '../../includes/Conection/conection.js'
+} from '../../includes/Conection/conection.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { encriptar, desencriptar } from '../../controllers/cript.js'
-import actualizarLenguaje from '../../includes/Traducciones/Lenguajes/fijarLenguaje.js'
+import { encriptar, desencriptar } from '../../controllers/cript.js';
+import actualizarLenguaje from '../../includes/Traducciones/Lenguajes/fijarLenguaje.js';
 
-import baseUrl from '../../config.js'
-import { configPHP } from '../../controllers/configPHP.js'
-import LogOut from '../../controllers/logout.js'
+import baseUrl from '../../config.js';
+import { configPHP } from '../../controllers/configPHP.js';
+import LogOut from '../../controllers/logout.js';
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = baseUrl
+const SERVER = baseUrl;
 
-const spinner = document.querySelector('.spinner')
-const objButtons = {}
+const spinner = document.querySelector('.spinner');
+const objButtons = {};
 
 function leeVersion(json) {
   readJSON(json)
     .then((data) => {
-      document.querySelector('.version').innerText = data.version
+      document.querySelector('.version').innerText = data.version;
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
-      console.error('Error al cargar el archivo:', error)
-    })
+      console.error('Error al cargar el archivo:', error);
+    });
 }
 
 function completaButtons(obj) {
-  const divButtons = document.querySelector('.div-landing-buttons')
-  divButtons.innerHTML = ''
-  document.getElementById('spanUbicacion').innerText = objButtons.planta
+  const divButtons = document.querySelector('.div-landing-buttons');
+  divButtons.innerHTML = '';
+  document.getElementById('spanUbicacion').innerText = objButtons.planta;
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < objButtons[obj].bienvenido.length; i++) {
-    const element = objButtons[obj].bienvenido[i]
-    const abreviatura = objButtons[obj].abreviatura[i]
+    const element = objButtons[obj].bienvenido[i];
+    const abreviatura = objButtons[obj].abreviatura[i];
 
     // Crear un contenedor para el botón y el radio button
     let params = {
@@ -69,8 +69,8 @@ function completaButtons(obj) {
       flex: 'flex',
       alignItems: 'center',
       display: null,
-    }
-    const container = createDiv(params)
+    };
+    const container = createDiv(params);
     params = {
       text: `${element}<br>${abreviatura}`,
       name: abreviatura,
@@ -90,8 +90,8 @@ function completaButtons(obj) {
       paddingTop: null,
       paddingBotton: null,
       background: 'transparent',
-    }
-    const newButton = createButton(params)
+    };
+    const newButton = createButton(params);
     params = {
       name: 'radio',
       class: 'radio-selector',
@@ -111,108 +111,110 @@ function completaButtons(obj) {
       paddingBotton: null,
       disabled: 'disabled',
       dataCustom: abreviatura,
-    }
-    const newRadioButton = createRadioButton(params)
+    };
+    const newRadioButton = createRadioButton(params);
     // Agregar el botón y el radio button al contenedor
-    container.appendChild(newButton)
-    container.appendChild(newRadioButton)
+    container.appendChild(newButton);
+    container.appendChild(newRadioButton);
 
     // Agregar el contenedor al divButtons
-    divButtons.appendChild(container)
+    divButtons.appendChild(container);
   }
-  const divs = document.querySelectorAll('.div-selector')
-  const radios = document.querySelectorAll('.radio-selector')
+  const divs = document.querySelectorAll('.div-selector');
+  const radios = document.querySelectorAll('.radio-selector');
   // const seguir = document.querySelector('.my-button')
-  let language = ''
-  let index = 0
+  let language = '';
+  let index = 0;
   divs.forEach((div, i) => {
-    language = radios[i].getAttribute('data-custom')
-    index = i
+    language = radios[i].getAttribute('data-custom');
+    index = i;
     div.addEventListener('click', () => {
-      const radio = radios[i]
+      const radio = radios[i];
       // // Obtener el objeto almacenado en sessionStorage
-      const userData = desencriptar(sessionStorage.getItem('user'))
-      radio.checked = true
-      language = radios[i].getAttribute('data-custom')
-      userData.lng = language.slice(0, 2)
-      sessionStorage.setItem('user', encriptar(userData))
+      const userData = desencriptar(sessionStorage.getItem('user'));
+      radio.checked = true;
+      language = radios[i].getAttribute('data-custom');
+      userData.lng = language.slice(0, 2);
+      sessionStorage.setItem('user', encriptar(userData));
       document.querySelector('.custom-button').innerText = language
         .slice(0, 2)
-        .toUpperCase()
-      const persona = desencriptar(sessionStorage.getItem('user'))
+        .toUpperCase();
+      const persona = desencriptar(sessionStorage.getItem('user'));
 
-      spinner.style.visibility = 'visible'
-      loadLenguages(persona)
-    })
+      spinner.style.visibility = 'visible';
+      loadLenguages(persona);
+    });
 
-    const persona = desencriptar(sessionStorage.getItem('user'))
-    const buttonSelector = div.childNodes[0].name.slice(0, 2)
+    const persona = desencriptar(sessionStorage.getItem('user'));
+    const buttonSelector = div.childNodes[0].name.slice(0, 2);
 
     if (
       buttonSelector.slice(0, 2).toLowerCase() === persona.lng.toLowerCase()
     ) {
-      radios[index].checked = true
+      radios[index].checked = true;
       // seguir.disabled = false
       // seguir.style.background = '#212121'
     }
-  })
+  });
 }
 
 function leeApp(json) {
   readJSON(json)
     .then((data) => {
-      Object.assign(objButtons, data)
-      completaButtons('idiomas')
+      Object.assign(objButtons, data);
+      completaButtons('idiomas');
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
-      console.error('Error al cargar el archivo:', error)
-    })
+      console.error('Error al cargar el archivo:', error);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const user = desencriptar(sessionStorage.getItem('user'))
-  const { plant } = user
-  inicioPerformance()
-  configPHP(user, SERVER)
-  spinner.style.visibility = 'visible'
-  const customButton = document.getElementById('planta')
-  const persona = desencriptar(sessionStorage.getItem('user'))
-  const personaLng = persona.lng
-  customButton.innerText = personaLng.toUpperCase()
-  const person = document.querySelector('#person')
-  person.style.display = 'none'
-  const hamburguesa = document.querySelector('#hamburguesa')
-  hamburguesa.style.display = 'none'
-  leeVersion('version')
-  leeApp(`App/${plant}/app`)
-  spinner.style.visibility = 'hidden'
-  finPerformance()
-  setTimeout(function () {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.')
-    LogOut()
-  }, 43200000 - 300000)
-})
+  const user = desencriptar(sessionStorage.getItem('user'));
+  const { plant } = user;
+  inicioPerformance();
+  configPHP(user, SERVER);
+  spinner.style.visibility = 'visible';
+  const customButton = document.getElementById('planta');
+  const persona = desencriptar(sessionStorage.getItem('user'));
+  const quienEs = document.getElementById('spanPerson');
+  quienEs.innerText = persona.person;
+  const personaLng = persona.lng;
+  customButton.innerText = personaLng.toUpperCase();
+  const person = document.querySelector('#person');
+  person.style.display = 'none';
+  const hamburguesa = document.querySelector('#hamburguesa');
+  hamburguesa.style.display = 'none';
+  leeVersion('version');
+  leeApp(`App/${plant}/app`);
+  spinner.style.visibility = 'hidden';
+  finPerformance();
+  setTimeout(() => {
+    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    LogOut();
+  }, 43200000 - 300000);
+});
 
 async function loadLenguages(persona) {
   try {
     // console.log(persona)
-    const leng = persona.lng
-    const id = persona.id
+    const leng = persona.lng;
+    const { id } = persona;
     const objetoLng = {
       leng,
       id,
       ruta: '/mi_cfg',
-    }
-    const lenguaje = await actualizarLenguaje(objetoLng)
-    await arraysLoadTranslate(leng)
+    };
+    const lenguaje = await actualizarLenguaje(objetoLng);
+    await arraysLoadTranslate(leng);
     setTimeout(() => {
-      const url = `${SERVER}/Pages/Home`
-      window.location.href = url
+      const url = `${SERVER}/Pages/Home`;
+      window.location.href = url;
       // window.open(url, '_blank')
-    }, 1000)
+    }, 1000);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Ocurrió un error al cargar los datos:', error)
+    console.error('Ocurrió un error al cargar los datos:', error);
   }
 }
