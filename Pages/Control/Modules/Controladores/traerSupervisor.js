@@ -1,21 +1,23 @@
-import baseUrl from '../../../../config.js'
-const SERVER = baseUrl
+import baseUrl from '../../../../config.js';
+import { mostrarMensajeError } from '../../../../controllers/utils.js';
 
-export default function traerSupervisor(idSupervisor, sql_i) {
+const SERVER = baseUrl;
+
+export default function traerSupervisor(idSupervisor, sqlI) {
   // eslint-disable-next-line no-console
   return new Promise((resolve, reject) => {
-    const rax = `&new=${new Date()}`
+    const rax = `&new=${new Date()}`;
     // const id = encodeURIComponent(idSupervisor)
-    let obj = {
+    const obj = {
       q: idSupervisor,
       ruta: '/traerSupervisor',
       rax,
-      sql_i,
-    }
-    const datos = JSON.stringify(obj)
+      sqlI,
+    };
+    const datos = JSON.stringify(obj);
     // console.log(datos)
     // const ruta = `${SERVER}/Pages/Control/Routes/traerSupervisor.php?q=${id}${rax}`
-    const ruta = `${SERVER}/Routes/index.php`
+    const ruta = `${SERVER}/Routes/index.php`;
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -27,10 +29,10 @@ export default function traerSupervisor(idSupervisor, sql_i) {
       .then((res) => {
         if (!res.ok) {
           throw new Error(
-            `Error en la solicitud: ${res.status} ${res.statusText}`
-          )
+            `Error en la solicitud: ${res.status} ${res.statusText}`,
+          );
         }
-        return res.json()
+        return res.json();
       })
       .then((data) => {
         const objeto = {
@@ -39,13 +41,13 @@ export default function traerSupervisor(idSupervisor, sql_i) {
           mail: data.mail || null,
           tipo: data.tipo || null,
           mi_cfg: data.mi_cfg || null,
-        }
-        resolve(objeto)
+        };
+        resolve(objeto);
       })
       .catch((error) => {
-        console.error('Error en la solicitud:', error)
-        reject(error)
-        alert('No se pudo establecer conexión con el servidor')
-      })
-  })
+        console.error('Error en la solicitud:', error);
+        reject(error);
+        mostrarMensajeError('No se pudo establecer conexión con el servidor');
+      });
+  });
 }

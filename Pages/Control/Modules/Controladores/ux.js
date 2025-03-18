@@ -1,34 +1,35 @@
-import baseUrl from '../../../../config.js'
-const SERVER = baseUrl
+import baseUrl from '../../../../config.js';
+
+const SERVER = baseUrl;
 
 // eslint-disable-next-line quotes
 function limpiarObjeto(objeto) {
-  const { displayRow, requerido, ...restoDelObjeto } = objeto
+  const { displayRow, requerido, ...restoDelObjeto } = objeto;
   const nuevoObjeto = {
     ...restoDelObjeto,
-  }
+  };
 
-  return nuevoObjeto
+  return nuevoObjeto;
 }
 
 function updateRegistro(objeto, nux) {
   // eslint-disable-next-line no-console
-  console.time('update_time')
-  const objLimpio = limpiarObjeto(objeto)
+  console.time('update_time');
+  const objLimpio = limpiarObjeto(objeto);
   // console.log(objLimpio)
-  const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio))
+  const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio));
   // console.log(nuevoObjeto)
-  const rax = `&new=${new Date()}`
-  let obj = {
+  const rax = `&new=${new Date()}`;
+  const obj = {
     q: nuevoObjeto,
     ruta: '/ux2024',
     rax,
     nux,
-  }
+  };
 
-  const datos = JSON.stringify(obj)
+  const datos = JSON.stringify(obj);
   // console.log(datos)
-  const ruta = `${SERVER}/Routes/index.php`
+  const ruta = `${SERVER}/Routes/index.php`;
   // const datos = new URLSearchParams()
   // datos.append('nuevoObjeto', nuevoObjeto)
   // datos.append('nux', nux)
@@ -44,28 +45,28 @@ function updateRegistro(objeto, nux) {
     })
       .then((response) => {
         if (response.status === 200) {
-          return response.json()
+          return response.json();
         }
-        throw new Error(`Error en la solicitud: ${response.status}`)
+        throw new Error(`Error en la solicitud: ${response.status}`);
       })
       .then((data) => {
         if (typeof data === 'object') {
           // eslint-disable-next-line no-console
           // eslint-disable-next-line no-console
-          console.timeEnd('update_time')
-          resolve(data) // Resuelve la promesa con el valor correcto
+          console.timeEnd('update_time');
+          resolve(data); // Resuelve la promesa con el valor correcto
         } else {
-          throw new Error('Error en el formato JSON')
+          throw new Error('Error en el formato JSON');
         }
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
-        console.warn(error.message)
+        console.warn(error.message);
         // eslint-disable-next-line no-console
-        console.timeEnd('update_time')
-        reject(error) // Rechaza la promesa en caso de error
-      })
-  })
+        console.timeEnd('update_time');
+        reject(error); // Rechaza la promesa en caso de error
+      });
+  });
 }
 
-export default updateRegistro
+export default updateRegistro;

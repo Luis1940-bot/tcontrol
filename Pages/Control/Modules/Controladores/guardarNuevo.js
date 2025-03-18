@@ -1,48 +1,47 @@
 // eslint-disable-next-line import/extensions
-import fechasGenerator from '../../../../controllers/fechas.js'
+import fechasGenerator from '../../../../controllers/fechas.js';
 // eslint-disable-next-line import/extensions
-import respuestaColumna from './armadoDeObjetos.js'
+import respuestaColumna from './armadoDeObjetos.js';
 // // eslint-disable-next-line import/extensions
 // import guardaNotas from './guardaNotas.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { encriptar, desencriptar } from '../../../../controllers/cript.js'
-
-import baseUrl from '../../../../config.js'
-const SERVER = baseUrl
+import { encriptar, desencriptar } from '../../../../controllers/cript.js';
 
 function buscarEnArray(id, array) {
   try {
-    const idStr = id.toString().trim()
-    const resultado = array.find((registro) => registro[1] === idStr)
-    return resultado
+    const idStr = id.toString().trim();
+    const resultado = array.find((registro) => registro[1] === idStr);
+    return resultado;
   } catch (error) {
-    console.log(error)
+    // eslint-disable-next-line no-console
+    console.log(error);
+    return null;
   }
 }
 
 function convertirObjATextPlano(obj) {
-  const data = { ...obj }
+  const data = { ...obj };
 
-  delete data.src
-  const lines = []
+  delete data.src;
+  const lines = [];
 
   // Iterar sobre las claves del objeto
   Object.keys(data).forEach((key) => {
     // Obtener el valor asociado a la clave
-    const values = data[key]
+    const values = data[key];
 
     // Crear una línea de texto concatenando la clave y sus valores
     // const line = `${key}: ${JSON.stringify(values).replace(/\\/g, '')}`;
-    const line = `${key}: ${JSON.stringify(values)}`
+    const line = `${key}: ${JSON.stringify(values)}`;
 
     // Agregar la línea al arreglo
-    lines.push(line)
-  })
+    lines.push(line);
+  });
 
   // Convertir el arreglo de líneas a un solo texto con saltos de línea
-  const plainText = lines.join(',')
+  const plainText = lines.join(',');
 
-  return `{${plainText}}`
+  return `{${plainText}}`;
 }
 
 function tuFuncion(
@@ -54,98 +53,100 @@ function tuFuncion(
   mailUser,
   fechaActual,
   horaActual,
-  supervisor
+  supervisor,
 ) {
   // Crea una copia del objeto para evitar modificar el parámetro directamente
-  let emailSupervisor = ''
+  let emailSupervisor = '';
   if (supervisor) {
-    emailSupervisor = `/${supervisor}`
+    emailSupervisor = `/${supervisor}`;
   }
-  const objetoControlCopia = { ...objetoControl }
+  const objetoControlCopia = { ...objetoControl };
   // eslint-disable-next-line prefer-destructuring
-  objetoControlCopia.email.address = `${founded[28]}${emailSupervisor}`
-  objetoControlCopia.email.planta = planta
-  objetoControlCopia.email.titulo = 'Notificación del sistema de alerta'
-  objetoControlCopia.email.reporte = reporte
-  objetoControlCopia.email.fecha = fechaActual
-  objetoControlCopia.email.hora = horaActual
-  objetoControlCopia.email.notificador = notificador
-  objetoControlCopia.email.url = 'https://tenkiweb.com/tcontrol'
-  objetoControlCopia.email.mailNotificador = mailUser
+  objetoControlCopia.email.address = `${founded[28]}${emailSupervisor}`;
+  objetoControlCopia.email.planta = planta;
+  objetoControlCopia.email.titulo = 'Notificación del sistema de alerta';
+  objetoControlCopia.email.reporte = reporte;
+  objetoControlCopia.email.fecha = fechaActual;
+  objetoControlCopia.email.hora = horaActual;
+  objetoControlCopia.email.notificador = notificador;
+  objetoControlCopia.email.url = 'https://tenkiweb.com/tcontrol';
+  objetoControlCopia.email.mailNotificador = mailUser;
 
   // Puedes retornar la copia del objeto si es necesario
-  return objetoControlCopia
+  return objetoControlCopia;
 }
 
 function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
   try {
-    const person = desencriptar(sessionStorage.getItem('user'))
-    const idPerson = person.id
+    const person = desencriptar(sessionStorage.getItem('user'));
+    const idPerson = person.id;
     // const email = document.getElementById('idCheckBoxEmail').checked;
     // const url = new URL(window.location.href);
-    const contenido = sessionStorage.getItem('contenido')
-    const url = desencriptar(contenido)
-    const controlN = url.control_N // url.searchParams.get('control_N');
+    const contenido = sessionStorage.getItem('contenido');
+    const url = desencriptar(contenido);
+    const controlN = url.control_N; // url.searchParams.get('control_N');
     // const controlT = url.searchParams.get('control_T');
     // const numberDoc = document.getElementById('numberDoc').textContent;
     // const tbody = document.querySelector('tbody')
-    const table = document.getElementById('tableControl')
-    const tbody = table.querySelector('tbody')
-    const tr = tbody.querySelectorAll('tr')
-    let estanTodosLosRequeridos = true
-    let emailSupervisor = null
-    let supervisor = desencriptar(sessionStorage.getItem('firmado'))
+    const table = document.getElementById('tableControl');
+    const tbody = table.querySelector('tbody');
+    const tr = tbody.querySelectorAll('tr');
+    let estanTodosLosRequeridos = true;
+    let emailSupervisor = null;
+    let supervisor = desencriptar(sessionStorage.getItem('firmado'));
 
     // eslint-disable-next-line max-len
     supervisor.id === 0
       ? (supervisor = 0)
       : ((supervisor = Number(supervisor.id)),
         (emailSupervisor = desencriptar(
-          sessionStorage.getItem('firmado')
-        ).mail))
+          sessionStorage.getItem('firmado'),
+        ).mail));
 
-    let founded
-    let fechaActual = ''
-    let horaActual = ''
-    let nuxpedido
-    if (nux === false) {
-      nuxpedido = 0
-    } else {
-      nuxpedido = nux
-    }
+    let founded;
+    let fechaActual = '';
+    let horaActual = '';
+    // let nuxpedido;
+    // if (nux === false) {
+    //   nuxpedido = 0;
+    // } else {
+    //   nuxpedido = nux;
+    // }
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length; i++) {
-      let valor
-      let selector1
-      let selector2
-      let valorS
-      let valorOBS
-      let familiaselector
-      let valid = false
+      let valor;
+      let selector1;
+      let selector2;
+      let valorS;
+      let valorOBS;
+      let familiaselector;
+      // const valid = false;
       // let imagenes;
-      let observacion
-      let respuesta
+      let observacion;
+      let respuesta;
 
-      const td = tr[i].querySelectorAll('td')
+      const td = tr[i].querySelectorAll('td');
 
       // eslint-disable-next-line no-unused-vars
-      const displayRow = window.getComputedStyle(tr[i]).display
+      const displayRow = window.getComputedStyle(tr[i]).display;
       // eslint-disable-next-line no-plusplus
       for (let c = 2; c <= 4; c += 1) {
-        const displayCell = window.getComputedStyle(td[c]).display
-        const element = td[c]
-        const campo = td[1]
+        const displayCell = window.getComputedStyle(td[c]).display;
+        const element = td[c];
+        const campo = td[1];
 
-        let node, datoCelda, valueCelda
+        let node;
+        let datoCelda;
+        let valueCelda;
         if (element.childNodes.length > 0) {
-          node = element.childNodes[0]
-          datoCelda = node.data || null
-          valueCelda = node.value || null
+          [node] = element.childNodes;
+          datoCelda = node?.data || null;
+          valueCelda = node?.value || null;
         } else {
           // Si no hay nodos hijos, recupera el valor directamente del td
-          node = null
-          datoCelda = element.textContent || null
-          valueCelda = null
+          node = null;
+          datoCelda = element.textContent || null;
+          valueCelda = null;
           // console.warn(
           //   `El td en la columna ${c} no tiene nodos hijos. Valor de la celda: ${datoCelda}`
           // )
@@ -154,20 +155,20 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
         // const node = element.childNodes[0]
         // const datoCelda = element.childNodes[0].data
         // const valueCelda = element.childNodes[0].value
-        const colspanValue = td[1].getAttribute('colspan')
-        const inputElement = element.querySelector('input')
-        const { nodeType } = node
-        const { type } = node
-        const { tagName } = node
-        let childeNode0
-        let inputmode
-        let select
-        const checkbox = node.checked
-        const radio = node.checked
-        let divConsultas
-        let liImages
-        const selector = null
-        const terceraColumna = td[3].firstChild
+        const colspanValue = td[1].getAttribute('colspan');
+        const inputElement = element.querySelector('input');
+        const { nodeType } = node;
+        const { type } = node;
+        const { tagName } = node;
+        let childeNode0;
+        let inputmode;
+        let select;
+        const checkbox = node.checked;
+        const radio = node.checked;
+        let divConsultas;
+        let liImages;
+        const selector = null;
+        const terceraColumna = td[3].firstChild;
 
         let imagenes = {
           src: [],
@@ -175,7 +176,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
           extension: [],
           plant: [],
           carpeta: [],
-        }
+        };
 
         const objParametros = {
           displayCell,
@@ -198,71 +199,71 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
           selector,
           imagenes,
           terceraColumna,
-        }
+        };
         //  const { type } = objParametros
 
         if (c === 2) {
-          respuesta = respuestaColumna(c, i, objParametros)
-          ;({ valor, selector1, valorS, familiaselector } = respuesta)
-          i === 0 && type === 'date' ? objetoControl.fecha.push(valor) : null
-          i === 1 && type === 'time' ? objetoControl.hora.push(valor) : null
+          respuesta = respuestaColumna(c, i, objParametros);
+          ({ valor, selector1, valorS, familiaselector } = respuesta);
+          i === 0 && type === 'date' ? objetoControl.fecha.push(valor) : null;
+          i === 1 && type === 'time' ? objetoControl.hora.push(valor) : null;
         }
         if (c === 4) {
-          respuesta = respuestaColumna(c, i, objParametros, plant, carpeta)
-          ;({ selector2, valorOBS, familiaselector, imagenes, observacion } =
-            respuesta)
+          respuesta = respuestaColumna(c, i, objParametros, plant, carpeta);
+          ({ selector2, valorOBS, familiaselector, imagenes, observacion } =
+            respuesta);
         }
         if (c === 4) {
-          const tdCount = tr[i].cells.length
-          let valorFounded = 0
+          const tdCount = tr[i].cells.length;
+          // const valorFounded = 0;
           if (tdCount === 6) {
-            founded = buscarEnArray(td[5].textContent, arrayControl)
+            founded = buscarEnArray(td[5].textContent, arrayControl);
           } else if (tdCount === 5) {
-            founded = buscarEnArray(td[4].textContent, arrayControl)
+            founded = buscarEnArray(td[4].textContent, arrayControl);
           }
 
-          objetoControl.name.push(campo.textContent)
-          fechaActual = fechasGenerator.fecha_corta_yyyymmdd(new Date())
-          horaActual = fechasGenerator.hora_actual(new Date())
+          objetoControl.name.push(campo.textContent);
+          fechaActual = fechasGenerator.fecha_corta_yyyymmdd(new Date());
+          horaActual = fechasGenerator.hora_actual(new Date());
           // objetoControl.fecha.push(fechaActual)
           // objetoControl.hora.push(valor)
 
-          objetoControl.nuxpedido.push(0)
+          objetoControl.nuxpedido.push(0);
           valor !== null
             ? objetoControl.valor.push(valor)
-            : objetoControl.valor.push(founded[5])
-          objetoControl.desvio.push(founded[2])
-          objetoControl.idusuario.push(idPerson)
-          objetoControl.tipodedato.push(founded[5])
-          objetoControl.idLTYreporte.push(controlN)
-          objetoControl.idLTYcontrol.push(founded[1])
+            : objetoControl.valor.push(founded[5]);
+          objetoControl.desvio.push(founded[2]);
+          objetoControl.idusuario.push(idPerson);
+          objetoControl.tipodedato.push(founded[5]);
+          objetoControl.idLTYreporte.push(controlN);
+          objetoControl.idLTYcontrol.push(founded[1]);
           // eslint-disable-next-line max-len
           supervisor === 0
             ? objetoControl.supervisor.push(0)
-            : objetoControl.supervisor.push(supervisor)
-          objetoControl.tpdeobserva.push(founded[9])
+            : objetoControl.supervisor.push(supervisor);
+          objetoControl.tpdeobserva.push(founded[9]);
           // eslint-disable-next-line max-len
           selector1 !== null
             ? objetoControl.selector.push(selector1)
-            : objetoControl.selector.push(0)
+            : objetoControl.selector.push(0);
           // eslint-disable-next-line max-len
           selector2 !== null
             ? objetoControl.selector2.push(selector2)
-            : objetoControl.selector2.push(0)
-          objetoControl.valorS.push(valorS)
-          objetoControl.valorOBS.push(valorOBS)
-          objetoControl.familiaselector.push(familiaselector)
-          objetoControl.observacion.push(observacion)
-          objetoControl.requerido.push(founded[21])
+            : objetoControl.selector2.push(0);
+          objetoControl.valorS.push(valorS);
+          objetoControl.valorOBS.push(valorOBS);
+          objetoControl.familiaselector.push(familiaselector);
+          objetoControl.observacion.push(observacion);
+          objetoControl.requerido.push(founded[21]);
           if (imagenes.src.length > 0) {
-            const convertido = convertirObjATextPlano(imagenes)
+            const convertido = convertirObjATextPlano(imagenes);
 
-            objetoControl.imagenes.push(convertido)
-            objetoControl.objImagen.push(imagenes)
+            objetoControl.imagenes.push(convertido);
+            objetoControl.objImagen.push(imagenes);
           } else {
-            objetoControl.imagenes.push('')
+            objetoControl.imagenes.push('');
           }
-          objetoControl.displayRow.push(displayRow)
+          objetoControl.displayRow.push(displayRow);
           // objetoControl.detalle.push(terceraColumna.textContent)
 
           // console.log(typeof founded[21], founded[21], valor);
@@ -271,33 +272,33 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
             founded[21] === null ||
             founded[21] === undefined
           ) {
-            estanTodosLosRequeridos = true
+            estanTodosLosRequeridos = true;
           }
           if (
             founded[21] === '1' &&
             (valor === '' || valor === null || valor === undefined)
           ) {
-            estanTodosLosRequeridos = false
+            estanTodosLosRequeridos = false;
             const requerido = {
               requerido: false,
               fila: i,
               idLTYcontrol: founded[1],
-            }
-            sessionStorage.setItem('requerido', encriptar(requerido))
-            return false
+            };
+            sessionStorage.setItem('requerido', encriptar(requerido));
+            return false;
             // eslint-disable-next-line max-len
           }
         }
         if (c === 3) {
-          const tipoDatoDetalle = arrayControl[i][33]
-          objetoControl.tipoDatoDetalle.push(tipoDatoDetalle)
+          const tipoDatoDetalle = arrayControl[i][33];
+          objetoControl.tipoDatoDetalle.push(tipoDatoDetalle);
           if (tipoDatoDetalle === 'checkhour') {
-            const inputElement = td[3].querySelector('div > input')
-            let detalle = inputElement.value
-            detalle = detalle.replace(':', '.')
-            objetoControl.detalle.push(detalle)
+            const inputElement3 = td[3].querySelector('div > input');
+            let detalle = inputElement3.value;
+            detalle = detalle.replace(':', '.');
+            objetoControl.detalle.push(detalle);
           } else if (tipoDatoDetalle === 'x') {
-            objetoControl.detalle.push(terceraColumna.textContent)
+            objetoControl.detalle.push(terceraColumna.textContent);
           }
         }
       }
@@ -307,11 +308,11 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
     // console.log(objetoControl)
     // console.log(arrayControl);
     // console.log(estanTodosLosRequeridos)
-    const planta = document.getElementById('planta').textContent
-    const reporte = document.getElementById('wichC').textContent
-    const persona = desencriptar(sessionStorage.getItem('user'))
-    const notificador = persona.person
-    const mailUser = person.mail
+    const planta = document.getElementById('planta').textContent;
+    const reporte = document.getElementById('wichC').textContent;
+    const persona = desencriptar(sessionStorage.getItem('user'));
+    const notificador = persona.person;
+    const mailUser = person.mail;
     // eslint-disable-next-line no-unused-vars, max-len
     const objetoControlModificado = tuFuncion(
       objetoControl,
@@ -322,26 +323,26 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
       mailUser,
       fechaActual,
       horaActual,
-      emailSupervisor
-    )
+      emailSupervisor,
+    );
     if (estanTodosLosRequeridos) {
       const requerido = {
         requerido: true,
         fila: 0,
         idLTYcontrol: 0,
-      }
-      sessionStorage.setItem('requerido', encriptar(requerido))
+      };
+      sessionStorage.setItem('requerido', encriptar(requerido));
     }
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(error)
+    console.log(error);
   }
-  return true
+  return true;
 }
 function guardarNuevo(objetoControl, arrayControl, nuxpedido, planta, carpeta) {
   // console.log(objetoControl, arrayControl, nuxpedido)
 
-  return recorroTable(objetoControl, arrayControl, nuxpedido, planta, carpeta)
+  return recorroTable(objetoControl, arrayControl, nuxpedido, planta, carpeta);
 }
 
-export default guardarNuevo
+export default guardarNuevo;

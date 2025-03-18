@@ -1,20 +1,22 @@
-import baseUrl from '../../../../config.js'
-const SERVER = baseUrl
+import baseUrl from '../../../../config.js';
+import { mostrarMensajeError } from '../../../../controllers/utils.js';
 
-export default function traerRegistros(q, sql_i) {
+const SERVER = baseUrl;
+
+export default function traerRegistros(q, sqlI) {
   // eslint-disable-next-line no-console
 
   return new Promise((resolve, reject) => {
-    const rax = `&new=${new Date()}`
-    let obj = {
+    const rax = `&new=${new Date()}`;
+    const obj = {
       q,
       ruta: '/traerRegistros',
       rax,
-      sql_i,
-    }
-    const datos = JSON.stringify(obj)
-    const ruta = `${SERVER}/Routes/index.php`
-    // console.log(datos)
+      sqlI,
+    };
+    const datos = JSON.stringify(obj);
+    const ruta = `${SERVER}/Routes/index.php`;
+    // console.log(datos);
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -28,33 +30,34 @@ export default function traerRegistros(q, sql_i) {
       .then((data) => {
         // console.log(data)
 
-        let vecesLoad = sessionStorage.getItem('loadSystem')
+        let vecesLoad = sessionStorage.getItem('loadSystem');
 
-        const cantidadProcesos = sessionStorage.getItem('cantidadProcesos')
-        vecesLoad = Number(vecesLoad) + 1
-        sessionStorage.setItem('loadSystem', vecesLoad)
-        const modal = document.getElementById('modalAlertCarga')
+        const cantidadProcesos = sessionStorage.getItem('cantidadProcesos');
+        vecesLoad = Number(vecesLoad) + 1;
+        sessionStorage.setItem('loadSystem', vecesLoad);
+        const modal = document.getElementById('modalAlertCarga');
 
         if (vecesLoad > Number(cantidadProcesos)) {
           if (!modal) {
-            console.warn('El elemento modal no se encontró.')
+            // eslint-disable-next-line no-console
+            console.warn('El elemento modal no se encontró.');
           } else {
-            modal.style.display = 'none'
-            modal.remove()
+            modal.style.display = 'none';
+            modal.remove();
           }
 
-          document.getElementById('wichC').style.display = 'inline'
-          sessionStorage.setItem('loadSystem', '1')
+          document.getElementById('wichC').style.display = 'inline';
+          sessionStorage.setItem('loadSystem', '1');
         }
-        resolve(data)
+        resolve(data);
         // eslint-disable-next-line no-console
-        console.timeEnd('traerRegistros')
+        console.timeEnd('traerRegistros');
       })
       .catch((error) => {
-        console.timeEnd('traerRegistros')
-        console.error('Error en la solicitud:', error)
-        reject(error)
-        alert('No se pudo establecer conexión con el servidor')
-      })
-  })
+        console.timeEnd('traerRegistros');
+        console.error('Error en la solicitud:', error);
+        reject(error);
+        mostrarMensajeError('No se pudo establecer conexión con el servidor');
+      });
+  });
 }

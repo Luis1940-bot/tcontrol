@@ -7,12 +7,12 @@
         // include('datos.php');
         $sql='';
         
-        function traer($q, $sql_i) {
+        function traer($q, $sqlI) {
           $porciones = explode(",", $q);
                   switch ($porciones[0]) {
 
                       case 'empresa':
-                          $sql="SELECT c.cliente FROM LTYcliente c WHERE c.idLTYcliente =".$sql_i.";";
+                          $sql="SELECT c.cliente FROM LTYcliente c WHERE c.idLTYcliente =".$sqlI.";";
                       break;
 
                       case 'NuevoControl':
@@ -82,7 +82,7 @@
 
                       case 'traer_LTYsql':
                         
-                          $sql=$sql_i; //$_GET['sql'];
+                          $sql=$sqlI; //$_GET['sql'];
                           $sql = str_replace("+","%2B",$sql);
                           // $sql = urldecode($sql);
                           $sql = rawurldecode($sql);
@@ -148,7 +148,7 @@
         header("Content-Type: application/json; charset=utf-8");
         require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
         $datos = file_get_contents("php://input");
-        $datos = '{"q":"traer_LTYsql","ruta":"/traerRegistros","rax":"&new=Sun Oct 13 2024 09:23:52 GMT-0600 (hora estándar central)","sql_i":"SET%20%40sql%20%3D%20%0D%0A%20%20%20%20SELECT%0D%0A%20%20%20%20%20%20%20%20CONCAT(%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20%22DOC%20%22%2C%20reg.nuxpedido%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20STR_TO_DATE(JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B0%5D%22))%2C%20%22%25Y-%25m-%25d%22)%2C%20%22%20%22%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B1%5D%22))%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Usuario%20%22%2C%20usuario.nombre%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B5%5D%22))%0D%0A%20%20%20%20%20%20%20%20)%20AS%20HISTORIAL%0D%0A%20%20%20%20FROM%20LTYregistrocontrol%20reg%0D%0A%20%20%20%20INNER%20JOIN%20usuario%20ON%20usuario.idusuario%20%3D%20reg.idusuario%0D%0A%20%20%20%20WHERE%20reg.idLTYreporte%20%3D%2062%0D%0A%20%20%20%20ORDER%20BY%20%0D%0A%20%20%20%20%20%20%20%20STR_TO_DATE(JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B0%5D%22))%2C%20%22%25Y-%25m-%25d%22)%20ASC%2C%0D%0A%20%20%20%20%20%20%20%20JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B1%5D%22))%20ASC%0D%0A%3B%0D%0A%0D%0A--%20Preparar%20y%20ejecutar%20la%20consulta%20din%C3%A1mica%0D%0APREPARE%20stmt%20FROM%20%40sql%3B%0D%0AEXECUTE%20stmt%3B%0D%0ADEALLOCATE%20PREPARE%20stmt%3B"}';
+        $datos = '{"q":"traer_LTYsql","ruta":"/traerRegistros","rax":"&new=Sun Oct 13 2024 09:23:52 GMT-0600 (hora estándar central)","sqlI":"SET%20%40sql%20%3D%20%0D%0A%20%20%20%20SELECT%0D%0A%20%20%20%20%20%20%20%20CONCAT(%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20%22DOC%20%22%2C%20reg.nuxpedido%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20STR_TO_DATE(JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B0%5D%22))%2C%20%22%25Y-%25m-%25d%22)%2C%20%22%20%22%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B1%5D%22))%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Usuario%20%22%2C%20usuario.nombre%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B5%5D%22))%0D%0A%20%20%20%20%20%20%20%20)%20AS%20HISTORIAL%0D%0A%20%20%20%20FROM%20LTYregistrocontrol%20reg%0D%0A%20%20%20%20INNER%20JOIN%20usuario%20ON%20usuario.idusuario%20%3D%20reg.idusuario%0D%0A%20%20%20%20WHERE%20reg.idLTYreporte%20%3D%2062%0D%0A%20%20%20%20ORDER%20BY%20%0D%0A%20%20%20%20%20%20%20%20STR_TO_DATE(JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B0%5D%22))%2C%20%22%25Y-%25m-%25d%22)%20ASC%2C%0D%0A%20%20%20%20%20%20%20%20JSON_UNQUOTE(JSON_EXTRACT(newJSON%2C%20%22%24.valor%5B1%5D%22))%20ASC%0D%0A%3B%0D%0A%0D%0A--%20Preparar%20y%20ejecutar%20la%20consulta%20din%C3%A1mica%0D%0APREPARE%20stmt%20FROM%20%40sql%3B%0D%0AEXECUTE%20stmt%3B%0D%0ADEALLOCATE%20PREPARE%20stmt%3B"}';
 
         if (empty($datos)) {
           $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
@@ -161,8 +161,8 @@
 
         if ($data !== null) {
           $q = $data['q'];
-          $sql_i = urldecode($data['sql_i']);
-          traer($q, $sql_i);
+          $sqlI = urldecode($data['sqlI']);
+          traer($q, $sqlI);
         } else {
           echo "Error al decodificar la cadena JSON";
           error_log('Control/Routes/traerRegistros-JSON response: ' . json_encode($data));
