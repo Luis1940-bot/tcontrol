@@ -1,19 +1,20 @@
-// config.js
+/**
+ * Función para obtener la URL base dependiendo del entorno
+ * @returns {string} URL base
+ */
+const getBaseUrl = () => {
+  const { hostname } = window.location;
 
-// Detecta si estamos en localhost
-const isLocalhost =
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1'
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:3000';
+  }
 
-// Define la ruta base según el entorno
-let baseUrl
+  if (hostname === 'test.tenkiweb.com') {
+    return 'https://test.tenkiweb.com/tcontrol';
+  }
 
-if (isLocalhost) {
-  baseUrl = 'http://localhost:3000'
-} else {
-  // En producción
-  baseUrl = 'https://tenkiweb.com/tcontrol'
-}
+  return 'https://tenkiweb.com/tcontrol';
+};
 
-// Exporta la variable baseUrl para que otros archivos puedan importarla
-export default baseUrl
+// Exportar la función en lugar de una variable mutable
+export default getBaseUrl();
