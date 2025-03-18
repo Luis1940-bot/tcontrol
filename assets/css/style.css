@@ -1,4 +1,4 @@
-body{
+body {
   background: #393838;
   text-align: center;
   display: flex;
@@ -6,6 +6,6 @@ body{
   align-items: center;
   min-height: 90vh;
 }
-#logo_factum{
+#logo_factum {
   max-width: 100%;
 }
