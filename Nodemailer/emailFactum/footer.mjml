@@ -1,0 +1,13 @@
+<mj-section>
+  <mj-column>
+    <!-- Enlace al Sistema -->
+    <mj-button
+      background-color="#333333"
+      color="#ffffff"
+      href="https://tenkiweb.com/mccain/"
+      align="center"
+      padding="10px"
+      >{irA} Sistema Factum</mj-button
+    >
+  </mj-column>
+</mj-section>

@@ -5,16 +5,14 @@
   header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   // header ("MIME-Version: 1.0\r\n");
   require_once dirname(dirname(__DIR__)) . '/config.php';
-    /** @var string $baseDir */
-  $baseDir = BASE_DIR;
 
-  define('EMAIL', $baseDir .'/Nodemailer/nuevoUsuario');
+  define('EMAIL', BASE_URL .'/Nodemailer/nuevoUsuario');
 
-  ini_set('display_errors', '1');
-  ini_set('display_startup_errors', '1');
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 
-require $baseDir . '/vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -22,30 +20,28 @@ use PHPMailer\PHPMailer\SMTP;
 // include('datos.php');
 
 
-// require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php';
-// require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
-// require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
+require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/Exception.php';
+require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/PHPMailer.php';
+require __DIR__ . '/../PHPMailer-6.8.0/PHPMailer-6.8.0/src/SMTP.php';
 
 try {
-      /** @var array{objeto: array{cliente: string, contacto: string, address: string}} $datos */
+  $datos = json_decode(file_get_contents('php://input'), true);
+  // $datos = '{"ruta":"/sendNuevoUsuario","rax":"&new=Fri Sep 06 2024 20:35:22 GMT-0300 (hora estándar de Argentina)","objeto":{"cliente":"Alpek-PTAC Cosoleacaque","usuario":"grgrg","idusuario":15,"email":"luisglogista@gmail.com","v":"1a1fa5b9eb168096de1ed13e169b7792","subject":"Nuevo usuario","mensaje":"Se dio de alta un nuevo usuario:"}}';
+  // $datos = json_decode($datos, true);
 
-
-    $input = file_get_contents('php://input');
-
-    if ($input === false || $input === '') {
-        die('Error: No se pudo leer php://input o está vacío.');
+    if (empty($datos)) {
+        $response = array('success' => false, 'message' => 'Faltan datos necesarios.');
+        echo json_encode($response);
+        exit;
     }
 
-    $datos = json_decode($input, true);
-    //   $datos = '{"ruta":"/sendNuevoUsuario","rax":"&new=Fri Sep 06 2024 20:35:22 GMT-0300 (hora estándar de Argentina)","objeto":{"cliente":"Alpek-PTAC Cosoleacaque","usuario":"grgrg","idusuario":15,"email":"luisglogista@gmail.com","v":"1a1fa5b9eb168096de1ed13e169b7792","subject":"Nuevo usuario","mensaje":"Se dio de alta un nuevo usuario:"}}';
-    // $datos = json_decode($datos, true);
-    if ($datos === null || json_last_error() !== JSON_ERROR_NONE) {
+    if ($datos === null) {
         $response = array('success' => false, 'message' => 'Error al decodificar la cadena JSON principal');
         echo json_encode($response);
         exit;
     }
 
-    /** @var array{objeto: array{cliente: string, usuario: string, idusuario: string, email: string, subject: string, v: string, mensaje: string}} $datos */
+
     $objeto = $datos['objeto'];
 
     $cliente = $objeto['cliente'];
@@ -56,13 +52,10 @@ try {
     $cod_verificador = $objeto['v'];
     $mensaje = $objeto['mensaje'];
 
-
     ob_start();
     include(BASE_DIR . '/Nodemailer/nuevoUsuario/nuevoUsuario.html');
     $html = ob_get_clean();
-    if ($html === false || $html === '') {
-        die('Error: No se pudo cargar la plantilla HTML.');
-    }
+
   
    $html  = str_replace('{cliente}', $cliente, $html);
    $html  = str_replace('{usuario}', $usuario, $html);
