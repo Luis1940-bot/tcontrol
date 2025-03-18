@@ -1,249 +1,137 @@
 <?php
+// ini_set('display_errors', '1');
+// ini_set('display_startup_errors', '1');
+// error_reporting(E_ALL);
 mb_internal_encoding('UTF-8');
-require_once  dirname(__DIR__) . '/config.php';
+require_once dirname(__DIR__) . '/config.php';
 
-// // Define las opciones de sesión segura
-// $sessionOptions = [
-//     'use_only_cookies' => 1, // Solo usar cookies para almacenar el identificador de sesión
-//     'cookie_lifetime' => 14400, // Tiempo de vida de la cookie de sesión en segundos (1 hora)
-//     'cookie_secure' => 1, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
-//     'cookie_httponly' => 1, // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
-//     'cookie_samesite' => 'Strict' // Evita ataques de CSRF (Cross-Site Request Forgery)
-// ];
-
-
-// // Configura las opciones de sesión segura
-// session_set_cookie_params(
-//     $sessionOptions['cookie_lifetime'], // Tiempo de vida de la cookie de sesión en segundos (1 hora)
-//     '/', // Ruta de la cookie (puedes cambiarla según tus necesidades)
-//     $_SERVER['HTTP_HOST'], // Dominio de la cookie (usando el dominio actual)
-//     true, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
-//     true // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
-// );
-// // Inicia la sesión de PHP
-// if (session_status() == PHP_SESSION_NONE) {
-//     session_start();
-// }
-
-// Verificar si la sesión ya ha sido iniciada
+// Iniciar sesión segura si no está iniciada
+// tiene que ir dentro de la configuración inicial
 if (session_status() == PHP_SESSION_NONE) {
-    // Configura las opciones de sesión segura
-    session_set_cookie_params([
-        'lifetime' => 14400, // Tiempo de vida de la cookie de sesión en segundos (4 horas)
-        'path' => '/',
-        'domain' => $_SERVER['HTTP_HOST'], // Dominio de la cookie (usando el dominio actual)
-        'secure' => true, // Solo enviar la cookie a través de conexiones seguras (HTTPS)
-        'httponly' => true, // La cookie solo es accesible a través de HTTP y no puede ser manipulada por JavaScript
-        'samesite' => 'Strict' // Evita ataques de CSRF (Cross-Site Request Forgery)
-    ]);
-    session_start();
+  $domain = isset($_SERVER['HTTP_HOST']) && is_string($_SERVER['HTTP_HOST'])
+    ? $_SERVER['HTTP_HOST']
+    : null;
+
+  session_set_cookie_params([
+    'lifetime' => 14400, // 4 horas
+    'path' => '/',
+    'domain' => $domain,
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Strict'
+  ]);
+  session_start();
 }
 
 
-// Verifica si la solicitud se está realizando en localhost
-$host = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
-if ($host === 'localhost' || $host === '127.0.0.1') {
-    // Estás en localhost, no es necesario verificar HTTPS
-    
+$httpHost = isset($_SERVER['HTTP_HOST']) && is_string($_SERVER['HTTP_HOST'])
+  ? $_SERVER['HTTP_HOST']
+  : 'localhost'; // Valor por defecto
+
+$requestUri = isset($_SERVER['REQUEST_URI']) && is_string($_SERVER['REQUEST_URI'])
+  ? $_SERVER['REQUEST_URI']
+  : '/'; // Valor por defecto
+
+$host = parse_url($httpHost, PHP_URL_HOST);
+if ($host !== 'localhost' && $host !== '127.0.0.1' && (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on')) {
+  header("Location: https://{$httpHost}{$requestUri}", true, 301);
+  exit;
+}
+
+
+
+// Configurar CORS
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header("Content-Type: application/json; charset=utf-8");
+
+// Manejo de solicitudes OPTIONS
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+  http_response_code(200);
+  exit;
+}
+
+// Obtener datos de la solicitud
+$datos = file_get_contents("php://input");
+// $datos = '{"planta":15,"email":"luisconsultor@outlook.com","ruta":"/auth","rax":"&new=Sat Jan 18 2025 10:50:18 GMT-0300 (hora estándar de Argentina)"}';
+// Validar que $datos sea una cadena y no false
+if ($datos === false) {
+  $datos = '{}'; // Asignar JSON vacío en caso de error
+}
+
+$data = json_decode($datos, true);
+
+// Validar que $data sea un array
+if (!is_array($data)) {
+  echo json_encode(['success' => false, 'message' => 'Error al decodificar la cadena JSON']);
+  exit;
+}
+
+$ruta = $data['ruta'] ?? null;
+
+
+if (!$ruta) {
+  http_response_code(400);
+  echo json_encode(['error' => 'Ruta no especificada']);
+  exit;
+}
+
+// Mapeo de rutas a archivos PHP dinámicamente
+$rutas = [
+  '/login' => '/Pages/Login/Routes/login.php',
+  '/mi_cfg' => '/includes/Traducciones/Lenguajes/fijarLenguaje.php',
+  '/traerRegistros' => '/Pages/Control/Routes/traerRegistros.php',
+  '/traerControles' => '/Pages/Controles/Routes/traerRegistros.php',
+  '/callProcedure' => '/Pages/ConsultasViews/Routes/callProcedure.php',
+  '/callRove' => '/Pages/Rove/Routes/traer_rove.php',
+  '/alertaRove' => '/Pages/ControlsView/Routes/traerRegistros.php',
+  '/traerFirma' => '/Pages/Control/Routes/supervisores.php',
+  '/traerSupervisor' => '/Pages/Control/Routes/traerSupervisor.php',
+  '/ex2024' => '/Pages/ControlsView/Routes/eliminaRegistro.php',
+  '/traerCargados' => '/Pages/ControlsView/Routes/traerRegistros.php',
+  '/ix2024' => '/Pages/Control/Routes/ix.php',
+  '/ux2024' => '/Pages/Control/Routes/ux.php',
+  '/traerReportes' => '/Pages/ListReportes/Routes/traerRegistros.php',
+  '/reporteOnOff' => '/Pages/ListReportes/Routes/reporteOnOff.php',
+  '/guardarReporteNuevo' => '/Pages/ListReportes/Routes/guardarReporteNuevo.php',
+  '/guardarReporteCambios' => '/Pages/ListReportes/Routes/guardarReporteCambios.php',
+  '/traerVariables' => '/Pages/ListVariables/Routes/traerRegistros.php',
+  '/variableOnOff' => '/Pages/ListVariables/Routes/variableOnOff.php',
+  '/variableUpDown' => '/Pages/ListVariables/Routes/variableUpDown.php',
+  '/addVariable' => '/Pages/ListVariables/Routes/aceptarVariable.php',
+  '/addSelector' => '/Pages/ListVariables/Routes/addSelector.php',
+  '/updateSelector' => '/Pages/ListVariables/Routes/updateSelector.php',
+  '/updateVariable' => '/Pages/ListVariables/Routes/updateVariable.php',
+  '/traerSelectReporte' => '/Pages/ListVariables/Routes/traerRegistros.php',
+  '/traerReporteParaVincular' => '/Pages/ListVariables/Routes/traerRegistros.php',
+  '/addVinculo' => '/Pages/ListVariables/Routes/aceptarVinculos.php',
+  '/selectReporteOnOff' => '/Pages/ListVariables/Routes/selectReporteOnOff.php',
+  '/traerLTYcontrol' => '/Pages/ListControles/Routes/traerRegistros.php',
+  '/turnOnOff' => '/Pages/ListControles/Routes/turnOnOff.php',
+  '/addNewCampo' => '/Pages/ListControles/Routes/addNewCampo.php',
+  '/clonarReporte' => '/Pages/ListControles/Routes/clonarReporte.php',
+  '/traerAreasParaRegistroUser' => '/Pages/RegisterUser/Routes/traerRegistros.php',
+  '/traerTipoDeUsuarioParaRegistroUser' => '/Pages/RegisterUser/Routes/traerRegistros.php',
+  '/traerTipoDeUsuarioParaRegistroPlanta' => '/Pages/RegisterPlant/Routes/traerRegistros.php',
+  '/addCompania' => '/Pages/RegisterPlant/Routes/nuevaCompania.php',
+  '/escribirJSON' => '/Pages/RegisterPlant/Routes/escribeJSON.php',
+  '/sendNuevoCliente' => '/Nodemailer/Routes/sendNuevoCliente.php',
+  '/addUsuario' => '/Pages/RegisterUser/Routes/nuevoUsuario.php',
+  '/sendNuevoUsuario' => '/Nodemailer/Routes/sendNuevoUsuario.php',
+  '/confirmaEmail' => '/Pages/RecoveryPass/Routes/confirmaEmail.php',
+  '/creaJSONapp' => '/Pages/RegisterPlant/Routes/creaJSONapp.php',
+  '/traerLTYareas' => '/Pages/ListAreas/Routes/traerRegistros.php',
+  '/guardarAreaNuevo' => '/Pages/ListAreas/Routes/guardarAreaNuevo.php',
+  '/areaOnOff' => '/Pages/ListAreas/Routes/areaOnOff.php',
+  '/guardarCambioArea' => '/Pages/ListAreas/Routes/guardarCambioArea.php',
+  '/auth' => '/Pages/Login/Routes/auth.php',
+  '/nuevoAuth' => '/Pages/AuthUser/Routes/ix.php',
+];
+
+if (isset($rutas[$ruta])) {
+  include_once dirname(__DIR__) . $rutas[$ruta];
 } else {
-    // No estás en localhost, verifica si se está utilizando HTTPS
-    if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
-        // Si la solicitud no se realizó mediante HTTPS, redirige a la misma URL pero con HTTPS
-        $redirectURL = "https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        header("Location: $redirectURL", true, 301); // Redirección permanente
-        exit;
-    }
+  http_response_code(404);
+  echo json_encode(['error' => 'Ruta no encontrada']);
 }
-
-// Verifica el método de la solicitud
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Verifica si se está recibiendo datos POST correctamente
-
-    // Agrega los encabezados CORS para permitir solicitudes desde cualquier origen
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: POST, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-    header("Content-Type: application/json; charset=utf-8");
-    $datos = file_get_contents("php://input");
-    
-  // $datos = '{"leng":"es","id":"6","ruta":"/mi_cfg","rax":"&new=Fri Apr 05 2024 19:02:11 GMT-0300 (hora estándar de Argentina)"}';
-    // $datos = '{"planta":"1","email":"luisglogista@gmail.com","password":"4488","ruta":"/login","rax":"&new=Sun Apr 14 2024 11:35:48 GMT-0300 (hora estándar de Argentina)"}';
-    $data = json_decode($datos, true);
-   
-    if ($data === null && json_last_error() === JSON_ERROR_NONE) {
-      // Error al decodificar JSON
-      http_response_code(400); // Bad Request
-      echo 'Error: Datos JSON incorrectos';
-      exit;
-    }
-
-    $ruta = $data['ruta'];
-  
-  
-    // Si la solicitud es una solicitud OPTIONS, finaliza la ejecución para evitar errores CORS
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        exit;
-    }
-
-    // $ruta = $_SERVER['REQUEST_URI'];
-
-    switch ($ruta) {
-        case '/login':
-            include_once dirname(__DIR__) .'/Pages/Login/Routes/login.php';
-            break;
-        case '/mi_cfg':
-            include_once dirname(__DIR__) . '/includes/Traducciones/Lenguajes/fijarLenguaje.php';
-            break;
-        case '/traerRegistros':
-            include_once dirname(__DIR__) . '/Pages/Control/Routes/traerRegistros.php';
-            break;
-        case '/traerControles':
-            include_once dirname(__DIR__) . '/Pages/Controles/Routes/traerRegistros.php';
-            break;
-        case '/callProcedure':
-            include_once dirname(__DIR__) . '/Pages/ConsultasViews/Routes/callProcedure.php';
-            break;
-        case '/callRove':
-            include_once dirname(__DIR__) . '/Pages/Rove/Routes/traer_rove.php';
-            break;
-        case '/alertaRove':
-            include_once dirname(__DIR__) . '/Pages/ControlsView/Routes/traerRegistros.php';
-            break;
-        case '/traerFirma':
-            include_once dirname(__DIR__) . '/Pages/Control/Routes/supervisores.php';
-            break;
-        case '/traerSupervisor':
-            include_once dirname(__DIR__) . '/Pages/Control/Routes/traerSupervisor.php';
-            break;
-         case '/ex2024':
-            include_once dirname(__DIR__) . '/Pages/ControlsView/Routes/eliminaRegistro.php';
-            break;
-          case '/traerCargados':
-            include_once dirname(__DIR__) . '/Pages/ControlsView/Routes/traerRegistros.php';
-            break;
-          case '/ix2024':
-            include_once dirname(__DIR__) . '/Pages/Control/Routes/ix.php';
-            break;
-          case '/ux2024':
-            include_once dirname(__DIR__) . '/Pages/Control/Routes/ux.php';
-            break;
-          case '/traerReportes':
-            include_once dirname(__DIR__) . '/Pages/ListReportes/Routes/traerRegistros.php';
-            break;
-          case '/reporteOnOff':
-            include_once dirname(__DIR__) . '/Pages/ListReportes/Routes/reporteOnOff.php';
-            break;
-          case '/guardarReporteNuevo':
-            include_once dirname(__DIR__) . '/Pages/ListReportes/Routes/guardarReporteNuevo.php';
-            break;
-          case '/guardarReporteCambios':
-            include_once dirname(__DIR__) . '/Pages/ListReportes/Routes/guardarReporteCambios.php';
-            break;
-          case '/traerVariables':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/traerRegistros.php';
-            break;
-          case '/variableOnOff':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/variableOnOff.php';
-            break;
-          case '/variableUpDown':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/variableUpDown.php';
-            break;
-          case '/addVariable':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/aceptarVariable.php';
-            break;
-          case '/addSelector':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/addSelector.php';
-            break;
-          case '/updateSelector':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/updateSelector.php';
-            break;
-          case '/updateVariable':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/updateVariable.php';
-            break;
-          case '/traerSelectReporte':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/traerRegistros.php';
-            break;
-          case '/traerReporteParaVincular':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/traerRegistros.php';
-            break;
-          case '/addVinculo':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/aceptarVinculos.php';
-          break;
-        case '/selectReporteOnOff':
-            include_once dirname(__DIR__) . '/Pages/ListVariables/Routes/selectReporteOnOff.php';
-          break;
-        case '/traerLTYcontrol':
-            include_once dirname(__DIR__) . '/Pages/ListControles/Routes/traerRegistros.php';
-          break;
-        case '/turnOnOff':
-            include_once dirname(__DIR__) . '/Pages/ListControles/Routes/turnOnOff.php';
-          break;
-        case '/addNewCampo':
-            include_once dirname(__DIR__) . '/Pages/ListControles/Routes/addNewCampo.php';
-          break;
-        case '/clonarReporte':
-            include_once dirname(__DIR__) . '/Pages/ListControles/Routes/clonarReporte.php';
-          break;
-        case '/traerAreasParaRegistroUser':
-            include_once dirname(__DIR__) . '/Pages/RegisterUser/Routes/traerRegistros.php';
-          break;
-        case '/traerTipoDeUsuarioParaRegistroUser':
-            include_once dirname(__DIR__) . '/Pages/RegisterUser/Routes/traerRegistros.php';
-          break;
-        case '/traerTipoDeUsuarioParaRegistroPlanta':
-            include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/traerRegistros.php';
-          break;
-        case '/addCompania':
-            include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/nuevaCompania.php';
-          break;
-        case '/escribirJSON':
-            include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/escribeJSON.php';
-          break;
-        case '/sendNuevoCliente':
-            include_once dirname(__DIR__) . '/Nodemailer/Routes/sendNuevoCliente.php';
-          break;
-        case '/addUsuario':
-            include_once dirname(__DIR__) . '/Pages/RegisterUser/Routes/nuevoUsuario.php';
-          break;
-        case '/sendNuevoUsuario':
-            include_once dirname(__DIR__) . '/Nodemailer/Routes/sendNuevoUsuario.php';
-          break;
-        case '/confirmaEmail':
-            include_once dirname(__DIR__) . '/Pages/RecoveryPass/Routes/confirmaEmail.php';
-          break;
-        case '/creaJSONapp':
-            include_once dirname(__DIR__) . '/Pages/RegisterPlant/Routes/creaJSONapp.php';
-          break;
-        case '/traerLTYareas':
-            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/traerRegistros.php';
-          break;
-        case '/guardarAreaNuevo':
-            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/guardarAreaNuevo.php';
-          break;
-        case '/areaOnOff':
-            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/areaOnOff.php';
-          break;
-        case '/guardarCambioArea':
-            include_once dirname(__DIR__) . '/Pages/ListAreas/Routes/guardarCambioArea.php';
-          break;
-        case '/auth':
-            include_once dirname(__DIR__) . '/Pages/Login/Routes/auth.php';
-          break;
-        case '/nuevoAuth':
-            include_once dirname(__DIR__) . '/Pages/AuthUser/Routes/ix.php';
-          break;
-        // Agrega más casos según las rutas de tu aplicación
-        default:
-            // Ruta no encontrada
-            http_response_code(404); // No encontrado
-            echo 'Página no encontrada';
-            break;
-    }
-} else {
-    // Ruta no permitida
-    http_response_code(405); // Método no permitido
-    echo 'Método no permitido';
-}
-
-?>
