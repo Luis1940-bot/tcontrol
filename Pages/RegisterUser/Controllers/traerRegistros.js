@@ -1,21 +1,21 @@
-import baseUrl from '../../../config.js'
+import baseUrl from '../../../config.js';
 // const SERVER = '/iControl-Vanilla/icontrol';
-const SERVER = baseUrl
+const SERVER = baseUrl;
 
-export default function traerRegistros(q, ruta, sql_i) {
+export default function traerRegistros(q, ruta, sqlI) {
   // eslint-disable-next-line no-console
-  console.time('traerRegistros')
+  console.time('traerRegistros');
   return new Promise((resolve, reject) => {
-    const rax = `&new=${new Date()}`
-    let obj = {
+    const rax = `&new=${new Date()}`;
+    const obj = {
       q,
       ruta,
-      sql_i,
+      sqlI,
       rax,
-    }
-    const datos = JSON.stringify(obj)
+    };
+    const datos = JSON.stringify(obj);
     // console.log(datos)
-    const url = `${SERVER}/Routes/index.php`
+    const url = `${SERVER}/Routes/index.php`;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -27,15 +27,15 @@ export default function traerRegistros(q, ruta, sql_i) {
     })
       .then((res) => res.json())
       .then((data) => {
-        resolve(data)
+        resolve(data);
         // eslint-disable-next-line no-console
-        console.timeEnd('traerRegistros')
+        console.timeEnd('traerRegistros');
       })
       .catch((error) => {
-        console.timeEnd('traerRegistros')
-        console.error('Error en la solicitud:', error)
-        reject(error)
-        alert('No se pudo establecer conexión con el servidor')
-      })
-  })
+        console.timeEnd('traerRegistros');
+        console.error('Error en la solicitud:', error);
+        reject(error);
+        alert('No se pudo establecer conexión con el servidor');
+      });
+  });
 }
