@@ -65,18 +65,22 @@
           "Mezcla de Antimonio",
           "MEZCLA RHIL",
           "Toner Azul",
-          "Toner Rojo SR52"
+          "Toner Rojo SR52",
+          "APM-MP-PR-141-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO FUSIÓN (TURNO 1)",
+          "APM-MP-PR-181-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO FUSIÓN/SERVICIO (TURNO 1)"
         ],
-        "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl"],
+        "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
         "ruta": [
           "control_N=175&control_T=BITACORA%20DEL%20DCS%20FUSIÓN%20(CP)&nr=",
           "",
           "control_N=178&control_T=PREPARACIÓN%20DE%20LA%20MEZCLA%20DE%20ANTIMONIO&nr=",
-          "control_N=179&control_T=PREPARACION%20DE%20LA%20MEZCLA%20DE%20EGV%20/%20RHIL&nr=",
+          "control_N=179&control_T=PREPARACION%20DE%20LA%20MEZCLA%20DE%20EGV%20-%20RHIL&nr=",
           "control_N=180&control_T=PREPARACION%20DE%20LA%20MEZCLA%20DE%20TONER%20AZUL%20PARA%20LA%20RESINA%20MB912&nr=",
-          "control_N=181&control_T=PREPARACIÓN%20DE%20LA%20MEZCLA%20DE%20TONER%20ROJO%20SR-52%20(REPI)&nr="
+          "control_N=181&control_T=PREPARACIÓN%20DE%20LA%20MEZCLA%20DE%20TONER%20ROJO%20SR-52%20(REPI)&nr=",
+          "control_N=220&control_T=APM-MP-PR-141-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20FUSIÓN%20(TURNO%201)&nr=",
+          "control_N=223&control_T=APM-MP-PR-181-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20FUSIÓN-SERVICIO%20(TURNO%201)&nr="
         ],
-        "nivel": [1, 1, 1, 1, 1, 1],
+        "nivel": [1, 1, 1, 1, 1, 1, 1, 1],
         "CP Check List Semanal": {
           "name": [
             "TURNO 1 LUNES",
@@ -130,20 +134,30 @@
         }
       },
       "SSP": {
-        "name": ["BITÁCORA DEL DCS SÓLIDO (SSP)"],
-        "type": ["ctrl"],
-        "ruta": [
-          "control_N=177&control_T=BITACORA%20DEL%20DCS%20SÓLIDO%20(SSP)&nr="
+        "name": [
+          "BITÁCORA DEL DCS SÓLIDO (SSP)",
+          "APM-MP-PR-141-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO SÓLIDO (TURNO 1)",
+          "APM-MP-PR-181-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO SÓLIDO (TURNO 1)"
         ],
-        "nivel": [1]
+        "type": ["ctrl", "ctrl", "ctrl"],
+        "ruta": [
+          "control_N=177&control_T=BITACORA%20DEL%20DCS%20SÓLIDO%20(SSP)&nr=",
+          "control_N=222&control_T=APM-MP-PR-141-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20SÓLIDO%20(TURNO%201)&nr=",
+          "control_N=224&control_T=APM-MP-PR-181-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20SÓLIDO%20(TURNO%201)&nr="
+        ],
+        "nivel": [1, 1, 1]
       },
       "SERVICIOS": {
-        "name": ["BITÁCORA DEL DCS SERVICIOS (UTILITIES)"],
-        "type": ["ctrl"],
-        "ruta": [
-          "control_N=176&control_T=BITACORA%20DE%20DCS%20SERVICIOS%20(UTILITIES)&nr="
+        "name": [
+          "BITÁCORA DEL DCS SERVICIOS (UTILITIES)",
+          "APM-MP-PR-141-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO SERVICIO (TURNO 1)"
         ],
-        "nivel": [1]
+        "type": ["ctrl", "ctrl"],
+        "ruta": [
+          "control_N=176&control_T=BITACORA%20DE%20DCS%20SERVICIOS%20(UTILITIES)&nr=",
+          "control_N=221&control_T=APM-MP-PR-141-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20SERVICIO%20(TURNO%201)&nr="
+        ],
+        "nivel": [1, 1]
       }
     }
   }
