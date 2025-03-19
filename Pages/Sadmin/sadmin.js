@@ -50,7 +50,12 @@ function asignarEventos() {
         // window.location.href = `${SERVER}/${ruta}.php`;
         ruta = `${SERVER}/${ruta}.php`;
         window.open(ruta, '_blank');
-      } else if (ruta === 'pegarExcel' || ruta === 'verRepetidosControl') {
+      } else if (
+        ruta === 'pegarExcel' ||
+        ruta === 'verRepetidosControl' ||
+        ruta === 'Corregir Registros' ||
+        ruta === 'Ver Log'
+      ) {
         ruta = objButtons.Sad.ruta[index];
         // window.location.href = `${SERVER}/Pages/${ruta}`;
         ruta = `${SERVER}/${ruta}.php`;
