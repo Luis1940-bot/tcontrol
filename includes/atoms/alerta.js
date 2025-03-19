@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function procesoStyleDisplay(elementosStyle) {
-  //remove modales
+  // remove modales
   if (!elementosStyle) {
     return;
   }
@@ -1392,10 +1392,7 @@ async function insert(
 
     try {
       if (docStorage === false) {
-        insertado = await insertarRegistro(
-          nuevoObjetoControl,
-          objEncabezados.idPlanta,
-        );
+        insertado = await insertarRegistro(nuevoObjetoControl, plant);
       } else {
         insertado = await updateRegistro(nuevoObjetoControl, docStorage);
       }
