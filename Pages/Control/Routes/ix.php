@@ -17,7 +17,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 } else {
   date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
-// include('datos.php'); //! MUTEAAAARRRR
+// include('datos.php'); //! MUTEAAAAAARRRRR
 
 function convertToValidJson(string $dataString): string
 {
@@ -25,7 +25,6 @@ function convertToValidJson(string $dataString): string
   try {
     /** @var string $dataString */
     // Añadir comillas dobles alrededor de las claves
-
     // $dataString = preg_replace('/(\w+):/', '"$1":', $dataString);
     $dataString = preg_replace('/(\w+):(?=[\s\{"])/', '"$1":', $dataString);
 
@@ -34,12 +33,15 @@ function convertToValidJson(string $dataString): string
       '/"valor":\s*\[(.*?)\]/',
       function ($matches) {
         /** @var string $content */
+
         $content = $matches[1];
-
-
         // Buscar los patrones del formato de tiempo ""HH":MM"
         $pattern = '/""(\d{2})":(\d{2})"/';
+        // $pattern = '/"(\d{2}):(\d{2})"/';
+        // $pattern = '/["\']?(\d{2}):(\d{2})["\']?/';
+
         $match = [];
+        $content = stripslashes($content);
         preg_match_all($pattern, $content, $match);
 
         // Corregir el formato de las horas encontradas
@@ -64,6 +66,7 @@ function convertToValidJson(string $dataString): string
       $dataString
     );
 
+
     // Corregir formato del campo "imagenes"
     $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?)\]/', function ($matches) {
       $content = $matches[1];
@@ -71,6 +74,7 @@ function convertToValidJson(string $dataString): string
       assert(is_string($content));
       $content = preg_replace('/\'/', '"', $content); // Convertir comillas simples a comillas dobles
       /** @var string|null $content */
+
       $content = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
         $submatches[1] = str_replace('"', "'", $submatches[1]); // Convertir comillas dobles a comillas simples dentro del objeto
         $submatches[1] = preg_replace('/fileName/', "'fileName'", $submatches[1]); // Reemplazar "fileName" con 'fileName'
@@ -88,11 +92,19 @@ function convertToValidJson(string $dataString): string
       // Corregir el formato de la hora dentro de "email"
       $content = $matches[1];
       $pattern = '/""(\d{2})":(\d{2})"/';
+      // $pattern = '/"(\d{2}):(\d{2})"/';
+      // $pattern = '/["\']?(\d{2}):(\d{2})["\']?/';
       $match = [];
-      preg_match_all($pattern, $matches[1], $match);
-      $content = preg_replace($pattern, '"' . $match[1][0] . ':' . $match[2][0] . '"', $content);
-      $content = str_replace('"', "'", $content ?? '');
+      // preg_match_all($pattern, $matches[1], $match);
+      $content = stripslashes($content);
+      preg_match_all($pattern, $content, $match);
+      if (!empty($match[1]) && !empty($match[2])) {
+        $content = preg_replace($pattern, '"' . $match[1][0] . ':' . $match[2][0] . '"', $content);
+      }
 
+      // $content = preg_replace($pattern, '"' . $match[1][0] . ':' . $match[2][0] . '"', $content);
+
+      $content = str_replace('"', "'", $content ?? '');
       $content = preg_replace('/"url":"(https:\/\/.*?)"/', "'url':'$1'", $content);
 
       // $content = preg_replace("/'https:\/\/(.*?)'/", '"https://$1"', $content); // Corregir formato de URL
@@ -120,9 +132,15 @@ function convertToValidJson(string $dataString): string
       $content = $matches[1];
       $pattern = '/""(\d{2})":(\d{2})"/';
       $match = [];
+      // preg_match_all($pattern, $content, $match);
       preg_match_all($pattern, $content, $match);
       // Corregir el formato de la hora dentro de "hora"
-      $content = preg_replace($pattern, '"' . $match[1][0] . ':' . $match[2][0] . '"', $content); // Corregir el formato de la hora ""HH:MM  
+
+      if (!empty($match[1]) && !empty($match[2])) {
+        $content = preg_replace($pattern, '"' . $match[1][0] . ':' . $match[2][0] . '"', $content);
+      }
+
+      // $content = preg_replace($pattern, '"' . $match[1][0] . ':' . $match[2][0] . '"', $content); // Corregir el formato de la hora ""HH:MM  
       // Reemplazar comillas dobles por comillas simples dentro de los objetos
       $content = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
         return '{' . str_replace('"', "'", $submatches[1]) . '}';
@@ -135,11 +153,8 @@ function convertToValidJson(string $dataString): string
 
       // Mantener las comillas al inicio y final de cada elemento, pero eliminar comillas dobles internas
       $content = preg_replace('/"([^"]*?)"\s*([A-Z])\s*"([^"]*?)"/', '"$1 $2 $3"', $content);
-
       return '"detalle": [' . $content . ']';
     }, $dataString ?? '');
-
-
 
     $jsonString = trim($dataString ?? '');
     $jsonString = preg_replace('/[\x00-\x1F\x7F]/', '', $jsonString);
@@ -237,8 +252,10 @@ function insertar_registro(string $datos, int $idLTYcliente): string
     throw new InvalidArgumentException('La propiedad "observacion" no existe o no es un arreglo.');
   }
 
+
   // Generar el nuxpedido
   $nuxpedido = generaNuxPedido();
+  error_log("JSON SQL25: " . $idLTYcliente . "  DOC: " . $nuxpedido);
 
   $campos = 'fecha, nuxpedido, idusuario, idLTYreporte, supervisor, observacion, newJSON, idLTYcliente,hora';
   $interrogantes = '?,?,?,?,?,?,?,?,?';
@@ -303,7 +320,7 @@ $data = json_decode($datos, true);
 if (is_array($data)) {
   $datos = is_string($data['q']) ? $data['q'] : '';
   $sql25 = is_int($data['sql25']) ? $data['sql25'] : 0;
-
+  error_log("SQL25>>>>>: " . $sql25);
   // Verifica que los valores sean válidos antes de llamar a la función
   if ($datos !== '') {
     insertar_registro($datos, $sql25);
