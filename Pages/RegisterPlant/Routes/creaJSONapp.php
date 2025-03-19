@@ -108,16 +108,20 @@ function writeJSON(array $objeto): array
           "phpinfo",
           "hash",
           "pegarExcel",
-          "verRepetidosControl"
+          "verRepetidosControl",
+          "Corregir Registros",
+          "Ver Log"
         ],
-        "type" => ["", "", "", "", "", ""],
+        "type" => ["", "", "", "", "", "", "", ""],
         "ruta" => [
           "RegisterAuthUser/index.php",
           "RegisterPlant/index.php",
           "phpinfo.php",
           "hash.php",
           "ListControles/Routes/pegarExcel.php",
-          "ListControles/Routes/verRepetidosControl.php"
+          "ListControles/Routes/verRepetidosControl.php",
+          "Pages/Sadmin/Routes/get_records",
+          "Pages/Sadmin/Routes/errorLog"
         ]
       ],
       "apps" => [
