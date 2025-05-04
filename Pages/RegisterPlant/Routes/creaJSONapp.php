@@ -1,7 +1,4 @@
 <?php
-// ini_set('display_errors', '1');
-// ini_set('display_startup_errors', '1');
-// error_reporting(E_ALL);
 mb_internal_encoding('UTF-8');
 require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
@@ -101,34 +98,11 @@ function writeJSON(array $objeto): array
           "ListAreas/index.php"
         ]
       ],
-      "Sad" => [
-        "name" => [
-          "AuthUser",
-          "RegisterPlant",
-          "phpinfo",
-          "hash",
-          "pegarExcel",
-          "verRepetidosControl",
-          "Corregir Registros",
-          "Ver Log"
-        ],
-        "type" => ["", "", "", "", "", "", "", ""],
-        "ruta" => [
-          "RegisterAuthUser/index.php",
-          "RegisterPlant/index.php",
-          "phpinfo.php",
-          "hash.php",
-          "ListControles/Routes/pegarExcel.php",
-          "ListControles/Routes/verRepetidosControl.php",
-          "Pages/Sadmin/Routes/get_records",
-          "Pages/Sadmin/Routes/errorLog"
-        ]
-      ],
       "apps" => [
-        "name" => ["SCG", "Admin", "Super Admin"],
-        "type" => ["ctrl", "ctrl", "btn"],
-        "ruta" => ["Menu/index.php", "Admin/index.php", "Sadmin/index.php"],
-        "nivel" => [3, 4, 8]
+        "name" => ["SCG", "Admin"],
+        "type" => ["ctrl", "ctrl"],
+        "ruta" => ["Menu/index.php", "Admin/index.php"],
+        "nivel" => [3, 4]
       ],
     ];
 
@@ -170,13 +144,14 @@ header("Content-Type: application/json; charset=utf-8");
 
 $datos = file_get_contents("php://input");
 // $datos = '{"ruta":"/escribirJSON","rax":"&new=Thu Jun 20 2024 18:04:48 GMT-0300 (hora estándar de Argentina)","objeto":{"name":"xxxxxxxxxx","num":4}}';
+// $datos = '{"objeto":{"name":"lu1dew","num":37}}';
 // Validar si $datos está vacío
 if (empty($datos)) {
   $response = ['success' => false, 'message' => 'Faltan datos necesarios.'];
   echo json_encode($response);
   exit;
 }
-
+// error_log("📥 Recibido: " . $datos);
 // Decodificar JSON de la solicitud
 $data = json_decode($datos, true);
 
@@ -197,4 +172,5 @@ if (!is_array($objeto)) {
 
 $objeto = array_combine(array_map('strval', array_keys($objeto)), array_values($objeto)) ?: [];
 
-writeJSON($objeto);
+$response = writeJSON($objeto);
+echo json_encode($response);

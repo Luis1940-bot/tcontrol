@@ -127,6 +127,9 @@ $rutas = [
   '/guardarCambioArea' => '/Pages/ListAreas/Routes/guardarCambioArea.php',
   '/auth' => '/Pages/Login/Routes/auth.php',
   '/nuevoAuth' => '/Pages/AuthUser/Routes/ix.php',
+  '/traerCargadosDiario' => '/Pages/ControlesDiarios/Routes/traerRegistros.php',
+  '/pivot_data' => '/Pages/client28/Routes/pivot_data.php',
+  '/pivot_lecturas_15' => '/Pages/client15/Routes/pivot_data.php',
 ];
 
 if (isset($rutas[$ruta])) {

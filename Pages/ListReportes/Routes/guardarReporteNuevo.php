@@ -28,6 +28,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 function guardarReporte(string $datos, int $plant): array
 
 {
+
   require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
   /** @var string $baseDir */
   $baseDir = BASE_DIR;
@@ -97,6 +98,7 @@ function guardarReporte(string $datos, int $plant): array
     $lastInsertedId = is_numeric($lastInsertedId) ? (int) $lastInsertedId : 0;
 
 
+
     // Respuesta dependiendo del resultado de la inserción.
     if ($cantidad_insert > 0) {
       // addCampos($objeto_json->nombre, $pdo, $lastInsertedId, $idLTYcliente);
@@ -138,7 +140,7 @@ function guardarReporte(string $datos, int $plant): array
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-// $datos = '{"q":"%7B%22nombre%22%3A%22SA%20-%20LECTURAS%20PULIDOR%20CONDENSADOS%20OSBL%20CALDERAS%22%2C%22detalle%22%3A%22CALDERAS%22%2C%22idLTYcliente%22%3A15%2C%22idLTYarea%22%3A20%2C%22titulo%22%3A%22SA%20-%20LECTURAS%20PULIDOR%20CONDENSADOS%20OSBL%20CALDERAS%22%2C%22rotulo1%22%3A%22ALPEK-COSOLEACAQUE%22%2C%22rotulo2%22%3A%22%22%2C%22rotulo3%22%3A%22OSBL%22%2C%22rotulo4%22%3A%22%22%2C%22piedeinforme%22%3A%22Complete%20lo%20que%20corresponda%22%2C%22firma1%22%3A%22SA%22%2C%22firma2%22%3A%22%22%2C%22firma3%22%3A%22%22%2C%22foto%22%3A%22n%22%2C%22activo%22%3A%22s%22%2C%22elaboro%22%3A%22OSBL%22%2C%22reviso%22%3A%22OSBL%22%2C%22aprobo%22%3A%22OSBL%22%2C%22regdc%22%3A%22REG-1%22%2C%22vigencia%22%3A%2216%2F09%2F2024%22%2C%22cambio%22%3A%22%22%2C%22modificacion%22%3A%2216%2F09%2F2024%22%2C%22version%22%3A%2201%22%2C%22frecuencia%22%3A1%2C%22testimado%22%3A5%2C%22asignado%22%3A0%2C%22nivel%22%3A%221%22%2C%22envio_mail%22%3A0%2C%22direcciones_mail%22%3A%22%22%7D","ruta":"/guardarReporteNuevo","rax":"&new=Mon Feb 24 2025 11:53:10 GMT-0600 (hora estándar central)","planta":15}';
+// $datos = '{"q":"%7B%22nombre%22%3A%22LUIS%22%2C%22detalle%22%3A%22luis%22%2C%22idLTYcliente%22%3A15%2C%22idLTYarea%22%3A16%2C%22titulo%22%3A%22luis%22%2C%22rotulo1%22%3A%22LUIS%22%2C%22rotulo2%22%3A%22%22%2C%22rotulo3%22%3A%22PRODUCCI%C3%93N%22%2C%22rotulo4%22%3A%22%22%2C%22piedeinforme%22%3A%22luis%22%2C%22firma1%22%3A%22LUIS%22%2C%22firma2%22%3A%22%22%2C%22firma3%22%3A%22%22%2C%22foto%22%3A%22n%22%2C%22activo%22%3A%22s%22%2C%22elaboro%22%3A%22luis%22%2C%22reviso%22%3A%22uis%22%2C%22aprobo%22%3A%22lusi%22%2C%22regdc%22%3A%22uis%22%2C%22vigencia%22%3A%2211%2F04%2F2025%22%2C%22cambio%22%3A%22%22%2C%22modificacion%22%3A%2211%2F04%2F2025%22%2C%22version%22%3A%2201%22%2C%22frecuencia%22%3A0%2C%22testimado%22%3A5%2C%22asignado%22%3A0%2C%22nivel%22%3A%221%22%2C%22envio_mail%22%3A0%2C%22direcciones_mail%22%3A%22%22%7D","ruta":"/guardarReporteNuevo","rax":"&new=Fri Apr 11 2025 14:59:54 GMT-0300 (hora estándar de Argentina)","planta":15}';
 
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

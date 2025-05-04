@@ -111,7 +111,7 @@ function estilosCell(
 }
 
 function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
-  // console.log(element, index, cantidadDeRegistros)
+  // console.log(element, index, cantidadDeRegistros);
   const newRow = document.createElement('tr');
   // eslint-disable-next-line no-plusplus
   let maxTextarea = null;

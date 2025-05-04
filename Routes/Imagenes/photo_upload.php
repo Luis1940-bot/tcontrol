@@ -1,9 +1,6 @@
 <?php
-// ini_set('display_errors', '1');
-// ini_set('display_startup_errors', '1');
-// error_reporting(E_ALL);
 header("Content-Type: text/html;charset=utf-8");
-
+header("Access-Control-Allow-Origin: *");
 
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 // Inicializar el logger con la ruta deseada
@@ -16,14 +13,18 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 } else {
   date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
+// error_log('[🛬] Llegó a photo_upload.php desde router');
 // include('datos.php');
 // // $datos = $_POST['imgBase64'];
 $datos = $_POST['imgBase64'] ?? '';
+// error_log("[🧪] RAW imgBase64 recibido: " . $datos);
+
 if (!is_string($datos)) {
   error_log("Error: imgBase64 no es una cadena.");
   die(json_encode(['success' => false, 'message' => 'Formato inválido de imgBase64.']));
 }
 // $datos = $datox;
+
 
 if (!empty($datos)) {
   require_once dirname(dirname(__DIR__)) . '/config.php';
@@ -165,7 +166,7 @@ if (!empty($datos)) {
         //  echo '94-  '.$rutaImagen;
         // Guardar la imagen redimensionada en el servidor
         file_put_contents($rutaImagen, $resizedImageData);
-
+        // error_log('ruta imagen=========== ' . $rutaImagen);
         $responses[] = array(
           'success' => true,
           'message' => "Elemento $elemento: Imagen subida y redimensionada correctamente",
@@ -199,7 +200,7 @@ if (!empty($datos)) {
         // echo '121-  '.$rutaImagen;
         // Guardar la imagen original en el servidor
         file_put_contents($rutaImagen, $imgData);
-
+        // error_log('ruta imagen=========== ' . $rutaImagen);
         $responses[] = array(
           'success' => true,
           'message' => "Elemento $i: Imagen subida correctamente",

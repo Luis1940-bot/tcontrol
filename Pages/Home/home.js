@@ -54,24 +54,44 @@ function leeVersion(json) {
 }
 
 function obtenerNombres(objeto, clave) {
-  if (objeto.hasOwnProperty(clave) && objeto[clave].hasOwnProperty('name')) {
-    return {
-      name: objeto[clave].name || null,
-      type: objeto[clave].type || null,
-      ruta: objeto[clave].ruta || null,
-      nivel: objeto[clave].nivel || null,
-    };
-  }
-  for (const prop in objeto) {
-    if (typeof objeto[prop] === 'object') {
-      const resultadoRecursivo = obtenerNombres(objeto[prop], clave);
-      if (resultadoRecursivo) {
-        return resultadoRecursivo;
-      }
+  if (typeof objeto !== 'object' || objeto === null) return null;
+
+  if (
+    Object.prototype.hasOwnProperty.call(objeto, clave) &&
+    typeof objeto[clave] === 'object' &&
+    objeto[clave] !== null
+  ) {
+    const item = objeto[clave];
+    if ('name' in item) {
+      const resultado = {
+        name: item.name || null,
+        type: item.type || null,
+        ruta: item.ruta || null,
+        nivel: item.nivel || null,
+      };
+
+      return resultado;
     }
   }
 
-  return null; // Devuelve null si la clave no se encuentra en el objeto
+  let resultadoFinal = null;
+
+  Object.keys(objeto).forEach((key) => {
+    const value = objeto[key];
+    if (
+      resultadoFinal === null &&
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value)
+    ) {
+      const resultado = obtenerNombres(value, clave);
+      if (resultado) {
+        resultadoFinal = resultado;
+      }
+    }
+  });
+
+  return resultadoFinal;
 }
 
 function extraeIndice(array, clave) {
@@ -104,7 +124,7 @@ function completaButtons(obj) {
   document.getElementById('spanUbicacion').innerText = appJSON.planta;
   for (let i = 0; i < obj.name.length; i++) {
     const { nivel } = obj;
-    if (nivel[i] <= parseInt(tipo)) {
+    if (nivel[i] <= parseInt(tipo, 10)) {
       const element = obj.name[i];
       const params = {
         text: trO(element, objTranslate) || element,
@@ -132,6 +152,7 @@ function completaButtons(obj) {
         tipo: null,
         procedure: null,
 
+        // eslint-disable-next-line no-use-before-define
         onClick: funcionDeClick,
       };
       const newButton = createButton(params);
@@ -160,6 +181,7 @@ function llamarCtrl(control) {
       url = `?${control}`;
       // console.log(tipoDeArchivo);
       if (tipoDeArchivo === '') {
+        // eslint-disable-next-line no-unused-vars
         const [subcadena, parametros] = url.split('?');
         // console.log(url);
         const pares = parametros.split('&');
@@ -198,23 +220,51 @@ function llamarCtrl(control) {
     console.log(error);
   }
 }
-
+let rutaPag = {};
 const funcionDeClick = (e) => {
   const claveBuscada = e.target.name;
+
   const indice = extraeIndice(navegador.estadoNavButton.name, claveBuscada);
+
   const btnCtrl = navegador.estadoNavButton.type[indice];
+
   const nuevoObjeto = obtenerNombres(appJSON, claveBuscada);
 
-  if (nuevoObjeto === null) {
+  if (nuevoObjeto === null && btnCtrl !== 'pag') {
     const control = navegador.estadoNavButton.ruta[indice];
     llamarCtrl(control);
     return;
   }
 
+  if (nuevoObjeto === null && btnCtrl === 'pag') {
+    let pagina = '';
+    try {
+      pagina = nuevoObjeto.ruta;
+    } catch (error) {
+      pagina = rutaPag.ruta[indice];
+    }
+    const url = `${SERVER}/${pagina}`;
+    window.location.href = url;
+    // window.open(url, '_blank');
+  }
+
+  if (nuevoObjeto !== null && btnCtrl === 'pag') {
+    let pagina = '';
+    try {
+      pagina = nuevoObjeto.ruta;
+    } catch (error) {
+      pagina = rutaPag.ruta[indice];
+    }
+    const url = `${SERVER}/${pagina}`;
+    window.location.href = url;
+    // window.open(url, '_blank');
+  }
+
   navegador.estadoNavButton = nuevoObjeto;
 
-  if (btnCtrl === 'btn') {
+  if (btnCtrl === 'btn' || btnCtrl === 'pag_0') {
     completaButtons(nuevoObjeto);
+    rutaPag = nuevoObjeto;
   }
 
   localizador(e);
@@ -291,7 +341,6 @@ function dondeEstaEn(array) {
 document.addEventListener('DOMContentLoaded', async () => {
   const user = desencriptar(sessionStorage.getItem('user'));
   const { plant } = user;
-
   inicioPerformance();
   configPHP(user, SERVER);
   document.querySelector('.header-McCain').style.display = 'none';
@@ -300,27 +349,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   const hamburguesa = document.querySelector('#hamburguesa');
   hamburguesa.style.display = 'none';
 
-  const persona = desencriptar(sessionStorage.getItem('user'));
-  if (persona) {
-    const quienEs = document.getElementById('spanPerson');
-    quienEs.innerText = persona.person;
+  // const persona = user; // desencriptar(sessionStorage.getItem('user'));
 
-    document.querySelector('.custom-button').innerText =
-      persona.lng.toUpperCase();
+  function iniciarAplicacion() {
+    if (document.querySelector('.custom-button')) {
+      dondeEstaEn(navegador.estadoAnteriorWhereUs);
+      leeApp(`App/${plant}/app`);
+      spinner.style.visibility = 'hidden';
+      finPerformance();
+    } else {
+      requestAnimationFrame(iniciarAplicacion); // Continúa intentando hasta que el elemento esté listo
+    }
+  }
+
+  if (user) {
+    const quienEs = document.getElementById('spanPerson');
+    quienEs.innerText = user.person;
+
+    document.querySelector('.custom-button').innerText = user.lng.toUpperCase();
 
     objTranslate = await arraysLoadTranslate();
     await leeVersion('version');
-
-    function iniciarAplicacion() {
-      if (document.querySelector('.custom-button')) {
-        dondeEstaEn(navegador.estadoAnteriorWhereUs);
-        leeApp(`App/${plant}/app`);
-        spinner.style.visibility = 'hidden';
-        finPerformance();
-      } else {
-        requestAnimationFrame(iniciarAplicacion); // Continúa intentando hasta que el elemento esté listo
-      }
-    }
 
     requestAnimationFrame(iniciarAplicacion); // Inicia la verificación de los elementos
   } else {

@@ -72,6 +72,25 @@ function consultar(int $planta, string $email, string $pass): array
         'verificador' => $data['verificador'] ?? '',
         'sso' => null,
       ];
+      try {
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'Desconocida';
+        $navegador = $_SERVER['HTTP_USER_AGENT'] ?? 'No info';
+
+        $logCnn = new PDO("mysql:host={$host};dbname={$dbname};port={$port};charset={$charset}", $user, $password);
+        $stmt = $logCnn->prepare("INSERT INTO log_accesos (idusuario, email, planta, ip, navegador) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([
+          $data['idusuario'],
+          $data['mail'],
+          $planta,
+          $ip,
+          $navegador
+        ]);
+        $stmt = null;
+        $logCnn = null;
+      } catch (Throwable $logErr) {
+        error_log("❌ Error al guardar log de acceso: " . $logErr->getMessage());
+      }
+
       $_SESSION['login_sso'] = $response;
       if (!isset($_SESSION['factum_validation']) || !is_array($_SESSION['factum_validation'])) {
         $_SESSION['factum_validation'] = []; // ✅ Se inicializa como array
@@ -87,6 +106,26 @@ function consultar(int $planta, string $email, string $pass): array
 
       $emailStr = is_string($email) ? $email : json_encode($email);
       $plantaStr = is_int($planta) ? (string) $planta : json_encode($planta);
+      $emailStr = is_string($email) ? $email : json_encode($email);
+      $plantaStr = is_int($planta) ? (string) $planta : json_encode($planta);
+
+      $ip = $_SERVER['REMOTE_ADDR'] ?? 'Desconocida';
+      $navegador = $_SERVER['HTTP_USER_AGENT'] ?? 'No info';
+      $motivo = 'Credenciales inválidas';
+
+      // 📝 Log en archivo (error.log)
+      error_log("🔐 Fallo de login para email: $emailStr, planta: $plantaStr, IP: $ip, Navegador: $navegador");
+
+      // 🗂️ Log en base de datos
+      try {
+        $logCnn = new PDO("mysql:host={$host};dbname={$dbname};port={$port};charset={$charset}", $user, $password);
+        $stmt = $logCnn->prepare("INSERT INTO log_fallos_login (email, planta, ip, navegador, motivo) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$emailStr, (int)$plantaStr, $ip, $navegador, $motivo]);
+        $stmt = null;
+        $logCnn = null;
+      } catch (Throwable $logErr) {
+        error_log("❌ Error al guardar log de fallo login: " . $logErr->getMessage());
+      }
 
       error_log("Login failed for email: $emailStr, planta: $plantaStr");
 

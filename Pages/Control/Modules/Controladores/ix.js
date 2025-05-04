@@ -1,4 +1,5 @@
 import baseUrl from '../../../../config.js';
+import { desencriptar } from '../../../../controllers/cript.js';
 
 const SERVER = baseUrl;
 
@@ -12,20 +13,23 @@ function limpiarObjeto(objeto) {
   return nuevoObjeto;
 }
 
-function insertarRegistro(objeto, plant) {
+function insertarRegistro(objeto, planta) {
   // eslint-disable-next-line no-console
   console.time('insert_time');
   // console.log(objeto);
   const objLimpio = limpiarObjeto(objeto);
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio));
   // console.log(objLimpio);
-
+  let plant = planta;
+  if (!plant || plant === 0 || plant === '') {
+    plant = desencriptar(sessionStorage.getItem('user')).plant;
+  }
   const rax = `&new=${new Date()}`;
   const obj = {
     q: nuevoObjeto,
     ruta: '/ix2024',
     rax,
-    sql25: plant,
+    sql25: String(plant),
   };
   const datos = JSON.stringify(obj);
   const ruta = `${SERVER}/Routes/index.php`;

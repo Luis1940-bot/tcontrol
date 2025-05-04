@@ -133,7 +133,7 @@ function addCompania(array $objeto): array
 header("Content-Type: application/json; charset=utf-8");
 
 $datos = file_get_contents("php://input");
-
+// $datos = '{"ruta":"/addCompania","objeto":{"cliente":"lu1dew","detalle":"radio","contacto":"luis","email":"luis@gmail.com","activo":"s"}}';
 // ✅ Manejo de datos vacíos
 if (empty($datos)) {
   echo json_encode(['success' => false, 'message' => 'Faltan datos necesarios.']);

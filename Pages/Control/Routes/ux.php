@@ -237,7 +237,7 @@ function update_registro(string $datos, string $nuxpedido): string
     } else {
       throw new InvalidArgumentException('La propiedad "imagenes" no existe o no es un arreglo.');
     }
-
+    error_log("JSON UPDATE DOC: " . $nuxpedido . "  usuario: " . $idusuario);
     // echo $fecha . '\n';
     // echo $idusuario . '\n';
     // echo $supervisor . '\n';
@@ -340,7 +340,7 @@ $data = json_decode($datos, true);
 if (is_array($data)) {
   $datos = is_string($data['q']) ? $data['q'] : '';
   $nux = is_string($data['nux']) ? $data['nux'] : '';
-
+  error_log("NUX>>>>>: " . $nux);
   update_registro($datos, $nux);
 } else {
   echo "Error al decodificar la cadena JSON";

@@ -1,4 +1,4 @@
-var doc = new jsPDF();
+const doc = new jsPDF();
 doc.setFontSize(22);
 doc.text(20, 20, 'This is a title');
 

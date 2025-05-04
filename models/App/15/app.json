@@ -41,21 +41,21 @@
   "Menu": {
     "name": ["Controles", "Consultas"],
     "type": ["", ""],
-    "ruta": ["Controles/index.php", "Consultas/index.php"]
+    "ruta": ["Controles\/index.php", "Consultas\/index.php"]
   },
   "Controles": {
     "name": ["Controles", "Imprimir control"],
     "type": ["", ""],
-    "ruta": ["Controles/index.php", ""]
+    "ruta": ["Controles\/index.php", ""]
   },
   "Ad": {
     "name": ["Reportes", "Controles", "Variables", "Areas"],
     "type": ["", "", "", ""],
     "ruta": [
-      "ListReportes/index.php",
-      "ListControles/index.php",
-      "ListVariables/index.php",
-      "ListAreas/index.php"
+      "ListReportes\/index.php",
+      "ListControles\/index.php",
+      "ListVariables\/index.php",
+      "ListAreas\/index.php"
     ]
   },
   "Sad": {
@@ -67,18 +67,20 @@
       "pegarExcel",
       "verRepetidosControl",
       "Corregir Registros",
-      "Ver Log"
+      "Ver Log",
+      "Forzar Reload"
     ],
-    "type": ["", "", "", "", "", "", "", ""],
+    "type": ["", "", "", "", "", "", "", "", ""],
     "ruta": [
-      "RegisterAuthUser/index.php",
-      "RegisterPlant/index.php",
+      "RegisterAuthUser\/index.php",
+      "RegisterPlant\/index.php",
       "phpinfo.php",
       "hash.php",
-      "ListControles/Routes/pegarExcel.php",
-      "ListControles/Routes/verRepetidosControl.php",
-      "Pages/Sadmin/Routes/get_records",
-      "Pages/Sadmin/Routes/errorLog"
+      "ListControles\/Routes\/pegarExcel.php",
+      "ListControles\/Routes\/verRepetidosControl.php",
+      "Pages\/Sadmin\/Routes\/get_records",
+      "Pages\/Sadmin\/Routes\/errorLog",
+      "Pages\/Sadmin\/Routes\/recarga-control"
     ]
   },
   "apps": {
@@ -92,34 +94,40 @@
     ],
     "type": ["ctrl", "ctrl", "btn", "btn", "btn", "btn"],
     "ruta": [
-      "Menu/index.php",
-      "Admin/index.php",
+      "Menu\/index.php",
+      "Admin\/index.php",
       "",
       "",
       "",
-      "Sadmin/index.php"
+      "Sadmin\/index.php"
     ],
     "nivel": [2, 4, 1, 1, 1, 8],
     "Producción": {
-      "name": ["OXIDACIÓN", "PURIFICACIÓN", "FACILITADORES TA/PTA"],
-      "type": ["btn", "btn", "btn"],
-      "ruta": ["", "", ""],
-      "nivel": [1, 1, 1],
+      "name": [
+        "OXIDACIÓN",
+        "PURIFICACIÓN",
+        "FACILITADORES TA\/PTA",
+        "CREADOS HOY"
+      ],
+      "type": ["btn", "btn", "btn", "pag"],
+      "ruta": ["", "", "", "Pages\/ControlesDiarios\/"],
+      "nivel": [1, 1, 1, 1],
       "OXIDACIÓN": {
         "name": [
           "TABLERO TA",
           "REACCIÓN TA",
           "FILTROS TA",
           "RECUPERACIÓN DE SOLVENTES TA",
-          "ACEITE CALIENTE TA"
+          "ACEITE CALIENTE TA",
+          "TA-HISTORIAL DE LECTURAS DE CAMPO"
         ],
-        "type": ["btn", "btn", "btn", "btn", "btn"],
-        "ruta": ["", "", "", "", ""],
-        "nivel": [1, 1, 1, 1, 1],
+        "type": ["btn", "btn", "btn", "btn", "btn", "pag_0"],
+        "ruta": ["", "", "", "", "", ""],
+        "nivel": [1, 1, 1, 1, 1, 1],
         "TABLERO TA": {
           "name": [
             "Formato Orden y Limpieza Tablero",
-            "Lecturas L1/L2 Tablero TA",
+            "Lecturas L1\/L2 Tablero TA",
             "GPT-F-027 Hoja de verificación de la unidad de oxidación Tablero"
           ],
           "type": ["ctrl", "ctrl", "ctrl"],
@@ -237,6 +245,22 @@
             "control_N=118&control_T=TA%20-%20GPT-F-599%20LISTA%20DE%20CHEQUEO%20DE%20PUNTOS%20ESTRATÉGICOS%20-%20ACEITE%20CALIENTE&nr="
           ],
           "nivel": [1, 1, 1, 1, 1, 1, 1]
+        },
+        "TA-HISTORIAL DE LECTURAS DE CAMPO": {
+          "name": [
+            "TA - Lecturas de campo - Reacción y Cristalización",
+            "TA - Lecturas de campo - Filtros",
+            "TA - Lecturas de campo - Rec. de SDV",
+            "TA - Lecturas de campo - Aceite"
+          ],
+          "type": ["pag", "pag", "pag", "pag"],
+          "ruta": [
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=78&nme=HISTORIAL TA - Lecturas de Campo - Reacción y Cristalización",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=77&nme=HISTORIAL TA - Lecturas de Campo - Filtros",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=79&nme=HISTORIAL TA - Lecturas de Campo - Rec. de SDV",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=76&nme=HISTORIAL TA - Lecturas de Campo - Aceite"
+          ],
+          "nivel": [1, 1, 1, 1]
         }
       },
       "PURIFICACIÓN": {
@@ -245,16 +269,17 @@
           "REACCIÓN PTA",
           "FILTROS PTA",
           "PREPARACIÓN PTA",
-          "RLM PTA"
+          "RLM PTA",
+          "PTA-HISTORIAL DE LECTURAS DE CAMPO"
         ],
-        "type": ["btn", "btn", "btn", "btn", "btn"],
-        "ruta": ["", "", "", "", ""],
-        "nivel": [1, 1, 1, 1, 1],
+        "type": ["btn", "btn", "btn", "btn", "btn", "pag_0"],
+        "ruta": ["", "", "", "", "", ""],
+        "nivel": [1, 1, 1, 1, 1, 1],
         "TABLERO PTA": {
           "name": [
             "Formato Orden y Limpieza Tablero",
-            "Lecturas L1/L2 Tablero PTA",
-            "GPT-F-016 Hoja De Verificación De La Unidad, Línea 1/2 Tablero"
+            "Lecturas L1\/L2 Tablero PTA",
+            "GPT-F-016 Hoja De Verificación De La Unidad, Línea 1\/2 Tablero"
           ],
           "type": ["ctrl", "btn", "ctrl"],
           "ruta": [
@@ -263,7 +288,7 @@
             "control_N=97&control_T=GPT-F-016%20HOJA%20DE%20VERIFICACIÓN%20DE%20LA%20UNIDAD%20LÍNEA%201-2%20TABLERO&nr="
           ],
           "nivel": [1, 1, 1],
-          "Lecturas L1/L2 Tablero PTA": {
+          "Lecturas L1\/L2 Tablero PTA": {
             "name": ["Línea 1", "Línea 2"],
             "type": ["ctrl", "ctrl"],
             "ruta": [
@@ -326,13 +351,13 @@
             "Check List de Actividades Filtros PTA",
             "Lecturas de Campo Filtros PTA",
             "Check List Energía Filtros PTA",
-            "GPT-F-782 Lista de Verificación del Filtro BHS CM-407 A/B Filtros PTA",
+            "GPT-F-782 Lista de Verificación del Filtro BHS CM-407 A\/B Filtros PTA",
             "GPT-F-780 Inspección Diaria de Filtros de Gas de Transporte Filtros PTA",
             "GPT-F-785 Lista de Chequeos de Puntos Estratégicos Filtros PTA"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
           "ruta": [
-            "control_N=69&control_T=TA%20-%20LECTURAS%20DE%20CAMPO%20-%20REACCION%20Y%20CRISTALIZACION&nr=",
+            "control_N=69&control_T=5S PTA – FILTROS&nr=",
             "",
             "control_N=84&control_T=PTA%20-%20LECTURAS%20DE%20CAMPO%20-%20FILTROS&nr=",
             "control_N=28&control_T=PTA%20-%20CHECK%20LIST%20DE%20ENERGÍA%20-%20FILTROS&nr=",
@@ -386,7 +411,7 @@
             "Check List de Actividades RLM",
             "Check List Energía RLM",
             "GPT-F-785 Lista de Chequeos de Puntos Estratégicos en RLM",
-            "GPT-F-710 Inspección diaria de los filtros funda CM-417 A/B/C RLM",
+            "GPT-F-710 Inspección diaria de los filtros funda CM-417 A\/B\/C RLM",
             "Lecturas de Campo RLM"
           ],
           "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl"],
@@ -407,14 +432,38 @@
             ],
             "nivel": [1]
           }
+        },
+        "PTA-HISTORIAL DE LECTURAS DE CAMPO": {
+          "name": [
+            "PTA - Lecturas de campo - Cristalización",
+            "PTA - Lecturas de campo - Compresores planta de hidrógeno",
+            "PTA - Lecturas de campo - Filtros",
+            "PTA - Lecturas de campo - Preparación",
+            "PTA - Lecturas de campo - RLM"
+          ],
+          "type": ["pag", "pag", "pag", "pag", "pag"],
+          "ruta": [
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=83&nme=HISTORIAL TA - Lecturas de Campo - Reacción y Cristalización",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=81&nme=HISTORIAL TA - Lecturas de Campo - Filtros",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=84&nme=HISTORIAL TA - Lecturas de Campo - Rec. de SDV",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=82&nme=HISTORIAL TA - Lecturas de Campo - Aceite",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=85&nme=HISTORIAL TA - Lecturas de Campo - Aceite"
+          ],
+          "nivel": [1, 1, 1, 1, 1]
         }
       },
-      "FACILITADORES TA/PTA": {
-        "name": ["Producción TA/PTA"],
+      "FACILITADORES TA\/PTA": {
+        "name": ["Producción TA\/PTA"],
         "type": ["ctrl"],
         "ruta": [
           "control_N=96&control_T=FACILITACIÓN%20ACTIVA%20PRODUCCION%20TA-PTA&nr="
         ],
+        "nivel": [1]
+      },
+      "CREADOS HOY": {
+        "name": ["CREADOS HOY"],
+        "type": ["pag"],
+        "ruta": ["Pages\/ControlesDiarios\/"],
         "nivel": [1]
       }
     },
@@ -424,10 +473,15 @@
       "ruta": ["", "", "", ""],
       "nivel": [1, 1, 1, 1],
       "Ingeniería": {
-        "name": ["Confiabilidad", "Integridad", "REPUESTOS EN TALLER"],
-        "type": ["btn", "btn", "btn"],
-        "ruta": ["", "", ""],
-        "nivel": [1, 1, 1],
+        "name": [
+          "Confiabilidad",
+          "Integridad",
+          "REPUESTOS EN TALLER",
+          "LISTA DE VERIFICACIÓN"
+        ],
+        "type": ["btn", "btn", "btn", "btn"],
+        "ruta": ["", "", "", ""],
+        "nivel": [1, 1, 1, 1],
         "REPUESTOS EN TALLER": {
           "name": [
             "BD-204",
@@ -435,25 +489,25 @@
             "BR-303",
             "BR-305",
             "BR-307",
-            "BD-401A/B",
-            "BD-402A/B",
-            "BD-403A/B",
+            "BD-401A\/B",
+            "BD-402A\/B",
+            "BD-403A\/B",
             "BM-503",
             "BM-513",
             "BM-523",
             "BM-533",
-            "BC-601A/B",
+            "BC-601A\/B",
             "BC-601D",
             "BGT-101A",
             "BG-101B",
-            "BG-102A/B",
-            "BG-501A/B",
+            "BG-102A\/B",
+            "BG-501A\/B",
             "CD-300",
             "CD-301B",
-            "CD-302A/B",
+            "CD-302A\/B",
             "CD-304A",
             "CD-305B",
-            "CG-101A/B/C",
+            "CG-101A\/B\/C",
             "CM-503",
             "BM-513",
             "BM-523",
@@ -542,6 +596,14 @@
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1
           ]
+        },
+        "LISTA DE VERIFICACIÓN": {
+          "name": ["GMT-F-140 MANTENIMIENTO PREVENTIVO A SECADORES"],
+          "type": ["ctrl"],
+          "ruta": [
+            "control_N=259&control_T=GMT-F-140 LISTA DE VERIFICACIÓN PARA MANTENIMIENTO PREVENTIVO A SECADORES-4464-5&nr="
+          ],
+          "nivel": [1]
         }
       },
       "Planeación": {
@@ -568,17 +630,100 @@
         }
       },
       "Elec & Inst": {
-        "name": [],
-        "type": [],
-        "ruta": [],
-        "nivel": []
+        "name": ["LISTA DE VERIFICACIÓN"],
+        "type": ["btn"],
+        "ruta": [""],
+        "nivel": [1],
+        "LISTA DE VERIFICACIÓN": {
+          "name": [
+            "Actividades SV Nivel",
+            "Transmisores SV Nivel",
+            "Válvulas de Control SV Nivel",
+            "Válvulas de Corte SV Nivel"
+          ],
+          "type": ["btn", "btn", "btn", "btn"],
+          "ruta": ["", "", "", ""],
+          "nivel": [1, 1, 1, 1],
+          "Actividades SV Nivel": {
+            "name": [
+              "LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 1",
+              "LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 2",
+              "LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 3",
+              "LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 4",
+              "LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 5"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=239&control_T=LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 1&nr=",
+              "control_N=248&control_T=LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 2&nr=",
+              "control_N=249&control_T=LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 3&nr=",
+              "control_N=240&control_T=LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 4&nr=",
+              "control_N=241&control_T=LISTA DE VERIFICACIÓN PARA ACTIVIDADES DE NIVEL 5&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1]
+          },
+          "Transmisores SV Nivel": {
+            "name": [
+              "LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 1",
+              "LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 2",
+              "LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 3",
+              "LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 4",
+              "LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 5"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=242&control_T=LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 1&nr=",
+              "control_N=243&control_T=LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 2&nr=",
+              "control_N=250&control_T=LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 3&nr=",
+              "control_N=251&control_T=LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 4&nr=",
+              "control_N=244&control_T=LISTA DE VERIFICACIÓN PARA TRANSMISORES DE NIVEL 5&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1]
+          },
+          "Válvulas de Control SV Nivel": {
+            "name": [
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 1",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 2",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 3",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 4",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 5"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=245&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 1&nr=",
+              "control_N=246&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 2&nr=",
+              "control_N=252&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 3&nr=",
+              "control_N=253&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 4&nr=",
+              "control_N=247&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CONTROL NIVEL 5&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1]
+          },
+          "Válvulas de Corte SV Nivel": {
+            "name": [
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 1",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 2",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 3",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 4",
+              "LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 5"
+            ],
+            "type": ["ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+            "ruta": [
+              "control_N=254&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 1&nr=",
+              "control_N=255&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 2&nr=",
+              "control_N=256&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 3&nr=",
+              "control_N=257&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 4&nr=",
+              "control_N=258&control_T=LISTA DE VERIFICACIÓN PARA VALVULAS DE CORTE NIVEL 5&nr="
+            ],
+            "nivel": [1, 1, 1, 1, 1]
+          }
+        }
       }
     },
     "Servicios Auxiliares": {
-      "name": ["FACILITADORES SA", "OPERADORES SA"],
-      "type": ["btn", "btn"],
-      "ruta": ["", ""],
-      "nivel": [1, 1],
+      "name": ["FACILITADORES SA", "OPERADORES SA", "CREADOS HOY"],
+      "type": ["btn", "btn", "pag"],
+      "ruta": ["", "", ""],
+      "nivel": [1, 1, 1],
       "FACILITADORES SA": {
         "name": ["Rutina Facilitador"],
         "type": ["ctrl"],
@@ -695,7 +840,7 @@
             ],
             "type": ["ctrl", "ctrl", "ctrl", "ctrl"],
             "ruta": [
-              "control_N=141&control_T=SA%20-%20HOJA%20DE%20LECTURAS%20DEL%20BCT-101-683-9&nr=",
+              "control_N=141&control_T=SA - HOJA DE LECTURAS DEL BCT-101-683-9&nr=",
               "control_N=129&control_T=SA%20-%20LECTURAS%20DEL%20AN-301&nr=",
               "control_N=128&control_T=SA%20-%20LECTURAS%20DEL%20TABLERO%20DE%20DISTRIBUCIÓN%20#1&nr=",
               "control_N=127&control_T=SA%20-%20LECTURAS%20DEL%20TURBO-GENERADOR%20ANT-301&nr="
@@ -908,6 +1053,12 @@
             "nivel": [1, 1, 1, 1, 1, 1]
           }
         }
+      },
+      "CREADOS HOY": {
+        "name": ["CREADOS HOY"],
+        "type": ["pag"],
+        "ruta": ["Pages\/ControlesDiarios\/"],
+        "nivel": [1]
       }
     }
   }

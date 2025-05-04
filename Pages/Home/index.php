@@ -96,6 +96,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 <!DOCTYPE html>
 <!-- <html lang='en'> -->
 
+
 <head>
   <meta charset='UTF-8'>
   <meta name='description'>

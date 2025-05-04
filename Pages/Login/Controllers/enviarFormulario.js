@@ -26,7 +26,7 @@ export default function enviarLogin(objeto) {
           );
         }
         // Registrar el tipo de contenido
-        console.log('Content-Type:', res.headers.get('Content-Type'));
+        // console.log('Content-Type:', res.headers.get('Content-Type'));
         return res.text(); // Cambiar a res.text() temporalmente para registro
       })
       .then((text) => {

@@ -72,10 +72,16 @@
     "ruta": ["Menu/index.php", "Admin/index.php", "Sadmin/index.php", ""],
     "nivel": [3, 4, 8, 1],
     "Producción PET": {
-      "name": ["CP", "SSP", "SERVICIOS"],
-      "type": ["btn", "btn", "btn"],
-      "ruta": ["", "", ""],
-      "nivel": [1, 1, 1],
+      "name": [
+        "CP",
+        "SSP",
+        "SERVICIOS",
+        "CREADOS HOY",
+        "HISTORIAL DE BITÁCORAS"
+      ],
+      "type": ["btn", "btn", "btn", "pag", "pag_0"],
+      "ruta": ["", "", "", "", ""],
+      "nivel": [1, 1, 1, 1, 1],
       "CP": {
         "name": [
           "BITÁCORA DEL DCS FUSIÓN (CP)",
@@ -176,6 +182,26 @@
           "control_N=221&control_T=APM-MP-PR-141-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20SERVICIO%20(TURNO%201)&nr="
         ],
         "nivel": [1, 1]
+      },
+      "CREADOS HOY": {
+        "name": ["CREADOS HOY"],
+        "type": ["pag"],
+        "ruta": ["Pages\/ControlesDiarios\/"],
+        "nivel": [1]
+      },
+      "HISTORIAL DE BITÁCORAS": {
+        "name": [
+          "HISTORIAL DCS FUSIÓN (CP)",
+          "HISTORIAL DCS SERVICIOS (UTILITIES)",
+          "HISTORIAL DCS SÓLIDO (SSP)"
+        ],
+        "type": ["pag", "pag", "pag"],
+        "ruta": [
+          "Pages\/client28\/Bitacoras\/index.php?ctrl=175&nme=HISTORIAL BITÁCORA DEL DCS FUSIÓN (CP)",
+          "Pages\/client28\/Bitacoras\/index.php?ctrl=176&nme=HISTORIAL BITACORA DE DCS SERVICIOS (UTILITIES)",
+          "Pages\/client28\/Bitacoras\/index.php?ctrl=177&nme=HISTORIAL BITÁCORA DEL DCS SÓLIDO (SSP)"
+        ],
+        "nivel": [1, 1, 1]
       }
     }
   }

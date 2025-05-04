@@ -1,7 +1,4 @@
 <?php
-// ini_set('display_errors', '1');
-// ini_set('display_startup_errors', '1');
-// error_reporting(E_ALL);
 mb_internal_encoding('UTF-8');
 require_once dirname(dirname(dirname(__DIR__))) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(dirname(__DIR__))) . '/logs/error.log');
@@ -28,6 +25,7 @@ function writeJSON(array $objeto): array
     /** @var string $baseDir */
     $baseDir = BASE_DIR;
     $file = $baseDir . '/models/log.json';
+
     // $currentData = json_decode(file_get_contents($file), true);
     $jsonData = file_get_contents($file);
     $currentData = is_string($jsonData) ? json_decode($jsonData, true) : null;
@@ -64,11 +62,14 @@ header("Content-Type: application/json; charset=utf-8");
 
 $datos = file_get_contents("php://input");
 // $datos = '{"ruta":"/escribirJSON","rax":"&new=Thu Jun 20 2024 18:04:48 GMT-0300 (hora estándar de Argentina)","objeto":{"name":"mccain-balcarce","num":3}}';
+// $datos = '{"objeto":{"name":"lu1dew","num":37}}';
 // ✅ Manejo de datos vacíos
 if (empty($datos)) {
   echo json_encode(['success' => false, 'message' => 'Faltan datos necesarios.']);
   exit;
 }
+// error_log("📥 Recibido: " . $datos);
+
 
 // ✅ Decodificar JSON de manera segura
 $data = json_decode($datos, true);
@@ -86,4 +87,5 @@ $objeto = isset($data['objeto']) && is_array($data['objeto'])
   : [];
 
 // ✅ Ahora los parámetros tienen los tipos correctos
-writeJSON($objeto);
+$response = writeJSON($objeto);
+echo json_encode($response);

@@ -41,9 +41,15 @@ const encabezados = {
     '2do Valor SQL',
     'SQL Consulta dinámica',
     'Tipo de Detalle',
+    'Pastilla Text',
+    'Pastilla Select',
+    'Pastilla Consulta',
   ],
   width: [
     '0.2',
+    '1',
+    '1',
+    '1',
     '1',
     '1',
     '1',
@@ -182,6 +188,15 @@ function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   }
   if (tipoDeDato === 'checkdatehour') {
     tipo = trO('Check Date Hora', objTranslate) || 'Check Date Hora';
+  }
+  if (tipoDeDato === 'pastillaTx') {
+    tipo = trO('Pastilla Texto', objTranslate) || 'Pastilla Texto';
+  }
+  if (tipoDeDato === 'pastillaSelect') {
+    tipo = trO('Pastilla Select', objTranslate) || 'Pastilla Select';
+  }
+  if (tipoDeDato === 'pastillaConsulta') {
+    tipo = trO('Pastilla Consulta', objTranslate) || 'Pastilla Consulta';
   }
   return tipo;
 }
@@ -400,6 +415,16 @@ function reconoceColumna(
       }
       texto = '';
       button = true;
+      if (
+        array[4] === 'pastillaTx' ||
+        array[4] === 'pastillaSelect' ||
+        array[4] === 'pastillaConsulta'
+      ) {
+        background = '#ff7659';
+        texto = 'Add SQL';
+        fontStyle = 'Italic';
+        fontWeight = 700;
+      }
       break;
     case 16:
       // rutinaSql

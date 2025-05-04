@@ -45,6 +45,7 @@ import {
   createRadioButton,
   createTextArea,
 } from './createAlerta/creates.js';
+// import * as XLSX from './cdnjs/xlsx.full.min';
 
 const SERVER = baseUrl;
 let objTraductor = [];
@@ -194,98 +195,67 @@ const funcionSalir = () => {
   // window.close()
   window.history.back();
 };
-const funcionExportarExcel = () => {
-  try {
-    const tabla = document.getElementById('tableConsultaViews');
-    const rows = Array.from(tabla.getElementsByTagName('tr')); // 🔹 Convertimos HTMLCollection a array
-
-    // Convertir fechas a texto para evitar conversiones no deseadas
-    rows.forEach((row) => {
-      const cells = Array.from(row.getElementsByTagName('td'));
-
-      cells.forEach((cell) => {
-        // Si la celda contiene una fecha, convertirla a texto en formato dd-mm-yyyy
-        const cellValue = cell.textContent;
-        if (!Number.isNaN(Date.parse(cellValue))) {
-          const fecha = new Date(cellValue);
-          const dia = fecha.getDate().toString().padStart(2, '0');
-          const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-          const anio = fecha.getFullYear();
-          const nuevoTexto = `${dia}-${mes}-${anio}`;
-          // eslint-disable-next-line no-param-reassign
-          cell.textContent = nuevoTexto;
-        }
-      });
-    });
-
-    const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Sheet JS' });
-    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([wbout], { type: 'application/octet-stream' });
-
-    const nameConsulta = document.getElementById('whereUs').textContent.trim();
-    const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date());
-
-    // Crear un enlace para la descarga
-    const a = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    a.href = url;
-    a.download = `${nameConsulta} ${fechaDeHoy}.xlsx`;
-
-    // Agregar el enlace temporal al DOM, simular el clic y luego limpiar
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    // Cerrar y eliminar el modal después de la exportación
-    const menu = document.getElementById('modalAlertM');
-    if (menu) {
-      menu.style.display = 'none';
-      menu.remove();
-    }
-  } catch (error) {
-    console.error('Error al exportar la tabla a Excel:', error);
-  }
-};
 
 // const funcionExportarExcel = () => {
 //   try {
 //     const tabla = document.getElementById('tableConsultaViews');
-//     // Convertir fechas a texto para evitar conversiones no deseadas
-//     const rows = tabla.getElementsByTagName('tr');
-//     for (const row of rows) {
-//       const cells = row.getElementsByTagName('td');
-//       for (const cell of cells) {
-//         // Si la celda contiene una fecha, convertirla a texto en formato dd-mm-yyyy
-//         if (Date.parse(cell.textContent)) {
-//           const fecha = new Date(cell.textContent);
-//           const dia = fecha.getDate().toString().padStart(2, '0');
-//           const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-//           const anio = fecha.getFullYear();
-//           cell.textContent = `${dia}-${mes}-${anio}`;
-//         }
-//       }
+//     if (!tabla) {
+//       alert('No se encontró la tabla.');
+//       return;
 //     }
-//     const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Sheet JS' });
+
+//     const filasHTML = Array.prototype.slice.call(tabla.querySelectorAll('tr'));
+//     const data = filasHTML.map((filaExcel) => {
+//       const celdas = Array.prototype.slice.call(
+//         filaExcel.querySelectorAll('th, td'),
+//       );
+//       return celdas.map((celda) => {
+//         const valor = celda.textContent.trim();
+//         const esNumeroEngañoso = /^\d{1,2}$/.test(valor);
+//         const esFechaSospechosa = /^(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})$/.test(
+//           valor,
+//         );
+//         const esFechaValida = !Number.isNaN(Date.parse(valor));
+
+//         if (esNumeroEngañoso || esFechaSospechosa || esFechaValida) {
+//           return { t: 's', v: valor }; // Forzamos a texto real
+//         }
+
+//         return valor; // Let it be
+//       });
+//     });
+
+//     const sheet = XLSX.utils.aoa_to_sheet([]);
+//     data.forEach((filaExcel, r) => {
+//       filaExcel.forEach((celda, c) => {
+//         const addr = XLSX.utils.encode_cell({ c, r });
+//         sheet[addr] = typeof celda === 'object' ? celda : { t: 's', v: celda };
+//       });
+//     });
+
+//     sheet['!ref'] = XLSX.utils.encode_range({
+//       s: { c: 0, r: 0 },
+//       e: { c: data[0].length - 1, r: data.length - 1 },
+//     });
+
+//     const wb = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, sheet, 'Export');
+
 //     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
 //     const blob = new Blob([wbout], { type: 'application/octet-stream' });
 
 //     const nameConsulta = document.getElementById('whereUs').textContent.trim();
 //     const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date());
 
-//     // Crear un enlace para la descarga
 //     const a = document.createElement('a');
 //     const url = URL.createObjectURL(blob);
 //     a.href = url;
 //     a.download = `${nameConsulta} ${fechaDeHoy}.xlsx`;
-
-//     // Agregar el enlace temporal al DOM, simular el clic y luego limpiar
 //     document.body.appendChild(a);
 //     a.click();
 //     document.body.removeChild(a);
 //     URL.revokeObjectURL(url);
 
-//     // Cerrar y eliminar el modal después de la exportación
 //     const menu = document.getElementById('modalAlertM');
 //     if (menu) {
 //       menu.style.display = 'none';
@@ -293,8 +263,92 @@ const funcionExportarExcel = () => {
 //     }
 //   } catch (error) {
 //     console.error('Error al exportar la tabla a Excel:', error);
+//     alert('Ocurrió un error inesperado al exportar.');
 //   }
 // };
+
+const funcionExportarExcel = () => {
+  try {
+    const tabla = document.getElementById('tableConsultaViews');
+    if (!tabla) {
+      console.warn('❌ No se encontró la tabla con id tableConsultaViews');
+      return;
+    }
+
+    // Recolectar filas
+    const filasHTML = Array.from(tabla.querySelectorAll('tr'));
+
+    // Construir la data como array de arrays
+    const data = filasHTML.map((filaExcel) => {
+      const celdas = Array.from(filaExcel.querySelectorAll('th, td'));
+
+      return celdas.map((celda) => {
+        const valorOriginal = celda.textContent.trim();
+
+        // Detectar valores que Excel puede transformar
+        const pareceFecha = /^\d{1,2}[/-]\d{1,2}[/-]\d{2,4}$/.test(
+          valorOriginal,
+        );
+        const esFechaReal = !Number.isNaN(Date.parse(valorOriginal));
+        const esNumeroCorto = /^\d{1,2}$/.test(valorOriginal); // tipo "6"
+        const esTextoValido =
+          Number.isNaN(valorOriginal) || valorOriginal.includes(' ');
+
+        // Forzar todo como texto, porque Excel es un gremlin
+        if (pareceFecha || esFechaReal || esNumeroCorto || !esTextoValido) {
+          return { t: 's', v: valorOriginal };
+        }
+
+        return { t: 's', v: valorOriginal }; // TODO se fuerza como texto, por seguridad
+      });
+    });
+
+    // Crear hoja y libro
+    const hoja = XLSX.utils.aoa_to_sheet([]);
+    data.forEach((filaExcel, r) => {
+      filaExcel.forEach((celda, c) => {
+        const ref = XLSX.utils.encode_cell({ r, c });
+        hoja[ref] = celda;
+      });
+    });
+    hoja['!ref'] = XLSX.utils.encode_range({
+      s: { r: 0, c: 0 },
+      e: { r: data.length - 1, c: data[0].length - 1 },
+    });
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, hoja, 'Export');
+
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], { type: 'application/octet-stream' });
+
+    // Obtener nombre y fecha
+    const nameConsulta =
+      document.getElementById('whereUs')?.textContent.trim() || 'Reporte';
+    const fechaDeHoy =
+      window.fechasGenerator?.fecha_larga_ddmmyyyyhhmm?.(new Date()) ||
+      new Date().toISOString();
+
+    // Descargar archivo
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${nameConsulta} ${fechaDeHoy}.xlsx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+
+    // Cerrar modal si existe
+    const menu = document.getElementById('modalAlertM');
+    if (menu) {
+      menu.style.display = 'none';
+      menu.remove();
+    }
+  } catch (error) {
+    console.error('🧨 Error al exportar a Excel:', error);
+    alert('Algo salió mal al exportar. Revisá la consola.');
+  }
+};
 
 const funcionExportarPDF = async () => {
   try {
@@ -1380,8 +1434,8 @@ async function insert(
   enviaPorEmailBooleano,
 ) {
   try {
-    const { value } = desencriptar(sessionStorage.getItem('plant'));
-    const plant = parseInt(value, 10);
+    const { plant } = desencriptar(sessionStorage.getItem('user'));
+
     const nuevoObjetoControl = { ...nuevoObjeto };
     delete nuevoObjetoControl.name;
     delete nuevoObjetoControl.email;
@@ -1749,6 +1803,12 @@ function estilosCell(
   cell.style.fontStyle = fontStyle;
   cell.style.fontWeight = fontWeight;
   cell.style.color = colorText;
+  cell.style.background = '#ffffff';
+  cell.style.maxWidth = '20rem'; // o el valor que mejor te quede
+  cell.style.minWidth = '5rem';
+  cell.style.overflowWrap = 'break-word';
+  cell.style.wordBreak = 'break-word';
+  cell.style.whiteSpace = 'normal';
 
   colSpan === 1 ? (cell.colSpan = 4) : null;
   colSpan === 2 ? (cell.style.display = 'none') : null;
@@ -4816,6 +4876,9 @@ export default class Alerta {
           ['checkhour', 'Check Hora'],
           ['checkdate', 'Check Date'],
           ['checkdatehour', 'Check Date Hora'],
+          ['pastillaTx', 'Pastilla Texto'],
+          ['pastillaSelect', 'Pastilla Select'],
+          ['pastillaConsulta', 'Pastilla Consulta'],
         ];
         const params = {
           id: '',

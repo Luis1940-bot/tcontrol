@@ -1,8 +1,4 @@
 <?php
-// ini_set('display_errors', '1');
-// ini_set('display_startup_errors', '1');
-// error_reporting(E_ALL);
-
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 /** @var string $baseDir */
 $baseDir = BASE_DIR;
@@ -255,7 +251,7 @@ function insertar_registro(string $datos, int $idLTYcliente): string
 
   // Generar el nuxpedido
   $nuxpedido = generaNuxPedido();
-  error_log("JSON SQL25: " . $idLTYcliente . "  DOC: " . $nuxpedido);
+  error_log("JSON SQL25: " . $idLTYcliente . "  DOC: " . $nuxpedido . "  usuario: " . $idusuario);
 
   $campos = 'fecha, nuxpedido, idusuario, idLTYreporte, supervisor, observacion, newJSON, idLTYcliente,hora';
   $interrogantes = '?,?,?,?,?,?,?,?,?';
@@ -319,8 +315,21 @@ $data = json_decode($datos, true);
 // error_log('ix-JSON response: ' . json_encode($data));
 if (is_array($data)) {
   $datos = is_string($data['q']) ? $data['q'] : '';
-  $sql25 = is_int($data['sql25']) ? $data['sql25'] : 0;
-  error_log("SQL25>>>>>: " . $sql25);
+  // $sql25 = is_int($data['sql25']) ? $data['sql25'] : 0;
+  // $sql25 = isset($data['sql25']) && is_numeric($data['sql25']) ? (int)$data['sql25'] : 0;
+  $sql25 = 0;
+  $sql25 = (int)$data['sql25'];
+  // if (isset($data['sql25'])) {
+  //   if (is_int($data['sql25'])) {
+  //     $sql25 = $data['sql25'];
+  //   } elseif (is_string($data['sql25']) && ctype_digit($data['sql25'])) {
+  //     $sql25 = (int)$data['sql25'];
+  //   }
+  // }
+
+  error_log("[sql25]=====: " . $sql25);
+  error_log("SQL25>>>>>: " . $sql25 . "  type: " . gettype($sql25));
+
   // Verifica que los valores sean válidos antes de llamar a la función
   if ($datos !== '') {
     insertar_registro($datos, $sql25);

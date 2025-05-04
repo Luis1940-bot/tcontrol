@@ -54,7 +54,8 @@ function asignarEventos() {
         ruta === 'pegarExcel' ||
         ruta === 'verRepetidosControl' ||
         ruta === 'Corregir Registros' ||
-        ruta === 'Ver Log'
+        ruta === 'Ver Log' ||
+        ruta === 'Forzar Reload'
       ) {
         ruta = objButtons.Sad.ruta[index];
         // window.location.href = `${SERVER}/Pages/${ruta}`;

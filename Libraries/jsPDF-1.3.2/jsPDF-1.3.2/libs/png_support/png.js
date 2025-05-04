@@ -4,47 +4,48 @@
 # PNG.js
 # Copyright (c) 2011 Devon Govett
 # MIT LICENSE
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this 
-# software and associated documentation files (the "Software"), to deal in the Software 
-# without restriction, including without limitation the rights to use, copy, modify, merge, 
-# publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons 
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this
+# software and associated documentation files (the "Software"), to deal in the Software
+# without restriction, including without limitation the rights to use, copy, modify, merge,
+# publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
 # to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or 
+#
+# The above copyright notice and this permission notice shall be included in all copies or
 # substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING 
-# BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
-# DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+# BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+# DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+(function (global) {
+  let PNG;
 
-(function(global) {
-  var PNG;
+  PNG = (function () {
+    let APNG_BLEND_OP_OVER; let APNG_BLEND_OP_SOURCE; let APNG_DISPOSE_OP_BACKGROUND; let APNG_DISPOSE_OP_NONE; let APNG_DISPOSE_OP_PREVIOUS; let makeImage; let scratchCanvas; let
+      scratchCtx;
 
-  PNG = (function() {
-    var APNG_BLEND_OP_OVER, APNG_BLEND_OP_SOURCE, APNG_DISPOSE_OP_BACKGROUND, APNG_DISPOSE_OP_NONE, APNG_DISPOSE_OP_PREVIOUS, makeImage, scratchCanvas, scratchCtx;
-
-    PNG.load = function(url, canvas, callback) {
-      var xhr,
-        _this = this;
+    PNG.load = function (url, canvas, callback) {
+      let xhr;
+      const _this = this;
       if (typeof canvas === 'function') {
         callback = canvas;
       }
-      xhr = new XMLHttpRequest;
-      xhr.open("GET", url, true);
-      xhr.responseType = "arraybuffer";
-      xhr.onload = function() {
-        var data, png;
+      xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'arraybuffer';
+      xhr.onload = function () {
+        let data; let
+          png;
         data = new Uint8Array(xhr.response || xhr.mozResponseArrayBuffer);
         png = new PNG(data);
         if (typeof (canvas != null ? canvas.getContext : void 0) === 'function') {
           png.render(canvas);
         }
-        return typeof callback === "function" ? callback(png) : void 0;
+        return typeof callback === 'function' ? callback(png) : void 0;
       };
       return xhr.send(null);
     };
@@ -60,7 +61,8 @@
     APNG_BLEND_OP_OVER = 1;
 
     function PNG(data) {
-      var chunkSize, colors, palLen, delayDen, delayNum, frame, i, index, key, section, palShort, text, _i, _j, _ref;
+      let chunkSize; let colors; let palLen; let delayDen; let delayNum; let frame; let i; let index; let key; let section; let palShort; let text; let _i; let _j; let
+        _ref;
       this.data = data;
       this.pos = 8;
       this.palette = [];
@@ -71,8 +73,9 @@
       frame = null;
       while (true) {
         chunkSize = this.readUInt32();
-        section = ((function() {
-          var _i, _results;
+        section = ((function () {
+          let _i; let
+            _results;
           _results = [];
           for (i = _i = 0; _i < 4; i = ++_i) {
             _results.push(String.fromCharCode(this.data[this.pos++]));
@@ -93,7 +96,7 @@
             this.animation = {
               numFrames: this.readUInt32(),
               numPlays: this.readUInt32() || Infinity,
-              frames: []
+              frames: [],
             };
             break;
           case 'PLTE':
@@ -108,7 +111,7 @@
               width: this.readUInt32(),
               height: this.readUInt32(),
               xOffset: this.readUInt32(),
-              yOffset: this.readUInt32()
+              yOffset: this.readUInt32(),
             };
             delayNum = this.readUInt16();
             delayDen = this.readUInt16() || 100;
@@ -124,7 +127,7 @@
               chunkSize -= 4;
             }
             data = (frame != null ? frame.data : void 0) || this.imgData;
-            for (i = _i = 0; 0 <= chunkSize ? _i < chunkSize : _i > chunkSize; i = 0 <= chunkSize ? ++_i : --_i) {
+            for (i = _i = 0; chunkSize >= 0 ? _i < chunkSize : _i > chunkSize; i = chunkSize >= 0 ? ++_i : --_i) {
               data.push(this.data[this.pos++]);
             }
             break;
@@ -132,17 +135,16 @@
             this.transparency = {};
             switch (this.colorType) {
               case 3:
-            	palLen = this.palette.length/3;
+            	palLen = this.palette.length / 3;
                 this.transparency.indexed = this.read(chunkSize);
-                if(this.transparency.indexed.length > palLen)
-                	throw new Error('More transparent colors than palette size');
+                if (this.transparency.indexed.length > palLen) throw new Error('More transparent colors than palette size');
                 /*
                  * According to the PNG spec trns should be increased to the same size as palette if shorter
                  */
-                //palShort = 255 - this.transparency.indexed.length;
+                // palShort = 255 - this.transparency.indexed.length;
                 palShort = palLen - this.transparency.indexed.length;
                 if (palShort > 0) {
-                  for (i = _j = 0; 0 <= palShort ? _j < palShort : _j > palShort; i = 0 <= palShort ? ++_j : --_j) {
+                  for (i = _j = 0; palShort >= 0 ? _j < palShort : _j > palShort; i = palShort >= 0 ? ++_j : --_j) {
                     this.transparency.indexed.push(255);
                   }
                 }
@@ -164,7 +166,7 @@
             if (frame) {
               this.animation.frames.push(frame);
             }
-            this.colors = (function() {
+            this.colors = (function () {
               switch (this.colorType) {
                 case 0:
                 case 3:
@@ -178,7 +180,7 @@
             this.hasAlphaChannel = (_ref = this.colorType) === 4 || _ref === 6;
             colors = this.colors + (this.hasAlphaChannel ? 1 : 0);
             this.pixelBitlength = this.bits * colors;
-            this.colorSpace = (function() {
+            this.colorSpace = (function () {
               switch (this.colors) {
                 case 1:
                   return 'DeviceGray';
@@ -193,23 +195,25 @@
         }
         this.pos += 4;
         if (this.pos > this.data.length) {
-          throw new Error("Incomplete or corrupt PNG file");
+          throw new Error('Incomplete or corrupt PNG file');
         }
       }
       return;
     }
 
-    PNG.prototype.read = function(bytes) {
-      var i, _i, _results;
+    PNG.prototype.read = function (bytes) {
+      let i; let _i; let
+        _results;
       _results = [];
-      for (i = _i = 0; 0 <= bytes ? _i < bytes : _i > bytes; i = 0 <= bytes ? ++_i : --_i) {
+      for (i = _i = 0; bytes >= 0 ? _i < bytes : _i > bytes; i = bytes >= 0 ? ++_i : --_i) {
         _results.push(this.data[this.pos++]);
       }
       return _results;
     };
 
-    PNG.prototype.readUInt32 = function() {
-      var b1, b2, b3, b4;
+    PNG.prototype.readUInt32 = function () {
+      let b1; let b2; let b3; let
+        b4;
       b1 = this.data[this.pos++] << 24;
       b2 = this.data[this.pos++] << 16;
       b3 = this.data[this.pos++] << 8;
@@ -217,15 +221,17 @@
       return b1 | b2 | b3 | b4;
     };
 
-    PNG.prototype.readUInt16 = function() {
-      var b1, b2;
+    PNG.prototype.readUInt16 = function () {
+      let b1; let
+        b2;
       b1 = this.data[this.pos++] << 8;
       b2 = this.data[this.pos++];
       return b1 | b2;
     };
 
-    PNG.prototype.decodePixels = function(data) {
-      var abyte, c, col, i, left, length, p, pa, paeth, pb, pc, pixelBytes, pixels, pos, row, scanlineLength, upper, upperLeft, _i, _j, _k, _l, _m;
+    PNG.prototype.decodePixels = function (data) {
+      let abyte; let c; let col; let i; let left; let length; let p; let pa; let paeth; let pb; let pc; let pixelBytes; let pixels; let pos; let row; let scanlineLength; let upper; let upperLeft; let _i; let _j; let _k; let _l; let
+        _m;
       if (data == null) {
         data = this.imgData;
       }
@@ -298,15 +304,16 @@
             }
             break;
           default:
-            throw new Error("Invalid filter algorithm: " + data[pos - 1]);
+            throw new Error(`Invalid filter algorithm: ${data[pos - 1]}`);
         }
         row++;
       }
       return pixels;
     };
 
-    PNG.prototype.decodePalette = function() {
-      var c, i, length, palette, pos, ret, transparency, _i, _ref, _ref1;
+    PNG.prototype.decodePalette = function () {
+      let c; let i; let length; let palette; let pos; let ret; let transparency; let _i; let _ref; let
+        _ref1;
       palette = this.palette;
       transparency = this.transparency.indexed || [];
       ret = new Uint8Array((transparency.length || 0) + palette.length);
@@ -322,8 +329,9 @@
       return ret;
     };
 
-    PNG.prototype.copyToImageData = function(imageData, pixels) {
-      var alpha, colors, data, i, input, j, k, length, palette, v, _ref;
+    PNG.prototype.copyToImageData = function (imageData, pixels) {
+      let alpha; let colors; let data; let i; let input; let j; let k; let length; let palette; let v; let
+        _ref;
       colors = this.colors;
       palette = null;
       alpha = this.hasAlphaChannel;
@@ -358,33 +366,34 @@
       }
     };
 
-    PNG.prototype.decode = function() {
-      var ret;
+    PNG.prototype.decode = function () {
+      let ret;
       ret = new Uint8Array(this.width * this.height * 4);
       this.copyToImageData(ret, this.decodePixels());
       return ret;
     };
 
     try {
-        scratchCanvas = global.document.createElement('canvas');
-        scratchCtx = scratchCanvas.getContext('2d');
-    } catch(e) {
-        return -1;
+      scratchCanvas = global.document.createElement('canvas');
+      scratchCtx = scratchCanvas.getContext('2d');
+    } catch (e) {
+      return -1;
     }
 
-    makeImage = function(imageData) {
-      var img;
+    makeImage = function (imageData) {
+      let img;
       scratchCtx.width = imageData.width;
       scratchCtx.height = imageData.height;
       scratchCtx.clearRect(0, 0, imageData.width, imageData.height);
       scratchCtx.putImageData(imageData, 0, 0);
-      img = new Image;
+      img = new Image();
       img.src = scratchCanvas.toDataURL();
       return img;
     };
 
-    PNG.prototype.decodeFrames = function(ctx) {
-      var frame, i, imageData, pixels, _i, _len, _ref, _results;
+    PNG.prototype.decodeFrames = function (ctx) {
+      let frame; let i; let imageData; let pixels; let _i; let _len; let _ref; let
+        _results;
       if (!this.animation) {
         return;
       }
@@ -401,8 +410,9 @@
       return _results;
     };
 
-    PNG.prototype.renderFrame = function(ctx, number) {
-      var frame, frames, prev;
+    PNG.prototype.renderFrame = function (ctx, number) {
+      let frame; let frames; let
+        prev;
       frames = this.animation.frames;
       frame = frames[number];
       prev = frames[number - 1];
@@ -420,13 +430,14 @@
       return ctx.drawImage(frame.image, frame.xOffset, frame.yOffset);
     };
 
-    PNG.prototype.animate = function(ctx) {
-      var doFrame, frameNumber, frames, numFrames, numPlays, _ref,
-        _this = this;
+    PNG.prototype.animate = function (ctx) {
+      let doFrame; let frameNumber; let frames; let numFrames; let numPlays; let _ref;
+      const _this = this;
       frameNumber = 0;
       _ref = this.animation, numFrames = _ref.numFrames, frames = _ref.frames, numPlays = _ref.numPlays;
-      return (doFrame = function() {
-        var f, frame;
+      return (doFrame = function () {
+        let f; let
+          frame;
         f = frameNumber++ % numFrames;
         frame = frames[f];
         _this.renderFrame(ctx, f);
@@ -436,34 +447,32 @@
       })();
     };
 
-    PNG.prototype.stopAnimation = function() {
-      var _ref;
+    PNG.prototype.stopAnimation = function () {
+      let _ref;
       return clearTimeout((_ref = this.animation) != null ? _ref._timeout : void 0);
     };
 
-    PNG.prototype.render = function(canvas) {
-      var ctx, data;
+    PNG.prototype.render = function (canvas) {
+      let ctx; let
+        data;
       if (canvas._png) {
         canvas._png.stopAnimation();
       }
       canvas._png = this;
       canvas.width = this.width;
       canvas.height = this.height;
-      ctx = canvas.getContext("2d");
+      ctx = canvas.getContext('2d');
       if (this.animation) {
         this.decodeFrames(ctx);
         return this.animate(ctx);
-      } else {
-        data = ctx.createImageData(this.width, this.height);
-        this.copyToImageData(data, this.decodePixels());
-        return ctx.putImageData(data, 0, 0);
       }
+      data = ctx.createImageData(this.width, this.height);
+      this.copyToImageData(data, this.decodePixels());
+      return ctx.putImageData(data, 0, 0);
     };
 
     return PNG;
-
-  })();
+  }());
 
   global.PNG = PNG;
-
-})(typeof window !== "undefined" && window || this);
+}(typeof window !== 'undefined' && window || this));
