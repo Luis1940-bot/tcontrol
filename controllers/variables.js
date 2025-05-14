@@ -1688,7 +1688,7 @@ const objMenuCView = {
   },
   imgExcel: {
     id: null,
-    src: '../../assets/img/icons8-microsoft-excel-50.png',
+    src: '../../../assets/img/icons8-microsoft-excel-50.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1698,7 +1698,7 @@ const objMenuCView = {
   },
   imgPdf: {
     id: null,
-    src: '../../assets/img/icons8-pdf-64.png',
+    src: '../../../assets/img/icons8-pdf-64.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1708,7 +1708,7 @@ const objMenuCView = {
   },
   imgSalir: {
     id: null,
-    src: '../../assets/img/icons8-logout-26.png',
+    src: '../../../assets/img/icons8-logout-26.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1718,7 +1718,7 @@ const objMenuCView = {
   },
   imgJson: {
     id: null,
-    src: '../../assets/img/icons8-json-80.png',
+    src: '../../../assets/img/icons8-json-80.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1728,7 +1728,7 @@ const objMenuCView = {
   },
   imgRefresh: {
     id: null,
-    src: '../../assets/img/icons8-refresh-50.png',
+    src: '../../../assets/img/icons8-refresh-50.png',
     className: 'img-menu',
     alt: '',
     height: 20,
@@ -1738,7 +1738,7 @@ const objMenuCView = {
   },
   imgApi: {
     id: null,
-    src: '../../assets/img/icons8-api-64.png',
+    src: '../../../assets/img/icons8-api-64.png',
     className: 'img-menu',
     alt: '',
     height: 20,

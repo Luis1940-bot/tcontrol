@@ -64,24 +64,27 @@ function convertToValidJson(string $dataString): string
 
 
     // Corregir formato del campo "imagenes"
-    $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?)\]/', function ($matches) {
-      $content = $matches[1];
-      $content = preg_replace("/''/", '""', $content); // Convertir comillas simples vacías a comillas dobles vacías
-      assert(is_string($content));
-      $content = preg_replace('/\'/', '"', $content); // Convertir comillas simples a comillas dobles
-      /** @var string|null $content */
 
-      $content = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
-        $submatches[1] = str_replace('"', "'", $submatches[1]); // Convertir comillas dobles a comillas simples dentro del objeto
-        $submatches[1] = preg_replace('/fileName/', "'fileName'", $submatches[1]); // Reemplazar "fileName" con 'fileName'
-        $submatches[1] = preg_replace('/extension/', "'extension'", $submatches[1] ?? ''); // Reemplazar "extension" con 'extension'
-        $submatches[1] = preg_replace_callback('/\[(.*?)\]/', function ($arrayMatches) {
-          return '[' . str_replace('"', "'", $arrayMatches[1]) . ']'; // Convertir comillas dobles a comillas simples dentro de los arrays
-        }, $submatches[1] ?? '');
-        return '{' . $submatches[1] . '}';
-      }, $content ?? '');
-      return '"imagenes": [' . $content . ']';
-    }, $dataString ?? '');
+
+
+    // $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?)\]/', function ($matches) {
+    //   $content = $matches[1];
+    //   $content = preg_replace("/''/", '""', $content); // Convertir comillas simples vacías a comillas dobles vacías
+    //   assert(is_string($content));
+    //   $content = preg_replace('/\'/', '"', $content); // Convertir comillas simples a comillas dobles
+    //   /** @var string|null $content */
+
+    //   $content = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
+    //     $submatches[1] = str_replace('"', "'", $submatches[1]); // Convertir comillas dobles a comillas simples dentro del objeto
+    //     $submatches[1] = preg_replace('/fileName/', "'fileName'", $submatches[1]); // Reemplazar "fileName" con 'fileName'
+    //     $submatches[1] = preg_replace('/extension/', "'extension'", $submatches[1] ?? ''); // Reemplazar "extension" con 'extension'
+    //     $submatches[1] = preg_replace_callback('/\[(.*?)\]/', function ($arrayMatches) {
+    //       return '[' . str_replace('"', "'", $arrayMatches[1]) . ']'; // Convertir comillas dobles a comillas simples dentro de los arrays
+    //     }, $submatches[1] ?? '');
+    //     return '{' . $submatches[1] . '}';
+    //   }, $content ?? '');
+    //   return '"imagenes": [' . $content . ']';
+    // }, $dataString ?? '');
 
     // Corregir formato del campo "email"
     $dataString = preg_replace_callback('/"email":\s*\{(.*?)\}/', function ($matches) {
@@ -108,20 +111,53 @@ function convertToValidJson(string $dataString): string
     }, $dataString ?? '');
 
     // Verificar "fileName" y "extension" dentro de "imagenes"
-    $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?({.*?}).*?)\]/', function ($matches) {
-      $content = $matches[1];
-      $content = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
-        $submatches[1] = preg_replace('/"fileName"/', "'fileName'", $submatches[1]); // Reemplazar "fileName" con 'fileName'
-        $submatches[1] = preg_replace('/"extension"/', "'extension'", $submatches[1] ?? ''); // Reemplazar "extension" con 'extension'
-        $submatches[1] = preg_replace('/"plant"/', "'plant'", $submatches[1] ?? ''); // Reemplazar "plant" con 'plant'
-        $submatches[1] = preg_replace('/"carpeta"/', "'carpeta'", $submatches[1] ?? ''); // Reemplazar "carpeta" con 'carpeta'
+    // $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?({.*?}).*?)\]/', function ($matches) {
+    //   $content = $matches[1];
+    //   $content = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
+    //     $submatches[1] = preg_replace('/"fileName"/', "'fileName'", $submatches[1]); // Reemplazar "fileName" con 'fileName'
+    //     $submatches[1] = preg_replace('/"extension"/', "'extension'", $submatches[1] ?? ''); // Reemplazar "extension" con 'extension'
+    //     $submatches[1] = preg_replace('/"plant"/', "'plant'", $submatches[1] ?? ''); // Reemplazar "plant" con 'plant'
+    //     $submatches[1] = preg_replace('/"carpeta"/', "'carpeta'", $submatches[1] ?? ''); // Reemplazar "carpeta" con 'carpeta'
+    //     $submatches[1] = preg_replace_callback('/\[(.*?)\]/', function ($arrayMatches) {
+    //       return '[' . str_replace('"', "'", $arrayMatches[1]) . ']'; // Convertir comillas dobles a comillas simples dentro de los arrays
+    //     }, $submatches[1] ?? '');
+    //     return '{' . $submatches[1] . '}';
+    //   }, $content);
+    //   return '"imagenes": [' . $content . ']';
+    // }, $dataString ?? '');
+
+    // $dataString = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
+    //   $submatches[1] = preg_replace('/"fileName"/', "'fileName'", $submatches[1]);
+    //   $submatches[1] = preg_replace('/"extension"/', "'extension'", $submatches[1] ?? '');
+    //   $submatches[1] = preg_replace('/"plant"/', "'plant'", $submatches[1] ?? '');
+    //   $submatches[1] = preg_replace('/"carpeta"/', "'carpeta'", $submatches[1] ?? '');
+
+    //   // Reemplazo de comillas dentro de arrays
+    //   $submatches[1] = preg_replace_callback('/\[(.*?)\]/', function ($arrayMatches) {
+    //     return '[' . str_replace('"', "'", $arrayMatches[1]) . ']';
+    //   }, $submatches[1] ?? '');
+
+    //   return '{' . $submatches[1] . '}';
+    // }, $dataString ?? '');
+
+
+    if (preg_match('/"imagenes":\s*\[.*\]/', $dataString)) {
+      $dataString = preg_replace_callback('/\{(.*?)\}/', function ($submatches) {
+        $submatches[1] = preg_replace('/"fileName"/', "'fileName'", $submatches[1]);
+        $submatches[1] = preg_replace('/"extension"/', "'extension'", $submatches[1] ?? '');
+        $submatches[1] = preg_replace('/"plant"/', "'plant'", $submatches[1] ?? '');
+        $submatches[1] = preg_replace('/"carpeta"/', "'carpeta'", $submatches[1] ?? '');
+
+        // Reemplazo de comillas dentro de arrays
         $submatches[1] = preg_replace_callback('/\[(.*?)\]/', function ($arrayMatches) {
-          return '[' . str_replace('"', "'", $arrayMatches[1]) . ']'; // Convertir comillas dobles a comillas simples dentro de los arrays
+          return '[' . str_replace('"', "'", $arrayMatches[1]) . ']';
         }, $submatches[1] ?? '');
+
         return '{' . $submatches[1] . '}';
-      }, $content);
-      return '"imagenes": [' . $content . ']';
-    }, $dataString ?? '');
+      }, $dataString);
+    } else {
+      echo "No se encontró la sección 'imagenes'.";
+    }
 
     // Corregir formato del campo "hora"
     $dataString = preg_replace_callback('/"hora":\s*\[(.*?)\]/', function ($matches) {
@@ -211,6 +247,7 @@ function insertar_registro(string $datos, int $idLTYcliente): string
   $jsonString = rtrim($jsonString, '}');
 
   // Convertir jsonString a un JSON válido
+
   $nuevoObjetoJSON = convertToValidJson($jsonString);
 
 

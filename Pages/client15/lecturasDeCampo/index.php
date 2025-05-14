@@ -110,11 +110,11 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
     include_once('../../../includes/molecules/header.php');
     include_once('../../../includes/molecules/encabezado.php');
     include_once('../../../includes/molecules/whereUs.php');
-    include_once('../../../includes/molecules/doc.php');
+    // include_once('../../../includes/molecules/doc.php');
     ?>
   </header>
   <main>
-    <table id='tableBitacora28'>
+    <table id='tableConsultaViews'>
       <thead></thead>
       <tbody></tbody>
     </table>
@@ -127,6 +127,9 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
   <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo (time()); ?>'></script>
   <script type='module' src='<?php echo BASE_URL ?>/Pages/client15/js/pivot_data.js?v=<?php echo (time()); ?>'></script>
   <script type='module' src='<?php echo BASE_URL ?>/Pages/client15/js/traer.js?v=<?php echo (time()); ?>'></script>
+  <script src='<?php echo BASE_URL ?>/includes/atoms/cdnjs/xlsx.full.min.js'></script>
+  <script src='<?php echo BASE_URL ?>/includes/atoms/html2canvas/html2canvas.min.js'></script>
+  <script src='<?php echo BASE_URL ?>/includes/atoms/jspdf/jspdf.min.js'></script>
 </body>
 
 </html>

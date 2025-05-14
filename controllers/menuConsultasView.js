@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/extensions
 // import { Alerta } from '../includes/atoms/alerta.js';
+import objVariables from './variables.js';
 import Alerta from '../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
-import objVariables from './variables.js';
 
 function closeModal() {
   const hamburguesa = document.getElementById('hamburguesa');

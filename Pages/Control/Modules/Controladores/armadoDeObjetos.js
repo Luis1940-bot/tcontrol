@@ -50,6 +50,7 @@ function consologuear(c, i, objParams) {
 
 function respuestaColumna(c, i, objParams, plant, carpeta) {
   try {
+    // console.log(objParams);
     // ** tagName-INPUT   tagName-SELECT   tagName-DIV*/
     const obj = objParams;
     const { tagName, type } = obj;
@@ -155,7 +156,6 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
     if (c === 4 && obj.terceraColumna.tagName === 'UL') {
       const ul = obj.terceraColumna;
       // eslint-disable-next-line no-plusplus
-      // console.log(ul.children.length)
       for (let m = 0; m < ul.children.length; m++) {
         const li = ul.children[m].childNodes[0];
         const rutaSrc = li.getAttribute('src');

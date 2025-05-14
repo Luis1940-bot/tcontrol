@@ -1184,7 +1184,9 @@ function convertirObjATextPlano(obj) {
   return `${plainText}`;
 }
 
-async function subirImagenes(img) {
+// eslint-disable-next-line camelcase, no-unused-vars
+async function subirImagenes_OLD(img) {
+  console.log(img);
   if (img.length === 0) {
     return null;
   }
@@ -1192,7 +1194,7 @@ async function subirImagenes(img) {
     return null;
   }
 
-  const imgJsonString = JSON.stringify(img[0]);
+  const imgJsonString = JSON.stringify(img);
   try {
     JSON.parse(imgJsonString); // Esto lanzará un error si el JSON no es válido
   } catch (e) {
@@ -1203,6 +1205,8 @@ async function subirImagenes(img) {
   const formData = new FormData();
   formData.append('imgBase64', imgJsonString);
 
+  console.log(formData);
+  // return;
   fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
     method: 'POST',
     body: formData,
@@ -1219,6 +1223,89 @@ async function subirImagenes(img) {
       console.error('Error al enviar la imagen:', error);
     });
   return null;
+}
+
+function base64ToFile(base64String, filename, mimeType) {
+  const byteString = atob(base64String.split(',')[1]);
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+  return new File([ab], filename, { type: mimeType });
+}
+
+async function subirImagenes(img) {
+  try {
+    if (!img) {
+      console.log('Archivo de imagen vacío');
+    }
+    if (!Array.isArray(img) || img.length === 0) {
+      console.log('La imagen no es un array');
+    }
+
+    const formData = new FormData();
+
+    img.forEach((item, groupIndex) => {
+      // console.log(`Procesando grupo de imágenes ${groupIndex}`);
+
+      const {
+        carpeta = [],
+        extension = [],
+        fileName = [],
+        plant = [],
+        src = [],
+      } = item;
+
+      const length = Math.min(
+        carpeta.length,
+        extension.length,
+        fileName.length,
+        plant.length,
+        src.length,
+      );
+
+      for (let i = 0; i < length; i++) {
+        const base64 = src[i];
+        const fileExt = extension[i];
+        const name = fileName[i];
+        const folder = carpeta[i];
+        const plantValue = plant[i];
+
+        const mimeMatch = base64.match(/^data:(image\/[a-zA-Z]+);base64,/);
+        const mimeType = mimeMatch ? mimeMatch[1] : `image/${fileExt}`;
+
+        const file = base64ToFile(base64, name, mimeType);
+
+        formData.append('images[]', file);
+        formData.append('fileName[]', name);
+        formData.append('extension[]', fileExt);
+        formData.append('carpeta[]', folder);
+        formData.append('plant[]', plantValue);
+      }
+    });
+    // console.log(formData);
+    fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then(
+        (data) =>
+          // eslint-disable-next-line no-console
+          // console.log('Respuesta del servidor:', data)
+          data,
+      )
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Error al enviar la imagen:', error);
+      });
+    return null;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warm(`Error al subir imagenes: ${error}`);
+    return null;
+  }
 }
 
 function cartelVerdeInsertado(
@@ -2280,7 +2367,7 @@ export default class Alerta {
         : null;
       procesoStyleDisplay(elementosStyle);
       limpiaArrays();
-      // console.log(arrayGlobal.objetoControl)
+      // console.log(arrayGlobal.objetoControl);
       const okGuardar = guardarNuevo(
         arrayGlobal.objetoControl,
         arrayGlobal.arrayControl,
@@ -2312,7 +2399,6 @@ export default class Alerta {
 
         const convertido = convertirObjATextPlano(arrayGlobal.objetoControl);
 
-        // console.log(convertido)
         const nuevoObjeto = {
           ...arrayGlobal.objetoControl,
           // eslint-disable-next-line max-len
@@ -2882,6 +2968,7 @@ export default class Alerta {
   createModalConsultaView(objeto, objTranslate) {
     // eslint-disable-next-line no-unused-vars
     const obj = objeto;
+
     // const obj = JSON.parse(JSON.stringify(objeto))
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertM';

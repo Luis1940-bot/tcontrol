@@ -17,6 +17,7 @@ import { arraysLoadTranslate } from '../../../controllers/arraysLoadTranslate.js
 import { trO } from '../../../controllers/trOA.js';
 import LogOut from '../../../controllers/logout.js';
 import traerPivot from './traer.js';
+import menuModalConsultasView from '../../../controllers/menuConsultasView.js';
 
 const SERVER = baseUrl;
 const spinner = document.querySelector('.spinner');
@@ -66,7 +67,7 @@ function pivotData(row) {
   });
 
   const fechaList = [...fechas].sort();
-  const tableElement = document.getElementById('tableBitacora28');
+  const tableElement = document.getElementById('tableConsultaViews');
   tableElement.innerHTML = ''; // limpiar
 
   // Header
@@ -97,7 +98,7 @@ async function cargar(objeto) {
   } else {
     console.warn('No se pudo cargar la data del servidor. Detalles:', response);
     // Podés también mostrar un mensaje en pantalla, porque llorar por consola no ayuda al usuario
-    const table = document.getElementById('tableBitacora28');
+    const table = document.getElementById('tableConsultaViews');
     table.innerHTML =
       '<tr><td colspan="999">No hay datos disponibles 😢</td></tr>';
   }
@@ -155,7 +156,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  const hamburguesa = document.getElementById('hamburguesa');
+  hamburguesa.style.display = 'block';
+  hamburguesa.addEventListener('click', () => {
+    const modalAlertM = document.getElementById('modalAlertM');
+    if (!modalAlertM) {
+      menuModalConsultasView(objTranslate);
+    }
+  });
   const person = document.getElementById('person');
+  person.style.display = 'block';
   person.addEventListener('click', () => {
     person.style.border = '3px solid #212121';
     person.style.background = '#212121';
@@ -167,7 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
       home: 'Inicio',
       salir: trO('Cerrar sesión', objTranslate),
     };
-    personModal(user, objTranslate);
+    const modalAlertP = document.getElementById('modalAlertP');
+    if (!modalAlertP) {
+      personModal(user, objTranslate);
+    }
   });
   setTimeout(() => {
     alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
