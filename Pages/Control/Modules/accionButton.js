@@ -166,6 +166,7 @@ async function validation(val, plant, objTrad, div, index) {
 
     const supervisor = await traerFirma(val, plant);
     if (supervisor.id !== null) {
+      const habilitaValidar = sessionStorage.getItem('habilitaValidar');
       while (div.firstChild) {
         div.removeChild(div.firstChild);
       }
@@ -184,6 +185,7 @@ async function validation(val, plant, objTrad, div, index) {
       inputText.value = `Validado por ${supervisor.nombre}`;
 
       div.appendChild(inputText);
+      sessionStorage.setItem('habilitaValidar', habilitaValidar);
     } else {
       const miAlerta = new Alerta();
       const obj = arrayGlobal.avisoRojo;
@@ -192,6 +194,7 @@ async function validation(val, plant, objTrad, div, index) {
 
       const modal = document.getElementById('modalAlertVerde');
       modal.style.display = 'block';
+      sessionStorage.setItem('habilitaValidar', 'false');
     }
   } catch (error) {
     // eslint-disable-next-line no-console

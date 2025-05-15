@@ -109,6 +109,7 @@ function RegisterUser(a, email) {
   const data = etiqueta.getAttribute('data');
   sessionStorage.setItem('volver', encriptar('Login'));
   sessionStorage.setItem('mailInvitado', encriptar(email));
+  sessionStorage.setItem('habilitaValidar', 'false');
 
   window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`;
 }

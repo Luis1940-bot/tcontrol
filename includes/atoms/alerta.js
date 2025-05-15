@@ -1520,6 +1520,7 @@ async function insert(
   docStorage,
   enviaPorEmailBooleano,
 ) {
+  // console.log(nuevoObjeto);
   try {
     const { plant } = desencriptar(sessionStorage.getItem('user'));
 
@@ -1530,10 +1531,12 @@ async function insert(
     delete nuevoObjetoControl.objImagen;
 
     let insertado;
-
+    // console.log(nuevoObjetoControl, plant);
     try {
       if (docStorage === false) {
         insertado = await insertarRegistro(nuevoObjetoControl, plant);
+        // console.log(insertado);
+        sessionStorage.setItem('habilitaValidar', 'true');
       } else {
         insertado = await updateRegistro(nuevoObjetoControl, docStorage);
       }

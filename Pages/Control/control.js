@@ -199,6 +199,7 @@ async function cargaDeRegistros(objTrad, plant) {
       esperarTablaLista(() => {
         console.log('Ejecutando cargarNR después de que la tabla está lista');
         cargarNR(controlNr, plant, valor_sql);
+        sessionStorage.setItem('habilitaValidar', 'true');
       });
     }
   } catch (error) {
@@ -238,7 +239,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   sessionStorage.setItem('config_menu', encriptar('x'));
   sessionStorage.setItem('envia_por_email', false);
   sessionStorage.setItem('doc', null);
-
+  sessionStorage.setItem('habilitaValidar', 'false');
   const supervisor = {
     id: 0,
     mail: '',

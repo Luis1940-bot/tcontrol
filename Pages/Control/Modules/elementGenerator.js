@@ -14,6 +14,7 @@ import buttonImage from './imagenes.js';
 
 import baseUrl from '../../../config.js';
 import { encriptar } from '../../../controllers/cript.js';
+
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl;
 
@@ -428,6 +429,12 @@ class ElementGenerator {
         encriptado = null;
       }
       validation(encriptado, plant, objTrad, div, index);
+      const habilitaValidar = sessionStorage.getItem('habilitaValidar');
+      if (habilitaValidar === 'true') {
+        alert('Tiene que guardar los cambios para registrar su firma.');
+      } else if (habilitaValidar === 'false') {
+        alert('No olvide de guardar el documento.');
+      }
     });
     return div;
   }

@@ -1,1 +1,24 @@
 
+[15-May-2025 10:56:48 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[15-May-2025 10:56:48 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[15-May-2025 10:56:48 America/Argentina/Buenos_Aires] 1	[2025-05-15 10:56:48 -03] [Error 2] Undefined array key 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 240 | IP: ::1 | URI: /Pages/Control/Routes/ix.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+[15-May-2025 10:56:48 America/Argentina/Buenos_Aires] 1	[2025-05-15 10:56:48 -03] [Error 8192] rtrim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 243 | IP: ::1 | URI: /Pages/Control/Routes/ix.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+[15-May-2025 10:56:48 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250515105648659  usuario: 25
+[15-May-2025 11:32:03 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[15-May-2025 11:32:03 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[15-May-2025 11:32:03 America/Argentina/Buenos_Aires] 1	[2025-05-15 11:32:03 -03] [Error 2] Undefined array key 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 240 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+[15-May-2025 11:32:03 America/Argentina/Buenos_Aires] 1	[2025-05-15 11:32:03 -03] [Error 8192] rtrim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 243 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+[15-May-2025 11:32:03 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250515113203219  usuario: 25
+[15-May-2025 11:39:26 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[15-May-2025 11:39:26 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[15-May-2025 11:39:26 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250515113926887  usuario: 25
+[15-May-2025 11:39:27 America/Argentina/Buenos_Aires] 1	[2025-05-15 11:39:27 -03] [Exception] SQLSTATE[HY000]: General error: 3819 Check constraint 'LTYregistrocontrol_chk_1' is violated. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ix.php on line 319 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+[15-May-2025 11:43:51 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[15-May-2025 11:43:51 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[15-May-2025 11:43:51 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250515114351984  usuario: 25
+[15-May-2025 11:51:54 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[15-May-2025 11:51:54 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[15-May-2025 11:51:54 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250515115154284  usuario: 25
+[15-May-2025 11:53:54 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[15-May-2025 11:53:54 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[15-May-2025 11:53:54 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250515115354664  usuario: 25
