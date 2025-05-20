@@ -201,7 +201,7 @@ function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
           terceraColumna,
         };
         //  const { type } = objParametros
-
+        // console.log('columna: ', c, '  fila: ', i);
         if (c === 2) {
           respuesta = respuestaColumna(c, i, objParametros);
           ({ valor, selector1, valorS, familiaselector } = respuesta);

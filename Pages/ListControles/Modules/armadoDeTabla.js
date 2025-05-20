@@ -189,15 +189,16 @@ function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   if (tipoDeDato === 'checkdatehour') {
     tipo = trO('Check Date Hora', objTranslate) || 'Check Date Hora';
   }
-  if (tipoDeDato === 'pastillaTx') {
+  if (tipoDeDato === 'pastillatx') {
     tipo = trO('Pastilla Texto', objTranslate) || 'Pastilla Texto';
   }
-  if (tipoDeDato === 'pastillaSelect') {
+  if (tipoDeDato === 'pastillase') {
     tipo = trO('Pastilla Select', objTranslate) || 'Pastilla Select';
   }
-  if (tipoDeDato === 'pastillaConsulta') {
+  if (tipoDeDato === 'pastillaco') {
     tipo = trO('Pastilla Consulta', objTranslate) || 'Pastilla Consulta';
   }
+  // console.log(tipo);
   return tipo;
 }
 
@@ -264,6 +265,7 @@ function reconoceColumna(
       break;
     case 4:
       // tipodedato
+      // console.log(array[i]);
       texto = reconoceTipoDeDato(array[i], objTranslate);
       buttonEditar = addEditar(indice, cantidadDeRegistros);
       break;
@@ -559,6 +561,7 @@ function estiloCellCampos(celda) {
 }
 
 async function turnOnOff(target, objTranslate, plant) {
+  // console.log(target, plant);
   const turn = await turnControl(target, plant);
 
   if (turn.success) {
@@ -748,6 +751,7 @@ function addCeldaFilaCampo(
   colSpan,
 ) {
   try {
+    // console.log(array, index, selects);
     const newRow = document.createElement('tr');
     let col = 0;
     // console.log(array, index, array.length)
@@ -917,6 +921,7 @@ function addCeldaFilaCampo(
 
 async function viewer(selector, array, objTranslate, plant) {
   //! editar
+  // console.log(selector, array);
   try {
     arrayOrden = [];
     const segundaTabla = document.querySelector('.tabla-campos');

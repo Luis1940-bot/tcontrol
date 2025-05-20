@@ -7,6 +7,7 @@ import {
   checkHour,
   checkDate,
   checkDateHour,
+  addPastillaText,
   // eslint-disable-next-line import/extensions
 } from './accionButton.js';
 // eslint-disable-next-line import/extensions
@@ -503,6 +504,61 @@ class ElementGenerator {
       checkDateHour(div, index);
     });
     return div;
+  }
+
+  static generateDivPastillita(index) {
+    const div = document.createElement('div');
+    div.setAttribute('id', `pastillita${index}`);
+    return div;
+  }
+
+  static generateAddPastillita(
+    text,
+    name,
+    clase,
+    plant,
+    index,
+    tipoDeEelemento,
+    selector,
+  ) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.setAttribute('name', name);
+    button.setAttribute('class', clase);
+    button.setAttribute('data-sel', selector);
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+
+      const valor = await addPastillaText(tipoDeEelemento, selector);
+
+      const divPastilla = document.getElementById(`pastillita${index}`);
+      divPastilla.className = 'div-pastillita';
+
+      // Crea el contenedor individual para cada pastilla
+      const pastilla = document.createElement('div');
+      pastilla.className = 'pastilla';
+      pastilla.setAttribute('data-id', `${Date.now()}-${Math.random()}`); // id único, por si querés rastrear
+
+      const span = document.createElement('span');
+      span.className = 'label-email';
+      span.innerHTML = valor;
+
+      const buttonCerrar = document.createElement('button');
+      buttonCerrar.className = 'button-email';
+      buttonCerrar.innerHTML = 'x';
+
+      // Acción de eliminar la pastilla al hacer clic
+      buttonCerrar.addEventListener('click', () => {
+        pastilla.remove();
+      });
+
+      pastilla.appendChild(span);
+      pastilla.appendChild(buttonCerrar);
+
+      divPastilla.appendChild(pastilla);
+    });
+
+    return button;
   }
 }
 

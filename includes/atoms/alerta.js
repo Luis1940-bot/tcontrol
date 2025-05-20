@@ -5286,6 +5286,7 @@ export default class Alerta {
       // aceptar el cambio
       let response = false;
       let datoSatinizado = '';
+      console.log(datoSeleccionado, column);
       if (
         typeof datoSeleccionado === 'object' ||
         column === '16' ||
@@ -5298,7 +5299,7 @@ export default class Alerta {
       } else {
         datoSatinizado = sanitiza(datoSeleccionado).trim();
       }
-
+      console.log(datoSatinizado, valor);
       if (datoSeleccionado !== null && datoSatinizado !== valor) {
         response = {
           success: true,
@@ -5308,7 +5309,7 @@ export default class Alerta {
       } else {
         response = { success: false, response: null };
       }
-      // console.log(response)
+      console.log(response);
       callback(response);
       cerrarModal('modalAlert');
     });

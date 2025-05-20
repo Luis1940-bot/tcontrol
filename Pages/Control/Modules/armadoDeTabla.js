@@ -106,6 +106,7 @@ function estilosCell(
   colSpan === 3 ? (cell.colSpan = 3) : null;
   colSpan === 4 ? (cell.style.display = 'none') : null;
   colSpan === 5 ? (cell.colSpan = 3) : null;
+  colSpan === 6 ? (cell.colSpan = 2) : null;
   display !== null ? (cell.style.display = display) : null;
   return cell;
 }
@@ -139,6 +140,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
     if (separador) {
       borde = element[17].trim();
     }
+    const tiposValidos = ['pastillatx', 'pastillase', 'pastillaco'];
 
     if (i === 0) {
       ID += 1;
@@ -434,6 +436,14 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         index,
       );
       type = inputButton;
+    } else if (i === 2 && tiposValidos.includes(tipoDeDato)) {
+      dato = null;
+      colSpan = 6;
+      const divPastilla = ElementGenerator.generateDivPastillita(index);
+      type = divPastilla;
+    }
+    if (i > 2 && i < 4 && tiposValidos.includes(tipoDeDato)) {
+      display = 'none';
     }
 
     if (i > 2 && tipoDeDato === 'tx') {
@@ -443,6 +453,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
     if (i > 2 && tipoDeDato === 'tx' && maxTextarea !== null && tipoColSpanTx) {
       display = 'none';
     }
+
     if (i === 4 && tipoDeObservacion === 'd') {
       const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
       const fecha = fechasGenerator.fecha_corta_yyyymmdd(new Date());
@@ -512,6 +523,7 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       const arraySel = arrayGlobal.arraySelect.filter(
         (ele) => ele[2] === element[15],
       );
+
       const select = ElementGenerator.generateSelect(arraySel);
       type = select;
     } else if (i === 4 && tipoDeObservacion === 'cn') {
@@ -557,6 +569,75 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         name,
       );
       type = radioButton;
+    } else if (i === 4 && tipoDeObservacion === 'pastillatx') {
+      dato = null;
+      // colSpan = 5;
+      let text = 'Texto';
+      const tipoDeElemento = 'text';
+      const anchoButton =
+        widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.2;
+      const wordLenght = text.length * 10;
+      const caracteres = Math.ceil((wordLenght - anchoButton) / 5);
+      text = `${text.substring(0, caracteres)}.`;
+      const inputButton = ElementGenerator.generateAddPastillita(
+        text,
+        'TEXTO',
+        'InputButton-transparent',
+        plant,
+        index,
+        tipoDeElemento,
+      );
+      type = inputButton;
+    } else if (i === 4 && tipoDeObservacion === 'pastillase') {
+      dato = null;
+      // colSpan = 5;
+      let text = 'Selector';
+      const tipoDeElemento = 'select';
+      const anchoButton =
+        widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.2;
+      const wordLenght = text.length * 10;
+      const caracteres = Math.ceil((wordLenght - anchoButton) / 5);
+      text = `${text.substring(0, caracteres)}.`;
+      const datosSelector = {
+        selector: element[15],
+        opciones: arrayGlobal.arraySelect.filter(
+          (ele) => ele[2] === element[15],
+        ),
+        valorPorDefecto: element[20] !== '' ? element[20] : null,
+      };
+
+      const inputButton = ElementGenerator.generateAddPastillita(
+        text,
+        'TEXTO',
+        'InputButton-transparent',
+        plant,
+        index,
+        tipoDeElemento,
+        datosSelector,
+      );
+      type = inputButton;
+    } else if (i === 4 && tipoDeObservacion === 'pastillaco') {
+      dato = null;
+      // colSpan = 5;
+      let text = 'Consulta';
+      const tipoDeElemento = 'consulta';
+      const anchoButton =
+        widthScreenAjustado * widthScreen * arrayWidthEncabezado[2] * 0.2;
+      const wordLenght = text.length * 10;
+      const caracteres = Math.ceil((wordLenght - anchoButton) / 5);
+      text = `${text.substring(0, caracteres)}.`;
+
+      const consulta = element[25] || '';
+      const inputButton = ElementGenerator.generateAddPastillita(
+        text,
+        'TEXTO',
+        'InputButton-transparent',
+        plant,
+        index,
+        tipoDeElemento,
+        consulta,
+      );
+      type = inputButton;
     }
 
     if (i === 3 && tipoDatoDetalle === 'checkhour') {
@@ -651,7 +732,7 @@ function completaTabla(arrayControl, encabezados, objTrad, url, plant) {
   // Inicializar el progreso
   let fila = 0;
   updateProgress();
-  // console.log(arrayControl)
+  // console.log(arrayControl);
   // Procesar cada elemento del array
   arrayControl.forEach((element, index) => {
     const newRow = estilosTbodyCell(

@@ -275,6 +275,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       spinner.style.visibility = 'hidden'; // Ocultar spinner
       console.timeEnd('timeControl'); // Finalizar medición del tiempo
+      console.clear();
     }
   } catch (error) {
     console.warn(error); // Manejo de errores

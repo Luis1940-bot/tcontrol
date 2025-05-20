@@ -418,6 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
     LogOut();
   }, 43200000 - 300000);
+  console.clear();
 });
 
 const volver = document.getElementById('volver');

@@ -1,4 +1,8 @@
 /* Estilos para el modal */
+.modal-content {
+  height: auto;
+}
+
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   .modal {
     display: none;

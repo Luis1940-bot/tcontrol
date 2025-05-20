@@ -102,7 +102,7 @@ hr {
 }
 .button-cn {
   gap: 2px;
-  height: 80%;
+  height: 100%;
 }
 ul {
   list-style: none;
@@ -125,6 +125,68 @@ li {
 #imageInput {
   display: none;
 }
+
+.add-button {
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.div-pastillita {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid #9d9d9d;
+  border-radius: 5px;
+  margin-left: 2px;
+  align-items: center;
+  background-color: #f9f9f9;
+  width: 100%; /* <== fuerza a ajustarse al td */
+  box-sizing: border-box; /* <== que el padding y border no rompan el 100% */
+  overflow-wrap: break-word; /* rompe palabras si se va muy lejos */
+  word-break: break-word; /* para palabras largas tipo 'largooooooooo' */
+}
+
+.pastilla {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  padding: 4px 6px;
+  max-width: 100%;
+  word-break: break-word;
+  overflow: hidden;
+  flex-shrink: 1; /* <= que no se niegue a reducir */
+}
+
+.label-email {
+  color: #212121;
+  white-space: normal; /* permite que el texto largo se acomode */
+  font-size: 12px;
+  margin-right: 6px;
+  line-height: 1.2;
+}
+
+.button-email {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: #212121;
+  color: #cecece;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.div-pastillita:empty {
+  display: none;
+}
+
 /* Estilos para dispositivos móviles */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   /* Agrega estilos para dispositivos móviles aquí */
@@ -428,7 +490,7 @@ li {
   }
   .button-cn {
     gap: 2px;
-    height: 80%;
+    height: 100%;
   }
   .img-select {
     height: 50px;

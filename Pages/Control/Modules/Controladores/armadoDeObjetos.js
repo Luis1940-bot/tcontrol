@@ -64,7 +64,7 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
     const { imagenes } = obj;
     let observacion = '';
 
-    // console.log(c, tagName, type, plant, carpeta, obj)
+    // console.log(c, tagName, type, plant, carpeta, obj);
 
     if (tagName === 'INPUT') {
       if (type === 'text') {
@@ -150,8 +150,20 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
       }
     }
     if (tagName === 'DIV') {
-      valor = obj.inputElement.value;
+      obj.inputElement ? (valor = obj.inputElement.value) : null;
       c === 4 ? ((observacion = obj.inputElement), (valor = null)) : null;
+      const hijos = obj.node.children;
+      if (hijos.length > 0) {
+        const hijosArray = Array.from(obj.node.children);
+
+        const valores = hijosArray
+          .map((pastilla) => {
+            const span = pastilla.querySelector('span');
+            return span ? span.textContent.trim() : '';
+          })
+          .filter((v) => v !== ''); // por si algún span estaba vacío
+        valor = valores.join('-');
+      }
     }
     if (c === 4 && obj.terceraColumna.tagName === 'UL') {
       const ul = obj.terceraColumna;
@@ -178,6 +190,7 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
       const { height } = obj.node;
       valor = `{"img": "${imagen}", "width" : ${width}, "height": ${height}}`;
     }
+
     // console.log(c,i,valor)
     // consologuear(c, i, obj);
     // const valorr = `c:${c} i:${i} /${valor}`;

@@ -194,6 +194,39 @@ function columna2(
     }
   }
 
+  if (
+    tagName === 'DIV' &&
+    ['pastillatx', 'pastillase', 'pastillaco'].includes(tipodedato)
+  ) {
+    const celda = tds[2];
+    const divInterno = celda.querySelector('div');
+    const partes = valorVal.split('-');
+    // let pastilla;
+    partes.forEach((parte) => {
+      const pastilla = document.createElement('div');
+      pastilla.className = 'pastilla';
+      pastilla.setAttribute('data-id', `${Date.now()}-${Math.random()}`); // id único, por si querés rastrear
+
+      const span = document.createElement('span');
+      span.className = 'label-email';
+      span.innerHTML = parte;
+      const buttonCerrar = document.createElement('button');
+      buttonCerrar.className = 'button-email';
+      buttonCerrar.innerHTML = 'x';
+
+      // Acción de eliminar la pastilla al hacer clic
+      buttonCerrar.addEventListener('click', (e) => {
+        const pastillaE = e.target.closest('.pastilla');
+        if (pastillaE) {
+          pastillaE.remove(); // Fin del drama
+        }
+      });
+
+      pastilla.appendChild(span);
+      pastilla.appendChild(buttonCerrar);
+      divInterno.appendChild(pastilla);
+    });
+  }
   if (tagName === 'INPUT' && type === 'radio') {
     td[columnaTd].childNodes[0].checked = valorVal === '1';
   }

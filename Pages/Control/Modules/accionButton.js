@@ -12,13 +12,32 @@ import fechasGenerator from '../../../controllers/fechas.js';
 
 let objTranslate = [];
 
+function generateOptions(array, select) {
+  while (select.firstChild) {
+    select.removeChild(select.firstChild);
+  }
+  if (array.length > 0) {
+    const emptyOption = document.createElement('option');
+    emptyOption.value = '';
+    emptyOption.text = '';
+    select.appendChild(emptyOption);
+    array.forEach((subarray) => {
+      const [value, text] = subarray;
+      const option = document.createElement('option');
+      option.value = value;
+      option.text = text;
+      select.appendChild(option);
+    });
+  }
+}
+
 async function cargaModal(respuesta, input, haceClick, idInput) {
   try {
+    // console.log(respuesta, input, haceClick, idInput);
     // const etiquetaInput = input;
     const table = document.querySelector('.modal-content table');
     const thead = table.querySelector('.modal-content table thead');
     const tbody = table.querySelector('.modal-content table tbody');
-
     while (thead.firstChild) {
       thead.removeChild(thead.firstChild);
     }
@@ -66,6 +85,154 @@ async function cargaModal(respuesta, input, haceClick, idInput) {
     // eslint-disable-next-line no-console
     console.log(error);
   }
+}
+
+function renderTablaConsulta(resultado) {
+  const contenedor = document.createElement('div');
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'Buscar...';
+  input.id = 'searchInput';
+
+  const tabla = document.createElement('table');
+  tabla.style.width = '100%';
+  const tbody = document.createElement('tbody');
+  tabla.appendChild(tbody);
+
+  const mensajeSeleccion = document.createElement('span');
+  mensajeSeleccion.style.fontSize = '12px';
+  mensajeSeleccion.style.fontWeight = 'bold';
+  mensajeSeleccion.style.display = 'block';
+  mensajeSeleccion.style.marginTop = '5px';
+
+  let seleccionado = null;
+
+  const render = (filtro = '') => {
+    tbody.innerHTML = '';
+    resultado.forEach((fila) => {
+      const nombre = fila[1]?.trim() || '';
+      if (nombre.toLowerCase().includes(filtro.toLowerCase())) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.textContent = nombre;
+        td.className = 'label-email';
+        td.style.cursor = 'pointer';
+        td.onclick = () => {
+          seleccionado = nombre;
+          [...tbody.querySelectorAll('td')].forEach((el) =>
+            el.classList.remove('selected'),
+          );
+          td.classList.add('selected'); // marcás el que elegiste
+          mensajeSeleccion.textContent = `Seleccionaste: ${nombre}`;
+        };
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      }
+    });
+  };
+
+  input.addEventListener('input', (e) => render(e.target.value));
+  render();
+
+  contenedor.appendChild(input);
+  contenedor.appendChild(tabla);
+  contenedor.appendChild(mensajeSeleccion);
+
+  return {
+    tablaCompleta: contenedor,
+    getSeleccionado: () => seleccionado,
+  };
+}
+
+function crearModalPastillas(tipo = 'text', selector = null) {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (resolve) => {
+    const fondo = document.createElement('div');
+    fondo.className = 'modal';
+    fondo.id = 'modalDinamico';
+
+    const modal = document.createElement('div');
+    modal.className = 'modal-content';
+
+    const cerrar = document.createElement('span');
+    cerrar.setAttribute('class', 'close');
+    cerrar.innerHTML = '&times;';
+    cerrar.style.cursor = 'pointer';
+    cerrar.onclick = () => {
+      document.body.removeChild(fondo);
+      resolve(null); // El usuario cerró sin aceptar nada
+    };
+
+    const divContenido = document.createElement('div');
+    divContenido.className = 'div-span';
+
+    let inputElement;
+    let valorGetter = null;
+
+    if (tipo === 'select') {
+      const select = document.createElement('select');
+      select.style.width = '90%';
+      select.style.padding = '10px';
+      select.style.marginBottom = '10px';
+      generateOptions(selector.opciones, select);
+
+      inputElement = select;
+    } else if (tipo === 'consulta') {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Escribe algo...';
+      input.id = 'searchInput';
+      inputElement = input;
+
+      // modal.style.display = 'inline-block';
+      const resultado = await traerRegistros(
+        'traer_LTYsql',
+        `${encodeURIComponent(selector)}`,
+      );
+      const { tablaCompleta, getSeleccionado } = renderTablaConsulta(resultado);
+      valorGetter = getSeleccionado;
+      inputElement = tablaCompleta;
+
+      // return;
+    } else {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Escribe algo...';
+      input.id = 'searchInput';
+      inputElement = input;
+    }
+
+    const hr = document.createElement('hr');
+
+    const boton = document.createElement('button');
+    boton.textContent = 'Aceptar';
+    boton.className = 'div-button';
+    boton.onclick = () => {
+      let valor = '';
+      if (tipo === 'text') {
+        valor = inputElement.value;
+      } else if (tipo === 'select') {
+        valor = inputElement.options[inputElement.selectedIndex].text;
+      } else if (tipo === 'consulta') {
+        valor = valorGetter();
+      }
+
+      document.body.removeChild(fondo);
+      valor !== '' ? resolve(valor) : null; // Acá te devuelve el valor final
+    };
+
+    divContenido.appendChild(inputElement);
+    divContenido.appendChild(hr);
+    divContenido.appendChild(boton);
+
+    modal.appendChild(cerrar);
+    modal.appendChild(divContenido);
+    fondo.appendChild(modal);
+    document.body.appendChild(fondo);
+
+    fondo.style.display = 'block';
+  });
 }
 
 async function consultaCN(event, consulta) {
@@ -293,25 +460,6 @@ async function checkDateHour(div, index) {
   }
 }
 
-function generateOptions(array, select) {
-  while (select.firstChild) {
-    select.removeChild(select.firstChild);
-  }
-  if (array.length > 0) {
-    const emptyOption = document.createElement('option');
-    emptyOption.value = '';
-    emptyOption.text = '';
-    select.appendChild(emptyOption);
-    array.forEach((subarray) => {
-      const [value, text] = subarray;
-      const option = document.createElement('option');
-      option.value = value;
-      option.text = text;
-      select.appendChild(option);
-    });
-  }
-}
-
 function removeAllOptions(select) {
   while (select.firstChild) {
     select.removeChild(select.firstChild);
@@ -399,6 +547,12 @@ async function eventSelect(event, hijo, sqlHijo) {
   }
 }
 
+async function addPastillaText(tipoDeEelemento, selector) {
+  const valor = await crearModalPastillas(tipoDeEelemento, selector);
+  // console.log(valor);
+  return valor;
+}
+
 document.getElementById('closeModalButton').onclick = () => {
   document.getElementById('myModal').style.display = 'none';
 };
@@ -412,6 +566,7 @@ buscarModal.addEventListener('input', (e) => {
   const rows = tbody.querySelectorAll('tr');
   rows.forEach((row) => {
     const cells = row.querySelectorAll('td');
+
     let filaCoincide = false;
 
     cells.forEach((cell, index) => {
@@ -453,4 +608,5 @@ export {
   checkHour,
   checkDate,
   checkDateHour,
+  addPastillaText,
 };

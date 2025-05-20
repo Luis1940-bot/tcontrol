@@ -62,7 +62,6 @@ function convertToValidJson(string $dataString): string
       $dataString
     );
 
-
     // Corregir formato del campo "imagenes"
 
 
@@ -109,6 +108,8 @@ function convertToValidJson(string $dataString): string
       // $content = preg_replace("/'https:\/\/(.*?)'/", '"https://$1"', $content); // Corregir formato de URL
       return '"email": "{' . $content . '}"';
     }, $dataString ?? '');
+
+
 
     // Verificar "fileName" y "extension" dentro de "imagenes"
     // $dataString = preg_replace_callback('/"imagenes":\s*\[(.*?({.*?}).*?)\]/', function ($matches) {
@@ -159,6 +160,7 @@ function convertToValidJson(string $dataString): string
       echo "No se encontró la sección 'imagenes'.";
     }
 
+
     // Corregir formato del campo "hora"
     $dataString = preg_replace_callback('/"hora":\s*\[(.*?)\]/', function ($matches) {
       $content = $matches[1];
@@ -180,6 +182,8 @@ function convertToValidJson(string $dataString): string
       return '"hora": [' . $content . ']';
     }, $dataString ?? '');
 
+
+
     $dataString = preg_replace_callback('/"detalle":\s*\[(.*?)\]/s', function ($matches) {
       $content = $matches[1];
 
@@ -188,14 +192,22 @@ function convertToValidJson(string $dataString): string
       return '"detalle": [' . $content . ']';
     }, $dataString ?? '');
 
+
+
     $jsonString = trim($dataString ?? '');
     $jsonString = preg_replace('/[\x00-\x1F\x7F]/', '', $jsonString);
+
+
 
     // 📌 Verificación antes de json_decode()
     // echo "JSON antes de decodificar:\n" . '{' . $jsonString . '}' . "\n";
 
+
+
     // Convertir el string a un array asociativo
     $dataArray = json_decode('{' . $jsonString . '}', true);
+
+
 
 
     // Verificar si la conversión fue exitosa
