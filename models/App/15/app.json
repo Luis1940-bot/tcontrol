@@ -49,13 +49,14 @@
     "ruta": ["Controles\/index.php", ""]
   },
   "Ad": {
-    "name": ["Reportes", "Controles", "Variables", "Areas"],
-    "type": ["", "", "", ""],
+    "name": ["Reportes", "Controles", "Variables", "Areas", "Comunicaciones"],
+    "type": ["", "", "", "", ""],
     "ruta": [
       "ListReportes\/index.php",
       "ListControles\/index.php",
       "ListVariables\/index.php",
-      "ListAreas\/index.php"
+      "ListAreas\/index.php",
+      "ListComunicaciones\/index.php"
     ]
   },
   "Sad": {
@@ -443,11 +444,11 @@
           ],
           "type": ["pag", "pag", "pag", "pag", "pag"],
           "ruta": [
-            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=83&nme=HISTORIAL TA - Lecturas de Campo - Reacción y Cristalización",
-            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=81&nme=HISTORIAL TA - Lecturas de Campo - Filtros",
-            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=84&nme=HISTORIAL TA - Lecturas de Campo - Rec. de SDV",
-            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=82&nme=HISTORIAL TA - Lecturas de Campo - Aceite",
-            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=85&nme=HISTORIAL TA - Lecturas de Campo - Aceite"
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=83&nme=HISTORIAL PTA - Lecturas de Campo - Cristalización",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=81&nme=HISTORIAL PTA - Lecturas de Campo - Compresores planta de hidrógeno",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=84&nme=HISTORIAL PTA - Lecturas de Campo - Filtros",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=82&nme=HISTORIAL PTA - Lecturas de Campo - Preparación",
+            "Pages\/client15\/lecturasDeCampo\/index.php?ctrl=85&nme=HISTORIAL PTA - Lecturas de Campo - RLM"
           ],
           "nivel": [1, 1, 1, 1, 1]
         }

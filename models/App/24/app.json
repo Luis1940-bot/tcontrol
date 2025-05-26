@@ -34,13 +34,14 @@
     "ruta": ["Controles/index.php", ""]
   },
   "Ad": {
-    "name": ["Reportes", "Controles", "Variables", "Areas"],
-    "type": ["", "", "", ""],
+    "name": ["Reportes", "Controles", "Variables", "Areas", "Comunicaciones"],
+    "type": ["", "", "", "", ""],
     "ruta": [
       "ListReportes/index.php",
       "ListControles/index.php",
       "ListVariables/index.php",
-      "ListAreas/index.php"
+      "ListAreas/index.php",
+      "ListComunicaciones/index.php"
     ]
   },
   "apps": {

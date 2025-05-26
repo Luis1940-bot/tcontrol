@@ -6,34 +6,13 @@
 /**
  * @return array<int, array<int|string, mixed>>
  */
-function traer(string $q, int $sqlI): array
+function traeComunicacion(int $idLTYReporte): array
 {
-  $porciones = explode(",", $q);
-  $sql = '';
-  $plant = $sqlI;
-  switch ($porciones[0]) {
 
-    case 'traerLTYarea':
-      $sql = "SELECT 
-                            ar.idLTYarea AS id, 
-                            ar.areax AS area 
-                          FROM LTYarea ar 
-                          WHERE ar.idLTYcliente = " . $plant . " AND ar.activo = 's' AND ar.visible = 's' 
-                          ORDER BY ar.idLTYarea ASC;";
-      break;
-
-    case 'traerTipoDeUsuario':
-      $sql = "SELECT c.idtipousuario AS 'ID', c.tipo AS 'TIPO', c.detalle AS 'DETALLE' FROM tipousuario c ORDER BY c.idtipousuario ASC;";
-      break;
-
-    case 'traerUsuariosActivosVerificados':
-      $sql = "SELECT u.idtipousuario, u.nombre, u.area, u.puesto, u.mail
-                  FROM usuario u WHERE u.activo ='s' AND u.verificador =1 AND u.idLTYcliente = " . $plant . ";";
-      break;
-
-    default:
-      return [];
-  }
+  $sql = "SELECT c.idLTYComunicacion, c.idLTYreporte, c.idusuario, c.rol, c.activo, c.fecha_asignacion, u.nombre, u.mail
+  FROM LTYComunicacion c
+  JOIN usuario u ON c.idusuario = u.idusuario
+  WHERE c.idLTYreporte = " . $idLTYReporte . " AND c.activo = 's';";
 
 
   require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
@@ -112,7 +91,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 }
 
 $datos = file_get_contents("php://input");
-// $datos = '{"q":"traerTipoDeUsuario","ruta":"/traerTipoDeUsuarioParaRegistroUser","sqlI":null,"rax":"&new=Fri Jun 21 2024 19:20:33 GMT-0300 (hora estándar de Argentina)"}';
+$datos = '{"q":"traerReglasComunicacion","ruta":"/traerReglasComunicacion","rax":"&new=Mon May 26 2025 15:34:35 GMT-0300 (hora estándar de Argentina)","sqlI":"14"}';
 if ($datos === false || trim($datos) === '') {
   $response = ['success' => false, 'message' => 'Faltan datos necesarios.'];
   echo json_encode($response);
@@ -129,13 +108,13 @@ if (!is_array($data)) {
 }
 
 // Validar existencia y tipo de los valores
-$q = isset($data['q']) && is_string($data['q']) ? $data['q'] : '';
-$sqlI = isset($data['sqlI']) && is_numeric($data['sqlI']) ? (int) $data['sqlI'] : 0;
+$idLTYReporte = isset($data['sqlI']) && is_numeric($data['sqlI']) ? (int) $data['sqlI'] : 0;
 
-if ($q === '') {
+
+if ($idLTYReporte === '') {
   echo json_encode(['success' => false, 'message' => 'El parámetro "q" es requerido.']);
   exit;
 }
 
 // ✅ Llamar a la función con valores seguros
-traer($q, $sqlI);
+traeComunicacion($idLTYReporte);

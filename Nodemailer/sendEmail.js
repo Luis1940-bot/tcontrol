@@ -7,7 +7,9 @@ async function send(nuevoObjeto, encabezados) {
   formData.append('datos', JSON.stringify(nuevoObjeto));
   formData.append('encabezados', JSON.stringify(encabezados));
   const url = `${SERVER}/Nodemailer/Routes/sendEmail.php`;
-
+  console.log(nuevoObjeto, encabezados);
+  console.log(JSON.stringify(nuevoObjeto));
+  console.log(JSON.stringify(encabezados));
   console.time('sendEmail');
 
   // Controlador de aborto para manejar el timeout

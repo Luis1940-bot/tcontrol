@@ -27,8 +27,10 @@ function traer(string $q, int $sqlI): array
       break;
 
     case 'traerUsuariosActivosVerificados':
-      $sql = "SELECT u.idtipousuario, u.nombre, u.area, u.puesto, u.mail
-                  FROM usuario u WHERE u.activo ='s' AND u.verificador =1 AND u.idLTYcliente = " . $plant . ";";
+      $sql = "SELECT u.idusuario, u.nombre, u.area, u.puesto, u.mail, t.tipo
+                  FROM usuario u 
+                  INNER JOIN tipousuario t ON t.idtipousuario = u.idtipousuario
+                  WHERE u.activo ='s' AND u.verificador =1 AND u.idLTYcliente = " . $plant . " ORDER BY u.nombre ASC;";
       break;
 
     default:

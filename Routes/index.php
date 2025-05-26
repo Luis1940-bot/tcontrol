@@ -130,6 +130,10 @@ $rutas = [
   '/traerCargadosDiario' => '/Pages/ControlesDiarios/Routes/traerRegistros.php',
   '/pivot_data' => '/Pages/client28/Routes/pivot_data.php',
   '/pivot_lecturas_15' => '/Pages/client15/Routes/pivot_data.php',
+  '/habilitarEmail' => '/Pages/ListComunicacion/Routes/habilitarEmail.php',
+  '/traerUsuariosActivosVerificados' => '/Pages/ListComunicacion/Routes/traerUsuarios.php',
+  '/registrarReglaComunicacion' => '/Pages/ListComunicacion/Routes/asignarComunicacion.php',
+  '/traerReglasComunicacion' => '/Pages/ListComunicacion/Routes/traerReglasComunicacion.php',
 ];
 
 if (isset($rutas[$ruta])) {
