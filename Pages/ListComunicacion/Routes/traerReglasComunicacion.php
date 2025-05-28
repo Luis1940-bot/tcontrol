@@ -91,7 +91,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 }
 
 $datos = file_get_contents("php://input");
-$datos = '{"q":"traerReglasComunicacion","ruta":"/traerReglasComunicacion","rax":"&new=Mon May 26 2025 15:34:35 GMT-0300 (hora estándar de Argentina)","sqlI":"14"}';
+// $datos = '{"q":"traerReglasComunicacion","ruta":"/traerReglasComunicacion","rax":"&new=Mon May 26 2025 15:34:35 GMT-0300 (hora estándar de Argentina)","sqlI":"14"}';
 if ($datos === false || trim($datos) === '') {
   $response = ['success' => false, 'message' => 'Faltan datos necesarios.'];
   echo json_encode($response);

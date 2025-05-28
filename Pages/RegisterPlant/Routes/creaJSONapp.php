@@ -96,7 +96,7 @@ function writeJSON(array $objeto): array
           "ListControles/index.php",
           "ListVariables/index.php",
           "ListAreas/index.php",
-          "ListComunicaciones/index.php"
+          "ListComunicacion/index.php"
         ]
       ],
       "apps" => [

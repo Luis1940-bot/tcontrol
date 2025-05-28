@@ -5,6 +5,7 @@ const SERVER = baseUrl;
 export default function traerRegistros(q, rut, sqlI) {
   // eslint-disable-next-line no-console
   console.time('traerRegistros');
+
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`;
     const obj = {
@@ -14,7 +15,7 @@ export default function traerRegistros(q, rut, sqlI) {
       sqlI,
     };
     const datos = JSON.stringify(obj);
-    // console.log(datos)
+    // console.log(datos);
     // const ruta = `${SERVER}/Pages/Controles/Routes/traerRegistros.php?q=${sql}${rax}`
     const ruta = `${SERVER}/Routes/index.php`;
     fetch(ruta, {

@@ -9,7 +9,7 @@ import {
   finPerformance,
 } from '../../includes/Conection/conection.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { desencriptar, encriptar } from '../../controllers/cript.js';
+import { desencriptar } from '../../controllers/cript.js';
 // eslint-disable-next-line import/extensions
 import cargaTabla from './controlesViews.js';
 // eslint-disable-next-line import/extensions
@@ -24,21 +24,22 @@ import { configPHP } from '../../controllers/configPHP.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { trO } from '../../controllers/trOA.js';
 import LogOut from '../../controllers/logout.js';
+import { mostrarMensaje } from '../../controllers/alertasLuis.js';
 
 const SERVER = baseUrl;
 let objTranslate = [];
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
-const navegador = {
-  estadoAnteriorButton: '',
-  estadoAnteriorWhereUs: [],
-};
+// const navegador = {
+//   estadoAnteriorButton: '',
+//   estadoAnteriorWhereUs: [],
+// };
 
-const encabezados = {
-  title: ['controles'],
-  width: ['1'],
-};
+// const encabezados = {
+//   title: ['controles'],
+//   width: ['1'],
+// };
 
 function leeVersion(json) {
   readJSON(json)
@@ -86,11 +87,15 @@ function dondeEstaEn() {
 
 function cambiaColorPastillas(button) {
   const pastillas = document.querySelectorAll('.pastilla');
+  /* eslint-disable no-param-reassign */
   pastillas.forEach((pastilla) => {
     pastilla.style.color = '#393939';
     pastilla.style.background = '#d9d9d9';
   });
+  /* eslint-enable no-param-reassign */
+  // eslint-disable-next-line no-param-reassign
   button.target.style.color = '#cecece';
+  // eslint-disable-next-line no-param-reassign
   button.target.style.background = '#212121';
 }
 
@@ -102,7 +107,11 @@ function addCampo(e) {
   const partes = reporte.split(/-(.+)/);
   const antesDelGuion = partes[0].trim();
   const despuesDelGuion = partes[1] ? partes[1].trim() : '';
-  nuevoCampo(objTranslate, { antesDelGuion, despuesDelGuion }, parseInt(plant));
+  nuevoCampo(
+    objTranslate,
+    { antesDelGuion, despuesDelGuion },
+    parseInt(plant, 10),
+  );
 }
 
 function clonarControl(e) {
@@ -117,7 +126,7 @@ function clonarControl(e) {
     idLTYreporte,
     nameReporte,
   };
-  clonarCamposAReporte(objTranslate, target, parseInt(plant));
+  clonarCamposAReporte(objTranslate, target, parseInt(plant, 10));
 }
 
 function cargaPastillas(plant) {
@@ -145,7 +154,8 @@ function cargaPastillas(plant) {
       divPastillas.appendChild(button);
     }
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
+    // console.log(error);
   }
 }
 
@@ -211,7 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.style.display = 'block';
   });
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+      'warning',
+    );
+    // alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
     LogOut();
   }, 43200000 - 300000);
 });

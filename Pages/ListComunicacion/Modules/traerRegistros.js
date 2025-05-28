@@ -1,4 +1,4 @@
-import baseUrl from '../../../../config.js';
+import baseUrl from '../../../config.js';
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl;
 

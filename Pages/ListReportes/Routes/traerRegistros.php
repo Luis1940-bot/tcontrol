@@ -121,7 +121,7 @@ function traer(string $q, int $sqlI): array
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
 // $datos = '{"q":"traerReportes","ruta":"/traerControles","rax":"&new=Sun Apr 07 2024 20:13:49 GMT-0300 (hora estándar de Argentina)","sqlI":15}';
-// $datos = '{"q":"verificarControl,240408142616477","ruta":"/traerControles","rax":"&new=Tue Apr 09 2024 17:06:49 GMT-0300 (hora estándar de Argentina)","sqlI":null}';
+// $datos = '{"q":"traerReportes","ruta":"/traerReportes","rax":"&new=Tue May 27 2025 16:52:54 GMT-0300 (hora estándar de Argentina)","sqlI":15}';
 
 if ($datos === false) {
   $datos = '';

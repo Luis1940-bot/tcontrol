@@ -644,9 +644,9 @@ document.getElementById('btnMostrar').addEventListener('click', async () => {
       <li><strong>Área:</strong> ${reporte[13]}</li>
       <li><strong>Detalle:</strong> ${reporte[2]}</li>
       <li><strong>Comunicación:</strong> ${reporte[15] === '1' ? 'Comunica' : 'No comunica'}</li>
-      <li><strong>Emails:</strong> ${reporte[24] || 'N/D'}</li>
     </ul>
   `;
+  // <li><strong>Emails:</strong> ${reporte[24] || 'N/D'}</li>
   const check = document.getElementById('checkComunica');
   const newCheck = check.cloneNode(true);
   const wrapper = document.getElementById('comunicacionWrapper');

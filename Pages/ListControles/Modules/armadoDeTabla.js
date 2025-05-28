@@ -3,20 +3,22 @@ import arrayGlobal from '../../../controllers/variables.js';
 // eslint-disable-next-line import/extensions
 // import { Alerta } from '../../../includes/atoms/alerta.js';
 import Alerta from '../../../includes/atoms/alerta.js';
-import { encriptar, desencriptar } from '../../../controllers/cript.js';
+// import { encriptar, desencriptar } from '../../../controllers/cript.js';
 import baseUrl from '../../../config.js';
 import traerRegistros from './Controladores/traerRegistros.js';
 import turnControl from './Controladores/ux.js';
 import agregarCampoNuevo from './Controladores/ix.js';
 import { trA, trO } from '../../../controllers/trOA.js';
+import { mostrarMensaje } from '../../../controllers/alertasLuis.js';
 
 const widthScreen = window.innerWidth;
 const widthScreenAjustado = 1; // 360 / widthScreen;
 let arrayWidthEncabezado;
 let arraySinDuplicados = [];
+let objetoOrden = {};
 
 const SERVER = baseUrl;
-let arrayOrden = [];
+let arrayOrden1 = [];
 const encabezados = {
   title: [
     'ID',
@@ -94,11 +96,11 @@ function estilosTheadCell(element, index, columnas, objTranslate) {
   return cell;
 }
 
-function encabezado(encabezados, objTranslate) {
+function encabezado(encabezadox, objTranslate) {
   const thead = document.querySelector('thead');
   const newRow = document.createElement('tr');
-  arrayWidthEncabezado = [...encabezados.width];
-  encabezados.title.forEach((element, index) => {
+  arrayWidthEncabezado = [...encabezadox.width];
+  encabezadox.title.forEach((element, index) => {
     const cell = estilosTheadCell(element, index, 2, objTranslate);
     newRow.appendChild(cell);
   });
@@ -106,12 +108,12 @@ function encabezado(encabezados, objTranslate) {
   return thead;
 }
 
-function encabezadoCampos(encabezados, objTranslate) {
+function encabezadoCampos(encabezadox, objTranslate) {
   const thead = document.createElement('thead');
   const newRow = document.createElement('tr');
-  arrayWidthEncabezado = [...encabezados.width];
+  arrayWidthEncabezado = [...encabezadox.width];
   const cantidadDeColumnas = 22;
-  encabezados.title.forEach((element, index) => {
+  encabezadox.title.forEach((element, index) => {
     const cell = estilosTheadCell(
       element,
       index,
@@ -222,6 +224,7 @@ function changeOrden(indice, cantidadDeRegistros) {
     }
     return 1;
   }
+  return 0;
 }
 
 function reconoceColumna(
@@ -245,6 +248,7 @@ function reconoceColumna(
   let buttonEditar = false;
   let buttonOrden = 0;
   let fontWeight = 600;
+  let separador;
 
   switch (i) {
     case 0:
@@ -352,6 +356,7 @@ function reconoceColumna(
           if (array[i].includes('filatx')) {
             let celdas = '1';
             if (medidas.colspantx === '1') {
+              // eslint-disable-next-line no-unused-vars
               celdas = '4';
             }
             texto = `rows: ${medidas.filatx} - cols: ${medidas.colstx} - cells: ${medidas.colstx}`;
@@ -364,7 +369,7 @@ function reconoceColumna(
         fontStyle = 'Italic';
         fontWeight = 700;
       }
-      const separador = array[11].includes('solid');
+      separador = array[11].includes('solid');
       if (separador) {
         texto = 'con Separador';
         background = '#ff7659';
@@ -560,6 +565,70 @@ function estiloCellCampos(celda) {
   return cell;
 }
 
+async function viewer(selector, array, objTranslate, plant) {
+  //! editar
+  // console.log(selector, array);
+  try {
+    arrayOrden1 = [];
+    const segundaTabla = document.querySelector('.tabla-campos');
+    if (segundaTabla) {
+      segundaTabla.innerHTML = '';
+    }
+
+    const filtrado = array.filter((subArray) => subArray[23] === selector);
+    const selects = await traerRegistros(
+      'traerSelects',
+      '/traerLTYcontrol',
+      plant,
+    );
+
+    const elemento = document.querySelector('.div-encabezadoPastillas');
+    const div1 = document.querySelector('.div1');
+    const span = document.createElement('span');
+    span.setAttribute('id', 'idTituloDelReporte');
+    div1.innerHTML = '';
+    const tituloDelReporte = `${selector} - ${
+      trA(filtrado[0][0], objTranslate) || filtrado[0][0]
+    }`;
+    span.innerText = tituloDelReporte;
+    div1.appendChild(span);
+    elemento.style.display = 'block';
+    if (elemento) {
+      div1.setAttribute('tabindex', '-1'); // O cualquier otro valor de tabindex
+      div1.focus();
+      const div = document.querySelector('.div2');
+      div.innerHTML = '';
+      const tabla = document.createElement('table');
+      tabla.style.marginTop = '10px';
+      tabla.setAttribute('class', 'tabla-campos');
+      const thead = encabezadoCampos(encabezados, objTranslate);
+      tabla.appendChild(thead);
+      div.appendChild(tabla);
+      const tbody = document.createElement('tbody');
+      // console.log(filtrado)
+      filtrado.forEach((element, index) => {
+        // eslint-disable-next-line no-use-before-define
+        const newRow = addCeldaFilaCampo(
+          element,
+          index,
+          selects,
+          filtrado.length,
+          selector,
+          objTranslate,
+          plant,
+          null,
+        );
+        tbody.appendChild(newRow);
+      });
+      tabla.appendChild(tbody);
+      div.appendChild(tabla);
+    }
+  } catch (error) {
+    mostrarMensaje(error, 'error');
+    // console.log(error);
+  }
+}
+
 async function turnOnOff(target, objTranslate, plant) {
   // console.log(target, plant);
   const turn = await turnControl(target, plant);
@@ -587,8 +656,8 @@ async function clonarReporte(target) {
 }
 
 function subirBajar(target, objTranslate, plant) {
-  const { posicion, cantidadDeRegistros, arrayOrden, item, column, id } =
-    target;
+  const { posicion, cantidadDeRegistros, item, column, id } = target;
+  const arrayOrden = target.arrayOrden1 || [];
   let { posActual } = posicion;
   const nuevoArray = [...arrayOrden];
   posActual = Number(posActual);
@@ -644,12 +713,12 @@ function editCampos(target, objTranslate, LTYselect, plant) {
           response.dato &&
           response.dato !== 'object'
         ) {
-          valor = parseInt(response.dato);
+          valor = parseInt(response.dato, 10);
         }
         if (response.success) {
           const nuevoTarget = {
             item: target.item,
-            column: parseInt(target.column),
+            column: parseInt(target.column, 10),
             valor,
             param: response.param,
             id: target.id,
@@ -664,7 +733,8 @@ function editCampos(target, objTranslate, LTYselect, plant) {
     const modal = document.getElementById('modalAlert');
     modal.style.display = 'block';
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
+    // console.log(error);
   }
 }
 
@@ -677,7 +747,7 @@ export function nuevoCampo(objTranslate, target, plant) {
       if (response.success) {
         const nuevoTarget = {
           reporte: target.despuesDelGuion,
-          idLTYreporte: parseInt(target.antesDelGuion),
+          idLTYreporte: parseInt(target.antesDelGuion, 10),
           campo: response.nombre,
           orden: response.orden,
           idObservacion: response.idObservacion,
@@ -688,7 +758,8 @@ export function nuevoCampo(objTranslate, target, plant) {
     const modal = document.getElementById('modalAlert');
     modal.style.display = 'block';
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
+    // console.log(error);
   }
 }
 
@@ -725,8 +796,8 @@ export function clonarCamposAReporte(objTranslate, target) {
         // console.log(response)
         if (response.success) {
           const nuevoTarget = {
-            origen: parseInt(response.dato.idOrigen),
-            destino: parseInt(response.dato.idDestino),
+            origen: parseInt(response.dato.idOrigen, 10),
+            destino: parseInt(response.dato.idDestino, 10),
           };
 
           clonarReporte(nuevoTarget);
@@ -736,7 +807,8 @@ export function clonarCamposAReporte(objTranslate, target) {
     const modal = document.getElementById('modalAlert');
     modal.style.display = 'block';
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
+    // console.log(error);
   }
 }
 
@@ -777,9 +849,9 @@ function addCeldaFilaCampo(
           img.setAttribute('data-column', i);
           img.setAttribute('data-id', idReporte);
           img.setAttribute('data-colspan', colSpan);
-          const valor = array[i] || '0';
+          const dataValor = array[i] || '0';
           let param = 's';
-          img.setAttribute('data-valor', valor);
+          img.setAttribute('data-valor', dataValor);
           img.addEventListener('click', (e) => {
             e.preventDefault();
             let valor = e.target.getAttribute('data-valor');
@@ -838,11 +910,11 @@ function addCeldaFilaCampo(
         }
 
         if (celda.buttonOrden !== 0) {
-          const objetoOrden = {
+          objetoOrden = {
             id: array[1],
-            orden: parseInt(celda.texto),
+            orden: parseInt(celda.texto, 10),
           };
-          arrayOrden.push(objetoOrden);
+          arrayOrden1.push(objetoOrden);
           const div = document.createElement('div');
           div.setAttribute('class', 'div-orden');
           const imgDown = document.createElement('img');
@@ -854,6 +926,7 @@ function addCeldaFilaCampo(
           imgDown.setAttribute('data-id', idReporte);
           imgDown.setAttribute('data-baja', celda.texto);
 
+          // eslint-disable-next-line no-loop-func
           imgDown.addEventListener('click', (e) => {
             e.preventDefault();
             const posicion = {
@@ -867,7 +940,7 @@ function addCeldaFilaCampo(
               cantidadDeRegistros,
               id: e.target.getAttribute('data-id'),
               posicion,
-              arrayOrden,
+              arrayOrden1,
             };
             subirBajar(target, objTranslate, plant);
           });
@@ -879,6 +952,7 @@ function addCeldaFilaCampo(
           imgUp.setAttribute('data-column', i);
           imgUp.setAttribute('data-id', idReporte);
           imgUp.setAttribute('data-sube', celda.texto);
+          // eslint-disable-next-line no-loop-func
           imgUp.addEventListener('click', (e) => {
             e.preventDefault();
             const posicion = {
@@ -892,7 +966,7 @@ function addCeldaFilaCampo(
               cantidadDeRegistros,
               id: e.target.getAttribute('data-id'),
               posicion,
-              arrayOrden,
+              arrayOrden1,
             };
             subirBajar(target, objTranslate, plant);
           });
@@ -915,69 +989,9 @@ function addCeldaFilaCampo(
     }
     return newRow;
   } catch (error) {
-    console.log(error);
-  }
-}
-
-async function viewer(selector, array, objTranslate, plant) {
-  //! editar
-  // console.log(selector, array);
-  try {
-    arrayOrden = [];
-    const segundaTabla = document.querySelector('.tabla-campos');
-    if (segundaTabla) {
-      segundaTabla.innerHTML = '';
-    }
-
-    const filtrado = array.filter((subArray) => subArray[23] === selector);
-    const selects = await traerRegistros(
-      'traerSelects',
-      '/traerLTYcontrol',
-      plant,
-    );
-
-    const elemento = document.querySelector('.div-encabezadoPastillas');
-    const div1 = document.querySelector('.div1');
-    const span = document.createElement('span');
-    span.setAttribute('id', 'idTituloDelReporte');
-    div1.innerHTML = '';
-    const tituloDelReporte = `${selector} - ${
-      trA(filtrado[0][0], objTranslate) || filtrado[0][0]
-    }`;
-    span.innerText = tituloDelReporte;
-    div1.appendChild(span);
-    elemento.style.display = 'block';
-    if (elemento) {
-      div1.setAttribute('tabindex', '-1'); // O cualquier otro valor de tabindex
-      div1.focus();
-      const div = document.querySelector('.div2');
-      div.innerHTML = '';
-      const tabla = document.createElement('table');
-      tabla.style.marginTop = '10px';
-      tabla.setAttribute('class', 'tabla-campos');
-      const thead = encabezadoCampos(encabezados, objTranslate);
-      tabla.appendChild(thead);
-      div.appendChild(tabla);
-      const tbody = document.createElement('tbody');
-      // console.log(filtrado)
-      filtrado.forEach((element, index) => {
-        const newRow = addCeldaFilaCampo(
-          element,
-          index,
-          selects,
-          filtrado.length,
-          selector,
-          objTranslate,
-          plant,
-          null,
-        );
-        tbody.appendChild(newRow);
-      });
-      tabla.appendChild(tbody);
-      div.appendChild(tabla);
-    }
-  } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
+    // console.log(error);
+    return null;
   }
 }
 
@@ -1011,9 +1025,10 @@ function estilosCell(
   const onOff = '';
   let colorItems = 'green';
   const textoSelector = items;
-  const dirImg = '';
+  // const dirImg = '';
 
   if (items === 0) {
+    // eslint-disable-next-line no-unused-vars
     colorDelTexto = 'red';
     colorItems = 'red';
   }
@@ -1154,18 +1169,18 @@ function completaTabla(arrayControl, objTranslate, plant) {
   tableControlViews.style.display = 'block';
 }
 
-function loadTabla(arrayControl, encabezados, objTranslate, plant) {
+function loadTabla(arrayControl, encabezadox, objTranslate, plant) {
   const miAlerta = new Alerta();
-  const arraySinDuplicados = eliminarDuplicadosPorPrimerElemento(arrayControl);
+  const arraySinDuplicadox = eliminarDuplicadosPorPrimerElemento(arrayControl);
 
-  if (arraySinDuplicados.length > 0) {
-    encabezado(encabezados, objTranslate);
+  if (arraySinDuplicadox.length > 0) {
+    encabezado(encabezadox, objTranslate);
     completaTabla(arrayControl, objTranslate, plant);
 
     const cantidadDeFilas = document.querySelector('table tbody');
     let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga;
 
-    if (cantidadDeFilas.childElementCount !== arraySinDuplicados.length) {
+    if (cantidadDeFilas.childElementCount !== arraySinDuplicadox.length) {
       mensaje = trO(mensaje, objTranslate) || mensaje;
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null);
       const modal = document.getElementById('modalAlert');
@@ -1181,17 +1196,20 @@ function loadTabla(arrayControl, encabezados, objTranslate, plant) {
 
     let modal = document.getElementById('modalAlertVerde');
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'warning');
+      // console.warn('Error de carga en el modal');
     }
     modal.style.display = 'block';
     modal = document.querySelector('.div-encabezadoPastillas');
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'warning');
+      // console.warn('Error de carga en el modal');
     }
     modal.style.display = 'none';
     modal = document.querySelector('.div-ubicacionSearch');
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'warning');
+      // console.warn('Error de carga en el modal');
     }
     modal.style.display = 'none';
   }
@@ -1199,12 +1217,12 @@ function loadTabla(arrayControl, encabezados, objTranslate, plant) {
 
 export default function tablaVacia(
   arrayControl,
-  encabezados,
+  encabezadox,
   objTranslate,
   plant,
 ) {
   // Reemplazar setTimeout con requestAnimationFrame para garantizar que el DOM esté listo
   requestAnimationFrame(() => {
-    loadTabla(arrayControl, encabezados, objTranslate, plant);
+    loadTabla(arrayControl, encabezadox, objTranslate, plant);
   });
 }
