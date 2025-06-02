@@ -19,6 +19,7 @@ $baseUrl = BASE_URL;
   <link rel='shortcut icon' type='image / x-icon' href='<?php echo $baseUrl ?>/assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='<?php echo $baseUrl ?>/assets/css/wichConsult.css' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo $baseUrl ?>/assets/css/modal.css' media='screen'>
+  <link rel='stylesheet' type='text/css' href='<?php echo $baseUrl ?>/assets/css/common-components.css' media='screen'>
   <title>Tenki</title>
 </head>
 
