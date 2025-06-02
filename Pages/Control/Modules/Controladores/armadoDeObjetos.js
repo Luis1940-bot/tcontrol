@@ -153,16 +153,20 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
       obj.inputElement ? (valor = obj.inputElement.value) : null;
       c === 4 ? ((observacion = obj.inputElement), (valor = null)) : null;
       const hijos = obj.node.children;
-      if (hijos.length > 0) {
+      if (hijos.length > 0 && c === 2) {
         const hijosArray = Array.from(obj.node.children);
-
-        const valores = hijosArray
-          .map((pastilla) => {
-            const span = pastilla.querySelector('span');
-            return span ? span.textContent.trim() : '';
-          })
-          .filter((v) => v !== ''); // por si algún span estaba vacío
-        valor = valores.join('-');
+        if (
+          hijosArray[0].tagName === 'DIV' &&
+          hijosArray[0].classList.contains('pastilla')
+        ) {
+          const valores = hijosArray
+            .map((pastilla) => {
+              const span = pastilla.querySelector('span');
+              return span ? span.textContent.trim() : '';
+            })
+            .filter((v) => v !== ''); // por si algún span estaba vacío
+          valor = valores.join('-');
+        }
       }
     }
     if (c === 4 && obj.terceraColumna.tagName === 'UL') {

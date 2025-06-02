@@ -183,7 +183,7 @@ function traer(string $q, int $sqlI): string
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
 // $datos = '{"q":"ctrlCargado,250128202858454","ruta":"/traerCargados","rax":"&new=Thu Jan 30 2025 07:13:33 GMT-0300 (hora estándar de Argentina)","sqlI":null}';
-// $datos = '{"q":"traerControles,14","ruta":"/traerCargados","rax":"&new=Thu Jan 30 2025 11:25:33 GMT-0300 (hora estándar de Argentina)","sqlI":15}';
+// $datos = '{"q":"ctrlCargado,250601220044093","ruta":"/traerCargados","rax":"&new=Mon Jun 02 2025 12:14:48 GMT-0300 (hora estándar de Argentina)","sql_i":null}';
 
 if (empty($datos)) {
   $response = array('success' => false, 'message' => 'Faltan datos necesarios.');

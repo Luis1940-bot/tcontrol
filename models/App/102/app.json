@@ -1,0 +1,95 @@
+{
+  "planta": "Insa Copiers SRL",
+  "idiomas": {
+    "bienvenido": ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
+    "abreviatura": ["es", "bra", "en"]
+  },
+  "menuSelectivo": {
+    "sin": {
+      "sinGuardar": [],
+      "sinGuardarCambio": [],
+      "sinGuardarComoNuevo": [],
+      "sinSalir": [],
+      "sinVolver": [],
+      "sinHacerFirmar": []
+    },
+    "con": {
+      "conExportar": [],
+      "conGuardar": [],
+      "conGuardarCambio": [],
+      "conGuardarComoNuevo": [],
+      "conSalir": [],
+      "conVolver": [],
+      "conHacerFirmar": []
+    }
+  },
+  "Menu": {
+    "name": ["Controles", "Consultas"],
+    "type": ["", ""],
+    "ruta": ["Controles\/index.php", "Consultas\/index.php"]
+  },
+  "Controles": {
+    "name": ["Controles", "Imprimir control"],
+    "type": ["", ""],
+    "ruta": ["Controles\/index.php", ""]
+  },
+  "Ad": {
+    "name": ["Reportes", "Controles", "Variables", "Areas", "Comunicaciones"],
+    "type": ["", "", "", "", ""],
+    "ruta": [
+      "ListReportes\/index.php",
+      "ListControles\/index.php",
+      "ListVariables\/index.php",
+      "ListAreas\/index.php",
+      "ListComunicacion\/index.php"
+    ]
+  },
+  "apps": {
+    "name": ["SCG", "Admin", "Comercial", "Departamento Técnico"],
+    "type": ["ctrl", "ctrl", "btn", "btn"],
+    "ruta": ["Menu\/index.php", "Admin\/index.php", "", ""],
+    "nivel": [3, 4, 4, 4],
+    "Comercial": {
+      "name": [
+        "Clientes",
+        "Proveedores",
+        "Máquinas",
+        "Provincias",
+        "Localidades",
+        "Marcas",
+        "Modelos",
+        "Planes",
+        "Contratos"
+      ],
+      "type": [
+        "ctrl",
+        "ctrl",
+        "ctrl",
+        "ctrl",
+        "ctrl",
+        "ctrl",
+        "ctrl",
+        "ctrl",
+        "ctrl"
+      ],
+      "ruta": [
+        "control_N=265&control_T=CLIENTES&nr=",
+        "control_N=269&control_T=PROVEEDORES&nr=",
+        "control_N=266&control_T=MÁQUINAS&nr=",
+        "control_N=263&control_T=PROVINCIAS&nr=",
+        "control_N=264&control_T=LOCALIDADES&nr=",
+        "control_N=267&control_T=MARCAS&nr=",
+        "control_N=268&control_T=MODELOS&nr=",
+        "control_N=270&control_T=PLANES&nr=",
+        "control_N=271&control_T=CONTRATOS&nr="
+      ],
+      "nivel": [4, 4, 4, 4, 4, 4, 4, 4, 4]
+    },
+    "DepartamentoTecnico": {
+      "name": ["Copias"],
+      "type": ["ctrl"],
+      "ruta": [""],
+      "nivel": [1]
+    }
+  }
+}

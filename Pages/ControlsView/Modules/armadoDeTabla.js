@@ -131,13 +131,35 @@ function generatePhoto(src, alt, dim, extension, plant) {
 function detectarPhoto(valor, nombreControl, fila) {
   try {
     const { plant } = desencriptar(sessionStorage.getItem('user'));
-    valor = valor.replace(/'/g, '"');
-    valor = JSON.parse(valor);
-    const src = valor.img;
+    // Validar si valor es un string JSON válido
+    let valorObj = null;
+    if (typeof valor === 'string') {
+      let str = valor.trim();
+      // Reemplazar comillas simples por dobles si es necesario
+      if (str[0] !== '{') {
+        // Si no empieza con {, probablemente no es un JSON válido
+        throw new Error(
+          `El valor recibido para detectarPhoto no es un JSON válido: ${valor}`,
+        );
+      }
+      try {
+        str = str.replace(/'/g, '"');
+        valorObj = JSON.parse(str);
+      } catch (e) {
+        console.error('Error al parsear JSON en detectarPhoto:', valor, e);
+        return; // Salir si no se puede parsear
+      }
+    } else if (typeof valor === 'object' && valor !== null) {
+      valorObj = valor;
+    } else {
+      console.error('Tipo de valor inesperado en detectarPhoto:', valor);
+      return;
+    }
+    const src = valorObj.img;
     const alt = src.replace(/\.[^/.]+$/, '');
-    const parte = valor.img.split('.');
+    const parte = valorObj.img.split('.');
     const extension = parte.pop();
-    const dimensiones = ` { width: ${valor.width}, height: ${valor.height} }`;
+    const dimensiones = ` { width: ${valorObj.width}, height: ${valorObj.height} }`;
 
     const img = generatePhoto(src, alt, dimensiones, extension, plant);
     const texto =
@@ -167,7 +189,7 @@ function detectarPhoto(valor, nombreControl, fila) {
 
     nuevaCelda.style.borderBottom = '1px solid #cecece';
   } catch (error) {
-    console.log(error);
+    console.error('Error en detectarPhoto:', error);
   }
 }
 
@@ -325,6 +347,7 @@ function buscaCodigo(codigo, array, columna, tipo) {
 
 function completamosTablaModal(array) {
   try {
+    // console.log(array);
     const tbody = document.getElementById('idTbodyModal');
     for (let i = 0; i < tbody.rows.length; i++) {
       const fila = tbody.rows[i];

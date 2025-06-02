@@ -16,7 +16,7 @@ export default function traerRegistros(q, sqlI) {
       sqlI,
     };
     const datos = JSON.stringify(obj);
-    // console.log(datos)
+    // console.log(datos);
     fetch(ruta, {
       method: 'POST',
       headers: {

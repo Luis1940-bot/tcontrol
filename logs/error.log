@@ -5,3 +5,33 @@
 [28-May-2025 09:20:24 America/Argentina/Buenos_Aires] 1	[2025-05-28 09:20:24 -03] [Exception] La consulta SQL está vacía o no es válida. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 149 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
 [28-May-2025 09:20:30 America/Argentina/Buenos_Aires] 1	[2025-05-28 09:20:30 -03] [Exception] La consulta SQL está vacía o no es válida. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 149 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
 [28-May-2025 09:20:37 America/Argentina/Buenos_Aires] 1	[2025-05-28 09:20:37 -03] [Exception] La consulta SQL está vacía o no es válida. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 149 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+[31-May-2025 11:03:11 America/Argentina/Buenos_Aires] Datos inválidos: q="{\"q\":250531101037002,\"ruta\":\"\/ex2024\",\"rax\":\"&new=Sat May 31 2025 11:03:11 GMT-0300 (hora est\u00e1ndar de Argentina)\",\"sqlI\":null}", sqlI=0
+[01-Jun-2025 19:56:43 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[01-Jun-2025 19:56:43 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[01-Jun-2025 19:56:43 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250601195643111  usuario: 25
+[01-Jun-2025 19:56:44 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 20:04:46 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[01-Jun-2025 20:04:46 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[01-Jun-2025 20:04:46 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250601200446469  usuario: 25
+[01-Jun-2025 20:04:48 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 20:16:20 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 20:27:18 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 20:32:08 America/Argentina/Buenos_Aires] 1	[2025-06-01 20:32:08 -03] [Exception] Unknown column 'm.valor' in 'field list' in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 152 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+[01-Jun-2025 20:33:10 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 20:36:14 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 20:39:25 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 20:56:38 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:02:43 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:07:56 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:12:17 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:20:36 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:23:14 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:30:06 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:35:58 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:39:28 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:51:53 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 21:56:14 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[01-Jun-2025 22:00:44 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[01-Jun-2025 22:00:44 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[01-Jun-2025 22:00:44 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250601220044093  usuario: 25
+[01-Jun-2025 22:00:45 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.

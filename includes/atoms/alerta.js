@@ -2418,7 +2418,7 @@ export default class Alerta {
         );
 
         // soloEnviaEmail(nuevoObjeto, encabezados)
-        // console.log(encabezados, ' >>>nuevo objeto: ', nuevoObjeto)
+        // console.log(encabezados, ' >>>nuevo objeto: ', nuevoObjeto);
         insert(
           nuevoObjeto,
           convertido,
