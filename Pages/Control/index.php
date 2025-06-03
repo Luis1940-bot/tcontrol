@@ -102,6 +102,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/alerta.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/modal.css?v=<?php echo (time()); ?>' media='screen'>
+  <link rel="stylesheet" href="/assets/css/common-components.css">
   <title>Tenki</title>
   <script src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
 </head>

@@ -1,3 +1,5 @@
+/* ARCHIVO NO USADO: Los estilos de header han sido migrados a common-components.css. Este archivo puede eliminarse. */
+
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   body {
     grid-area: body;

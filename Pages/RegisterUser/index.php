@@ -49,6 +49,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
   <link rel='shortcut icon' type='image / x-icon' href='../../assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='../../Pages/RegisterUser/register.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='../../assets/css/spinner.css?v=<?php echo (time()); ?>' media='screen'>
+  <link rel="stylesheet" href="/assets/css/common-components.css">
   <title>Tenki</title>
   <script src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
 </head>

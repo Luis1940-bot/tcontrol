@@ -10,22 +10,14 @@ function finPerformance() {
   const fin = performance.now();
   const inicio = sessionStorage.getItem('performance');
   const velocidadMbps = fin - inicio;
-  const signal = document.getElementById('idSignal');
-  // signal.style.height = '12px';
-  // signal.style.width = '12px';
-  const ruta = `${SERVER}/assets/img/`;
+  const signalDot = document.getElementById('signal-dot');
+  if (!signalDot) return;
   if (velocidadMbps > 5) {
-    signal.src = `${ruta}caracol.png`;
-    signal.alt = 'No connetc';
-    // console.log('mala conexion');
-  } else if (velocidadMbps > 2 && velocidadMbps <= 5) {
-    signal.src = `${ruta}liebre.png`;
-    signal.alt = 'Lost connetc';
-    // console.log('conexión intermedia');
+    signalDot.style.background = '#e53935'; // rojo
+    signalDot.title = 'Conexión lenta';
   } else {
-    signal.src = `${ruta}liebre.png`;
-    signal.alt = 'Good connetc';
-    // console.log('buena conexión');
+    signalDot.style.background = '#43a047'; // verde
+    signalDot.title = 'Conexión óptima';
   }
 }
 

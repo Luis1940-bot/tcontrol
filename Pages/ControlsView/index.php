@@ -99,6 +99,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/ControlsView/css/controles.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/ControlsView/css/estiloImpresion.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo (time()); ?>' media='screen'>
+  <link rel="stylesheet" href="/assets/css/common-components.css">
   <title></title>
   <script src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
 </head>

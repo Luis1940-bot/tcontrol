@@ -129,7 +129,7 @@ function completaButtons(obj) {
       const params = {
         text: trO(element, objTranslate) || element,
         name: obj.name[i],
-        class: 'button-selector-home',
+        class: 'btn-modern',
         innerHTML: null,
         height: null, // 35
         width: null, // 75%

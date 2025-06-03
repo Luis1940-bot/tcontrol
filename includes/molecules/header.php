@@ -14,13 +14,14 @@ include_once('../../includes/molecules/modales/modalMenu.php');
   <div class='headerMenu'>
     <div class='div-menu'><img id='hamburguesa' src='<?php echo $baseUrl ?>/assets/img/hamburguesa.png' alt='Menu'></div>
   </div>
-  <div class='headerVersion'>
-    <span class="version">V1.0</span><img id='idSignal' src='' alt=''>
+  <div class='headerVersion headerVersion-row'>
+    <span id="signal-dot" class="signal-dot"></span>
+    <span class="version">V1.0</span>
   </div>
   <div class='headerFactum'>
     <div class='logoFactum'>
-      <a id='linkInstitucional' target='_blank'>
-        <img id='logo_factum'>
+      <a id='linkInstitucional' target='_blank' href='https://linkedin.com/in/luisergimenez/'>
+        <img id='logo_factum' src='<?php echo $baseUrl ?>/assets/Logos/15/logo.png' alt='Tenki Web' width='100' height='40'>
       </a>
     </div>
   </div>

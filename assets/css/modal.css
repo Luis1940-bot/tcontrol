@@ -1,3 +1,8 @@
+/*
+  AVISO: Este archivo ya no se utiliza. Sus estilos han sido migrados a 'common-components.css'.
+  Puede eliminarse de forma segura una vez confirmada la migración total.
+*/
+
 /* Estilos para el modal */
 .modal-content {
   height: auto;
@@ -609,7 +614,9 @@
   #idDivAvisoImagenes {
     margin-top: 100px;
   }
-
+  #idDivImagen {
+    margin: 2rem auto auto auto;
+  }
   #idDivGuardar {
     margin-left: 17rem;
     margin-top: 5rem;
@@ -638,7 +645,7 @@
     margin-left: 24rem;
   }
   .div-verde {
-    width: 60%;
+    width: 80%;
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;

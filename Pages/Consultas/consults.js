@@ -154,7 +154,7 @@ function completaButtons(obj, tipodeusuario) {
     const params = {
       text: trA(element, objTranslate) || element,
       name,
-      class: 'button-selector-consultas',
+      class: 'btn-modern button-selector-consultas',
       innerHTML: null,
       height: null, // 35
       width: null, // 75%
