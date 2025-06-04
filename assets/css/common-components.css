@@ -211,6 +211,21 @@ a {
   padding: 5px;
 }
 
+/* Estilo específico para el modal de éxito */
+.modal-alert-verde {
+  background: #e8fce8;
+  border: 3px solid #21d849;
+  color: #145c1b;
+  box-shadow: 0 0 16px #21d84955;
+  font-weight: 600;
+}
+.modal-alert-verde .close {
+  color: #21d849;
+}
+.modal-alert-verde .close:hover {
+  color: #145c1b;
+}
+
 /* === HEADER PRINCIPAL === */
 .div-header {
   display: flex;
@@ -836,5 +851,39 @@ a {
     font-size: 0.95rem;
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+}
+
+/* Centrado y responsividad del logo McCain en el header */
+.header-McCain {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ececec;
+  min-height: 60px;
+  margin: 0;
+  padding: 0;
+}
+.div-McCain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+#logo_mccain {
+  display: block;
+  height: 50px;
+  max-width: 90vw;
+  margin: auto;
+}
+@media (max-width: 700px) {
+  #logo_mccain {
+    height: 36px;
+    max-width: 80vw;
+  }
+  .header-McCain {
+    min-height: 40px;
   }
 }

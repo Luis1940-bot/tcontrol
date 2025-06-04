@@ -27,7 +27,19 @@ function columna2(
   if (valorSql !== null) {
     // return;
   }
-
+  console.log(
+    tagName,
+    type,
+    tds,
+    val,
+    datos,
+    i,
+    columnaTd,
+    selDatos,
+    index,
+    valorSql,
+    tipoDatoDetalle,
+  );
   const valorVal = val;
   const td = tds;
 

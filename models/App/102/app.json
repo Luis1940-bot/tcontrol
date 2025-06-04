@@ -1,5 +1,5 @@
 {
-  "planta": "Insa Copiers SRL",
+  "planta": "InsaCopiers SRL",
   "idiomas": {
     "bienvenido": ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
     "abreviatura": ["es", "bra", "en"]
@@ -59,7 +59,7 @@
         "Marcas",
         "Modelos",
         "Planes",
-        "Contratos"
+        "Alquileres"
       ],
       "type": [
         "ctrl",
@@ -81,7 +81,7 @@
         "control_N=267&control_T=MARCAS&nr=",
         "control_N=268&control_T=MODELOS&nr=",
         "control_N=270&control_T=PLANES&nr=",
-        "control_N=271&control_T=CONTRATOS&nr="
+        "control_N=271&control_T=ALQUILERES&nr="
       ],
       "nivel": [4, 4, 4, 4, 4, 4, 4, 4, 4]
     },

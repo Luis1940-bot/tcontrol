@@ -71,6 +71,9 @@ async function cargaModal(respuesta, input, haceClick, idInput) {
           const id = idInput;
           const inputTD = document.getElementById(id);
           inputTD.value = e.target.textContent;
+          const event = new Event('input', { bubbles: true });
+          inputTD.dispatchEvent(event);
+
           const modal = document.getElementById('myModal');
           if (!modal) {
             // eslint-disable-next-line no-console
@@ -266,42 +269,114 @@ async function consultaQuery(event, consulta) {
   resultado.length > 0 ? cargaModal(resultado, '', false) : null;
 }
 
+// async function cambioDeVariables(sql, array) {
+//   try {
+//     const objTraerHijo = {
+//       filaInserta: sql.substring(0, 4).replace(/@/g, ''),
+//       tipoDeElemento: sql.substring(5, 8).replace(/@/g, ''),
+//       columnas: sql.substring(9, 12).replace(/@/g, ''),
+//       variables: parseInt(sql.substring(13, 16).replace(/@/g, ''), 10), // Número de reemplazos (3 en este caso)
+//       posicionReferencia: parseInt(sql.substring(17, 20).replace(/@/g, ''), 10),
+//       res: [],
+//       query: '',
+//     };
+//     const replacements = array.slice(0, objTraerHijo.variables); // Obtener tantos valores como `variables`
+//     console.log(replacements);
+//     let replacedQuery = sql;
+//     let currentIndex = 0;
+//     for (let i = 0; i < objTraerHijo.variables; i++) {
+//       // Encontrar la posición del siguiente "?"
+//       const questionMarkPosition = replacedQuery.indexOf('?', currentIndex);
+
+//       if (questionMarkPosition === -1) break; // Si no hay más "?", salir del bucle
+
+//       // Reemplazar el "?" en la posición encontrada
+//       // replacedQuery =
+//       //   replacedQuery.slice(0, questionMarkPosition) +
+//       //   (replacements[0] || 'undefined') +
+//       //   replacedQuery.slice(questionMarkPosition + 1);
+
+//       replacedQuery = `${replacedQuery.slice(
+//         0,
+//         questionMarkPosition,
+//       )}"${replacements[0]}"${
+//         // Agregar explícitamente comillas
+//         replacedQuery.slice(questionMarkPosition + 1)
+//       }`;
+
+//       // Actualizar el índice actual para buscar el próximo "?"
+//       currentIndex = questionMarkPosition + 1;
+//     }
+//     console.log(replacedQuery);
+//     // objTraerHijo.query = replacedQuery.split('$')[1];
+//     // const [, query] = replacedQuery.split('$');
+//     // objTraerHijo.query = query || '';
+//     // replacedQuery = replacedQuery.replace('?', `'${array[0]}'`);
+//     // const query = replacedQuery.substring(replacedQuery.indexOf('$') + 1);
+//     if (array[0] && typeof array[0] === 'string') {
+//       replacedQuery = replacedQuery.replace(/\?/, `'${array[0]}'`);
+//     } else {
+//       console.log(
+//         'Error: el valor de array[0] no es válido o no es una cadena.',
+//       );
+//     }
+//     console.log(replacedQuery);
+//     // Extraer la parte de la consulta después del primer `$`
+//     let query = replacedQuery.substring(replacedQuery.indexOf('$') + 1).trim();
+
+//     // Asegurar que el valor dentro del WHERE esté correctamente encerrado
+//     query = query.replace(/= ([^'\s]+)/, "= '$1'");
+
+//     objTraerHijo.query = query || '';
+//     return objTraerHijo;
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.log('Error en cambiar las ?: ', error);
+//     return null;
+//   }
+// }
+
 async function cambioDeVariables(sql, array) {
   try {
     const objTraerHijo = {
       filaInserta: sql.substring(0, 4).replace(/@/g, ''),
       tipoDeElemento: sql.substring(5, 8).replace(/@/g, ''),
       columnas: sql.substring(9, 12).replace(/@/g, ''),
-      variables: parseInt(sql.substring(13, 16).replace(/@/g, ''), 10), // Número de reemplazos (3 en este caso)
+      variables: parseInt(sql.substring(13, 16).replace(/@/g, ''), 10), // Número de reemplazos
       posicionReferencia: parseInt(sql.substring(17, 20).replace(/@/g, ''), 10),
       res: [],
       query: '',
     };
-    const replacements = array.slice(0, objTraerHijo.variables); // Obtener tantos valores como `variables`
+
+    const replacements = array.slice(0, objTraerHijo.variables);
     let replacedQuery = sql;
     let currentIndex = 0;
-    for (let i = 0; i < objTraerHijo.variables; i++) {
-      // Encontrar la posición del siguiente "?"
-      const questionMarkPosition = replacedQuery.indexOf('?', currentIndex);
 
+    for (let i = 0; i < objTraerHijo.variables; i++) {
+      const questionMarkPosition = replacedQuery.indexOf('?', currentIndex);
       if (questionMarkPosition === -1) break; // Si no hay más "?", salir del bucle
 
-      // Reemplazar el "?" en la posición encontrada
-      replacedQuery =
-        replacedQuery.slice(0, questionMarkPosition) +
-        (replacements[0] || 'undefined') +
-        replacedQuery.slice(questionMarkPosition + 1);
+      // Reemplazar el "?" por el valor correspondiente con comillas
+      replacedQuery = `${replacedQuery.slice(0, questionMarkPosition)}"${replacements[i]}"${replacedQuery.slice(questionMarkPosition + 1)}`;
 
-      // Actualizar el índice actual para buscar el próximo "?"
       currentIndex = questionMarkPosition + 1;
     }
-    // objTraerHijo.query = replacedQuery.split('$')[1];
-    const [, query] = replacedQuery.split('$');
+
+    // Verificar si `array[0]` es un string válido antes de aplicar el reemplazo final
+    if (array[0] && typeof array[0] === 'string') {
+      replacedQuery = replacedQuery.replace(/\?/, `'${array[0]}'`);
+    }
+
+    // Extraer la parte de la consulta después del primer `$`
+    let query = replacedQuery.substring(replacedQuery.indexOf('$') + 1).trim();
+
+    // Asegurar que el valor dentro del WHERE esté correctamente encerrado en comillas
+    query = query.replace(/= ([^'\s]+)/, "= '$1'");
+
     objTraerHijo.query = query || '';
     return objTraerHijo;
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('Error en cambiar las ?: ', error);
+    console.error('Error en cambiar las ?: ', error);
     return null;
   }
 }
@@ -313,10 +388,12 @@ async function traerHijo(sql, array) {
     }
 
     const objTraerHijo = await cambioDeVariables(sql, array);
+
     objTraerHijo.res = await traerRegistros(
       'traer_LTYsql',
       `${encodeURIComponent(objTraerHijo.query)}`,
     );
+
     return objTraerHijo;
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -474,7 +551,11 @@ function insertarDatoEnFila(obj) {
 
     select.setAttribute('selector', 'select-hijo');
     const nuevoArray = obj.res;
-    if (nuevoArray[0][0] !== '') {
+    if (
+      nuevoArray.length > 0 &&
+      nuevoArray[0].length > 0 &&
+      nuevoArray[0][0] !== ''
+    ) {
       generateOptions(nuevoArray, select);
     } else {
       removeAllOptions(select);
@@ -513,20 +594,21 @@ function insertarDatoEnFila(obj) {
 // }
 
 async function eventSelect(event, hijo, sqlHijo) {
+  const valorInput = event.target.value;
   const select = event.target;
   const { selectedOptions } = select;
-
-  // Asegúrate de que hay opciones seleccionadas válidas
-  if (selectedOptions.length === 0) {
-    // eslint-disable-next-line no-console
-    console.warn('No hay opciones seleccionadas.');
-    return;
-  }
-
   const indexTextPairs = [];
-  for (let i = 0; i < selectedOptions.length; i++) {
-    const option = selectedOptions[i];
-    indexTextPairs.push([option.value, option.textContent]);
+
+  if (selectedOptions) {
+    // Asegúrate de que hay opciones seleccionadas válidas
+    if (selectedOptions.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < selectedOptions.length; i++) {
+      const option = selectedOptions[i];
+      indexTextPairs.push([option.value, option.textContent]);
+    }
   }
 
   let obj;
@@ -544,6 +626,16 @@ async function eventSelect(event, hijo, sqlHijo) {
     } catch (error) {
       console.error('Error al llamar a traerHijo:', error);
     }
+  } else if (hijo === '1' && event.type === 'input') {
+    indexTextPairs.push(valorInput);
+    obj = await traerHijo(sqlHijo, indexTextPairs);
+    if (obj === null) {
+      // eslint-disable-next-line no-console
+      console.warn('No se encontraron datos para la selección.');
+      return;
+    }
+
+    insertarDatoEnFila(obj);
   }
 }
 

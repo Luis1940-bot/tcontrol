@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const { plant } = user;
   inicioPerformance();
   configPHP(user, SERVER);
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   spinner.style.visibility = 'visible';
 
   const hamburguesa = document.querySelector('#hamburguesa');

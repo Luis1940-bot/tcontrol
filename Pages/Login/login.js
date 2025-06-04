@@ -607,6 +607,48 @@ function generaOverlay() {
   }
 }
 
+// Habilita/deshabilita campos según selección de empresa
+function toggleLoginFields() {
+  const select = document.getElementById('idSelectLogin');
+  const email = document.getElementById('idInput0');
+  const password = document.getElementById('idInput1');
+  if (!select || !email || !password) return;
+  if (select.value && select.value !== '0') {
+    email.removeAttribute('disabled');
+    email.classList.remove('input-login-disabled');
+    email.classList.add('input-login');
+    password.removeAttribute('disabled');
+    password.classList.remove('input-login-disabled');
+    password.classList.add('input-login');
+  } else {
+    email.setAttribute('disabled', true);
+    email.classList.remove('input-login');
+    email.classList.add('input-login-disabled');
+    password.setAttribute('disabled', true);
+    password.classList.remove('input-login');
+    password.classList.add('input-login-disabled');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const select = document.getElementById('idSelectLogin');
+  if (select) {
+    select.addEventListener('change', toggleLoginFields);
+    toggleLoginFields();
+  } else {
+    // Si el select aún no existe, esperar a que se cree dinámicamente
+    const observer = new MutationObserver(() => {
+      const select = document.getElementById('idSelectLogin');
+      if (select) {
+        select.addEventListener('change', toggleLoginFields);
+        toggleLoginFields();
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.target.matches('.input-login')) {
@@ -625,7 +667,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (spinner) {
       spinner.style.visibility = 'visible';
     }
-
+    // const logoMccain = document.getElementById('logo_mccain');
+    // logoMccain.style.display = 'none';
     // Oculta elementos en el DOM
     const hamburguesa = document.querySelector('#hamburguesa');
     hamburguesa.style.display = 'none';

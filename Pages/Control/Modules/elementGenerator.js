@@ -344,7 +344,15 @@ class ElementGenerator {
     return img;
   }
 
-  static generateInputButton(text, name, consulta, clase, index) {
+  static generateInputButton(
+    text,
+    name,
+    consulta,
+    clase,
+    index,
+    hijo,
+    sqlHijo,
+  ) {
     const div = document.createElement('div');
     div.setAttribute('class', 'button-cn');
     const inputText = document.createElement('input');
@@ -359,6 +367,24 @@ class ElementGenerator {
 
     // Agregar evento input al input
     inputText.addEventListener('input', validateInput);
+    inputText.addEventListener('input', async (event) => {
+      // Prevenir cambios simultáneos
+
+      if (inputText.dataset.loading === 'true') return;
+
+      try {
+        // Indicar que se está cargando
+        inputText.dataset.loading = 'true';
+
+        // Llamar a la función y pasar los parámetros necesarios
+        await eventSelect(event, hijo, sqlHijo);
+      } catch (error) {
+        console.error('Error en el evento change:', error);
+      } finally {
+        // Finalizar el estado de carga
+        inputText.dataset.loading = 'false';
+      }
+    });
     div.appendChild(inputText);
     const button = document.createElement('button');
     button.textContent = text;
@@ -370,6 +396,7 @@ class ElementGenerator {
     button.addEventListener('click', (event) => {
       consultaCN(event, consulta);
     });
+
     return div;
   }
 

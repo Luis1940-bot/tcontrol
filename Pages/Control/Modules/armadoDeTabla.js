@@ -328,6 +328,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
       background = 'transparent';
     } else if (i === 2 && tipoDeDato === 'cn') {
       dato = null;
+      const hijo = element[24];
+      const sqlHijo = element[25];
       let text = element[orden[1]].toUpperCase();
       const consulta = element[23] || '';
       const anchoButton =
@@ -341,6 +343,8 @@ function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
         consulta,
         'InputButton-transparent',
         index,
+        hijo,
+        sqlHijo,
       );
       type = inputButton;
     } else if (i === 2 && tipoDeDato === 'btnqwery') {

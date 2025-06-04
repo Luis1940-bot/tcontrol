@@ -1,8 +1,11 @@
 const getLogoSrc = async (plant, SERVER) => {
   const customLogoUrl = `${SERVER}/assets/Logos/${String(plant)}/logo.png`;
-  const defaultLogoUrl = `${SERVER}/assets/img/tcontrol.png`;
+  const defaultLogoUrl = `${SERVER}/assets/Logos/tenki.png`;
 
   try {
+    if (!plant) {
+      return defaultLogoUrl;
+    }
     const response = await fetch(customLogoUrl, { method: 'HEAD' });
     if (response.ok) {
       return customLogoUrl;
