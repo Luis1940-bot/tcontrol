@@ -15,6 +15,7 @@ import buttonImage from './imagenes.js';
 
 import baseUrl from '../../../config.js';
 import { encriptar } from '../../../controllers/cript.js';
+import { mostrarMensaje } from '../../../controllers/ui/alertasLuis.js';
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl;
@@ -63,7 +64,8 @@ class ElementGenerator {
     function validateInput(event) {
       const inputElement = event.target.value;
       // Reemplazar caracteres no permitidos
-      event.target.value = inputElement.replace(/[,:"'*/;]/g, '');
+      const eve = event;
+      eve.target.value = inputElement.replace(/[,:"'*/;]/g, '');
       // const newValue = inputElement.replace(/[,:"']/g, '');
       // event.target.value = newValue;
     }
@@ -96,7 +98,7 @@ class ElementGenerator {
     }
 
     // Validar entrada en tiempo real
-    inputNumber.addEventListener('input', function () {
+    inputNumber.addEventListener('input', function inputNumberEventInput() {
       // Permitir solo dígitos, un único punto decimal y un signo negativo al principio
       let sanitizedValue = this.value.replace(/(?!^-)[^\d.-]/g, '');
 
@@ -130,7 +132,7 @@ class ElementGenerator {
     });
 
     // Validar valor final al perder el foco
-    inputNumber.addEventListener('blur', function () {
+    inputNumber.addEventListener('blur', function inputNumberEventBlur() {
       if (this.value === '' || Number.isNaN(Number(this.value))) {
         this.value = ''; // Si el valor no es válido, limpiar el input
       }
@@ -192,7 +194,8 @@ class ElementGenerator {
     function validateInput(event) {
       const currentValue = event.target.value;
       // Reemplazar caracteres no permitidos
-      event.target.value = currentValue.replace(/[,:"'*/;]/g, '');
+      const eve = event;
+      eve.target.value = currentValue.replace(/[,:"'*/;]/g, '');
     }
 
     // Agregar evento input al input
@@ -294,7 +297,7 @@ class ElementGenerator {
       emptyOption.value = '';
       emptyOption.text = '';
       select.appendChild(emptyOption);
-      array.forEach((subarray, index) => {
+      array.forEach((subarray) => {
         const [value, text] = subarray;
         const option = document.createElement('option');
         option.value = value;
@@ -362,7 +365,8 @@ class ElementGenerator {
     function validateInput(event) {
       const currentValue = event.target.value;
       // Reemplazar caracteres no permitidos
-      event.target.value = currentValue.replace(/[,:"'/]/g, '');
+      const eve = event;
+      eve.target.value = currentValue.replace(/[,:"'/]/g, '');
     }
 
     // Agregar evento input al input
@@ -459,9 +463,14 @@ class ElementGenerator {
       validation(encriptado, plant, objTrad, div, index);
       const habilitaValidar = sessionStorage.getItem('habilitaValidar');
       if (habilitaValidar === 'true') {
-        alert('Tiene que guardar los cambios para registrar su firma.');
+        mostrarMensaje(
+          'Tiene que guardar los cambios para registrar su firma.',
+          'info',
+        );
+        // alert('Tiene que guardar los cambios para registrar su firma.');
       } else if (habilitaValidar === 'false') {
-        alert('No olvide de guardar el documento.');
+        mostrarMensaje('No olvide de guardar el documento.', 'info');
+        // alert('No olvide de guardar el documento.');
       }
     });
     return div;

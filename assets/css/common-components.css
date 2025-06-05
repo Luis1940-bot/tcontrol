@@ -25,7 +25,7 @@
 }
 #wichC {
   font-family: var(--fuente-base);
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 700;
   background: #ececec;
@@ -210,6 +210,11 @@ a {
   padding: 5px;
 }
 
+/* Cambia el cursor a pointer en los td de tablas dentro de .modal-content al hacer hover */
+.modal-content td:hover {
+  cursor: pointer;
+}
+
 /* Estilo específico para el modal de éxito */
 .modal-alert-verde {
   background: #e8fce8;
@@ -223,6 +228,34 @@ a {
 }
 .modal-alert-verde .close:hover {
   color: #145c1b;
+}
+
+/* Botón de cierre universal para modales y alertas */
+.close {
+  cursor: pointer;
+  color: #888;
+  font-size: 1.5em;
+  font-weight: bold;
+  transition:
+    color 0.2s,
+    transform 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+  padding: 0 8px;
+  border-radius: 50%;
+  background: transparent;
+  outline: none;
+  border: none;
+  user-select: none;
+  display: inline-block;
+  line-height: 1;
+}
+.close:hover,
+.close:focus {
+  color: #e53935;
+  background: #ffeaea;
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15);
 }
 
 /* === HEADER PRINCIPAL === */
@@ -240,6 +273,9 @@ a {
 }
 .headerMenu {
   flex: 0 0 auto;
+}
+.headerMenu img {
+  cursor: pointer;
 }
 .headerVersion-row {
   display: flex;
@@ -1024,4 +1060,32 @@ a {
 }
 #doc {
   background: #f5f5f5 !important;
+}
+
+/* Estilo específico para el span#doc cuando es mensaje (sobrescribe #doc) */
+#doc.doc-mensaje {
+  font-family: var(
+    --fuente-base,
+    'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif
+  ) !important;
+  font-size: 15px !important;
+  color: #393939 !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
+  width: 100% !important;
+  height: auto !important;
+  border: none !important;
+  background: transparent !important;
+  text-align: left !important;
+  outline: none !important;
+  padding-left: 10px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  display: inline-block !important;
 }

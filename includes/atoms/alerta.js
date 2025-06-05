@@ -2556,7 +2556,8 @@ export default class Alerta {
     modalContent.appendChild(spinner);
 
     const spanCarga = createSpan(obj.spanCarga);
-    this.modal.appendChild(spanCarga);
+    modalContent.appendChild(spanCarga);
+    // this.modal.appendChild(spanCarga);
 
     let frase = '';
     if (objTrad === null) {

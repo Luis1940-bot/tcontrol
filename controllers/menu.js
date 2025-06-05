@@ -23,6 +23,25 @@ function closeModal() {
   });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburguesa = document.getElementById('hamburguesa');
+  hamburguesa.style.border = 'none';
+  hamburguesa.style.backgroundColor = 'transparent';
+  hamburguesa.style.borderRadius = '0px 0px 0px 0px';
+  hamburguesa.addEventListener('mouseenter', () => {
+    hamburguesa.style.border = '3px solid #212121';
+    hamburguesa.style.backgroundColor = '#212121';
+    hamburguesa.style.borderRadius = '10px 10px 0px 0px';
+  });
+
+  // Quitar los estilos al salir del :hover
+  hamburguesa.addEventListener('mouseleave', () => {
+    hamburguesa.style.border = 'none';
+    hamburguesa.style.backgroundColor = 'transparent';
+    hamburguesa.style.borderRadius = '0px 0px 0px 0px';
+  });
+});
+
 export default function menuModal(objTranslate, menuSelectivo, controlN) {
   const miAlertaM = new Alerta();
   miAlertaM.createModalMenu(

@@ -121,6 +121,9 @@ function createSpan(config, text) {
   config.left !== null ? (span.style.left = config.left) : null;
   config.innerHTML !== null ? (span.innerHTML = config.innerHTML) : null;
   config.margin !== null ? (span.style.margin = config.margin) : null;
+  config.textShadow !== null
+    ? (span.style.textShadow = config.textShadow)
+    : null;
   span.style.transition = 'background-color 0.3s';
   config.hoverColor !== null
     ? span.addEventListener('mouseover', () => {
@@ -317,7 +320,7 @@ function createSelect(array, params, objTranslate) {
   while (select.firstChild) {
     select.removeChild(select.firstChild);
   }
-  const nuevoArray = [...array];
+  // const nuevoArray = [...array];
   // nuevoArray.forEach((element, index) => {
   //   index === 1 ? select.setAttribute('selector', element[1]) : null
   // })

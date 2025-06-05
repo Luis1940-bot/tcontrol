@@ -116,7 +116,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
     ?>
     </div>
     <div class='div-span'>
-      <span id='doc'></span><span id='numberDoc'></span>
+      <span id='doc' class='doc-mensaje'></span><span id='numberDoc'></span>
       <hr>
     </div>
   </header>

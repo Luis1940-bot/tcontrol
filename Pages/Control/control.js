@@ -30,6 +30,7 @@ import baseUrl from '../../config.js';
 import { configPHP } from '../../controllers/configPHP.js';
 import { trO } from '../../controllers/trOA.js';
 import LogOut from '../../controllers/logout.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 let objTranslate = [];
@@ -99,7 +100,7 @@ function actualizarProgreso(porcentaje) {
     // Validar que idSpanCarga exista
     if (!idSpanCarga) {
       console.error("Elemento 'idSpanCarga' no encontrado en el DOM.");
-      return reject(new Error("Elemento 'idSpanCarga' no disponible."));
+      reject(new Error("Elemento 'idSpanCarga' no disponible."));
     }
 
     const startTime = new Date().getTime();
@@ -136,7 +137,9 @@ function actualizarProgreso(porcentaje) {
 }
 
 function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
 
 function esperarTablaLista(callback) {
@@ -153,8 +156,8 @@ function esperarTablaLista(callback) {
 
   // Si no hay filas, activa el observador
   const observer = new MutationObserver(() => {
-    const tr = tbody.querySelectorAll('tr');
-    if (tr.length > 0) {
+    const tr2 = tbody.querySelectorAll('tr');
+    if (tr2.length > 0) {
       // console.log('Tabla lista con filas:', tr.length)
       observer.disconnect(); // Detén el observador
       callback(); // Llama al callback
@@ -186,10 +189,13 @@ async function cargaDeRegistros(objTrad, plant) {
       `NuevoControl,${controlN}`,
       null,
     );
+
     arrayGlobal.arrayControl = [...nuevoControlData];
-    const valor_sql = nuevoControlData;
+    const valorSql = nuevoControlData;
     tablaVacia(nuevoControlData, encabezados, objTrad, plant);
-    await delay(100);
+    await delay(100); // Pequeño delay para UX, opcional
+    await actualizarProgreso('100%');
+    await delay(300); // Mostrar el 100% un instante
     finPerformance();
     // Ajustar el porcentaje a 100%
     // console.log(nr)
@@ -197,17 +203,18 @@ async function cargaDeRegistros(objTrad, plant) {
       const controlNr = await traerNR(nr, plant);
       // await cargarNR(controlNr, plant) // Asegúrate de que cargarNR sea una función async
       esperarTablaLista(() => {
-        console.log('Ejecutando cargarNR después de que la tabla está lista');
-        cargarNR(controlNr, plant, valor_sql);
+        // console.log('Ejecutando cargarNR después de que la tabla está lista');
+        cargarNR(controlNr, plant, valorSql);
         sessionStorage.setItem('habilitaValidar', 'true');
       });
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn(error);
-    console.log('error por espera de la carga de un modal');
+    // console.log('error por espera de la carga de un modal');
     window.location.reload(); // Puedes utilizar una redirección directa en lugar de setTimeout
     if (nr) {
-      console.log('entró otra vez');
+      // console.log('entró otra vez');
       const controlNr = await traerNR(nr, plant);
       await cargarNR(controlNr, plant); // Asegúrate de que cargarNR sea una función async
     }
@@ -278,6 +285,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       // console.clear();
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn(error); // Manejo de errores
     spinner.style.visibility = 'hidden';
   }
@@ -311,7 +319,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+    );
+
     LogOut();
   }, 43200000 - 300000);
 });
