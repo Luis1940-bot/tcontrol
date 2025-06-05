@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const divVolver = document.querySelector('.div-volver');
   divVolver.style.display = 'block';
   document.getElementById('volver').style.display = 'block';
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   document.querySelector('.div-encabezado').style.marginTop = '5px';
   const persona = desencriptar(sessionStorage.getItem('user'));
   if (persona) {

@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   divVolver.style.display = 'block';
   const volver = document.getElementById('volver');
   volver.style.display = 'block';
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   document.querySelector('.div-encabezado').style.marginTop = '5px';
 
   const persona = desencriptar(sessionStorage.getItem('user'));

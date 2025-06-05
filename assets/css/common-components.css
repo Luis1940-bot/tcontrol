@@ -102,7 +102,7 @@ a {
 }
 #whereUs {
   font-family: var(--fuente-base);
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
   display: none;
   width: auto;
@@ -112,7 +112,7 @@ a {
   only screen and (min-width: 1200px) and (max-width: 1800px),
   only screen and (min-width: 1800px) {
   #whereUs {
-    font-size: 18px;
+    font-size: 22px;
   }
 }
 
@@ -128,7 +128,6 @@ a {
   margin-top: 5px;
   width: 85%;
   position: relative;
-  background: #cecece;
   margin-left: auto;
   margin-right: auto;
   border: none;
@@ -754,14 +753,44 @@ a {
   outline: none;
   padding-left: 10px;
 }
-@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape),
-  only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait),
-  only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape),
-  only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape),
-  only screen and (min-width: 1800px) and (orientation: landscape) {
-  #search {
-    width: 83%;
-  }
+/* Mejora de inputs de buscador */
+#search,
+#doc {
+  border: 1.5px solid #90caf9 !important;
+  border-radius: 16px !important;
+  background: #f5f5f5 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+#search:focus,
+#doc:focus {
+  border-color: #1976d2 !important;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.12);
+  background: #fff !important;
+}
+.icono-busqueda {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.icono-busqueda:hover {
+  color: #1976d2;
+}
+.icono-busqueda[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1976d2;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-left: 8px;
+  z-index: 10;
 }
 .signal-dot {
   display: inline-block;
@@ -886,4 +915,113 @@ a {
   .header-McCain {
     min-height: 40px;
   }
+}
+
+/* Modal de usuario tipo popover desde el botón de usuario */
+.modal-content-person {
+  position: absolute;
+  top: 60px; /* Ajustar según la altura del header o del botón */
+  right: 2vw;
+  width: 30vw;
+  min-width: 220px;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 10px 0 10px 10px;
+  border: 3px solid #000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow: hidden;
+  z-index: 9999;
+  transition: all 0.3s;
+}
+@media (max-width: 900px) {
+  .modal-content-person {
+    width: 60vw;
+    right: 2vw;
+    min-width: 180px;
+  }
+}
+@media (max-width: 600px) {
+  .modal-content-person {
+    width: 90vw;
+    right: 5vw;
+    left: 5vw;
+    min-width: unset;
+    max-width: unset;
+    top: 50px;
+  }
+}
+
+/* === SPINNER === */
+.spinner-inline {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 4px solid #e0e0e0;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  background: transparent;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .spinner-inline {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+    margin-right: 8px;
+  }
+}
+
+/* === NUEVO ESTILO .div-verde === */
+.div-verde {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 24px;
+  box-sizing: border-box;
+  text-align: left;
+  min-height: 80px;
+}
+
+.div-verde span,
+.div-verde p,
+.div-verde label {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1.4;
+  font-family: var(--fuente-base);
+}
+
+@media (max-width: 600px) {
+  .div-verde {
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 8px;
+    min-height: 60px;
+    text-align: center;
+  }
+}
+
+/* Ajuste para evitar doble fondo en el buscador #doc */
+.div-ubicacionDoc {
+  background: transparent !important;
+}
+#doc {
+  background: #f5f5f5 !important;
 }

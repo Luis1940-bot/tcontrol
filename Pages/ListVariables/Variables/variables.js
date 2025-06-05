@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const { plant } = user;
   inicioPerformance();
   configPHP(user, SERVER);
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   document.querySelector('.div-encabezado').style.marginTop = '5px';
 
   spinner.style.visibility = 'visible';

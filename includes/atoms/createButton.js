@@ -1,5 +1,5 @@
 function createButton(params) {
-  // console.log(params)
+  // console.log(params);
   const nuevoBoton = document.createElement('button');
   params.text !== null && params.text !== undefined
     ? (nuevoBoton.textContent = params.text)

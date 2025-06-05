@@ -24,16 +24,17 @@ import { configPHP } from '../../controllers/configPHP.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { trO } from '../../controllers/trOA.js';
 import LogOut from '../../controllers/logout.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 let objTranslate = [];
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
-const navegador = {
-  estadoAnteriorButton: '',
-  estadoAnteriorWhereUs: [],
-};
+// const navegador = {
+//   estadoAnteriorButton: '',
+//   estadoAnteriorWhereUs: [],
+// };
 
 function leeVersion(json) {
   readJSON(json)
@@ -84,9 +85,17 @@ function dondeEstaEn() {
   document.getElementById('volver').style.display = 'block';
 }
 
+async function iniciarAplicacion(plant) {
+  objTranslate = await arraysLoadTranslate();
+  dondeEstaEn();
+  await leeApp(`App/${plant}/app`);
+  spinner.style.visibility = 'hidden';
+  finPerformance();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   // Ajustes iniciales de la interfaz
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   document.querySelector('.div-encabezado').style.marginTop = '5px';
 
   // Desencriptar información del usuario
@@ -113,16 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Cargar la versión y las traducciones, luego ejecutar las aplicaciones
     await leeVersion('version');
 
-    async function iniciarAplicacion() {
-      objTranslate = await arraysLoadTranslate();
-      dondeEstaEn();
-      await leeApp(`App/${plant}/app`);
-
-      spinner.style.visibility = 'hidden';
-      finPerformance();
-    }
-
-    requestAnimationFrame(iniciarAplicacion);
+    requestAnimationFrame(() => iniciarAplicacion(plant));
   } else {
     spinner.style.visibility = 'hidden';
     finPerformance();
@@ -148,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
 const buscaDoc = document.getElementById('imgDoc');
 buscaDoc.addEventListener('click', async () => {
   const documento = document.getElementById('doc').value;
-
   if (!Number.isNaN(documento)) {
     const array = await traerRegistros(
       `verificarControl,${documento.trim()}`,
@@ -211,7 +210,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+      'warning',
+    );
+
     LogOut();
   }, 43200000 - 300000);
 });

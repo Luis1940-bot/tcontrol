@@ -124,7 +124,7 @@ function configuracionLoad(user) {
 
   configPHP(user, SERVER);
 
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
 
   finPerformance();
 }

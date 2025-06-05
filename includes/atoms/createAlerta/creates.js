@@ -1,6 +1,8 @@
 import { trO } from '../../../controllers/trOA.js';
 
 function createButton(config) {
+  // console.log(config);
+  // console.log(config.marginBotton);
   const button = document.createElement('button');
   button.className = `${config.className}`;
   button.textContent = config.text;
@@ -19,6 +21,9 @@ function createButton(config) {
     : null;
   config.marginRight !== null
     ? (button.style.marginRight = config.marginRight)
+    : null;
+  config.marginBotton !== null && config.marginBotton !== undefined
+    ? (button.style.marginBottom = config.marginBotton)
     : null;
   config.fontWeight !== null
     ? (button.style.fontWeight = config.fontWeight)

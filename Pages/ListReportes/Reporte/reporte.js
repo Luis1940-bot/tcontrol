@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('volver').style.display = 'block';
   inicioPerformance();
   configPHP(user, SERVER);
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   document.querySelector('.div-encabezado').style.marginTop = '5px';
   spinner.style.visibility = 'visible';
   const hamburguesa = document.querySelector('#hamburguesa');

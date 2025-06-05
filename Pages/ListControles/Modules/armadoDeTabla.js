@@ -9,7 +9,7 @@ import traerRegistros from './Controladores/traerRegistros.js';
 import turnControl from './Controladores/ux.js';
 import agregarCampoNuevo from './Controladores/ix.js';
 import { trA, trO } from '../../../controllers/trOA.js';
-import { mostrarMensaje } from '../../../controllers/alertasLuis.js';
+import { mostrarMensaje } from '../../../controllers/ui/alertasLuis.js';
 
 const widthScreen = window.innerWidth;
 const widthScreenAjustado = 1; // 360 / widthScreen;

@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const hamburguesa = document.querySelector('#hamburguesa');
   hamburguesa.style.display = 'none';
 
-  const headerMcCain = document.querySelector('.header-McCain');
-  headerMcCain.style.display = 'none';
+  // const headerMcCain = document.querySelector('.header-McCain');
+  // headerMcCain.style.display = 'none';
 
   const persona = desencriptar(sessionStorage.getItem('user'));
   const quienEs = document.getElementById('spanPerson');

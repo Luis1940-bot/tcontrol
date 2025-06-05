@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   inicioPerformance();
   configPHP(user, SERVER);
-  document.querySelector('.header-McCain').style.display = 'none';
-  spinner.style.visibility = 'visible';
+  // document.querySelector('.header-McCain').style.display = 'none';
+  // spinner.style.visibility = 'visible';
 
   const hamburguesa = document.querySelector('#hamburguesa');
   hamburguesa.style.display = 'none';

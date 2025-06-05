@@ -20,6 +20,7 @@ import { configPHP } from '../../controllers/configPHP.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { trO } from '../../controllers/trOA.js';
 import LogOut from '../../controllers/logout.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 
@@ -50,6 +51,8 @@ function leeVersion(json) {
       miAlerta.createVerde(obj, texto, objTranslate);
       const modal = document.getElementById('modalAlertVerde');
       modal.style.display = 'block';
+      // eslint-disable-next-line no-console
+      console.log(error);
     });
 }
 
@@ -217,6 +220,7 @@ function llamarCtrl(control) {
     window.location.href = ruta;
     // window.open(ruta, '_blank')
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 }
@@ -395,6 +399,7 @@ function goBack() {
     completaButtons(nuevoObjeto);
     dondeEstaEn(navegador.estadoAnteriorWhereUs);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 }
@@ -415,10 +420,13 @@ document.addEventListener('DOMContentLoaded', () => {
     personModal(user, objTranslate);
   });
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      'Bienvenido a la aplicación. Si tienes alguna duda, contacta con el administrador.',
+      'info',
+    );
     LogOut();
   }, 43200000 - 300000);
-  console.clear();
+  // console.clear();
 });
 
 const volver = document.getElementById('volver');

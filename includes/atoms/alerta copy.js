@@ -19,6 +19,11 @@ import eliminarRegistro from '../../Pages/ControlsView/Modules/Controladores/eli
 // eslint-disable-next-line import/extensions
 import callProcedure from '../../Pages/ConsultasViews/Controladores/callProcedure.js';
 import traerRegistros from '../../Pages/ControlsView/Modules/Controladores/traerRegistros.js';
+// import callRove from '../../Pages/Rove/Controladores/callRove.js'
+// import primerRender from '../../Pages/Rove/Controladores/primerRender.js'
+// import cargarStandares from '../../Pages/Rove/Controladores/cargaStandares.js'
+// import pintaBarras from '../../Pages/Rove/Controladores/pintaBarras.js'
+// import dwt from '../../Pages/Rove/Controladores/dwt.js'
 import onOff from '../../Pages/ListReportes/Modules/Controladores/reporteOnOff.js';
 import baseUrl from '../../config.js';
 import guardarNuevoReporte from '../../Pages/ListReportes/Modules/Controladores/guardarReporte.js';
@@ -40,7 +45,6 @@ import {
   createRadioButton,
   createTextArea,
 } from './createAlerta/creates.js';
-import createSpinner from './createSpinner.js';
 // import * as XLSX from './cdnjs/xlsx.full.min';
 
 const SERVER = baseUrl;
@@ -191,6 +195,77 @@ const funcionSalir = () => {
   // window.close()
   window.history.back();
 };
+
+// const funcionExportarExcel = () => {
+//   try {
+//     const tabla = document.getElementById('tableConsultaViews');
+//     if (!tabla) {
+//       alert('No se encontró la tabla.');
+//       return;
+//     }
+
+//     const filasHTML = Array.prototype.slice.call(tabla.querySelectorAll('tr'));
+//     const data = filasHTML.map((filaExcel) => {
+//       const celdas = Array.prototype.slice.call(
+//         filaExcel.querySelectorAll('th, td'),
+//       );
+//       return celdas.map((celda) => {
+//         const valor = celda.textContent.trim();
+//         const esNumeroEngañoso = /^\d{1,2}$/.test(valor);
+//         const esFechaSospechosa = /^(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})$/.test(
+//           valor,
+//         );
+//         const esFechaValida = !Number.isNaN(Date.parse(valor));
+
+//         if (esNumeroEngañoso || esFechaSospechosa || esFechaValida) {
+//           return { t: 's', v: valor }; // Forzamos a texto real
+//         }
+
+//         return valor; // Let it be
+//       });
+//     });
+
+//     const sheet = XLSX.utils.aoa_to_sheet([]);
+//     data.forEach((filaExcel, r) => {
+//       filaExcel.forEach((celda, c) => {
+//         const addr = XLSX.utils.encode_cell({ c, r });
+//         sheet[addr] = typeof celda === 'object' ? celda : { t: 's', v: celda };
+//       });
+//     });
+
+//     sheet['!ref'] = XLSX.utils.encode_range({
+//       s: { c: 0, r: 0 },
+//       e: { c: data[0].length - 1, r: data.length - 1 },
+//     });
+
+//     const wb = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, sheet, 'Export');
+
+//     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+//     const blob = new Blob([wbout], { type: 'application/octet-stream' });
+
+//     const nameConsulta = document.getElementById('whereUs').textContent.trim();
+//     const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date());
+
+//     const a = document.createElement('a');
+//     const url = URL.createObjectURL(blob);
+//     a.href = url;
+//     a.download = `${nameConsulta} ${fechaDeHoy}.xlsx`;
+//     document.body.appendChild(a);
+//     a.click();
+//     document.body.removeChild(a);
+//     URL.revokeObjectURL(url);
+
+//     const menu = document.getElementById('modalAlertM');
+//     if (menu) {
+//       menu.style.display = 'none';
+//       menu.remove();
+//     }
+//   } catch (error) {
+//     console.error('Error al exportar la tabla a Excel:', error);
+//     alert('Ocurrió un error inesperado al exportar.');
+//   }
+// };
 
 const funcionExportarExcel = () => {
   try {
@@ -2199,6 +2274,18 @@ function sanitiza(texto) {
   return valorLimpio;
 }
 
+// function funcionLogOut(ss) {
+//   // eslint-disable-next-line no-plusplus
+//   for (let i = 0; i < sessionStorage.length; i++) {
+//     const key = sessionStorage.key(i)
+//     sessionStorage.removeItem(key)
+//   }
+
+//   const sso = encodeURIComponent(ss)
+//   const url = `${SERVER}/includes/molecules/logout.php?s=${sso}`
+//   window.location.href = url
+// }
+
 export default class Alerta {
   constructor() {
     this.modal = null;
@@ -2551,9 +2638,6 @@ export default class Alerta {
     const modalContent = createDiv(obj.div);
     const span = createSpan(obj.close);
     modalContent.appendChild(span);
-    const spinner = createSpinner(obj.spinner);
-    spinner.id = 'idSpanInsert';
-    modalContent.appendChild(spinner);
 
     const spanCarga = createSpan(obj.spanCarga);
     this.modal.appendChild(spanCarga);
@@ -2600,6 +2684,10 @@ export default class Alerta {
 
     texto = trO(user.salir, objTranslate) || user.salir;
     const spanSalir = createSpan(obj.salir, texto);
+    // spanSalir.addEventListener('click', () => {
+    //   const { sso } = desencriptar(sessionStorage.getItem('user'))
+    //   funcionLogOut(sso)
+    // })
     modalContent.appendChild(spanSalir);
 
     this.modal.appendChild(modalContent);
@@ -3038,7 +3126,6 @@ export default class Alerta {
       const persona = desencriptar(sessionStorage.getItem('user'));
       const { tipo } = persona;
       const obj = objeto;
-      // console.log(obj);
       // const obj = JSON.parse(JSON.stringify(objeto))
       this.modal = document.createElement('div');
       this.modal.id = 'modalAlertView';
@@ -3098,7 +3185,7 @@ export default class Alerta {
       spanTexto = createSpan(obj.span, texto);
       modalContent.appendChild(spanTexto);
 
-      if (nivelReporte <= parseInt(tipo, 10)) {
+      if (nivelReporte <= parseInt(tipo)) {
         const divButton = createDiv(obj.divButtons);
         texto = trO(obj.btnNuevo.text, objTrad) || obj.btnNuevo.text;
         obj.btnNuevo.text = texto;
@@ -3174,7 +3261,7 @@ export default class Alerta {
           const idTituloH3 = document.getElementById('idTituloH3');
           const cod = idTituloH3.getAttribute('data-index');
           const name = idTituloH3.getAttribute('data-name');
-          // const url = `${cod}`;
+          const url = `${cod}`;
           const datos = {
             titulo: idTituloH3.textContent,
             cod,
@@ -3201,8 +3288,8 @@ export default class Alerta {
         obj.span.marginTop = '10px';
         obj.span.fontSize = '18px';
         obj.span.fontColor = 'red';
-        const spanTexto2 = createSpan(obj.span, texto);
-        modalContent.appendChild(spanTexto2);
+        const spanTexto = createSpan(obj.span, texto);
+        modalContent.appendChild(spanTexto);
         this.modal.appendChild(modalContent);
         document.body.appendChild(this.modal);
       }
@@ -3213,7 +3300,6 @@ export default class Alerta {
         }
       });
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -4108,6 +4194,209 @@ export default class Alerta {
       }
     });
   }
+
+  // async createCalendarROVE(objeto, objTranslate, rove) {
+  //   try {
+  //     const obj = objeto
+  //     this.modal = document.createElement('div')
+  //     this.modal.id = 'modalTablaViewFecha'
+  //     this.modal.className = 'modal'
+  //     this.modal.style.background = 'rgba(0, 0, 0, 0.5)'
+
+  //     // Crear el contenido del modal
+  //     const modalContent = createDiv(obj.divContent)
+  //     let span = createSpan(obj.close)
+  //     obj.divCajita.hoverColor = null
+  //     obj.divCajita.position = null
+  //     const divClose = createDiv(obj.divCajita)
+  //     divClose.appendChild(span)
+  //     modalContent.appendChild(divClose)
+
+  //     let texto =
+  //       trO(
+  //         'Seleccione el intervalo de fechas para la consulta:',
+  //         objTranslate
+  //       ) || 'Seleccione el intervalo de fechas para la consulta:'
+  //     obj.span.text = texto
+  //     span = createSpan(obj.span, texto)
+  //     modalContent.appendChild(span)
+
+  //     obj.titulo.text.text = `ROVE: ${rove.toUpperCase()}`
+  //     const title = createH3(obj.titulo, 'text')
+  //     title.id = 'idTituloFechasH3'
+  //     title.setAttribute('data-name', rove)
+  //     modalContent.appendChild(title)
+
+  //     const divEncabezado = createDiv(obj.divEncabezado)
+  //     obj.imgPrint.display = 'inline-block'
+  //     const imagenButton = createIMG(obj.imgPrint)
+  //     obj.span.alignSelf = 'left'
+  //     obj.span.left = '10px'
+  //     span = createSpan(obj.span, 'Fechas')
+  //     divEncabezado.appendChild(imagenButton)
+  //     divEncabezado.appendChild(span)
+  //     modalContent.appendChild(divEncabezado)
+
+  //     const hr = createHR(obj)
+  //     modalContent.appendChild(hr)
+
+  //     const fechaDeHoy = fechasGenerator.fecha_corta_yyyymmdd(new Date())
+  //     let divInput = createDiv(obj.divInput)
+  //     obj.input.id = 'idDesde'
+  //     obj.input.value = fechaDeHoy
+  //     let input = createInput(obj.input)
+  //     texto = trO('Desde', objTranslate) || 'Desde'
+
+  //     obj.label.innerText = `${texto}:`
+  //     obj.label.margin = 'auto 10px'
+  //     let label = createLabel(obj.label)
+
+  //     divInput.appendChild(label)
+  //     divInput.appendChild(input)
+  //     modalContent.appendChild(divInput)
+
+  //     obj.divInput.id = 'idDivInputPorFechaHasta'
+  //     divInput = createDiv(obj.divInput)
+
+  //     texto = trO('Enviar', objTranslate) || 'Enviar'
+  //     obj.btnEnviar.text = texto
+  //     const btn = createButton(obj.btnEnviar)
+  //     btn.setAttribute('data-procedure', rove)
+  //     modalContent.appendChild(btn)
+
+  //     // Agregar el contenido al modal
+  //     this.modal.appendChild(modalContent)
+
+  //     // Agregar el modal al body del documento
+  //     document.body.appendChild(this.modal)
+
+  //     // Evento de click para el botón "Enviar"
+  //     const idbtnEnviar = document.getElementById('idbtnEnviar')
+  //     idbtnEnviar.addEventListener('click', async (e) => {
+  //       const name = e.target.attributes[3].value
+  //       let inputDesde = document.getElementById('idDesde')
+  //       let desde = inputDesde.value
+  //       const fechaDesde = new Date(`${desde}T00:00:00-03:00`)
+  //       let fechaCorta = fechasGenerator.fecha_corta_ddmmyyyy(fechaDesde)
+  //       document.getElementById('whereUs').innerText += ` [${fechaCorta}]`
+
+  //       const miAlerta = new Alerta()
+  //       const aviso =
+  //         'Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.'
+  //       const mensaje = trO(aviso, objTranslate) || aviso
+  //       miAlerta.createControl(
+  //         arrayGlobal.avisoListandoControles,
+  //         mensaje,
+  //         objTranslate
+  //       )
+
+  //       let modal = document.getElementById('modalAlertCarga')
+  //       modal.style.display = 'block'
+  //       document.getElementById('idSpanCarga').style.display = 'none'
+
+  //       // Esperar antes de continuar
+  //       await new Promise((resolve) => setTimeout(resolve, 200))
+
+  //       //! Comienza la búsqueda del ROVE
+  //       const estandaresRove = await callRove(`est${rove}`, desde, desde)
+
+  //       if (!estandaresRove.success) {
+  //         const miAlerta = new Alerta()
+  //         const aviso =
+  //           'No se encontró algún registro que coincida con las fechas proporcionadas. Revise las fechas en Controles cargados.'
+  //         const mensaje = trO(aviso, objTranslate) || aviso
+  //         arrayGlobal.avisoRojo.span.text = mensaje
+  //         arrayGlobal.avisoRojo.div.height = '110px'
+  //         miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate)
+
+  //         modal = document.getElementById('modalAlertCarga')
+  //         modal.remove()
+  //         modal = document.getElementById('modalAlertVerde')
+  //         modal.style.display = 'block'
+  //         return
+  //       }
+
+  //       modal = document.getElementById('modalAlertCarga')
+  //       modal.remove()
+  //       modal = document.getElementById('modalTablaViewFecha')
+  //       modal.remove()
+
+  //       primerRender(rove, objTranslate, trO)
+  //       cargarStandares(estandaresRove, objTranslate, trO)
+
+  //       // Ejecutar en secuencia sin setTimeout
+  //       const documentos = await callRove(`doc${rove}`, desde, desde)
+  //       await pintaBarras(documentos, objTranslate)
+
+  //       const downtimes = await callRove(`dwt${rove}`, desde, desde)
+  //       await dwt(downtimes, objTranslate)
+
+  //       const table = document.getElementById('tableRove')
+  //       table.style.display = 'block'
+  //     })
+
+  //     document.addEventListener('keydown', (event) => {
+  //       if (event.key === 'Escape') {
+  //         event.preventDefault()
+  //         cerrarModal('modalTablaViewFecha')
+  //       }
+  //     })
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // createModalMenuRove(objeto, objTranslate) {
+  //   // eslint-disable-next-line no-unused-vars
+
+  //   const obj = objeto
+  //   // const obj = JSON.parse(JSON.stringify(objeto))
+  //   this.modal = document.createElement('div')
+  //   this.modal.id = 'modalAlertM'
+  //   this.modal.className = 'modal'
+  //   this.modal.style.background = 'rgba(0, 0, 0, 0.1)'
+  //   // Crear el contenido del modal
+  //   const modalContent = createDiv(obj.divContent)
+
+  //   const span = createSpan(obj.close)
+  //   obj.divCajita.hoverColor = null
+  //   obj.divCajita.position = null
+  //   const divClose = createDiv(obj.divCajita)
+  //   divClose.appendChild(span)
+  //   modalContent.appendChild(divClose)
+
+  //   //! refrescar
+  //   obj.divCajita.id = 'idDivRefrescar'
+  //   obj.divCajita.onClick = funcionRefrescar
+  //   let div = createDiv(obj.divCajita)
+  //   const imgRefresh = createIMG(obj.imgRefresh)
+  //   let texto = trO(obj.refresh.text, objTranslate) || obj.refresh.text
+  //   const spanRefresh = createSpan(obj.refresh, texto)
+  //   div.appendChild(imgRefresh)
+  //   div.appendChild(spanRefresh)
+  //   modalContent.appendChild(div)
+  //   obj.divCajita.onClick = null
+
+  //   //! fin refrescar
+
+  //   //! salir
+  //   obj.divCajita.id = 'idDivSalir'
+  //   obj.divCajita.onClick = funcionSalir
+  //   div = createDiv(obj.divCajita)
+  //   const imgSalir = createIMG(obj.imgSalir)
+  //   texto = trO(obj.salir.text, objTranslate) || obj.salir.text
+  //   const spanSalir = createSpan(obj.salir, texto)
+  //   div.appendChild(imgSalir)
+  //   div.appendChild(spanSalir)
+  //   modalContent.appendChild(div)
+  //   obj.divCajita.onClick = null
+  //   //! fin salir
+
+  //   this.modal.appendChild(modalContent)
+
+  //   // Agregar el modal al body del documento
+  //   document.body.appendChild(this.modal)
+  // }
 
   createModalMenuReportes(objeto, objTranslate) {
     // eslint-disable-next-line no-unused-vars

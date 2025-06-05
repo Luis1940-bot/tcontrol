@@ -20,7 +20,7 @@ import { trO } from '../../controllers/trOA.js';
 import LogOut from '../../controllers/logout.js';
 import traerRegistros from './Modules/traerRegistros.js';
 import reporteOnOff from './Modules/habilitarEmail.js';
-import { mostrarMensaje } from '../../controllers/alertasLuis.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 let objTranslate = [];
@@ -752,7 +752,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const divVolver = document.querySelector('.div-volver');
   divVolver.style.display = 'block';
   document.getElementById('volver').style.display = 'block';
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   document.querySelector('.div-encabezado').style.marginTop = '5px';
   document.querySelector('.div-encabezadoPastillas').style.display = 'none';
 

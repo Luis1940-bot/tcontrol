@@ -88,7 +88,7 @@ function configuracionLoad(user) {
   document.getElementById('wichC').innerText = `${controlN}-${controlT}`;
 
   configPHP(user, SERVER);
-  document.querySelector('.header-McCain').style.display = 'none';
+  // document.querySelector('.header-McCain').style.display = 'none';
   finPerformance();
 }
 

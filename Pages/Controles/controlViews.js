@@ -16,6 +16,10 @@ const encabezados = {
   width: ['1'],
 };
 
+function recargarPagina() {
+  window.location.reload();
+}
+
 async function cargaDeRegistros(objTranslate, plant, nivel) {
   try {
     const reportes = await traerRegistros(
@@ -26,14 +30,9 @@ async function cargaDeRegistros(objTranslate, plant, nivel) {
     // Finaliza la carga y realiza cualquier otra acción necesaria
     tablaVacia(reportes, encabezados, objTranslate);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn(error);
-    console.log('error por espera de la carga de un modal');
-
-    // Reemplazo de setTimeout con requestAnimationFrame
-    function recargarPagina() {
-      window.location.reload();
-    }
-
+    // console.log('error por espera de la carga de un modal');
     requestAnimationFrame(recargarPagina);
   }
 }
@@ -51,8 +50,9 @@ async function mensajeDeCarga(objTranslate, plant, nivel) {
   modal.style.display = 'block';
 
   // Agrega un retraso antes de iniciar la carga de registros
-  // eslint-disable-next-line no-promise-executor-return
-  await new Promise((resolve) => setTimeout(() => resolve(), 200));
+  await new Promise((resolve) => {
+    setTimeout(resolve, 200);
+  });
 
   await cargaDeRegistros(objTranslate, plant, nivel);
 }

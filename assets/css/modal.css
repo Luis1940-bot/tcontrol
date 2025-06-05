@@ -822,7 +822,9 @@
   #idDivAvisoImagenes {
     margin-top: 100px;
   }
-
+  #idDivImagen {
+    margin: 2rem auto auto auto;
+  }
   #idDivGuardar {
     margin-left: 25rem;
     margin-top: 5rem;
