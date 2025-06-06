@@ -91,7 +91,7 @@ const funcionGuardar = async () => {
     miAlerta.createAlerta(obj, objTraductorFG, 'guardar');
     const elementosStyle = {
       element: ['modalAlert'],
-      style: ['block'],
+      style: ['flex'],
       remove: [null],
     };
     procesoStyleDisplay(elementosStyle);
@@ -120,7 +120,7 @@ const funcionGuardarCambio = async () => {
     miAlerta.createAlerta(obj, objTraductorFGC, 'guardarCambio');
     const elementosStyle = {
       element: ['modalAlert'],
-      style: ['block'],
+      style: ['flex'],
       remove: [null],
     };
     procesoStyleDisplay(elementosStyle);
@@ -150,7 +150,7 @@ const funcionGuardarComoNuevo = async () => {
     miAlerta.createAlerta(obj, objTraductorFGCN, 'guardarComoNuevo');
     const elementosStyle = {
       element: ['modalAlert'],
-      style: ['block'],
+      style: ['flex'],
       remove: [null],
     };
     procesoStyleDisplay(elementosStyle);
@@ -182,7 +182,7 @@ const funcionHacerFirmar = async () => {
   miAlertaFirmar.createFirma(obj, objTraductorFHF, 'firmar');
   const elementosStyle = {
     element: ['modalAlert'],
-    style: ['block'],
+    style: ['flex'],
     remove: [null],
   };
   procesoStyleDisplay(elementosStyle);
@@ -1027,6 +1027,7 @@ async function firmar(firmadoPor, objTrad) {
 
     const modal = document.getElementById('modalAlert');
     if (!modal) {
+      // eslint-disable-next-line no-console
       console.warn('Error de carga en el modal');
     }
     modal.style.display = 'none';
@@ -2016,7 +2017,7 @@ function printDiv() {
   ventana.close(); // Cierra la ventana
 }
 
-async function eliminarR(objTraductor) {
+async function eliminarR(objTraductor2) {
   const nux = document.getElementById('idEliminaRegistro');
   let registro = nux.textContent;
   const matches = registro.match(/\d+/);
@@ -2024,15 +2025,17 @@ async function eliminarR(objTraductor) {
   const deleteados = await eliminarRegistro(registro);
   let modal = document.getElementById('modalAlert');
   if (!modal) {
+    // eslint-disable-next-line no-console
     console.warn('Error de carga en el modal');
   }
   modal.style.display = 'none';
   modal.remove();
+  // eslint-disable-next-line no-use-before-define
   const miAlerta = new Alerta();
   const obj = arrayGlobal.avisoRojo;
   obj.div.width = '80%';
   obj.close.id = 'idCloseDeleteado';
-  let texto = trO(deleteados.message, objTraductor) || deleteados.message;
+  let texto = trO(deleteados.message, objTraductor2) || deleteados.message;
   texto = `${texto}: ${registro}`;
   miAlerta.createVerde(obj, texto, null);
   modal = document.getElementById('modalAlertVerde');
@@ -2216,7 +2219,7 @@ export default class Alerta {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlert';
     this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
     // Crear el contenido del modal
     if (typeAlert === 'guardar') {
       obj.divContent.height = '210px';
@@ -2378,7 +2381,16 @@ export default class Alerta {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlert';
     this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
+    this.modal.style.zIndex = '9999';
+    this.modal.style.position = 'fixed';
+    // Centrado horizontal y arriba
+    this.modal.style.display = 'flex';
+    this.modal.style.flexDirection = 'column';
+    this.modal.style.alignItems = 'center';
+    this.modal.style.justifyContent = 'flex-start';
+    this.modal.style.paddingTop = '60px'; // o el valor que prefieras
+
     // Crear el contenido del modal
     if (typeAlert === 'firmar' && widthScreen !== 360) {
       obj.divContent.height = '290px';
@@ -2578,7 +2590,7 @@ export default class Alerta {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertP';
     this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(0, 0, 0, 0.1)';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
     // Crear el contenido del modal
     const modalContent = createDiv(obj.divContent);
 
@@ -2627,7 +2639,15 @@ export default class Alerta {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertM';
     this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(0, 0, 0, 0.1)';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
+    this.modal.style.zIndex = '9999';
+    this.modal.style.position = 'fixed';
+    // Centrado horizontal y arriba
+    this.modal.style.display = 'flex';
+    this.modal.style.flexDirection = 'column';
+    this.modal.style.alignItems = 'center';
+    this.modal.style.justifyContent = 'flex-start';
+    this.modal.style.paddingTop = '60px'; // o el valor que prefieras
     // Crear el contenido del modal
     const modalContent = createDiv(obj.divContent);
 
@@ -2646,10 +2666,10 @@ export default class Alerta {
     //! guardar
     if (sinMenus.sinGuardar || conMenus.sinGuardar) {
       if (sinMenus.sinGuardar.length > 0) {
-        existeSin = sinMenus.sinGuardar.includes(parseInt(controlN));
+        existeSin = sinMenus.sinGuardar.includes(parseInt(controlN, 10));
       }
       if (conMenus.conGuardar.length > 0) {
-        existeCon = conMenus.conGuardar.includes(parseInt(controlN));
+        existeCon = conMenus.conGuardar.includes(parseInt(controlN, 10));
       }
     }
 
@@ -2681,10 +2701,10 @@ export default class Alerta {
     //! guardar cambio
     if (sinMenus.sinGuardarCambio || conMenus.conGuardarCambio) {
       if (sinMenus.sinGuardarCambio.length > 0) {
-        existeSin = sinMenus.sinGuardarCambio.includes(parseInt(controlN));
+        existeSin = sinMenus.sinGuardarCambio.includes(parseInt(controlN, 10));
       }
       if (conMenus.conGuardarCambio.length > 0) {
-        existeCon = conMenus.conGuardarCambio.includes(parseInt(controlN));
+        existeCon = conMenus.conGuardarCambio.includes(parseInt(controlN, 10));
       }
     }
 
@@ -2718,10 +2738,14 @@ export default class Alerta {
     //! guardar como nuevo
     if (sinMenus.sinGuardarComoNuevo || conMenus.conGuardarComoNuevo) {
       if (sinMenus.sinGuardarComoNuevo.length > 0) {
-        existeSin = sinMenus.sinGuardarComoNuevo.includes(parseInt(controlN));
+        existeSin = sinMenus.sinGuardarComoNuevo.includes(
+          parseInt(controlN, 10),
+        );
       }
       if (conMenus.conGuardarComoNuevo.length > 0) {
-        existeCon = conMenus.conGuardarComoNuevo.includes(parseInt(controlN));
+        existeCon = conMenus.conGuardarComoNuevo.includes(
+          parseInt(controlN, 10),
+        );
       }
     }
 
@@ -2889,7 +2913,15 @@ export default class Alerta {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertM';
     this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(0, 0, 0, 0.1)';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
+    this.modal.style.zIndex = '9999';
+    this.modal.style.position = 'fixed';
+    // Centrado horizontal y arriba
+    this.modal.style.display = 'flex';
+    this.modal.style.flexDirection = 'column';
+    this.modal.style.alignItems = 'center';
+    this.modal.style.justifyContent = 'flex-start';
+
     // Crear el contenido del modal
     const modalContent = createDiv(obj.divContent);
 
@@ -3188,7 +3220,7 @@ export default class Alerta {
             objTrad,
           );
           const modal2 = document.getElementById('modalTablaViewFecha');
-          modal2.style.display = 'block';
+          modal2.style.display = 'flex';
         });
       } else {
         texto =
@@ -3645,7 +3677,15 @@ export default class Alerta {
       this.modal = document.createElement('div');
       this.modal.id = 'modalTablaViewFecha';
       this.modal.className = 'modal';
-      this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+      this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
+      this.modal.style.zIndex = '9999';
+      this.modal.style.position = 'fixed';
+      // Centrado horizontal y arriba
+      this.modal.style.display = 'flex';
+      this.modal.style.flexDirection = 'column';
+      this.modal.style.alignItems = 'center';
+      this.modal.style.justifyContent = 'flex-start';
+      this.modal.style.paddingTop = '60px';
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent);
       // let span = createSpan(obj.close)
@@ -3692,6 +3732,7 @@ export default class Alerta {
 
       obj.label.innerText = `${texto}: `;
       obj.label.margin = 'auto 10px';
+      obj.color = '#212121';
       let label = createLabel(obj.label);
       divInput.appendChild(label);
       divInput.appendChild(input);
@@ -3771,26 +3812,30 @@ export default class Alerta {
           };
 
           if (consulta.length <= 1) {
-            const miAlerta = new Alerta();
-            const aviso =
+            const miAlerta2 = new Alerta();
+            const aviso2 =
               'No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.';
-            const mensaje = trO(aviso, objTranslate) || aviso;
-            arrayGlobal.avisoRojo.span.text = mensaje;
+            const mensaje2 = trO(aviso2, objTranslate) || aviso2;
+            arrayGlobal.avisoRojo.span.text = mensaje2;
             arrayGlobal.avisoRojo.span.padding = '0px 0px 0px 0px';
             arrayGlobal.avisoRojo.div.height = '110px';
             arrayGlobal.avisoRojo.div.margin = '200px auto auto auto';
-            miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, objTranslate);
-            let modal = document.getElementById('modalAlertCarga');
-            modal.remove();
-            modal = document.getElementById('modalAlertVerde');
-            modal.style.display = 'block';
+            miAlerta2.createVerde(
+              arrayGlobal.avisoRojo,
+              mensaje2,
+              objTranslate,
+            );
+            let modal2 = document.getElementById('modalAlertCarga');
+            modal2.remove();
+            modal2 = document.getElementById('modalAlertVerde');
+            modal2.style.display = 'block';
           }
           if (consulta.length > 1) {
             sessionStorage.setItem('api', encriptar(api));
-            let modal = document.getElementById('modalAlertCarga');
-            modal.remove();
-            modal = document.getElementById('modalTablaViewFecha');
-            modal.remove();
+            let modal3 = document.getElementById('modalAlertCarga');
+            modal3.remove();
+            modal3 = document.getElementById('modalTablaViewFecha');
+            modal3.remove();
             const table = document.getElementById('tableConsultaViews');
 
             table.style.display = 'block';
@@ -3848,6 +3893,7 @@ export default class Alerta {
         }
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -5119,6 +5165,7 @@ export default class Alerta {
   createNewCampo(objeto, objTrad, target, table, callback) {
     const obj = JSON.parse(JSON.stringify(objeto));
     let datoSeleccionado = null;
+    // eslint-disable-next-line no-unused-vars
     const { antesDelGuion, despuesDelGuion } = target;
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlert';
@@ -5185,11 +5232,12 @@ export default class Alerta {
         const tbody = table.querySelector('tbody');
         const filas = tbody.querySelectorAll('tr');
         const cantidadDeFilas = filas.length - 1;
-        const fila = tbody.rows[cantidadDeFilas];
-        let celda = fila.cells[8];
-        const orden = parseInt(celda.textContent.trim());
-        celda = fila.cells[0];
-        const idObservacion = parseInt(celda.textContent.trim());
+        const fila2 = tbody.rows[cantidadDeFilas];
+        let celda = fila2.cells[8];
+        const orden = parseInt(celda.textContent.trim(), 10);
+        // eslint-disable-next-line prefer-destructuring
+        celda = fila2.cells[0];
+        const idObservacion = parseInt(celda.textContent.trim(), 10);
         response = {
           success: true,
           nombre: datoSatinizado,

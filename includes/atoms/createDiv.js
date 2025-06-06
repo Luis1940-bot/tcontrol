@@ -57,6 +57,9 @@ function createDiv(params) {
   params.display !== null && params.display !== undefined
     ? (nuevoDiv.style.display = params.display)
     : null;
+  params.justifyContent !== null && params.justifyContent !== undefined
+    ? (nuevoDiv.style.justifyContent = params.justifyContent)
+    : null;
   return nuevoDiv;
 }
 

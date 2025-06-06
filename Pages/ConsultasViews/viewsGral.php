@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 };
 header('Content-Type: text/html;charset=utf-8');
 $nonce = base64_encode(random_bytes(16));
-header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: example.com; script-src 'self' 'nonce-$nonce' cdn.example.com; style-src 'self' 'nonce-$nonce' cdn.example.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: tenkiweb.com; script-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; style-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
 
 
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");

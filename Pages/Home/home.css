@@ -47,6 +47,8 @@ main {
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   .div-home-buttons {
     margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 }
 

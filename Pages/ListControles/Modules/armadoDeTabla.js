@@ -1052,6 +1052,7 @@ function estilosCell(
     imagen.style.float = 'right';
     imagen.src = `${SERVER}/assets/img/icons8-view-30.png`;
     imagen.style.cursor = 'pointer';
+    imagen.title = trO('Ver detalles', objTranslate) || 'Ver detalles';
     imagen.setAttribute('data-index', id);
     imagen.setAttribute('data-plant', plant);
     imagen.addEventListener('click', (e) => {

@@ -812,7 +812,7 @@ function loadTabla(arrayControl, encabezados, objTrad, url, plant) {
     //   hacerMemoria(arrayControl, plant)
     // }, 1000)
   } else {
-    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTranslate);
+    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTrad);
     const modal = document.getElementById('modalAlert');
     modal.style.display = 'block';
   }

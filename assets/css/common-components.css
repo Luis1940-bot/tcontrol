@@ -1,12 +1,150 @@
+/* === BREAKPOINTS RESPONSIVOS ORDENADOS === */
+
+/* 1. Móviles pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  /* ...estilos específicos para móviles pequeños... */
+}
+
+/* 2. Móviles grandes y tablets pequeñas (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .div-encabezado {
+    height: var(--div-encabezado-height);
+    font-family: var(--fuente-base);
+    margin-top: 40px;
+  }
+  .div-ubicacion {
+    height: var(--div-ubicacion-height);
+    font-family: var(--fuente-base);
+    text-align: center;
+    padding-top: 20px;
+  }
+  .div-volver {
+    height: var(--div-volver-height);
+    font-family: var(--fuente-base);
+    margin-left: 55px;
+  }
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: var(--div-volver-img-display);
+  }
+  .div-ubicacion #spanUbicacion {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+  .div-person {
+    text-align: center;
+  }
+  #spanPerson {
+    font-size: var(--spanPerson-font-size);
+    font-style: italic;
+  }
+  #volver {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+  }
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+}
+
+/* 3. Tablets medianas y grandes (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #wichC,
+  #person {
+    font-size: 20px;
+    padding: 10px 20px;
+    min-width: 30px;
+    min-height: 30px;
+  }
+  #div-wich img {
+    width: 32px;
+    height: 32px;
+  }
+  #hamburguesa {
+    width: 40px;
+    height: 40px;
+  }
+  #whereUs {
+    font-size: 22px;
+  }
+}
+
+/* 4. Laptops y desktops estándar (1025px - 1799px) */
+@media (min-width: 1025px) and (max-width: 1799px) {
+  /* Puedes agregar aquí ajustes para laptops y desktops estándar si los necesitas */
+}
+
+/* 5. Monitores anchos (>= 1800px) */
+@media (min-width: 1800px) {
+  .div-encabezado {
+    height: var(--div-encabezado-height);
+    font-family: var(--fuente-base);
+    margin-top: 40px;
+  }
+  .div-ubicacion {
+    height: var(--div-ubicacion-height);
+    font-family: var(--fuente-base);
+    text-align: center;
+    padding-top: 20px;
+  }
+  .div-person {
+    font-size: 1.2rem;
+  }
+  .div-volver img {
+    height: var(--div-volver-height);
+    font-family: var(--fuente-base);
+    margin-left: 40px;
+    margin-top: 40px;
+    height: 30px;
+    width: 30px;
+  }
+  #spanUbicacion {
+    font-size: 32px;
+  }
+  #spanPerson {
+    font-size: 22px;
+  }
+  .div-span {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  #doc,
+  #numberDoc {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    width: auto;
+    margin-left: 10px;
+  }
+  #whereUs {
+    font-size: 22px;
+  }
+}
+
+/* 6. Orientación específica (opcional, solo si es necesario) */
+@media (max-width: 768px) and (orientation: landscape) {
+  /* ...estilos para móviles/tablets en horizontal... */
+}
+@media (max-width: 768px) and (orientation: portrait) {
+  /* ...estilos para móviles/tablets en vertical... */
+}
+
+/* === ESTILOS GENERALES === */
 :root {
   --color-principal: #123456;
   --color-secundario: #abcdef;
   --fuente-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* === Unificación de estilos de componentes molecules === */
+/* === UNIFICACIÓN DE ESTILOS DE COMPONENTES MOLECULES === */
 
-/* wichControl */
+/* WICH CONTROL */
 .div-wichControl {
   margin-top: 15px;
 }
@@ -28,7 +166,7 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
-  background: #ececec;
+  background: transparent; /* #ececec;*/
   display: none;
   width: auto;
 }
@@ -36,7 +174,7 @@
   display: none;
 }
 
-/* wichConsult */
+/* WICH CONSULT */
 .div-wichConsult {
   margin-top: 30px;
   margin-bottom: 10px;
@@ -269,6 +407,7 @@ a {
   border-radius: 10px;
   border: 3px solid #212121;
   padding: 5px;
+  left: 1vw;
 }
 
 /* Cambia el cursor a pointer en los td de tablas dentro de .modal-content al hacer hover */
@@ -865,7 +1004,7 @@ a {
   }
 }
 
-/* === Estilos Search (migrados de search.css) === */
+/* === ESTILOS SEARCH (MIGRADOS DE SEARCH.CSS) === */
 .div-encabezadoSearch {
   height: auto;
   margin-top: 4px;
@@ -1062,7 +1201,7 @@ a {
 .modal-content-person {
   position: absolute;
   top: 60px; /* Ajustar según la altura del header o del botón */
-  right: 2vw;
+  right: 4vw;
   width: 30vw;
   min-width: 220px;
   max-width: 400px;
@@ -1080,7 +1219,7 @@ a {
 @media (max-width: 900px) {
   .modal-content-person {
     width: 60vw;
-    right: 2vw;
+    right: 8vw;
     min-width: 180px;
   }
 }
@@ -1281,4 +1420,36 @@ a {
     width: 40px;
     height: 40px;
   }
+}
+
+#modalTablaViewFecha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed; /* o absolute según tu estructura */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.3); /* opcional, para fondo oscuro */
+}
+
+#modalTablaViewFecha > div {
+  /* El div interno que contiene el contenido */
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.label-calendar {
+  font-family: var(--fuente-base);
+  font-size: 16px;
+  color: #393939 !important;
+  font-weight: 600;
+  margin-right: 8px;
 }

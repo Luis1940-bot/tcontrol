@@ -519,6 +519,7 @@ function estilosCell(
   // imagen.style.width = '12px'
   // imagen.style.margin = 'auto 5px auto auto'
   imagen.style.cursor = 'pointer';
+  imagen.title = trO('Ver detalles', objTranslate) || 'Ver detalles';
   imagen.setAttribute('data-index', index);
   imagen.addEventListener('click', (e) => {
     const i = e.target.getAttribute('data-index');
