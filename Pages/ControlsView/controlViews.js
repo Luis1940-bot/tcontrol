@@ -20,23 +20,27 @@ const encabezados = {
 
 async function cargaDeRegistros(objTranslate, control, plant) {
   try {
+    // eslint-disable-next-line camelcase, no-unused-vars
     const { control_N, control_T, desde, hasta } = control;
     const whereUs = document.getElementById('whereUs');
     const textoAdicional = document.createTextNode(
+      // eslint-disable-next-line camelcase
       `> ${control_N} - ${control_T}`,
     );
     whereUs.appendChild(textoAdicional);
     let reportes;
     desde === undefined || hasta === undefined
-      ? (reportes = await traerRegistros(`traerControles,${control_N}`, plant))
+      ? // eslint-disable-next-line camelcase
+        (reportes = await traerRegistros(`traerControles,${control_N}`, plant))
       : null;
     desde !== undefined || hasta !== undefined
       ? (reportes = await traerRegistros(
+          // eslint-disable-next-line camelcase
           `traerControlesFechas,${control_N},${desde},${hasta}`,
           null,
         ))
       : null;
-
+    // console.log(reportes);
     if (reportes.length > 0) {
       // Finaliza la carga y realiza cualquier otra acción necesaria
       tablaVacia(reportes, encabezados, objTranslate);
@@ -90,7 +94,7 @@ function cargaTabla(objTranslate, control, plant) {
   }
 }
 
-function goBack(e) {
+function goBack() {
   const url = `${SERVER}/Pages/Controles/index.php?simulateAsignarEventos=true`;
   window.location.href = url;
 }

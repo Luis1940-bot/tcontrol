@@ -5,6 +5,7 @@ const SERVER = baseUrl;
 export default function traerRegistros(q, sqlI) {
   // eslint-disable-next-line no-console
   console.time('traerRegistros');
+
   return new Promise((resolve, reject) => {
     const rax = `&new=${new Date()}`;
     // const ruta = `${SERVER}/Pages/ControlsView/Routes/traerRegistros.php?q=${sql}${rax}`
@@ -28,7 +29,7 @@ export default function traerRegistros(q, sqlI) {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data)
+        // console.log(data);
         resolve(data);
         const modal = document.getElementById('modalAlertCarga');
         if (modal && modal.style.display !== 'none') {

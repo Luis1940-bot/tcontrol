@@ -3939,7 +3939,7 @@ export default class Alerta {
         const cantidadDeRegistros = nuevoArray[0].length;
         const tbody = document.createElement('tbody');
         nuevoArray.forEach((element, index) => {
-          const newRow = estilosTbodyCellConsulta(
+          const newRow2 = estilosTbodyCellConsulta(
             element,
             index,
             cantidadDeRegistros,
@@ -3947,11 +3947,12 @@ export default class Alerta {
             arrayWidth,
             filaDoc,
           );
-          tbody.appendChild(newRow);
+          tbody.appendChild(newRow2);
         });
         table.appendChild(tbody);
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -3969,7 +3970,7 @@ export default class Alerta {
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent);
       const span = createSpan(obj.close);
-      modalContent.appendChild(span);
+      this.modal.appendChild(span);
 
       const divEncabezado = createDiv(obj.divEncabezado);
       const buttonPDF = createButton(obj.btnPDF);
@@ -3979,7 +3980,7 @@ export default class Alerta {
         printDiv();
       });
       divEncabezado.appendChild(buttonPDF);
-      modalContent.appendChild(divEncabezado);
+      this.modal.appendChild(divEncabezado);
 
       obj.titulo.text.control = firma;
       obj.titulo.fontSize = '20px';
@@ -4026,25 +4027,31 @@ export default class Alerta {
       tbody.setAttribute('id', 'idTbodyModal');
       const cantidadDeRegistros = traerControl.length;
       traerControl.forEach((element, index) => {
-        const newRow = estilosTbodyCell(
+        const newRow2 = estilosTbodyCell(
           element,
           index,
           cantidadDeRegistros,
           objTrad,
           arrayWidthEncabezado,
         );
-        tbody.appendChild(newRow);
+        tbody.appendChild(newRow2);
       });
       table.appendChild(tbody);
-      modalContent.appendChild(table);
+      const divAuxiliar = document.createElement('div');
+      divAuxiliar.setAttribute('id', 'divAuxiliar');
+      divAuxiliar.appendChild(table);
+      modalContent.appendChild(divAuxiliar);
+      // modalContent.appendChild(table);
       this.modal.appendChild(modalContent);
       document.body.appendChild(this.modal);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
 
   createEliminaRegistro(objeto, nuxpedido, objTrad, control) {
+    // eslint-disable-next-line camelcase
     const { control_N, control_T } = control;
     const obj = objeto;
     // const obj = JSON.parse(JSON.stringify(objeto))

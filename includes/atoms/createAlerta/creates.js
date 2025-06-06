@@ -58,6 +58,10 @@ function createDiv(config) {
     : null;
   config.width !== null ? (div.style.width = config.width) : null;
   config.height !== null ? (div.style.height = config.height) : null;
+  config.maxWidth !== null ? (div.style.maxWidth = config.maxWidth) : null;
+  config.minWidth !== null ? (div.style.minWidth = config.minWidth) : null;
+  config.maxHeight !== null ? (div.style.maxHeight = config.maxHeight) : null;
+  config.minHeight !== null ? (div.style.minHeight = config.minHeight) : null;
   config.background !== null
     ? (div.style.background = config.background)
     : null;

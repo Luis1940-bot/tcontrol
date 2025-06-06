@@ -124,7 +124,7 @@
   #idDivTablas {
     width: 90%;
     height: auto;
-    max-height: 500px;
+    max-height: 80vh;
     /* margin: 10px auto auto auto; */
     background-color: #ffffff;
     overflow-y: auto;
@@ -132,16 +132,12 @@
     margin-right: auto;
   }
   #idTablaViewer {
-    width: 95%;
+    width: 98%;
   }
-  #idTablaViewer thead {
-    font-size: 12px;
-  }
-  #idTablaViewer tr th {
-    font-size: 12px;
-  }
+  #idTablaViewer thead,
+  #idTablaViewer tr th,
   #idTablaViewer tr td {
-    font-size: 12px;
+    font-size: 14px;
   }
   #idbtnPDF {
     margin-left: 5px;
@@ -155,7 +151,7 @@
   #idDivTablas {
     width: 90%;
     height: auto;
-    max-height: 500px;
+    max-height: 85vh;
     /* margin: 10px auto auto auto; */
     background-color: #ffffff;
     overflow-y: auto;
@@ -163,16 +159,12 @@
     margin-right: auto;
   }
   #idTablaViewer {
-    width: 95%;
+    width: 99%;
   }
-  #idTablaViewer thead {
-    font-size: 12px;
-  }
-  #idTablaViewer tr th {
-    font-size: 12px;
-  }
+  #idTablaViewer thead,
+  #idTablaViewer tr th,
   #idTablaViewer tr td {
-    font-size: 12px;
+    font-size: 16px;
   }
   #idbtnPDF {
     margin-left: 5px;

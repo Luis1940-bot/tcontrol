@@ -2586,8 +2586,8 @@ const tablaEnModal = {
     id: 'idDivTablasEncabezado',
     position: null,
     borderRadius: null,
-    width: 'auto',
-    height: 'auto',
+    width: null,
+    height: null,
     background: '#ffffff',
     border: null,
     boxShadow: null,
@@ -2596,7 +2596,7 @@ const tablaEnModal = {
     flexDirection: 'column',
     padding: null,
     overflow: null,
-    className: 'div-verde',
+    className: null,
     textAlign: '',
     gap: '2px',
     top: '5px',
@@ -2610,16 +2610,20 @@ const tablaEnModal = {
     id: 'idDivTablas',
     position: 'relative',
     borderRadius: '10px',
-    width: null, // '320px',
-    height: 'auto',
+    width: '90vw', // Hace que el modal use el 90% del ancho de la ventana
+    maxWidth: '1200px', // Limita el ancho máximo en pantallas grandes
+    minWidth: '350px', // Asegura que no sea muy chico en móviles
+    height: null, // Usa el 80% del alto de la ventana
+    maxHeight: '90vh', // Limita el alto máximo
+    minHeight: '300px',
     background: null, // '#ffffff',
     border: '3px solid #000000',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-    margin: '10px auto auto auto', // '10% auto',
+    margin: '10px auto', // '10% auto',
     display: 'flex',
     flexDirection: 'column',
     padding: '10px',
-    overflow: null, // 'hidden',
+    overflow: 'auto', // 'hidden',
     className: 'div-verde',
     textAlign: '',
     gap: '0px',
@@ -2647,7 +2651,7 @@ const tablaEnModal = {
     borderRadius: '5px',
     hoverBackground: '#cecece',
     hoverColor: '#000000',
-    marginLeft: null,
+    marginLeft: '10px',
     // onClick: funcionExportarPDF,
   },
   span: {

@@ -14,8 +14,8 @@ const SERVER = baseUrl;
 
 let translateOperativo = [];
 let espanolOperativo = [];
-let translateArchivos = [];
-let espanolArchivos = [];
+// let translateArchivos = [];
+// let espanolArchivos = [];
 
 const widthScreen = window.innerWidth;
 const widthScreenAjustado = 1; // 360 / widthScreen
@@ -213,6 +213,7 @@ function detectarImagenes(fila, imagenes) {
       ul.style.display = 'flex';
       let contenidoFilaUnido = 'oooo';
       for (let i = 1; i <= 5; i++) {
+        // eslint-disable-next-line no-unused-vars
         contenidoFilaUnido += '';
       }
       const nuevaCelda = document.createElement('td');
@@ -228,6 +229,7 @@ function detectarImagenes(fila, imagenes) {
       // eslint-disable-next-line no-plusplus
       for (let n = 0; n < cantidadDeImagenes; n++) {
         const src = objeto.fileName[n];
+        // eslint-disable-next-line no-unused-vars
         const extension = objeto.extension[n];
         const li = document.createElement('li');
         const img = document.createElement('img');
@@ -246,16 +248,19 @@ function detectarImagenes(fila, imagenes) {
       nuevaCelda.style.borderBottom = '1px solid #cecece';
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 }
 
 function formatado(valor, tipoDeDato, nombreControl, fila, imagenes) {
+  let resolve;
   switch (tipoDeDato) {
-    case 'd':
+    case 'd': {
       const partes = valor.split('-');
       const fechaVuelta = `${partes[2]}-${partes[1]}-${partes[0]}`;
       return fechaVuelta;
+    }
     case 'h':
       return valor;
     case 'b':
@@ -284,8 +289,8 @@ function formatado(valor, tipoDeDato, nombreControl, fila, imagenes) {
     case 'img':
       detectarImagenes(fila, imagenes);
       return null;
-    case 'l':
-      var resolve = leyendaSubtituloTitulo(
+    case 'l': {
+      resolve = leyendaSubtituloTitulo(
         nombreControl,
         fila,
         'Italic',
@@ -293,8 +298,9 @@ function formatado(valor, tipoDeDato, nombreControl, fila, imagenes) {
         '30px',
       );
       return resolve;
+    }
     case 'title':
-      var resolve = leyendaSubtituloTitulo(
+      resolve = leyendaSubtituloTitulo(
         nombreControl,
         fila,
         'Normal',
@@ -303,7 +309,7 @@ function formatado(valor, tipoDeDato, nombreControl, fila, imagenes) {
       );
       return resolve;
     case 'subt':
-      var resolve = leyendaSubtituloTitulo(
+      resolve = leyendaSubtituloTitulo(
         nombreControl,
         fila,
         'Normal',
@@ -324,6 +330,7 @@ function formatado(valor, tipoDeDato, nombreControl, fila, imagenes) {
     default:
       return valor;
   }
+  return null;
 }
 
 function buscaCodigo(codigo, array, columna, tipo) {
@@ -394,6 +401,7 @@ function completamosTablaModal(array) {
       }
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 }
@@ -414,8 +422,10 @@ function eliminarRegistro(array, objTranslate) {
 
 async function viewer(array, objTranslate) {
   const control = desencriptar(sessionStorage.getItem('listadoCtrls'));
+  // eslint-disable-next-line no-unused-vars, camelcase
   const { control_N, control_T } = control;
   const nuxpedido = array[1];
+  // eslint-disable-next-line camelcase
   const traerControl = await traerRegistros(`NuevoControl,${control_N}`, null);
   const traerNuxpedido = await traerRegistros(`ctrlCargado,${nuxpedido}`, null);
   const miAlerta = new Alerta();
@@ -434,10 +444,10 @@ async function viewer(array, objTranslate) {
 function abrirControl(nr) {
   try {
     const control = desencriptar(sessionStorage.getItem('listadoCtrls'));
-    const { control_N, control_T } = control;
+    const { controlN, controlT } = control;
     let contenido = {
-      control_N,
-      control_T,
+      controlN,
+      controlT,
       nr,
     };
     contenido = encriptar(contenido);
@@ -448,6 +458,7 @@ function abrirControl(nr) {
     window.location.href = url;
     // window.open(url, '_blank')
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 }
@@ -552,7 +563,7 @@ function estilosTbodyCell(element, index, arrayControl, objTranslate, tipo) {
   const paddingLeft = '10px';
   const fontStyle = 'normal';
   // const fontWeight = 500
-  const background = '#ffffff';
+  // const background = '#ffffff';
   const colorText = '#000000';
 
   const cell = estilosCell(
@@ -628,8 +639,8 @@ export default function tablaVacia(arrayControl, encabezados, objTranslate) {
   // Configurar las traducciones
   translateOperativo = objTranslate.operativoTR;
   espanolOperativo = objTranslate.operativoES;
-  translateArchivos = objTranslate.archivosTR;
-  espanolArchivos = objTranslate.archivosES;
+  // translateArchivos = objTranslate.archivosTR;
+  // espanolArchivos = objTranslate.archivosES;
 
   // Usar requestAnimationFrame para asegurarse de que el DOM esté listo antes de cargar la tabla
   requestAnimationFrame(() => {

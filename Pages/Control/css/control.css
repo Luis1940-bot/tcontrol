@@ -76,7 +76,7 @@ hr {
   font-size: 18px;
 }
 .InputButton-transparent {
-  height: 80%;
+  height: 100%;
   padding-left: 0px;
   padding-top: 0px;
   padding-right: 0px;
@@ -238,7 +238,7 @@ li {
     font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
-    height: 70%;
+    height: 100%;
   }
 
   table tbody tr td textarea {
@@ -252,7 +252,7 @@ li {
     font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
-    height: 80%;
+    height: 100%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */
@@ -270,7 +270,7 @@ li {
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
-    height: 70%;
+    height: 100%;
   }
   table tbody tr td div select {
     font-size: var(--font-size-input);
@@ -278,7 +278,7 @@ li {
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
-    height: 80%;
+    height: 100%;
   }
   /* Estilos para los botones */
   button {
@@ -288,7 +288,7 @@ li {
     color: #fff;
     border: none;
     cursor: pointer;
-    height: 70%;
+    height: 100%;
   }
   .transparent-button {
     background: transparent;
@@ -307,7 +307,7 @@ li {
     font-size: 18px;
   }
   .InputButton-transparent {
-    height: 80%;
+    height: 100%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -333,7 +333,7 @@ li {
   }
   .button-cn {
     gap: 2px;
-    height: 80%;
+    height: 100%;
   }
   .custom-checkbox {
     width: 2rem;
@@ -396,7 +396,7 @@ li {
     font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
-    height: 70%;
+    height: 100%;
   }
 
   table tbody tr td textarea {
@@ -410,7 +410,7 @@ li {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
-    height: 80%;
+    height: 100%;
   }
   /* Estilos para los contenedores en las celdas de tabla */
   table tbody tr td div {
@@ -427,7 +427,7 @@ li {
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
-    height: 70%;
+    height: 100%;
   }
   table tbody tr td div select {
     font-size: 12px;
@@ -435,7 +435,7 @@ li {
     height: 100%;
     margin-left: 10px;
     border: 1px solid #000;
-    height: 80%;
+    height: 100%;
   }
   /* Estilos para los botones */
   button {
@@ -445,7 +445,7 @@ li {
     color: #fff;
     border: none;
     cursor: pointer;
-    height: 70%;
+    height: 100%;
   }
 
   /* .planos {
@@ -464,7 +464,7 @@ li {
     font-size: 18px;
   }
   .InputButton-transparent {
-    height: 80%;
+    height: 100%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -556,7 +556,7 @@ li {
     font-size: var(--font-size-input);
     width: 90%;
     border: 1px solid #000;
-    height: 70%;
+    height: 100%;
   }
 
   table tbody tr td textarea {
@@ -570,7 +570,7 @@ li {
     font-size: 12px;
     width: 90%;
     border: 1px solid #000;
-    height: 80%;
+    height: 100%;
   }
 
   /* Estilos para los contenedores en las celdas de tabla */
@@ -625,7 +625,7 @@ li {
     font-size: 18px;
   }
   .InputButton-transparent {
-    height: 80%;
+    height: 100%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -651,7 +651,7 @@ li {
   }
   .button-cn {
     gap: 2px;
-    height: 80%;
+    height: 100%;
   }
   .img-select {
     height: 50px;
@@ -794,7 +794,7 @@ li {
     font-size: 18px;
   }
   .InputButton-transparent {
-    height: 80%;
+    height: 100%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -820,7 +820,7 @@ li {
   }
   .button-cn {
     gap: 2px;
-    height: 80%;
+    height: 100%;
   }
   .img-select {
     height: 50px;
@@ -964,7 +964,7 @@ li {
     font-size: 32px;
   }
   .InputButton-transparent {
-    height: 80%;
+    height: 100%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -990,7 +990,7 @@ li {
   }
   .button-cn {
     gap: 2px;
-    height: 80%;
+    height: 100%;
   }
   .img-select {
     height: 80px;
@@ -1134,7 +1134,7 @@ li {
     font-size: 32px;
   }
   .InputButton-transparent {
-    height: 80%;
+    height: 100%;
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -1160,7 +1160,7 @@ li {
   }
   .button-cn {
     gap: 2px;
-    height: 80%;
+    height: 100%;
   }
   .img-select {
     height: 80px;
@@ -1168,5 +1168,21 @@ li {
   .custom-checkbox {
     width: 2rem;
     height: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1800px) {
+  .div-span {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  #doc,
+  #numberDoc {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    width: auto;
+    margin-left: 10px;
   }
 }
