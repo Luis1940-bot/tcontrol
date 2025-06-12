@@ -95,17 +95,6 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
             observacion = valor;
             valor = null;
           }
-
-          // let decimal = obj.valueCelda || 0;
-          // decimal === '' ? (decimal = 0) : null;
-          // const numeroFormateado = decimal
-          //   .toString()
-          //   .replace(/\.(?=\d{3})/g, '')
-          //   .replace(',', '.');
-          // valor = parseFloat(numeroFormateado) || 0;
-          // c === 4
-          //   ? ((observacion = parseFloat(numeroFormateado)), (valor = null))
-          //   : null;
         } else {
           obj.valueCelda === null ? (valor = '') : (valor = obj.valueCelda);
           // valor = obj.valueCelda

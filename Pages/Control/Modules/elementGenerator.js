@@ -8,6 +8,8 @@ import {
   checkDate,
   checkDateHour,
   addPastillaText,
+  addComponentTable,
+
   // eslint-disable-next-line import/extensions
 } from './accionButton.js';
 // eslint-disable-next-line import/extensions
@@ -19,6 +21,43 @@ import { mostrarMensaje } from '../../../controllers/ui/alertasLuis.js';
 
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl;
+
+// function sanitizeJsonString(jsonString) {
+//   // Solo reemplaza saltos de línea por \n dentro de strings, pero NO escapa comillas dobles
+//   let inString = false;
+//   let prevChar = '';
+//   let result = '';
+//   for (let i = 0; i < jsonString.length; i++) {
+//     const char = jsonString[i];
+//     if (char === '"' && prevChar !== '\\') {
+//       inString = !inString;
+//     }
+//     if (inString && char === '\n') {
+//       result += '\\n';
+//     } else {
+//       result += char;
+//     }
+//     prevChar = char;
+//   }
+//   return result;
+// }
+
+function sanitizeJsonString(jsonString) {
+  if (!jsonString) {
+    return null;
+  }
+  // Elimina saltos de línea reales, literales \n, literales \\n y tabulaciones dentro de los valores de "query"
+  return jsonString.replace(
+    /("query"\s*:\s*")([\s\S]*?)(?<!\\)"/g,
+    (match, p1, p2) => {
+      // Escapa comillas dobles internas, elimina saltos de línea, literales \n, literales \\n y tabulaciones
+      const sanitized = p2
+        .replace(/\\?"/g, '\\"') // escapa comillas dobles internas
+        .replace(/\\\\n|\\n|[\r\n\t]/g, ''); // elimina \\n, \n, saltos de línea reales y tabulaciones
+      return `${p1}${sanitized}"`;
+    },
+  );
+}
 
 class ElementGenerator {
   static generateInputDate(date, width, valorPorDefecto) {
@@ -83,7 +122,7 @@ class ElementGenerator {
     return inputCheckBox;
   }
 
-  static generateInputNumber(width, valorPorDefecto) {
+  static generateInputNumber(width, valorPorDefecto, hijo, sqlHijo) {
     const inputNumber = document.createElement('input');
     inputNumber.setAttribute('type', 'text'); // Cambiado a 'text' para compatibilidad con inputmode
     inputNumber.setAttribute('inputmode', 'decimal'); // Sugerir teclado numérico con punto decimal
@@ -130,13 +169,21 @@ class ElementGenerator {
 
       this.value = sanitizedValue;
     });
-
+    inputNumber.dispatchEvent(new Event('input', { bubbles: true }));
     // Validar valor final al perder el foco
     inputNumber.addEventListener('blur', function inputNumberEventBlur() {
       if (this.value === '' || Number.isNaN(Number(this.value))) {
         this.value = ''; // Si el valor no es válido, limpiar el input
       }
     });
+    // eslint-disable-next-line no-unused-vars
+    inputNumber.addEventListener('change', async (event) => {
+      // console.log('eventooooooo');
+      // await eventSelect(event, hijo, sqlHijo);
+    });
+    if (hijo === '1' && sqlHijo) {
+      inputNumber.dispatchEvent(new Event('change', { bubbles: true })); // Dispara el evento input manualmente
+    }
 
     return inputNumber;
   }
@@ -206,19 +253,26 @@ class ElementGenerator {
   static generateSelectDinamic(hijo, sqlHijo) {
     const selectDinamic = document.createElement('select');
     selectDinamic.setAttribute('selector', 'selectDinamic');
-    // selectDinamic.addEventListener('change', (event) => {
-    //   eventSelect(event, hijo, sqlHijo)
-    // })
+
     selectDinamic.addEventListener('change', async (event) => {
       // Prevenir cambios simultáneos
       if (selectDinamic.dataset.loading === 'true') return;
 
       try {
         // Indicar que se está cargando
+        if (!sqlHijo) {
+          return;
+        }
         selectDinamic.dataset.loading = 'true';
+        const sqlCorregido = sanitizeJsonString(sqlHijo);
+        const jsonStringSinSaltos = sqlCorregido.replace(/[\r\n]+/g, ' ');
 
-        // Llamar a la función y pasar los parámetros necesarios
-        await eventSelect(event, hijo, sqlHijo);
+        const sqlJSON = JSON.parse(jsonStringSinSaltos);
+        if (Array.isArray(sqlJSON.hijos)) {
+          sqlJSON.hijos.forEach(async (nieto) => {
+            await eventSelect(event, 1, nieto);
+          });
+        }
       } catch (error) {
         console.error('Error en el evento change:', error);
       } finally {
@@ -240,20 +294,26 @@ class ElementGenerator {
       index === 1 ? select.setAttribute('selector', element[2]) : null;
     });
 
-    // select.addEventListener('change', (event) => {
-    //   eventSelect(event, hijo, sqlHijo)
-    // })
-
     select.addEventListener('change', async (event) => {
       // Prevenir cambios simultáneos
       if (select.dataset.loading === 'true') return;
 
       try {
         // Indicar que se está cargando
+        if (!sqlHijo) {
+          return;
+        }
         select.dataset.loading = 'true';
+        const sqlCorregido = sanitizeJsonString(sqlHijo);
+        const jsonStringSinSaltos = sqlCorregido.replace(/[\r\n]+/g, ' ');
 
-        // Llamar a la función y pasar los parámetros necesarios
-        await eventSelect(event, hijo, sqlHijo);
+        const sqlJSON = JSON.parse(jsonStringSinSaltos);
+
+        if (Array.isArray(sqlJSON.hijos)) {
+          sqlJSON.hijos.forEach(async (nieto) => {
+            await eventSelect(event, 1, nieto);
+          });
+        }
       } catch (error) {
         console.error('Error en el evento change:', error);
       } finally {
@@ -380,8 +440,17 @@ class ElementGenerator {
         // Indicar que se está cargando
         inputText.dataset.loading = 'true';
 
-        // Llamar a la función y pasar los parámetros necesarios
-        await eventSelect(event, hijo, sqlHijo);
+        // const sqlCorregido = sanitizeJsonString(sqlHijo);
+
+        // const sqlJSON = JSON.parse(sqlCorregido);
+        const sqlCorregido = sanitizeJsonString(sqlHijo);
+        const jsonStringSinSaltos = sqlCorregido.replace(/[\r\n]+/g, ' ');
+        const sqlJSON = JSON.parse(jsonStringSinSaltos);
+        if (Array.isArray(sqlJSON.hijos)) {
+          sqlJSON.hijos.forEach(async (nieto) => {
+            await eventSelect(event, 1, nieto);
+          });
+        }
       } catch (error) {
         console.error('Error en el evento change:', error);
       } finally {
@@ -595,6 +664,20 @@ class ElementGenerator {
     });
 
     return button;
+  }
+
+  static generaComponentTable(posicion, plant, filaTomaValor) {
+    const table = document.createElement('table');
+    table.setAttribute('id', `tabla-${posicion}`);
+    table.setAttribute('data-plant', plant);
+    table.setAttribute(`data-fila${posicion}`, filaTomaValor);
+    table.setAttribute('class', 'table-componente');
+    return table;
+  }
+
+  static generateRowsTable(query, index, tablaComponente) {
+    const tbody = addComponentTable(query, index, tablaComponente);
+    return tbody;
   }
 }
 

@@ -34,6 +34,7 @@ export default function traerRegistros(q, sqlI) {
 
         const cantidadProcesos = sessionStorage.getItem('cantidadProcesos');
         vecesLoad = Number(vecesLoad) + 1;
+
         sessionStorage.setItem('loadSystem', vecesLoad);
         const modal = document.getElementById('modalAlertCarga');
 

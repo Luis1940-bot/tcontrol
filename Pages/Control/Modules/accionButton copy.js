@@ -269,20 +269,44 @@ async function consultaQuery(event, consulta) {
   resultado.length > 0 ? cargaModal(resultado, '', false) : null;
 }
 
+async function deteccionDeVariables(sql, array) {
+  try {
+  } catch (error) {
+    console.error('Error en cambiar las ?: ', error);
+  }
+}
+
 async function cambioDeVariables(sql, array) {
   try {
+    console.log(sql, array);
     const objTraerHijo = {
-      filaInserta: sql.filaInserta || 0, // Posición del dato a insertar
-      tipoDeElemento: sql.tipoElemento || '',
-      columnas: sql.columnasQuery || 0,
-      variables: sql.reemplazos || 0, // Número de reemplazos
-      posicionReferencia: sql.posicionReferencia || 0,
+      filaInserta: sql.substring(0, 4).replace(/@/g, ''),
+      tipoDeElemento: sql.substring(5, 8).replace(/@/g, ''),
+      columnas: sql.substring(9, 12).replace(/@/g, ''),
+      variables: parseInt(sql.substring(13, 16).replace(/@/g, ''), 10), // Número de reemplazos
+      posicionReferencia: parseInt(sql.substring(17, 20).replace(/@/g, ''), 10),
       res: [],
-      query: sql.query,
+      query: '',
+      nietos: [],
     };
+    // Extraer NIETOS
+    const bloques = sql.split('@@@');
+    const cantidad = parseInt(bloques[5], 10); // Sexto bloque
+    // const valoresExtraidos = [];
+    // la primera posicion del array es la cantidad de nietos
+    for (let i = 0; i < cantidad; i++) {
+      let valor = bloques[6 + i];
+      if (typeof valor === 'string' && valor.includes('$')) {
+        [valor] = valor.split('$'); // Solo toma lo anterior al $
+      }
+      const num = Number(valor);
+      if (!Number.isNaN(num)) {
+        objTraerHijo.nietos.push(num);
+      }
+    }
 
     const replacements = array.slice(0, objTraerHijo.variables);
-    let replacedQuery = objTraerHijo.query || '';
+    let replacedQuery = sql;
     let currentIndex = 0;
 
     for (let i = 0; i < objTraerHijo.variables; i++) {
@@ -295,8 +319,18 @@ async function cambioDeVariables(sql, array) {
       currentIndex = questionMarkPosition + 1;
     }
 
-    objTraerHijo.query = replacedQuery || '';
+    // Verificar si `array[0]` es un string válido antes de aplicar el reemplazo final
+    if (array[0] && typeof array[0] === 'string') {
+      replacedQuery = replacedQuery.replace(/\?/, `'${array[0]}'`);
+    }
 
+    // Extraer la parte de la consulta después del primer `$`
+    let query = replacedQuery.substring(replacedQuery.indexOf('$') + 1).trim();
+
+    // Asegurar que el valor dentro del WHERE esté correctamente encerrado en comillas
+    query = query.replace(/= ([^'\s]+)/, "= '$1'");
+
+    objTraerHijo.query = query || '';
     return objTraerHijo;
   } catch (error) {
     console.error('Error en cambiar las ?: ', error);
@@ -311,7 +345,7 @@ async function traerHijo(sql, array) {
     }
 
     const objTraerHijo = await cambioDeVariables(sql, array);
-
+    console.log(objTraerHijo);
     objTraerHijo.res = await traerRegistros(
       'traer_LTYsql',
       `${encodeURIComponent(objTraerHijo.query)}`,
@@ -468,14 +502,12 @@ function removeAllOptions(select) {
 
 function insertarDatoEnFila(obj) {
   try {
-    const tabla = document.querySelector('#tableControl');
-    const tbody = tabla.querySelector('tbody');
+    console.log(obj);
     const posicion = Number(obj.filaInserta) + 1;
-    const fila = tbody.querySelector(`tr:nth-child(${posicion})`);
-
+    const fila = document.querySelector(`tr:nth-child(${posicion})`);
+    const select = fila.querySelector('td:nth-child(3) select');
     const { tipoDeElemento } = obj;
     if (tipoDeElemento === 's') {
-      const select = fila.querySelector('td:nth-child(3) select');
       select.setAttribute('selector', 'select-hijo');
       const nuevoArray = obj.res;
       if (
@@ -488,40 +520,18 @@ function insertarDatoEnFila(obj) {
         removeAllOptions(select);
       }
     }
-    if (tipoDeElemento === 't' || tipoDeElemento === 'n') {
-      const texto = fila.querySelector('td:nth-child(3) input');
-      const valorRes = obj.res[0] || '';
-      tipoDeElemento === 't' ? (texto.value = valorRes) : null;
-      tipoDeElemento === 'n'
-        ? (texto.value = parseInt(valorRes, 10) || 0)
+    if (
+      tipoDeElemento === 't' ||
+      tipoDeElemento === 'n' ||
+      tipoDeElemento === 'tx'
+    ) {
+      const filaTexto = document.querySelector(`tr:nth-child(${posicion})`);
+      const texto = filaTexto.querySelector('td:nth-child(3) input');
+      tipoDeElemento === 't' || tipoDeElemento === 'tx'
+        ? (texto.value = obj.res[0] || '')
         : null;
+      tipoDeElemento === 'n' ? (texto.value = obj.res[0] || 0) : null;
       texto.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-    if (tipoDeElemento === 'tx') {
-      const texto = fila.querySelector('td:nth-child(3) textarea');
-      const valorRes = obj.res[0] || '';
-      texto.value = valorRes;
-      texto.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-    if (tipoDeElemento === 'table') {
-      const tablaComponente = fila.querySelector('td:nth-child(3) table');
-      const valorRes = obj.res || [];
-
-      const tbodyComponente = document.createElement('tbody');
-
-      if (valorRes.length > 0) {
-        valorRes.forEach((item) => {
-          const row = document.createElement('tr');
-          item.forEach((cellData) => {
-            const cell = document.createElement('td');
-            cell.textContent = cellData;
-            row.appendChild(cell);
-          });
-          tbodyComponente.appendChild(row);
-        });
-        tablaComponente.appendChild(tbodyComponente);
-        tablaComponente.dispatchEvent(new Event('change', { bubbles: true }));
-      }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -530,6 +540,7 @@ function insertarDatoEnFila(obj) {
 }
 
 async function eventSelect(event, hijo, sqlHijo) {
+  console.log(event, hijo, sqlHijo);
   const valorInput = event.target.value;
   const select = event.target;
   const { selectedOptions } = select;
@@ -546,9 +557,8 @@ async function eventSelect(event, hijo, sqlHijo) {
       indexTextPairs.push([option.value, option.textContent]);
     }
   }
-
   let obj;
-  if (hijo === 1 && indexTextPairs.length > 0) {
+  if (hijo === '1' && indexTextPairs.length > 0) {
     try {
       // Aquí puedes usar indexTextPairs para acceder a los índices y textos
       obj = await traerHijo(sqlHijo, indexTextPairs[0]);
@@ -562,7 +572,7 @@ async function eventSelect(event, hijo, sqlHijo) {
     } catch (error) {
       console.error('Error al llamar a traerHijo:', error);
     }
-  } else if (hijo === 1 && event.type === 'input') {
+  } else if (hijo === '1' && event.type === 'input') {
     indexTextPairs.push(valorInput);
     obj = await traerHijo(sqlHijo, indexTextPairs);
     if (obj === null) {
@@ -570,9 +580,8 @@ async function eventSelect(event, hijo, sqlHijo) {
       console.warn('No se encontraron datos para la selección.');
       return;
     }
-
     insertarDatoEnFila(obj);
-  } else if (hijo === 1 && event.type === 'change') {
+  } else if (hijo === '1' && event.type === 'change') {
     indexTextPairs.push(valorInput);
     obj = await traerHijo(sqlHijo, indexTextPairs);
     if (obj === null) {
@@ -580,7 +589,6 @@ async function eventSelect(event, hijo, sqlHijo) {
       console.warn('No se encontraron datos para la selección.');
       return;
     }
-
     insertarDatoEnFila(obj);
   }
 }
@@ -589,47 +597,6 @@ async function addPastillaText(tipoDeEelemento, selector) {
   const valor = await crearModalPastillas(tipoDeEelemento, selector);
   // console.log(valor);
   return valor;
-}
-
-async function addComponentTable(consulta, index, tablaComponente) {
-  try {
-    let query = consulta;
-    const tabla = document.querySelector('#tableControl');
-    const valorFila = parseInt(
-      tablaComponente.getAttribute(`data-fila${index}`),
-      10,
-    );
-    const fila = tabla.tBodies[0].rows[valorFila];
-    const terceraCelda = fila.cells[2]; // Índice 2 es la tercera celda
-    const componente = terceraCelda.firstElementChild;
-    const valorReferencia = componente.value || null;
-    if (valorReferencia && query) {
-      query = query.replace('?', valorReferencia);
-    }
-    const resultado = await traerRegistros(
-      'traer_LTYsql',
-      `${encodeURIComponent(query)}`,
-    );
-    if (resultado.length > 0) {
-      const tbody = document.createElement('tbody');
-      resultado.forEach((item) => {
-        const row = document.createElement('tr');
-        item.forEach((cellData) => {
-          const cell = document.createElement('td');
-          cell.textContent = cellData;
-          row.appendChild(cell);
-        });
-        tbody.appendChild(row);
-      });
-
-      return tbody;
-    }
-    return null;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
-    return null;
-  }
 }
 
 document.getElementById('closeModalButton').onclick = () => {
@@ -688,5 +655,4 @@ export {
   checkDate,
   checkDateHour,
   addPastillaText,
-  addComponentTable,
 };

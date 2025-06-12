@@ -1,5 +1,31 @@
 /* === BREAKPOINTS RESPONSIVOS ORDENADOS === */
 
+.table-componente {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+}
+
+.table-componente th,
+.table-componente td {
+  border: 1px solid #bdbdbd; /* reticulado gris claro */
+  padding: 4px 6px;
+  text-align: left;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
+}
+
+.table-componente th {
+  background: #f4f4f4;
+  font-weight: 600;
+}
+
+.table-componente tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
 /* 1. Móviles pequeños (hasta 480px) */
 @media (max-width: 480px) {
   /* ...estilos específicos para móviles pequeños... */
@@ -1001,6 +1027,23 @@ a {
     font-weight: 600;
     width: auto;
     margin-left: 10px;
+  }
+}
+
+/*  === NUEVO MEDIA QUERY A PARTIR DE 1322px === */
+@media (min-width: 1322px) {
+  #volver {
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      border-radius 0.2s;
+  }
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
   }
 }
 

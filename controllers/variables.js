@@ -3009,7 +3009,7 @@ const objMenuRove = {
     background: '#ffffff',
     border: '3px solid #000000',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-    margin: null,
+    margin: '7vw 3vw',
     display: 'flex',
     flexDirection: 'column',
     padding: null,

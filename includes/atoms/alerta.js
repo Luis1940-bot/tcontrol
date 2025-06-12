@@ -3076,7 +3076,14 @@ export default class Alerta {
       this.modal = document.createElement('div');
       this.modal.id = 'modalAlertView';
       this.modal.className = 'modal';
-      this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+      this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
+      this.modal.style.zIndex = '9999';
+      this.modal.style.position = 'fixed';
+      // Centrado horizontal y arriba
+      this.modal.style.display = 'flex';
+      this.modal.style.flexDirection = 'column';
+      this.modal.style.alignItems = 'center';
+      this.modal.style.justifyContent = 'flex-start';
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent);
       // const span = createSpan(obj.close)
@@ -3259,6 +3266,7 @@ export default class Alerta {
       this.modal.id = 'modalTablaViewFecha';
       this.modal.className = 'modal';
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent);
       // let span = createSpan(obj.close)
@@ -3392,7 +3400,14 @@ export default class Alerta {
       this.modal = document.createElement('div');
       this.modal.id = 'modalAlertView';
       this.modal.className = 'modal';
-      this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+      this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
+      this.modal.style.zIndex = '9999';
+      this.modal.style.position = 'fixed';
+      // Centrado horizontal y arriba
+      this.modal.style.display = 'flex';
+      this.modal.style.flexDirection = 'column';
+      this.modal.style.alignItems = 'center';
+      this.modal.style.justifyContent = 'flex-start';
 
       // Crear el contenido del modal
       const modalContent = createDiv(obj.divContent);
@@ -3529,8 +3544,8 @@ export default class Alerta {
         obj.span.marginTop = '10px';
         obj.span.fontSize = '18px';
         obj.span.fontColor = 'red';
-        const spanTexto = createSpan(obj.span, texto);
-        modalContent.appendChild(spanTexto);
+        const spanTexto2 = createSpan(obj.span, texto);
+        modalContent.appendChild(spanTexto2);
         this.modal.appendChild(modalContent);
         document.body.appendChild(this.modal);
       }
@@ -4171,7 +4186,14 @@ export default class Alerta {
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertM';
     this.modal.className = 'modal';
-    this.modal.style.background = 'rgba(0, 0, 0, 0.1)';
+    this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
+    this.modal.style.zIndex = '9999';
+    this.modal.style.position = 'fixed';
+    // Centrado horizontal y arriba
+    this.modal.style.display = 'flex';
+    this.modal.style.flexDirection = 'column';
+    this.modal.style.alignItems = 'center';
+    this.modal.style.justifyContent = 'flex-start';
     // Crear el contenido del modal
     const modalContent = createDiv(obj.divContent);
 

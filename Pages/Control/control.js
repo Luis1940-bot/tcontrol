@@ -101,11 +101,26 @@ function actualizarProgreso(porcentaje) {
     if (!idSpanCarga) {
       console.error("Elemento 'idSpanCarga' no encontrado en el DOM.");
       reject(new Error("Elemento 'idSpanCarga' no disponible."));
+      return;
+    }
+
+    // Permitir que porcentaje sea '100%', '100' o 100
+    let targetPercentage = porcentaje;
+    if (typeof targetPercentage === 'string') {
+      targetPercentage = targetPercentage.replace('%', '');
+    }
+    targetPercentage = parseInt(targetPercentage, 10);
+
+    // Obtener el porcentaje inicial mostrado en el span
+    let startPercentage = parseFloat(idSpanCarga.innerText) || 0;
+    // Si el target es 100 y el valor actual es menor a 40, forzar inicio en 40
+    if (targetPercentage === 100 && startPercentage < 40) {
+      startPercentage = 40;
+      idSpanCarga.innerText = '40%';
     }
 
     const startTime = new Date().getTime();
-    const duration = 1000; // Duración total en milisegundos (1 segundo)
-    const startPercentage = parseFloat(idSpanCarga.innerText) || 0; // Obtener el porcentaje inicial
+    const duration = 500; // Duración total en milisegundos (1 segundo)
 
     function update() {
       const currentTime = new Date().getTime();
@@ -113,8 +128,9 @@ function actualizarProgreso(porcentaje) {
 
       // Calcular el porcentaje interpolado y convertir a cadena para eliminar decimales
       const interpolatedPercentage = Math.min(
-        100,
-        startPercentage + (elapsedTime / duration) * 10,
+        targetPercentage,
+        startPercentage +
+          (elapsedTime / duration) * (targetPercentage - startPercentage),
       );
       const parteEntera = Math.floor(interpolatedPercentage);
 
@@ -126,7 +142,7 @@ function actualizarProgreso(porcentaje) {
         requestAnimationFrame(update);
       } else {
         // Si ha pasado el tiempo total, establecer el porcentaje final y resolver la promesa
-        idSpanCarga.innerText = porcentaje;
+        idSpanCarga.innerText = `${targetPercentage}%`;
         resolve();
       }
     }
@@ -171,10 +187,10 @@ async function cargaDeRegistros(objTrad, plant) {
   try {
     inicioPerformance();
     await actualizarProgreso('10%');
-
     const countSelect = await traerRegistros(`countSelect,${controlN}`, null);
     sessionStorage.setItem('loadSystem', 2);
-    sessionStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 4);
+
+    sessionStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 5);
 
     await actualizarProgreso('20%');
     const empresaData = await traerRegistros('empresa', plant);
@@ -193,9 +209,24 @@ async function cargaDeRegistros(objTrad, plant) {
     arrayGlobal.arrayControl = [...nuevoControlData];
     const valorSql = nuevoControlData;
     tablaVacia(nuevoControlData, encabezados, objTrad, plant);
-    await delay(100); // Pequeño delay para UX, opcional
+    // await delay(100); // Pequeño delay para UX, opcional
+    const idSpanCarga = document.getElementById('idSpanCarga');
+    idSpanCarga.innerText = '41%';
+    await new Promise(requestAnimationFrame);
     await actualizarProgreso('100%');
-    await delay(300); // Mostrar el 100% un instante
+    await delay(100); // Mostrar el 100% un instante
+    const modal = document.getElementById('modalAlertCarga');
+
+    if (!modal) {
+      // eslint-disable-next-line no-console
+      console.warn('El elemento modal no se encontró.');
+    } else {
+      modal.style.display = 'none';
+      modal.remove();
+      document.getElementById('wichC').style.display = 'inline';
+      sessionStorage.setItem('loadSystem', '1');
+    }
+
     finPerformance();
     // Ajustar el porcentaje a 100%
     // console.log(nr)

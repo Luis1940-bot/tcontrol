@@ -13,12 +13,13 @@
       "Modelos",
       "Máquinas",
       "Planes",
-      "Alquileres"
+      "Alquileres",
+      "Registro de Copias"
     ],
-    "confecha": [0, 0, 0, 0, 0, 0, 1],
-    "archivo": ["x", "x", "x", "x", "x", "x", "x"],
-    "active": [1, 1, 1, 1, 1, 1, 1],
-    "button": [0, 0, 0, 0, 0, 0, 0],
+    "confecha": [0, 0, 0, 0, 0, 0, 1, 1],
+    "archivo": ["x", "x", "x", "x", "x", "x", "x", "x"],
+    "active": [1, 1, 1, 1, 1, 1, 1, 1],
+    "button": [0, 0, 0, 0, 0, 0, 0, 0],
     "procedure": [
       "proc_102_clientes",
       "proc_102_proveedores",
@@ -26,12 +27,13 @@
       "proc_102_modelos",
       "proc_102_maquinas",
       "proc_102_planes",
-      "proc_102_contratos"
+      "proc_102_contratos",
+      "proc_102_copias"
     ],
-    "in": [null, null, null, null, null, null, null],
-    "out": [null, null, null, null, null, null, null],
-    "operation": [null, null, null, null, null, null, null],
-    "nivel": [3, 3, 3, 3, 3, 3, 3]
+    "in": [null, null, null, null, null, null, null, null],
+    "out": [null, null, null, null, null, null, null, null],
+    "operation": [null, null, null, null, null, null, null, null],
+    "nivel": [3, 3, 3, 3, 3, 3, 3, 3]
   },
   "Departamento Técnico": {
     "name": ["Registro de Copias"],

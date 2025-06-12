@@ -7,14 +7,14 @@ import arrayGlobal from '../../../controllers/variables.js';
 // eslint-disable-next-line import/extensions
 import traerRegistros from './Controladores/traerRegistros.js';
 // eslint-disable-next-line import/extensions
-import Alerta from '../../../includes/atoms/alerta.js';
+import { Alerta } from '../../../includes/atoms/alerta.js';
 // eslint-disable-next-line import/extensions
 // import hacerMemoria from './Controladores/hacerMemoria.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { desencriptar } from '../../../controllers/cript.js';
 import { trO, trA } from '../../../controllers/trOA.js';
 
-// const data = {};
+const data = {};
 
 const widthScreen = window.innerWidth;
 const widthScreenAjustado = 360 / widthScreen;
@@ -22,7 +22,7 @@ let arrayWidthEncabezado;
 let selectDinamic;
 let elementHTML;
 let ID = 0;
-// const fila = 0;
+const fila = 0;
 
 function estilosTheadCell(element, index, objTrad) {
   const cell = document.createElement('th');
@@ -71,6 +71,7 @@ function estilosCell(
 ) {
   const cell = document.createElement('td');
   let dato = '';
+
   if (typeof datos === 'string' && datos !== null) {
     dato = trA(datos, objTrad) || datos;
   } else {
@@ -81,14 +82,11 @@ function estilosCell(
   } else if (dato === null && type !== null) {
     cell.appendChild(type);
     // Deshabilitar el elemento si enabled es 1
-    const tipoType = type;
     if (enabled === 1) {
-      tipoType.disabled = true; // Inhabilita el input, select, textarea
+      type.disabled = true; // Inhabilita el input, select, textarea
     } else {
-      tipoType.disabled = false; // Asegura que esté habilitado si enabled no es 1
+      type.disabled = false; // Asegura que esté habilitado si enabled no es 1
     }
-  } else if (datos === 'table' && type !== null) {
-    cell.appendChild(type);
   }
   let bordeStandar = '1px solid #cecece';
   if (borde) {
@@ -113,13 +111,7 @@ function estilosCell(
   return cell;
 }
 
-async function estilosTbodyCell(
-  element,
-  index,
-  cantidadDeRegistros,
-  objTrad,
-  plant,
-) {
+function estilosTbodyCell(element, index, cantidadDeRegistros, objTrad, plant) {
   // console.log(element, index, cantidadDeRegistros);
   const newRow = document.createElement('tr');
   // eslint-disable-next-line no-plusplus
@@ -258,16 +250,11 @@ async function estilosTbodyCell(
     } else if (i === 2 && tipoDeDato === 'n') {
       dato = null;
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
-      const hijo = element[24];
-      const sqlHijo = element[25];
       const width = '';
       const inputNumber = ElementGenerator.generateInputNumber(
         width,
         valorXDefecto,
-        hijo,
-        sqlHijo,
       );
-
       elementHTML = inputNumber;
       type = inputNumber;
       element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
@@ -276,7 +263,6 @@ async function estilosTbodyCell(
       let filasTextArea = null;
       let columnasTextArea = null;
 
-      // eslint-disable-next-line prefer-destructuring
       maxTextarea = element[17];
       if (maxTextarea && maxTextarea.trim() !== '' && separador === false) {
         const ajustada = maxTextarea.replace(
@@ -285,9 +271,9 @@ async function estilosTbodyCell(
         );
 
         const objetoTextarea = JSON.parse(ajustada);
-        filasTextArea = parseInt(objetoTextarea.filatx, 10);
-        columnasTextArea = parseInt(objetoTextarea.colstx, 10);
-        tipoColSpanTx = parseInt(objetoTextarea.colspantx, 10);
+        filasTextArea = parseInt(objetoTextarea.filatx);
+        columnasTextArea = parseInt(objetoTextarea.colstx);
+        tipoColSpanTx = parseInt(objetoTextarea.colspantx);
       }
 
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
@@ -397,15 +383,13 @@ async function estilosTbodyCell(
       const partes = element[20].split('.');
       const extension = partes.pop();
       const dimensiones = element[17];
-      const { plant: plantUsuario } = desencriptar(
-        sessionStorage.getItem('user'),
-      );
+      const { plant } = desencriptar(sessionStorage.getItem('user'));
       const img = ElementGenerator.generateImg(
         src,
         alt,
         dimensiones,
         extension,
-        plantUsuario,
+        plant,
       );
       type = img;
     } else if (i === 2 && tipoDeDato === 'valid') {
@@ -461,20 +445,6 @@ async function estilosTbodyCell(
       colSpan = 6;
       const divPastilla = ElementGenerator.generateDivPastillita(index);
       type = divPastilla;
-    } else if (i === 2 && tipoDeDato === 'table') {
-      dato = 'table';
-
-      const valorXDefecto = element[20] !== null ? element[20] : null;
-      const filaTomaValor = element[26] !== null ? element[26] : 0;
-      if (valorXDefecto !== null) {
-        const tablaComponente = ElementGenerator.generaComponentTable(
-          index,
-          plant,
-          filaTomaValor,
-        );
-        elementHTML = tablaComponente;
-        type = tablaComponente;
-      }
     }
     if (i > 2 && i < 4 && tiposValidos.includes(tipoDeDato)) {
       display = 'none';
@@ -705,7 +675,6 @@ async function estilosTbodyCell(
 
     newRow.appendChild(cell);
   }
-
   return newRow;
 }
 
@@ -721,16 +690,16 @@ async function traerRutina(sqli, selDinamico) {
 }
 async function traerValorPorDefecto(sqli, tipo, html, url) {
   try {
-    let sqlI = sqli;
+    let sql_i = sqli;
     const { nr } = url;
 
     if (sqli.includes('?') && nr !== '0') {
-      sqlI = sqlI.replace('?', nr);
+      sql_i = sql_i.replace('?', nr);
     } else if (sqli.includes('?') && nr === '0') {
-      sqlI = sqlI.replace('?', '0');
+      sql_i = sql_i.replace('?', '0');
     }
 
-    const sql = encodeURIComponent(sqlI);
+    const sql = encodeURIComponent(sql_i);
 
     if (tipo === 'n') {
       const arrayValor = await traerRegistros(`traer_LTYsql`, `${sql}`); // encodeURIComponent
@@ -744,27 +713,12 @@ async function traerValorPorDefecto(sqli, tipo, html, url) {
     console.log(error);
   }
 }
-async function completaComponenteTabla(query, index) {
-  if (!query) {
-    // eslint-disable-next-line no-console
-    // console.error('No se proporcionó una consulta para completar la tabla.');
-    return;
-  }
-  const tablaComponente = document.getElementById(`tabla-${index}`);
-  const tbody = await ElementGenerator.generateRowsTable(
-    query,
-    index,
-    tablaComponente,
-  );
-  tablaComponente.appendChild(tbody);
-}
 
 function completaTabla(arrayControl, encabezados, objTrad, url, plant) {
-  const tablaPrincipal = document.getElementById('tableControl');
-  const tbody = tablaPrincipal.querySelector('tbody');
+  const tbody = document.querySelector('tbody');
   const cantidadDeRegistros = arrayControl.length;
   const email = arrayControl[0][22];
-  let fila2 = 0;
+
   // Establecer valor en sessionStorage
   sessionStorage.setItem('envia_por_email', email === '1');
 
@@ -772,7 +726,7 @@ function completaTabla(arrayControl, encabezados, objTrad, url, plant) {
   function updateProgress() {
     const idSpanCarga = document.getElementById('idSpanCarga');
     if (idSpanCarga) {
-      const porcentaje = (100 * (fila2 / cantidadDeRegistros)).toFixed(0);
+      const porcentaje = (100 * (fila / cantidadDeRegistros)).toFixed(0);
       idSpanCarga.innerText = `${porcentaje}%`;
     } else {
       requestAnimationFrame(updateProgress); // Reintentar en el siguiente frame
@@ -780,22 +734,20 @@ function completaTabla(arrayControl, encabezados, objTrad, url, plant) {
   }
 
   // Inicializar el progreso
-  fila2 = 0;
+  let fila = 0;
   updateProgress();
   // console.log(arrayControl);
   // Procesar cada elemento del array
-  arrayControl.forEach(async (element, index) => {
-    // console.log(element, index);
-    const newRow = await estilosTbodyCell(
+  arrayControl.forEach((element, index) => {
+    const newRow = estilosTbodyCell(
       element,
       index,
       cantidadDeRegistros,
       objTrad,
       plant,
     );
-    // console.log(tbody, newRow);
     tbody.appendChild(newRow);
-    fila2 += 1;
+    fila += 1;
 
     // Ocultar filas específicas
     if (element[8] === 'n') {
@@ -816,10 +768,6 @@ function completaTabla(arrayControl, encabezados, objTrad, url, plant) {
       traerValorPorDefecto(element[23], element[5], elementHTML, url);
     }
 
-    if (['table'].includes(element[5]) && element[20] !== null) {
-      completaComponenteTabla(element[20], index);
-    }
-
     if (element[9] === 'sd' && element[26]) {
       traerRutina(element[26], selectDinamic);
     }
@@ -838,10 +786,10 @@ function controlT(objTrad) {
   const url = desencriptar(contenido);
   // console.log(url)
   // const url = new URL(window.location.href);
-  const controlTc = url.control_T; // url.searchParams.get('control_T');
+  const controlT = url.control_T; // url.searchParams.get('control_T');
   const controlN = url.control_N;
-  const controlTtraducido = trA(controlTc, objTrad) || controlTc;
-  const mensaje = `${controlN}-${controlTtraducido}`;
+  const controlT_traducido = trA(controlT, objTrad) || controlT;
+  const mensaje = `${controlN}-${controlT_traducido}`;
   document.getElementById('wichC').innerText = mensaje;
   return url;
 }
@@ -857,16 +805,14 @@ function loadTabla(arrayControl, encabezados, objTrad, url, plant) {
       mensaje = trO(mensaje, objTrad) || mensaje;
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null);
       const modal = document.getElementById('modalAlert');
-      if (modal) {
-        modal.style.display = 'block';
-      }
+      modal.style.display = 'block';
     }
     // setTimeout(() => {
     //   const { plant } = desencriptar(sessionStorage.getItem('user'))
     //   hacerMemoria(arrayControl, plant)
     // }, 1000)
   } else {
-    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTrad);
+    miAlerta.createVerde(arrayGlobal.avisoRojo, null, objTranslate);
     const modal = document.getElementById('modalAlert');
     modal.style.display = 'block';
   }

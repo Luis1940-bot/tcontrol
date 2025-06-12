@@ -59,9 +59,11 @@
         "Marcas",
         "Modelos",
         "Planes",
-        "Alquileres"
+        "Alquileres",
+        "Registro de Contadores"
       ],
       "type": [
+        "ctrl",
         "ctrl",
         "ctrl",
         "ctrl",
@@ -81,9 +83,10 @@
         "control_N=267&control_T=MARCAS&nr=",
         "control_N=268&control_T=MODELOS&nr=",
         "control_N=270&control_T=PLANES&nr=",
-        "control_N=271&control_T=ALQUILERES&nr="
+        "control_N=271&control_T=ALQUILERES&nr=",
+        "control_N=272&control_T=REGISTRO DE CONTADORES&nr="
       ],
-      "nivel": [4, 4, 4, 4, 4, 4, 4, 4, 4]
+      "nivel": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
     },
     "DepartamentoTecnico": {
       "name": ["Copias"],
