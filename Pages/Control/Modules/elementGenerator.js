@@ -60,9 +60,10 @@ function sanitizeJsonString(jsonString) {
 }
 
 class ElementGenerator {
-  static generateInputDate(date, width, valorPorDefecto) {
+  static generateInputDate(date, width, valorPorDefecto, enabled) {
     const inputDate = document.createElement('input');
     inputDate.setAttribute('type', 'date');
+    enabled === 1 ? inputDate.setAttribute('class', 'element-disabled') : null;
     date ? (inputDate.value = date) : null;
     width ? (inputDate.style.width = width) : null;
     valorPorDefecto !== '' &&
@@ -74,9 +75,10 @@ class ElementGenerator {
     return inputDate;
   }
 
-  static generateInputHora(hora, width, valorPorDefecto) {
+  static generateInputHora(hora, width, valorPorDefecto, enabled) {
     const inputHora = document.createElement('input');
     inputHora.setAttribute('type', 'time');
+    enabled === 1 ? inputHora.setAttribute('class', 'element-disabled') : null;
     hora ? (inputHora.value = hora) : null;
     width ? (inputHora.style.width = width) : null;
     valorPorDefecto !== '' &&
@@ -89,9 +91,10 @@ class ElementGenerator {
     return inputHora;
   }
 
-  static generateInputText(width, valorPorDefecto) {
+  static generateInputText(width, valorPorDefecto, enabled) {
     const inputText = document.createElement('input');
     inputText.setAttribute('type', 'text');
+    enabled === 1 ? inputText.setAttribute('class', 'element-disabled') : null;
     width ? (inputText.style.width = width) : null;
     valorPorDefecto !== '' &&
     valorPorDefecto !== ' ' &&
@@ -122,12 +125,14 @@ class ElementGenerator {
     return inputCheckBox;
   }
 
-  static generateInputNumber(width, valorPorDefecto, hijo, sqlHijo) {
+  static generateInputNumber(width, valorPorDefecto, hijo, sqlHijo, enabled) {
     const inputNumber = document.createElement('input');
     inputNumber.setAttribute('type', 'text'); // Cambiado a 'text' para compatibilidad con inputmode
     inputNumber.setAttribute('inputmode', 'decimal'); // Sugerir teclado numérico con punto decimal
     inputNumber.setAttribute('placeholder', '0.0'); // Guía para el usuario
-
+    enabled === 1
+      ? inputNumber.setAttribute('class', 'element-disabled')
+      : null;
     // Aplicar ancho si se especifica
     if (width) inputNumber.style.width = width;
 
@@ -211,7 +216,9 @@ class ElementGenerator {
         ? valorQuery
         : '';
     elementoCopia.value = newValue;
-    elementoHTML.parentNode.replaceChild(elementoCopia, elementoHTML);
+    elementoHTML.parentNode
+      ? elementoHTML.parentNode.replaceChild(elementoCopia, elementoHTML)
+      : null;
   }
 
   static generateInputTextAreaQuery(valorQuery, elementoHTML) {
@@ -227,10 +234,11 @@ class ElementGenerator {
     elementoHTML.parentNode.replaceChild(elementoCopia, elementoHTML);
   }
 
-  static generateTextArea(valorPorDefecto, filas = 5, cols = 50) {
+  static generateTextArea(valorPorDefecto, filas = 5, cols = 50, enabled = 0) {
     const textArea = document.createElement('textarea');
     textArea.rows = filas ?? 5;
     textArea.cols = cols ?? 50;
+    enabled === 1 ? textArea.setAttribute('class', 'element-disabled') : null;
     valorPorDefecto ? (textArea.value = valorPorDefecto) : null;
     valorPorDefecto !== '' &&
     valorPorDefecto !== ' ' &&
@@ -437,13 +445,16 @@ class ElementGenerator {
       if (inputText.dataset.loading === 'true') return;
 
       try {
+        if (!sqlHijo) {
+          return; // Si no hay sqlHijo, no hacer nada
+        }
         // Indicar que se está cargando
         inputText.dataset.loading = 'true';
 
         // const sqlCorregido = sanitizeJsonString(sqlHijo);
 
         // const sqlJSON = JSON.parse(sqlCorregido);
-        const sqlCorregido = sanitizeJsonString(sqlHijo);
+        const sqlCorregido = sanitizeJsonString(sqlHijo) || '';
         const jsonStringSinSaltos = sqlCorregido.replace(/[\r\n]+/g, ' ');
         const sqlJSON = JSON.parse(jsonStringSinSaltos);
         if (Array.isArray(sqlJSON.hijos)) {
@@ -666,13 +677,18 @@ class ElementGenerator {
     return button;
   }
 
-  static generaComponentTable(posicion, plant, filaTomaValor) {
+  static generaComponentTable(posicion, plant, filaTomaValor, enabled = 1) {
+    const div = document.createElement('div');
+    div.setAttribute('class', 'div-table');
+    div.setAttribute('id', `div-table-${posicion}`);
     const table = document.createElement('table');
     table.setAttribute('id', `tabla-${posicion}`);
     table.setAttribute('data-plant', plant);
     table.setAttribute(`data-fila${posicion}`, filaTomaValor);
     table.setAttribute('class', 'table-componente');
-    return table;
+    enabled === 1 ? table.setAttribute('class', 'element-disabled') : null;
+    div.appendChild(table);
+    return div;
   }
 
   static generateRowsTable(query, index, tablaComponente) {

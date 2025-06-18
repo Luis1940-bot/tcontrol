@@ -50,7 +50,6 @@ function consologuear(c, i, objParams) {
 
 function respuestaColumna(c, i, objParams, plant, carpeta) {
   try {
-    // console.log(objParams);
     // ** tagName-INPUT   tagName-SELECT   tagName-DIV*/
     const obj = objParams;
     const { tagName, type } = obj;
@@ -63,8 +62,7 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
     const familiaselector = 0;
     const { imagenes } = obj;
     let observacion = '';
-
-    // console.log(c, tagName, type, plant, carpeta, obj);
+    const tagTable = obj.node.childNodes;
 
     if (tagName === 'INPUT') {
       if (type === 'text') {
@@ -142,6 +140,7 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
       obj.inputElement ? (valor = obj.inputElement.value) : null;
       c === 4 ? ((observacion = obj.inputElement), (valor = null)) : null;
       const hijos = obj.node.children;
+      console.log(hijos.length);
       if (hijos.length > 0 && c === 2) {
         const hijosArray = Array.from(obj.node.children);
         if (
@@ -156,6 +155,9 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
             .filter((v) => v !== ''); // por si algún span estaba vacío
           valor = valores.join('-');
         }
+      } else {
+        console.log(valor);
+        // valor = '';
       }
     }
     if (c === 4 && obj.terceraColumna.tagName === 'UL') {
@@ -182,6 +184,13 @@ function respuestaColumna(c, i, objParams, plant, carpeta) {
       const { width } = obj.node;
       const { height } = obj.node;
       valor = `{"img": "${imagen}", "width" : ${width}, "height": ${height}}`;
+    }
+
+    if (tagTable.length === 1 && tagName === 'DIV') {
+      if (tagTable[0].tagName === 'TABLE') {
+        // eslint-disable-next-line no-console
+        console.log('Tabla secundaria');
+      }
     }
 
     // console.log(c,i,valor)

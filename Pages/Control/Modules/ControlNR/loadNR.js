@@ -27,19 +27,19 @@ function columna2(
   if (valorSql !== null) {
     // return;
   }
-  console.log(
-    tagName,
-    type,
-    tds,
-    val,
-    datos,
-    i,
-    columnaTd,
-    selDatos,
-    index,
-    valorSql,
-    tipoDatoDetalle,
-  );
+  // console.log(
+  //   tagName,
+  //   type,
+  //   tds,
+  //   val,
+  //   datos,
+  //   i,
+  //   columnaTd,
+  //   selDatos,
+  //   index,
+  //   valorSql,
+  //   tipoDatoDetalle,
+  // );
   const valorVal = val;
   const td = tds;
 
@@ -211,6 +211,9 @@ function columna2(
     ['pastillatx', 'pastillase', 'pastillaco'].includes(tipodedato)
   ) {
     const celda = tds[2];
+    if (!val) {
+      return;
+    }
     const divInterno = celda.querySelector('div');
     const partes = valorVal.split('-');
     // let pastilla;

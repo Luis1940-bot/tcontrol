@@ -83,6 +83,7 @@ function procesoStyleDisplay(elementosStyle) {
 
 const funcionGuardar = async () => {
   const { habilitadoGuardar } = arrayGlobal;
+
   if (habilitadoGuardar) {
     const objTraductorFG = await arraysLoadTranslate();
     // eslint-disable-next-line no-use-before-define
@@ -2270,7 +2271,6 @@ export default class Alerta {
     modalContent.appendChild(divButton);
     // Agregar el contenido al modal
     this.modal.appendChild(modalContent);
-
     // Agregar el modal al body del documento
     document.body.appendChild(this.modal);
     const idAceptar = document.getElementById('idAceptar');
@@ -2296,6 +2296,7 @@ export default class Alerta {
       );
 
       const requerido = desencriptar(sessionStorage.getItem('requerido'));
+
       if (requerido.requerido && okGuardar) {
         const miAlerta = new Alerta();
         const miAlertaInforme = new Alerta();
@@ -2346,16 +2347,19 @@ export default class Alerta {
           enviaPorEmailBooleano,
         );
       }
+      console.log(requerido.requerido, okGuardar);
       if (!requerido.requerido || !okGuardar) {
         limpiaArrays();
-        const fila = 1;
+        const fila3 = 1;
         const { idLTYcontrol } = requerido;
+        console.log(idLTYcontrol);
         const table = document.querySelector('#tableControl');
         const tbody = table.querySelector('tbody');
-        let filas = tbody.querySelector(`tr:nth-child(${fila})`);
+        let filas = tbody.querySelector(`tr:nth-child(${fila3})`);
         let celda = filas.querySelector('td:nth-child(6)');
+        console.log(celda);
         let id = celda.textContent.trim();
-        let incremento = fila;
+        let incremento = fila3;
         while (idLTYcontrol !== id) {
           filas.style.backgroundColor = '#ffffff';
           incremento += 1;
@@ -2511,7 +2515,6 @@ export default class Alerta {
   }
 
   createVerde(obj, texto, objTrad) {
-    // console.log(obj, texto, objTrad)
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlertVerde';
     this.modal.className = 'modal';

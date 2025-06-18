@@ -215,7 +215,7 @@ async function cargaDeRegistros(objTrad, plant) {
     await new Promise(requestAnimationFrame);
     await actualizarProgreso('100%');
     await delay(100); // Mostrar el 100% un instante
-    const modal = document.getElementById('modalAlertCarga');
+    let modal = document.getElementById('modalAlertCarga');
 
     if (!modal) {
       // eslint-disable-next-line no-console
@@ -225,6 +225,11 @@ async function cargaDeRegistros(objTrad, plant) {
       modal.remove();
       document.getElementById('wichC').style.display = 'inline';
       sessionStorage.setItem('loadSystem', '1');
+      modal = document.getElementById('modalAlertVerde');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.remove();
+      }
     }
 
     finPerformance();
@@ -259,7 +264,6 @@ async function mensajeDeCarga(objTrad, plant) {
   const modal = document.getElementById('modalAlertCarga');
   modal.style.display = 'block';
   sessionStorage.setItem('loadSystem', 1);
-
   // Agrega un retraso antes de iniciar la carga de registros
   // eslint-disable-next-line no-promise-executor-return
   await new Promise((resolve) => setTimeout(() => resolve(), 200));

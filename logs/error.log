@@ -93,3 +93,132 @@ ORDER BY JSON_UNQUOTE(JSON_EXTRACT(l.newJSON,' at line 7 in C:\DATOS\04.DESARROL
 [11-Jun-2025 11:27:00 America/Argentina/Buenos_Aires] 1	[2025-06-11 11:27:00 -03] [Exception] La consulta SQL está vacía o no es válida. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 149 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
 [11-Jun-2025 11:28:15 America/Argentina/Buenos_Aires] 1	[2025-06-11 11:28:15 -03] [Exception] La consulta SQL está vacía o no es válida. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 149 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
 [11-Jun-2025 18:49:40 America/Argentina/Buenos_Aires] 1	[2025-06-11 18:49:40 -03] [Exception] La consulta SQL está vacía o no es válida. in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 149 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+[12-Jun-2025 19:39:15 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[12-Jun-2025 19:39:15 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[12-Jun-2025 19:39:15 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250612193915506  usuario: 238
+[12-Jun-2025 19:39:16 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[12-Jun-2025 19:47:45 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[12-Jun-2025 19:47:45 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[12-Jun-2025 19:47:45 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250612194745751  usuario: 238
+[12-Jun-2025 19:47:46 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[12-Jun-2025 20:06:11 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[12-Jun-2025 20:06:11 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[12-Jun-2025 20:06:11 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250612200611788  usuario: 238
+[12-Jun-2025 20:06:12 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[12-Jun-2025 20:21:59 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[12-Jun-2025 20:21:59 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[12-Jun-2025 20:21:59 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250612202159081  usuario: 25
+[12-Jun-2025 20:22:00 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 08:37:52 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[13-Jun-2025 08:37:52 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[13-Jun-2025 08:37:52 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250613083752331  usuario: 25
+[13-Jun-2025 08:37:53 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 08:54:04 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[13-Jun-2025 08:54:04 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[13-Jun-2025 08:54:04 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250613085404881  usuario: 25
+[13-Jun-2025 08:54:06 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 08:58:44 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[13-Jun-2025 08:58:44 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[13-Jun-2025 08:58:44 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250613085844365  usuario: 25
+[13-Jun-2025 08:58:45 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 09:01:00 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[13-Jun-2025 09:01:00 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[13-Jun-2025 09:01:00 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250613090100618  usuario: 25
+[13-Jun-2025 09:01:01 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 09:02:35 America/Argentina/Buenos_Aires] NUX>>>>>: 250613090100618
+[13-Jun-2025 09:02:35 America/Argentina/Buenos_Aires] 1	[2025-06-13 09:02:35 -03] [Error 2] Undefined array key 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+[13-Jun-2025 09:02:35 America/Argentina/Buenos_Aires] 1	[2025-06-13 09:02:35 -03] [Error 2] Undefined array key 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 92 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+[13-Jun-2025 09:02:35 America/Argentina/Buenos_Aires] 1	[2025-06-13 09:02:35 -03] [Error 2] Undefined array key 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+[13-Jun-2025 09:02:35 America/Argentina/Buenos_Aires] 1	[2025-06-13 09:02:35 -03] [Error 2] Undefined array key 0 in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\ux.php on line 128 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+[13-Jun-2025 09:02:35 America/Argentina/Buenos_Aires] JSON UPDATE DOC: 250613090100618  usuario: 25
+[13-Jun-2025 09:02:36 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 12:21:55 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[13-Jun-2025 12:21:55 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[13-Jun-2025 12:21:55 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250613122155965  usuario: 238
+[13-Jun-2025 12:21:57 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 12:31:30 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 14:47:45 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 14:51:45 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 14:54:15 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:01:34 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:06:00 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:11:02 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:12:07 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:14:43 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:41:50 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:46:33 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:48:30 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:49:41 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:50:45 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 15:54:10 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 16:54:07 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 16:57:01 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 17:00:50 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 17:03:49 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 17:09:51 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 17:11:29 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[13-Jun-2025 17:13:16 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[14-Jun-2025 13:20:22 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[14-Jun-2025 13:23:33 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[14-Jun-2025 14:15:18 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[14-Jun-2025 14:20:03 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[14-Jun-2025 14:21:16 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[14-Jun-2025 14:23:07 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 10:42:05 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 10:52:18 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 10:57:05 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 11:09:02 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 11:10:17 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 11:10:17 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 11:10:17 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616111017616  usuario: 238
+[16-Jun-2025 11:10:18 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 11:35:55 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 11:35:55 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 11:35:55 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616113555852  usuario: 238
+[16-Jun-2025 11:35:56 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 12:03:30 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 12:03:30 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 12:03:30 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616120330720  usuario: 238
+[16-Jun-2025 12:03:31 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 12:33:59 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 12:33:59 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 12:33:59 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616123359872  usuario: 238
+[16-Jun-2025 12:34:00 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 12:45:25 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 12:45:25 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 12:45:25 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616124525192  usuario: 238
+[16-Jun-2025 12:45:26 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 13:58:06 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 13:58:06 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 13:58:06 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616135806900  usuario: 238
+[16-Jun-2025 13:58:07 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 19:11:44 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 19:11:44 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 19:11:44 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616191144666  usuario: 238
+[16-Jun-2025 19:11:45 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 19:21:08 America/Argentina/Buenos_Aires] [sql25]=====: 102
+[16-Jun-2025 19:21:08 America/Argentina/Buenos_Aires] SQL25>>>>>: 102  type: integer
+[16-Jun-2025 19:21:08 America/Argentina/Buenos_Aires] JSON SQL25: 102  DOC: 250616192108268  usuario: 238
+[16-Jun-2025 19:21:09 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 19:37:57 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[16-Jun-2025 19:37:57 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[16-Jun-2025 19:37:57 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250616193757713  usuario: 25
+[16-Jun-2025 19:37:58 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 19:39:41 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[16-Jun-2025 19:39:41 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[16-Jun-2025 19:39:41 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250616193941701  usuario: 25
+[16-Jun-2025 19:39:42 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 19:52:14 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[16-Jun-2025 19:52:14 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[16-Jun-2025 19:52:14 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250616195214898  usuario: 25
+[16-Jun-2025 19:52:16 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 20:01:12 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[16-Jun-2025 20:01:12 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[16-Jun-2025 20:01:12 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250616200112451  usuario: 25
+[16-Jun-2025 20:01:13 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 21:07:09 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 21:10:01 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 21:17:40 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 21:24:53 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 21:27:22 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[16-Jun-2025 21:32:30 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.

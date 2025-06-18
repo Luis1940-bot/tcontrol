@@ -505,6 +505,11 @@ function insertarDatoEnFila(obj) {
     }
     if (tipoDeElemento === 'table') {
       const tablaComponente = fila.querySelector('td:nth-child(3) table');
+      if (tablaComponente === null) {
+        // eslint-disable-next-line no-console
+        // console.warn('No se encontró la tabla en la celda esperada.');
+        return;
+      }
       const valorRes = obj.res || [];
 
       const tbodyComponente = document.createElement('tbody');

@@ -6,6 +6,12 @@
   --font-size-input: 12px;
   --font-size-button: 7px;
 }
+#volver {
+  display: none;
+}
+.element-disabled {
+  background: #ecebeb;
+}
 
 /* Estilos generales */
 body {

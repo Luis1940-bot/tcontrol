@@ -71,6 +71,7 @@ function estilosCell(
 ) {
   const cell = document.createElement('td');
   let dato = '';
+  const colorTexto = colorText || '#000000';
   if (typeof datos === 'string' && datos !== null) {
     dato = trA(datos, objTrad) || datos;
   } else {
@@ -101,7 +102,7 @@ function estilosCell(
   cell.style.paddingLeft = paddingLeft;
   cell.style.fontStyle = fontStyle;
   cell.style.fontWeight = fontWeight;
-  cell.style.color = colorText;
+  cell.style.color = colorTexto;
   // cell.style.borderBottom = border
   colSpan === 1 ? (cell.colSpan = 4) : null;
   colSpan === 2 ? (cell.style.display = 'none') : null;
@@ -215,25 +216,27 @@ async function estilosTbodyCell(
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
       const fecha = fechasGenerator.fecha_corta_yyyymmdd(new Date());
       const width = '';
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
       const inputDate = ElementGenerator.generateInputDate(
         fecha,
         width,
         valorXDefecto,
+        enabled,
       );
       type = inputDate;
-      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
     } else if (i === 2 && tipoDeDato === 'h') {
       dato = null;
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
       const hora = fechasGenerator.hora_actual(new Date());
       const width = '';
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
       const inputHora = ElementGenerator.generateInputHora(
         hora,
         width,
         valorXDefecto,
+        enabled,
       );
       type = inputHora;
-      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
     } else if (i === 2 && tipoDeDato === 'x') {
       dato = ''; // null
       type = null;
@@ -241,13 +244,14 @@ async function estilosTbodyCell(
       dato = null;
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
       const width = '';
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
       const inputText = ElementGenerator.generateInputText(
         width,
         valorXDefecto,
+        enabled,
       );
       elementHTML = inputText;
       type = inputText;
-      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
     } else if (i === 2 && tipoDeDato === 'b') {
       dato = null;
       let checked = false;
@@ -261,16 +265,17 @@ async function estilosTbodyCell(
       const hijo = element[24];
       const sqlHijo = element[25];
       const width = '';
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
       const inputNumber = ElementGenerator.generateInputNumber(
         width,
         valorXDefecto,
         hijo,
         sqlHijo,
+        enabled,
       );
 
       elementHTML = inputNumber;
       type = inputNumber;
-      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
     } else if (i === 2 && tipoDeDato === 'tx') {
       dato = null;
       let filasTextArea = null;
@@ -291,10 +296,12 @@ async function estilosTbodyCell(
       }
 
       const [valorXDefecto] = element[20] !== '' ? [element[20]] : [];
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
       const textArea = ElementGenerator.generateTextArea(
         valorXDefecto,
         filasTextArea,
         columnasTextArea,
+        enabled,
       );
 
       elementHTML = textArea;
@@ -310,7 +317,6 @@ async function estilosTbodyCell(
         alignCenter = 'left';
         paddingLeft = '3px';
       }
-      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
     } else if (i === 2 && tipoDeDato === 'sd') {
       dato = null;
       const hijo = element[24];
@@ -463,14 +469,16 @@ async function estilosTbodyCell(
       type = divPastilla;
     } else if (i === 2 && tipoDeDato === 'table') {
       dato = 'table';
-
+      colSpan = 1;
       const valorXDefecto = element[20] !== null ? element[20] : null;
       const filaTomaValor = element[26] !== null ? element[26] : 0;
+      element[29] === '1' ? ((background = '#cecece'), (enabled = 1)) : null;
       if (valorXDefecto !== null) {
         const tablaComponente = ElementGenerator.generaComponentTable(
           index,
           plant,
           filaTomaValor,
+          enabled,
         );
         elementHTML = tablaComponente;
         type = tablaComponente;
@@ -487,9 +495,13 @@ async function estilosTbodyCell(
     if (i > 2 && tipoDeDato === 'tx' && maxTextarea !== null && tipoColSpanTx) {
       display = 'none';
     }
+    if (i > 2 && tipoDeDato === 'table') {
+      display = 'none';
+    }
 
     if (i === 4 && tipoDeObservacion === 'd') {
       const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
+
       const fecha = fechasGenerator.fecha_corta_yyyymmdd(new Date());
       const width = '';
       const inputDate = ElementGenerator.generateInputDate(
@@ -501,6 +513,7 @@ async function estilosTbodyCell(
     } else if (i === 4 && tipoDeObservacion === 'h') {
       dato = null;
       const [valorXDefecto] = element[26] !== '' ? [element[26]] : [];
+
       const hora = fechasGenerator.hora_actual(new Date());
       const width = '';
       const inputHora = ElementGenerator.generateInputHora(
@@ -713,7 +726,9 @@ async function traerRutina(sqli, selDinamico) {
   try {
     const sql = encodeURIComponent(sqli);
     const arraySelectDinamico = await traerRegistros(`traer_LTYsql`, `${sql}`); // encodeURIComponent
-    ElementGenerator.generateOptions(arraySelectDinamico, selDinamico);
+    if (arraySelectDinamico.length > 0) {
+      ElementGenerator.generateOptions(arraySelectDinamico, selDinamico);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
@@ -723,7 +738,6 @@ async function traerValorPorDefecto(sqli, tipo, html, url) {
   try {
     let sqlI = sqli;
     const { nr } = url;
-
     if (sqli.includes('?') && nr !== '0') {
       sqlI = sqlI.replace('?', nr);
     } else if (sqli.includes('?') && nr === '0') {
@@ -734,10 +748,14 @@ async function traerValorPorDefecto(sqli, tipo, html, url) {
 
     if (tipo === 'n') {
       const arrayValor = await traerRegistros(`traer_LTYsql`, `${sql}`); // encodeURIComponent
-      ElementGenerator.generateInputNumberQuery(arrayValor, html);
+      if (arrayValor.length > 0) {
+        ElementGenerator.generateInputNumberQuery(arrayValor, html);
+      }
     } else if (tipo === 't' || tipo === 'tx') {
       const arrayValor = await traerRegistros(`traer_LTYsql`, `${sql}`); // encodeURIComponent
-      ElementGenerator.generateInputTextQuery(arrayValor, html);
+      if (arrayValor.length > 0) {
+        ElementGenerator.generateInputTextQuery(arrayValor, html);
+      }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -848,17 +866,18 @@ function controlT(objTrad) {
 
 function loadTabla(arrayControl, encabezados, objTrad, url, plant) {
   const miAlerta = new Alerta();
+  let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga;
   if (arrayControl.length > 0) {
     encabezado(encabezados, objTrad);
     completaTabla(arrayControl, encabezados, objTrad, url, plant);
     const cantidadDeFilas = document.querySelector('table tbody');
-    let mensaje = arrayGlobal.mensajesVarios.cargarControl.fallaCarga;
+
     if (cantidadDeFilas.childElementCount !== arrayControl.length) {
       mensaje = trO(mensaje, objTrad) || mensaje;
       miAlerta.createVerde(arrayGlobal.avisoRojo, mensaje, null);
       const modal = document.getElementById('modalAlert');
       if (modal) {
-        modal.style.display = 'block';
+        modal.style.display = 'none';
       }
     }
     // setTimeout(() => {
