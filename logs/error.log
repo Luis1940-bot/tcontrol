@@ -222,3 +222,31 @@ ORDER BY JSON_UNQUOTE(JSON_EXTRACT(l.newJSON,' at line 7 in C:\DATOS\04.DESARROL
 [16-Jun-2025 21:24:53 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
 [16-Jun-2025 21:27:22 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
 [16-Jun-2025 21:32:30 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 09:49:14 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 10:43:56 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 11:58:37 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 12:04:55 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 12:16:09 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 12:20:13 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 12:31:41 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 12:38:27 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 12:52:19 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 12:57:06 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 13:02:15 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 13:19:23 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 13:30:24 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 13:40:32 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 16:09:08 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 16:23:47 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 16:36:18 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 16:48:51 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 17:33:18 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 18:01:45 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[19-Jun-2025 18:01:45 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[19-Jun-2025 18:01:45 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250619180145038  usuario: 25
+[19-Jun-2025 18:01:47 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.
+[19-Jun-2025 19:51:17 America/Argentina/Buenos_Aires] 1	[2025-06-19 19:51:17 -03] [Exception] Se ha anulado una conexión establecida por el software en su equipo host in C:\DATOS\04.DESARROLLOS\tcontrol\Pages\Control\Routes\traerRegistros.php on line 139 | IP: ::1 | URI: /Routes/index.php | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+[20-Jun-2025 12:00:14 America/Argentina/Buenos_Aires] [sql25]=====: 15
+[20-Jun-2025 12:00:14 America/Argentina/Buenos_Aires] SQL25>>>>>: 15  type: integer
+[20-Jun-2025 12:00:14 America/Argentina/Buenos_Aires] JSON SQL25: 15  DOC: 250620120014697  usuario: 25
+[20-Jun-2025 12:00:15 America/Argentina/Buenos_Aires] No se recibieron archivos válidos.

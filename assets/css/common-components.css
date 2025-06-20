@@ -26,6 +26,11 @@
   background: #f9f9f9;
 }
 
+.div-table-modal {
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
 /* 1. Móviles pequeños (hasta 480px) */
 @media (max-width: 480px) {
   /* ...estilos específicos para móviles pequeños... */
@@ -76,6 +81,10 @@
     border-radius: 20px;
     cursor: pointer;
   }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
 }
 
 /* 3. Tablets medianas y grandes (769px - 1024px) */
@@ -97,6 +106,10 @@
   }
   #whereUs {
     font-size: 22px;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 
@@ -150,6 +163,10 @@
   }
   #whereUs {
     font-size: 22px;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 
@@ -312,6 +329,10 @@ a {
   padding: 6px 4px;
   text-align: left;
 }
+.div-table-modal {
+  overflow-y: auto;
+  max-height: 60vh;
+}
 @media (min-width: 800px) {
   a {
     font-size: 10px;
@@ -338,6 +359,10 @@ a {
   only screen and (min-width: 1800px) {
   #whereUs {
     font-size: 22px;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 
@@ -603,6 +628,10 @@ a {
     width: 18px;
     height: 18px;
   }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
 }
 @media (min-width: 700px) {
   .div-header {
@@ -626,6 +655,10 @@ a {
     max-height: 56px;
     width: auto;
     height: auto;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 
@@ -695,6 +728,10 @@ a {
     border-radius: 20px;
     cursor: pointer;
   }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
 }
 @media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
   .div-encabezado {
@@ -739,6 +776,10 @@ a {
     background: #ececec;
     border-radius: 20px;
     cursor: pointer;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
@@ -785,6 +826,10 @@ a {
     border-radius: 20px;
     cursor: pointer;
   }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
   .div-encabezado,
@@ -823,6 +868,10 @@ a {
     font-size: 18px;
     font-style: italic;
   }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
 }
 @media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
   .div-encabezado,
@@ -849,6 +898,10 @@ a {
     background: #ececec;
     border-radius: 20px;
     cursor: pointer;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 @media only screen and (min-width: 200px) and (max-width: 480px) and (orientation: portrait) {
@@ -895,6 +948,10 @@ a {
     border-radius: 20px;
     cursor: pointer;
   }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
 }
 @media only screen and (min-width: 481px) and (max-width: 768px) and (orientation: landscape) {
   .div-encabezado {
@@ -939,6 +996,10 @@ a {
     background: #ececec;
     border-radius: 20px;
     cursor: pointer;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 @media only screen and (min-width: 834px) and (max-width: 1024px) and (orientation: portrait) {
@@ -985,6 +1046,10 @@ a {
     border-radius: 20px;
     cursor: pointer;
   }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
 }
 @media only screen and (min-width: 1800px) {
   .div-encabezado {
@@ -1027,6 +1092,10 @@ a {
     font-weight: 600;
     width: auto;
     margin-left: 10px;
+  }
+  .div-table-modal {
+    overflow-y: auto;
+    max-height: 60vh;
   }
 }
 

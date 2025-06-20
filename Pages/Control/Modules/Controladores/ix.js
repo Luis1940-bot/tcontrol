@@ -19,8 +19,8 @@ function insertarRegistro(objeto, planta) {
   // console.log(objeto);
   const objLimpio = limpiarObjeto(objeto);
   const nuevoObjeto = encodeURIComponent(JSON.stringify(objLimpio));
-  console.log(objLimpio);
-  return;
+  // console.log(objLimpio);
+  // return;
   let plant = planta;
   if (!plant || plant === 0 || plant === '') {
     plant = desencriptar(sessionStorage.getItem('user')).plant;

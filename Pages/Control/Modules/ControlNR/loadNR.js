@@ -331,9 +331,9 @@ async function cargarNR(res, plant, data) {
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < tr.length - 0; i++) {
       const row = tr[i];
-      const valorSql = data[i][23];
+      const valorSql = data[i] && data[i][23] ? data[i][23] : '';
       const td = row.querySelectorAll('td');
-      const tipoDatoDetalle = data[i][33];
+      const tipoDatoDetalle = data[i] && data[i][33] ? data[i][33] : '';
       const codigo = td[5].innerText;
 
       const { tagName } = td[2].childNodes[0];

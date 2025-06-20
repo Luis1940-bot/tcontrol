@@ -2347,7 +2347,6 @@ export default class Alerta {
           enviaPorEmailBooleano,
         );
       }
-      console.log(requerido.requerido, okGuardar);
       if (!requerido.requerido || !okGuardar) {
         limpiaArrays();
         const fila3 = 1;

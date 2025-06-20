@@ -234,7 +234,7 @@ async function cargaDeRegistros(objTrad, plant) {
 
     finPerformance();
     // Ajustar el porcentaje a 100%
-    // console.log(nr)
+    // console.log(nr);
     if (nr) {
       const controlNr = await traerNR(nr, plant);
       // await cargarNR(controlNr, plant) // Asegúrate de que cargarNR sea una función async

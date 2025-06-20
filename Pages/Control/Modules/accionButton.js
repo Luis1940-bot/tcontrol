@@ -90,9 +90,9 @@ async function cargaModal(respuesta, input, haceClick, idInput) {
   }
 }
 
-function renderTablaConsulta(resultado) {
+function renderTablaConsulta(resultado, divContenido) {
   const contenedor = document.createElement('div');
-
+  contenedor.setAttribute('class', 'div-table-modal');
   const input = document.createElement('input');
   input.type = 'text';
   input.placeholder = 'Buscar...';
@@ -138,7 +138,8 @@ function renderTablaConsulta(resultado) {
   input.addEventListener('input', (e) => render(e.target.value));
   render();
 
-  contenedor.appendChild(input);
+  // contenedor.appendChild(input);
+  divContenido.appendChild(input);
   contenedor.appendChild(tabla);
   contenedor.appendChild(mensajeSeleccion);
 
@@ -193,7 +194,10 @@ function crearModalPastillas(tipo = 'text', selector = null) {
         'traer_LTYsql',
         `${encodeURIComponent(selector)}`,
       );
-      const { tablaCompleta, getSeleccionado } = renderTablaConsulta(resultado);
+      const { tablaCompleta, getSeleccionado } = renderTablaConsulta(
+        resultado,
+        divContenido,
+      );
       valorGetter = getSeleccionado;
       inputElement = tablaCompleta;
 

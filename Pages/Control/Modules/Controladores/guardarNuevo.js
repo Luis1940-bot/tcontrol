@@ -1,27 +1,27 @@
 // eslint-disable-next-line import/extensions
 import fechasGenerator from '../../../../controllers/fechas.js';
 // eslint-disable-next-line import/extensions
-import respuestaColumna from './armadoDeObjetos.js';
+// import respuestaColumna from './armadoDeObjetos.js';
 // // eslint-disable-next-line import/extensions
 // import guardaNotas from './guardaNotas.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../../../controllers/cript.js';
 
-function buscarEnArray(id, array) {
-  try {
-    const idStr = id.toString().trim();
-    const resultado = array.find((registro) => registro[1] === idStr);
-    return resultado;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
-    return null;
-  }
-}
+// function buscarEnArray(id, array) {
+//   try {
+//     const idStr = id.toString().trim();
+//     const resultado = array.find((registro) => registro[1] === idStr);
+//     return resultado;
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.log(error);
+//     return null;
+//   }
+// }
 
 function convertirObjATextPlano(obj) {
   const data = { ...obj };
-  console.log(data);
+  // console.log(data);
   delete data.src;
   const lines = [];
 
@@ -76,291 +76,6 @@ function tuFuncion(
   return objetoControlCopia;
 }
 
-function recorroTable(objetoControl, arrayControl, nux, plant, carpeta) {
-  try {
-    const person = desencriptar(sessionStorage.getItem('user'));
-    const idPerson = person.id;
-    // const email = document.getElementById('idCheckBoxEmail').checked;
-    // const url = new URL(window.location.href);
-    const contenido = sessionStorage.getItem('contenido');
-    const url = desencriptar(contenido);
-    const controlN = url.control_N; // url.searchParams.get('control_N');
-    // const controlT = url.searchParams.get('control_T');
-    // const numberDoc = document.getElementById('numberDoc').textContent;
-    // const tbody = document.querySelector('tbody')
-    const table = document.getElementById('tableControl');
-    const tbody = table.querySelector('tbody');
-    const tr = tbody.querySelectorAll(':scope > tr');
-    // const tr = tbody.querySelectorAll('tr');
-    let estanTodosLosRequeridos = true;
-    let emailSupervisor = null;
-    let supervisor = desencriptar(sessionStorage.getItem('firmado'));
-
-    // eslint-disable-next-line max-len
-    supervisor.id === 0
-      ? (supervisor = 0)
-      : ((supervisor = Number(supervisor.id)),
-        (emailSupervisor = desencriptar(
-          sessionStorage.getItem('firmado'),
-        ).mail));
-
-    let founded;
-    let fechaActual = '';
-    let horaActual = '';
-    // let nuxpedido;
-    // if (nux === false) {
-    //   nuxpedido = 0;
-    // } else {
-    //   nuxpedido = nux;
-    // }
-    // eslint-disable-next-line no-plusplus
-    const largoTr = tr.length;
-
-    for (let i = 0; i < largoTr; i++) {
-      const td = tr[i].querySelectorAll('td');
-      // const elementoPruebaDeTabla = td[2];
-      const swap = true;
-
-      if (swap) {
-        // console.log(swap, i, td);
-        // }
-        let valor;
-        let selector1;
-        let selector2;
-        let valorS;
-        let valorOBS;
-        let familiaselector;
-        // const valid = false;
-        // let imagenes;
-        let observacion;
-        let respuesta;
-
-        // eslint-disable-next-line no-unused-vars
-        const displayRow = window.getComputedStyle(tr[i]).display;
-        // eslint-disable-next-line no-plusplus
-        for (let c = 2; c <= 4; c += 1) {
-          const displayCell = window.getComputedStyle(td[c]).display;
-          const element = td[c];
-          const campo = td[1];
-
-          let node;
-          let datoCelda;
-          let valueCelda;
-          if (element.childNodes.length > 0) {
-            [node] = element.childNodes;
-            datoCelda = node?.data || null;
-            valueCelda = node?.value || null;
-          } else {
-            // Si no hay nodos hijos, recupera el valor directamente del td
-            node = null;
-            datoCelda = element.textContent || null;
-            valueCelda = null;
-            // console.warn(
-            //   `El td en la columna ${c} no tiene nodos hijos. Valor de la celda: ${datoCelda}`
-            // )
-          }
-
-          // const node = element.childNodes[0]
-          // const datoCelda = element.childNodes[0].data
-          // const valueCelda = element.childNodes[0].value
-          const colspanValue = td[1].getAttribute('colspan');
-          const inputElement = element.querySelector('input');
-          const { nodeType } = node;
-          const { type } = node;
-          const { tagName } = node;
-          let childeNode0;
-          let inputmode;
-          let select;
-          const checkbox = node.checked;
-          const radio = node.checked;
-          let divConsultas;
-          let liImages;
-          const selector = null;
-          const terceraColumna = td[3].firstChild;
-
-          let imagenes = {
-            src: [],
-            fileName: [],
-            extension: [],
-            plant: [],
-            carpeta: [],
-          };
-
-          const objParametros = {
-            displayCell,
-            element,
-            node,
-            datoCelda,
-            valueCelda,
-            colspanValue,
-            inputElement,
-            nodeType,
-            type,
-            tagName,
-            inputmode,
-            childeNode0,
-            select,
-            checkbox,
-            radio,
-            divConsultas,
-            liImages,
-            selector,
-            imagenes,
-            terceraColumna,
-          };
-
-          if (c === 2) {
-            respuesta = respuestaColumna(c, i, objParametros);
-            ({ valor, selector1, valorS, familiaselector } = respuesta);
-            i === 0 && type === 'date' ? objetoControl.fecha.push(valor) : null;
-            i === 1 && type === 'time' ? objetoControl.hora.push(valor) : null;
-          }
-          if (c === 4) {
-            respuesta = respuestaColumna(c, i, objParametros, plant, carpeta);
-            ({ selector2, valorOBS, familiaselector, imagenes, observacion } =
-              respuesta);
-          }
-          if (c === 4) {
-            const tdCount = tr[i].cells.length;
-            let valorTd5;
-            if (tdCount > 5) {
-              valorTd5 = td[5].textContent.trim();
-            }
-
-            const esNumero = /^\d+$/.test(valorTd5);
-            if (tdCount === 6 && esNumero) {
-              founded = buscarEnArray(td[5].textContent, arrayControl);
-            } else if (tdCount === 5 && esNumero) {
-              founded = buscarEnArray(td[4].textContent, arrayControl);
-            }
-
-            const tipoDeDatoFounded = founded[5] || 'table';
-            if (!valor && tipoDeDatoFounded === 'table') {
-              valor = 'table';
-            }
-            objetoControl.name.push(campo.textContent);
-            fechaActual = fechasGenerator.fecha_corta_yyyymmdd(new Date());
-            horaActual = fechasGenerator.hora_actual(new Date());
-            // objetoControl.fecha.push(fechaActual)
-            // objetoControl.hora.push(valor)
-
-            objetoControl.nuxpedido.push(0);
-            valor !== null
-              ? objetoControl.valor.push(valor)
-              : objetoControl.valor.push(founded[5]);
-            objetoControl.desvio.push(founded[2]);
-            objetoControl.idusuario.push(idPerson);
-            objetoControl.tipodedato.push(tipoDeDatoFounded);
-            objetoControl.idLTYreporte.push(controlN);
-            objetoControl.idLTYcontrol.push(founded[1]);
-            // eslint-disable-next-line max-len
-            supervisor === 0
-              ? objetoControl.supervisor.push(0)
-              : objetoControl.supervisor.push(supervisor);
-            objetoControl.tpdeobserva.push(founded[9]);
-            // eslint-disable-next-line max-len
-            selector1 !== null
-              ? objetoControl.selector.push(selector1)
-              : objetoControl.selector.push(0);
-            // eslint-disable-next-line max-len
-            selector2 !== null
-              ? objetoControl.selector2.push(selector2)
-              : objetoControl.selector2.push(0);
-            objetoControl.valorS.push(valorS);
-            objetoControl.valorOBS.push(valorOBS);
-            objetoControl.familiaselector.push(familiaselector);
-            objetoControl.observacion.push(observacion);
-            objetoControl.requerido.push(founded[21]);
-            console.log(imagenes);
-            if (imagenes.src.length > 0) {
-              const convertido = convertirObjATextPlano(imagenes);
-              console.log(convertido);
-              objetoControl.imagenes.push(convertido);
-              objetoControl.objImagen.push(imagenes);
-            } else {
-              objetoControl.imagenes.push('');
-            }
-            objetoControl.displayRow.push(displayRow);
-            // objetoControl.detalle.push(terceraColumna.textContent)
-
-            // console.log(typeof founded[21], founded[21], valor);
-            if (
-              founded[21] === '0' ||
-              founded[21] === null ||
-              founded[21] === undefined
-            ) {
-              estanTodosLosRequeridos = true;
-            }
-            if (
-              founded[21] === '1' &&
-              (valor === '' || valor === null || valor === undefined)
-            ) {
-              estanTodosLosRequeridos = false;
-              const requerido = {
-                requerido: false,
-                fila: i,
-                idLTYcontrol: founded[1],
-              };
-              sessionStorage.setItem('requerido', encriptar(requerido));
-              return false;
-              // eslint-disable-next-line max-len
-            }
-          }
-          if (c === 3) {
-            const tipoDatoDetalle = arrayControl[i][33];
-            objetoControl.tipoDatoDetalle.push(tipoDatoDetalle);
-            console.log(tipoDatoDetalle, td[3]);
-            if (tipoDatoDetalle === 'checkhour') {
-              const inputElement3 = td[3].querySelector('div > input');
-              let detalle = inputElement3.value;
-              detalle = detalle.replace(':', '.');
-              objetoControl.detalle.push(detalle);
-            } else if (tipoDatoDetalle === 'x') {
-              objetoControl.detalle.push(terceraColumna.textContent);
-            }
-          }
-        }
-      } else {
-        estanTodosLosRequeridos = true;
-      }
-      console.log(objetoControl);
-    }
-    // console.log(objetoMemoria);
-    // console.log(objetoControl)
-    // console.log(arrayControl);
-    // console.log(estanTodosLosRequeridos);
-    const planta = document.getElementById('planta').textContent;
-    const reporte = document.getElementById('wichC').textContent;
-    const persona = desencriptar(sessionStorage.getItem('user'));
-    const notificador = persona.person;
-    const mailUser = person.mail;
-    // eslint-disable-next-line no-unused-vars, max-len
-    const objetoControlModificado = tuFuncion(
-      objetoControl,
-      founded,
-      planta,
-      reporte,
-      notificador,
-      mailUser,
-      fechaActual,
-      horaActual,
-      emailSupervisor,
-    );
-    if (estanTodosLosRequeridos) {
-      const requerido = {
-        requerido: true,
-        fila: 0,
-        idLTYcontrol: 0,
-      };
-      sessionStorage.setItem('requerido', encriptar(requerido));
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
-  }
-  return true;
-}
-
 function checaRequeridos(estanTodosLosRequeridos, requeridoVacio) {
   try {
     const requerido = {
@@ -375,13 +90,25 @@ function checaRequeridos(estanTodosLosRequeridos, requeridoVacio) {
   }
 }
 
-function pushValoresObjetoControl(objetoControl, valores, arrayControl, i) {
+function pushValoresObjetoControl(
+  objetoControl,
+  valores,
+  arrayControl,
+  i,
+  displayRow,
+) {
   try {
+    // Clonar profundamente el objetoControl
+    const objetoControlClonado = JSON.parse(JSON.stringify(objetoControl));
     const person = desencriptar(sessionStorage.getItem('user'));
-    const idPerson = person.id;
+    const idPerson = Number(person.id);
+    const notificador = person.person;
+    const mailUser = person.mail;
     const contenido = sessionStorage.getItem('contenido');
     const url = desencriptar(contenido);
-    const controlN = url.control_N;
+    const controlN = Number(url.control_N);
+    const planta = document.getElementById('planta').textContent;
+    const reporte = document.getElementById('wichC').textContent;
 
     let emailSupervisor = null;
     let supervisor = desencriptar(sessionStorage.getItem('firmado'));
@@ -402,33 +129,148 @@ function pushValoresObjetoControl(objetoControl, valores, arrayControl, i) {
       tipoDeDato,
       tipoDeObservacion,
     } = valores;
-    objetoControl.name.push(arrayControl[i][3]);
-    objetoControl.nuxpedido.push(0);
-    objetoControl.desvio.push(arrayControl[i][2]);
-    objetoControl.idusuario.push(idPerson);
-    objetoControl.tipodedato.push(arrayControl[i][5]);
-    objetoControl.idLTYreporte.push(controlN);
-    objetoControl.idLTYcontrol.push(arrayControl[i][1]);
+    // ...existing code...
+    let valorFinal = valor1 || valor2 || '';
+    if (
+      (tipoDeDato === 's' || tipoDeDato === 'sd') &&
+      valores &&
+      typeof valorFinal === 'object' &&
+      valorFinal.sel
+    ) {
+      valorFinal = valorFinal.sel;
+    } else if (tipoDeDato === 'n') {
+      valorFinal = Number(valorFinal);
+    }
+    objetoControlClonado.valor.push(valorFinal);
+    // --- Ajuste para valorS ---
+    let valorSFinal = valor1 || valor2 || 0;
+    if (
+      (tipoDeDato === 's' || tipoDeDato === 'sd') &&
+      valores &&
+      typeof valorSFinal === 'object' &&
+      valorSFinal.valor !== undefined
+    ) {
+      valorSFinal = Number(valorSFinal.valor);
+    } else {
+      valorSFinal = 0;
+    }
+    objetoControlClonado.valorS.push(valorSFinal);
+    // --- Ajuste para valorOBS ---
+    let valorOBSFinal = valorObs || 0;
+    if (
+      (tipoDeObservacion === 's' || tipoDeObservacion === 'sd') &&
+      valores &&
+      typeof valorOBSFinal === 'object' &&
+      valorOBSFinal.valor !== undefined
+    ) {
+      valorOBSFinal = Number(valorOBSFinal.valor);
+    } else {
+      valorOBSFinal = 0;
+    }
+    objetoControlClonado.valorOBS.push(valorOBSFinal);
+    // --- Ajuste para selector ---
+    let valorSelector = valor1 || valor2 || 0;
+    if (
+      (tipoDeDato === 's' || tipoDeDato === 'sd') &&
+      valores &&
+      typeof valorSelector === 'object' &&
+      valorSelector.valor !== undefined
+    ) {
+      valorSelector = valorSelector.valor;
+    } else {
+      valorSelector = 0;
+    }
+    objetoControlClonado.selector.push(valorSelector);
+    // --- Ajuste para selector2 ---
+    let valorSelector2 = valorObs || 0;
+    if (
+      (tipoDeObservacion === 's' || tipoDeObservacion === 'sd') &&
+      valores &&
+      typeof valorSelector2 === 'object' &&
+      valorSelector2.valor !== undefined
+    ) {
+      valorSelector2 = valorSelector2.valor;
+    } else {
+      valorSelector2 = 0;
+    }
+    objetoControlClonado.selector2.push(valorSelector2);
+    objetoControlClonado.fecha.push(fechaActual);
+    objetoControlClonado.hora.push(horaActual);
+    objetoControlClonado.name.push(arrayControl[i][3]);
+    objetoControlClonado.nuxpedido.push(0);
+    objetoControlClonado.desvio.push(arrayControl[i][2]);
+    objetoControlClonado.idusuario.push(idPerson);
+    objetoControlClonado.tipodedato.push(arrayControl[i][5]);
+    objetoControlClonado.idLTYreporte.push(controlN);
+    objetoControlClonado.idLTYcontrol.push(arrayControl[i][1]);
     supervisor === 0
-      ? objetoControl.supervisor.push(0)
-      : objetoControl.supervisor.push(supervisor);
-    objetoControl.tpdeobserva.push(arrayControl[i][9]);
-    objetoControl.selector.push(arrayControl[i][12]);
-    objetoControl.selector2.push(arrayControl[i][15]);
-    objetoControl.valorS.push(arrayControl[i][13]);
-    objetoControl.valorOBS.push(arrayControl[i][16]);
-    objetoControl.familiaselector.push(arrayControl[i][14]);
-    objetoControl.observacion.push(valorObs || '');
-    objetoControl.requerido.push(arrayControl[i][21]);
-    if (tipoDeDato === 'img') {
-      if (valorCelda3.src > 0) {
-        objetoControl.imagenes.push(valorCelda3);
-        objetoControl.objImagen.push(valorCelda3);
+      ? objetoControlClonado.supervisor.push(0)
+      : objetoControlClonado.supervisor.push(supervisor);
+    objetoControlClonado.tpdeobserva.push(arrayControl[i][9]);
+    objetoControlClonado.familiaselector.push(arrayControl[i][14]);
+    // --- Ajuste para observacion ---
+    let observacionFinal = valorObs;
+    if (typeof observacionFinal === 'string') {
+      observacionFinal = observacionFinal.trim();
+    }
+    if (
+      tipoDeObservacion === 'btnqwery' ||
+      tipoDeObservacion === 'checkhour' ||
+      tipoDeObservacion === 'checkdate' ||
+      tipoDeObservacion === 'checkdateh'
+    ) {
+      observacionFinal = '';
+    } else if (
+      observacionFinal &&
+      typeof observacionFinal === 'object' &&
+      observacionFinal.sel
+    ) {
+      observacionFinal = observacionFinal.sel;
+    }
+    objetoControlClonado.observacion.push(observacionFinal || '');
+    objetoControlClonado.requerido.push(arrayControl[i][21]);
+    objetoControlClonado.imagenes.push('');
+    if (tipoDeDato === 'img' && valorCelda3) {
+      if (valorCelda3) {
+        objetoControlClonado.imagenes.push(valorCelda3);
+        objetoControlClonado.objImagen.push(valorCelda3);
       } else {
-        objetoControl.imagenes.push('');
+        objetoControlClonado.imagenes.push('');
       }
     }
-    objetoControl.displayRow.push(arrayControl[i][22] || 'none');
+    objetoControlClonado.displayRow.push(displayRow);
+    const detalle = valorCelda3 || valorCelda33 || '';
+    if (tipoDeDato !== 'table') {
+      if (tipoDeDato === 'img') {
+        // Si es imagen, guarda el detalle solo si valorCelda3 existe
+        if (valorCelda3) {
+          objetoControlClonado.detalle.push(valorCelda3);
+        } else {
+          objetoControlClonado.detalle.push('');
+        }
+      } else {
+        objetoControlClonado.detalle.push(detalle);
+      }
+    }
+    objetoControlClonado.tipoDatoDetalle.push(arrayControl[i][33] || 'x');
+
+    // Actualizar el objetoControl original con los datos del clonado
+    Object.keys(objetoControl).forEach((key) => {
+      // eslint-disable-next-line no-param-reassign
+      objetoControl[key] = objetoControlClonado[key];
+    });
+    // eslint-disable-next-line no-unused-vars
+    const objetoControlModificado = tuFuncion(
+      objetoControl,
+      arrayControl[0][28],
+      planta,
+      reporte,
+      notificador,
+      mailUser,
+      fechaActual,
+      horaActual,
+      emailSupervisor,
+    );
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
@@ -537,11 +379,17 @@ function obtenerValoresPorTipos(
           celda.querySelector('input[type="text"]')?.value ||
           celda.textContent
         );
-      case 'n':
-        return (
-          celda.querySelector('input[type="number"]')?.value ||
-          celda.textContent
-        );
+      case 'n': {
+        const inputNumber = celda.querySelector('input[type="number"]');
+        if (
+          inputNumber &&
+          inputNumber.value !== undefined &&
+          inputNumber.value !== ''
+        ) {
+          return Number(inputNumber.value);
+        }
+        return Number(celda.textContent);
+      }
       case 'img': {
         let lis;
         const ul = Array.from(celda.childNodes).find(
@@ -583,8 +431,12 @@ function obtenerValoresPorTipos(
       case 's':
       case 'sd': {
         const select = celda.querySelector('select');
+
         return select && select.options[select.selectedIndex]
-          ? select.options[select.selectedIndex].text
+          ? {
+              sel: select.options[select.selectedIndex].text,
+              valor: select.value,
+            }
           : celda.textContent;
       }
       case 'cn':
@@ -659,11 +511,11 @@ function obtenerValoresPorTipos(
     }
   }
 
-  const valor1 = extraerValor(celda1, tipo1);
-  const valor2 = extraerValor(celda2, tipo2);
-  const valorObs = extraerValor(celdas[4], tipo2);
-  const valorCelda3 = extraerValor(celdas[3], tipo1);
-  const valorCelda33 = extraerValor(celdas[3], 't');
+  const valor1 = extraerValor(celda1, tipo1) || null;
+  const valor2 = extraerValor(celda2, tipo2) || null;
+  const valorObs = extraerValor(celdas[4], tipo2) || null;
+  const valorCelda3 = extraerValor(celdas[3], tipo1) || null;
+  const valorCelda33 = extraerValor(celdas[3], 't') || null;
   const requeridoVacio = arrayControl[filaIndex][21] || 0;
 
   if (
@@ -689,39 +541,16 @@ function obtenerValoresPorTipos(
 
 function recorroFullTable(objetoControl, arrayControl, nux, plant, carpeta) {
   try {
-    console.log(objetoControl);
     const table = document.getElementById('tableControl');
     const tbody = table.querySelector('tbody');
     const filas = tbody.querySelectorAll(':scope > tr');
-
-    // const objParametros = {
-    //   displayCell,
-    //   element,
-    //   node,
-    //   datoCelda,
-    //   valueCelda,
-    //   colspanValue,
-    //   inputElement,
-    //   nodeType,
-    //   type,
-    //   tagName,
-    //   inputmode,
-    //   childeNode0,
-    //   select,
-    //   checkbox,
-    //   radio,
-    //   divConsultas,
-    //   liImages,
-    //   selector,
-    //   imagenes,
-    //   terceraColumna,
-    // };
 
     // Estructura para guardar los valores de todos los hijos de cada celda
     const resultadoTabla = [];
     for (let i = 0; i < filas.length; i++) {
       const resultadoFila = [];
       const fila = filas[i];
+      const displayRow = window.getComputedStyle(fila).display;
       const celdas = fila.querySelectorAll('td');
       let valores;
       // Leer el valor de la última celda de la fila
@@ -760,14 +589,22 @@ function recorroFullTable(objetoControl, arrayControl, nux, plant, carpeta) {
           tipoDeObservacion,
         });
       }
-      pushValoresObjetoControl(objetoControl, valores, arrayControl, i);
+      pushValoresObjetoControl(
+        objetoControl,
+        valores,
+        arrayControl,
+        i,
+        displayRow,
+      );
       // ...puedes seguir agregando info de celdas si lo necesitas...
       resultadoTabla.push(resultadoFila);
     }
     // Al final del recorrido, loguea la estructura de valores extraídos
-    console.log('Valores extraídos por fila:', resultadoTabla);
-    return '';
+    // console.log('Valores extraídos por fila:', resultadoTabla);
+    // console.log(objetoControl);
+    return objetoControl;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     return '';
   }

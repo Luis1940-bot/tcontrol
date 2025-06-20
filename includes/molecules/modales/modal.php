@@ -37,10 +37,12 @@ $baseUrl = BASE_URL;
         <input type='text' id='searchInput' placeholder='Buscar...' />
         <hr>
       </div>
-      <table>
-        <thead></thead>
-        <tbody></tbody>
-      </table>
+      <div class='div-table-modal'>
+        <table>
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
       <footer>
       </footer>
     </div>
