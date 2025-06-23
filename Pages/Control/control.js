@@ -77,8 +77,10 @@ function leeApp(json) {
 
 function configuracionLoad(user) {
   inicioPerformance();
+
   const contenido = sessionStorage.getItem('contenido');
   const url = desencriptar(contenido);
+
   controlN = url.control_N;
   controlT = url.control_T;
   nr = url.nr;
@@ -89,6 +91,7 @@ function configuracionLoad(user) {
   document.getElementById('wichC').innerText = `${controlN}-${controlT}`;
 
   configPHP(user, SERVER);
+
   // document.querySelector('.header-McCain').style.display = 'none';
   finPerformance();
 }
@@ -186,10 +189,11 @@ function esperarTablaLista(callback) {
 async function cargaDeRegistros(objTrad, plant) {
   try {
     inicioPerformance();
+
     await actualizarProgreso('10%');
+
     const countSelect = await traerRegistros(`countSelect,${controlN}`, null);
     sessionStorage.setItem('loadSystem', 2);
-
     sessionStorage.setItem('cantidadProcesos', Number(countSelect[0][0]) + 5);
 
     await actualizarProgreso('20%');
@@ -234,7 +238,7 @@ async function cargaDeRegistros(objTrad, plant) {
 
     finPerformance();
     // Ajustar el porcentaje a 100%
-    // console.log(nr);
+
     if (nr) {
       const controlNr = await traerNR(nr, plant);
       // await cargarNR(controlNr, plant) // Asegúrate de que cargarNR sea una función async

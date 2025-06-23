@@ -45,10 +45,10 @@ function asignarEventos() {
   buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
       // const ruta = objButtons.Ad.name[index];
-      const ruta = objButtons.Ad.name[index]
+      const ruta = objButtons.Ad.ruta[index]
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
-      window.location.href = `${SERVER}/Pages/List${ruta}/index.php`;
+      window.location.href = `${SERVER}/Pages/${ruta}`;
     });
   });
 }

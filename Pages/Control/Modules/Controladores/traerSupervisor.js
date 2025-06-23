@@ -15,7 +15,7 @@ export default function traerSupervisor(idSupervisor, sqlI) {
       sqlI,
     };
     const datos = JSON.stringify(obj);
-    // console.log(datos)
+    // console.log(datos);
     // const ruta = `${SERVER}/Pages/Control/Routes/traerSupervisor.php?q=${id}${rax}`
     const ruta = `${SERVER}/Routes/index.php`;
     fetch(ruta, {
@@ -35,6 +35,7 @@ export default function traerSupervisor(idSupervisor, sqlI) {
         return res.json();
       })
       .then((data) => {
+        // console.log(data);
         const objeto = {
           id: data.id || null,
           nombre: data.nombre || null,

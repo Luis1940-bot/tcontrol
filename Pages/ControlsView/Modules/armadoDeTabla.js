@@ -444,13 +444,18 @@ async function viewer(array, objTranslate) {
 function abrirControl(nr) {
   try {
     const control = desencriptar(sessionStorage.getItem('listadoCtrls'));
-    const { controlN, controlT } = control;
+
+    // eslint-disable-next-line camelcase
+    const { control_N, control_T } = control;
     let contenido = {
-      controlN,
-      controlT,
+      // eslint-disable-next-line camelcase
+      control_N,
+      // eslint-disable-next-line camelcase
+      control_T,
       nr,
     };
     contenido = encriptar(contenido);
+
     sessionStorage.setItem('contenido', contenido);
     // const url = '../../../Pages/Control/index.php'
     const timestamp = new Date().getTime();
@@ -530,6 +535,7 @@ function estilosCell(
   content.addEventListener('click', () => {
     content.style.color = 'blue';
     const nr = element[1].trim();
+
     abrirControl(nr);
   });
 

@@ -186,7 +186,7 @@ function llamarCtrl(control) {
       if (tipoDeArchivo === '') {
         // eslint-disable-next-line no-unused-vars
         const [subcadena, parametros] = url.split('?');
-        // console.log(url);
+
         const pares = parametros.split('&');
         const objeto = pares.reduce((objs, par) => {
           const obj = objs;
@@ -197,6 +197,7 @@ function llamarCtrl(control) {
         sessionStorage.setItem('contenido', encriptar(objeto));
         ruta = `${SERVER}/Pages/Router/rutas.php?ruta=control&v=${timestamp}`;
       }
+
       if (tipoDeArchivo !== '' && tipoDeArchivo.toLowerCase() === 'rove') {
         const objeto = {
           rove: tipoDeRove,

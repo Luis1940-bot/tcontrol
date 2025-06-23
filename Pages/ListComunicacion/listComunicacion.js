@@ -648,7 +648,8 @@ document.getElementById('btnMostrar').addEventListener('click', async () => {
   `;
   // <li><strong>Emails:</strong> ${reporte[24] || 'N/D'}</li>
   const check = document.getElementById('checkComunica');
-  const newCheck = check.cloneNode(true);
+  // const newCheck = check.cloneNode(true);
+
   const wrapper = document.getElementById('comunicacionWrapper');
   wrapper.classList.remove('oculto');
   wrapper.classList.add('visible');
@@ -673,7 +674,8 @@ document.getElementById('btnMostrar').addEventListener('click', async () => {
     agrupaPastillas.classList.remove('visible');
     agrupaPastillas.classList.add('oculto');
   }
-  newCheck.addEventListener('change', async () => {
+  check.addEventListener('change', async () => {
+    // console.log('checkComunica cambiado');
     const nuevoValor = check.checked ? 1 : 0;
     const idReporte = parseInt(reporte[1], 10); // asumimos que ID está en el índice 0
 

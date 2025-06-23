@@ -423,6 +423,8 @@ a {
   height: 100%;
   background-color: rgb(0, 0, 0);
   font-family: var(--fuente-base);
+  /* justify-content: center;
+  align-items: center; */
 }
 .modal-content {
   margin-top: 2rem;
@@ -437,16 +439,22 @@ a {
   padding: 5px;
 }
 .modal-content-aceptar {
-  margin-top: 2rem;
-  margin-left: 2rem;
-  float: left;
+  margin: auto;
   text-align: left;
   background-color: #ffffff;
-  width: 30%;
-  height: 80%;
+  width: auto;
+  max-width: 400px;
+  height: auto;
+  max-height: 90vh;
+  min-height: unset;
   border-radius: 10px;
   border: 3px solid #212121;
-  padding: 5px;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .modal-content-menu {
   margin-top: 1.5rem;
@@ -1092,6 +1100,9 @@ a {
     font-weight: 600;
     width: auto;
     margin-left: 10px;
+  }
+  #whereUs {
+    font-size: 22px;
   }
   .div-table-modal {
     overflow-y: auto;

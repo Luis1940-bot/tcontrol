@@ -64,10 +64,7 @@ function viewer(array, indice) {
         if (firstChild.nodeType === Node.TEXT_NODE) {
           firstChild.textContent = nuevoValor;
         } else {
-          firstCell.insertBefore(
-            document.createTextNode(nuevoValor),
-            firstChild,
-          );
+          celda.insertBefore(document.createTextNode(nuevoValor), firstChild);
         }
       }
     },

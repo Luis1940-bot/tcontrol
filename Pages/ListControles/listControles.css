@@ -222,6 +222,50 @@ select {
   margin-left: 3rem;
   margin-right: auto;
 }
+.div-encabezadoPastillas {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.div-pastillas {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap; /* Permite que las pastillas bajen en pantallas pequeñas */
+  justify-content: center; /* Centra las pastillas dentro del contenedor */
+  width: 100%;
+}
+
+.pastilla {
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: 20px;
+  background: #e0e0e0;
+  color: #393939;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  margin-bottom: 0.3em;
+}
+
+.pastilla[style*='background: rgb(33, 33, 33)'] {
+  background: #212121 !important;
+  color: #cecece !important;
+}
+
+.pastilla:hover,
+.pastilla:focus {
+  background: #393939;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  outline: none;
+}
 /* Media Queries */
 @media only screen and (min-width: 200px) and (orientation: portrait) {
   .button-controles-menu {

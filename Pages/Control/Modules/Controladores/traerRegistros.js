@@ -17,6 +17,7 @@ export default function traerRegistros(q, sqlI) {
     const datos = JSON.stringify(obj);
     const ruta = `${SERVER}/Routes/index.php`;
     // console.log(datos);
+
     fetch(ruta, {
       method: 'POST',
       headers: {
@@ -28,7 +29,7 @@ export default function traerRegistros(q, sqlI) {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data)
+        // console.log(data);
 
         let vecesLoad = sessionStorage.getItem('loadSystem');
 

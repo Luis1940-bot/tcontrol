@@ -200,6 +200,9 @@ function reconoceTipoDeDato(tipoDeDato, objTranslate) {
   if (tipoDeDato === 'pastillaco') {
     tipo = trO('Pastilla Consulta', objTranslate) || 'Pastilla Consulta';
   }
+  if (tipoDeDato === 'tablex') {
+    tipo = trO('Tabla', objTranslate) || 'Tabla';
+  }
   // console.log(tipo);
   return tipo;
 }
@@ -249,6 +252,9 @@ function reconoceColumna(
   let buttonOrden = 0;
   let fontWeight = 600;
   let separador;
+  if (array[4] === 'tablex') {
+    // console.log(i, array, index, selects, cantidadDeRegistros);
+  }
 
   switch (i) {
     case 0:
@@ -365,6 +371,7 @@ function reconoceColumna(
         if (array[i].trim().charAt(0) === 's') {
           texto = '--------';
         }
+
         background = '#ff7659';
         fontStyle = 'Italic';
         fontWeight = 700;
@@ -376,6 +383,7 @@ function reconoceColumna(
         fontStyle = 'Italic';
         fontWeight = 700;
       }
+
       buttonEditar = addEditar(indice, cantidadDeRegistros);
       break;
     case 12:
@@ -392,6 +400,18 @@ function reconoceColumna(
         fontWeight = 700;
         texto = 'Add: photo.png';
       }
+      if (
+        array[4] === 'tablex' &&
+        array[i] !== '' &&
+        typeof array[13] === 'string'
+      ) {
+        // if (array[13] && typeof array[13] === 'string') {
+        texto = 'Contiene SQL';
+      } else {
+        texto = 'NO Contiene SQL';
+        // }
+      }
+
       buttonEditar = addEditar(indice, cantidadDeRegistros);
       break;
     case 14:
@@ -550,6 +570,7 @@ function reconoceColumna(
     buttonOrden,
     fontWeight,
   };
+  // console.log(propiedadesCelda);
   return propiedadesCelda;
 }
 
@@ -731,7 +752,7 @@ function editCampos(target, objTranslate, LTYselect, plant) {
       LTYselect,
     );
     const modal = document.getElementById('modalAlert');
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
   } catch (error) {
     mostrarMensaje(error, 'error');
     // console.log(error);

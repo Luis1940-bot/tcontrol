@@ -16,12 +16,12 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 /**
  * Verifica la información de un supervisor en la base de datos.
  *
- * @param string $q El identificador del supervisor.
- * @param string $sqlI El identificador de cliente.
+ * @param int $q El identificador del supervisor.
+ * @param int $sqlI El identificador de cliente.
  * @return array<string, mixed> Un array asociativo con los datos del supervisor o un mensaje de error.
  */
 
-function verifica(string $q, string $sqlI): array
+function verifica(int $q, int $sqlI): array
 {
   // global $q;
   $idSupervisor = $q; //urldecode($q);
@@ -38,24 +38,36 @@ function verifica(string $q, string $sqlI): array
   /** @var int|string $port */
 
   // Definir valores predeterminados si es necesario
-  $charset = $charset ?? 'utf8mb4';
+  $charset = 'utf8mb4'; // Forzar charset correcto para MySQL
   $port = $port !== '' ? $port : 3306;
 
-
+  // $host = "34.174.211.66";
+  // $user = "uumwldufguaxi";
+  // $password = "5lvvumrslp0v";
+  // $dbname = "db5i8ff3wrjzw3";
+  // $port = 3306;
   // Asegurar que $port sea una cadena
   $port = (string) $port;
+  // echo "Conectando a la base de datos: {$host}, {$dbname}, {$port}, {$charset}, {$password}<br>";
 
-  $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};charset={$charset}", $user, $password);
+  try {
+    $pdo = new PDO("mysql:host={$host};dbname={$dbname};port={$port};charset={$charset}", $user, $password);
+    // echo "Conexión PDO exitosa<br>";
+  } catch (PDOException $e) {
+    echo "Error al conectar con PDO: " . $e->getMessage() . "<br>";
+    return ['error' => 'Error de conexión PDO: ' . $e->getMessage()];
+  }
 
   try {
 
     $sql = "SELECT u.idusuario, u.nombre, u.mail, u.idtipousuario, u.mi_cfg  FROM usuario u WHERE u.idusuario=? AND u.idLTYcliente=?";
+
     $query = $pdo->prepare($sql);
-    $query->bindParam(1, $idSupervisor, PDO::PARAM_STR);
+    $query->bindParam(1, $idSupervisor, PDO::PARAM_INT);
     $query->bindParam(2, $sqlI, PDO::PARAM_INT);
     $query->execute();
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
-    // echo count($data).'<br>';
+    // echo count($data) . '<br>';
     if (is_array($data) && count($data) > 0 && is_array($data[0])) {
       $response = array(
         'id' => $data[0]['idusuario'] ?? null,
@@ -84,7 +96,7 @@ function verifica(string $q, string $sqlI): array
 
 header("Content-Type: application/json; charset=utf-8");
 $datos = file_get_contents("php://input");
-
+// $datos = '{"q":25,"ruta":"/traerSupervisor","rax":"&new=Fri Jun 20 2025 12:45:30 GMT-0300 (hora estándar de Argentina)","sqlI":15}';
 if (empty($datos)) {
   $response = ['success' => false, 'message' => 'Faltan datos necesarios.'];
   echo json_encode($response);
@@ -93,7 +105,7 @@ if (empty($datos)) {
 
 $data = json_decode($datos, true);
 
-if (is_array($data) && isset($data['q'], $data['sqlI']) && is_string($data['q']) && is_string($data['sqlI'])) {
+if (is_array($data) && isset($data['q'], $data['sqlI']) && is_numeric($data['q']) && is_numeric($data['sqlI'])) {
   $q = $data['q'];
   $sqlI = $data['sqlI'];
   verifica($q, $sqlI);

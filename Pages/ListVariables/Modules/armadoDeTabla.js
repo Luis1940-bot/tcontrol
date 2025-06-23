@@ -4,7 +4,7 @@ import arrayGlobal from '../../../controllers/variables.js';
 // import { Alerta } from '../../../includes/atoms/alerta.js';
 import Alerta from '../../../includes/atoms/alerta.js';
 import variableOnOff from './Controladores/variableOnOff.js';
-import { encriptar, desencriptar } from '../../../controllers/cript.js';
+import { encriptar } from '../../../controllers/cript.js';
 
 import baseUrl from '../../../config.js';
 import { trA, trO } from '../../../controllers/trOA.js';
@@ -42,7 +42,7 @@ function encabezado(encabezados, objTranslate) {
   thead.appendChild(newRow);
 }
 
-function viewer(selector, array, objTranslate) {
+function viewer(selector, array) {
   //! editar
   const filtrado = array.filter((subArray) => subArray[4] === selector);
   const objetoRuta = {
@@ -59,31 +59,32 @@ function viewer(selector, array, objTranslate) {
   window.location.href = ruta;
 }
 
-async function cargaDeRegistros(objTranslate) {
-  try {
-    const reportes = await traerRegistros(
-      'traerVariables',
-      '/traerVariables',
-      null,
-    );
-    arrayGlobal.arrayReportes = [...reportes];
-    // Finaliza la carga y realiza cualquier otra acción necesaria
-    tablaVacia(reportes, null, objTranslate);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn(error);
-    // eslint-disable-next-line no-console
-    console.log('error por espera de la carga de un modal');
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
-  }
-}
+// async function cargaDeRegistros(objTranslate) {
+//   try {
+//     const reportes = await traerRegistros(
+//       'traerVariables',
+//       '/traerVariables',
+//       null,
+//     );
+//     arrayGlobal.arrayReportes = [...reportes];
+//     // Finaliza la carga y realiza cualquier otra acción necesaria
+//     tablaVacia(reportes, null, objTranslate);
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.warn(error);
+//     // eslint-disable-next-line no-console
+//     console.log('error por espera de la carga de un modal');
+//     setTimeout(() => {
+//       window.location.reload();
+//     }, 100);
+//   }
+// }
 
+// eslint-disable-next-line no-unused-vars
 async function conceptoOnOff(id, status, objTranslate) {
   const actualizado = await variableOnOff(id, status, '/variableOnOff');
   if (actualizado.success) {
-    await cargaDeRegistros(objTranslate);
+    // await cargaDeRegistros(objTranslate);
   }
 }
 
@@ -111,14 +112,14 @@ function estilosCell(
   cell.style.fontStyle = fontStyle;
   cell.style.fontWeight = fontWeight;
   // cell.style.fontSize = fontSize
-  let colorDelTexto = colorText;
+  // let colorDelTexto = colorText;
   let onOff = '';
   let colorOnOff = 'green';
   let textoSelector = selector;
   let dirImg = '';
 
   if (selector === 'n') {
-    colorDelTexto = '#818181';
+    // colorDelTexto = '#818181';
     onOff = 'OFF';
     colorOnOff = 'red';
     textoSelector = 'OFF';
@@ -164,9 +165,12 @@ function estilosCell(
     imgEye.src = `${SERVER}/assets/img/icons8-view-30.png`;
     imgEye.style.cursor = 'pointer';
     imgEye.setAttribute('data-index', indice);
+    // eslint-disable-next-line no-unused-vars
     imgEye.addEventListener('click', (e) => {
-      const i = e.target.getAttribute('data-index');
+      // const i = e.target.getAttribute('data-index');
+      // eslint-disable-next-line no-shadow
       const arrayFiltrado = arrayControl.filter((e) => e[4] === selector);
+      // eslint-disable-next-line no-use-before-define
       viewerConceptos(arrayFiltrado, objTranslate);
     });
     cell.appendChild(imgEye);

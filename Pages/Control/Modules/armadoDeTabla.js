@@ -88,7 +88,7 @@ function estilosCell(
     } else {
       tipoType.disabled = false; // Asegura que esté habilitado si enabled no es 1
     }
-  } else if (datos === 'table' && type !== null) {
+  } else if (datos === 'tablex' && type !== null) {
     cell.appendChild(type);
   }
   let bordeStandar = '1px solid #cecece';
@@ -467,8 +467,8 @@ async function estilosTbodyCell(
       colSpan = 6;
       const divPastilla = ElementGenerator.generateDivPastillita(index);
       type = divPastilla;
-    } else if (i === 2 && tipoDeDato === 'table') {
-      dato = 'table';
+    } else if (i === 2 && tipoDeDato === 'tablex') {
+      dato = 'tablex';
       colSpan = 1;
       const valorXDefecto = element[20] !== null ? element[20] : null;
       const filaTomaValor = element[26] !== null ? element[26] : 0;
@@ -495,7 +495,7 @@ async function estilosTbodyCell(
     if (i > 2 && tipoDeDato === 'tx' && maxTextarea !== null && tipoColSpanTx) {
       display = 'none';
     }
-    if (i > 2 && tipoDeDato === 'table') {
+    if (i > 2 && tipoDeDato === 'tablex') {
       display = 'none';
     }
 
@@ -834,7 +834,7 @@ function completaTabla(arrayControl, encabezados, objTrad, url, plant) {
       traerValorPorDefecto(element[23], element[5], elementHTML, url);
     }
 
-    if (['table'].includes(element[5]) && element[20] !== null) {
+    if (['tablex'].includes(element[5]) && element[20] !== null) {
       completaComponenteTabla(element[20], index);
     }
 

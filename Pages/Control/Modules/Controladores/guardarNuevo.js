@@ -240,7 +240,7 @@ function pushValoresObjetoControl(
     }
     objetoControlClonado.displayRow.push(displayRow);
     const detalle = valorCelda3 || valorCelda33 || '';
-    if (tipoDeDato !== 'table') {
+    if (tipoDeDato !== 'tablex') {
       if (tipoDeDato === 'img') {
         // Si es imagen, guarda el detalle solo si valorCelda3 existe
         if (valorCelda3) {
@@ -357,7 +357,7 @@ function obtenerValoresPorTipos(
 
     // checaRequeridos(faltanRequeridos);
     switch (tipo) {
-      case 'table':
+      case 'tablex':
         return '';
       case 'd':
         return (

@@ -41,6 +41,7 @@ import {
   createTextArea,
 } from './createAlerta/creates.js';
 import createSpinner from './createSpinner.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 // import * as XLSX from './cdnjs/xlsx.full.min';
 
 const SERVER = baseUrl;
@@ -197,7 +198,11 @@ const funcionExportarExcel = () => {
   try {
     const tabla = document.getElementById('tableConsultaViews');
     if (!tabla) {
-      console.warn('❌ No se encontró la tabla con id tableConsultaViews');
+      mostrarMensaje(
+        '❌ No se encontró la tabla con id tableConsultaViews',
+        'error',
+      );
+      // console.warn('❌ No se encontró la tabla con id tableConsultaViews');
       return;
     }
 
@@ -230,21 +235,27 @@ const funcionExportarExcel = () => {
     });
 
     // Crear hoja y libro
+    // eslint-disable-next-line no-undef
     const hoja = XLSX.utils.aoa_to_sheet([]);
     data.forEach((filaExcel, r) => {
       filaExcel.forEach((celda, c) => {
+        // eslint-disable-next-line no-undef
         const ref = XLSX.utils.encode_cell({ r, c });
         hoja[ref] = celda;
       });
     });
+    // eslint-disable-next-line no-undef
     hoja['!ref'] = XLSX.utils.encode_range({
       s: { r: 0, c: 0 },
       e: { r: data.length - 1, c: data[0].length - 1 },
     });
 
+    // eslint-disable-next-line no-undef
     const wb = XLSX.utils.book_new();
+    // eslint-disable-next-line no-undef
     XLSX.utils.book_append_sheet(wb, hoja, 'Export');
 
+    // eslint-disable-next-line no-undef
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     const blob = new Blob([wbout], { type: 'application/octet-stream' });
 
@@ -272,7 +283,8 @@ const funcionExportarExcel = () => {
     }
   } catch (error) {
     console.error('🧨 Error al exportar a Excel:', error);
-    alert('Algo salió mal al exportar. Revisá la consola.');
+    // alert('Algo salió mal al exportar. Revisá la consola.');
+    mostrarMensaje('Algo salió mal al exportar. Revisá la consola.', 'error');
   }
 };
 
@@ -284,10 +296,12 @@ const funcionExportarPDF = async () => {
     const fechaDeHoy = fechasGenerator.fecha_larga_ddmmyyyyhhmm(new Date());
 
     // Capturar la tabla como imagen utilizando html2canvas
+    /* global html2canvas */
     const canvas = await html2canvas(tabla);
     const imgData = canvas.toDataURL('image/png', 1.0);
 
     // Crear y configurar el PDF
+    // eslint-disable-next-line new-cap, no-undef
     const pdf = new jsPDF('p', 'pt', 'a4');
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Calcular la altura en función de la relación de aspecto de la imagen
@@ -370,6 +384,7 @@ const funcionApi = () => {
     const folders = path.split('/').filter((folder) => folder !== '');
     let primeraSubCarpeta = '';
     if (folders.length >= 2) {
+      // eslint-disable-next-line prefer-destructuring
       primeraSubCarpeta = folders[0];
     }
 
@@ -400,7 +415,8 @@ const funcionApi = () => {
         document.body.removeChild(elementoTemporal);
       });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    mostrarMensaje(error, 'error');
   }
 };
 
@@ -445,18 +461,21 @@ const funcionNuevoSelect = () => {
 
 function checaCamposReporte(elemento) {
   if (elemento.value === '') {
-    elemento.style.background = 'rgb(254, 4, 4)';
+    const copia = { ...elemento };
+    copia.style.background = 'rgb(254, 4, 4)';
   }
 }
 
 function completaObjetoReporte() {
   const inputs = document.querySelectorAll('input');
   inputs.forEach((input) => {
-    input.style.background = '#fff'; // Establece el fondo a blanco
+    const copia = { ...input };
+    copia.style.background = '#fff'; // Establece el fondo a blanco
   });
   const selects = document.querySelectorAll('select');
   selects.forEach((select) => {
-    select.style.background = '#fff';
+    const copia = { ...select };
+    copia.style.background = '#fff';
   });
   const user = desencriptar(sessionStorage.getItem('user'));
   const { plant } = user;
@@ -515,7 +534,7 @@ function completaObjetoReporte() {
   checaCamposReporte(establecimiento);
 
   const areaControladora = document.getElementById('areaControladora');
-  objetoReporte.idLTYarea = parseInt(areaControladora.value);
+  objetoReporte.idLTYarea = parseInt(areaControladora.value, 10);
   const selectedOption =
     areaControladora.options[areaControladora.selectedIndex];
   objetoReporte.rotulo3 = selectedOption.textContent.toUpperCase();
@@ -561,9 +580,9 @@ function completaObjetoReporte() {
   objetoReporte.modificacion = nuevaFecha;
 
   const version = document.getElementById('version');
-  let version_ = '01';
-  version.value !== '' ? (version_ = version.value) : null;
-  objetoReporte.version = version_;
+  let version01 = '01';
+  version.value !== '' ? (version01 = version.value) : null;
+  objetoReporte.version = version01;
 
   const situacion = document.getElementById('situacion');
   let activo = 's';
@@ -571,25 +590,25 @@ function completaObjetoReporte() {
   objetoReporte.activo = activo;
 
   const email = document.getElementById('email');
-  let email_ = 0;
-  email.value === '2' ? (email_ = 1) : null;
-  objetoReporte.envio_mail = email_;
-  if (email_ === 1) {
+  let email01 = 0;
+  email.value === '2' ? (email01 = 1) : null;
+  objetoReporte.envio_mail = email01;
+  if (email01 === 1) {
     const emailGroup = document.querySelector('.email-group');
     const remainingPastillitas = emailGroup.querySelectorAll(
       '.div-pastillita .label-email',
     );
-    let direcciones_emails = '';
+    let direccionesEmails = '';
     for (let i = 0; i < remainingPastillitas.length; i++) {
       const element = remainingPastillitas[i];
-      direcciones_emails += `/${element.textContent}`;
+      direccionesEmails += `/${element.textContent}`;
     }
-    direcciones_emails = direcciones_emails.slice(1);
-    objetoReporte.direcciones_mail = direcciones_emails;
+    direccionesEmails = direccionesEmails.slice(1);
+    objetoReporte.direcciones_mail = direccionesEmails;
   }
 
   const frecuencia = document.getElementById('frecuencia');
-  objetoReporte.frecuencia = parseInt(frecuencia.value);
+  objetoReporte.frecuencia = parseInt(frecuencia.value, 10);
 
   const number = document.getElementById('testimado');
   objetoReporte.testimado = parseFloat(number.value);
@@ -602,6 +621,7 @@ function completaObjetoReporte() {
 
 const funcionReporteGuardarNuevo = async () => {
   try {
+    // eslint-disable-next-line no-use-before-define
     const miAlerta = new Alerta();
     let aviso = 'Se dará de alta un nuevo reporte.';
     let mensaje = trO(aviso, objTraductor) || aviso;
@@ -615,10 +635,12 @@ const funcionReporteGuardarNuevo = async () => {
       objetoGuardarReporte,
       '/guardarReporteNuevo',
     );
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
@@ -662,17 +684,20 @@ const funcionReporteGuardarNuevo = async () => {
     modal.style.display = 'block';
     modal = document.getElementById('modalAlertM');
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    mostrarMensaje(error, 'error');
   }
 };
 
 const funcionReporteGuardarCambios = async () => {
   try {
+    // eslint-disable-next-line no-use-before-define
     const miAlerta = new Alerta();
     let aviso = 'Se modificarán los datos del reporte.';
     let mensaje = trO(aviso, objTraductor) || aviso;
@@ -684,9 +709,11 @@ const funcionReporteGuardarCambios = async () => {
       objetoGuardarReporte,
       '/guardarReporteCambios',
     );
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, 1000));
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
@@ -707,17 +734,20 @@ const funcionReporteGuardarCambios = async () => {
     modal.style.display = 'block';
     modal = document.getElementById('modalAlertM');
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    mostrarMensaje(error, 'error');
   }
 };
 
 const funcionReporteGuardarComo = async () => {
   try {
+    // eslint-disable-next-line no-use-before-define
     const miAlerta = new Alerta();
     let aviso = 'Se dará de alta una copia del reporte actual.';
     let mensaje = trO(aviso, objTraductor) || aviso;
@@ -731,9 +761,11 @@ const funcionReporteGuardarComo = async () => {
       objetoGuardarReporte,
       '/guardarReporteNuevo',
     );
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, 1000));
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
@@ -777,12 +809,14 @@ const funcionReporteGuardarComo = async () => {
     modal.style.display = 'block';
     modal = document.getElementById('modalAlertM');
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    mostrarMensaje(error, 'error');
   }
 };
 
@@ -804,13 +838,15 @@ const funcionSelectorGuardarNuevo = async () => {
       const modalAlertM = document.getElementById('modalAlertM');
       modalAlertM.style.display = 'none';
       modalAlertM.remove();
+      // eslint-disable-next-line no-use-before-define
       const miAlertaM = new Alerta();
       miAlertaM.createVerde(arrayGlobal.avisoVerde, null, objTraductor);
       const modal = document.getElementById('modalAlertVerde');
       modal.style.display = 'block';
-      modal.addEventListener('click', (e) => {
+      modal.addEventListener('click', () => {
         if (!modal) {
-          console.warn('Error de carga en el modal');
+          // console.warn('Error de carga en el modal');
+          mostrarMensaje('Error de carga en el modal', 'error');
         }
         modal.style.display = 'none'; // Cerrar el modal
         const url = `${SERVER}/Pages/ListVariables`;
@@ -892,11 +928,13 @@ function completaObjetoArea() {
   const { plant } = user;
   const inputs = document.querySelectorAll('input');
   inputs.forEach((input) => {
-    input.style.background = '#fff'; // Establece el fondo a blanco
+    const copia = { ...input };
+    copia.style.background = '#fff'; // Establece el fondo a blanco
   });
   const selects = document.querySelectorAll('select');
   selects.forEach((select) => {
-    select.style.background = '#fff';
+    const copia = { ...select };
+    copia.style.background = '#fff';
   });
   const objetoReporte = {
     idLTYarea: 0,
@@ -928,6 +966,7 @@ function completaObjetoArea() {
 
 const funcionAreaGuardarNuevo = async () => {
   try {
+    // eslint-disable-next-line no-use-before-define
     const miAlerta = new Alerta();
     let aviso = 'Se dará de alta una nueva área.';
     let mensaje = trO(aviso, objTraductor) || aviso;
@@ -940,9 +979,11 @@ const funcionAreaGuardarNuevo = async () => {
       objetoGuardarArea,
       '/guardarAreaNuevo',
     );
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, 1000));
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
@@ -969,17 +1010,20 @@ const funcionAreaGuardarNuevo = async () => {
     modal.style.display = 'block';
     modal = document.getElementById('modalAlertM');
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    mostrarMensaje(error, 'error');
   }
 };
 
 const funcionAreaGuardarCambios = async () => {
   try {
+    // eslint-disable-next-line no-use-before-define
     const miAlerta = new Alerta();
     let aviso = 'Se modificarán los datos del área.';
     let mensaje = trO(aviso, objTraductor) || aviso;
@@ -992,9 +1036,11 @@ const funcionAreaGuardarCambios = async () => {
       objetoGuardarArea,
       '/guardarCambioArea',
     );
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, 1000));
     if (!modal) {
-      console.warn('Error de carga en el modal');
+      // console.warn('Error de carga en el modal');
+      mostrarMensaje('Error de carga en el modal', 'error');
     }
     modal.style.display = 'none';
     modal.remove();
@@ -1014,7 +1060,8 @@ const funcionAreaGuardarCambios = async () => {
     modal = document.getElementById('modalAlertVerde');
     modal.style.display = 'block';
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    mostrarMensaje(error, 'error');
   }
 };
 
@@ -1056,13 +1103,14 @@ async function firmar(firmadoPor, objTrad) {
       };
       sessionStorage.setItem('config_menu', encriptar(configMenu));
     } else {
+      // eslint-disable-next-line no-use-before-define
       const miAlerta = new Alerta();
       const obj = arrayGlobal.avisoRojo;
       const texto = arrayGlobal.mensajesVarios.firma.no_encontrado;
       miAlerta.createVerde(obj, texto, objTrad);
 
-      const modal = document.getElementById('modalAlertVerde');
-      modal.style.display = 'block';
+      const modalAlertVerde = document.getElementById('modalAlertVerde');
+      modalAlertVerde.style.display = 'block';
     }
 
     // Esperar la eliminación del modal con promesas en lugar de setTimeout
@@ -1113,7 +1161,7 @@ function convertirObjATextPlano(obj) {
 
 // eslint-disable-next-line camelcase, no-unused-vars
 async function subirImagenes_OLD(img) {
-  console.log(img);
+  // console.log(img);
   if (img.length === 0) {
     return null;
   }
@@ -1132,7 +1180,7 @@ async function subirImagenes_OLD(img) {
   const formData = new FormData();
   formData.append('imgBase64', imgJsonString);
 
-  console.log(formData);
+  // console.log(formData);
   // return;
   fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
     method: 'POST',
@@ -1165,15 +1213,17 @@ function base64ToFile(base64String, filename, mimeType) {
 async function subirImagenes(img) {
   try {
     if (!img) {
-      console.log('Archivo de imagen vacío');
+      // console.log('Archivo de imagen vacío');
+      mostrarMensaje('Archivo de imagen', 'mensaje');
     }
     if (!Array.isArray(img) || img.length === 0) {
-      console.log('La imagen no es un array');
+      // console.log('La imagen no es un array');
+      mostrarMensaje('La imagen no es un array', 'mensaje');
     }
 
     const formData = new FormData();
 
-    img.forEach((item, groupIndex) => {
+    img.forEach((item) => {
       // console.log(`Procesando grupo de imágenes ${groupIndex}`);
 
       const {
@@ -1543,7 +1593,7 @@ function armaEncabezado(arrayMensajes, objTrad, docStorage, planta) {
   const titulo = trO(mensaje, objTrad) || mensaje;
   const idLTYreporte = arrayMensajes.objetoControl.idLTYreporte[0];
   const { texto, value } = planta;
-  const numeroPlanta = parseInt(value);
+  const numeroPlanta = parseInt(value, 10);
   const nombrePlanta = texto;
   const encabezados = {
     documento: docStorage,
@@ -1573,6 +1623,7 @@ function armaEncabezado(arrayMensajes, objTrad, docStorage, planta) {
 }
 
 function formatarMenu(doc, configMenu, objTranslate) {
+  // console.log(configMenu);
   let firmado;
   let count = 0;
   if (
@@ -1585,11 +1636,12 @@ function formatarMenu(doc, configMenu, objTranslate) {
       Object.prototype.toString.call(configMenu.configFirma) ===
       '[object Object]'
     ) {
-      for (const key in configMenu.configFirma) {
-        if (configMenu.configFirma.hasOwnProperty(key)) {
-          count++;
-        }
-      }
+      // for (const key in configMenu.configFirma) {
+      //   if (configMenu.configFirma.hasOwnProperty(key)) {
+      //     count++;
+      //   }
+      // }
+      count += Object.keys(configMenu.configFirma).length;
       count > 1 ? (firmado = true) : (firmado = false);
     }
   }
@@ -1700,6 +1752,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
   if (doc !== 'null' && firmado === true) {
     //! console.log('menú guardado con firma');
     const idMensaje1 = document.getElementById('idMensaje1');
+    const idMensaje2 = document.getElementById('idMensaje2');
     const mensajeDoc =
       trO(
         'Estás trabajando con un control guardado con el número:',
@@ -1755,7 +1808,7 @@ function formatarMenu(doc, configMenu, objTranslate) {
   procesoStyleDisplay(elementosStyle);
 }
 
-function estilosTheadCell(element, index, arrayWidthEncabezado) {
+function estilosTheadCell(element, index, arrayWidthEncabezadoThead) {
   const cell = document.createElement('th');
   cell.textContent = element;
   // trO(element.toUpperCase(), objTrad) || element.toUpperCase()
@@ -1764,7 +1817,7 @@ function estilosTheadCell(element, index, arrayWidthEncabezado) {
   cell.style.overflow = 'hidden';
 
   const widthCell =
-    widthScreenAjustado * widthScreen * arrayWidthEncabezado[index];
+    widthScreenAjustado * widthScreen * arrayWidthEncabezadoThead[index];
 
   // let size = '8px'
   // if (widthScreen >= 800) {
@@ -1790,12 +1843,12 @@ function estilosCell(
   requerido,
   display,
   objTrad,
-  arrayWidthEncabezado,
+  arrayWidthEncabezadoThead,
   index,
 ) {
   const cell = document.createElement('td');
   const widthCell =
-    widthScreenAjustado * widthScreen * arrayWidthEncabezado[index];
+    widthScreenAjustado * widthScreen * arrayWidthEncabezadoThead[index];
   let dato = '';
   if (type === 'link' && datos instanceof HTMLAnchorElement) {
     cell.appendChild(datos);
@@ -1842,14 +1895,14 @@ function estilosTbodyCell(
   index,
   cantidadDeRegistros,
   objTrad,
-  arrayWidthEncabezado,
+  arrayWidthEncabezadoTbody,
 ) {
   const newRow = document.createElement('tr');
   for (let i = 0; i < 6; i++) {
     const orden = [0, 3, 4, 6, 7, 1];
     let dato = element[orden[i]];
-    const tipoDeDato = element[5];
-    const tipoDeObservacion = element[9];
+    // const tipoDeDato = element[5];
+    // const tipoDeObservacion = element[9];
     let alignCenter = 'left';
     const paddingLeft = '5px';
     const colSpan = 0;
@@ -1882,7 +1935,7 @@ function estilosTbodyCell(
       requerido,
       display,
       objTrad,
-      arrayWidthEncabezado,
+      arrayWidthEncabezadoTbody,
       i,
     );
     newRow.appendChild(cell);
@@ -1892,10 +1945,14 @@ function estilosTbodyCell(
 
 async function handleClickEnlace(dato) {
   const control = await traerRegistros(`controlNT,${dato}`, null);
+  // eslint-disable-next-line camelcase
   const control_N = control[0][0];
+  // eslint-disable-next-line camelcase
   const control_T = control[0][1];
   let contenido = {
+    // eslint-disable-next-line camelcase
     control_N,
+    // eslint-disable-next-line camelcase
     control_T,
     nr: dato,
   };
@@ -1931,7 +1988,7 @@ function estilosTbodyCellConsulta(
   index,
   cantidadDeRegistros,
   objTranslate,
-  arrayWidthEncabezado,
+  arrayWidthEncabezadoTcell,
   filaDoc,
 ) {
   const newRow = document.createElement('tr');
@@ -1966,7 +2023,7 @@ function estilosTbodyCellConsulta(
       requerido,
       display,
       null,
-      arrayWidthEncabezado,
+      arrayWidthEncabezadoTcell,
       i,
     );
     newRow.appendChild(cell);
@@ -2069,7 +2126,8 @@ function formatoDivsMedidas(m1, m2, m3, num) {
   div.style.height = `${m2}${px}`;
   const divsRadios = document.querySelectorAll('.div-radios');
   divsRadios.forEach((element) => {
-    element.style.height = `${m3}${px}`;
+    const copia = { ...element };
+    copia.style.height = `${m3}${px}`;
   });
   if (num === 1) {
     // vacio
@@ -2081,11 +2139,12 @@ function formatoDivsMedidas(m1, m2, m3, num) {
     div.style.display = 'none';
     const divsMedidas = document.querySelectorAll('.div-medidas');
     divsMedidas.forEach((element) => {
-      element.style.display = 'none';
-      const inputs = element.getElementsByTagName('input');
-      Array.from(inputs).forEach((input) => {
-        // input.value = 100
-      });
+      const copia = { ...element };
+      copia.style.display = 'none';
+      // const inputs = element.getElementsByTagName('input');
+      // Array.from(inputs).forEach((input) => {
+      //   // input.value = 100
+      // });
     });
   }
   if (num === 2) {
@@ -2100,11 +2159,12 @@ function formatoDivsMedidas(m1, m2, m3, num) {
     div.style.display = 'block';
     const divsMedidas = document.querySelectorAll('.div-medidas');
     divsMedidas.forEach((element) => {
-      element.style.display = 'none';
-      const inputs = element.getElementsByTagName('input');
-      Array.from(inputs).forEach((input) => {
-        // input.value = 100
-      });
+      const copia = { ...element };
+      copia.style.display = 'none';
+      // const inputs = element.getElementsByTagName('input');
+      // Array.from(inputs).forEach((input) => {
+      //   // input.value = 100
+      // });
     });
   }
   if (num === 3) {
@@ -2117,11 +2177,12 @@ function formatoDivsMedidas(m1, m2, m3, num) {
     div.style.display = 'none';
     const divsMedidas = document.querySelectorAll('.div-medidas');
     divsMedidas.forEach((element) => {
-      element.style.display = 'block';
-      const inputs = element.getElementsByTagName('input');
-      Array.from(inputs).forEach((input) => {
-        // input.value = 100
-      });
+      const copia = { ...element };
+      copia.style.display = 'block';
+      // const inputs = element.getElementsByTagName('input');
+      // Array.from(inputs).forEach((input) => {
+      //   // input.value = 100
+      // });
     });
   }
 
@@ -2135,11 +2196,12 @@ function formatoDivsMedidas(m1, m2, m3, num) {
     div.style.display = 'none';
     const divsMedidas = document.querySelectorAll('.div-medidas');
     divsMedidas.forEach((element) => {
-      element.style.display = 'block';
-      const inputs = element.getElementsByTagName('input');
-      Array.from(inputs).forEach((input) => {
-        // input.value = 100
-      });
+      const copia = { ...element };
+      copia.style.display = 'block';
+      // const inputs = element.getElementsByTagName('input');
+      // Array.from(inputs).forEach((input) => {
+      //   // input.value = 100
+      // });
     });
   }
 }
@@ -2223,10 +2285,10 @@ export default class Alerta {
     this.modal.style.background = 'rgba(0, 0, 0, 0.8)';
     // Crear el contenido del modal
     if (typeAlert === 'guardar') {
-      obj.divContent.height = '210px';
+      obj.divContent.height = '25vh';
     }
     if (typeAlert === 'guardarCambio') {
-      obj.divContent.height = '210px';
+      obj.divContent.height = '30vh';
     }
 
     const modalContent = createDiv(obj.divContent);
@@ -2351,12 +2413,10 @@ export default class Alerta {
         limpiaArrays();
         const fila3 = 1;
         const { idLTYcontrol } = requerido;
-        console.log(idLTYcontrol);
         const table = document.querySelector('#tableControl');
         const tbody = table.querySelector('tbody');
         let filas = tbody.querySelector(`tr:nth-child(${fila3})`);
         let celda = filas.querySelector('td:nth-child(6)');
-        console.log(celda);
         let id = celda.textContent.trim();
         let incremento = fila3;
         while (idLTYcontrol !== id) {
@@ -2780,10 +2840,10 @@ export default class Alerta {
     //! firmar
     if (sinMenus.sinHacerFirmar || conMenus.conHacerFirmar) {
       if (sinMenus.sinHacerFirmar.length > 0) {
-        existeSin = sinMenus.sinHacerFirmar.includes(parseInt(controlN));
+        existeSin = sinMenus.sinHacerFirmar.includes(parseInt(controlN, 10));
       }
       if (conMenus.conHacerFirmar.length > 0) {
-        existeCon = conMenus.conHacerFirmar.includes(parseInt(controlN));
+        existeCon = conMenus.conHacerFirmar.includes(parseInt(controlN, 10));
       }
     }
 
@@ -2841,7 +2901,7 @@ export default class Alerta {
     obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrRefresh';
-    hr = createHR(obj.hr);
+    // hr = createHR(obj.hr);
     // modalContent.appendChild(hr)
     //! fin refrescar
 
@@ -2859,7 +2919,7 @@ export default class Alerta {
     obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrSalir';
-    hr = createHR(obj.hr);
+    // hr = createHR(obj.hr);
     // modalContent.appendChild(hr)
     //! fin salir
 
@@ -2991,7 +3051,7 @@ export default class Alerta {
 
     //! api
     obj.divCajita.id = 'idDivApi';
-    if (parseInt(tipo) >= 3) {
+    if (parseInt(tipo, 10) >= 3) {
       obj.divCajita.onClick = funcionApi;
     }
     div = createDiv(obj.divCajita);
@@ -3050,7 +3110,7 @@ export default class Alerta {
     obj.divCajita.onClick = null;
 
     obj.hr.id = 'idHrSalir';
-    hr = createHR(obj.hr);
+    // hr = createHR(obj.hr);
     // modalContent.appendChild(hr)
     //! fin salir
 
@@ -3199,7 +3259,7 @@ export default class Alerta {
           // const ruta = `../../Pages/ControlsView/index.php?v=${Math.round(
           //   Math.random() * 10
           // )}`
-          // console.log(cod)
+          // console.log(url);
           const objetoRuta = {
             control_N: url,
             control_T: decodeURIComponent(name),
@@ -3389,7 +3449,8 @@ export default class Alerta {
         });
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      mostrarMensaje(error, 'error');
     }
   }
 
@@ -3431,6 +3492,7 @@ export default class Alerta {
       title.setAttribute('data-status', array[20]);
       modalContent.appendChild(title);
 
+      // eslint-disable-next-line prefer-destructuring
       texto = array[2];
       texto = trA(texto, objTrad) || texto;
       typeAlert = 'descripcion';
@@ -3439,14 +3501,14 @@ export default class Alerta {
       let spanTexto = createSpan(obj.span, texto);
       modalContent.appendChild(spanTexto);
 
-      let on_of = 'ON';
+      let onOf = 'ON';
       let colorOnOff = 'green';
       if (array[20] === 'n') {
-        on_of = 'OFF';
+        onOf = 'OFF';
         colorOnOff = 'red';
       }
 
-      texto = `Status: ${on_of}`;
+      texto = `Status: ${onOf}`;
       typeAlert = 'status';
       obj.span.text[typeAlert] = texto;
       obj.span.marginTop = '2px';
@@ -3476,7 +3538,7 @@ export default class Alerta {
       spanTexto = createSpan(obj.span, texto);
       modalContent.appendChild(spanTexto);
 
-      if (nivelReporte <= parseInt(tipo)) {
+      if (nivelReporte <= parseInt(tipo, 10)) {
         const divButton = createDiv(obj.divButtons);
         texto = trO('Editar', objTrad) || 'Editar';
         obj.btnNuevo.text = texto;
@@ -3527,7 +3589,7 @@ export default class Alerta {
           //! ON/OFF
           const idTituloH3 = document.getElementById('idTituloH3');
           const cod = idTituloH3.getAttribute('data-index');
-          const name = idTituloH3.getAttribute('data-name');
+          // const name = idTituloH3.getAttribute('data-name');
           const status = idTituloH3.getAttribute('data-status');
           await onOff(cod, status);
 
@@ -3559,7 +3621,8 @@ export default class Alerta {
         }
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      mostrarMensaje(error, 'error');
     }
   }
 
@@ -3572,7 +3635,7 @@ export default class Alerta {
       this.modal.className = 'modal';
       this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
 
-      obj.divContent.height = '290px';
+      obj.divContent.height = '35vh';
       const modalContent = createDiv(obj.divContent);
 
       const span = createSpan(obj.close);
@@ -3595,14 +3658,14 @@ export default class Alerta {
       title.setAttribute('data-visible', array[4]);
       modalContent.appendChild(title);
 
-      let on_of = 'ON';
+      let onOf = 'ON';
       let colorOnOff = 'green';
       if (array[3] === 'n') {
-        on_of = 'OFF';
+        onOf = 'OFF';
         colorOnOff = 'red';
       }
 
-      texto = `Status: ${on_of}`;
+      texto = `Status: ${onOf}`;
       typeAlert = 'status';
       obj.span.text = texto;
       obj.span.marginTop = '2px';
@@ -3611,14 +3674,14 @@ export default class Alerta {
       let spanStatus = createSpan(obj.span, texto);
       modalContent.appendChild(spanStatus);
 
-      on_of = 'ON';
+      onOf = 'ON';
       colorOnOff = 'green';
       if (array[4] === 'n') {
-        on_of = 'OFF';
+        onOf = 'OFF';
         colorOnOff = 'red';
       }
 
-      texto = `Visible: ${on_of}`;
+      texto = `Visible: ${onOf}`;
       typeAlert = 'status';
       obj.span.text = texto;
       obj.span.marginTop = '2px';
@@ -3630,6 +3693,7 @@ export default class Alerta {
       obj.input.width = null;
       obj.input.type = 'text';
       obj.input.fontWeight = null;
+      // eslint-disable-next-line prefer-destructuring
       obj.input.value = array[0];
       obj.input.id = 'idInputArea';
       const input = createInput(obj.input);
@@ -3657,7 +3721,7 @@ export default class Alerta {
         const idTituloH3 = document.getElementById('idTituloH3');
         const cod = idTituloH3.getAttribute('data-index');
         let { value } = document.getElementById('idInputArea');
-        const id = parseInt(cod);
+        const id = parseInt(cod, 10);
         const filtrado = arrayGlobal.arrayReportes.filter(
           (subArray) => subArray[1] === cod,
         );
@@ -3683,7 +3747,8 @@ export default class Alerta {
         }
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      mostrarMensaje(error, 'error');
     }
   }
 
@@ -3777,8 +3842,8 @@ export default class Alerta {
       // Agregar el modal al body del documento
       document.body.appendChild(this.modal);
       const idbtnEnviar = document.getElementById('idbtnEnviar');
-      idbtnEnviar.addEventListener('click', async (e) => {
-        const name = e.target.attributes[3].value;
+      idbtnEnviar.addEventListener('click', async () => {
+        // const name = e.target.attributes[3].value;
         // console.log(name)
         const inputDesde = document.getElementById('idDesde');
         const inputHasta = document.getElementById('idHasta');
@@ -3814,6 +3879,7 @@ export default class Alerta {
           const modal = document.getElementById('modalAlertCarga');
           modal.style.display = 'block';
           document.getElementById('idSpanCarga').style.display = 'none';
+          // eslint-disable-next-line no-promise-executor-return
           await new Promise((resolve) => setTimeout(() => resolve(), 200));
           const consulta = await callProcedure(
             procedure.procedure,
@@ -3887,7 +3953,7 @@ export default class Alerta {
             const cantidadDeRegistros = nuevoArray[0].length;
             const tbody = document.createElement('tbody');
             nuevoArray.forEach((element, index) => {
-              const newRow = estilosTbodyCellConsulta(
+              const newRowCalendar = estilosTbodyCellConsulta(
                 element,
                 index,
                 cantidadDeRegistros,
@@ -3895,7 +3961,7 @@ export default class Alerta {
                 arrayWidth,
                 filaDoc,
               );
-              tbody.appendChild(newRow);
+              tbody.appendChild(newRowCalendar);
             });
             table.appendChild(tbody);
           }
@@ -3910,8 +3976,8 @@ export default class Alerta {
         }
       });
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      // console.log(error);
+      mostrarMensaje(error, 'error');
     }
   }
 
@@ -4015,8 +4081,7 @@ export default class Alerta {
         table.appendChild(tbody);
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      mostrarMensaje(error, 'error');
     }
   }
 
@@ -4108,8 +4173,7 @@ export default class Alerta {
       this.modal.appendChild(modalContent);
       document.body.appendChild(this.modal);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      mostrarMensaje(error, 'error');
     }
   }
 
@@ -4136,6 +4200,7 @@ export default class Alerta {
     modalContent.appendChild(title);
 
     texto = trO(obj.titulo.text.eliminar, objTrad) || obj.titulo.text.eliminar;
+    // eslint-disable-next-line camelcase
     obj.titulo.text.eliminar = `${control_N} - ${control_T}`;
     obj.titulo.marginTop = '0px';
     const ctrl = createH3(obj.titulo, 'eliminar');
@@ -4530,7 +4595,7 @@ export default class Alerta {
     // Crear el elemento modal
     const obj = JSON.parse(JSON.stringify(objeto));
     let datoSeleccionado = null;
-    const col = parseInt(target.col) - 1;
+    const col = parseInt(target.col, 10) - 1;
     const { column, valor } = target;
     const bindParam = [
       's',
@@ -4559,11 +4624,12 @@ export default class Alerta {
       's',
       's',
     ];
-    const tipoDeParametro = bindParam[parseInt(column)];
+    const tipoDeParametro = bindParam[parseInt(column, 10)];
     this.modal = document.createElement('div');
     this.modal.id = 'modalAlert';
     this.modal.className = 'modal';
     this.modal.style.background = 'rgba(0, 0, 0, 0.5)';
+
     // Crear el contenido del modal
     obj.divContent.id = 'idDivListControles';
     // console.log(column);
@@ -4599,7 +4665,7 @@ export default class Alerta {
       default:
         break;
     }
-    // console.log(obj)
+    // console.log(obj);
     const modalContent = createDiv(obj.divContent);
     const spanClose = createSpan(obj.close);
     spanClose.addEventListener('click', () => {
@@ -4641,17 +4707,20 @@ export default class Alerta {
       case '21':
       case '22':
         obj.divCajita.height = null;
+        // eslint-disable-next-line no-case-declarations
         const divDetalle = createDiv(obj.divCajita);
         obj.label.id = `idLabel${texto}`;
         obj.label.innerText = `${actualMente}: ${valor}`;
         obj.label.fontSize = '18px';
         obj.label.backgroundColor = '#cecece';
+        // eslint-disable-next-line no-case-declarations
         const label = createLabel(obj.label);
         obj.input.id = `idInput${texto.trim()}`;
         obj.input.width = '250px';
         obj.input.fontWeight = 600;
         obj.input.value = valor;
 
+        // eslint-disable-next-line no-case-declarations
         let input = '';
         if (column === '5') {
           obj.input.className = 'textArea-detalle';
@@ -4727,12 +4796,15 @@ export default class Alerta {
       case '24':
         obj.divCajita.height = null;
         obj.divCajita.alignItems = 'center';
+        // eslint-disable-next-line no-case-declarations
         const divDetalleS = createDiv(obj.divCajita);
         obj.label.id = `idLabel${texto.trim()}`;
         obj.label.innerText = `${actualMente}: ${valor}`;
         obj.label.fontSize = '18px';
         obj.label.backgroundColor = '#cecece';
+        // eslint-disable-next-line no-case-declarations
         const labelS = createLabel(obj.label);
+        // eslint-disable-next-line no-case-declarations
         const nameOptions = [
           ['d', 'Fecha'],
           ['h', 'Hora'],
@@ -4758,11 +4830,14 @@ export default class Alerta {
           ['pastillaTx', 'Pastilla Texto'],
           ['pastillaSelect', 'Pastilla Select'],
           ['pastillaConsulta', 'Pastilla Consulta'],
+          ['tablex', 'Tabla'],
         ];
+        // eslint-disable-next-line no-case-declarations
         const params = {
           id: '',
           className: 'select-tipodedato',
         };
+        // eslint-disable-next-line no-case-declarations
         const select = createSelect(nameOptions, params, objTrad);
         datoSeleccionado = '';
         select.addEventListener('change', (e) => {
@@ -4776,13 +4851,16 @@ export default class Alerta {
       case '11':
         obj.divCajita.height = 'auto';
         // obj.divCajita.display = 'flex'
+        // eslint-disable-next-line no-case-declarations
         const divDetalleP = createDiv(obj.divCajita);
         obj.label.id = `idLabel${texto.trim()}`;
         obj.label.innerText = `${actualMente}: ${valor}`;
         obj.label.fontSize = '18px';
         obj.label.backgroundColor = '#cecece';
+        // eslint-disable-next-line no-case-declarations
         const labelTituloCampo = createLabel(obj.label);
         modalContent.appendChild(labelTituloCampo);
+        // eslint-disable-next-line no-case-declarations
         const paramsRadio = {
           name: 'radio',
           class: 'radio-selector',
@@ -4811,7 +4889,9 @@ export default class Alerta {
         obj.divCajita.width = '100%';
         obj.divCajita.flexDirection = 'row';
         obj.divCajita.height = '50px';
+        // eslint-disable-next-line no-case-declarations
         let divCajitaRB = createDiv(obj.divCajita);
+        // eslint-disable-next-line no-case-declarations
         const radio = createRadioButton(paramsRadio);
         radio.addEventListener('change', () => {
           formatoDivsMedidas('auto', 120, 120, 1);
@@ -4821,12 +4901,14 @@ export default class Alerta {
         obj.span.fontSize = '18px';
         obj.span.fontWeight = 600;
         obj.span.alignSelf = 'normal';
+        // eslint-disable-next-line no-case-declarations
         let spanRB = createSpan(obj.span, trO('Vacío', objTrad) || 'Vacío');
         divCajitaRB.appendChild(radio);
         divCajitaRB.appendChild(spanRB);
         divDetalleP.appendChild(divCajitaRB);
         paramsRadio.checked = null;
 
+        // eslint-disable-next-line no-case-declarations
         const radio2 = createRadioButton(paramsRadio);
         spanRB = createSpan(
           obj.span,
@@ -4855,6 +4937,7 @@ export default class Alerta {
         obj.divCajita.flexDirection = null;
         obj.divCajita.textAlign = 'center';
         obj.label.fontWeight = 600;
+        // eslint-disable-next-line no-case-declarations
         const divSeparador = createDiv(obj.divCajita);
         obj.label.id = null;
         obj.label.fontSize = '18px';
@@ -4862,6 +4945,7 @@ export default class Alerta {
         obj.label.className = 'label-separador';
         obj.label.innerText =
           trO('----Separador----', objTrad) || '----Separador----';
+        // eslint-disable-next-line no-case-declarations
         const labelSeparador = createLabel(obj.label);
         divSeparador.appendChild(labelSeparador);
         divCajitaRB.appendChild(divSeparador);
@@ -4869,6 +4953,7 @@ export default class Alerta {
         modalContent.appendChild(divDetalleP);
         //*
 
+        // eslint-disable-next-line no-case-declarations
         const radio3 = createRadioButton(paramsRadio);
         radio3.addEventListener('change', () => {
           formatoDivsMedidas('auto', 250, 150, 3);
@@ -4905,8 +4990,11 @@ export default class Alerta {
         obj.divCajita.flexDirection = null;
         obj.divCajita.textAlign = 'left';
 
+        // eslint-disable-next-line no-case-declarations
         let divHW = createDiv(obj.divCajita);
+        // eslint-disable-next-line no-case-declarations
         const objInput3 = { ...obj.input };
+        // eslint-disable-next-line no-case-declarations
         const inputCols = { ...obj.input };
         objInput3.type = 'number';
         objInput3.width = '60%';
@@ -4921,15 +5009,19 @@ export default class Alerta {
         obj.label.className = 'label-HW';
         obj.label.innerText = 'Width';
         objInput3.id = 'idWidth';
+        // eslint-disable-next-line no-case-declarations
         const inputH = createInput(objInput3);
+        // eslint-disable-next-line no-case-declarations
         const labelH = createLabel(obj.label);
         divHW.appendChild(inputH);
         divHW.appendChild(labelH);
         divCajitaRB.appendChild(divHW);
         divHW = createDiv(obj.divCajita);
         objInput3.id = 'idHeight';
+        // eslint-disable-next-line no-case-declarations
         const inputW = createInput(objInput3);
         obj.label.innerText = 'Height';
+        // eslint-disable-next-line no-case-declarations
         const labelW = createLabel(obj.label);
         divHW.appendChild(inputW);
         divHW.appendChild(labelW);
@@ -4938,6 +5030,7 @@ export default class Alerta {
         modalContent.appendChild(divDetalleP);
 
         //* se agrega para texto largo
+        // eslint-disable-next-line no-case-declarations
         const radio4 = createRadioButton(paramsRadio);
         radio4.addEventListener('change', () => {
           formatoDivsMedidas('auto', 250, 150, 4); // 500
@@ -4984,6 +5077,7 @@ export default class Alerta {
         obj.divCajita.flexDirection = null;
         obj.divCajita.textAlign = 'left';
 
+        // eslint-disable-next-line no-case-declarations
         let divHWtx = createDiv(obj.divCajita);
         inputCols.type = 'number';
         inputCols.width = '60%';
@@ -4998,7 +5092,9 @@ export default class Alerta {
         obj.label.className = 'label-HW';
         obj.label.innerText = 'Rows';
         inputCols.id = 'idWidthTx';
+        // eslint-disable-next-line no-case-declarations
         const inputHtx = createInput(inputCols);
+        // eslint-disable-next-line no-case-declarations
         const labelHtx = createLabel(obj.label);
         divHWtx.appendChild(inputHtx);
         divHWtx.appendChild(labelHtx);
@@ -5006,8 +5102,10 @@ export default class Alerta {
         divHWtx = createDiv(obj.divCajita);
         inputCols.id = 'idHeightTx';
         inputCols.value = 50;
+        // eslint-disable-next-line no-case-declarations
         const inputWtx = createInput(inputCols);
         obj.label.innerText = 'Cols';
+        // eslint-disable-next-line no-case-declarations
         const labelWtx = createLabel(obj.label);
         divHWtx.appendChild(inputWtx);
         divHWtx.appendChild(labelWtx);
@@ -5024,7 +5122,9 @@ export default class Alerta {
         obj.input.id = 'idboxTx';
         obj.input.cursor = 'pointer';
         obj.input.width = '25px';
+        // eslint-disable-next-line no-case-declarations
         const boxTx = createInput(obj.input);
+        // eslint-disable-next-line no-case-declarations
         const labelBox = createLabel(obj.label);
         divCajitaRB.appendChild(boxTx);
         divCajitaRB.appendChild(labelBox);
@@ -5038,17 +5138,22 @@ export default class Alerta {
         //* selector de variable
         obj.divCajita.height = null;
         obj.divCajita.alignItems = 'center';
+        // eslint-disable-next-line no-case-declarations
         const divDetalleSelects = createDiv(obj.divCajita);
         obj.label.id = `idLabel${texto.trim()}`;
         obj.label.innerText = `${actualMente}: ${valor}`;
         obj.label.fontSize = '18px';
         obj.label.backgroundColor = '#cecece';
+        // eslint-disable-next-line no-case-declarations
         const labelSelects = createLabel(obj.label);
+        // eslint-disable-next-line no-case-declarations
         const nameOptionSelect = LTYselect;
+        // eslint-disable-next-line no-case-declarations
         const paramSelect = {
           id: '',
           className: 'select-tipodedato',
         };
+        // eslint-disable-next-line no-case-declarations
         const selects = createSelect(nameOptionSelect, paramSelect, objTrad);
         datoSeleccionado = '';
         selects.addEventListener('change', (e) => {
@@ -5075,7 +5180,7 @@ export default class Alerta {
       // aceptar el cambio
       let response = false;
       let datoSatinizado = '';
-      console.log(datoSeleccionado, column);
+
       if (
         typeof datoSeleccionado === 'object' ||
         column === '16' ||
@@ -5088,7 +5193,7 @@ export default class Alerta {
       } else {
         datoSatinizado = sanitiza(datoSeleccionado).trim();
       }
-      console.log(datoSatinizado, valor);
+
       if (datoSeleccionado !== null && datoSatinizado !== valor) {
         response = {
           success: true,
@@ -5098,7 +5203,7 @@ export default class Alerta {
       } else {
         response = { success: false, response: null };
       }
-      console.log(response);
+
       callback(response);
       cerrarModal('modalAlert');
     });
@@ -5135,7 +5240,8 @@ export default class Alerta {
     const inputs = document.querySelectorAll('.solonumeros');
     inputs.forEach((input) => {
       input.addEventListener('input', () => {
-        input.value = input.value.replace(/\D/g, ''); // Remueve cualquier carácter que no sea un dígito
+        const copia = { ...input };
+        copia.value = input.value.replace(/\D/g, ''); // Remueve cualquier carácter que no sea un dígito
       });
     });
     const chkBox = document.getElementById('idboxTx');

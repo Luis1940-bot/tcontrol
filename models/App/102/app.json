@@ -34,7 +34,7 @@
     "ruta": ["Controles\/index.php", ""]
   },
   "Ad": {
-    "name": ["Reportes", "Controles", "Variables", "Areas", "Comunicaciones"],
+    "name": ["Reportes", "Controles", "Variables", "Areas", "Comunicación"],
     "type": ["", "", "", "", ""],
     "ruta": [
       "ListReportes\/index.php",

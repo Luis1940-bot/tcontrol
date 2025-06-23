@@ -308,8 +308,10 @@ async function verSupervisor(idSupervisor, plant) {
 
 async function cargarNR(res, plant, data) {
   try {
+    // console.log(res, plant);
     const objString = res[0][14];
     const datos = JSON.parse(objString);
+
     const idSupervisor = datos.supervisor[0];
     const table = document.getElementById('tableControl');
     // console.log(
