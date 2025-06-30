@@ -1,20 +1,27 @@
-PLATAFORMA TENKI
+![tControl Logo](assets/img/tenki/logo.png)
 
-D.A.T.O.S.
+# 🏭 PLATAFORMA TENKI - tControl
 
-Dinámico: Adaptable a diferentes dispositivos y necesidades operacionales.
+## 📊 D.A.T.O.S.
 
-Accesible: Facil acceso y manejo desde cualquier dispositivo con conexión a internet.
+**Dinámico**: Adaptable a diferentes dispositivos y necesidades operacionales.
 
-Transparente: Facilita la visualización clara y directa de los datos en tiempo real.
+**Accesible**: Fácil acceso y manejo desde cualquier dispositivo con conexión a internet.
 
-Operacional: Orientado a optimizar las operaciones y procesos diarios.
+**Transparente**: Facilita la visualización clara y directa de los datos en tiempo real.
 
-Seguro: Protege la integridad y privacidad de los datos recolectados.
+**Operacional**: Orientado a optimizar las operaciones y procesos diarios.
 
-Este nemónico resume las características esenciales de un sistema de controles web y es fácil de recordar, lo que puede ayudar a los usuarios a mantener en mente las principales ventajas y funciones del sistema cuando lo usen o lo mencionen.
+**Seguro**: Protege la integridad y privacidad de los datos recolectados.
 
-# tControl - Sistema de Gestión Documental
+---
+
+# 🎯 tControl - Sistema de Gestión Documental
+
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
+[![Environment](https://img.shields.io/badge/environment-testing-yellow.svg)](https://test.tenkiweb.com/tcontrol)
+[![PHP](https://img.shields.io/badge/PHP-8.0%2B-777BB4.svg)](https://php.net/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Este sistema permite gestionar reportes técnicos generados por diferentes áreas, asignarlos a usuarios y clasificarlos por tipo, cliente y otros metadatos. La arquitectura incluye integración con roles, notificaciones por correo (futuro), y lógica RACI para asignación de responsabilidades.
 
@@ -448,8 +455,8 @@ Informes generados a partir de los dashboards.
 | ------------ | -------- | ------------------------ |
 | idLTYarea    | INT      | ID del área              |
 | areax        | VARCHAR  | Nombre del área          |
-| activo       | BOOLEAN  | Estado del área          |
-| visible      | BOOLEAN  | Indicador de visibilidad |
+| activo       | BOOLEAN | Estado del área          |
+| visible      | BOOLEAN | Indicador de visibilidad |
 | idLTYcliente | INT (FK) | Cliente asociado         |
 
 ---
@@ -746,6 +753,38 @@ Dependencias y configuración adicional se encuentran en:
 ├── Router/ → Control de navegación por rutas
 ├── Rove_OLD/ → Versión anterior de algo, nadie lo toca pero nadie lo borra
 ├── Sadmin/ → Posible super admin / configuración avanzada
+
+## 🚀 **Despliegue y Entornos**
+
+### **Entornos Disponibles**
+- **🔧 Development**: `http://localhost/tcontrol/` - Desarrollo local
+- **🧪 Testing**: `https://test.tenkiweb.com/tcontrol/` - Pruebas de usuario
+- **🌐 Production**: `https://tenkiweb.com/tcontrol/` - Producción
+
+### **Flujo de Trabajo**
+```bash
+# Desarrollo
+git checkout development
+git checkout -b feature/nueva-funcionalidad
+# ... desarrollo ...
+git push origin feature/nueva-funcionalidad
+
+# Testing
+git checkout testing
+git merge development
+./deploy.ps1 -Environment testing
+
+# Producción
+git checkout main  
+git merge testing
+./deploy.ps1 -Environment production
+```
+
+### **Scripts de Despliegue**
+- **Windows**: `.\deploy.ps1 -Environment [development|testing|production]`
+- **Linux/Mac**: `./deploy.sh [development|testing|production]`
+
+---
 
 ## 🛍️ Flujo de Usuario y Experiencia de Uso (UX)
 
