@@ -76,8 +76,8 @@ foreach ($config as $key => $value) {
 }
 
 // Configurar PHP basado en el entorno
-error_reporting(ERROR_REPORTING);
-ini_set('display_errors', DISPLAY_ERRORS ? '1' : '0');
+error_reporting($config['ERROR_REPORTING']);
+ini_set('display_errors', $config['DISPLAY_ERRORS'] ? '1' : '0');
 
 // Definir constante del entorno
 if (!defined('ENVIRONMENT')) {
