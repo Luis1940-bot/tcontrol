@@ -1,0 +1,74 @@
+<?php
+/**
+ * Archivo de configuración de ejemplo para tControl
+ * Copia este archivo a config.php y configura tus credenciales
+ */
+
+// ⚠️ NO SUBIR ESTE ARCHIVO CON CREDENCIALES REALES A GIT
+
+// Configuración de Base de Datos
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'tcontrol_dev'); // Cambiar según entorno
+define('DB_USER', 'tu_usuario');
+define('DB_PASS', 'tu_password');
+define('DB_CHARSET', 'utf8mb4');
+
+// Configuración de la aplicación
+define('BASE_URL', 'http://localhost/tcontrol/');
+define('APP_NAME', 'tControl');
+define('APP_VERSION', '2.0.0');
+
+// Configuración de email (PHPMailer)
+define('SMTP_HOST', 'smtp.gmail.com');
+define('SMTP_PORT', 587);
+define('SMTP_USER', 'tu_email@gmail.com');
+define('SMTP_PASS', 'tu_password_aplicacion');
+define('SMTP_FROM', 'noreply@tenkiweb.com');
+define('SMTP_FROM_NAME', 'tControl System');
+
+// Configuración de seguridad
+define('JWT_SECRET', 'tu_clave_secreta_muy_larga_y_segura');
+define('ENCRYPTION_KEY', 'otra_clave_para_encriptacion');
+
+// Configuración de sesiones
+define('SESSION_LIFETIME', 3600); // 1 hora
+define('SESSION_NAME', 'TCONTROL_SESSION');
+
+// Configuración de logging
+define('LOG_LEVEL', 'DEBUG'); // DEBUG, INFO, WARNING, ERROR
+define('LOG_FILE', __DIR__ . '/logs/app.log');
+
+// Configuración específica del entorno
+define('ENVIRONMENT', 'development'); // development, testing, production
+define('DEBUG_MODE', true);
+define('SHOW_ERRORS', true);
+
+// Configuración de archivos
+define('UPLOAD_PATH', __DIR__ . '/assets/Imagenes/');
+define('MAX_FILE_SIZE', 5242880); // 5MB
+define('ALLOWED_EXTENSIONS', 'jpg,jpeg,png,gif,pdf,doc,docx');
+
+// Timezone
+date_default_timezone_set('America/Mexico_City');
+
+// Headers de seguridad (solo para producción)
+if (ENVIRONMENT === 'production') {
+    header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+    header("X-Content-Type-Options: nosniff");
+    header("X-Frame-Options: DENY");
+    header("X-XSS-Protection: 1; mode=block");
+}
+
+// Configuración de errores según entorno
+if (ENVIRONMENT === 'development') {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+} else {
+    error_reporting(E_ERROR | E_WARNING | E_PARSE);
+    ini_set('display_errors', 0);
+}
+
+// Autoload de Composer
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
