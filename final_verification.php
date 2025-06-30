@@ -4,12 +4,13 @@
 echo "🚀 VERIFICACIÓN COMPLETA DE CONFIGURACIÓN DE ENTORNOS\n";
 echo "=" . str_repeat("=", 60) . "\n\n";
 
-function testSingleEnvironment($host, $envName) {
-    echo "🔍 PROBANDO: $envName\n";
-    echo "Host: $host\n";
-    
-    // Crear proceso separado para cada entorno
-    $testScript = "<?php
+function testSingleEnvironment($host, $envName)
+{
+  echo "🔍 PROBANDO: $envName\n";
+  echo "Host: $host\n";
+
+  // Crear proceso separado para cada entorno
+  $testScript = "<?php
 \$_SERVER['HTTP_HOST'] = '$host';
 include 'config_env.php';
 echo 'Entorno: ' . ENVIRONMENT . \"\\n\";
@@ -19,17 +20,17 @@ echo 'Cache: ' . (CACHE_ENABLED ? 'ON' : 'OFF') . \"\\n\";
 echo 'BD: ' . DB_NAME . \"\\n\";
 echo 'Log Level: ' . LOG_LEVEL . \"\\n\";
 ";
-    
-    // Escribir script temporal
-    file_put_contents('temp_test.php', $testScript);
-    
-    // Ejecutar y capturar resultado
-    $output = shell_exec('php temp_test.php 2>&1');
-    echo $output;
-    echo "✅ OK\n\n";
-    
-    // Limpiar
-    unlink('temp_test.php');
+
+  // Escribir script temporal
+  file_put_contents('temp_test.php', $testScript);
+
+  // Ejecutar y capturar resultado
+  $output = shell_exec('php temp_test.php 2>&1');
+  echo $output;
+  echo "✅ OK\n\n";
+
+  // Limpiar
+  unlink('temp_test.php');
 }
 
 // Probar todos los entornos
