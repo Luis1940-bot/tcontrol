@@ -1,0 +1,223 @@
+Compañía
+Correo electrónico
+Contraseña
+Acceso
+Sin compañías
+Versión
+Usted está en
+Alta de usuario
+Regístrese (Seleccione compañía y escriba su email).
+Registra tu compañía.
+Recuperar contraseña.
+Nombre y apellido
+Repetir contraseña
+Área
+Puesto
+Código de usuario
+Tipo de usuario
+Situación
+Activo
+No activo
+Verificador
+No verificado
+Verificado
+Firma
+Idioma
+Español
+Inglés
+Portugués
+Registrar
+Colaborador	
+Usuario u operador
+Supervisor	
+Supervisor o encargado
+Jefe	
+Jefatura de área
+Admin	
+Un administrador del cliente
+Gerente	
+Gerente de área
+Sponsor	
+Sponsor, Directores y quien paga por la herramienta
+Desarrollador	
+Sólo para desarrolladores
+Aguarde un instante luego será redirigido.
+Verificación.
+Ingrese el código de verificación:
+Verificar
+Aguarde un instante luego será redirigido.
+El usuario ya existe
+Formato de correo no válido.
+Su usuario no está verificado, debe buscar el email para verificar o comuníquese con el administrador.
+Blanqueo de contraseña.
+No se encontró el usuario.
+Falta completar algún campos.
+Hay diferencias entre los emails escritos.
+Ingrese su correo electrónico
+Repita su correo electrónico
+Enviar solicitud
+Ingrese la nueva contraseña
+Repita su la nueva contraseña
+Aceptar contraseña
+Hay diferencias entre las contraseñas escritas.
+Hay diferencias entre los campos escritos.
+No está desarrollado el árbol de controles.
+Controles
+Consultas
+Reportes
+Informes
+Variables
+Menú
+Buscar...
+Doc
+No existen controles cargados. Comuníquese con el administrador.
+Error. El código del documento debe ser un número.
+No se encontraron registros con el documento
+Cerrar sesión
+Inicio
+Error al cargar el archivo.
+Todos
+Activos
+Apagados
+No existen reportes cargados. Comuníquese con el administrador.
+Aguarde unos instantes, se están listando los reportes activos. Gracias!
+Agregar
+Clonar
+No existen controles cargados. Comuníquese con el administrador.
+Aguarde unos instantes, se están listando los controles. Gracias!
+No existen variables cargadas. Comuníquese con el administrador.
+Aguarde unos instantes, se están listando las áreas activas. Gracias!
+No existen áreas cargadas. Comuníquese con el administrador.
+Elaboró
+Revisó
+Aprobó
+Vigencia
+Versión
+Modificación
+Fecha actual
+Firma control
+Firma supervisa
+Control de cambios
+No
+Si
+Indeterminado
+Todos los días
+Una vez por semana
+Una vez por quincena
+Una vez por mes
+Una vez por trimestre
+Una vez por semestre
+Una vez por año
+EDITAR
+No está desarrollado el árbol de controles. Póngase en contacto con el Administrador o con el Desarrolador.
+concepto
+relevamiento
+detalle
+observación
+Guardar
+Guardar cambios
+Guardar como...
+Firmar
+Atención
+Documentos
+Nuevo
+Editar
+Se guardará un control nuevo.
+Se guardarán los cambios.
+Se hace una copia del actual.
+Al firmar asegúrese de los datos conferidos.
+Está a punto de eliminar el registro
+Documentos involucrados en la carga.
+Clonar este contol a:
+Hacer firmar
+¡Proceso completado con éxito! Todos los pasos del procedimiento se han ejecutado correctamente.
+El proceso puede demorar unos instantes hasta que se visualice la imágen en la celda correpondiente.
+Hubo un error que no permite continuar con el proceso correcto.
+Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!
+Ejemplo de Alerta
+Recargar(F5)
+Volver
+Estas trabajando con un control nuevo que no se ha guardado.
+Documento no firmado digitalmente.
+Firmado por
+Se envía por email. Destilde para no enviar.
+Ejemplo de Alerta
+Nueva Consulta(F5)
+Copiado al portapapeles.
+Autorizado desde Jefatura de Área.
+El proceso puede demorar unos instantes, ya que se comprueban los datos inferidos.
+No realizó ningún cambio a los determinados por configuración. No podrá guardar ningún control.
+Están faltando datos requeridos que no se han completado. Cierre este mensaje, complete el dato requerido y acepte nuevamente.
+El proceso de insertar resultó exitosamente.
+Se insertaron la cantidad de:
+items
+Documento nº
+Algo salió mal.
+El proceso falló ya que no se registran datos insertados. Compruebe la conexión a internet y vuelva a intentarlo.\nSi el problema persiste comunique al analista de su área.
+Se ha enviado emails acorde a la configuración del control.
+Aguarde unos instantes, el proceso se está ejecutando. Los controles son instrumentos digitales complejos, en la carga se controla que todo suceda según lo esperado. Gracias!
+La tabla no se completó según lo esperado, vuelva a intentarlo.
+No hay modificaciones en el control que requieran ser guardadas, verifique los datos inferidos ya que los datos presentes son los estándares.
+Fecha de alerta:
+Hora de alerta:
+Entre al sistema y acceda al documento número
+Ir a
+Notifica
+Sistema de Alertas
+Notificación del sistema de alerta
+El archivo no tiene el formato JSON adecuado. Comuníquese con el desarrollador.
+El archivo JSON no existe. Comuníquese con el desarrollador.
+Error al cargar el archivo JSON. Comuníquese con el desarrollador.
+No se pudo completar su firma digital, hay un error en su clave. Verifique por favor y vuelva a intentarlo. Gracias
+Acción
+Anterior
+Actual
+Si los datos son correctos acepte, de lo contrario puede cancelar la operación.\n Si acepta ya no podrá deshacer la acción.
+Este control se enviará por email de acuerdo a la configuración de correos.
+Este control NO se enviará por email.
+El proceso de guardado resulto exitosamente.
+Aguarde unos instantes, se están listando los controles activos. Gracias!
+Ver cargados
+Ver visibles
+Procedimiento
+Ver por fecha
+Enviar
+Seleccione el intervalo de fechas para:
+Ejemplo de Alerta
+Reporte nuevo
+Se dará de alta un nuevo reporte.
+El reporte nuevo se generó correctamente con el id:
+Algo salió mal y no se guardó el nuevo reporte!
+Se modificarán los datos del reporte.
+Se guardaron las modificaciones al reporte.
+Algo salió mal y no se guardaron las modificaciones!
+Se dará de alta una copia del reporte actual.
+La copia del reporte se generó correctamente con el id:
+Algo salió mal y no se realizó la copia del reporte!
+Se dará de alta una nueva área.
+La nueva área se generó correctamente.
+Algo salió mal y no se guardó la nueva área!
+Se modificarán los datos del área.
+Se guardaron las modificaciones del área.
+Algo salió mal y no se guardaron las modificaciones!
+Primera
+Última
+Tipo de usuario:
+No tiene permiso para crear o revisar este control. Póngase en contacto con su jefe. Gracias
+No tiene permiso para crear o revisar este reporte. Póngase en contacto con su jefe. Gracias
+Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.
+No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.
+Seleccione el intervalo de fechas para la consulta:
+No se encotró algún registro que coincida con la fechas proporcionadas. Revise las fechas en Controles cargados.
+Vacío
+Con separador
+Con Photo
+Campo nuevo
+Estás trabajando con un control guardado con el número:
+Documento firmado digitalmente.
+Tener en cuenta que se están verificando los emails para su envío.
+Se está realizando la consulta, va a demorar unos segundos, esta puede ser muy compleja dependiendo de los archivos involucrados y el intervalo de tiempo solicitado. Asegure la conexión de internet.
+Validado por
+Este correo no está autorizado, consulte con el Super Admin o con el Desarrollador.
+Este correo ya fue autorizado.
+Se registró con éxito.

@@ -1,0 +1,71 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f4f4;
+  text-align: center;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  margin: 20px auto;
+}
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+th {
+  background: #000;
+  color: #fff;
+}
+button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+.btn-edit {
+  background: #007bff;
+  color: white;
+}
+.btn-edit:hover {
+  background: #0056b3;
+}
+.btn-cancel {
+  background: #dc3545;
+  color: white;
+}
+.btn-cancel:hover {
+  background: #a71d2a;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-content {
+  margin: 5% auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  text-align: left;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:hover {
+  color: red;
+}

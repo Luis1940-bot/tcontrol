@@ -1,0 +1,22 @@
+/**
+ * jsPDF Autoprint Plugin
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+(function (jsPDFAPI) {
+  jsPDFAPI.autoPrint = function () {
+    let refAutoPrintTag;
+
+    this.internal.events.subscribe('postPutResources', function () {
+      refAutoPrintTag = this.internal.newObject();
+      this.internal.write('<< /S/Named /Type/Action /N/Print >>', 'endobj');
+    });
+
+    this.internal.events.subscribe('putCatalog', function () {
+      this.internal.write(`/OpenAction ${refAutoPrintTag} 0` + ' R');
+    });
+    return this;
+  };
+}(jsPDF.API));

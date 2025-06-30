@@ -1,0 +1,66 @@
+/*
+  AVISO: Este archivo ya no se utiliza. Sus estilos han sido migrados a 'common-components.css'.
+  Puede eliminarse de forma segura una vez confirmada la migración total.
+*/
+
+/* Estilos comunes */
+.div-encabezadoDoc {
+  height: auto;
+  margin-top: 4px;
+}
+.div-ubicacionDoc {
+  display: flex;
+  height: auto;
+  text-align: center;
+  margin-top: 5px;
+  width: 85%;
+  position: relative;
+  background: #cecece;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 10px;
+  display: none;
+}
+
+#doc {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  color: #393939;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+  height: 30px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  outline: none;
+  padding-left: 10px;
+}
+
+.input-con-icono {
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.icono-busqueda {
+  position: absolute;
+  margin-left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Media queries */
+
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape),
+  only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait),
+  only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape),
+  only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape),
+  only screen and (min-width: 1800px) and (orientation: landscape) {
+  .div-ubicacionDoc {
+    width: 84%;
+  }
+}

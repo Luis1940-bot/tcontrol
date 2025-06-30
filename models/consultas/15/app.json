@@ -1,0 +1,725 @@
+{
+    "Consultas": {
+        "name": [
+            "Gestión General",
+            "Mantenimiento",
+            "Producción"
+        ],
+        "active": [
+            1,
+            1,
+            1
+        ],
+        "button": [
+            1,
+            1,
+            1
+        ],
+        "nivel": [
+            3,
+            1,
+            1
+        ]
+    },
+    "Gestión General": {
+        "name": [
+            "PA Facilitador",
+            "PA Jefatura",
+            "PA Gerencia",
+            "Control Interno de Ingreso"
+        ],
+        "confecha": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "button": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "procedure": [
+            "proc_pa_facilitador",
+            "proc_pa_jefatura",
+            "proc_pa_gerencia",
+            "proc_15_control_interno1"
+        ],
+        "in": [
+            null,
+            null,
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null,
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null,
+            null,
+            null
+        ],
+        "nivel": [
+            2,
+            3,
+            5,
+            3
+        ]
+    },
+    "Mantenimiento": {
+        "name": [
+            "Listado de Compañías",
+            "Auditorías M&T",
+            "Evaluación de Proveedores",
+            "Calificación de Proveedores",
+            "Operarios de Mantenimiento",
+            "Estatus Repuestos en Taller",
+            "Estatus BD-402 A\/B",
+            "Estatus BD-204"
+        ],
+        "confecha": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+        ],
+        "button": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "procedure": [
+            "proc_companias",
+            "proc_auditoria_compania",
+            "proc_evaluacion_proveedores",
+            "proc_15_cuali_proveedores",
+            "proc_15_operarios_mantto",
+            "proc_15_estatus_repuestos2",
+            "proc_15_estatus_BD402",
+            "proc_15_estatus_BD204"
+        ],
+        "in": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "nivel": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+        ]
+    },
+    "Producción": {
+        "name": [
+            "PTA",
+            "TA",
+            "Servicios Auxiliares",
+            "5S-Producción",
+            "GESTIÓN"
+        ],
+        "confecha": [
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        "button": [
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        "procedure": [
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "in": [
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "nivel": [
+            1,
+            1,
+            1,
+            3,
+            2
+        ]
+    },
+    "PTA": {
+        "name": [
+            "Área de Preparación",
+            "Área de Cristalización",
+            "Área de Filtros",
+            "Área de RLM",
+            "Turno 4 Filtros",
+            "Turno 5 Filtros",
+            "Tuno 4 Reacción PH2",
+            "Turno 5 Reacción PH2",
+            "Turno 4 Preparación",
+            "Turno 5 Preparación",
+            "Turno 4 RLM"
+        ],
+        "confecha": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        "button": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "procedure": [
+            "proc_area_preparacion",
+            "proc_area_cristalizacion",
+            "proc_area_filtros",
+            "proc_area_rlm",
+            "proc_turno4_filtros",
+            "proc_turno5_filtros",
+            "proc_turno4_reaccion",
+            "proc_turno5_reaccion",
+            "proc_turno4_preparacion",
+            "proc_turno5_preparacion",
+            "proc_turno4_rlm"
+        ],
+        "in": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "nivel": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ]
+    },
+    "Servicios Auxiliares": {
+        "name": [
+            "Calderas",
+            "Turbinas"
+        ],
+        "confecha": [
+            null,
+            null
+        ],
+        "archivo": [
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1
+        ],
+        "button": [
+            1,
+            1
+        ],
+        "procedure": [
+            null,
+            null
+        ],
+        "in": [
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null
+        ],
+        "nivel": [
+            1,
+            1
+        ]
+    },
+    "5S-Producción": {
+        "name": [
+            "5S-PTA",
+            "5S-TA",
+            "Factor de Corrección"
+        ],
+        "confecha": [
+            null,
+            null,
+            1
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1
+        ],
+        "button": [
+            1,
+            1,
+            0
+        ],
+        "procedure": [
+            null,
+            null,
+            "proc_15_5s_fc"
+        ],
+        "in": [
+            null,
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null,
+            null
+        ],
+        "nivel": [
+            3,
+            3,
+            3
+        ]
+    },
+    "5S-TA": {
+        "name": [
+            "5S-TA-Operarios",
+            "5S-TA-EDE"
+        ],
+        "confecha": [
+            1,
+            1
+        ],
+        "archivo": [
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1
+        ],
+        "button": [
+            0,
+            0
+        ],
+        "procedure": [
+            "proc_average_5s_ta",
+            "proc_average_5s_ta_ede"
+        ],
+        "in": [
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null
+        ],
+        "nivel": [
+            3,
+            3
+        ]
+    },
+    "GESTIÓN": {
+        "name": [
+            "Que hay en PTAC",
+            "Que hay en OSBL",
+            "TAGS y sus Rangos",
+            "5000-5001-5002"
+        ],
+        "confecha": [
+            1,
+            1,
+            0,
+            1
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "button": [
+            0,
+            0,
+            0,
+            1
+        ],
+        "procedure": [
+            "proc_15_que_hay_hoy_PTAC",
+            "proc_15_que_hay_hoy_SAPTA",
+            "proc_15_tags_rangos",
+            "proc_15_5000"
+        ],
+        "in": [
+            null,
+            null,
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null,
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null,
+            null,
+            null
+        ],
+        "nivel": [
+            2,
+            2,
+            2,
+            2
+        ]
+    },
+    "5000-5001-5002": {
+        "name": [
+            "PTA-TA(5000)",
+            "Servicios Auxiliares(5000)"
+        ],
+        "confecha": [
+            null,
+            null
+        ],
+        "archivo": [
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1
+        ],
+        "button": [
+            1,
+            1
+        ],
+        "procedure": [
+            null,
+            null
+        ],
+        "in": [
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null
+        ],
+        "nivel": [
+            1,
+            1
+        ]
+    },
+    "PTA-TA(5000)": {
+        "name": [
+            "(5000)",
+            "(5001)",
+            "(5002)"
+        ],
+        "confecha": [
+            1,
+            1,
+            1
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1
+        ],
+        "button": [
+            0,
+            0,
+            0
+        ],
+        "procedure": [
+            "proc_15_PTA_TA_5000",
+            "proc_15_PTA_TA_5001",
+            "proc_15_PTA_TA_5002"
+        ],
+        "in": [
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null
+        ],
+        "nivel": [
+            1,
+            1
+        ]
+    },
+    "Servicios Auxiliares(5000)": {
+        "name": [
+            "(5000)",
+            "(5001)",
+            "(5002)"
+        ],
+        "confecha": [
+            1,
+            1,
+            1
+        ],
+        "archivo": [
+            "x",
+            "x",
+            "x"
+        ],
+        "active": [
+            1,
+            1,
+            1
+        ],
+        "button": [
+            0,
+            0,
+            0
+        ],
+        "procedure": [
+            "proc_15_SA_5000",
+            "proc_15_SA_5001",
+            "proc_15_SA_5002"
+        ],
+        "in": [
+            null,
+            null
+        ],
+        "out": [
+            null,
+            null
+        ],
+        "operation": [
+            null,
+            null
+        ],
+        "nivel": [
+            1,
+            1
+        ]
+    }
+}

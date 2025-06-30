@@ -1,0 +1,60 @@
+# Archivos de configuración sensibles
+config.php
+php.ini
+session_config.php
+
+# Logs
+logs/
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Archivos de respaldo
+*.bak
+*.backup
+
+# Dependencias
+vendor/
+node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de depuración
+debug_*.php
+debug_*.html
+test_*.php
+
+# Archivos sensibles específicos del proyecto
+ssh.txt
+ErrorLogger.php
+ErrorLogger_v2.php
+
+# Cache y archivos temporales de PHP
+*.cache
+/cache/
+
+# Archivos de configuración específicos del entorno
+.env
+.env.local
+.env.production
+.env.test
+
+# Uploads y archivos generados por usuarios
+uploads/
+user_files/
+
+# Archivos específicos de desarrollo
+Routes/test.php
+Routes/debug.php
+Routes/info.php

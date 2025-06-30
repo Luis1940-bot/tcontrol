@@ -1,0 +1,53 @@
+{
+  "planta": "LU1DEW",
+  "idiomas": {
+    "bienvenido": ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
+    "abreviatura": ["es", "bra", "en"]
+  },
+  "menuSelectivo": {
+    "sin": {
+      "sinGuardar": [],
+      "sinGuardarCambio": [],
+      "sinGuardarComoNuevo": [],
+      "sinSalir": [],
+      "sinVolver": [],
+      "sinHacerFirmar": []
+    },
+    "con": {
+      "conExportar": [],
+      "conGuardar": [],
+      "conGuardarCambio": [],
+      "conGuardarComoNuevo": [],
+      "conSalir": [],
+      "conVolver": [],
+      "conHacerFirmar": []
+    }
+  },
+  "Menu": {
+    "name": ["Controles", "Consultas"],
+    "type": ["", ""],
+    "ruta": ["Controles\/index.php", "Consultas\/index.php"]
+  },
+  "Controles": {
+    "name": ["Controles", "Imprimir control"],
+    "type": ["", ""],
+    "ruta": ["Controles\/index.php", ""]
+  },
+  "Ad": {
+    "name": ["Reportes", "Controles", "Variables", "Areas", "Comunicación"],
+    "type": ["", "", "", "", ""],
+    "ruta": [
+      "ListReportes\/index.php",
+      "ListControles\/index.php",
+      "ListVariables\/index.php",
+      "ListAreas\/index.php",
+      "ListComunicacion\/index.php"
+    ]
+  },
+  "apps": {
+    "name": ["SCG", "Admin"],
+    "type": ["ctrl", "ctrl"],
+    "ruta": ["Menu\/index.php", "Admin\/index.php"],
+    "nivel": [3, 4]
+  }
+}

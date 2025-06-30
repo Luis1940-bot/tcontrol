@@ -1,0 +1,359 @@
+/* Estilos comunes para todas las resoluciones */
+body {
+  grid-area: body;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-gap: 1px;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  height: auto;
+}
+
+header {
+  display: block;
+}
+
+main {
+  overflow-y: auto;
+  height: auto;
+}
+
+.div-verify {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  align-items: left;
+  margin-top: 10px;
+  border: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color: #ffffff;
+}
+
+.select-verify {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  background-color: #ffffff;
+  margin-top: 2px;
+  padding-left: 5px;
+}
+
+.label-verify {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  color: #9d9d9d;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.input-verify {
+  width: 98%;
+  height: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  background-color: #ffffff;
+  border: 1px solid #000;
+  margin-top: 2px;
+  padding-left: 5px;
+}
+.input-verify-requerido {
+  width: 98%;
+  height: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  background-color: #f81212;
+  border: 1px solid #000;
+  margin-top: 2px;
+  padding-left: 5px;
+}
+#id,
+#firma {
+  background-color: #cecece;
+}
+.button-verify {
+  height: 35px;
+  width: 100%;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  background: #000;
+  color: #cecece;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 40px;
+}
+.button-verify-apagado {
+  background: #cccccc;
+  cursor: not-allowed;
+  color: #666666;
+}
+
+.span-verify {
+  color: #f81212;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 1px;
+  margin-left: 1px;
+}
+.span-no-repite-pass {
+  color: #0a7e3e;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 1px;
+  margin-left: 1px;
+}
+.span-si-repite-pass {
+  color: #f81212;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 1px;
+  margin-left: 1px;
+}
+
+/* Media Queries */
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  .div-verify {
+    /* margin-top: 40px; */
+    width: 70%;
+    height: auto;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .button-verify {
+    height: 35px;
+    width: 100%;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+  .input-verify {
+    width: 97%;
+    height: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #000;
+    margin-top: 2px;
+    padding-left: 5px;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  header {
+    height: 70px;
+  }
+  .div-verify {
+    margin-top: 110px;
+    width: 30%;
+    height: auto;
+    background-color: #ffffff;
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+  .label-verify {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .input-verify {
+    /* width: 88%; */
+    height: 30px;
+    font-size: 14px;
+    margin-top: 2px;
+    padding-left: 5px;
+  }
+  .button-verify {
+    height: 35px;
+    /* width: 90%; */
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Estilos para tabletas en formato portrait */
+@media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  header {
+    height: 100px;
+  }
+  .div-verify {
+    margin-top: 130px;
+    width: 30%;
+    height: auto;
+    background-color: #ffffff;
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
+  .label-verify {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .input-verify {
+    /* width: 88%; */
+    height: 30px;
+    font-size: 14px;
+    margin-top: 2px;
+    padding-left: 5px;
+  }
+  .button-verify {
+    height: 35px;
+    /* width: 90%; */
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Estilos para tabletas en formato landscape */
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
+  header {
+    height: 100px;
+  }
+  .div-verify {
+    margin-top: 120px;
+    width: 30%;
+    height: auto;
+    background-color: #ffffff;
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
+  .label-verify {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .input-verify {
+    /* width: 88%; */
+    height: 30px;
+    font-size: 14px;
+    margin-top: 2px;
+    padding-left: 5px;
+  }
+  .button-verify {
+    height: 35px;
+    /* width: 90%; */
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Estilos para pantallas grandes en formato portrait */
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  header {
+    height: 100px;
+  }
+  .div-verify {
+    margin-top: 120px;
+    width: 20%;
+    height: auto;
+    background-color: #ffffff;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .label-verify {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .input-verify {
+    /* width: 88%; */
+    height: 30px;
+    font-size: 14px;
+    margin-top: 2px;
+    padding-left: 5px;
+  }
+  .button-verify {
+    height: 35px;
+    /* width: 90%; */
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .alert-box {
+    width: 20%;
+  }
+}
+
+/* Estilos para pantallas grandes en formato landscape */
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
+  header {
+    height: 120px;
+  }
+  .div-verify {
+    margin-top: 100px;
+    width: 20%;
+    height: auto;
+    background-color: #ffffff;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .label-verify {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .input-verify {
+    /* width: 88%; */
+    height: 30px;
+    font-size: 14px;
+    margin-top: 2px;
+    padding-left: 5px;
+  }
+  .button-verify {
+    height: 35px;
+    /* width: 90%; */
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+  .alert-box {
+    width: 20%;
+  }
+}

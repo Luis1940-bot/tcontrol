@@ -1,0 +1,173 @@
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 9px;
+  }
+  #idTablaViewer tr th {
+    font-size: 9px;
+  }
+  #idTablaViewer tr td {
+    font-size: 9px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para tabletas en formato portrait */
+@media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  /* Estilos para tablets en orientación vertical */
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para tabletas en formato landscape */
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
+  /* Estilos para tablets en orientación landscape */
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 95%;
+  }
+  #idTablaViewer thead {
+    font-size: 12px;
+  }
+  #idTablaViewer tr th {
+    font-size: 12px;
+  }
+  #idTablaViewer tr td {
+    font-size: 12px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para pantallas grandes en formato portrait */
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación vertical */
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 80vh;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 98%;
+  }
+  #idTablaViewer thead,
+  #idTablaViewer tr th,
+  #idTablaViewer tr td {
+    font-size: 14px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}
+
+/* Estilos para pantallas grandes en formato landscape */
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación landscape */
+  #idDivTablas {
+    width: 90%;
+    height: auto;
+    max-height: 85vh;
+    /* margin: 10px auto auto auto; */
+    background-color: #ffffff;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idTablaViewer {
+    width: 99%;
+  }
+  #idTablaViewer thead,
+  #idTablaViewer tr th,
+  #idTablaViewer tr td {
+    font-size: 16px;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+    margin-right: auto;
+  }
+}

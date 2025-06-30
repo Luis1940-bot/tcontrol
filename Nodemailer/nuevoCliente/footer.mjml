@@ -1,0 +1,19 @@
+<mj-section>
+  <mj-column>
+    <!-- Enlace al Sistema -->
+    <mj-divider border-color="#fd1f02"></mj-divider>
+    <mj-button 
+      href="https://linkedin.com/in/luisergimenez/"
+      background-color="#ffffff"
+      color="#fd1f02"
+      font-size="14px"
+      font-family="helvetica"
+      padding="10px 25px"
+      border="none"
+      border-radius="3px"
+      text-decoration="none"
+      align="center">
+      Luis Gimenez
+    </mj-button>
+  </mj-column>
+</mj-section>

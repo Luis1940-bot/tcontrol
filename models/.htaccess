@@ -1,0 +1,31 @@
+# Configuración para archivos JSON
+<Files "*.json">
+    Header always set Content-Type "application/json; charset=utf-8"
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET"
+    Header always set Access-Control-Allow-Headers "Content-Type"
+</Files>
+
+# Prevenir acceso directo a archivos sensibles
+<Files "*.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Habilitar compresión para mejor rendimiento
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+</IfModule>
+
+# Cache control para archivos JSON (evitar cache excesivo durante desarrollo)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(json)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+</IfModule>

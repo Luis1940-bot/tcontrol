@@ -1,0 +1,387 @@
+/* Estilos comunes para todas las resoluciones */
+body {
+  grid-area: body;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-gap: 1px;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  height: auto;
+}
+
+header {
+  display: block;
+}
+
+main {
+  overflow-y: auto;
+  height: auto;
+  min-width: 100%;
+}
+
+.div-controles-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.button-controles-menu {
+  margin-bottom: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background: #fff;
+  border: none;
+  border-radius: 3px;
+  height: 48px;
+  width: 247px;
+}
+
+.button-controles-menu:hover {
+  background: #cecece;
+  cursor: pointer;
+}
+
+hr {
+  width: 100%;
+  color: #cecece;
+}
+
+thead {
+  background: #000000;
+  width: 90%;
+  height: 30px;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+tbody {
+  background: #ffffff;
+  width: 90%;
+  margin-bottom: 1px;
+}
+
+tbody tr {
+  width: 90%;
+}
+
+tbody tr td {
+  height: 30px;
+  color: #000000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+tbody tr td span {
+  font-size: 10px;
+}
+
+table tbody tr td input,
+table tbody tr td textarea,
+table tbody tr td button {
+  font-size: 9px;
+  width: 90%;
+  border: 1px solid #000;
+}
+
+table tbody tr td div {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+table tbody tr td div input {
+  font-size: 9px;
+  width: 50%;
+  height: 100%;
+  margin-left: 10px;
+  border: 1px solid #000;
+}
+
+table tbody tr td div button {
+  font-size: 7px;
+  width: 20%;
+  height: 14px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+
+table tbody tr td img {
+  height: 20px;
+  width: 20px;
+}
+
+.img-view {
+  height: 20px;
+  width: 20px;
+  margin-right: 15px;
+}
+
+.img-status {
+  height: 20px;
+  width: 20px;
+  margin-right: 15px;
+}
+
+.img-edit {
+  height: 12px;
+  width: 12px;
+  margin-left: 4px;
+}
+.img-edit:hover {
+  background: #9d9d9d;
+}
+.div-orden {
+  padding-left: 2px;
+}
+.img-orden {
+  height: 12px;
+  width: 12px;
+  margin-left: 4px;
+}
+.img-orden:hover {
+  background: #9d9d9d;
+}
+
+.tabla-campos thead {
+  font-size: 8px;
+}
+.tabla-campos thead tr th {
+  height: 10px;
+}
+
+.div1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#tableControlesViews {
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+  overflow-y: auto;
+  width: 90%;
+}
+
+.tabla-campos {
+  border-collapse: collapse;
+}
+
+.tabla-campos tbody tr td {
+  border: 1px solid #cecece;
+}
+
+select {
+  font-size: 12px;
+  width: 90%;
+  border: 1px solid #000;
+  height: 80%;
+}
+
+#idLabelSEPARADOR {
+  text-align: center;
+  margin-top: 10px;
+}
+.select-tipodedato {
+  height: 30px;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.textArea-detalle {
+  margin-top: 5px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.radio-selector {
+  cursor: pointer;
+}
+.modal-content-aceptar {
+  margin-left: 3rem;
+  margin-right: auto;
+}
+.div-encabezadoPastillas {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.div-pastillas {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap; /* Permite que las pastillas bajen en pantallas pequeñas */
+  justify-content: center; /* Centra las pastillas dentro del contenedor */
+  width: 100%;
+}
+
+.pastilla {
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: 20px;
+  background: #e0e0e0;
+  color: #393939;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  margin-bottom: 0.3em;
+}
+
+.pastilla[style*='background: rgb(33, 33, 33)'] {
+  background: #212121 !important;
+  color: #cecece !important;
+}
+
+.pastilla:hover,
+.pastilla:focus {
+  background: #393939;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  outline: none;
+}
+/* Media Queries */
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  .button-controles-menu {
+    font-size: 12px;
+  }
+
+  thead {
+    background: #000000;
+    width: 90%;
+    height: 30px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  tbody {
+    background: #ffffff;
+    width: 90%;
+    margin-bottom: 1px;
+  }
+
+  tbody tr td,
+  tbody tr td span,
+  table tbody tr td input,
+  table tbody tr td textarea,
+  table tbody tr td button {
+    font-size: 9px;
+  }
+
+  table tbody tr td div button {
+    font-size: 7px;
+  }
+
+  table tbody tr td img {
+    height: 15px;
+    width: 15px;
+  }
+
+  .img-view {
+    height: 20px;
+    width: 20px;
+  }
+  .modal-content-aceptar {
+    margin-left: 5rem;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  .button-controles-menu {
+    font-size: 12px;
+  }
+  .modal-content-aceptar {
+    margin-left: 15rem;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  .button-controles-menu {
+    font-size: 12px;
+  }
+  table tbody tr td {
+    font-size: 12px;
+  }
+  tbody tr td span {
+    font-size: 11px;
+  }
+  .img-view {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
+  .button-controles-menu {
+    font-size: 12px;
+  }
+  table tbody tr td {
+    font-size: 12px;
+  }
+  tbody tr td span {
+    font-size: 11px;
+  }
+  .img-view {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  .button-controles-menu {
+    font-size: 18px;
+    height: 30px;
+  }
+  .tabla-campos thead tr th {
+    height: 20px;
+    font-size: 10px;
+  }
+  .div1 {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
+  .button-controles-menu {
+    font-size: 18px;
+    height: 30px;
+  }
+  .tabla-campos thead tr th {
+    height: 20px;
+    font-size: 10px;
+  }
+  .div1 {
+    font-size: 25px;
+  }
+}

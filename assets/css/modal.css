@@ -1,0 +1,1326 @@
+/*
+  AVISO: Este archivo ya no se utiliza. Sus estilos han sido migrados a 'common-components.css'.
+  Puede eliminarse de forma segura una vez confirmada la migración total.
+*/
+
+/* Estilos para el modal */
+.modal-content {
+  height: auto;
+}
+
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    text-align: left;
+    background-color: #ffffff;
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-aceptar {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-menu {
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 15rem;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-cview {
+    margin-top: 1.7rem;
+    margin-left: 1.7rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-doc-rove {
+    margin-top: 1.7rem;
+    margin-left: 1.7rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .nr-rove {
+    font-size: 14px;
+  }
+  .modal-content-person {
+    margin-top: 2rem;
+    float: right;
+    margin-right: 1.5rem;
+    text-align: left;
+    width: 100px;
+    height: auto;
+  }
+  .comentariosPerson {
+    font-size: 9px;
+  }
+  #idScreenPerson {
+    font-size: 9px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .close:hover {
+    color: red;
+  }
+
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    margin-right: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+    height: 80%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .modal-content table tbody {
+    max-height: 400px;
+  }
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #bababa;
+    margin: 0;
+  }
+  #idTituloH3 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .modal-content h3 + span {
+    font-size: 18px;
+  }
+  .div-button {
+    margin: 2px 2px 2px 2px;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
+    margin-top: 10px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  #idDivPorFecha {
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #idDivVerde,
+  #idDivAvisoRojo,
+  #idDivAvisoImagenes,
+  #idProcesoExitoso {
+    width: 90%;
+    margin-top: 100px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .comentarios {
+    font-size: 14px;
+  }
+
+  #idDivImagen {
+    margin: 5rem auto auto auto;
+  }
+  #idDivGuardar {
+    margin-left: 3rem;
+    height: 290px;
+  }
+
+  #idSpanCarga {
+    color: #cecece;
+    width: 100%;
+    margin-top: 10rem;
+    margin-left: 10rem;
+  }
+  .div-verde {
+    width: 80%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivTablasEncabezado {
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+  #idbtnPDF {
+    margin-left: 5px;
+  }
+  .div-cajita {
+    padding: 5px;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .modal-content {
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    text-align: left;
+    background-color: #ffffff;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-aceptar {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-cview {
+    margin-top: 1.7rem;
+    margin-left: 1.7rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-menu {
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20rem;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-person {
+    margin-top: 2rem;
+    float: right;
+    margin-right: 2rem;
+    text-align: left;
+    width: 100px;
+    height: auto;
+  }
+  .modal-doc-rove {
+    margin-top: 1.7rem;
+    margin-left: 10rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .nr-rove {
+    font-size: 14px;
+  }
+  .comentariosPerson {
+    font-size: 12px;
+  }
+  #idScreenPerson {
+    font-size: 10px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #idTituloH3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+    height: 80%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .modal-content table tbody {
+    height: 200px;
+  }
+  .modal-content h3 + span {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+  .div-button {
+    margin: 0;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
+    margin-top: 6px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #idDivPorFecha {
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivAvisoVerde,
+  #idDivAvisoRojo {
+    margin: 180px auto auto auto;
+  }
+  #idDivAvisoImagenes {
+    margin-top: 100px;
+  }
+  #idDivImagen {
+    margin: 2rem auto auto auto;
+  }
+  #idDivGuardar {
+    margin-left: 18rem;
+    height: 350px;
+  }
+  .modal-content-aceptar {
+    margin-left: 18rem;
+  }
+  #idProcesoExitoso {
+    margin-top: 100px;
+  }
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    margin-right: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+  #idSpanCarga {
+    color: #cecece;
+    width: 100%;
+    margin-top: 5rem;
+    margin-left: 28rem;
+  }
+  .div-verde {
+    width: 80%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivTablasEncabezado {
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+  .div-cajita {
+    padding: 0px;
+  }
+  .comentarios {
+    font-size: 14px;
+  }
+}
+
+/* Estilos para tabletas en formato portrait */
+@media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  /* Estilos para tablets en orientación vertical */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .modal-content {
+    margin-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    text-align: left;
+    background-color: #ffffff;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-aceptar {
+    margin-top: 2rem;
+    margin-left: 15rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-cview {
+    margin-top: 1.7rem;
+    margin-left: 1.7rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-menu {
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20rem;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+
+  .modal-content-person {
+    margin-top: 2rem;
+    float: right;
+    margin-right: 2rem;
+    text-align: left;
+    width: 100px;
+    height: auto;
+  }
+  .modal-doc-rove {
+    margin-top: 1.7rem;
+    margin-left: 10rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .nr-rove {
+    font-size: 14px;
+  }
+  .comentariosPerson {
+    font-size: 12px;
+  }
+  #idScreenPerson {
+    font-size: 10px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #idTituloH3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+    height: 80%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .modal-content table tbody {
+    height: 800px;
+  }
+  .modal-content h3 + span {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+  .div-button {
+    margin: 0;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
+    margin-top: 6px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #idDivPorFecha {
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivAvisoVerde,
+  #idDivAvisoRojo {
+    margin: 180px auto auto auto;
+  }
+  #idDivAvisoImagenes {
+    margin-top: 100px;
+  }
+  #idDivImagen {
+    margin: 2rem auto auto auto;
+  }
+  #idDivGuardar {
+    margin-left: 17rem;
+    margin-top: 5rem;
+    height: 400px;
+  }
+  #idProcesoExitoso {
+    margin-top: 100px;
+  }
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    margin-right: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+  #idSpanCarga {
+    color: #cecece;
+    width: 100%;
+    margin-top: 10rem;
+    margin-left: 24rem;
+  }
+  .div-verde {
+    width: 80%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivTablasEncabezado {
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+  .div-cajita {
+    padding: 5px;
+  }
+  .comentarios {
+    font-size: 18px;
+  }
+}
+
+/* Estilos para tabletas en formato landscape */
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
+  /* Estilos para tablets en orientación landscape */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .modal-content {
+    margin-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    text-align: left;
+    background-color: #ffffff;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-aceptar {
+    margin-top: 2rem;
+    margin-left: 20rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-cview {
+    margin-top: 1.7rem;
+    margin-left: 1.7rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-menu {
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20rem;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-person {
+    margin-top: 2rem;
+    float: right;
+    margin-right: 3rem;
+    text-align: left;
+    width: 100px;
+    height: auto;
+  }
+  .modal-doc-rove {
+    margin-top: 1.7rem;
+    margin-left: 10rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .nr-rove {
+    font-size: 14px;
+  }
+  .comentariosPerson {
+    font-size: 12px;
+  }
+  #idScreenPerson {
+    font-size: 10px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #idTituloH3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .modal-content table tbody {
+    height: 400px;
+  }
+  .modal-content h3 + span {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+  .div-button {
+    margin: 0;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
+    margin-top: 6px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #idDivPorFecha {
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivAvisoVerde,
+  #idDivAvisoRojo {
+    margin: 180px auto auto auto;
+  }
+  #idDivAvisoImagenes {
+    margin-top: 100px;
+  }
+  #idDivImagen {
+    margin: 2rem auto auto auto;
+  }
+  #idDivGuardar {
+    margin-left: 25rem;
+    margin-top: 5rem;
+    height: 450px;
+  }
+  #idProcesoExitoso {
+    margin-top: 100px;
+  }
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    margin-right: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+  #idSpanCarga {
+    color: #cecece;
+    width: 100%;
+    margin-top: 10rem;
+    margin-left: 30rem;
+  }
+  .div-verde {
+    width: 60%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivTablasEncabezado {
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+  .div-cajita {
+    padding: 5px;
+  }
+  .comentarios {
+    font-size: 20px;
+  }
+}
+
+/* Estilos para pantallas grandes en formato portrait */
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación vertical */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .modal-content {
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    text-align: left;
+    background-color: #ffffff;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-aceptar {
+    margin-top: 2rem;
+    margin-left: 30rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-cview {
+    margin-top: 1.7rem;
+    margin-left: 1.7rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-doc-rove {
+    margin-top: 1.7rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    /* text-align: left; */
+    background-color: #ffffff;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .nr-rove {
+    font-size: 24px;
+  }
+  .modal-content-menu {
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20rem;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-person {
+    margin-top: 2.3rem;
+    float: right;
+    margin-right: 4rem;
+    text-align: left;
+    width: 120px;
+    height: auto;
+  }
+
+  .comentariosPerson {
+    font-size: 12px;
+  }
+  #idScreenPerson {
+    font-size: 10px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #idTituloH3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .modal-content table tbody {
+    height: 400px;
+  }
+  .modal-content h3 + span {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+  .div-button {
+    margin: 0;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
+    margin-top: 6px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #idDivPorFecha {
+    margin-top: 6rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivAvisoVerde,
+  #idDivAvisoRojo {
+    margin: 180px auto auto auto;
+  }
+  #idDivAvisoImagenes {
+    margin-top: 100px;
+  }
+
+  #idDivGuardar {
+    margin-left: 35rem;
+    margin-top: 5rem;
+    height: 500px;
+  }
+  #idProcesoExitoso {
+    margin-top: 100px;
+  }
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    color: #aaa;
+    float: right;
+    font-size: 34px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+  #idSpanCarga {
+    color: #cecece;
+    width: 100%;
+    margin-top: 10rem;
+    margin-left: 45rem;
+  }
+  .div-verde {
+    width: 60%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivTablasEncabezado {
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+  .div-cajita {
+    padding: 5px;
+  }
+  .comentarios {
+    font-size: 20px;
+  }
+}
+
+/* Estilos para pantallas grandes en formato landscape */
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
+  /* Estilos para dispositivos de escritorio en orientación landscape */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .modal-content {
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    text-align: left;
+    background-color: #ffffff;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-aceptar {
+    margin-top: 2rem;
+    margin-left: 40rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-cview {
+    margin-top: 1.7rem;
+    margin-left: 1.7rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-menu {
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    float: left;
+    text-align: left;
+    background-color: #ffffff;
+    width: 20rem;
+    height: 80%;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .modal-content-person {
+    margin-top: 2.2rem;
+    float: right;
+    margin-right: 9.5rem;
+    text-align: left;
+    width: 120px;
+    height: auto;
+  }
+  .modal-doc-rove {
+    margin-top: 1.7rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* float: left; */
+    /* text-align: left; */
+    background-color: #ffffff;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    border: 3px solid #212121;
+    padding: 5px;
+  }
+  .nr-rove {
+    font-size: 24px;
+  }
+  .comentariosPerson {
+    font-size: 12px;
+  }
+  #idScreenPerson {
+    font-size: 10px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #searchInput {
+    padding: 10px;
+    width: 90%;
+    height: 5px;
+    border: 1px solid #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #idTituloH3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .modal-content thead tr th {
+    padding-left: 10px;
+  }
+  .modal-content tbody {
+    max-height: 600px;
+    display: block;
+    overflow-y: auto;
+  }
+  .modal-content tbody td {
+    cursor: pointer;
+  }
+  .modal-content tbody td:hover {
+    background: #cecece;
+  }
+  .modal-content table {
+    width: 100%;
+  }
+  .modal-content tbody tr td {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .modal-content table tbody {
+    height: 400px;
+  }
+  .modal-content h3 + span {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+  .div-button {
+    margin: 0;
+  }
+  #idbtnNuevo,
+  #idVerCargados,
+  #idProcedimiento,
+  #idVerCargadosPorFecha,
+  #idVerVisibles {
+    margin-top: 6px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #idDivPorFecha {
+    margin-top: 6rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivAvisoVerde,
+  #idDivAvisoRojo {
+    margin: 180px auto auto auto;
+  }
+  #idDivAvisoImagenes {
+    margin-top: 100px;
+  }
+
+  #idDivGuardar {
+    margin-left: 45rem;
+    margin-top: 5rem;
+    height: 550px;
+  }
+  #idProcesoExitoso {
+    margin-top: 100px;
+  }
+  /* Estilos para el botón de cierre del modal */
+  #closeModalButton {
+    color: #aaa;
+    float: right;
+    font-size: 34px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #closeModalButton:hover {
+    color: red;
+  }
+  #idSpanCarga {
+    color: #cecece;
+    width: 100%;
+    margin-top: 15rem;
+    margin-left: 55rem;
+  }
+  .div-verde {
+    width: 60%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #idDivTablasEncabezado {
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+  .div-cajita {
+    padding: 5px;
+  }
+  .comentarios {
+    font-size: 20px;
+  }
+}
+
+.spinner-inline {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 4px solid #e0e0e0;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  background: transparent;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .spinner-inline {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+    margin-right: 8px;
+  }
+}

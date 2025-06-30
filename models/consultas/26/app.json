@@ -1,0 +1,18 @@
+{
+  "Consultas": {
+    "name": ["Gestión"],
+    "active": [1],
+    "button": [1]
+  },
+  "Gestión": {
+    "name": ["Bitácora E-I"],
+    "confecha": [1],
+    "archivo": ["x"],
+    "active": [1],
+    "button": [0],
+    "procedure": ["proc_26_bitacora_ei"],
+    "in": [null],
+    "out": [null],
+    "operation": [null]
+  }
+}

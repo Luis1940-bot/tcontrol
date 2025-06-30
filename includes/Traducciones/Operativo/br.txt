@@ -1,0 +1,223 @@
+Empresa
+Correio eletrônico
+Senha
+Acesso
+Sem empresas
+Versão
+Você está em
+Alto usuário
+Cadastre-se (selecione a empresa e digite seu email).
+Cadastre sua empresa.
+Recuperar senha.
+Nome e sobrenome
+Repetir a senha
+Área
+Posição
+Código de usuário
+Tipo de usuário
+Situação
+Ativo
+Inativo
+Verificador
+Não verificado
+Verificado
+Assinatura
+Linguagem
+Espanhol
+Inglês
+Português
+Registrar
+Colaborador
+Usuário ou operador
+Supervisor
+Supervisor ou gerente
+Chefe
+Sede da Área
+Administrador
+Um administrador de cliente
+Gerente
+Gerente da área
+Patrocinador
+Patrocinador, Diretores e quem paga pela ferramenta
+Desenvolvedor
+Somente para desenvolvedores
+Espere um momento e você será redirecionado.
+Verificar.
+Digite o código de verificação:
+Verificar
+Wait a moment then you will be redirected.
+Usuário já existe
+Formato de email inválido.
+Seu usuário não foi verificado, você deve procurar o e-mail para verificar ou entrar em contato com o administrador.
+Clareamento de senha
+O usuário não foi encontrado.
+Alguns campos estão faltando.
+Existem diferenças entre e-mails escritos.
+Digite seu e-mail
+Repita seu e-mail
+Enviar solicitação
+Digite a nova senha
+Repita sua nova senha
+Aceitar senha
+Existem diferenças entre senhas escritas.
+Existem diferenças entre os campos escritos.
+A árvore de controle não está desenvolvida.
+Controles
+Consultas
+Relatórios
+Relatórios
+Variáveis
+Cardápio
+Procurar...
+Doc
+Não há controles carregados. Entre em contato com o administrador.
+Erro. O código do documento deve ser um número.
+Nenhum registro encontrado com o documento
+Fechar Sessão
+Começar
+Erro ao carregar o arquivo.
+Todos
+Ativos
+Desligado
+Não há relatórios carregados. Entre em contato com o administrador.
+Aguarde alguns instantes, os relatórios ativos estão sendo listados. Obrigado!
+Adicionar
+Clone
+Não há controles carregados. Entre em contato com o administrador.
+Aguarde alguns instantes, os controles estão sendo listados. Obrigado!
+Não há variáveis ​​carregadas. Entre em contato com o administrador.
+Aguarde alguns instantes, as áreas ativas estão sendo listadas. Obrigado!
+Não há áreas carregadas. Entre em contato com o administrador.
+Elaborado
+Revisado
+aprovado
+Validade
+Versão
+Modificação
+Data atual
+Assinatura de controle
+A empresa supervisiona
+Controle de mudanças
+Não
+Sim
+Indeterminado
+Todos os dias
+Uma vez por semana
+Uma vez a cada duas semanas
+Uma vez por mês
+Uma vez por trimestre
+Uma vez por semestre
+Uma vez ao ano
+EDITAR
+A árvore de controle não está desenvolvida. Entre em contato com o administrador ou desenvolvedor.
+Conceito
+Enquete
+Detalhe
+Observação
+Manter
+Guardar mudanças
+Salvar como...
+Sinal
+Atenção
+Documentos
+Novo
+Editar
+Um novo controle será salvo.
+As alterações serão salvas.
+Uma cópia do atual é feita.
+Ao assinar, certifique-se dos dados fornecidos.
+Você está prestes a excluir o registro
+Documentos envolvidos na carga.
+Clone este controle para:
+Fazer sinal
+Processo concluído com sucesso! Todas as etapas do procedimento foram executadas corretamente.
+O processo pode demorar alguns instantes até que a imagem seja exibida na célula correspondente.
+Ocorreu um erro que não permite continuar com o processo correto.
+Aguarde alguns instantes, o processo está em execução. Os controles são instrumentos digitais complexos, durante o carregamento é controlado que tudo aconteça conforme o esperado. Obrigado!
+Exemplo de alerta
+Recarregar (F5)
+Retornar
+Você está trabalhando com um novo controle que não foi salvo.
+Documento não assinado digitalmente.
+Assinado por
+É enviado por e-mail. Desmarque para não enviar.
+Exemplo de alerta
+Nova Consulta (F5)
+Copiado para a área de transferência.
+Autorizado pela Sede da Área.
+O processo pode demorar alguns instantes enquanto os dados inferidos são verificados.
+Não fez nenhuma alteração àquelas determinadas pela configuração. Você não poderá salvar nenhum controle.
+Os dados necessários estão faltando e não foram preenchidos. Feche esta mensagem, preencha as informações solicitadas e aceite novamente.
+O processo de inserção foi bem-sucedido.
+A quantidade de:
+Unid
+N º do documento.
+Algo deu errado.
+O processo falhou porque nenhum dado inserido foi registrado. Verifique a conexão com a Internet e tente novamente.\nSe o problema persistir, entre em contato com o analista da sua área.
+Os e-mails foram enviados de acordo com a configuração do controle.
+Aguarde alguns instantes, o processo está em execução. Os controles são instrumentos digitais complexos, durante o carregamento é controlado que tudo aconteça conforme o esperado. Obrigado!
+A tabela não foi preenchida conforme o esperado. Tente novamente.
+Não há modificações no controle que exijam salvamento, verifique os dados inferidos já que os dados presentes são o padrão.
+Data do alerta:
+Tempo de alerta:
+Entre no sistema e acesse o número do documento
+Vai
+Notificar
+Sistema de Alerta
+Notificação do sistema de alerta
+O arquivo não está no formato JSON adequado. Entre em contato com o desenvolvedor.
+O arquivo JSON não existe. Entre em contato com o desenvolvedor.
+Erro ao carregar o arquivo JSON. Entre em contato com o desenvolvedor.
+Não foi possível concluir sua assinatura digital, há um erro em sua chave. Verifique e tente novamente. Obrigado
+Ação
+Antigo
+Atual
+Se os dados estiverem corretos, aceite, caso contrário você poderá cancelar a operação.\n Se aceitar, não será mais possível desfazer a ação.
+Este controle será enviado por email conforme configuração do email.
+Este controle NÃO será enviado por email.
+O processo de salvamento foi bem-sucedido.
+Aguarde alguns instantes, os controles ativos estão sendo listados. Obrigado!
+Ver enviado
+Ver visível
+Procedimento
+Ver por data
+Enviar
+Selecione o intervalo de datas para:
+Exemplo de alerta
+Novo relatório
+Um novo relatório será registrado.
+O novo relatório foi gerado corretamente com o id:
+Algo deu errado e o novo relatório não foi salvo!
+Os dados do relatório serão modificados.
+As modificações no relatório foram salvas.
+Algo deu errado e as modificações não foram salvas!
+Uma cópia do relatório atual será divulgada.
+A cópia do relatório foi gerada corretamente com o id:
+Algo deu errado e não foi feita uma cópia do relatório!
+Uma nova área será cadastrada.
+A nova área foi gerada com sucesso.
+Algo deu errado e a nova área não foi salva!
+Os dados da área serão modificados.
+As modificações de área foram salvas.
+Algo deu errado e as modificações não foram salvas!
+Primeiro
+Durar
+Tipo de usuário:
+Você não tem permissão para criar ou revisar este controle. Entre em contato com seu chefe. Obrigado
+Você não tem permissão para criar ou revisar este relatório. Entre em contato com seu chefe. Obrigado
+A consulta está sendo realizada, levará alguns segundos, pode ser muito complexa dependendo dos arquivos envolvidos e do intervalo de tempo solicitado. Proteja a conexão com a Internet.
+Não foi encontrado nenhum registro que corresponda às datas fornecidas. Revise as datas em Controles carregados.
+Selecione o intervalo de datas para a consulta:
+Não foi encontrado nenhum registro que corresponda às datas fornecidas. Revise as datas em Controles carregados.
+Vazio
+Com separador
+Com foto
+Novo acampamento
+Você está trabalhando com um controle salvo com o número:
+Documento assinado digitalmente.
+Lembre-se de que os e-mails estão sendo verificados para envio.
+A consulta está sendo realizada, levará alguns segundos, pode ser muito complexa dependendo dos arquivos envolvidos e do intervalo de tempo solicitado. Proteja a conexão com a Internet.
+Validado por
+Este e-mail não é autorizado, consulte o Super Admin ou Desenvolvedor.
+Este e-mail já foi autorizado.
+Registrado com sucesso.

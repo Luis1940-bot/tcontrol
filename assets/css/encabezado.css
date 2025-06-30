@@ -1,0 +1,328 @@
+/* ARCHIVO NO USADO: Los estilos de encabezado han sido migrados a common-components.css. Este archivo puede eliminarse. */
+
+/* Definición de variables */
+:root {
+  --div-encabezado-height: auto;
+  --div-ubicacion-height: auto;
+  --div-volver-height: auto;
+  --div-volver-img-display: none;
+  --spanUbicacion-font-size: 18px;
+  --spanPerson-font-size: 12px;
+  --volver-height: 16px;
+  --volver-width: 16px;
+}
+.div-encabezado {
+  position: relative;
+}
+.div-volver {
+  position: relative;
+  z-index: 1;
+}
+#spanUbicacion {
+  font-size: 18px;
+}
+
+/* Estilos para diferentes tamaños de pantalla y orientaciones */
+/* Media Queries */
+@media only screen and (min-width: 200px) and (orientation: portrait) {
+  .div-encabezado {
+    height: var(--div-encabezado-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 40px;
+  }
+
+  .div-ubicacion {
+    height: var(--div-ubicacion-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver {
+    height: var(--div-volver-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 20px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: var(--div-volver-img-display);
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: var(--spanUbicacion-font-size);
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: var(--spanPerson-font-size);
+    font-style: italic;
+  }
+
+  #volver {
+    height: var(--volver-height);
+    width: var(--volver-width);
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape) {
+  .div-encabezado {
+    height: var(--div-encabezado-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 40px;
+  }
+
+  .div-ubicacion {
+    height: var(--div-ubicacion-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver {
+    height: var(--div-volver-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 55px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: var(--div-volver-img-display);
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: 24px; /*var(--spanUbicacion-font-size); */
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: var(--spanPerson-font-size);
+    font-style: italic;
+  }
+
+  #volver {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  .div-encabezado {
+    height: var(--div-encabezado-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 40px;
+  }
+
+  .div-ubicacion {
+    height: var(--div-ubicacion-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver {
+    height: var(--div-volver-height);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 20px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 50px;
+    display: var(--div-volver-img-display);
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: var(--spanUbicacion-font-size);
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: var(--spanPerson-font-size);
+    font-style: italic;
+  }
+
+  #volver {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
+  .div-encabezado,
+  .div-ubicacion,
+  .div-volver {
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* margin-top: 40px; */
+  }
+
+  .div-ubicacion {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 100px;
+    display: var(--div-volver-img-display);
+  }
+
+  #volver {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: 18px;
+    font-style: italic;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape) {
+  .div-encabezado,
+  .div-ubicacion,
+  .div-volver {
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* margin-top: 40px; */
+  }
+
+  .div-ubicacion {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 100px;
+    display: var(--div-volver-img-display);
+  }
+
+  #volver {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: 18px;
+    font-style: italic;
+  }
+}
+
+@media only screen and (min-width: 1800px) and (orientation: landscape) {
+  .div-encabezado,
+  .div-ubicacion,
+  .div-volver {
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* margin-top: 40px; */
+  }
+
+  .div-ubicacion {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .div-volver img {
+    margin-top: 20px;
+    margin-left: 100px;
+    display: var(--div-volver-img-display);
+  }
+
+  #volver {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  #volver:hover {
+    background: #ececec;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .div-ubicacion #spanUbicacion {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .div-person {
+    text-align: center;
+  }
+
+  #spanPerson {
+    font-size: 18px;
+    font-style: italic;
+  }
+}

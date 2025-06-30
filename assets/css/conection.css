@@ -1,0 +1,35 @@
+/*
+  AVISO: Este archivo ya no se utiliza. Sus estilos han sido migrados a 'common-components.css'.
+  Puede eliminarse de forma segura una vez confirmada la migración total.
+*/
+
+/* Definición de variables */
+:root {
+  --idSignal-width: 25px;
+  --idSignal-height: 25px;
+  --idSignal-margin-left: 10px;
+  --idSignal-margin-top: 10px;
+}
+
+/* Estilos para diferentes tamaños de pantalla y orientaciones */
+@media only screen and (min-width: 200px) and (orientation: portrait),
+  only screen and (min-width: 481px) and (max-width: 900px) and (orientation: landscape),
+  only screen and (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  #idSignal {
+    width: var(--idSignal-width);
+    height: var(--idSignal-height);
+    margin-left: var(--idSignal-margin-left);
+    margin-top: var(--idSignal-margin-top);
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape),
+  only screen and (min-width: 1200px) and (max-width: 1800px) and (orientation: landscape),
+  only screen and (min-width: 1800px) and (orientation: landscape) {
+  #idSignal {
+    width: 30px;
+    height: 30px;
+    margin-left: var(--idSignal-margin-left);
+    margin-top: var(--idSignal-margin-top);
+  }
+}

@@ -1,0 +1,223 @@
+Company
+Email
+Password
+Login
+Withou companies
+Version
+You are in
+High User
+Register (Select company and enter your email).
+Register your company.
+Recover password.
+Name and surname
+Repeat password
+Area
+Position
+User code
+Type of user
+Situation
+Asset
+Inactive
+Checker
+Not verified
+Verified
+Signature
+Language
+Spanish
+English
+Portuguese
+to register
+Collaborator
+User or operator
+Supervisor
+Supervisor or manager
+Boss
+Area Headquarters
+Admin
+A client administrator
+Manager
+Area manager
+Sponsor
+Sponsor, Directors and who pays for the tool
+Developer
+For developers only
+Wait a moment then you will be redirected.
+Check.
+Enter verification code:
+Verify
+Wait a moment then you will be redirected.
+User already exists
+Invalid email format.
+Your user is not verified, you must look for the email to verify or contact the administrator.
+Password whitening.
+The user was not found.
+Some fields are missing.
+There are differences between written emails.
+Enter your email
+Repeat your email
+Send request
+Enter the new password
+Repeat your new password
+Accept password
+There are differences between written passwords.
+There are differences between the written fields.
+The control tree is not developed.
+Controls
+Consultations
+Reports
+Reports
+Variables
+Menu
+Look for...
+Doc
+There are no loaded controls. Contact the administrator.
+Mistake. The document code must be a number.
+No records found with the document
+Sign off
+Start
+Error loading file.
+All
+Assets
+Off
+There are no reports loaded. Contact the administrator.
+Wait a few moments, the active reports are being listed. Thank you!
+Add
+Clone
+There are no loaded controls. Contact the administrator.
+Please wait a few moments, the controls are being listed. Thank you!
+There are no loaded variables. Contact the administrator.
+Please wait a few moments, the active areas are being listed. Thank you!
+There are no loaded areas. Contact the administrator.
+Elaborated
+Revised
+approved
+Validity
+Version
+Modification
+Current date
+Control signature
+Firm supervises
+Change control
+No
+Yeah
+Indeterminate
+Every day
+Once a week
+Once a fortnight
+Once a month
+Once a quarter
+Once a semester
+Once per year
+EDIT
+The control tree is not developed. Contact the Administrator or Developer.
+Concept
+Survey
+Detail
+Observation
+Keep
+Save Changes
+Save as...
+Sign
+Attention
+Documents
+New
+Edit
+A new control will be saved.
+The changes will be saved.
+A copy of the current one is made.
+When signing, be sure of the data provided.
+You are about to delete the registry
+Documents involved in the cargo.
+Clone this control to:
+Make sign
+Process completed successfully! All steps of the procedure have been executed correctly.
+The process may take a few moments until the image is displayed in the corresponding cell.
+There was an error that does not allow you to continue with the correct process.
+Wait a few moments, the process is running. The controls are complex digital instruments, during loading it is controlled that everything happens as expected. Thank you!
+Alert Example
+Reload(F5)
+Return
+You are working with a new control that has not been saved.
+Document not digitally signed.
+Signed by
+It is sent by email. Deselect not to send.
+Alert Example
+New Query(F5)
+Copied to clipboard.
+Authorized from Area Headquarters.
+The process may take a few moments as the inferred data is checked.
+Did not make any changes to those determined by configuration. You will not be able to save any controls.
+Required data is missing and has not been completed. Close this message, complete the required information and accept again.
+The insertion process was successful.
+The quantity of:
+items
+Document no.
+Something went wrong.
+The process failed as no inserted data is recorded. Check the internet connection and try again.\nIf the problem persists, contact the analyst in your area.
+Emails have been sent according to the control configuration.
+Wait a few moments, the process is running. The controls are complex digital instruments, during loading it is controlled that everything happens as expected. Thank you!
+The table did not populate as expected, please try again.
+There are no modifications in the control that require saving, verify the inferred data since the data present is the standard.
+Alert date:
+Alert time:
+Enter the system and access document number
+Gonna
+Notify
+Alert System
+Alert system notification
+The file is not in proper JSON format. Contact the developer.
+The JSON file does not exist. Contact the developer.
+Error loading JSON file. Contact the developer.
+Your digital signature could not be completed, there is an error in your key. Please verify and try again. Thank you
+Action
+Former
+Current
+If the data is correct, accept, otherwise you can cancel the operation.\n If you accept, you will no longer be able to undo the action.
+This control will be sent by email according to the email configuration.
+This control will NOT be sent by email.
+The saving process was successful.
+Please wait a few moments, the active controls are being listed. Thank you!
+View uploaded
+See visible
+Procedure
+View by date
+Send
+Select the date range for:
+Alert Example
+New report
+A new report will be registered.
+The new report was generated correctly with the id:
+Something went wrong and the new report was not saved!
+The report data will be modified.
+Modifications to the report were saved.
+Something went wrong and the modifications were not saved!
+A copy of the current report will be released.
+The copy of the report was generated correctly with the id:
+Something went wrong and a copy of the report was not made!
+A new area will be registered.
+The new area was generated successfully.
+Something went wrong and the new area was not saved!
+The area data will be modified.
+The area modifications were saved.
+Something went wrong and the modifications were not saved!
+First
+Last
+Type of user:
+You do not have permission to create or review this control. Contact your leader. Thank you
+You do not have permission to create or review this report. Contact your leader. Thank you
+The query is being performed, it will take a few seconds, it can be very complex depending on the files involved and the time interval requested. Secure the internet connection.
+No record was found that matches the dates provided. Review the dates in Loaded Controls.
+Select the date range for the query:
+No record was found that matches the dates provided. Review the dates in Loaded Controls.
+Empty
+With separator
+With Photo
+New camp
+You are working with a control saved with the number:
+Digitally signed document.
+Keep in mind that the emails are being verified for sending.
+The query is being processed, it will take a few seconds. It may be very complex depending on the files involved and the time interval requested. Ensure your internet connection.
+Validated by
+This email is not authorized, please check with the Super Admin or Developer.
+This email has already been authorized.
+You have registered successfully.
