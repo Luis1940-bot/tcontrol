@@ -1,0 +1,209 @@
+{
+  "planta": "Alpek-PET Cosoleacaque",
+  "idiomas": {
+    "bienvenido": ["Bienvenido", "Bem-vindo(Br)", "Welcome"],
+    "abreviatura": ["es", "bra", "en"]
+  },
+  "menuSelectivo": {
+    "sin": {
+      "sinGuardar": [],
+      "sinGuardarCambio": [],
+      "sinGuardarComoNuevo": [],
+      "sinSalir": [],
+      "sinVolver": [],
+      "sinHacerFirmar": []
+    },
+    "con": {
+      "conExportar": [],
+      "conGuardar": [],
+      "conGuardarCambio": [],
+      "conGuardarComoNuevo": [],
+      "conSalir": [],
+      "conVolver": [],
+      "conHacerFirmar": []
+    }
+  },
+  "Menu": {
+    "name": ["Controles", "Consultas"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", "Consultas/index.php"]
+  },
+  "Controles": {
+    "name": ["Controles", "Imprimir control"],
+    "type": ["", ""],
+    "ruta": ["Controles/index.php", ""]
+  },
+  "Ad": {
+    "name": ["Reportes", "Controles", "Variables", "Areas", "Comunicación"],
+    "type": ["", "", "", "", ""],
+    "ruta": [
+      "ListReportes/index.php",
+      "ListControles/index.php",
+      "ListVariables/index.php",
+      "ListAreas/index.php",
+      "ListComunicacion/index.php"
+    ]
+  },
+  "Sad": {
+    "name": [
+      "AuthUser",
+      "RegisterPlant",
+      "phpinfo",
+      "hash",
+      "pegarExcel",
+      "verRepetidosControl",
+      "Corregir Registros",
+      "Ver Log"
+    ],
+    "type": ["", "", "", "", "", "", "", ""],
+    "ruta": [
+      "RegisterAuthUser/index.php",
+      "RegisterPlant/index.php",
+      "phpinfo.php",
+      "hash.php",
+      "ListControles/Routes/pegarExcel.php",
+      "ListControles/Routes/verRepetidosControl.php",
+      "Pages/Sadmin/Routes/get_records",
+      "Pages/Sadmin/Routes/errorLog"
+    ]
+  },
+  "apps": {
+    "name": ["SCG", "Admin", "Super Admin", "Producción PET"],
+    "type": ["ctrl", "ctrl", "btn", "btn"],
+    "ruta": ["Menu/index.php", "Admin/index.php", "Sadmin/index.php", ""],
+    "nivel": [3, 4, 8, 1],
+    "Producción PET": {
+      "name": [
+        "CP",
+        "SSP",
+        "SERVICIOS",
+        "CREADOS HOY",
+        "HISTORIAL DE BITÁCORAS"
+      ],
+      "type": ["btn", "btn", "btn", "pag", "pag_0"],
+      "ruta": ["", "", "", "", ""],
+      "nivel": [1, 1, 1, 1, 1],
+      "CP": {
+        "name": [
+          "BITÁCORA DEL DCS FUSIÓN (CP)",
+          "CP Check List Semanal",
+          "Mezcla de Antimonio",
+          "MEZCLA RHIL",
+          "Toner Azul",
+          "Toner Rojo SR52",
+          "APM-MP-PR-141-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO FUSIÓN (TURNO 1)",
+          "APM-MP-PR-181-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO FUSIÓN/SERVICIO (TURNO 1)"
+        ],
+        "type": ["ctrl", "btn", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl", "ctrl"],
+        "ruta": [
+          "control_N=175&control_T=BITACORA%20DEL%20DCS%20FUSIÓN%20(CP)&nr=",
+          "",
+          "control_N=178&control_T=PREPARACIÓN%20DE%20LA%20MEZCLA%20DE%20ANTIMONIO&nr=",
+          "control_N=179&control_T=PREPARACION%20DE%20LA%20MEZCLA%20DE%20EGV%20-%20RHIL&nr=",
+          "control_N=180&control_T=PREPARACION%20DE%20LA%20MEZCLA%20DE%20TONER%20AZUL%20PARA%20LA%20RESINA%20MB912&nr=",
+          "control_N=181&control_T=PREPARACIÓN%20DE%20LA%20MEZCLA%20DE%20TONER%20ROJO%20SR-52%20(REPI)&nr=",
+          "control_N=220&control_T=APM-MP-PR-141-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20FUSIÓN%20(TURNO%201)&nr=",
+          "control_N=223&control_T=APM-MP-PR-181-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20FUSIÓN-SERVICIO%20(TURNO%201)&nr="
+        ],
+        "nivel": [1, 1, 1, 1, 1, 1, 1, 1],
+        "CP Check List Semanal": {
+          "name": [
+            "TURNO 1 LUNES",
+            "TURNO 2 LUNES",
+            "TURNO 1 MARTES",
+            "TURNO 2 MARTES",
+            "TURNO 1 MIÉRCOLES",
+            "TURNO 2 MIÉRCOLES",
+            "TURNO 1 JUEVES",
+            "TURNO 2 JUEVES",
+            "TURNO 1 VIERNES",
+            "TURNO 2 VIERNES",
+            "TURNO 1 SÁBADO",
+            "TURNO 2 SÁBADO",
+            "TURNO 1 DOMINGO",
+            "TURNO 2 DOMINGO"
+          ],
+          "type": [
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl",
+            "ctrl"
+          ],
+          "ruta": [
+            "control_N=135&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%201%20LUNES&nr=",
+            "control_N=183&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%202%20LUNES&nr=",
+            "control_N=184&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%201%20MARTES&nr=",
+            "control_N=185&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%202%20MARTES&nr=",
+            "control_N=186&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%201%20MIÉRCOLES&nr=",
+            "control_N=187&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%202%20MIÉRCOLES&nr=",
+            "control_N=188&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%201%20JUEVES&nr=",
+            "control_N=189&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%202%20JUEVES&nr=",
+            "control_N=190&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%201%20VIERNES&nr=",
+            "control_N=191&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%202%20VIERNES&nr=",
+            "control_N=192&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%201%20SÁBADO&nr=",
+            "control_N=193&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%202%20SÁBADO&nr=",
+            "control_N=194&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%201%20DOMINGO&nr=",
+            "control_N=195&control_T=CP-56498-1%20-%20CHECK%20LIST%20PROGRAMA%20SEMANAL%20TURNO%202%20DOMINGO&nr="
+          ],
+          "nivel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        }
+      },
+      "SSP": {
+        "name": [
+          "BITÁCORA DEL DCS SÓLIDO (SSP)",
+          "APM-MP-PR-141-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO SÓLIDO (TURNO 1)",
+          "APM-MP-PR-181-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO SÓLIDO (TURNO 1)"
+        ],
+        "type": ["ctrl", "ctrl", "ctrl"],
+        "ruta": [
+          "control_N=177&control_T=BITACORA%20DEL%20DCS%20SÓLIDO%20(SSP)&nr=",
+          "control_N=222&control_T=APM-MP-PR-141-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20SÓLIDO%20(TURNO%201)&nr=",
+          "control_N=224&control_T=APM-MP-PR-181-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20SÓLIDO%20(TURNO%201)&nr="
+        ],
+        "nivel": [1, 1, 1]
+      },
+      "SERVICIOS": {
+        "name": [
+          "BITÁCORA DEL DCS SERVICIOS (UTILITIES)",
+          "APM-MP-PR-141-PR TOMA DE DATOS DE RECORRIDOS DE CAMPO SERVICIO (TURNO 1)"
+        ],
+        "type": ["ctrl", "ctrl"],
+        "ruta": [
+          "control_N=176&control_T=BITACORA%20DE%20DCS%20SERVICIOS%20(UTILITIES)&nr=",
+          "control_N=221&control_T=APM-MP-PR-141-PR%20TOMA%20DE%20DATOS%20DE%20RECORRIDOS%20DE%20CAMPO%20SERVICIO%20(TURNO%201)&nr="
+        ],
+        "nivel": [1, 1]
+      },
+      "CREADOS HOY": {
+        "name": ["CREADOS HOY"],
+        "type": ["pag"],
+        "ruta": ["Pages\/ControlesDiarios\/"],
+        "nivel": [1]
+      },
+      "HISTORIAL DE BITÁCORAS": {
+        "name": [
+          "HISTORIAL DCS FUSIÓN (CP)",
+          "HISTORIAL DCS SERVICIOS (UTILITIES)",
+          "HISTORIAL DCS SÓLIDO (SSP)"
+        ],
+        "type": ["pag", "pag", "pag"],
+        "ruta": [
+          "Pages\/client28\/Bitacoras\/index.php?ctrl=175&nme=HISTORIAL BITÁCORA DEL DCS FUSIÓN (CP)",
+          "Pages\/client28\/Bitacoras\/index.php?ctrl=176&nme=HISTORIAL BITACORA DE DCS SERVICIOS (UTILITIES)",
+          "Pages\/client28\/Bitacoras\/index.php?ctrl=177&nme=HISTORIAL BITÁCORA DEL DCS SÓLIDO (SSP)"
+        ],
+        "nivel": [1, 1, 1]
+      }
+    }
+  }
+}

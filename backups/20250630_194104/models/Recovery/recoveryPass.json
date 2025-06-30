@@ -1,0 +1,84 @@
+{
+  "elements": [
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "email1",
+        "className": "label-recovery",
+        "innerHTML": "Ingrese su correo electrónico"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "email1",
+        "type": "email",
+        "className": "input-recovery",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "email2",
+        "className": "label-recovery",
+        "innerHTML": "Repita su correo electrónico"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "email2",
+        "type": "email",
+        "className": "input-recovery",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "pass1",
+        "className": "label-recovery",
+        "innerHTML": "Ingrese la nueva contraseña"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "pass1",
+        "type": "password",
+        "className": "input-recovery",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "pass2",
+        "className": "label-recovery",
+        "innerHTML": "Repita su la nueva contraseña"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "pass2",
+        "type": "password",
+        "className": "input-recovery",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "button",
+      "config": {
+        "id": "idButtonRecoveryUser",
+        "class": "button-recovery",
+        "text": "Enviar solicitud"
+      }
+    }
+  ]
+}

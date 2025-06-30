@@ -1,0 +1,194 @@
+{
+  "elements": [
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "id",
+        "className": "label-plant",
+        "innerHTML": "ID"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "id",
+        "type": "text",
+        "className": "input-plant",
+        "disabled": true
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "cliente",
+        "className": "label-plant",
+        "innerHTML": "Compañía-Sitio"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "cliente",
+        "type": "text",
+        "className": "input-plant"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-plant",
+        "text": "Campo obligatorio."
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "detalle",
+        "className": "label-plant",
+        "innerHTML": "Detalle"
+      }
+    },
+    {
+      "tag": "textarea",
+      "config": {
+        "id": "detalle",
+        "className": "textarea-plant",
+        "rows": 3,
+        "cols": 50
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "contacto",
+        "className": "label-plant",
+        "innerHTML": "Contacto"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "contacto",
+        "type": "text",
+        "className": "input-plant"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-plant",
+        "text": "Campo obligatorio."
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "email",
+        "className": "label-plant",
+        "innerHTML": "Email de contacto"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "email",
+        "type": "email",
+        "className": "input-plant"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-plant",
+        "text": "Campo obligatorio."
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "situacion",
+        "className": "label-plant",
+        "innerHTML": "Situación"
+      }
+    },
+    {
+      "tag": "select",
+      "config": {
+        "id": "situacion",
+        "className": "select-plant",
+        "disabled": true
+      },
+      "options": [
+        {
+          "value": "s",
+          "text": "Activo"
+        },
+        {
+          "value": "n",
+          "text": "No activo"
+        }
+      ]
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "logo",
+        "className": "label-plant",
+        "innerHTML": "Logo (PNG)"
+      }
+    },
+    {
+      "tag": "button",
+      "config": {
+        "id": "idLogo",
+        "class": "button-logo",
+        "text": "Seleccionar Logo"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": "idSpanLogo",
+        "className": "span-logo",
+        "text": ""
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "logo",
+        "type": "file",
+        "className": "input-file",
+        "name": "logo",
+        "accept": "image/png"
+      }
+    },
+    {
+      "tag": "img",
+      "config": {
+        "id": "idImgLogo",
+        "class": "thumbnail",
+        "src": "#",
+        "alt": "Sin logo."
+      }
+    },
+    {
+      "tag": "button",
+      "config": {
+        "id": "idRegisterButton",
+        "class": "button-plant",
+        "text": "Registrar"
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "elements": [
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "idSelectLogin",
+        "className": "label-login",
+        "innerHTML": "Compañía"
+      }
+    },
+    {
+      "tag": "select",
+      "config": { "id": "idSelectLogin", "className": "select-login" }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": "idSpanLogin",
+        "className": "span-sin-planta",
+        "text": "Seleccione una compañía."
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "idInput0",
+        "className": "label-login",
+        "innerHTML": "Correo electrónico"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "idInput0",
+        "type": "email",
+        "className": "input-login"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "idInput1",
+        "className": "label-login",
+        "innerHTML": "Contraseña"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "idInput1",
+        "type": "password",
+        "className": "input-login"
+      }
+    },
+    {
+      "tag": "button",
+      "config": {
+        "id": "idAcceso",
+        "class": null,
+        "text": "Acceso"
+      }
+    },
+    {
+      "tag": "div",
+      "config": { "class": "div-a" },
+      "children": [
+        {
+          "tag": "a",
+          "config": {
+            "id": "idAltaUsuario",
+            "className": "a-login",
+            "data": "RegisterUser",
+            "textContent": "Regístrese (Seleccione compañía y escriba su email)"
+          }
+        },
+
+        {
+          "tag": "a",
+          "config": {
+            "id": "idOlvidoPass",
+            "className": "a-login",
+            "data": "RecoveryPass",
+            "textContent": "Recuperar contraseña.",
+            "href": "RegisterUser"
+          }
+        }
+      ]
+    }
+  ]
+}

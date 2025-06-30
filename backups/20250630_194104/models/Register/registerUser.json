@@ -1,0 +1,297 @@
+{
+  "elements": [
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "id",
+        "className": "label-register",
+        "innerHTML": "ID"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "id",
+        "type": "text",
+        "className": "input-register",
+        "style": "transition: background-color 0.3s;",
+        "disabled": true
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "nombre",
+        "className": "label-register",
+        "innerHTML": "Nombre y apellido"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "nombre",
+        "type": "text",
+        "className": "input-register",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-register",
+        "text": "Requerido."
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "pass",
+        "className": "label-register",
+        "innerHTML": "Contraseña"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "pass",
+        "type": "password",
+        "className": "input-register",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": null,
+        "className": "span-register",
+        "text": "Requerido. No use claves personales."
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "repetir-pass",
+        "className": "label-register",
+        "innerHTML": "Repetir Contraseña"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "repetirPass",
+        "type": "password",
+        "className": "input-register",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": "idSpanRepetirPass",
+        "className": "span-no-repite-pass",
+        "text": "Correcto."
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "area",
+        "className": "label-register",
+        "innerHTML": "Área"
+      }
+    },
+    {
+      "tag": "select",
+      "config": {
+        "id": "area",
+        "className": "select-register"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "puesto",
+        "className": "label-register",
+        "innerHTML": "Puesto"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "puesto",
+        "type": "text",
+        "className": "input-register",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "cod_usuario",
+        "className": "label-register",
+        "innerHTML": "Código de Usuario"
+      }
+    },
+    {
+      "tag": "span",
+      "config": {
+        "id": "cod_usuario",
+        "className": "span-register",
+        "text": "-"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "tipo_usuario",
+        "className": "label-register",
+        "innerHTML": "Tipo de Usuario"
+      }
+    },
+    {
+      "tag": "select",
+      "config": {
+        "id": "tipo_usuario",
+        "className": "select-register"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "situacion",
+        "className": "label-register",
+        "innerHTML": "Situación"
+      }
+    },
+    {
+      "tag": "select",
+      "config": {
+        "id": "situacion",
+        "className": "select-register",
+        "disabled": true
+      },
+      "options": [
+        {
+          "value": "s",
+          "text": "Activo"
+        },
+        {
+          "value": "n",
+          "text": "No activo"
+        }
+      ]
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "verificador",
+        "className": "label-register",
+        "innerHTML": "Verificador"
+      }
+    },
+    {
+      "tag": "select",
+      "config": {
+        "id": "verificador",
+        "className": "select-register",
+        "disabled": true
+      },
+      "options": [
+        {
+          "value": "n",
+          "text": "No verificado"
+        },
+        {
+          "value": "s",
+          "text": "Verificado"
+        }
+      ]
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "email",
+        "className": "label-register",
+        "innerHTML": "Correo Electrónico"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "email",
+        "type": "email",
+        "className": "input-register",
+        "style": "transition: background-color 0.3s;"
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "firma",
+        "className": "label-register",
+        "innerHTML": "Firma"
+      }
+    },
+    {
+      "tag": "input",
+      "config": {
+        "id": "firma",
+        "type": "text",
+        "className": "input-register",
+        "style": "transition: background-color 0.3s;",
+        "disabled": true
+      }
+    },
+    {
+      "tag": "label",
+      "config": {
+        "id": null,
+        "htmlFor": "idioma",
+        "className": "label-register",
+        "innerHTML": "Idioma"
+      }
+    },
+    {
+      "tag": "select",
+      "config": {
+        "id": "idioma",
+        "className": "select-register"
+      },
+      "options": [
+        {
+          "value": "es",
+          "text": "Español"
+        },
+        {
+          "value": "en",
+          "text": "Inglés"
+        },
+        {
+          "value": "br",
+          "text": "Portugués"
+        }
+      ]
+    },
+    {
+      "tag": "button",
+      "config": {
+        "id": "idButtonRegisterUser",
+        "class": "button-register",
+        "text": "Registrar"
+      }
+    }
+  ]
+}

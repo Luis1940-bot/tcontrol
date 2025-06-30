@@ -1,0 +1,54 @@
+{
+  "Consultas": {
+    "name": ["Gestión General", "Producción"],
+    "active": [1, 1, 1],
+    "button": [1, 1, 1],
+    "nivel": [3, 1, 1]
+  },
+  "Gestión General": {
+    "name": [
+      "PA Facilitador",
+      "PA Jefatura",
+      "PA Gerencia",
+      "Control Interno de Ingreso"
+    ],
+    "confecha": [1, 1, 1, 1],
+    "archivo": ["x", "x", "x", "x"],
+    "active": [1, 1, 1, 1],
+    "button": [0, 0, 0, 0],
+    "procedure": [
+      "proc_pa_facilitador",
+      "proc_pa_jefatura",
+      "proc_pa_gerencia",
+      "proc_15_control_interno1"
+    ],
+    "in": [null, null, null, null],
+    "out": [null, null, null, null],
+    "operation": [null, null, null, null],
+    "nivel": [2, 3, 5, 3]
+  },
+  "Producción": {
+    "name": ["GESTIÓN"],
+    "confecha": [null],
+    "archivo": ["x"],
+    "active": [1],
+    "button": [1],
+    "procedure": [null],
+    "in": [null],
+    "out": [null],
+    "operation": [null],
+    "nivel": [2]
+  },
+  "GESTIÓN": {
+    "name": ["Que hay en PET", "TAGS y Rangos"],
+    "confecha": [1, 0],
+    "archivo": ["x", "x"],
+    "active": [1, 1],
+    "button": [0, 0],
+    "procedure": ["proc_28_que_hay_hoy_PET", "proc_28_tags_rangos"],
+    "in": [null, null],
+    "out": [null, null],
+    "operation": [null, null],
+    "nivel": [2, 2]
+  }
+}
