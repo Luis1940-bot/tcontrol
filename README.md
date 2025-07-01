@@ -889,3 +889,157 @@ El sistema fue diseñado bajo principios de **simplicidad visual**, **jerarquía
 - ✅ Los usuarios colaborativos solo navegan con botones y etiquetas amigables.
 - ✅ Los administradores y supervisores tienen acceso a herramientas más potentes, pero igual de directas.
 - ✅ El sistema se adapta a múltiples clientes y estructuras internas distintas.
+
+---
+
+## 🔧 Herramientas de Calidad de Código
+
+[![Calidad de Código](https://img.shields.io/badge/Calidad-Configurado-brightgreen)](https://github.com/Luis1940-bot/tcontrol)
+[![ESLint](https://img.shields.io/badge/ESLint-Configurado-blue)](https://eslint.org/)
+[![Prettier](https://img.shields.io/badge/Prettier-Configurado-ff69b4)](https://prettier.io/)
+[![PHPStan](https://img.shields.io/badge/PHPStan-Nivel%20Max-red)](https://phpstan.org/)
+
+Este proyecto incluye un entorno completo de calidad de código con las siguientes herramientas:
+
+### JavaScript/TypeScript
+
+- **ESLint**: Análisis estático y corrección automática de código JavaScript
+- **Prettier**: Formateo automático y consistente del código
+
+### PHP
+
+- **PHPStan**: Análisis estático de código PHP con nivel máximo de strictness
+
+## 🚀 Uso de Herramientas de Calidad
+
+### Scripts Automatizados
+
+**Windows (PowerShell):**
+
+```powershell
+.\quality-tools.ps1
+```
+
+**Linux/Mac (Bash):**
+
+```bash
+./quality-tools.sh
+```
+
+### Comandos Individuales
+
+**Formatear código:**
+
+```bash
+npm run format          # Prettier en todo el proyecto
+```
+
+**Verificar estilo JavaScript:**
+
+```bash
+npm run lint            # Solo verificar
+npm run lint:fix        # Verificar y corregir automáticamente
+```
+
+**Analizar código PHP:**
+
+```bash
+composer run phpstan    # Análisis estático completo
+```
+
+## 📊 Estado Actual de Calidad
+
+### JavaScript
+
+- ✅ Prettier configurado y aplicado
+- ✅ ESLint configurado con reglas modernas
+- ⚠️ ~280 problemas menores de linting restantes (mayormente warnings)
+
+### PHP
+
+- ✅ PHPStan configurado con nivel máximo
+- ⚠️ 871 problemas de tipado y validación identificados
+- 🎯 Oportunidades de mejora en tipado y manejo de errores
+
+## 🛠️ Configuración de Calidad
+
+### Archivos de Configuración
+
+- **`.eslintrc.js`**: Configuración avanzada de ESLint
+- **`.prettierrc`**: Configuración de formateo con Prettier
+- **`phpstan.neon`**: Configuración de análisis estático PHP
+- **`package.json`**: Scripts y dependencias npm
+- **`composer.json`**: Scripts y dependencias PHP
+
+### Scripts Disponibles
+
+#### NPM Scripts
+
+```bash
+npm run format         # Formatear con Prettier
+npm run lint           # Verificar con ESLint
+npm run lint:fix       # Corregir automáticamente con ESLint
+```
+
+#### Composer Scripts
+
+```bash
+composer run phpstan   # Análizar con PHPStan (512MB memory limit)
+```
+
+## 🎯 Roadmap de Calidad
+
+### Próximos Pasos
+
+1. **Resolver errores críticos de PHPStan** (tipados, validaciones)
+2. **Implementar type hints en funciones PHP**
+3. **Mejorar manejo de errores y excepciones**
+4. **Reducir warnings de ESLint restantes**
+5. **Agregar tests unitarios**
+
+### Mejoras Sugeridas
+
+- [ ] Implementar PHPDoc blocks completos
+- [ ] Validar inputs de usuario consistentemente
+- [ ] Refactorizar funciones con tipos mixed
+- [ ] Configurar pre-commit hooks
+- [ ] Agregar CI/CD con verificación de calidad
+
+## 🔍 Tipos de Problemas Identificados
+
+### JavaScript (ESLint)
+
+- Variables sin usar
+- Funciones declaradas pero no utilizadas
+- Inconsistencias en el uso de comillas
+- Espaciado y formateo (ya resuelto con Prettier)
+
+### PHP (PHPStan)
+
+- Tipos mixed sin validación
+- Acceso a propiedades/offsets sin verificación
+- Parámetros de función sin tipo especificado
+- Operaciones binarias entre tipos incompatibles
+- Funciones sin tipo de retorno especificado
+
+## 🛡️ Seguridad y Validación
+
+El análisis de PHPStan ha identificado áreas críticas para mejorar:
+
+1. **Validación de entrada**: Muchas funciones procesan datos sin validar tipos
+2. **Manejo de errores**: Falta de verificación de valores nulos/false
+3. **Seguridad SQL**: Verificar escape de parámetros en consultas
+4. **Validación de archivos**: Verificar existencia antes de includes
+
+## 🤝 Contribución y Calidad
+
+Al contribuir al proyecto:
+
+1. **Ejecuta las herramientas de calidad** antes de hacer commit
+2. **Corrige errores críticos** identificados por PHPStan
+3. **Sigue las convenciones** de formateo de Prettier
+4. **Agrega tipos y documentación** para nuevo código PHP
+
+---
+
+**Nota**: Este proyecto está en proceso de modernización con enfoque en calidad de código y mejores prácticas de desarrollo.
