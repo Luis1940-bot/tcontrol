@@ -25,8 +25,14 @@
   let PNG;
 
   PNG = (function () {
-    let APNG_BLEND_OP_OVER; let APNG_BLEND_OP_SOURCE; let APNG_DISPOSE_OP_BACKGROUND; let APNG_DISPOSE_OP_NONE; let APNG_DISPOSE_OP_PREVIOUS; let makeImage; let scratchCanvas; let
-      scratchCtx;
+    let APNG_BLEND_OP_OVER;
+    let APNG_BLEND_OP_SOURCE;
+    let APNG_DISPOSE_OP_BACKGROUND;
+    let APNG_DISPOSE_OP_NONE;
+    let APNG_DISPOSE_OP_PREVIOUS;
+    let makeImage;
+    let scratchCanvas;
+    let scratchCtx;
 
     PNG.load = function (url, canvas, callback) {
       let xhr;
@@ -38,11 +44,13 @@
       xhr.open('GET', url, true);
       xhr.responseType = 'arraybuffer';
       xhr.onload = function () {
-        let data; let
-          png;
+        let data;
+        let png;
         data = new Uint8Array(xhr.response || xhr.mozResponseArrayBuffer);
         png = new PNG(data);
-        if (typeof (canvas != null ? canvas.getContext : void 0) === 'function') {
+        if (
+          typeof (canvas != null ? canvas.getContext : void 0) === 'function'
+        ) {
           png.render(canvas);
         }
         return typeof callback === 'function' ? callback(png) : void 0;
@@ -61,8 +69,21 @@
     APNG_BLEND_OP_OVER = 1;
 
     function PNG(data) {
-      let chunkSize; let colors; let palLen; let delayDen; let delayNum; let frame; let i; let index; let key; let section; let palShort; let text; let _i; let _j; let
-        _ref;
+      let chunkSize;
+      let colors;
+      let palLen;
+      let delayDen;
+      let delayNum;
+      let frame;
+      let i;
+      let index;
+      let key;
+      let section;
+      let palShort;
+      let text;
+      let _i;
+      let _j;
+      let _ref;
       this.data = data;
       this.pos = 8;
       this.palette = [];
@@ -73,15 +94,17 @@
       frame = null;
       while (true) {
         chunkSize = this.readUInt32();
-        section = ((function () {
-          let _i; let
-            _results;
+        section = function () {
+          let _i;
+          let _results;
           _results = [];
           for (i = _i = 0; _i < 4; i = ++_i) {
             _results.push(String.fromCharCode(this.data[this.pos++]));
           }
           return _results;
-        }).call(this)).join('');
+        }
+          .call(this)
+          .join('');
         switch (section) {
           case 'IHDR':
             this.width = this.readUInt32();
@@ -115,7 +138,7 @@
             };
             delayNum = this.readUInt16();
             delayDen = this.readUInt16() || 100;
-            frame.delay = 1000 * delayNum / delayDen;
+            frame.delay = (1000 * delayNum) / delayDen;
             frame.disposeOp = this.data[this.pos++];
             frame.blendOp = this.data[this.pos++];
             frame.data = [];
@@ -127,7 +150,11 @@
               chunkSize -= 4;
             }
             data = (frame != null ? frame.data : void 0) || this.imgData;
-            for (i = _i = 0; chunkSize >= 0 ? _i < chunkSize : _i > chunkSize; i = chunkSize >= 0 ? ++_i : --_i) {
+            for (
+              i = _i = 0;
+              chunkSize >= 0 ? _i < chunkSize : _i > chunkSize;
+              i = chunkSize >= 0 ? ++_i : --_i
+            ) {
               data.push(this.data[this.pos++]);
             }
             break;
@@ -135,16 +162,21 @@
             this.transparency = {};
             switch (this.colorType) {
               case 3:
-            	palLen = this.palette.length / 3;
+                palLen = this.palette.length / 3;
                 this.transparency.indexed = this.read(chunkSize);
-                if (this.transparency.indexed.length > palLen) throw new Error('More transparent colors than palette size');
+                if (this.transparency.indexed.length > palLen)
+                  throw new Error('More transparent colors than palette size');
                 /*
                  * According to the PNG spec trns should be increased to the same size as palette if shorter
                  */
                 // palShort = 255 - this.transparency.indexed.length;
                 palShort = palLen - this.transparency.indexed.length;
                 if (palShort > 0) {
-                  for (i = _j = 0; palShort >= 0 ? _j < palShort : _j > palShort; i = palShort >= 0 ? ++_j : --_j) {
+                  for (
+                    i = _j = 0;
+                    palShort >= 0 ? _j < palShort : _j > palShort;
+                    i = palShort >= 0 ? ++_j : --_j
+                  ) {
                     this.transparency.indexed.push(255);
                   }
                 }
@@ -160,13 +192,16 @@
             text = this.read(chunkSize);
             index = text.indexOf(0);
             key = String.fromCharCode.apply(String, text.slice(0, index));
-            this.text[key] = String.fromCharCode.apply(String, text.slice(index + 1));
+            this.text[key] = String.fromCharCode.apply(
+              String,
+              text.slice(index + 1),
+            );
             break;
           case 'IEND':
             if (frame) {
               this.animation.frames.push(frame);
             }
-            this.colors = (function () {
+            this.colors = function () {
               switch (this.colorType) {
                 case 0:
                 case 3:
@@ -176,18 +211,18 @@
                 case 6:
                   return 3;
               }
-            }).call(this);
+            }.call(this);
             this.hasAlphaChannel = (_ref = this.colorType) === 4 || _ref === 6;
             colors = this.colors + (this.hasAlphaChannel ? 1 : 0);
             this.pixelBitlength = this.bits * colors;
-            this.colorSpace = (function () {
+            this.colorSpace = function () {
               switch (this.colors) {
                 case 1:
                   return 'DeviceGray';
                 case 3:
                   return 'DeviceRGB';
               }
-            }).call(this);
+            }.call(this);
             this.imgData = new Uint8Array(this.imgData);
             return;
           default:
@@ -202,18 +237,25 @@
     }
 
     PNG.prototype.read = function (bytes) {
-      let i; let _i; let
-        _results;
+      let i;
+      let _i;
+      let _results;
       _results = [];
-      for (i = _i = 0; bytes >= 0 ? _i < bytes : _i > bytes; i = bytes >= 0 ? ++_i : --_i) {
+      for (
+        i = _i = 0;
+        bytes >= 0 ? _i < bytes : _i > bytes;
+        i = bytes >= 0 ? ++_i : --_i
+      ) {
         _results.push(this.data[this.pos++]);
       }
       return _results;
     };
 
     PNG.prototype.readUInt32 = function () {
-      let b1; let b2; let b3; let
-        b4;
+      let b1;
+      let b2;
+      let b3;
+      let b4;
       b1 = this.data[this.pos++] << 24;
       b2 = this.data[this.pos++] << 16;
       b3 = this.data[this.pos++] << 8;
@@ -222,16 +264,37 @@
     };
 
     PNG.prototype.readUInt16 = function () {
-      let b1; let
-        b2;
+      let b1;
+      let b2;
       b1 = this.data[this.pos++] << 8;
       b2 = this.data[this.pos++];
       return b1 | b2;
     };
 
     PNG.prototype.decodePixels = function (data) {
-      let abyte; let c; let col; let i; let left; let length; let p; let pa; let paeth; let pb; let pc; let pixelBytes; let pixels; let pos; let row; let scanlineLength; let upper; let upperLeft; let _i; let _j; let _k; let _l; let
-        _m;
+      let abyte;
+      let c;
+      let col;
+      let i;
+      let left;
+      let length;
+      let p;
+      let pa;
+      let paeth;
+      let pb;
+      let pc;
+      let pixelBytes;
+      let pixels;
+      let pos;
+      let row;
+      let scanlineLength;
+      let upper;
+      let upperLeft;
+      let _i;
+      let _j;
+      let _k;
+      let _l;
+      let _m;
       if (data == null) {
         data = this.imgData;
       }
@@ -265,7 +328,13 @@
             for (i = _k = 0; _k < scanlineLength; i = _k += 1) {
               abyte = data[pos++];
               col = (i - (i % pixelBytes)) / pixelBytes;
-              upper = row && pixels[(row - 1) * scanlineLength + col * pixelBytes + (i % pixelBytes)];
+              upper =
+                row &&
+                pixels[
+                  (row - 1) * scanlineLength +
+                    col * pixelBytes +
+                    (i % pixelBytes)
+                ];
               pixels[c++] = (upper + abyte) % 256;
             }
             break;
@@ -274,7 +343,13 @@
               abyte = data[pos++];
               col = (i - (i % pixelBytes)) / pixelBytes;
               left = i < pixelBytes ? 0 : pixels[c - pixelBytes];
-              upper = row && pixels[(row - 1) * scanlineLength + col * pixelBytes + (i % pixelBytes)];
+              upper =
+                row &&
+                pixels[
+                  (row - 1) * scanlineLength +
+                    col * pixelBytes +
+                    (i % pixelBytes)
+                ];
               pixels[c++] = (abyte + Math.floor((left + upper) / 2)) % 256;
             }
             break;
@@ -286,8 +361,19 @@
               if (row === 0) {
                 upper = upperLeft = 0;
               } else {
-                upper = pixels[(row - 1) * scanlineLength + col * pixelBytes + (i % pixelBytes)];
-                upperLeft = col && pixels[(row - 1) * scanlineLength + (col - 1) * pixelBytes + (i % pixelBytes)];
+                upper =
+                  pixels[
+                    (row - 1) * scanlineLength +
+                      col * pixelBytes +
+                      (i % pixelBytes)
+                  ];
+                upperLeft =
+                  col &&
+                  pixels[
+                    (row - 1) * scanlineLength +
+                      (col - 1) * pixelBytes +
+                      (i % pixelBytes)
+                  ];
               }
               p = left + upper - upperLeft;
               pa = Math.abs(p - left);
@@ -312,8 +398,16 @@
     };
 
     PNG.prototype.decodePalette = function () {
-      let c; let i; let length; let palette; let pos; let ret; let transparency; let _i; let _ref; let
-        _ref1;
+      let c;
+      let i;
+      let length;
+      let palette;
+      let pos;
+      let ret;
+      let transparency;
+      let _i;
+      let _ref;
+      let _ref1;
       palette = this.palette;
       transparency = this.transparency.indexed || [];
       ret = new Uint8Array((transparency.length || 0) + palette.length);
@@ -330,13 +424,25 @@
     };
 
     PNG.prototype.copyToImageData = function (imageData, pixels) {
-      let alpha; let colors; let data; let i; let input; let j; let k; let length; let palette; let v; let
-        _ref;
+      let alpha;
+      let colors;
+      let data;
+      let i;
+      let input;
+      let j;
+      let k;
+      let length;
+      let palette;
+      let v;
+      let _ref;
       colors = this.colors;
       palette = null;
       alpha = this.hasAlphaChannel;
       if (this.palette.length) {
-        palette = (_ref = this._decodedPalette) != null ? _ref : this._decodedPalette = this.decodePalette();
+        palette =
+          (_ref = this._decodedPalette) != null
+            ? _ref
+            : (this._decodedPalette = this.decodePalette());
         colors = 4;
         alpha = true;
       }
@@ -392,8 +498,14 @@
     };
 
     PNG.prototype.decodeFrames = function (ctx) {
-      let frame; let i; let imageData; let pixels; let _i; let _len; let _ref; let
-        _results;
+      let frame;
+      let i;
+      let imageData;
+      let pixels;
+      let _i;
+      let _len;
+      let _ref;
+      let _results;
       if (!this.animation) {
         return;
       }
@@ -405,23 +517,28 @@
         pixels = this.decodePixels(new Uint8Array(frame.data));
         this.copyToImageData(imageData, pixels);
         frame.imageData = imageData;
-        _results.push(frame.image = makeImage(imageData));
+        _results.push((frame.image = makeImage(imageData)));
       }
       return _results;
     };
 
     PNG.prototype.renderFrame = function (ctx, number) {
-      let frame; let frames; let
-        prev;
+      let frame;
+      let frames;
+      let prev;
       frames = this.animation.frames;
       frame = frames[number];
       prev = frames[number - 1];
       if (number === 0) {
         ctx.clearRect(0, 0, this.width, this.height);
       }
-      if ((prev != null ? prev.disposeOp : void 0) === APNG_DISPOSE_OP_BACKGROUND) {
+      if (
+        (prev != null ? prev.disposeOp : void 0) === APNG_DISPOSE_OP_BACKGROUND
+      ) {
         ctx.clearRect(prev.xOffset, prev.yOffset, prev.width, prev.height);
-      } else if ((prev != null ? prev.disposeOp : void 0) === APNG_DISPOSE_OP_PREVIOUS) {
+      } else if (
+        (prev != null ? prev.disposeOp : void 0) === APNG_DISPOSE_OP_PREVIOUS
+      ) {
         ctx.putImageData(prev.imageData, prev.xOffset, prev.yOffset);
       }
       if (frame.blendOp === APNG_BLEND_OP_SOURCE) {
@@ -431,30 +548,40 @@
     };
 
     PNG.prototype.animate = function (ctx) {
-      let doFrame; let frameNumber; let frames; let numFrames; let numPlays; let _ref;
+      let doFrame;
+      let frameNumber;
+      let frames;
+      let numFrames;
+      let numPlays;
+      let _ref;
       const _this = this;
       frameNumber = 0;
-      _ref = this.animation, numFrames = _ref.numFrames, frames = _ref.frames, numPlays = _ref.numPlays;
+      ((_ref = this.animation),
+        (numFrames = _ref.numFrames),
+        (frames = _ref.frames),
+        (numPlays = _ref.numPlays));
       return (doFrame = function () {
-        let f; let
-          frame;
+        let f;
+        let frame;
         f = frameNumber++ % numFrames;
         frame = frames[f];
         _this.renderFrame(ctx, f);
         if (numFrames > 1 && frameNumber / numFrames < numPlays) {
-          return _this.animation._timeout = setTimeout(doFrame, frame.delay);
+          return (_this.animation._timeout = setTimeout(doFrame, frame.delay));
         }
       })();
     };
 
     PNG.prototype.stopAnimation = function () {
       let _ref;
-      return clearTimeout((_ref = this.animation) != null ? _ref._timeout : void 0);
+      return clearTimeout(
+        (_ref = this.animation) != null ? _ref._timeout : void 0,
+      );
     };
 
     PNG.prototype.render = function (canvas) {
-      let ctx; let
-        data;
+      let ctx;
+      let data;
       if (canvas._png) {
         canvas._png.stopAnimation();
       }
@@ -472,7 +599,7 @@
     };
 
     return PNG;
-  }());
+  })();
 
   global.PNG = PNG;
-}(typeof window !== 'undefined' && window || this));
+})((typeof window !== 'undefined' && window) || this);

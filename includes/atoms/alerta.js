@@ -1139,7 +1139,7 @@ function convertirObjATextPlano(obj) {
   const data = { ...obj };
 
   delete data.objImagen;
-  
+
   // Simplemente retornar JSON válido directamente
   return JSON.stringify(data);
 }
@@ -1203,17 +1203,19 @@ async function subirImagenes(img) {
     }
 
     // Parsear los strings JSON si es necesario
-    const parsedData = img.map((item, index) => {
-      if (typeof item === 'string') {
-        try {
-          return JSON.parse(item);
-        } catch (parseError) {
-          console.error(`Error al parsear item ${index}:`, parseError);
-          return null;
+    const parsedData = img
+      .map((item, index) => {
+        if (typeof item === 'string') {
+          try {
+            return JSON.parse(item);
+          } catch (parseError) {
+            console.error(`Error al parsear item ${index}:`, parseError);
+            return null;
+          }
         }
-      }
-      return item;
-    }).filter(item => item !== null);
+        return item;
+      })
+      .filter((item) => item !== null);
 
     // Verificar que tengamos datos válidos
     if (parsedData.length === 0) {
@@ -1221,7 +1223,11 @@ async function subirImagenes(img) {
     }
 
     // Verificar el formato esperado por el servidor
-    if (!parsedData[0] || !parsedData[0].extension || parsedData[0].extension.length === 0) {
+    if (
+      !parsedData[0] ||
+      !parsedData[0].extension ||
+      parsedData[0].extension.length === 0
+    ) {
       return null;
     }
 
@@ -1231,12 +1237,11 @@ async function subirImagenes(img) {
       fileName: [],
       extension: [],
       plant: [],
-      carpeta: []
+      carpeta: [],
     };
 
     // Combinar todos los arrays de todos los objetos
     parsedData.forEach((item) => {
-      
       if (item.src && Array.isArray(item.src)) {
         transformedData.src.push(...item.src);
       }
@@ -1256,7 +1261,7 @@ async function subirImagenes(img) {
 
     // Enviar como JSON string
     const imgJsonString = JSON.stringify(transformedData);
-    
+
     try {
       JSON.parse(imgJsonString); // Verificar que el JSON sea válido
       // console.log('JSON válido confirmado');
@@ -1267,33 +1272,36 @@ async function subirImagenes(img) {
 
     const formData = new FormData();
     formData.append('imgBase64', imgJsonString);
-    
+
     // Enviar las imágenes al servidor y retornar la respuesta
     const response = await fetch(`${SERVER}/Routes/Imagenes/photo_upload.php`, {
       method: 'POST',
       body: formData,
     });
-    
+
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
-    
+
     // Obtener el texto de la respuesta primero para verificar qué está devolviendo
     const responseText = await response.text();
-    
+
     // Intentar parsear solo si hay contenido
     if (!responseText || responseText.trim() === '') {
       return { success: false, message: 'Respuesta vacía del servidor' };
     }
-    
+
     let uploadResult;
     try {
       uploadResult = JSON.parse(responseText);
     } catch (parseError) {
       console.error('Error al parsear la respuesta del servidor:', parseError);
-      return { success: false, message: 'Error al parsear respuesta del servidor' };
+      return {
+        success: false,
+        message: 'Error al parsear respuesta del servidor',
+      };
     }
-    
+
     return uploadResult;
   } catch (error) {
     // eslint-disable-next-line no-console

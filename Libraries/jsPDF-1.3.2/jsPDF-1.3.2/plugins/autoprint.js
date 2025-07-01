@@ -19,4 +19,4 @@
     });
     return this;
   };
-}(jsPDF.API));
+})(jsPDF.API);

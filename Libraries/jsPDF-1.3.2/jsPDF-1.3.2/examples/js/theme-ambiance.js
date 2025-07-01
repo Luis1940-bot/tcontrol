@@ -21,10 +21,15 @@
  * IN THE SOFTWARE.
  * ***** END LICENSE BLOCK ***** */
 
-define('ace/theme/ambiance', ['require', 'exports', 'module', 'ace/lib/dom'], (require, exports, module) => {
+define('ace/theme/ambiance', ['require', 'exports', 'module', 'ace/lib/dom'], (
+  require,
+  exports,
+  module,
+) => {
   exports.isDark = true;
   exports.cssClass = 'ace-ambiance';
-  exports.cssText = ".ace-ambiance .ace_gutter {\
+  exports.cssText =
+    ".ace-ambiance .ace_gutter {\
 background-color: #3d3d3d;\
 background-image: -moz-linear-gradient(left, #3D3D3D, #333);\
 background-image: -ms-linear-gradient(left, #3D3D3D, #333);\

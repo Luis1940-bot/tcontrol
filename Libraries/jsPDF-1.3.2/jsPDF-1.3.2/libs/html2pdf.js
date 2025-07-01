@@ -14,7 +14,6 @@ function html2pdf(html, pdf, callback) {
   }
   canvas.pdf = pdf;
   pdf.annotations = {
-
     _nameMap: [],
 
     createAnnotation(href, bounds) {
@@ -32,7 +31,13 @@ function html2pdf(html, pdf, callback) {
           url: href,
         };
       }
-      pdf.link(x, y, bounds.right - bounds.left, bounds.bottom - bounds.top, options);
+      pdf.link(
+        x,
+        y,
+        bounds.right - bounds.left,
+        bounds.bottom - bounds.top,
+        options,
+      );
     },
 
     setName(name, bounds) {
@@ -45,7 +50,6 @@ function html2pdf(html, pdf, callback) {
         y,
       };
     },
-
   };
   canvas.annotations = pdf.annotations;
 
@@ -62,7 +66,10 @@ function html2pdf(html, pdf, callback) {
 
   if (typeof html === 'string') {
     // remove all scripts
-    html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+    html = html.replace(
+      /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+      '',
+    );
 
     var iframe = document.createElement('iframe');
     // iframe.style.width = canvas.width;

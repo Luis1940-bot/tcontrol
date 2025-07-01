@@ -11,8 +11,12 @@ function StackingContext(hasOwnStacking, opacity, element, parent) {
 StackingContext.prototype = Object.create(NodeContainer.prototype);
 
 StackingContext.prototype.getParentStack = function (context) {
-  const parentStack = (this.parent) ? this.parent.stack : null;
-  return parentStack ? (parentStack.ownStacking ? parentStack : parentStack.getParentStack(context)) : context.stack;
+  const parentStack = this.parent ? this.parent.stack : null;
+  return parentStack
+    ? parentStack.ownStacking
+      ? parentStack
+      : parentStack.getParentStack(context)
+    : context.stack;
 };
 
 module.exports = StackingContext;

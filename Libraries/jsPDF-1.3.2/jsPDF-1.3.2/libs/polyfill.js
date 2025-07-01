@@ -5,7 +5,8 @@
  */
 
 (function (global) {
-  const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+  const b64 =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
   if (typeof global.btoa === 'undefined') {
     global.btoa = function (data) {
@@ -20,26 +21,39 @@
       //   example 1: base64_encode('Kevin van Zonneveld');
       //   returns 1: 'S2V2aW4gdmFuIFpvbm5ldmVsZA=='
 
-      let o1; let o2; let o3; let h1; let h2; let h3; let h4; let bits; let i = 0; let ac = 0; let enc = ''; const tmp_arr = [];
+      let o1;
+      let o2;
+      let o3;
+      let h1;
+      let h2;
+      let h3;
+      let h4;
+      let bits;
+      let i = 0;
+      let ac = 0;
+      let enc = '';
+      const tmp_arr = [];
 
       if (!data) {
         return data;
       }
 
-      do { // pack three octets into four hexets
+      do {
+        // pack three octets into four hexets
         o1 = data.charCodeAt(i++);
         o2 = data.charCodeAt(i++);
         o3 = data.charCodeAt(i++);
 
-        bits = o1 << 16 | o2 << 8 | o3;
+        bits = (o1 << 16) | (o2 << 8) | o3;
 
-        h1 = bits >> 18 & 0x3f;
-        h2 = bits >> 12 & 0x3f;
-        h3 = bits >> 6 & 0x3f;
+        h1 = (bits >> 18) & 0x3f;
+        h2 = (bits >> 12) & 0x3f;
+        h3 = (bits >> 6) & 0x3f;
         h4 = bits & 0x3f;
 
         // use hexets to index into b64, and append result to encoded string
-        tmp_arr[ac++] = b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
+        tmp_arr[ac++] =
+          b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
       } while (i < data.length);
 
       enc = tmp_arr.join('');
@@ -65,7 +79,18 @@
       //   example 1: base64_decode('S2V2aW4gdmFuIFpvbm5ldmVsZA==');
       //   returns 1: 'Kevin van Zonneveld'
 
-      let o1; let o2; let o3; let h1; let h2; let h3; let h4; let bits; let i = 0; let ac = 0; let dec = ''; const tmp_arr = [];
+      let o1;
+      let o2;
+      let o3;
+      let h1;
+      let h2;
+      let h3;
+      let h4;
+      let bits;
+      let i = 0;
+      let ac = 0;
+      let dec = '';
+      const tmp_arr = [];
 
       if (!data) {
         return data;
@@ -73,16 +98,17 @@
 
       data += '';
 
-      do { // unpack four hexets into three octets using index points in b64
+      do {
+        // unpack four hexets into three octets using index points in b64
         h1 = b64.indexOf(data.charAt(i++));
         h2 = b64.indexOf(data.charAt(i++));
         h3 = b64.indexOf(data.charAt(i++));
         h4 = b64.indexOf(data.charAt(i++));
 
-        bits = h1 << 18 | h2 << 12 | h3 << 6 | h4;
+        bits = (h1 << 18) | (h2 << 12) | (h3 << 6) | h4;
 
-        o1 = bits >> 16 & 0xff;
-        o2 = bits >> 8 & 0xff;
+        o1 = (bits >> 16) & 0xff;
+        o2 = (bits >> 8) & 0xff;
         o3 = bits & 0xff;
 
         if (h3 == 64) {
@@ -102,10 +128,12 @@
 
   if (!Array.prototype.map) {
     Array.prototype.map = function (fun /* , thisArg */) {
-      if (this === void 0 || this === null || typeof fun !== 'function') throw new TypeError();
+      if (this === void 0 || this === null || typeof fun !== 'function')
+        throw new TypeError();
 
-      const t = Object(this); const len = t.length >>> 0; const
-        res = new Array(len);
+      const t = Object(this);
+      const len = t.length >>> 0;
+      const res = new Array(len);
       const thisArg = arguments.length > 1 ? arguments[1] : void 0;
       for (let i = 0; i < len; i++) {
         // NOTE: Absolute correctness would demand Object.defineProperty
@@ -128,10 +156,11 @@
 
   if (!Array.prototype.forEach) {
     Array.prototype.forEach = function (fun, thisArg) {
-      if (this === void 0 || this === null || typeof fun !== 'function') throw new TypeError();
+      if (this === void 0 || this === null || typeof fun !== 'function')
+        throw new TypeError();
 
-      const t = Object(this); const
-        len = t.length >>> 0;
+      const t = Object(this);
+      const len = t.length >>> 0;
       for (let i = 0; i < len; i++) {
         if (i in t) fun.call(thisArg, t[i], i, t);
       }
@@ -141,17 +170,30 @@
   if (!Object.keys) {
     Object.keys = (function () {
       const { hasOwnProperty } = Object.prototype;
-      const hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString');
-      const dontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty',
-        'isPrototypeOf', 'propertyIsEnumerable', 'constructor'];
+      const hasDontEnumBug = !{ toString: null }.propertyIsEnumerable(
+        'toString',
+      );
+      const dontEnums = [
+        'toString',
+        'toLocaleString',
+        'valueOf',
+        'hasOwnProperty',
+        'isPrototypeOf',
+        'propertyIsEnumerable',
+        'constructor',
+      ];
       const dontEnumsLength = dontEnums.length;
 
       return function (obj) {
-        if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
+        if (
+          typeof obj !== 'object' &&
+          (typeof obj !== 'function' || obj === null)
+        ) {
           throw new TypeError();
         }
-        const result = []; let prop; let
-          i;
+        const result = [];
+        let prop;
+        let i;
 
         for (prop in obj) {
           if (hasOwnProperty.call(obj, prop)) {
@@ -168,7 +210,7 @@
         }
         return result;
       };
-    }());
+    })();
   }
 
   if (!String.prototype.trim) {
@@ -186,4 +228,8 @@
       return this.replace(/\s+$/g, '');
     };
   }
-}(typeof self !== 'undefined' && self || typeof window !== 'undefined' && window || this));
+})(
+  (typeof self !== 'undefined' && self) ||
+    (typeof window !== 'undefined' && window) ||
+    this,
+);

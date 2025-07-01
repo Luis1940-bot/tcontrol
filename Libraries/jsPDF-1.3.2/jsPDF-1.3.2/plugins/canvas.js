@@ -14,7 +14,8 @@
 
 (function (jsPDFAPI) {
   jsPDFAPI.events.push([
-    'initialized', function () {
+    'initialized',
+    function () {
       this.canvas.pdf = this;
     },
   ]);
@@ -48,4 +49,4 @@
   });
 
   return this;
-}(jsPDF.API));
+})(jsPDF.API);

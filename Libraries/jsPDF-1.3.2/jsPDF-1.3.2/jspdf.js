@@ -57,7 +57,8 @@
  */
 const jsPDF = (function (global) {
   const pdfVersion = '1.3';
-  const pageFormats = { // Size in pt of various paper formats
+  const pageFormats = {
+    // Size in pt of various paper formats
     a0: [2383.94, 3370.39],
     a1: [1683.78, 2383.94],
     a2: [1190.55, 1683.78],
@@ -66,16 +67,16 @@ const jsPDF = (function (global) {
     a5: [419.53, 595.28],
     a6: [297.64, 419.53],
     a7: [209.76, 297.64],
-    a8: [147.40, 209.76],
-    a9: [104.88, 147.40],
-    a10: [73.70, 104.88],
+    a8: [147.4, 209.76],
+    a9: [104.88, 147.4],
+    a10: [73.7, 104.88],
     b0: [2834.65, 4008.19],
     b1: [2004.09, 2834.65],
     b2: [1417.32, 2004.09],
     b3: [1000.63, 1417.32],
     b4: [708.66, 1000.63],
-    b5: [498.90, 708.66],
-    b6: [354.33, 498.90],
+    b5: [498.9, 708.66],
+    b6: [354.33, 498.9],
     b7: [249.45, 354.33],
     b8: [175.75, 249.45],
     b9: [124.72, 175.75],
@@ -102,14 +103,14 @@ const jsPDF = (function (global) {
   };
 
   /**
-     * jsPDF's Internal PubSub Implementation.
-     * See mrrio.github.io/jsPDF/doc/symbols/PubSub.html
-     * Backward compatible rewritten on 2014 by
-     * Diego Casorran, https://github.com/diegocr
-     *
-     * @class
-     * @name PubSub
-     */
+   * jsPDF's Internal PubSub Implementation.
+   * See mrrio.github.io/jsPDF/doc/symbols/PubSub.html
+   * Backward compatible rewritten on 2014 by
+   * Diego Casorran, https://github.com/diegocr
+   *
+   * @class
+   * @name PubSub
+   */
   function PubSub(context) {
     const topics = {};
 
@@ -140,8 +141,8 @@ const jsPDF = (function (global) {
 
     this.publish = function (topic) {
       if (topics.hasOwnProperty(topic)) {
-        const args = Array.prototype.slice.call(arguments, 1); const
-          idr = [];
+        const args = Array.prototype.slice.call(arguments, 1);
+        const idr = [];
 
         for (const id in topics[topic]) {
           const sub = topics[topic][id];
@@ -160,9 +161,9 @@ const jsPDF = (function (global) {
   }
 
   /**
-     * @constructor
-     * @private
-     */
+   * @constructor
+   * @private
+   */
   function jsPDF(orientation, unit, format, compressPdf) {
     let options = {};
 
@@ -178,9 +179,9 @@ const jsPDF = (function (global) {
     // Default options
     unit = unit || 'mm';
     format = format || 'a4';
-    orientation = (`${orientation || 'P'}`).toLowerCase();
+    orientation = `${orientation || 'P'}`.toLowerCase();
 
-    const format_as_string = (`${format}`).toLowerCase();
+    const format_as_string = `${format}`.toLowerCase();
     let compress = !!compressPdf && typeof Uint8Array === 'function';
     let textColor = options.textColor || '0 g';
     const drawColor = options.drawColor || '0 G';
@@ -230,7 +231,7 @@ const jsPDF = (function (global) {
       return number.toFixed(3); // Ie, %.3f
     };
     const padd2 = function (number) {
-      return (`0${parseInt(number)}`).slice(-2);
+      return `0${parseInt(number)}`.slice(-2);
     };
     const out = function (string) {
       if (outToPages) {
@@ -277,8 +278,16 @@ const jsPDF = (function (global) {
       out('endstream');
     };
     const putPages = function () {
-      let n; let p; let arr; let i; let deflater; let adler32; let adler32cs; let wPt; let hPt; const
-        pageObjectNumbers = [];
+      let n;
+      let p;
+      let arr;
+      let i;
+      let deflater;
+      let adler32;
+      let adler32cs;
+      let wPt;
+      let hPt;
+      const pageObjectNumbers = [];
 
       adler32cs = global.adler32cs || jsPDF.adler32cs;
       if (compress && typeof adler32cs === 'undefined') {
@@ -315,9 +324,16 @@ const jsPDF = (function (global) {
           deflater.append(new Uint8Array(arr));
           p = deflater.flush();
           arr = new Uint8Array(p.length + 6);
-          arr.set(new Uint8Array([120, 156])),
-          arr.set(p, 2);
-          arr.set(new Uint8Array([adler32 & 0xFF, (adler32 >> 8) & 0xFF, (adler32 >> 16) & 0xFF, (adler32 >> 24) & 0xFF]), p.length + 2);
+          (arr.set(new Uint8Array([120, 156])), arr.set(p, 2));
+          arr.set(
+            new Uint8Array([
+              adler32 & 0xff,
+              (adler32 >> 8) & 0xff,
+              (adler32 >> 16) & 0xff,
+              (adler32 >> 24) & 0xff,
+            ]),
+            p.length + 2,
+          );
           p = String.fromCharCode.apply(null, arr);
           out(`<</Length ${p.length} /Filter [/FlateDecode]>>`);
         } else {
@@ -409,29 +425,29 @@ const jsPDF = (function (global) {
       fontmap[fontName][fontStyle] = fontKey;
     };
     /**
-             * FontObject describes a particular font as member of an instnace of jsPDF
-             *
-             * It's a collection of properties like 'id' (to be used in PDF stream),
-             * 'fontName' (font's family name), 'fontStyle' (font's style variant label)
-             *
-             * @class
-             * @public
-             * @property id {String} PDF-document-instance-specific label assinged to the font.
-             * @property PostScriptName {String} PDF specification full name for the font
-             * @property encoding {Object} Encoding_name-to-Font_metrics_object mapping.
-             * @name FontObject
-             */
+     * FontObject describes a particular font as member of an instnace of jsPDF
+     *
+     * It's a collection of properties like 'id' (to be used in PDF stream),
+     * 'fontName' (font's family name), 'fontStyle' (font's style variant label)
+     *
+     * @class
+     * @public
+     * @property id {String} PDF-document-instance-specific label assinged to the font.
+     * @property PostScriptName {String} PDF specification full name for the font
+     * @property encoding {Object} Encoding_name-to-Font_metrics_object mapping.
+     * @name FontObject
+     */
     const addFont = function (PostScriptName, fontName, fontStyle, encoding) {
       const fontKey = `F${(Object.keys(fonts).length + 1).toString(10)}`;
       // This is FontObject
-      const font = fonts[fontKey] = {
+      const font = (fonts[fontKey] = {
         id: fontKey,
         PostScriptName,
         fontName,
         fontStyle,
         encoding,
         metadata: {},
-      };
+      });
       addToFontDictionary(fontKey, fontName, fontStyle);
       events.publish('addFont', font);
 
@@ -498,55 +514,62 @@ const jsPDF = (function (global) {
     };
     const to8bitStream = function (text, flags) {
       /**
-                 * PDF 1.3 spec:
-                 * "For text strings encoded in Unicode, the first two bytes must be 254 followed by
-                 * 255, representing the Unicode byte order marker, U+FEFF. (This sequence conflicts
-                 * with the PDFDocEncoding character sequence thorn ydieresis, which is unlikely
-                 * to be a meaningful beginning of a word or phrase.) The remainder of the
-                 * string consists of Unicode character codes, according to the UTF-16 encoding
-                 * specified in the Unicode standard, version 2.0. Commonly used Unicode values
-                 * are represented as 2 bytes per character, with the high-order byte appearing first
-                 * in the string."
-                 *
-                 * In other words, if there are chars in a string with char code above 255, we
-                 * recode the string to UCS2 BE - string doubles in length and BOM is prepended.
-                 *
-                 * HOWEVER!
-                 * Actual *content* (body) text (as opposed to strings used in document properties etc)
-                 * does NOT expect BOM. There, it is treated as a literal GID (Glyph ID)
-                 *
-                 * Because of Adobe's focus on "you subset your fonts!" you are not supposed to have
-                 * a font that maps directly Unicode (UCS2 / UTF16BE) code to font GID, but you could
-                 * fudge it with "Identity-H" encoding and custom CIDtoGID map that mimics Unicode
-                 * code page. There, however, all characters in the stream are treated as GIDs,
-                 * including BOM, which is the reason we need to skip BOM in content text (i.e. that
-                 * that is tied to a font).
-                 *
-                 * To signal this "special" PDFEscape / to8bitStream handling mode,
-                 * API.text() function sets (unless you overwrite it with manual values
-                 * given to API.text(.., flags) )
-                 * flags.autoencode = true
-                 * flags.noBOM = true
-                 *
-                 * ===================================================================================
-                 * `flags` properties relied upon:
-                 *   .sourceEncoding = string with encoding label.
-                 *                     "Unicode" by default. = encoding of the incoming text.
-                 *                     pass some non-existing encoding name
-                 *                     (ex: 'Do not touch my strings! I know what I am doing.')
-                 *                     to make encoding code skip the encoding step.
-                 *   .outputEncoding = Either valid PDF encoding name
-                 *                     (must be supported by jsPDF font metrics, otherwise no encoding)
-                 *                     or a JS object, where key = sourceCharCode, value = outputCharCode
-                 *                     missing keys will be treated as: sourceCharCode === outputCharCode
-                 *   .noBOM
-                 *       See comment higher above for explanation for why this is important
-                 *   .autoencode
-                 *       See comment higher above for explanation for why this is important
-                 */
+       * PDF 1.3 spec:
+       * "For text strings encoded in Unicode, the first two bytes must be 254 followed by
+       * 255, representing the Unicode byte order marker, U+FEFF. (This sequence conflicts
+       * with the PDFDocEncoding character sequence thorn ydieresis, which is unlikely
+       * to be a meaningful beginning of a word or phrase.) The remainder of the
+       * string consists of Unicode character codes, according to the UTF-16 encoding
+       * specified in the Unicode standard, version 2.0. Commonly used Unicode values
+       * are represented as 2 bytes per character, with the high-order byte appearing first
+       * in the string."
+       *
+       * In other words, if there are chars in a string with char code above 255, we
+       * recode the string to UCS2 BE - string doubles in length and BOM is prepended.
+       *
+       * HOWEVER!
+       * Actual *content* (body) text (as opposed to strings used in document properties etc)
+       * does NOT expect BOM. There, it is treated as a literal GID (Glyph ID)
+       *
+       * Because of Adobe's focus on "you subset your fonts!" you are not supposed to have
+       * a font that maps directly Unicode (UCS2 / UTF16BE) code to font GID, but you could
+       * fudge it with "Identity-H" encoding and custom CIDtoGID map that mimics Unicode
+       * code page. There, however, all characters in the stream are treated as GIDs,
+       * including BOM, which is the reason we need to skip BOM in content text (i.e. that
+       * that is tied to a font).
+       *
+       * To signal this "special" PDFEscape / to8bitStream handling mode,
+       * API.text() function sets (unless you overwrite it with manual values
+       * given to API.text(.., flags) )
+       * flags.autoencode = true
+       * flags.noBOM = true
+       *
+       * ===================================================================================
+       * `flags` properties relied upon:
+       *   .sourceEncoding = string with encoding label.
+       *                     "Unicode" by default. = encoding of the incoming text.
+       *                     pass some non-existing encoding name
+       *                     (ex: 'Do not touch my strings! I know what I am doing.')
+       *                     to make encoding code skip the encoding step.
+       *   .outputEncoding = Either valid PDF encoding name
+       *                     (must be supported by jsPDF font metrics, otherwise no encoding)
+       *                     or a JS object, where key = sourceCharCode, value = outputCharCode
+       *                     missing keys will be treated as: sourceCharCode === outputCharCode
+       *   .noBOM
+       *       See comment higher above for explanation for why this is important
+       *   .autoencode
+       *       See comment higher above for explanation for why this is important
+       */
 
-      let i; let l; let sourceEncoding; let encodingBlock; let outputEncoding; let newtext; let isUnicode; let ch; let
-        bch;
+      let i;
+      let l;
+      let sourceEncoding;
+      let encodingBlock;
+      let outputEncoding;
+      let newtext;
+      let isUnicode;
+      let ch;
+      let bch;
 
       flags = flags || {};
       sourceEncoding = flags.sourceEncoding || 'Unicode';
@@ -561,10 +584,12 @@ const jsPDF = (function (global) {
       //   .encoding = {'codePages':['WinANSI....'], 'WinANSI...':{code:code, ...}}
       //   .widths = {0:width, code:width, ..., 'fof':divisor}
       //   .kerning = {code:{previous_char_code:shift, ..., 'fof':-divisor},...}
-      if ((flags.autoencode || outputEncoding)
-                    && fonts[activeFontKey].metadata
-                    && fonts[activeFontKey].metadata[sourceEncoding]
-                    && fonts[activeFontKey].metadata[sourceEncoding].encoding) {
+      if (
+        (flags.autoencode || outputEncoding) &&
+        fonts[activeFontKey].metadata &&
+        fonts[activeFontKey].metadata[sourceEncoding] &&
+        fonts[activeFontKey].metadata[sourceEncoding].encoding
+      ) {
         encodingBlock = fonts[activeFontKey].metadata[sourceEncoding].encoding;
 
         // each font has default encoding. Some have it clearly defined.
@@ -589,13 +614,9 @@ const jsPDF = (function (global) {
           for (i = 0, l = text.length; i < l; i++) {
             ch = outputEncoding[text.charCodeAt(i)];
             if (ch) {
-              newtext.push(
-                String.fromCharCode(ch),
-              );
+              newtext.push(String.fromCharCode(ch));
             } else {
-              newtext.push(
-                text[i],
-              );
+              newtext.push(text[i]);
             }
 
             // since we are looping over chars anyway, might as well
@@ -628,8 +649,11 @@ const jsPDF = (function (global) {
         bch = ch >> 8; // divide by 256
         if (bch >> 8) {
           /* something left after dividing by 256 second time */
-          throw new Error(`Character at position ${i} of string '${
-            text}' exceeds 16bits. Cannot be encoded into UCS-2 BE`);
+          throw new Error(
+            `Character at position ${i} of string '${
+              text
+            }' exceeds 16bits. Cannot be encoded into UCS-2 BE`,
+          );
         }
         newtext.push(bch);
         newtext.push(ch - (bch << 8));
@@ -638,26 +662,32 @@ const jsPDF = (function (global) {
     };
     const pdfEscape = function (text, flags) {
       /**
-                 * Replace '/', '(', and ')' with pdf-safe versions
-                 *
-                 * Doing to8bitStream does NOT make this PDF display unicode text. For that
-                 * we also need to reference a unicode font and embed it - royal pain in the rear.
-                 *
-                 * There is still a benefit to to8bitStream - PDF simply cannot handle 16bit chars,
-                 * which JavaScript Strings are happy to provide. So, while we still cannot display
-                 * 2-byte characters property, at least CONDITIONALLY converting (entire string containing)
-                 * 16bit chars to (USC-2-BE) 2-bytes per char + BOM streams we ensure that entire PDF
-                 * is still parseable.
-                 * This will allow immediate support for unicode in document properties strings.
-                 */
-      return to8bitStream(text, flags).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+       * Replace '/', '(', and ')' with pdf-safe versions
+       *
+       * Doing to8bitStream does NOT make this PDF display unicode text. For that
+       * we also need to reference a unicode font and embed it - royal pain in the rear.
+       *
+       * There is still a benefit to to8bitStream - PDF simply cannot handle 16bit chars,
+       * which JavaScript Strings are happy to provide. So, while we still cannot display
+       * 2-byte characters property, at least CONDITIONALLY converting (entire string containing)
+       * 16bit chars to (USC-2-BE) 2-bytes per char + BOM streams we ensure that entire PDF
+       * is still parseable.
+       * This will allow immediate support for unicode in document properties strings.
+       */
+      return to8bitStream(text, flags)
+        .replace(/\\/g, '\\\\')
+        .replace(/\(/g, '\\(')
+        .replace(/\)/g, '\\)');
     };
     const putInfo = function () {
       out(`/Producer (jsPDF ${jsPDF.version})`);
       for (const key in documentProperties) {
         if (documentProperties.hasOwnProperty(key) && documentProperties[key]) {
-          out(`/${key.substr(0, 1).toUpperCase()}${key.substr(1)
-          } (${pdfEscape(documentProperties[key])})`);
+          out(
+            `/${key.substr(0, 1).toUpperCase()}${key.substr(
+              1,
+            )} (${pdfEscape(documentProperties[key])})`,
+          );
         }
       }
       const created = new Date();
@@ -666,13 +696,19 @@ const jsPDF = (function (global) {
       const tzhour = Math.floor(Math.abs(tzoffset / 60));
       const tzmin = Math.abs(tzoffset % 60);
       const tzstr = [tzsign, padd2(tzhour), "'", padd2(tzmin), "'"].join('');
-      out(['/CreationDate (D:',
-        created.getFullYear(),
-        padd2(created.getMonth() + 1),
-        padd2(created.getDate()),
-        padd2(created.getHours()),
-        padd2(created.getMinutes()),
-        padd2(created.getSeconds()), tzstr, ')'].join(''));
+      out(
+        [
+          '/CreationDate (D:',
+          created.getFullYear(),
+          padd2(created.getMonth() + 1),
+          padd2(created.getDate()),
+          padd2(created.getHours()),
+          padd2(created.getMinutes()),
+          padd2(created.getSeconds()),
+          tzstr,
+          ')',
+        ].join(''),
+      );
     };
     const putCatalog = function () {
       out('/Type /Catalog');
@@ -694,7 +730,8 @@ const jsPDF = (function (global) {
           break;
         default:
           var pcn = `${zoomMode}`;
-          if (pcn.substr(pcn.length - 1) === '%') zoomMode = parseInt(zoomMode) / 100;
+          if (pcn.substr(pcn.length - 1) === '%')
+            zoomMode = parseInt(zoomMode) / 100;
           if (typeof zoomMode === 'number') {
             out(`/OpenAction [3 0 R /XYZ null null ${f2(zoomMode)}]`);
           }
@@ -717,12 +754,12 @@ const jsPDF = (function (global) {
       }
       if (pageMode) {
         /**
-                     * A name object specifying how the document should be displayed when opened:
-                     * UseNone      : Neither document outline nor thumbnail images visible -- DEFAULT
-                     * UseOutlines  : Document outline visible
-                     * UseThumbs    : Thumbnail images visible
-                     * FullScreen   : Full-screen mode, with no menu bar, window controls, or any other window visible
-                     */
+         * A name object specifying how the document should be displayed when opened:
+         * UseNone      : Neither document outline nor thumbnail images visible -- DEFAULT
+         * UseOutlines  : Document outline visible
+         * UseThumbs    : Thumbnail images visible
+         * FullScreen   : Full-screen mode, with no menu bar, window controls, or any other window visible
+         */
         out(`/PageMode /${pageMode}`);
       }
       events.publish('putCatalog');
@@ -804,23 +841,25 @@ const jsPDF = (function (global) {
       }
     };
     /**
-             * Returns a document-specific font key - a label assigned to a
-             * font name + font type combination at the time the font was added
-             * to the font inventory.
-             *
-             * Font key is used as label for the desired font for a block of text
-             * to be added to the PDF document stream.
-             * @private
-             * @function
-             * @param fontName {String} can be undefined on "falthy" to indicate "use current"
-             * @param fontStyle {String} can be undefined on "falthy" to indicate "use current"
-             * @returns {String} Font key.
-             */
+     * Returns a document-specific font key - a label assigned to a
+     * font name + font type combination at the time the font was added
+     * to the font inventory.
+     *
+     * Font key is used as label for the desired font for a block of text
+     * to be added to the PDF document stream.
+     * @private
+     * @function
+     * @param fontName {String} can be undefined on "falthy" to indicate "use current"
+     * @param fontStyle {String} can be undefined on "falthy" to indicate "use current"
+     * @returns {String} Font key.
+     */
     const getFont = function (fontName, fontStyle) {
       let key;
 
-      fontName = fontName !== undefined ? fontName : fonts[activeFontKey].fontName;
-      fontStyle = fontStyle !== undefined ? fontStyle : fonts[activeFontKey].fontStyle;
+      fontName =
+        fontName !== undefined ? fontName : fonts[activeFontKey].fontName;
+      fontStyle =
+        fontStyle !== undefined ? fontStyle : fonts[activeFontKey].fontStyle;
 
       if (fontName !== undefined) {
         fontName = fontName.toLowerCase();
@@ -849,8 +888,7 @@ const jsPDF = (function (global) {
       try {
         // get a string like 'F3' - the KEY corresponding tot he font + type combination.
         key = fontmap[fontName][fontStyle];
-      } catch (e) {
-      }
+      } catch (e) {}
 
       if (!key) {
         // throw new Error("Unable to look up font label for font '" + fontName + "', '"
@@ -899,8 +937,9 @@ const jsPDF = (function (global) {
       out('endobj');
 
       // Cross-ref
-      const o = content_length; let i; const
-        p = '0000000000';
+      const o = content_length;
+      let i;
+      const p = '0000000000';
       out('xref');
       out(`0 ${objectNumber + 1}`);
       out(`${p} 65535 f `);
@@ -932,7 +971,12 @@ const jsPDF = (function (global) {
         op = 'f'; // fill
       } else if (style === 'FD' || style === 'DF') {
         op = 'B'; // both
-      } else if (style === 'f' || style === 'f*' || style === 'B' || style === 'B*') {
+      } else if (
+        style === 'f' ||
+        style === 'f*' ||
+        style === 'B' ||
+        style === 'B*'
+      ) {
         /*
                      Allow direct use of these PDF path-painting operators:
                      - f	fill using nonzero winding number rule
@@ -945,9 +989,10 @@ const jsPDF = (function (global) {
       return op;
     };
     const getArrayBuffer = function () {
-      const data = buildDocument(); let len = data.length;
-      const ab = new ArrayBuffer(len); const
-        u8 = new Uint8Array(ab);
+      const data = buildDocument();
+      let len = data.length;
+      const ab = new ArrayBuffer(len);
+      const u8 = new Uint8Array(ab);
 
       while (len--) u8[len] = data.charCodeAt(len);
       return ab;
@@ -956,28 +1001,32 @@ const jsPDF = (function (global) {
       return new Blob([getArrayBuffer()], { type: 'application/pdf' });
     };
     /**
-             * Generates the PDF document.
-             *
-             * If `type` argument is undefined, output is raw body of resulting PDF returned as a string.
-             *
-             * @param {String} type A string identifying one of the possible output types.
-             * @param {Object} options An object providing some additional signalling to PDF generator.
-             * @function
-             * @returns {jsPDF}
-             * @methodOf jsPDF#
-             * @name output
-             */
+     * Generates the PDF document.
+     *
+     * If `type` argument is undefined, output is raw body of resulting PDF returned as a string.
+     *
+     * @param {String} type A string identifying one of the possible output types.
+     * @param {Object} options An object providing some additional signalling to PDF generator.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name output
+     */
     const output = SAFE((type, options) => {
-      const datauri = (`${type}`).substr(0, 6) === 'dataur'
-        ? `data:application/pdf;base64,${btoa(buildDocument())}` : 0;
+      const datauri =
+        `${type}`.substr(0, 6) === 'dataur'
+          ? `data:application/pdf;base64,${btoa(buildDocument())}`
+          : 0;
 
       switch (type) {
         case undefined:
           return buildDocument();
         case 'save':
           if (navigator.getUserMedia) {
-            if (global.URL === undefined
-                                || global.URL.createObjectURL === undefined) {
+            if (
+              global.URL === undefined ||
+              global.URL.createObjectURL === undefined
+            ) {
               return API.output('dataurlnewwindow');
             }
           }
@@ -995,17 +1044,19 @@ const jsPDF = (function (global) {
         case 'bloburi':
         case 'bloburl':
           // User is responsible of calling revokeObjectURL
-          return global.URL && global.URL.createObjectURL(getBlob()) || void 0;
+          return (
+            (global.URL && global.URL.createObjectURL(getBlob())) || void 0
+          );
         case 'datauristring':
         case 'dataurlstring':
           return datauri;
         case 'dataurlnewwindow':
           var nW = global.open(datauri);
           if (nW || typeof safari === 'undefined') return nW;
-          /* pass through */
+        /* pass through */
         case 'datauri':
         case 'dataurl':
-          return global.document.location.href = datauri;
+          return (global.document.location.href = datauri);
         default:
           throw new Error(`Output type "${type}" is not supported.`);
       }
@@ -1038,27 +1089,27 @@ const jsPDF = (function (global) {
         k = 6;
         break;
       default:
-        throw (`Invalid unit: ${unit}`);
+        throw `Invalid unit: ${unit}`;
     }
 
     //---------------------------------------
     // Public API
 
     /**
-         * Object exposing internal API to plugins
-         * @public
-         */
+     * Object exposing internal API to plugins
+     * @public
+     */
     API.internal = {
       pdfEscape,
       getStyle,
       /**
-             * Returns {FontObject} describing a particular font.
-             * @public
-             * @function
-             * @param fontName {String} (Optional) Font's family name
-             * @param fontStyle {String} (Optional) Font's style variation name (Example:"Italic")
-             * @returns {FontObject}
-             */
+       * Returns {FontObject} describing a particular font.
+       * @public
+       * @function
+       * @param fontName {String} (Optional) Font's family name
+       * @param fontStyle {String} (Optional) Font's style variation name (Example:"Italic")
+       * @returns {FontObject}
+       */
       getFont() {
         return fonts[getFont.apply(API, arguments)];
       },
@@ -1069,7 +1120,11 @@ const jsPDF = (function (global) {
         return activeFontSize * lineHeightProportion;
       },
       write(string1 /* , string2, string3, etc */) {
-        out(arguments.length === 1 ? string1 : Array.prototype.join.call(arguments, ' '));
+        out(
+          arguments.length === 1
+            ? string1
+            : Array.prototype.join.call(arguments, ' '),
+        );
       },
       getCoordinateString(value) {
         return f2(value * k);
@@ -1110,11 +1165,19 @@ const jsPDF = (function (global) {
       f2,
       getPageInfo(pageNumberOneBased) {
         const objId = (pageNumberOneBased - 1) * 2 + 3;
-        return { objId, pageNumber: pageNumberOneBased, pageContext: pagesContext[pageNumberOneBased] };
+        return {
+          objId,
+          pageNumber: pageNumberOneBased,
+          pageContext: pagesContext[pageNumberOneBased],
+        };
       },
       getCurrentPageInfo() {
         const objId = (currentPage - 1) * 2 + 3;
-        return { objId, pageNumber: currentPage, pageContext: pagesContext[currentPage] };
+        return {
+          objId,
+          pageNumber: currentPage,
+          pageContext: pagesContext[currentPage],
+        };
       },
       getPDFVersion() {
         return pdfVersion;
@@ -1122,13 +1185,13 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Adds (and transfers the focus to) new page to the PDF document.
-         * @function
-         * @returns {jsPDF}
-         *
-         * @methodOf jsPDF#
-         * @name addPage
-         */
+     * Adds (and transfers the focus to) new page to the PDF document.
+     * @function
+     * @returns {jsPDF}
+     *
+     * @methodOf jsPDF#
+     * @name addPage
+     */
     API.addPage = function () {
       _addPage.apply(this, arguments);
       return this;
@@ -1177,215 +1240,223 @@ const jsPDF = (function (global) {
       _deletePage.apply(this, arguments);
       return this;
     };
-    API.setDisplayMode = function (zoom, layout, pmode) {
+    ((API.setDisplayMode = function (zoom, layout, pmode) {
       zoomMode = zoom;
       layoutMode = layout;
       pageMode = pmode;
       return this;
-    },
-
-    /**
-         * Adds text to page. Supports adding multiline text when 'text' argument is an Array of Strings.
-         *
-         * @function
-         * @param {String|Array} text String or array of strings to be added to the page. Each line is shifted one line down per font, spacing settings declared before this call.
-         * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Object} flags Collection of settings signalling how the text must be encoded. Defaults are sane. If you think you want to pass some flags, you likely can read the source.
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name text
-         */
-    API.text = function (text, x, y, flags, angle, align) {
+    }),
       /**
-                 * Inserts something like this into PDF
-                 *   BT
-                 *    /F1 16 Tf  % Font name + size
-                 *    16 TL % How many units down for next line in multiline text
-                 *    0 g % color
-                 *    28.35 813.54 Td % position
-                 *    (line one) Tj
-                 *    T* (line two) Tj
-                 *    T* (line three) Tj
-                 *   ET
-                 */
-      function ESC(s) {
-        s = s.split('\t').join(Array(options.TabLen || 9).join(' '));
-        return pdfEscape(s, flags);
-      }
-
-      // Pre-August-2012 the order of arguments was function(x, y, text, flags)
-      // in effort to make all calls have similar signature like
-      //   function(data, coordinates... , miscellaneous)
-      // this method had its args flipped.
-      // code below allows backward compatibility with old arg order.
-      if (typeof text === 'number') {
-        tmp = y;
-        y = x;
-        x = text;
-        text = tmp;
-      }
-
-      // If there are any newlines in text, we assume
-      // the user wanted to print multiple lines, so break the
-      // text up into an array.  If the text is already an array,
-      // we assume the user knows what they are doing.
-      // Convert text into an array anyway to simplify
-      // later code.
-      if (typeof text === 'string') {
-        if (text.match(/[\n\r]/)) {
-          text = text.split(/\r\n|\r|\n/g);
-        } else {
-          text = [text];
-        }
-      }
-      if (typeof angle === 'string') {
-        align = angle;
-        angle = null;
-      }
-      if (typeof flags === 'string') {
-        align = flags;
-        flags = null;
-      }
-      if (typeof flags === 'number') {
-        angle = flags;
-        flags = null;
-      }
-      let xtra = ''; let mode = 'Td'; let
-        todo;
-      if (angle) {
-        angle *= (Math.PI / 180);
-        const c = Math.cos(angle);
-        const s = Math.sin(angle);
-        xtra = [f2(c), f2(s), f2(s * -1), f2(c), ''].join(' ');
-        mode = 'Tm';
-      }
-      flags = flags || {};
-      if (!('noBOM' in flags)) flags.noBOM = true;
-      if (!('autoencode' in flags)) flags.autoencode = true;
-
-      let strokeOption = '';
-      const { pageContext } = this.internal.getCurrentPageInfo();
-      if (flags.stroke === true) {
-        if (pageContext.lastTextWasStroke !== true) {
-          strokeOption = '1 Tr\n';
-          pageContext.lastTextWasStroke = true;
-        }
-      } else {
-        if (pageContext.lastTextWasStroke) {
-          strokeOption = '0 Tr\n';
-        }
-        pageContext.lastTextWasStroke = false;
-      }
-
-      if (typeof this._runningPageHeight === 'undefined') {
-        this._runningPageHeight = 0;
-      }
-
-      if (typeof text === 'string') {
-        text = ESC(text);
-			          } else if (Object.prototype.toString.call(text) === '[object Array]') {
-        // we don't want to destroy  original text array, so cloning it
-        const sa = text.concat(); const da = []; var
-          len = sa.length;
-        // we do array.join('text that must not be PDFescaped")
-        // thus, pdfEscape each component separately
-        while (len--) {
-          da.push(ESC(sa.shift()));
-        }
-        const linesLeft = Math.ceil((pageHeight - y - this._runningPageHeight) * k / (activeFontSize * lineHeightProportion));
-        if (linesLeft >= 0 && linesLeft < da.length + 1) {
-          // todo = da.splice(linesLeft-1);
+       * Adds text to page. Supports adding multiline text when 'text' argument is an Array of Strings.
+       *
+       * @function
+       * @param {String|Array} text String or array of strings to be added to the page. Each line is shifted one line down per font, spacing settings declared before this call.
+       * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
+       * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
+       * @param {Object} flags Collection of settings signalling how the text must be encoded. Defaults are sane. If you think you want to pass some flags, you likely can read the source.
+       * @returns {jsPDF}
+       * @methodOf jsPDF#
+       * @name text
+       */
+      (API.text = function (text, x, y, flags, angle, align) {
+        /**
+         * Inserts something like this into PDF
+         *   BT
+         *    /F1 16 Tf  % Font name + size
+         *    16 TL % How many units down for next line in multiline text
+         *    0 g % color
+         *    28.35 813.54 Td % position
+         *    (line one) Tj
+         *    T* (line two) Tj
+         *    T* (line three) Tj
+         *   ET
+         */
+        function ESC(s) {
+          s = s.split('\t').join(Array(options.TabLen || 9).join(' '));
+          return pdfEscape(s, flags);
         }
 
-        if (align) {
-          let left;
-          let prevX;
-          let maxLineLength;
-          const leading = activeFontSize * lineHeightProportion;
-          const lineWidths = text.map(function (v) {
-            return this.getStringUnitWidth(v) * activeFontSize / k;
-          }, this);
-          maxLineLength = Math.max.apply(Math, lineWidths);
-          // The first line uses the "main" Td setting,
-          // and the subsequent lines are offset by the
-          // previous line's x coordinate.
-          if (align === 'center') {
-            // The passed in x coordinate defines
-            // the center point.
-            left = x - maxLineLength / 2;
-            x -= lineWidths[0] / 2;
-          } else if (align === 'right') {
-            // The passed in x coordinate defines the
-            // rightmost point of the text.
-            left = x - maxLineLength;
-            x -= lineWidths[0];
+        // Pre-August-2012 the order of arguments was function(x, y, text, flags)
+        // in effort to make all calls have similar signature like
+        //   function(data, coordinates... , miscellaneous)
+        // this method had its args flipped.
+        // code below allows backward compatibility with old arg order.
+        if (typeof text === 'number') {
+          tmp = y;
+          y = x;
+          x = text;
+          text = tmp;
+        }
+
+        // If there are any newlines in text, we assume
+        // the user wanted to print multiple lines, so break the
+        // text up into an array.  If the text is already an array,
+        // we assume the user knows what they are doing.
+        // Convert text into an array anyway to simplify
+        // later code.
+        if (typeof text === 'string') {
+          if (text.match(/[\n\r]/)) {
+            text = text.split(/\r\n|\r|\n/g);
           } else {
-            throw new Error('Unrecognized alignment option, use "center" or "right".');
+            text = [text];
           }
-          prevX = x;
-          text = da[0];
-          for (var i = 1, len = da.length; i < len; i++) {
-            let delta = maxLineLength - lineWidths[i];
-            if (align === 'center') delta /= 2;
-            // T* = x-offset leading Td ( text )
-            text += `) Tj\n${(left - prevX) + delta} -${leading} Td (${da[i]}`;
-            prevX = left + delta;
+        }
+        if (typeof angle === 'string') {
+          align = angle;
+          angle = null;
+        }
+        if (typeof flags === 'string') {
+          align = flags;
+          flags = null;
+        }
+        if (typeof flags === 'number') {
+          angle = flags;
+          flags = null;
+        }
+        let xtra = '';
+        let mode = 'Td';
+        let todo;
+        if (angle) {
+          angle *= Math.PI / 180;
+          const c = Math.cos(angle);
+          const s = Math.sin(angle);
+          xtra = [f2(c), f2(s), f2(s * -1), f2(c), ''].join(' ');
+          mode = 'Tm';
+        }
+        flags = flags || {};
+        if (!('noBOM' in flags)) flags.noBOM = true;
+        if (!('autoencode' in flags)) flags.autoencode = true;
+
+        let strokeOption = '';
+        const { pageContext } = this.internal.getCurrentPageInfo();
+        if (flags.stroke === true) {
+          if (pageContext.lastTextWasStroke !== true) {
+            strokeOption = '1 Tr\n';
+            pageContext.lastTextWasStroke = true;
           }
         } else {
-          text = da.join(') Tj\nT* (');
+          if (pageContext.lastTextWasStroke) {
+            strokeOption = '0 Tr\n';
+          }
+          pageContext.lastTextWasStroke = false;
         }
-      } else {
-        throw new Error(`Type of text must be string or Array. "${text}" is not recognized.`);
-      }
-      // Using "'" ("go next line and render text" mark) would save space but would complicate our rendering code, templates
 
-      // BT .. ET does NOT have default settings for Tf. You must state that explicitely every time for BT .. ET
-      // if you want text transformation matrix (+ multiline) to work reliably (which reads sizes of things from font declarations)
-      // Thus, there is NO useful, *reliable* concept of "default" font for a page.
-      // The fact that "default" (reuse font used before) font worked before in basic cases is an accident
-      // - readers dealing smartly with brokenness of jsPDF's markup.
+        if (typeof this._runningPageHeight === 'undefined') {
+          this._runningPageHeight = 0;
+        }
 
-      let curY;
+        if (typeof text === 'string') {
+          text = ESC(text);
+        } else if (Object.prototype.toString.call(text) === '[object Array]') {
+          // we don't want to destroy  original text array, so cloning it
+          const sa = text.concat();
+          const da = [];
+          var len = sa.length;
+          // we do array.join('text that must not be PDFescaped")
+          // thus, pdfEscape each component separately
+          while (len--) {
+            da.push(ESC(sa.shift()));
+          }
+          const linesLeft = Math.ceil(
+            ((pageHeight - y - this._runningPageHeight) * k) /
+              (activeFontSize * lineHeightProportion),
+          );
+          if (linesLeft >= 0 && linesLeft < da.length + 1) {
+            // todo = da.splice(linesLeft-1);
+          }
 
-      if (todo) {
-        // this.addPage();
-        // this._runningPageHeight += y -  (activeFontSize * 1.7 / k);
-        // curY = f2(pageHeight - activeFontSize * 1.7 /k);
-      } else {
-        curY = f2((pageHeight - y) * k);
-      }
-      // curY = f2((pageHeight - (y - this._runningPageHeight)) * k);
+          if (align) {
+            let left;
+            let prevX;
+            let maxLineLength;
+            const leading = activeFontSize * lineHeightProportion;
+            const lineWidths = text.map(function (v) {
+              return (this.getStringUnitWidth(v) * activeFontSize) / k;
+            }, this);
+            maxLineLength = Math.max.apply(Math, lineWidths);
+            // The first line uses the "main" Td setting,
+            // and the subsequent lines are offset by the
+            // previous line's x coordinate.
+            if (align === 'center') {
+              // The passed in x coordinate defines
+              // the center point.
+              left = x - maxLineLength / 2;
+              x -= lineWidths[0] / 2;
+            } else if (align === 'right') {
+              // The passed in x coordinate defines the
+              // rightmost point of the text.
+              left = x - maxLineLength;
+              x -= lineWidths[0];
+            } else {
+              throw new Error(
+                'Unrecognized alignment option, use "center" or "right".',
+              );
+            }
+            prevX = x;
+            text = da[0];
+            for (var i = 1, len = da.length; i < len; i++) {
+              let delta = maxLineLength - lineWidths[i];
+              if (align === 'center') delta /= 2;
+              // T* = x-offset leading Td ( text )
+              text += `) Tj\n${left - prevX + delta} -${leading} Td (${da[i]}`;
+              prevX = left + delta;
+            }
+          } else {
+            text = da.join(') Tj\nT* (');
+          }
+        } else {
+          throw new Error(
+            `Type of text must be string or Array. "${text}" is not recognized.`,
+          );
+        }
+        // Using "'" ("go next line and render text" mark) would save space but would complicate our rendering code, templates
 
-      //			if (curY < 0){
-      //				console.log('auto page break');
-      //				this.addPage();
-      //				this._runningPageHeight = y -  (activeFontSize * 1.7 / k);
-      //				curY = f2(pageHeight - activeFontSize * 1.7 /k);
-      //			}
+        // BT .. ET does NOT have default settings for Tf. You must state that explicitely every time for BT .. ET
+        // if you want text transformation matrix (+ multiline) to work reliably (which reads sizes of things from font declarations)
+        // Thus, there is NO useful, *reliable* concept of "default" font for a page.
+        // The fact that "default" (reuse font used before) font worked before in basic cases is an accident
+        // - readers dealing smartly with brokenness of jsPDF's markup.
 
-      out(
-        `BT\n/${
-          activeFontKey} ${activeFontSize} Tf\n${// font face, style, size
-          activeFontSize * lineHeightProportion} TL\n${// line spacing
-          strokeOption// stroke option
-        }${textColor
-        }\n${xtra}${f2(x * k)} ${curY} ${mode}\n(${
-          text
-        }) Tj\nET`,
-      );
+        let curY;
 
-      if (todo) {
-        // this.text( todo, x, activeFontSize * 1.7 / k);
-        // this.text( todo, x, this._runningPageHeight + (activeFontSize * 1.7 / k));
-        this.text(todo, x, y);// + (activeFontSize * 1.7 / k));
-      }
+        if (todo) {
+          // this.addPage();
+          // this._runningPageHeight += y -  (activeFontSize * 1.7 / k);
+          // curY = f2(pageHeight - activeFontSize * 1.7 /k);
+        } else {
+          curY = f2((pageHeight - y) * k);
+        }
+        // curY = f2((pageHeight - (y - this._runningPageHeight)) * k);
 
-      return this;
-    };
+        //			if (curY < 0){
+        //				console.log('auto page break');
+        //				this.addPage();
+        //				this._runningPageHeight = y -  (activeFontSize * 1.7 / k);
+        //				curY = f2(pageHeight - activeFontSize * 1.7 /k);
+        //			}
+
+        out(
+          `BT\n/${activeFontKey} ${activeFontSize} Tf\n${
+            // font face, style, size
+            activeFontSize * lineHeightProportion
+          } TL\n${
+            // line spacing
+            strokeOption // stroke option
+          }${textColor}\n${xtra}${f2(x * k)} ${curY} ${mode}\n(${text}) Tj\nET`,
+        );
+
+        if (todo) {
+          // this.text( todo, x, activeFontSize * 1.7 / k);
+          // this.text( todo, x, this._runningPageHeight + (activeFontSize * 1.7 / k));
+          this.text(todo, x, y); // + (activeFontSize * 1.7 / k));
+        }
+
+        return this;
+      }));
 
     API.lstext = function (text, x, y, spacing) {
-      for (let i = 0, len = text.length; i < len; i++, x += spacing) this.text(text[i], x, y);
+      for (let i = 0, len = text.length; i < len; i++, x += spacing)
+        this.text(text[i], x, y);
     };
 
     API.line = function (x1, y1, x2, y2) {
@@ -1400,10 +1471,10 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * This fixes the previous function clip(). Perhaps the 'stroke path' hack was due to the missing 'n' instruction?
-         * We introduce the fixed version so as to not break API.
-         * @param fillRule
-         */
+     * This fixes the previous function clip(). Perhaps the 'stroke path' hack was due to the missing 'n' instruction?
+     * We introduce the fixed version so as to not break API.
+     * @param fillRule
+     */
     API.clip_fixed = function (fillRule) {
       // Call .clip() after calling drawing ops with a style argument of null
       // W is the PDF clipping op
@@ -1419,27 +1490,36 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Adds series of curves (straight lines or cubic bezier curves) to canvas, starting at `x`, `y` coordinates.
-         * All data points in `lines` are relative to last line origin.
-         * `x`, `y` become x1,y1 for first line / curve in the set.
-         * For lines you only need to specify [x2, y2] - (ending point) vector against x1, y1 starting point.
-         * For bezier curves you need to specify [x2,y2,x3,y3,x4,y4] - vectors to control points 1, 2, ending point. All vectors are against the start of the curve - x1,y1.
-         *
-         * @example .lines([[2,2],[-2,2],[1,1,2,2,3,3],[2,1]], 212,110, 10) // line, line, bezier curve, line
-         * @param {Array} lines Array of *vector* shifts as pairs (lines) or sextets (cubic bezier curves).
-         * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Number} scale (Defaults to [1.0,1.0]) x,y Scaling factor for all vectors. Elements can be any floating number Sub-one makes drawing smaller. Over-one grows the drawing. Negative flips the direction.
-         * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
-         * @param {Boolean} closed If true, the path is closed with a straight line from the end of the last curve to the starting point.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name lines
-         */
+     * Adds series of curves (straight lines or cubic bezier curves) to canvas, starting at `x`, `y` coordinates.
+     * All data points in `lines` are relative to last line origin.
+     * `x`, `y` become x1,y1 for first line / curve in the set.
+     * For lines you only need to specify [x2, y2] - (ending point) vector against x1, y1 starting point.
+     * For bezier curves you need to specify [x2,y2,x3,y3,x4,y4] - vectors to control points 1, 2, ending point. All vectors are against the start of the curve - x1,y1.
+     *
+     * @example .lines([[2,2],[-2,2],[1,1,2,2,3,3],[2,1]], 212,110, 10) // line, line, bezier curve, line
+     * @param {Array} lines Array of *vector* shifts as pairs (lines) or sextets (cubic bezier curves).
+     * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {Number} scale (Defaults to [1.0,1.0]) x,y Scaling factor for all vectors. Elements can be any floating number Sub-one makes drawing smaller. Over-one grows the drawing. Negative flips the direction.
+     * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
+     * @param {Boolean} closed If true, the path is closed with a straight line from the end of the last curve to the starting point.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name lines
+     */
     API.lines = function (lines, x, y, scale, style, closed) {
-      let scalex; let scaley; let i; let l; let leg; let x2; let y2; let x3; let y3; let x4; let
-        y4;
+      let scalex;
+      let scaley;
+      let i;
+      let l;
+      let leg;
+      let x2;
+      let y2;
+      let x3;
+      let y3;
+      let x4;
+      let y4;
 
       // Pre-August-2012 the order of arguments was function(x, y, lines, scale, style)
       // in effort to make all calls have similar signature like
@@ -1483,12 +1563,9 @@ const jsPDF = (function (global) {
           x4 = leg[4] * scalex + x4; // here last x4 was prior ending point
           y4 = leg[5] * scaley + y4; // here last y4 was prior ending point
           out(
-            `${f3(x2 * k)} ${
-              f3((pageHeight - y2) * k)} ${
-              f3(x3 * k)} ${
-              f3((pageHeight - y3) * k)} ${
-              f3(x4 * k)} ${
-              f3((pageHeight - y4) * k)} c`,
+            `${f3(x2 * k)} ${f3((pageHeight - y2) * k)} ${f3(x3 * k)} ${f3(
+              (pageHeight - y3) * k,
+            )} ${f3(x4 * k)} ${f3((pageHeight - y4) * k)} c`,
           );
         }
       }
@@ -1505,27 +1582,25 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Adds a rectangle to PDF
-         *
-         * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Number} w Width (in units declared at inception of PDF document)
-         * @param {Number} h Height (in units declared at inception of PDF document)
-         * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name rect
-         */
+     * Adds a rectangle to PDF
+     *
+     * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {Number} w Width (in units declared at inception of PDF document)
+     * @param {Number} h Height (in units declared at inception of PDF document)
+     * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name rect
+     */
     API.rect = function (x, y, w, h, style) {
       const op = getStyle(style);
-      out([
-        f2(x * k),
-        f2((pageHeight - y) * k),
-        f2(w * k),
-        f2(-h * k),
-        're',
-      ].join(' '));
+      out(
+        [f2(x * k), f2((pageHeight - y) * k), f2(w * k), f2(-h * k), 're'].join(
+          ' ',
+        ),
+      );
 
       if (style !== null) {
         out(getStyle(style));
@@ -1535,20 +1610,20 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Adds a triangle to PDF
-         *
-         * @param {Number} x1 Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y1 Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Number} x2 Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y2 Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Number} x3 Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y3 Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name triangle
-         */
+     * Adds a triangle to PDF
+     *
+     * @param {Number} x1 Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y1 Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {Number} x2 Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y2 Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {Number} x3 Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y3 Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name triangle
+     */
     API.triangle = function (x1, y1, x2, y2, x3, y3, style) {
       this.lines(
         [
@@ -1566,32 +1641,32 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Adds a rectangle with rounded corners to PDF
-         *
-         * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Number} w Width (in units declared at inception of PDF document)
-         * @param {Number} h Height (in units declared at inception of PDF document)
-         * @param {Number} rx Radius along x axis (in units declared at inception of PDF document)
-         * @param {Number} rx Radius along y axis (in units declared at inception of PDF document)
-         * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name roundedRect
-         */
+     * Adds a rectangle with rounded corners to PDF
+     *
+     * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {Number} w Width (in units declared at inception of PDF document)
+     * @param {Number} h Height (in units declared at inception of PDF document)
+     * @param {Number} rx Radius along x axis (in units declared at inception of PDF document)
+     * @param {Number} rx Radius along y axis (in units declared at inception of PDF document)
+     * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name roundedRect
+     */
     API.roundedRect = function (x, y, w, h, rx, ry, style) {
-      const MyArc = 4 / 3 * (Math.SQRT2 - 1);
+      const MyArc = (4 / 3) * (Math.SQRT2 - 1);
       this.lines(
         [
-          [(w - 2 * rx), 0],
-          [(rx * MyArc), 0, rx, ry - (ry * MyArc), rx, ry],
-          [0, (h - 2 * ry)],
-          [0, (ry * MyArc), -(rx * MyArc), ry, -rx, ry],
-          [(-w + 2 * rx), 0],
+          [w - 2 * rx, 0],
+          [rx * MyArc, 0, rx, ry - ry * MyArc, rx, ry],
+          [0, h - 2 * ry],
+          [0, ry * MyArc, -(rx * MyArc), ry, -rx, ry],
+          [-w + 2 * rx, 0],
           [-(rx * MyArc), 0, -rx, -(ry * MyArc), -rx, -ry],
-          [0, (-h + 2 * ry)],
-          [0, -(ry * MyArc), (rx * MyArc), -ry, rx, -ry],
+          [0, -h + 2 * ry],
+          [0, -(ry * MyArc), rx * MyArc, -ry, rx, -ry],
         ],
         x + rx,
         y, // start of path
@@ -1602,61 +1677,69 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Adds an ellipse to PDF
-         *
-         * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Number} rx Radius along x axis (in units declared at inception of PDF document)
-         * @param {Number} rx Radius along y axis (in units declared at inception of PDF document)
-         * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name ellipse
-         */
+     * Adds an ellipse to PDF
+     *
+     * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {Number} rx Radius along x axis (in units declared at inception of PDF document)
+     * @param {Number} rx Radius along y axis (in units declared at inception of PDF document)
+     * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name ellipse
+     */
     API.ellipse = function (x, y, rx, ry, style) {
-      const lx = 4 / 3 * (Math.SQRT2 - 1) * rx;
-      const ly = 4 / 3 * (Math.SQRT2 - 1) * ry;
+      const lx = (4 / 3) * (Math.SQRT2 - 1) * rx;
+      const ly = (4 / 3) * (Math.SQRT2 - 1) * ry;
 
-      out([
-        f2((x + rx) * k),
-        f2((pageHeight - y) * k),
-        'm',
-        f2((x + rx) * k),
-        f2((pageHeight - (y - ly)) * k),
-        f2((x + lx) * k),
-        f2((pageHeight - (y - ry)) * k),
-        f2(x * k),
-        f2((pageHeight - (y - ry)) * k),
-        'c',
-      ].join(' '));
-      out([
-        f2((x - lx) * k),
-        f2((pageHeight - (y - ry)) * k),
-        f2((x - rx) * k),
-        f2((pageHeight - (y - ly)) * k),
-        f2((x - rx) * k),
-        f2((pageHeight - y) * k),
-        'c',
-      ].join(' '));
-      out([
-        f2((x - rx) * k),
-        f2((pageHeight - (y + ly)) * k),
-        f2((x - lx) * k),
-        f2((pageHeight - (y + ry)) * k),
-        f2(x * k),
-        f2((pageHeight - (y + ry)) * k),
-        'c',
-      ].join(' '));
-      out([
-        f2((x + lx) * k),
-        f2((pageHeight - (y + ry)) * k),
-        f2((x + rx) * k),
-        f2((pageHeight - (y + ly)) * k),
-        f2((x + rx) * k),
-        f2((pageHeight - y) * k),
-        'c',
-      ].join(' '));
+      out(
+        [
+          f2((x + rx) * k),
+          f2((pageHeight - y) * k),
+          'm',
+          f2((x + rx) * k),
+          f2((pageHeight - (y - ly)) * k),
+          f2((x + lx) * k),
+          f2((pageHeight - (y - ry)) * k),
+          f2(x * k),
+          f2((pageHeight - (y - ry)) * k),
+          'c',
+        ].join(' '),
+      );
+      out(
+        [
+          f2((x - lx) * k),
+          f2((pageHeight - (y - ry)) * k),
+          f2((x - rx) * k),
+          f2((pageHeight - (y - ly)) * k),
+          f2((x - rx) * k),
+          f2((pageHeight - y) * k),
+          'c',
+        ].join(' '),
+      );
+      out(
+        [
+          f2((x - rx) * k),
+          f2((pageHeight - (y + ly)) * k),
+          f2((x - lx) * k),
+          f2((pageHeight - (y + ry)) * k),
+          f2(x * k),
+          f2((pageHeight - (y + ry)) * k),
+          'c',
+        ].join(' '),
+      );
+      out(
+        [
+          f2((x + lx) * k),
+          f2((pageHeight - (y + ry)) * k),
+          f2((x + rx) * k),
+          f2((pageHeight - (y + ly)) * k),
+          f2((x + rx) * k),
+          f2((pageHeight - y) * k),
+          'c',
+        ].join(' '),
+      );
 
       if (style !== null) {
         out(getStyle(style));
@@ -1666,34 +1749,37 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Adds an circle to PDF
-         *
-         * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
-         * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
-         * @param {Number} r Radius (in units declared at inception of PDF document)
-         * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name circle
-         */
+     * Adds an circle to PDF
+     *
+     * @param {Number} x Coordinate (in units declared at inception of PDF document) against left edge of the page
+     * @param {Number} y Coordinate (in units declared at inception of PDF document) against upper edge of the page
+     * @param {Number} r Radius (in units declared at inception of PDF document)
+     * @param {String} style A string specifying the painting style or null.  Valid styles include: 'S' [default] - stroke, 'F' - fill,  and 'DF' (or 'FD') -  fill then stroke. A null value postpones setting the style so that a shape may be composed using multiple method calls. The last drawing method call used to define the shape should not have a null style argument.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name circle
+     */
     API.circle = function (x, y, r, style) {
       return this.ellipse(x, y, r, r, style);
     };
 
     /**
-         * Adds a properties to the PDF document
-         *
-         * @param {Object} A property_name-to-property_value object structure.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setProperties
-         */
+     * Adds a properties to the PDF document
+     *
+     * @param {Object} A property_name-to-property_value object structure.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setProperties
+     */
     API.setProperties = function (properties) {
       // copying only those properties we can render.
       for (const property in documentProperties) {
-        if (documentProperties.hasOwnProperty(property) && properties[property]) {
+        if (
+          documentProperties.hasOwnProperty(property) &&
+          properties[property]
+        ) {
           documentProperties[property] = properties[property];
         }
       }
@@ -1701,30 +1787,30 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Sets font size for upcoming text elements.
-         *
-         * @param {Number} size Font size in points.
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setFontSize
-         */
+     * Sets font size for upcoming text elements.
+     *
+     * @param {Number} size Font size in points.
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setFontSize
+     */
     API.setFontSize = function (size) {
       activeFontSize = size;
       return this;
     };
 
     /**
-         * Sets text font face, variant for upcoming text elements.
-         * See output of jsPDF.getFontList() for possible font names, styles.
-         *
-         * @param {String} fontName Font name or family. Example: "times"
-         * @param {String} fontStyle Font style or variant. Example: "italic"
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setFont
-         */
+     * Sets text font face, variant for upcoming text elements.
+     * See output of jsPDF.getFontList() for possible font names, styles.
+     *
+     * @param {String} fontName Font name or family. Example: "times"
+     * @param {String} fontStyle Font style or variant. Example: "italic"
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setFont
+     */
     API.setFont = function (fontName, fontStyle) {
       activeFontKey = getFont(fontName, fontStyle);
       // if font is not found, the above line blows up and we never go further
@@ -1732,16 +1818,16 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Switches font style or variant for upcoming text elements,
-         * while keeping the font face or family same.
-         * See output of jsPDF.getFontList() for possible font names, styles.
-         *
-         * @param {String} style Font style or variant. Example: "italic"
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setFontStyle
-         */
+     * Switches font style or variant for upcoming text elements,
+     * while keeping the font face or family same.
+     * See output of jsPDF.getFontList() for possible font names, styles.
+     *
+     * @param {String} style Font style or variant. Example: "italic"
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setFontStyle
+     */
     API.setFontStyle = API.setFontType = function (style) {
       activeFontKey = getFont(undefined, style);
       // if font is not found, the above line blows up and we never go further
@@ -1749,19 +1835,21 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Returns an object - a tree of fontName to fontStyle relationships available to
-         * active PDF document.
-         *
-         * @public
-         * @function
-         * @returns {Object} Like {'times':['normal', 'italic', ... ], 'arial':['normal', 'bold', ... ], ... }
-         * @methodOf jsPDF#
-         * @name getFontList
-         */
+     * Returns an object - a tree of fontName to fontStyle relationships available to
+     * active PDF document.
+     *
+     * @public
+     * @function
+     * @returns {Object} Like {'times':['normal', 'italic', ... ], 'arial':['normal', 'bold', ... ], ... }
+     * @methodOf jsPDF#
+     * @name getFontList
+     */
     API.getFontList = function () {
       // TODO: iterate over fonts array or return copy of fontmap instead in case more are ever added.
-      const list = {}; let fontName; let fontStyle; let
-        tmp;
+      const list = {};
+      let fontName;
+      let fontStyle;
+      let tmp;
 
       for (fontName in fontmap) {
         if (fontmap.hasOwnProperty(fontName)) {
@@ -1778,74 +1866,74 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Add a custom font.
-         *
-         * @param {String} Postscript name of the Font.  Example: "Menlo-Regular"
-         * @param {String} Name of font-family from @font-face definition.  Example: "Menlo Regular"
-         * @param {String} Font style.  Example: "normal"
-         * @function
-         * @returns the {fontKey} (same as the internal method)
-         * @methodOf jsPDF#
-         * @name addFont
-         */
+     * Add a custom font.
+     *
+     * @param {String} Postscript name of the Font.  Example: "Menlo-Regular"
+     * @param {String} Name of font-family from @font-face definition.  Example: "Menlo Regular"
+     * @param {String} Font style.  Example: "normal"
+     * @function
+     * @returns the {fontKey} (same as the internal method)
+     * @methodOf jsPDF#
+     * @name addFont
+     */
     API.addFont = function (postScriptName, fontName, fontStyle) {
       addFont(postScriptName, fontName, fontStyle, 'StandardEncoding');
     };
 
     /**
-         * Sets line width for upcoming lines.
-         *
-         * @param {Number} width Line width (in units declared at inception of PDF document)
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setLineWidth
-         */
+     * Sets line width for upcoming lines.
+     *
+     * @param {Number} width Line width (in units declared at inception of PDF document)
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setLineWidth
+     */
     API.setLineWidth = function (width) {
       out(`${(width * k).toFixed(2)} w`);
       return this;
     };
 
     /**
-         * Sets the stroke color for upcoming elements.
-         *
-         * Depending on the number of arguments given, Gray, RGB, or CMYK
-         * color space is implied.
-         *
-         * When only ch1 is given, "Gray" color space is implied and it
-         * must be a value in the range from 0.00 (solid black) to to 1.00 (white)
-         * if values are communicated as String types, or in range from 0 (black)
-         * to 255 (white) if communicated as Number type.
-         * The RGB-like 0-255 range is provided for backward compatibility.
-         *
-         * When only ch1,ch2,ch3 are given, "RGB" color space is implied and each
-         * value must be in the range from 0.00 (minimum intensity) to to 1.00
-         * (max intensity) if values are communicated as String types, or
-         * from 0 (min intensity) to to 255 (max intensity) if values are communicated
-         * as Number types.
-         * The RGB-like 0-255 range is provided for backward compatibility.
-         *
-         * When ch1,ch2,ch3,ch4 are given, "CMYK" color space is implied and each
-         * value must be a in the range from 0.00 (0% concentration) to to
-         * 1.00 (100% concentration)
-         *
-         * Because JavaScript treats fixed point numbers badly (rounds to
-         * floating point nearest to binary representation) it is highly advised to
-         * communicate the fractional numbers as String types, not JavaScript Number type.
-         *
-         * @param {Number|String} ch1 Color channel value
-         * @param {Number|String} ch2 Color channel value
-         * @param {Number|String} ch3 Color channel value
-         * @param {Number|String} ch4 Color channel value
-         *
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setDrawColor
-         */
+     * Sets the stroke color for upcoming elements.
+     *
+     * Depending on the number of arguments given, Gray, RGB, or CMYK
+     * color space is implied.
+     *
+     * When only ch1 is given, "Gray" color space is implied and it
+     * must be a value in the range from 0.00 (solid black) to to 1.00 (white)
+     * if values are communicated as String types, or in range from 0 (black)
+     * to 255 (white) if communicated as Number type.
+     * The RGB-like 0-255 range is provided for backward compatibility.
+     *
+     * When only ch1,ch2,ch3 are given, "RGB" color space is implied and each
+     * value must be in the range from 0.00 (minimum intensity) to to 1.00
+     * (max intensity) if values are communicated as String types, or
+     * from 0 (min intensity) to to 255 (max intensity) if values are communicated
+     * as Number types.
+     * The RGB-like 0-255 range is provided for backward compatibility.
+     *
+     * When ch1,ch2,ch3,ch4 are given, "CMYK" color space is implied and each
+     * value must be a in the range from 0.00 (0% concentration) to to
+     * 1.00 (100% concentration)
+     *
+     * Because JavaScript treats fixed point numbers badly (rounds to
+     * floating point nearest to binary representation) it is highly advised to
+     * communicate the fractional numbers as String types, not JavaScript Number type.
+     *
+     * @param {Number|String} ch1 Color channel value
+     * @param {Number|String} ch2 Color channel value
+     * @param {Number|String} ch3 Color channel value
+     * @param {Number|String} ch4 Color channel value
+     *
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setDrawColor
+     */
     API.setDrawColor = function (ch1, ch2, ch3, ch4) {
       let color;
-      if (ch2 === undefined || (ch4 === undefined && ch1 === ch2 === ch3)) {
+      if (ch2 === undefined || (ch4 === undefined && (ch1 === ch2) === ch3)) {
         // Gray color space.
         if (typeof ch1 === 'string') {
           color = `${ch1} G`;
@@ -1873,46 +1961,46 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Sets the fill color for upcoming elements.
-         *
-         * Depending on the number of arguments given, Gray, RGB, or CMYK
-         * color space is implied.
-         *
-         * When only ch1 is given, "Gray" color space is implied and it
-         * must be a value in the range from 0.00 (solid black) to to 1.00 (white)
-         * if values are communicated as String types, or in range from 0 (black)
-         * to 255 (white) if communicated as Number type.
-         * The RGB-like 0-255 range is provided for backward compatibility.
-         *
-         * When only ch1,ch2,ch3 are given, "RGB" color space is implied and each
-         * value must be in the range from 0.00 (minimum intensity) to to 1.00
-         * (max intensity) if values are communicated as String types, or
-         * from 0 (min intensity) to to 255 (max intensity) if values are communicated
-         * as Number types.
-         * The RGB-like 0-255 range is provided for backward compatibility.
-         *
-         * When ch1,ch2,ch3,ch4 are given, "CMYK" color space is implied and each
-         * value must be a in the range from 0.00 (0% concentration) to to
-         * 1.00 (100% concentration)
-         *
-         * Because JavaScript treats fixed point numbers badly (rounds to
-         * floating point nearest to binary representation) it is highly advised to
-         * communicate the fractional numbers as String types, not JavaScript Number type.
-         *
-         * @param {Number|String} ch1 Color channel value
-         * @param {Number|String} ch2 Color channel value
-         * @param {Number|String} ch3 Color channel value
-         * @param {Number|String} ch4 Color channel value
-         *
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setFillColor
-         */
+     * Sets the fill color for upcoming elements.
+     *
+     * Depending on the number of arguments given, Gray, RGB, or CMYK
+     * color space is implied.
+     *
+     * When only ch1 is given, "Gray" color space is implied and it
+     * must be a value in the range from 0.00 (solid black) to to 1.00 (white)
+     * if values are communicated as String types, or in range from 0 (black)
+     * to 255 (white) if communicated as Number type.
+     * The RGB-like 0-255 range is provided for backward compatibility.
+     *
+     * When only ch1,ch2,ch3 are given, "RGB" color space is implied and each
+     * value must be in the range from 0.00 (minimum intensity) to to 1.00
+     * (max intensity) if values are communicated as String types, or
+     * from 0 (min intensity) to to 255 (max intensity) if values are communicated
+     * as Number types.
+     * The RGB-like 0-255 range is provided for backward compatibility.
+     *
+     * When ch1,ch2,ch3,ch4 are given, "CMYK" color space is implied and each
+     * value must be a in the range from 0.00 (0% concentration) to to
+     * 1.00 (100% concentration)
+     *
+     * Because JavaScript treats fixed point numbers badly (rounds to
+     * floating point nearest to binary representation) it is highly advised to
+     * communicate the fractional numbers as String types, not JavaScript Number type.
+     *
+     * @param {Number|String} ch1 Color channel value
+     * @param {Number|String} ch2 Color channel value
+     * @param {Number|String} ch3 Color channel value
+     * @param {Number|String} ch4 Color channel value
+     *
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setFillColor
+     */
     API.setFillColor = function (ch1, ch2, ch3, ch4) {
       let color;
 
-      if (ch2 === undefined || (ch4 === undefined && ch1 === ch2 === ch3)) {
+      if (ch2 === undefined || (ch4 === undefined && (ch1 === ch2) === ch3)) {
         // Gray color space.
         if (typeof ch1 === 'string') {
           color = `${ch1} g`;
@@ -1945,27 +2033,27 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Sets the text color for upcoming elements.
-         * If only one, first argument is given,
-         * treats the value as gray-scale color value.
-         *
-         * @param {Number} r Red channel color value in range 0-255 or {String} r color value in hexadecimal, example: '#FFFFFF'
-         * @param {Number} g Green channel color value in range 0-255
-         * @param {Number} b Blue channel color value in range 0-255
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setTextColor
-         */
+     * Sets the text color for upcoming elements.
+     * If only one, first argument is given,
+     * treats the value as gray-scale color value.
+     *
+     * @param {Number} r Red channel color value in range 0-255 or {String} r color value in hexadecimal, example: '#FFFFFF'
+     * @param {Number} g Green channel color value in range 0-255
+     * @param {Number} b Blue channel color value in range 0-255
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setTextColor
+     */
     API.setTextColor = function (r, g, b) {
-      if ((typeof r === 'string') && /^#[0-9A-Fa-f]{6}$/.test(r)) {
+      if (typeof r === 'string' && /^#[0-9A-Fa-f]{6}$/.test(r)) {
         const hex = parseInt(r.substr(1), 16);
         r = (hex >> 16) & 255;
         g = (hex >> 8) & 255;
-        b = (hex & 255);
+        b = hex & 255;
       }
 
-      if ((r === 0 && g === 0 && b === 0) || (typeof g === 'undefined')) {
+      if ((r === 0 && g === 0 && b === 0) || typeof g === 'undefined') {
         textColor = `${f3(r / 255)} g`;
       } else {
         textColor = [f3(r / 255), f3(g / 255), f3(b / 255), 'rg'].join(' ');
@@ -1974,14 +2062,14 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Is an Object providing a mapping from human-readable to
-         * integer flag values designating the varieties of line cap
-         * and join styles.
-         *
-         * @returns {Object}
-         * @fieldOf jsPDF#
-         * @name CapJoinStyles
-         */
+     * Is an Object providing a mapping from human-readable to
+     * integer flag values designating the varieties of line cap
+     * and join styles.
+     *
+     * @returns {Object}
+     * @fieldOf jsPDF#
+     * @name CapJoinStyles
+     */
     API.CapJoinStyles = {
       0: 0,
       butt: 0,
@@ -1999,19 +2087,21 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Sets the line cap styles
-         * See {jsPDF.CapJoinStyles} for variants
-         *
-         * @param {String|Number} style A string or number identifying the type of line cap
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setLineCap
-         */
+     * Sets the line cap styles
+     * See {jsPDF.CapJoinStyles} for variants
+     *
+     * @param {String|Number} style A string or number identifying the type of line cap
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setLineCap
+     */
     API.setLineCap = function (style) {
       const id = this.CapJoinStyles[style];
       if (id === undefined) {
-        throw new Error(`Line cap style of '${style}' is not recognized. See or extend .CapJoinStyles property for valid styles`);
+        throw new Error(
+          `Line cap style of '${style}' is not recognized. See or extend .CapJoinStyles property for valid styles`,
+        );
       }
       lineCapID = id;
       out(`${id} J`);
@@ -2020,19 +2110,21 @@ const jsPDF = (function (global) {
     };
 
     /**
-         * Sets the line join styles
-         * See {jsPDF.CapJoinStyles} for variants
-         *
-         * @param {String|Number} style A string or number identifying the type of line join
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name setLineJoin
-         */
+     * Sets the line join styles
+     * See {jsPDF.CapJoinStyles} for variants
+     *
+     * @param {String|Number} style A string or number identifying the type of line join
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name setLineJoin
+     */
     API.setLineJoin = function (style) {
       const id = this.CapJoinStyles[style];
       if (id === undefined) {
-        throw new Error(`Line join style of '${style}' is not recognized. See or extend .CapJoinStyles property for valid styles`);
+        throw new Error(
+          `Line join style of '${style}' is not recognized. See or extend .CapJoinStyles property for valid styles`,
+        );
       }
       lineJoinID = id;
       out(`${id} j`);
@@ -2044,14 +2136,14 @@ const jsPDF = (function (global) {
     API.output = output;
 
     /**
-         * Saves as PDF document. An alias of jsPDF.output('save', 'filename.pdf')
-         * @param  {String} filename The filename including extension.
-         *
-         * @function
-         * @returns {jsPDF}
-         * @methodOf jsPDF#
-         * @name save
-         */
+     * Saves as PDF document. An alias of jsPDF.output('save', 'filename.pdf')
+     * @param  {String} filename The filename including extension.
+     *
+     * @function
+     * @returns {jsPDF}
+     * @methodOf jsPDF#
+     * @name save
+     */
     API.save = function (filename) {
       API.output('save', filename);
     };
@@ -2068,8 +2160,9 @@ const jsPDF = (function (global) {
             // Events were added by plugins to the jsPDF instantiator.
             // These are always added to the new instance and some ran
             // during instantiation.
-            let eventname; let handler_and_args; let
-              i;
+            let eventname;
+            let handler_and_args;
+            let i;
 
             for (i = newEvents.length - 1; i !== -1; i--) {
               // subscribe takes 3 args: 'topic', function, runonce_flag
@@ -2083,11 +2176,12 @@ const jsPDF = (function (global) {
                 events,
                 [eventname].concat(
                   typeof handler_and_args === 'function'
-                    ? [handler_and_args] : handler_and_args,
+                    ? [handler_and_args]
+                    : handler_and_args,
                 ),
               );
             }
-          }(events, jsPDF.API.events));
+          })(events, jsPDF.API.events);
         } else {
           API[plugin] = jsPDF.API[plugin];
         }
@@ -2107,31 +2201,31 @@ const jsPDF = (function (global) {
   }
 
   /**
-     * jsPDF.API is a STATIC property of jsPDF class.
-     * jsPDF.API is an object you can add methods and properties to.
-     * The methods / properties you add will show up in new jsPDF objects.
-     *
-     * One property is prepopulated. It is the 'events' Object. Plugin authors can add topics,
-     * callbacks to this object. These will be reassigned to all new instances of jsPDF.
-     * Examples:
-     * jsPDF.API.events['initialized'] = function(){ 'this' is API object }
-     * jsPDF.API.events['addFont'] = function(added_font_object){ 'this' is API object }
-     *
-     * @static
-     * @public
-     * @memberOf jsPDF
-     * @name API
-     *
-     * @example
-     * jsPDF.API.mymethod = function(){
-	 *   // 'this' will be ref to internal API object. see jsPDF source
-	 *   // , so you can refer to built-in methods like so:
-	 *   //     this.line(....)
-	 *   //     this.text(....)
-	 * }
-     * var pdfdoc = new jsPDF()
-     * pdfdoc.mymethod() // <- !!!!!!
-     */
+   * jsPDF.API is a STATIC property of jsPDF class.
+   * jsPDF.API is an object you can add methods and properties to.
+   * The methods / properties you add will show up in new jsPDF objects.
+   *
+   * One property is prepopulated. It is the 'events' Object. Plugin authors can add topics,
+   * callbacks to this object. These will be reassigned to all new instances of jsPDF.
+   * Examples:
+   * jsPDF.API.events['initialized'] = function(){ 'this' is API object }
+   * jsPDF.API.events['addFont'] = function(added_font_object){ 'this' is API object }
+   *
+   * @static
+   * @public
+   * @memberOf jsPDF
+   * @name API
+   *
+   * @example
+   * jsPDF.API.mymethod = function(){
+   *   // 'this' will be ref to internal API object. see jsPDF source
+   *   // , so you can refer to built-in methods like so:
+   *   //     this.line(....)
+   *   //     this.text(....)
+   * }
+   * var pdfdoc = new jsPDF()
+   * pdfdoc.mymethod() // <- !!!!!!
+   */
   jsPDF.API = { events: [] };
   jsPDF.version = '1.0.0-trunk';
 
@@ -2143,4 +2237,8 @@ const jsPDF = (function (global) {
     global.jsPDF = jsPDF;
   }
   return jsPDF;
-}(typeof self !== 'undefined' && self || typeof window !== 'undefined' && window || this));
+})(
+  (typeof self !== 'undefined' && self) ||
+    (typeof window !== 'undefined' && window) ||
+    this,
+);

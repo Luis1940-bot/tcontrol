@@ -5,12 +5,13 @@ function Color(value) {
   this.g = 0;
   this.b = 0;
   this.a = null;
-  const result = this.fromArray(value)
-        || this.namedColor(value)
-        || this.rgb(value)
-        || this.rgba(value)
-        || this.hex6(value)
-        || this.hex3(value);
+  const result =
+    this.fromArray(value) ||
+    this.namedColor(value) ||
+    this.rgb(value) ||
+    this.rgba(value) ||
+    this.hex6(value) ||
+    this.hex3(value);
 }
 
 Color.prototype.darken = function (amount) {
@@ -41,7 +42,7 @@ Color.prototype.fromArray = function (array) {
     }
   }
 
-  return (Array.isArray(array));
+  return Array.isArray(array);
 };
 
 const _hex3 = /^#([a-f0-9]{3})$/i;
@@ -80,7 +81,8 @@ Color.prototype.rgb = function (value) {
   return match !== null;
 };
 
-const _rgba = /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d?\.?\d+)\s*\)$/;
+const _rgba =
+  /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d?\.?\d+)\s*\)$/;
 
 Color.prototype.rgba = function (value) {
   let match = null;

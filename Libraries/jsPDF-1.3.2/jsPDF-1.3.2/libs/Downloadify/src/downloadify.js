@@ -71,7 +71,8 @@
   };
 
   Downloadify.create = function (idOrDOM, options) {
-    const el = (typeof (idOrDOM) === 'string' ? document.getElementById(idOrDOM) : idOrDOM);
+    const el =
+      typeof idOrDOM === 'string' ? document.getElementById(idOrDOM) : idOrDOM;
     return new Downloadify.Container(el, options);
   };
 
@@ -95,10 +96,12 @@
 
       base.queue_name = Downloadify.getUID(base.flashContainer);
 
-      if (typeof (base.options.filename) === 'function') base.filenameCallback = base.options.filename;
+      if (typeof base.options.filename === 'function')
+        base.filenameCallback = base.options.filename;
       else if (base.options.filename) base.filename = base.options.filename;
 
-      if (typeof (base.options.data) === 'function') base.dataCallback = base.options.data;
+      if (typeof base.options.data === 'function')
+        base.dataCallback = base.options.data;
       else if (base.options.data) base.data = base.options.data;
 
       const flashVars = {
@@ -120,9 +123,20 @@
 
       if (base.options.transparent === true) params.wmode = 'transparent';
 
-      if (base.options.downloadImage) flashVars.downloadImage = base.options.downloadImage;
+      if (base.options.downloadImage)
+        flashVars.downloadImage = base.options.downloadImage;
 
-      swfobject.embedSWF(base.options.swf, base.flashContainer.id, base.options.width, base.options.height, '10', null, flashVars, params, attributes);
+      swfobject.embedSWF(
+        base.options.swf,
+        base.flashContainer.id,
+        base.options.width,
+        base.options.height,
+        '10',
+        null,
+        flashVars,
+        params,
+        attributes,
+      );
 
       Downloadify.addToQueue(base);
     };
@@ -158,15 +172,16 @@
     };
 
     base.complete = function () {
-      if (typeof (base.options.onComplete) === 'function') base.options.onComplete();
+      if (typeof base.options.onComplete === 'function')
+        base.options.onComplete();
     };
 
     base.cancel = function () {
-      if (typeof (base.options.onCancel) === 'function') base.options.onCancel();
+      if (typeof base.options.onCancel === 'function') base.options.onCancel();
     };
 
     base.error = function () {
-      if (typeof (base.options.onError) === 'function') base.options.onError();
+      if (typeof base.options.onError === 'function') base.options.onError();
     };
 
     init();
@@ -181,10 +196,10 @@
     append: false,
     dataType: 'string',
   };
-}());
+})();
 
 // Support for jQuery
-if (typeof (jQuery) !== 'undefined') {
+if (typeof jQuery !== 'undefined') {
   (function ($) {
     $.fn.downloadify = function (options) {
       return this.each(function () {
@@ -193,11 +208,11 @@ if (typeof (jQuery) !== 'undefined') {
         $(this).data('Downloadify', dl);
       });
     };
-  }(jQuery));
+  })(jQuery);
 }
 
 /* mootools helper */
-if (typeof (MooTools) !== 'undefined') {
+if (typeof MooTools !== 'undefined') {
   Element.implement({
     downloadify(options) {
       options = $merge(Downloadify.defaultOptions, options);

@@ -455,8 +455,8 @@ Informes generados a partir de los dashboards.
 | ------------ | -------- | ------------------------ |
 | idLTYarea    | INT      | ID del área              |
 | areax        | VARCHAR  | Nombre del área          |
-| activo       | BOOLEAN | Estado del área          |
-| visible      | BOOLEAN | Indicador de visibilidad |
+| activo       | BOOLEAN  | Estado del área          |
+| visible      | BOOLEAN  | Indicador de visibilidad |
 | idLTYcliente | INT (FK) | Cliente asociado         |
 
 ---
@@ -757,11 +757,13 @@ Dependencias y configuración adicional se encuentran en:
 ## 🚀 **Despliegue y Entornos**
 
 ### **Entornos Disponibles**
+
 - **🔧 Development**: `http://localhost/tcontrol/` - Desarrollo local
 - **🧪 Testing**: `https://test.tenkiweb.com/tcontrol/` - Pruebas de usuario
 - **🌐 Production**: `https://tenkiweb.com/tcontrol/` - Producción
 
 ### **Flujo de Trabajo**
+
 ```bash
 # Desarrollo
 git checkout development
@@ -775,12 +777,13 @@ git merge development
 ./deploy.ps1 -Environment testing
 
 # Producción
-git checkout main  
+git checkout main
 git merge testing
 ./deploy.ps1 -Environment production
 ```
 
 ### **Scripts de Despliegue**
+
 - **Windows**: `.\deploy.ps1 -Environment [development|testing|production]`
 - **Linux/Mac**: `./deploy.sh [development|testing|production]`
 
@@ -858,7 +861,6 @@ Usuarios con nivel **Supervisor o superior** acceden al **SCG**, donde pueden:
 ### 🧠 Funciones Administrativas Adicionales
 
 - **Admins** pueden configurar:
-
   - Nuevos controles.
   - Variables asociadas.
   - RACI por reporte (quién recibe qué).
@@ -872,7 +874,6 @@ Usuarios con nivel **Supervisor o superior** acceden al **SCG**, donde pueden:
 
 - Al configurar un reporte, los **Admins** asignan usuarios con roles RACI (Responsible, Accountable, Consulted, Informed).
 - Cuando se genera un nuevo reporte, el sistema determina:
-
   - Quién debe recibir un correo electrónico.
   - Qué tipo de contenido recibir (resumen o contenido completo).
 

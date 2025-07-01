@@ -8,15 +8,24 @@ function Renderer(width, height, images, options, document) {
   this.document = document;
 }
 
-Renderer.prototype.renderImage = function (container, bounds, borderData, imageContainer) {
+Renderer.prototype.renderImage = function (
+  container,
+  bounds,
+  borderData,
+  imageContainer,
+) {
   const paddingLeft = container.cssInt('paddingLeft');
   const paddingTop = container.cssInt('paddingTop');
   const paddingRight = container.cssInt('paddingRight');
   const paddingBottom = container.cssInt('paddingBottom');
   const { borders } = borderData;
 
-  const width = bounds.width - (borders[1].width + borders[3].width + paddingLeft + paddingRight);
-  const height = bounds.height - (borders[0].width + borders[2].width + paddingTop + paddingBottom);
+  const width =
+    bounds.width -
+    (borders[1].width + borders[3].width + paddingLeft + paddingRight);
+  const height =
+    bounds.height -
+    (borders[0].width + borders[2].width + paddingTop + paddingBottom);
   this.drawImage(
     imageContainer,
     0,
@@ -54,14 +63,24 @@ Renderer.prototype.renderBorder = function (data) {
   }
 };
 
-Renderer.prototype.renderBackgroundImage = function (container, bounds, borderData) {
+Renderer.prototype.renderBackgroundImage = function (
+  container,
+  bounds,
+  borderData,
+) {
   const backgroundImages = container.parseBackgroundImages();
   backgroundImages.reverse().forEach(function (backgroundImage, index, arr) {
     switch (backgroundImage.method) {
       case 'url':
         var image = this.images.get(backgroundImage.args[0]);
         if (image) {
-          this.renderBackgroundRepeating(container, bounds, image, arr.length - (index + 1), borderData);
+          this.renderBackgroundRepeating(
+            container,
+            bounds,
+            image,
+            arr.length - (index + 1),
+            borderData,
+          );
         } else {
           log('Error loading background-image', backgroundImage.args[0]);
         }
@@ -83,24 +102,76 @@ Renderer.prototype.renderBackgroundImage = function (container, bounds, borderDa
   }, this);
 };
 
-Renderer.prototype.renderBackgroundRepeating = function (container, bounds, imageContainer, index, borderData) {
-  const size = container.parseBackgroundSize(bounds, imageContainer.image, index);
-  const position = container.parseBackgroundPosition(bounds, imageContainer.image, index, size);
+Renderer.prototype.renderBackgroundRepeating = function (
+  container,
+  bounds,
+  imageContainer,
+  index,
+  borderData,
+) {
+  const size = container.parseBackgroundSize(
+    bounds,
+    imageContainer.image,
+    index,
+  );
+  const position = container.parseBackgroundPosition(
+    bounds,
+    imageContainer.image,
+    index,
+    size,
+  );
   const repeat = container.parseBackgroundRepeat(index);
   switch (repeat) {
     case 'repeat-x':
     case 'repeat no-repeat':
-      this.backgroundRepeatShape(imageContainer, position, size, bounds, bounds.left + borderData[3], bounds.top + position.top + borderData[0], 99999, size.height, borderData);
+      this.backgroundRepeatShape(
+        imageContainer,
+        position,
+        size,
+        bounds,
+        bounds.left + borderData[3],
+        bounds.top + position.top + borderData[0],
+        99999,
+        size.height,
+        borderData,
+      );
       break;
     case 'repeat-y':
     case 'no-repeat repeat':
-      this.backgroundRepeatShape(imageContainer, position, size, bounds, bounds.left + position.left + borderData[3], bounds.top + borderData[0], size.width, 99999, borderData);
+      this.backgroundRepeatShape(
+        imageContainer,
+        position,
+        size,
+        bounds,
+        bounds.left + position.left + borderData[3],
+        bounds.top + borderData[0],
+        size.width,
+        99999,
+        borderData,
+      );
       break;
     case 'no-repeat':
-      this.backgroundRepeatShape(imageContainer, position, size, bounds, bounds.left + position.left + borderData[3], bounds.top + position.top + borderData[0], size.width, size.height, borderData);
+      this.backgroundRepeatShape(
+        imageContainer,
+        position,
+        size,
+        bounds,
+        bounds.left + position.left + borderData[3],
+        bounds.top + position.top + borderData[0],
+        size.width,
+        size.height,
+        borderData,
+      );
       break;
     default:
-      this.renderBackgroundRepeat(imageContainer, position, size, { top: bounds.top, left: bounds.left }, borderData[3], borderData[0]);
+      this.renderBackgroundRepeat(
+        imageContainer,
+        position,
+        size,
+        { top: bounds.top, left: bounds.left },
+        borderData[3],
+        borderData[0],
+      );
       break;
   }
 };

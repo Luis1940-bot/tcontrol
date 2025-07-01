@@ -10,25 +10,25 @@
   const { AcroForm } = window;
 
   AcroForm.scale = function (x) {
-    return (x * (acroformPlugin.internal.scaleFactor / 1));// 1 = (96 / 72)
+    return x * (acroformPlugin.internal.scaleFactor / 1); // 1 = (96 / 72)
   };
   AcroForm.antiScale = function (x) {
-    return ((1 / acroformPlugin.internal.scaleFactor) * x);
+    return (1 / acroformPlugin.internal.scaleFactor) * x;
   };
 
   var acroformPlugin = {
     fields: [],
     xForms: [],
     /**
-         * acroFormDictionaryRoot contains information about the AcroForm Dictionary
-         * 0: The Event-Token, the AcroFormDictionaryCallback has
-         * 1: The Object ID of the Root
-         */
+     * acroFormDictionaryRoot contains information about the AcroForm Dictionary
+     * 0: The Event-Token, the AcroFormDictionaryCallback has
+     * 1: The Object ID of the Root
+     */
     acroFormDictionaryRoot: null,
     /**
-         * After the PDF gets evaluated, the reference to the root has to be reset,
-         * this indicates, whether the root has already been printed out
-         */
+     * After the PDF gets evaluated, the reference to the root has to be reset,
+     * this indicates, whether the root has already been printed out
+     */
     printedOut: false,
     internal: null,
   };
@@ -53,12 +53,17 @@
     }
 
     // The Object Number of the AcroForm Dictionary
-    this.acroformPlugin.acroFormDictionaryRoot = new AcroForm.AcroFormDictionary();
+    this.acroformPlugin.acroFormDictionaryRoot =
+      new AcroForm.AcroFormDictionary();
 
     this.acroformPlugin.internal = this.internal;
 
     // add Callback for creating the AcroForm Dictionary
-    this.acroformPlugin.acroFormDictionaryRoot._eventID = this.internal.events.subscribe('postPutResources', AcroFormDictionaryCallback);
+    this.acroformPlugin.acroFormDictionaryRoot._eventID =
+      this.internal.events.subscribe(
+        'postPutResources',
+        AcroFormDictionaryCallback,
+      );
 
     this.internal.events.subscribe('buildDocument', annotReferenceCallback); // buildDocument
 
@@ -70,15 +75,17 @@
   };
 
   /**
-     * Create the Reference to the widgetAnnotation, so that it gets referenced in the Annot[] int the+
-     * (Requires the Annotation Plugin)
-     */
+   * Create the Reference to the widgetAnnotation, so that it gets referenced in the Annot[] int the+
+   * (Requires the Annotation Plugin)
+   */
   var createAnnotationReference = function (object) {
     const options = {
       type: 'reference',
       object,
     };
-    jsPDF.API.annotationPlugin.annotations[this.internal.getPageInfo(object.page).pageNumber].push(options);
+    jsPDF.API.annotationPlugin.annotations[
+      this.internal.getPageInfo(object.page).pageNumber
+    ].push(options);
   };
 
   const putForm = function (formObject) {
@@ -96,21 +103,25 @@
 
   var putCatalogCallback = function () {
     // Put reference to AcroForm to DocumentCatalog
-    if (typeof this.acroformPlugin.acroFormDictionaryRoot !== 'undefined') { // for safety, shouldn't normally be the case
-      this.internal.write(`/AcroForm ${this.acroformPlugin.acroFormDictionaryRoot.objId} ${
-        0} R`);
+    if (typeof this.acroformPlugin.acroFormDictionaryRoot !== 'undefined') {
+      // for safety, shouldn't normally be the case
+      this.internal.write(
+        `/AcroForm ${this.acroformPlugin.acroFormDictionaryRoot.objId} ${0} R`,
+      );
     } else {
       console.log('Root missing...');
     }
   };
 
   /**
-     * Adds /Acroform X 0 R to Document Catalog,
-     * and creates the AcroForm Dictionary
-     */
+   * Adds /Acroform X 0 R to Document Catalog,
+   * and creates the AcroForm Dictionary
+   */
   var AcroFormDictionaryCallback = function () {
     // Remove event
-    this.internal.events.unsubscribe(this.acroformPlugin.acroFormDictionaryRoot._eventID);
+    this.internal.events.unsubscribe(
+      this.acroformPlugin.acroFormDictionaryRoot._eventID,
+    );
 
     delete this.acroformPlugin.acroFormDictionaryRoot._eventID;
 
@@ -118,22 +129,25 @@
   };
 
   /**
-     * Creates the single Fields and writes them into the Document
-     *
-     * If fieldArray is set, use the fields that are inside it instead of the fields from the AcroRoot
-     * (for the FormXObjects...)
-     */
+   * Creates the single Fields and writes them into the Document
+   *
+   * If fieldArray is set, use the fields that are inside it instead of the fields from the AcroRoot
+   * (for the FormXObjects...)
+   */
   var createFieldCallback = function (fieldArray) {
-    const standardFields = (!fieldArray);
+    const standardFields = !fieldArray;
 
     if (!fieldArray) {
       // in case there is no fieldArray specified, we want to print out the Fields of the AcroForm
       // Print out Root
-      this.internal.newObjectDeferredBegin(this.acroformPlugin.acroFormDictionaryRoot.objId);
+      this.internal.newObjectDeferredBegin(
+        this.acroformPlugin.acroFormDictionaryRoot.objId,
+      );
       this.internal.out(this.acroformPlugin.acroFormDictionaryRoot.getString());
     }
 
-    var fieldArray = fieldArray || this.acroformPlugin.acroFormDictionaryRoot.Kids;
+    var fieldArray =
+      fieldArray || this.acroformPlugin.acroFormDictionaryRoot.Kids;
 
     for (var i in fieldArray) {
       const key = i;
@@ -142,22 +156,28 @@
       const oldRect = form.Rect;
 
       if (form.Rect) {
-        form.Rect = AcroForm.internal.calculateCoordinates.call(this, form.Rect);
+        form.Rect = AcroForm.internal.calculateCoordinates.call(
+          this,
+          form.Rect,
+        );
       }
 
       // Start Writing the Object
       this.internal.newObjectDeferredBegin(form.objId);
 
       let content = '';
-      content += (`${form.objId} 0 obj\n`);
+      content += `${form.objId} 0 obj\n`;
 
-      content += (`<<\n${form.getContent()}`);
+      content += `<<\n${form.getContent()}`;
 
       form.Rect = oldRect;
 
       if (form.hasAppearanceStream && !form.appearanceStreamContent) {
         // Calculate Appearance
-        const appearance = AcroForm.internal.calculateAppearanceStream.call(this, form);
+        const appearance = AcroForm.internal.calculateAppearanceStream.call(
+          this,
+          form,
+        );
         content += `/AP << /N ${appearance} >>\n`;
 
         this.acroformPlugin.xForms.push(appearance);
@@ -169,7 +189,7 @@
         // Iterate over N,R and D
         for (const k in form.appearanceStreamContent) {
           const value = form.appearanceStreamContent[k];
-          content += (`/${k} `);
+          content += `/${k} `;
           content += '<< ';
           if (Object.keys(value).length >= 1 || Array.isArray(value)) {
             // appearanceStream is an Array or Object!
@@ -179,10 +199,11 @@
                 // if Function is referenced, call it in order to get the FormXObject
                 obj = obj.call(this, form);
               }
-              content += (`/${i} ${obj} `);
+              content += `/${i} ${obj} `;
 
               // In case the XForm is already used, e.g. OffState of CheckBoxes, don't add it
-              if (!(this.acroformPlugin.xForms.indexOf(obj) >= 0)) this.acroformPlugin.xForms.push(obj);
+              if (!(this.acroformPlugin.xForms.indexOf(obj) >= 0))
+                this.acroformPlugin.xForms.push(obj);
             }
           } else {
             var obj = value;
@@ -190,17 +211,18 @@
               // if Function is referenced, call it in order to get the FormXObject
               obj = obj.call(this, form);
             }
-            content += (`/${i} ${obj} \n`);
-            if (!(this.acroformPlugin.xForms.indexOf(obj) >= 0)) this.acroformPlugin.xForms.push(obj);
+            content += `/${i} ${obj} \n`;
+            if (!(this.acroformPlugin.xForms.indexOf(obj) >= 0))
+              this.acroformPlugin.xForms.push(obj);
           }
           content += ' >>\n';
         }
 
         // appearance stream is a normal Object..
-        content += ('>>\n');
+        content += '>>\n';
       }
 
-      content += ('>>\nendobj\n');
+      content += '>>\nendobj\n';
 
       this.internal.out(content);
     }
@@ -240,27 +262,28 @@
       // try to put..
       putForm.call(this, fieldObject);
     }
-    fieldObject.page = this.acroformPlugin.internal.getCurrentPageInfo().pageNumber;
+    fieldObject.page =
+      this.acroformPlugin.internal.getCurrentPageInfo().pageNumber;
     return this;
   };
 
   // ############### sort in:
 
   /**
-     * Button
-     * FT = Btn
-     */
+   * Button
+   * FT = Btn
+   */
   var addButton = function (options) {
     var options = options || new AcroForm.Field();
 
     options.FT = '/Btn';
 
     /**
-         * Calculating the Ff entry:
-         *
-         * The Ff entry contains flags, that have to be set bitwise
-         * In the Following the number in the Comment is the BitPosition
-         */
+     * Calculating the Ff entry:
+     *
+     * The Ff entry contains flags, that have to be set bitwise
+     * In the Following the number in the Comment is the BitPosition
+     */
     let flags = options.Ff || 0;
 
     // 17, Pushbutton
@@ -296,43 +319,43 @@
     options.FT = '/Tx';
 
     /**
-         * Calculating the Ff entry:
-         *
-         * The Ff entry contains flags, that have to be set bitwise
-         * In the Following the number in the Comment is the BitPosition
-         */
+     * Calculating the Ff entry:
+     *
+     * The Ff entry contains flags, that have to be set bitwise
+     * In the Following the number in the Comment is the BitPosition
+     */
 
     let flags = options.Ff || 0;
 
     // 13, multiline
     if (options.multiline) {
       // Set Flag
-      flags |= (1 << 12);
+      flags |= 1 << 12;
       // Remove multiline from FieldObject
       // delete options.multiline;
     }
 
     // 14, Password
     if (options.password) {
-      flags |= (1 << 13);
+      flags |= 1 << 13;
       // delete options.password;
     }
 
     // 21, FileSelect, PDF 1.4...
     if (options.fileSelect) {
-      flags |= (1 << 20);
+      flags |= 1 << 20;
       // delete options.fileSelect;
     }
 
     // 23, DoNotSpellCheck, PDF 1.4...
     if (options.doNotSpellCheck) {
-      flags |= (1 << 22);
+      flags |= 1 << 22;
       // delete options.doNotSpellCheck;
     }
 
     // 24, DoNotScroll, PDF 1.4...
     if (options.doNotScroll) {
-      flags |= (1 << 23);
+      flags |= 1 << 23;
       // delete options.doNotScroll;
     }
 
@@ -348,11 +371,11 @@
     options.FT = '/Ch';
 
     /**
-         * Calculating the Ff entry:
-         *
-         * The Ff entry contains flags, that have to be set bitwise
-         * In the Following the number in the Comment is the BitPosition
-         */
+     * Calculating the Ff entry:
+     *
+     * The Ff entry contains flags, that have to be set bitwise
+     * In the Following the number in the Comment is the BitPosition
+     */
 
     let flags = options.Ff || 0;
 
@@ -426,23 +449,28 @@ AcroForm.Appearance = {
       return appearance;
     },
     /**
-         * If any other icons are needed, the number between the brackets can be changed
-         * @returns {string}
-         */
+     * If any other icons are needed, the number between the brackets can be changed
+     * @returns {string}
+     */
     createMK() {
       // 3-> Hook
       return '<< /CA (3)>>';
     },
     /**
-         * Returns the standard On Appearance for a CheckBox
-         * @returns {AcroForm.FormXObject}
-         */
+     * Returns the standard On Appearance for a CheckBox
+     * @returns {AcroForm.FormXObject}
+     */
     YesPushDown(formObject) {
       const xobj = AcroForm.createFormXObject(formObject);
       let stream = '';
       // F13 is ZapfDingbats (Symbolic)
       formObject.Q = 1; // set text-alignment as centered
-      const calcRes = AcroForm.internal.calculateX(formObject, '3', 'ZapfDingbats', 50);
+      const calcRes = AcroForm.internal.calculateX(
+        formObject,
+        '3',
+        'ZapfDingbats',
+        50,
+      );
       stream += `0.749023 g\n\
              0 0 ${AcroForm.Appearance.internal.getWidth(formObject)} ${AcroForm.Appearance.internal.getHeight(formObject)} re\n\
              f\n\
@@ -452,7 +480,8 @@ AcroForm.Appearance = {
              /F13 ${calcRes.fontSize} Tf 0 g\n\
              BT\n`;
       stream += calcRes.text;
-      stream += 'ET\n\
+      stream +=
+        'ET\n\
              Q\n\
              EMC\n';
       xobj.stream = stream;
@@ -463,7 +492,12 @@ AcroForm.Appearance = {
       const xobj = AcroForm.createFormXObject(formObject);
       let stream = '';
       formObject.Q = 1; // set text-alignment as centered
-      const calcRes = AcroForm.internal.calculateX(formObject, '3', 'ZapfDingbats', AcroForm.Appearance.internal.getHeight(formObject) * 0.9);
+      const calcRes = AcroForm.internal.calculateX(
+        formObject,
+        '3',
+        'ZapfDingbats',
+        AcroForm.Appearance.internal.getHeight(formObject) * 0.9,
+      );
       stream += `1 g\n\
 0 0 ${AcroForm.Appearance.internal.getWidth(formObject)} ${AcroForm.Appearance.internal.getHeight(formObject)} re\n\
 f\n\
@@ -476,16 +510,17 @@ n\n\
 BT\n\
 /F13 ${calcRes.fontSize} Tf 0 g\n`;
       stream += calcRes.text;
-      stream += 'ET\n\
+      stream +=
+        'ET\n\
              Q\n';
       xobj.stream = stream;
       return xobj;
     },
 
     /**
-         * Returns the standard Off Appearance for a CheckBox
-         * @returns {AcroForm.FormXObject}
-         */
+     * Returns the standard Off Appearance for a CheckBox
+     * @returns {AcroForm.FormXObject}
+     */
     OffPushDown(formObject) {
       const xobj = AcroForm.createFormXObject(formObject);
       let stream = '';
@@ -506,8 +541,10 @@ BT\n\
           },
           N: {},
         };
-        appearanceStreamContent.N[name] = AcroForm.Appearance.RadioButton.Circle.YesNormal;
-        appearanceStreamContent.D[name] = AcroForm.Appearance.RadioButton.Circle.YesPushDown;
+        appearanceStreamContent.N[name] =
+          AcroForm.Appearance.RadioButton.Circle.YesNormal;
+        appearanceStreamContent.D[name] =
+          AcroForm.Appearance.RadioButton.Circle.YesPushDown;
         return appearanceStreamContent;
       },
       createMK() {
@@ -518,8 +555,11 @@ BT\n\
         const xobj = AcroForm.createFormXObject(formObject);
         let stream = '';
         // Make the Radius of the Circle relative to min(height, width) of formObject
-        let DotRadius = (AcroForm.Appearance.internal.getWidth(formObject) <= AcroForm.Appearance.internal.getHeight(formObject))
-          ? AcroForm.Appearance.internal.getWidth(formObject) / 4 : AcroForm.Appearance.internal.getHeight(formObject) / 4;
+        let DotRadius =
+          AcroForm.Appearance.internal.getWidth(formObject) <=
+          AcroForm.Appearance.internal.getHeight(formObject)
+            ? AcroForm.Appearance.internal.getWidth(formObject) / 4
+            : AcroForm.Appearance.internal.getHeight(formObject) / 4;
         // The Borderpadding...
         DotRadius *= 0.9;
         const c = AcroForm.Appearance.internal.Bezier_C;
@@ -541,8 +581,11 @@ Q\n`;
       YesPushDown(formObject) {
         const xobj = AcroForm.createFormXObject(formObject);
         let stream = '';
-        let DotRadius = (AcroForm.Appearance.internal.getWidth(formObject) <= AcroForm.Appearance.internal.getHeight(formObject))
-          ? AcroForm.Appearance.internal.getWidth(formObject) / 4 : AcroForm.Appearance.internal.getHeight(formObject) / 4;
+        let DotRadius =
+          AcroForm.Appearance.internal.getWidth(formObject) <=
+          AcroForm.Appearance.internal.getHeight(formObject)
+            ? AcroForm.Appearance.internal.getWidth(formObject) / 4
+            : AcroForm.Appearance.internal.getHeight(formObject) / 4;
         // The Borderpadding...
         DotRadius *= 0.9;
         // Save results for later use; no need to waste processor ticks on doing math
@@ -598,8 +641,11 @@ ${dc} -${DotRadius} ${DotRadius} -${dc} ${DotRadius} 0 c\n\
       OffPushDown(formObject) {
         const xobj = AcroForm.createFormXObject(formObject);
         let stream = '';
-        let DotRadius = (AcroForm.Appearance.internal.getWidth(formObject) <= AcroForm.Appearance.internal.getHeight(formObject))
-          ? AcroForm.Appearance.internal.getWidth(formObject) / 4 : AcroForm.Appearance.internal.getHeight(formObject) / 4;
+        let DotRadius =
+          AcroForm.Appearance.internal.getWidth(formObject) <=
+          AcroForm.Appearance.internal.getHeight(formObject)
+            ? AcroForm.Appearance.internal.getWidth(formObject) / 4
+            : AcroForm.Appearance.internal.getHeight(formObject) / 4;
         // The Borderpadding...
         DotRadius *= 0.9;
         // Save results for later use; no need to waste processor ticks on doing math
@@ -635,10 +681,10 @@ ${kc} -${k} ${k} -${kc} ${k} 0 c\n\
 
     Cross: {
       /**
-             * Creates the Actual AppearanceDictionary-References
-             * @param name
-             * @returns
-             */
+       * Creates the Actual AppearanceDictionary-References
+       * @param name
+       * @returns
+       */
       createAppearanceStream(name) {
         const appearanceStreamContent = {
           D: {
@@ -646,8 +692,10 @@ ${kc} -${k} ${k} -${kc} ${k} 0 c\n\
           },
           N: {},
         };
-        appearanceStreamContent.N[name] = AcroForm.Appearance.RadioButton.Cross.YesNormal;
-        appearanceStreamContent.D[name] = AcroForm.Appearance.RadioButton.Cross.YesPushDown;
+        appearanceStreamContent.N[name] =
+          AcroForm.Appearance.RadioButton.Cross.YesNormal;
+        appearanceStreamContent.D[name] =
+          AcroForm.Appearance.RadioButton.Cross.YesPushDown;
         return appearanceStreamContent;
       },
       createMK() {
@@ -704,9 +752,9 @@ ${kc} -${k} ${k} -${kc} ${k} 0 c\n\
   },
 
   /**
-     * Returns the standard Appearance
-     * @returns {AcroForm.FormXObject}
-     */
+   * Returns the standard Appearance
+   * @returns {AcroForm.FormXObject}
+   */
   createDefaultAppearanceStream(formObject) {
     let stream = '';
     // Set Helvetica to Standard Font (size: auto)
@@ -721,7 +769,7 @@ AcroForm.Appearance.internal = {
 
   calculateCross(formObject) {
     const min = function (x, y) {
-      return (x > y) ? y : x;
+      return x > y ? y : x;
     };
 
     const width = AcroForm.Appearance.internal.getWidth(formObject);
@@ -731,21 +779,25 @@ AcroForm.Appearance.internal = {
     const borderPadding = 2; // The Padding in px
 
     const cross = {
-      x1: { // upperLeft
+      x1: {
+        // upperLeft
         x: (width - a) / 2,
-        y: ((height - a) / 2) + a, // height - borderPadding
+        y: (height - a) / 2 + a, // height - borderPadding
       },
-      x2: { // lowerRight
-        x: ((width - a) / 2) + a,
-        y: ((height - a) / 2), // borderPadding
+      x2: {
+        // lowerRight
+        x: (width - a) / 2 + a,
+        y: (height - a) / 2, // borderPadding
       },
-      x3: { // lowerLeft
+      x3: {
+        // lowerLeft
         x: (width - a) / 2,
-        y: ((height - a) / 2), // borderPadding
+        y: (height - a) / 2, // borderPadding
       },
-      x4: { // upperRight
-        x: ((width - a) / 2) + a,
-        y: ((height - a) / 2) + a, // height - borderPadding
+      x4: {
+        // upperRight
+        x: (width - a) / 2 + a,
+        y: (height - a) / 2 + a, // height - borderPadding
       },
     };
 
@@ -753,22 +805,23 @@ AcroForm.Appearance.internal = {
   },
 };
 AcroForm.Appearance.internal.getWidth = function (formObject) {
-  return formObject.Rect[2];// (formObject.Rect[2] - formObject.Rect[0]) || 0;
+  return formObject.Rect[2]; // (formObject.Rect[2] - formObject.Rect[0]) || 0;
 };
 AcroForm.Appearance.internal.getHeight = function (formObject) {
-  return formObject.Rect[3];// (formObject.Rect[1] - formObject.Rect[3]) || 0;
+  return formObject.Rect[3]; // (formObject.Rect[1] - formObject.Rect[3]) || 0;
 };
 
 // ##########################
 
 // ### For inheritance:
 AcroForm.internal.inherit = function (child, parent) {
-  const ObjectCreate = Object.create || function (o) {
-    const F = function () {
+  const ObjectCreate =
+    Object.create ||
+    function (o) {
+      const F = function () {};
+      F.prototype = o;
+      return new F();
     };
-    F.prototype = o;
-    return new F();
-  };
   child.prototype = Object.create(parent.prototype);
   child.prototype.constructor = child;
 };
@@ -781,7 +834,7 @@ AcroForm.internal.arrayToPdfArray = function (array) {
     for (const i in array) {
       const element = array[i].toString();
       content += element;
-      content += ((i < array.length - 1) ? ' ' : '');
+      content += i < array.length - 1 ? ' ' : '';
     }
     content += ']';
 
@@ -850,14 +903,19 @@ AcroForm.PDFObject.prototype.getString = function () {
 
 AcroForm.PDFObject.prototype.getContent = function () {
   /**
-     * Prints out all enumerable Variables from the Object
-     * @param fieldObject
-     * @returns {string}
-     */
+   * Prints out all enumerable Variables from the Object
+   * @param fieldObject
+   * @returns {string}
+   */
   const createContentFromFieldObject = function (fieldObject) {
     let content = '';
 
-    const keys = Object.keys(fieldObject).filter((key) => (key != 'content' && key != 'appearanceStreamContent' && key.substring(0, 1) != '_'));
+    const keys = Object.keys(fieldObject).filter(
+      (key) =>
+        key != 'content' &&
+        key != 'appearanceStreamContent' &&
+        key.substring(0, 1) != '_',
+    );
 
     for (const i in keys) {
       const key = keys[i];
@@ -900,7 +958,7 @@ AcroForm.FormXObject = function () {
   Object.defineProperty(this, 'Length', {
     enumerable: true,
     get() {
-      return (_stream !== undefined) ? _stream.length : 0;
+      return _stream !== undefined ? _stream.length : 0;
     },
   });
   Object.defineProperty(this, 'stream', {
@@ -979,9 +1037,9 @@ AcroForm.Field = function () {
     },
   });
   /**
-     * The Partial name of the Field Object.
-     * It has to be unique.
-     */
+   * The Partial name of the Field Object.
+   * It has to be unique.
+   */
   let _T;
 
   Object.defineProperty(this, 'T', {
@@ -1041,21 +1099,21 @@ AcroForm.Field = function () {
   Object.defineProperty(this, 'Type', {
     enumerable: true,
     get() {
-      return (this.hasAnnotation) ? '/Annot' : null;
+      return this.hasAnnotation ? '/Annot' : null;
     },
   });
 
   Object.defineProperty(this, 'Subtype', {
     enumerable: true,
     get() {
-      return (this.hasAnnotation) ? '/Widget' : null;
+      return this.hasAnnotation ? '/Widget' : null;
     },
   });
 
   /**
-     *
-     * @type {Array}
-     */
+   *
+   * @type {Array}
+   */
   this.BG;
 
   Object.defineProperty(this, 'hasAnnotation', {
@@ -1094,14 +1152,14 @@ AcroForm.ChoiceField = function () {
   // Top Index
   this.TI = 0;
   /**
-     * Defines, whether the
-     * @type {boolean}
-     */
+   * Defines, whether the
+   * @type {boolean}
+   */
   this.combo = false;
   /**
-     * Defines, whether the Choice Field is an Edit Field.
-     * An Edit Field is automatically an Combo Field.
-     */
+   * Defines, whether the Choice Field is an Edit Field.
+   * An Edit Field is automatically an Combo Field.
+   */
   Object.defineProperty(this, 'edit', {
     enumerable: true,
     set(val) {
@@ -1213,7 +1271,8 @@ AcroForm.ChildClass = function (parent, name) {
 
   // todo: set AppearanceType as variable that can be set from the outside...
   this._AppearanceType = AcroForm.Appearance.RadioButton.Circle; // The Default appearanceType is the Circle
-  this.appearanceStreamContent = this._AppearanceType.createAppearanceStream(name);
+  this.appearanceStreamContent =
+    this._AppearanceType.createAppearanceStream(name);
 
   // Set Print in the Annot Flag
   this.F = AcroForm.internal.setBitPosition(this.F, 3, 1);
@@ -1222,7 +1281,7 @@ AcroForm.ChildClass = function (parent, name) {
   this.MK = this._AppearanceType.createMK(); // (8) -> Cross, (1)-> Circle, ()-> nothing
 
   // Default Appearance is Off
-  this.AS = '/Off';// + name;
+  this.AS = '/Off'; // + name;
 
   this._Name = name;
 };
@@ -1230,13 +1289,17 @@ AcroForm.internal.inherit(AcroForm.ChildClass, AcroForm.Field);
 
 AcroForm.RadioButton.prototype.setAppearance = function (appearance) {
   if (!('createAppearanceStream' in appearance && 'createMK' in appearance)) {
-    console.log("Couldn't assign Appearance to RadioButton. Appearance was Invalid!");
+    console.log(
+      "Couldn't assign Appearance to RadioButton. Appearance was Invalid!",
+    );
     return;
   }
   for (const i in this.__Kids) {
     const child = this.__Kids[i];
 
-    child.appearanceStreamContent = appearance.createAppearanceStream(child._Name);
+    child.appearanceStreamContent = appearance.createAppearanceStream(
+      child._Name,
+    );
     child.MK = appearance.createMK();
   }
 };
@@ -1257,7 +1320,8 @@ AcroForm.RadioButton.prototype.createOption = function (name) {
 
 AcroForm.CheckBox = function () {
   Button.call(this);
-  this.appearanceStreamContent = AcroForm.Appearance.CheckBox.createAppearanceStream();
+  this.appearanceStreamContent =
+    AcroForm.Appearance.CheckBox.createAppearanceStream();
   this.MK = AcroForm.Appearance.CheckBox.createMK();
   this.AS = '/On';
   this.V = '/On';
@@ -1313,19 +1377,19 @@ AcroForm.TextField = function () {
   // this.multiline = false;
   // this.password = false;
   /**
-     * For PDF 1.4
-     * @type {boolean}
-     */
+   * For PDF 1.4
+   * @type {boolean}
+   */
   // this.fileSelect = false;
   /**
-     * For PDF 1.4
-     * @type {boolean}
-     */
+   * For PDF 1.4
+   * @type {boolean}
+   */
   // this.doNotSpellCheck = false;
   /**
-     * For PDF 1.4
-     * @type {boolean}
-     */
+   * For PDF 1.4
+   * @type {boolean}
+   */
   // this.doNotScroll = false;
 
   let _MaxLen = false;
@@ -1342,7 +1406,7 @@ AcroForm.TextField = function () {
   Object.defineProperty(this, 'hasAppearanceStream', {
     enumerable: false,
     get() {
-      return (this.V || this.DV);
+      return this.V || this.DV;
     },
   });
 };
@@ -1372,11 +1436,14 @@ window.PasswordField = AcroForm.PasswordField;
 AcroForm.internal.calculateFontSpace = function (text, fontsize, fonttype) {
   var fonttype = fonttype || 'helvetica';
   // re-use canvas object for speed improvements
-  const canvas = AcroForm.internal.calculateFontSpace.canvas || (AcroForm.internal.calculateFontSpace.canvas = document.createElement('canvas'));
+  const canvas =
+    AcroForm.internal.calculateFontSpace.canvas ||
+    (AcroForm.internal.calculateFontSpace.canvas =
+      document.createElement('canvas'));
 
   var context = canvas.getContext('2d');
   context.save();
-  const newFont = (`${fontsize} ${fonttype}`);
+  const newFont = `${fontsize} ${fonttype}`;
   context.font = newFont;
   const res = context.measureText(text);
   context.fontcolor = 'black';
@@ -1397,32 +1464,39 @@ AcroForm.internal.calculateX = function (formObject, text, font, maxFontSize) {
     text: '',
     fontSize: '',
   };
-    // Remove Brackets
-  text = (text.substr(0, 1) == '(') ? text.substr(1) : text;
-  text = (text.substr(text.length - 1) == ')') ? text.substr(0, text.length - 1) : text;
+  // Remove Brackets
+  text = text.substr(0, 1) == '(' ? text.substr(1) : text;
+  text =
+    text.substr(text.length - 1) == ')'
+      ? text.substr(0, text.length - 1)
+      : text;
   // split into array of words
   const textSplit = text.split(' ');
 
   /**
-     * the color could be ((alpha)||(r,g,b)||(c,m,y,k))
-     * @type {string}
-     */
+   * the color could be ((alpha)||(r,g,b)||(c,m,y,k))
+   * @type {string}
+   */
   const color = '0 g\n';
   let fontSize = maxFontSize; // The Starting fontSize (The Maximum)
   const lineSpacing = 2;
   const borderPadding = 2;
 
   let height = AcroForm.Appearance.internal.getHeight(formObject) || 0;
-  height = (height < 0) ? -height : height;
+  height = height < 0 ? -height : height;
   let width = AcroForm.Appearance.internal.getWidth(formObject) || 0;
-  width = (width < 0) ? -width : width;
+  width = width < 0 ? -width : width;
 
   const isSmallerThanWidth = function (i, lastLine, fontSize) {
     if (i + 1 < textSplit.length) {
       const tmp = `${lastLine} ${textSplit[i + 1]}`;
-      const TextWidth = ((AcroForm.internal.calculateFontSpace(tmp, `${fontSize}px`, font).width));
-      const FieldWidth = (width - 2 * borderPadding);
-      return (TextWidth <= FieldWidth);
+      const TextWidth = AcroForm.internal.calculateFontSpace(
+        tmp,
+        `${fontSize}px`,
+        font,
+      ).width;
+      const FieldWidth = width - 2 * borderPadding;
+      return TextWidth <= FieldWidth;
     }
     return false;
   };
@@ -1431,15 +1505,21 @@ AcroForm.internal.calculateX = function (formObject, text, font, maxFontSize) {
   FontSize: while (true) {
     var text = '';
     fontSize--;
-    const textHeight = AcroForm.internal.calculateFontSpace('3', `${fontSize}px`, font).height;
-    let startY = (formObject.multiline) ? height - fontSize : (height - textHeight) / 2;
+    const textHeight = AcroForm.internal.calculateFontSpace(
+      '3',
+      `${fontSize}px`,
+      font,
+    ).height;
+    let startY = formObject.multiline
+      ? height - fontSize
+      : (height - textHeight) / 2;
     startY += lineSpacing;
     let startX = -borderPadding;
 
-    let lastX = startX; let
-      lastY = startY;
-    let firstWordInLine = 0; let
-      lastWordInLine = 0;
+    let lastX = startX;
+    let lastY = startY;
+    let firstWordInLine = 0;
+    let lastWordInLine = 0;
     let lastLength = 0;
 
     const y = 0;
@@ -1451,16 +1531,27 @@ AcroForm.internal.calculateX = function (formObject, text, font, maxFontSize) {
       break;
     }
 
-    lastLength = AcroForm.internal.calculateFontSpace(`${textSplit[0]} `, `${fontSize}px`, font).width;
+    lastLength = AcroForm.internal.calculateFontSpace(
+      `${textSplit[0]} `,
+      `${fontSize}px`,
+      font,
+    ).width;
 
     let lastLine = '';
     let lineCount = 0;
     for (const i in textSplit) {
       lastLine += `${textSplit[i]} `;
       // Remove last blank
-      lastLine = (lastLine.substr(lastLine.length - 1) == ' ') ? lastLine.substr(0, lastLine.length - 1) : lastLine;
+      lastLine =
+        lastLine.substr(lastLine.length - 1) == ' '
+          ? lastLine.substr(0, lastLine.length - 1)
+          : lastLine;
       const key = parseInt(i);
-      lastLength = AcroForm.internal.calculateFontSpace(`${lastLine} `, `${fontSize}px`, font).width;
+      lastLength = AcroForm.internal.calculateFontSpace(
+        `${lastLine} `,
+        `${fontSize}px`,
+        font,
+      ).width;
       const nextLineIsSmaller = isSmallerThanWidth(key, lastLine, fontSize);
       const isLastWord = i >= textSplit.length - 1;
       if (nextLineIsSmaller && !isLastWord) {
@@ -1470,7 +1561,10 @@ AcroForm.internal.calculateX = function (formObject, text, font, maxFontSize) {
         if (!formObject.multiline) {
           continue FontSize;
         } else {
-          if (((textHeight + lineSpacing) * (lineCount + 2) + lineSpacing) > height) {
+          if (
+            (textHeight + lineSpacing) * (lineCount + 2) + lineSpacing >
+            height
+          ) {
             // If the Text is higher than the FieldObject
             continue FontSize;
           }
@@ -1479,7 +1573,10 @@ AcroForm.internal.calculateX = function (formObject, text, font, maxFontSize) {
         }
       } else if (isLastWord) {
         lastWordInLine = key;
-      } else if (formObject.multiline && ((textHeight + lineSpacing) * (lineCount + 2) + lineSpacing) > height) {
+      } else if (
+        formObject.multiline &&
+        (textHeight + lineSpacing) * (lineCount + 2) + lineSpacing > height
+      ) {
         // If the Text is higher than the FieldObject
         continue FontSize;
       }
@@ -1491,16 +1588,23 @@ AcroForm.internal.calculateX = function (formObject, text, font, maxFontSize) {
       }
 
       // Remove last blank
-      line = (line.substr(line.length - 1) == ' ') ? line.substr(0, line.length - 1) : line;
+      line =
+        line.substr(line.length - 1) == ' '
+          ? line.substr(0, line.length - 1)
+          : line;
       // lastLength -= blankSpace.width;
-      lastLength = AcroForm.internal.calculateFontSpace(line, `${fontSize}px`, font).width;
+      lastLength = AcroForm.internal.calculateFontSpace(
+        line,
+        `${fontSize}px`,
+        font,
+      ).width;
 
       // Calculate startX
       switch (formObject.Q) {
         case 2: // Right justified
-          startX = (width - lastLength - borderPadding);
+          startX = width - lastLength - borderPadding;
           break;
-        case 1:// Q = 1 := Text-Alignment: Center
+        case 1: // Q = 1 := Text-Alignment: Center
           startX = (width - lastLength) / 2;
           break;
         case 0:
@@ -1552,19 +1656,19 @@ AcroForm.internal.calculateAppearanceStream = function (formObject) {
 
   const calcRes = AcroForm.internal.calculateX(formObject, text);
 
-  stream += '/Tx BMC\n'
-        + 'q\n'
-  // color + '\n' +
-        + `/F1 ${calcRes.fontSize} Tf\n`
-  // Text Matrix
-        + '1 0 0 1 0 0 Tm\n';
+  stream +=
+    '/Tx BMC\n' +
+    'q\n' +
+    // color + '\n' +
+    `/F1 ${calcRes.fontSize} Tf\n` +
+    // Text Matrix
+    '1 0 0 1 0 0 Tm\n';
   // Begin Text
   stream += 'BT\n';
   stream += calcRes.text;
   // End Text
   stream += 'ET\n';
-  stream += 'Q\n'
-        + 'EMC\n';
+  stream += 'Q\n' + 'EMC\n';
 
   const appearanceStreamContent = new AcroForm.createFormXObject(formObject);
 
@@ -1592,7 +1696,7 @@ AcroForm.internal.calculateCoordinates = function (x, y, w, h) {
 
   if (this.internal) {
     function mmtopx(x) {
-      return (x * this.internal.scaleFactor);
+      return x * this.internal.scaleFactor;
     }
 
     if (Array.isArray(x)) {
@@ -1602,9 +1706,11 @@ AcroForm.internal.calculateCoordinates = function (x, y, w, h) {
       x[3] = AcroForm.scale(x[3]);
 
       coordinates.lowerLeft_X = x[0] || 0;
-      coordinates.lowerLeft_Y = (mmtopx.call(this, this.internal.pageSize.height) - x[3] - x[1]) || 0;
+      coordinates.lowerLeft_Y =
+        mmtopx.call(this, this.internal.pageSize.height) - x[3] - x[1] || 0;
       coordinates.upperRight_X = x[0] + x[2] || 0;
-      coordinates.upperRight_Y = (mmtopx.call(this, this.internal.pageSize.height) - x[1]) || 0;
+      coordinates.upperRight_Y =
+        mmtopx.call(this, this.internal.pageSize.height) - x[1] || 0;
     } else {
       x = AcroForm.scale(x);
       y = AcroForm.scale(y);
@@ -1630,7 +1736,12 @@ AcroForm.internal.calculateCoordinates = function (x, y, w, h) {
     }
   }
 
-  return [coordinates.lowerLeft_X, coordinates.lowerLeft_Y, coordinates.upperRight_X, coordinates.upperRight_Y];
+  return [
+    coordinates.lowerLeft_X,
+    coordinates.lowerLeft_Y,
+    coordinates.upperRight_X,
+    coordinates.upperRight_Y,
+  ];
 };
 
 AcroForm.internal.calculateColor = function (r, g, b) {
@@ -1644,7 +1755,7 @@ AcroForm.internal.calculateColor = function (r, g, b) {
 AcroForm.internal.getBitPosition = function (variable, position) {
   variable = variable || 0;
   let bitMask = 1;
-  bitMask <<= (position - 1);
+  bitMask <<= position - 1;
   return variable | bitMask;
 };
 
@@ -1653,14 +1764,14 @@ AcroForm.internal.setBitPosition = function (variable, position, value) {
   value = value || 1;
 
   let bitMask = 1;
-  bitMask <<= (position - 1);
+  bitMask <<= position - 1;
 
   if (value == 1) {
     // Set the Bit to 1
     var variable = variable | bitMask;
   } else {
     // Set the Bit to 0
-    var variable = variable & (~bitMask);
+    var variable = variable & ~bitMask;
   }
 
   return variable;

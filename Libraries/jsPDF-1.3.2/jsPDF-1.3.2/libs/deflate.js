@@ -43,8 +43,8 @@ const Deflater = (function (obj) {
 
   const LENGTH_CODES = 29;
   const LITERALS = 256;
-  const L_CODES = (LITERALS + 1 + LENGTH_CODES);
-  const HEAP_SIZE = (2 * L_CODES + 1);
+  const L_CODES = LITERALS + 1 + LENGTH_CODES;
+  const HEAP_SIZE = 2 * L_CODES + 1;
 
   const END_BLOCK = 256;
 
@@ -89,20 +89,35 @@ const Deflater = (function (obj) {
   // Tree
 
   // see definition of array dist_code below
-  const _dist_code = [0, 1, 2, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-    10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-    12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-    13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
-    14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
-    14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
-    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 16, 17, 18, 18, 19, 19,
-    20, 20, 20, 20, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
-    24, 24, 24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
-    26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27,
-    27, 27, 27, 27, 27, 27, 27, 27, 27, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
-    28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 29,
-    29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
-    29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29];
+  const _dist_code = [
+    0, 1, 2, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 9,
+    9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+    10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12,
+    12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+    12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13,
+    13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
+    13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+    14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+    14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+    14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15,
+    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 0, 0, 16, 17, 18, 18, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21, 22, 22,
+    22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24,
+    24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 25, 25, 25, 25, 25, 25, 25, 25,
+    25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
+    26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
+    26, 26, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27,
+    27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 28, 28, 28, 28,
+    28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
+    28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
+    28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28,
+    28, 28, 28, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
+    29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
+    29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
+    29, 29, 29, 29, 29, 29, 29, 29, 29, 29,
+  ];
 
   function Tree() {
     const that = this;
@@ -127,8 +142,8 @@ const Deflater = (function (obj) {
       const base = that.stat_desc.extra_base;
       const { max_length } = that.stat_desc;
       let h; // heap index
-      let n; let
-        m; // iterate over the tree elements
+      let n;
+      let m; // iterate over the tree elements
       let bits; // bit length
       let xbits; // extra bits
       let f; // frequency
@@ -226,7 +241,7 @@ const Deflater = (function (obj) {
       // The distribution counts are first used to generate the code values
       // without bit reversal.
       for (bits = 1; bits <= MAX_BITS; bits++) {
-        next_code[bits] = code = ((code + bl_count[bits - 1]) << 1);
+        next_code[bits] = code = (code + bl_count[bits - 1]) << 1;
       }
 
       // Check that the bit counts in bl_count are consistent. The last code
@@ -253,8 +268,8 @@ const Deflater = (function (obj) {
       const tree = that.dyn_tree;
       const stree = that.stat_desc.static_tree;
       const { elems } = that.stat_desc;
-      let n; let
-        m; // iterate over heap elements
+      let n;
+      let m; // iterate over heap elements
       let max_code = -1; // largest code with non zero frequency
       let node; // new node being created
 
@@ -307,7 +322,7 @@ const Deflater = (function (obj) {
         s.heap[--s.heap_max] = m;
 
         // Create a new node father of n and m
-        tree[node * 2] = (tree[n * 2] + tree[m * 2]);
+        tree[node * 2] = tree[n * 2] + tree[m * 2];
         s.depth[node] = Math.max(s.depth[n], s.depth[m]) + 1;
         tree[n * 2 + 1] = tree[m * 2 + 1] = node;
 
@@ -328,36 +343,58 @@ const Deflater = (function (obj) {
     };
   }
 
-  Tree._length_code = [0, 1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16,
-    16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-    20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22,
-    22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
-    24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,
-    25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
-    26, 26, 26, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 28];
+  Tree._length_code = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 12, 12, 13, 13,
+    13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 17,
+    17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19,
+    19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+    20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22,
+    22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23,
+    23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24,
+    24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,
+    24, 24, 24, 24, 24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,
+    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26,
+    26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26,
+    26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 27, 27, 27, 27, 27, 27, 27,
+    27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27,
+    27, 27, 27, 27, 27, 28,
+  ];
 
-  Tree.base_length = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 0];
+  Tree.base_length = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 20, 24, 28, 32, 40, 48, 56, 64,
+    80, 96, 112, 128, 160, 192, 224, 0,
+  ];
 
-  Tree.base_dist = [0, 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024, 1536, 2048, 3072, 4096, 6144, 8192, 12288, 16384,
-    24576];
+  Tree.base_dist = [
+    0, 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512,
+    768, 1024, 1536, 2048, 3072, 4096, 6144, 8192, 12288, 16384, 24576,
+  ];
 
   // Mapping from a distance to a distance code. dist is the distance - 1 and
   // must not have side effects. _dist_code[256] and _dist_code[257] are never
   // used.
   Tree.d_code = function (dist) {
-    return ((dist) < 256 ? _dist_code[dist] : _dist_code[256 + ((dist) >>> 7)]);
+    return dist < 256 ? _dist_code[dist] : _dist_code[256 + (dist >>> 7)];
   };
 
   // extra bits for each length code
-  Tree.extra_lbits = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0];
+  Tree.extra_lbits = [
+    0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5,
+    5, 5, 5, 0,
+  ];
 
   // extra bits for each distance code
-  Tree.extra_dbits = [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13];
+  Tree.extra_dbits = [
+    0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10,
+    11, 11, 12, 12, 13, 13,
+  ];
 
   // extra bits for each bit length code
   Tree.extra_blbits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 7];
 
-  Tree.bl_order = [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15];
+  Tree.bl_order = [
+    16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15,
+  ];
 
   // StaticTree
 
@@ -370,31 +407,67 @@ const Deflater = (function (obj) {
     that.max_length = max_length;
   }
 
-  StaticTree.static_ltree = [12, 8, 140, 8, 76, 8, 204, 8, 44, 8, 172, 8, 108, 8, 236, 8, 28, 8, 156, 8, 92, 8, 220, 8, 60, 8, 188, 8, 124, 8, 252, 8, 2, 8,
-    130, 8, 66, 8, 194, 8, 34, 8, 162, 8, 98, 8, 226, 8, 18, 8, 146, 8, 82, 8, 210, 8, 50, 8, 178, 8, 114, 8, 242, 8, 10, 8, 138, 8, 74, 8, 202, 8, 42,
-    8, 170, 8, 106, 8, 234, 8, 26, 8, 154, 8, 90, 8, 218, 8, 58, 8, 186, 8, 122, 8, 250, 8, 6, 8, 134, 8, 70, 8, 198, 8, 38, 8, 166, 8, 102, 8, 230, 8,
-    22, 8, 150, 8, 86, 8, 214, 8, 54, 8, 182, 8, 118, 8, 246, 8, 14, 8, 142, 8, 78, 8, 206, 8, 46, 8, 174, 8, 110, 8, 238, 8, 30, 8, 158, 8, 94, 8,
-    222, 8, 62, 8, 190, 8, 126, 8, 254, 8, 1, 8, 129, 8, 65, 8, 193, 8, 33, 8, 161, 8, 97, 8, 225, 8, 17, 8, 145, 8, 81, 8, 209, 8, 49, 8, 177, 8, 113,
-    8, 241, 8, 9, 8, 137, 8, 73, 8, 201, 8, 41, 8, 169, 8, 105, 8, 233, 8, 25, 8, 153, 8, 89, 8, 217, 8, 57, 8, 185, 8, 121, 8, 249, 8, 5, 8, 133, 8,
-    69, 8, 197, 8, 37, 8, 165, 8, 101, 8, 229, 8, 21, 8, 149, 8, 85, 8, 213, 8, 53, 8, 181, 8, 117, 8, 245, 8, 13, 8, 141, 8, 77, 8, 205, 8, 45, 8,
-    173, 8, 109, 8, 237, 8, 29, 8, 157, 8, 93, 8, 221, 8, 61, 8, 189, 8, 125, 8, 253, 8, 19, 9, 275, 9, 147, 9, 403, 9, 83, 9, 339, 9, 211, 9, 467, 9,
-    51, 9, 307, 9, 179, 9, 435, 9, 115, 9, 371, 9, 243, 9, 499, 9, 11, 9, 267, 9, 139, 9, 395, 9, 75, 9, 331, 9, 203, 9, 459, 9, 43, 9, 299, 9, 171, 9,
-    427, 9, 107, 9, 363, 9, 235, 9, 491, 9, 27, 9, 283, 9, 155, 9, 411, 9, 91, 9, 347, 9, 219, 9, 475, 9, 59, 9, 315, 9, 187, 9, 443, 9, 123, 9, 379,
-    9, 251, 9, 507, 9, 7, 9, 263, 9, 135, 9, 391, 9, 71, 9, 327, 9, 199, 9, 455, 9, 39, 9, 295, 9, 167, 9, 423, 9, 103, 9, 359, 9, 231, 9, 487, 9, 23,
-    9, 279, 9, 151, 9, 407, 9, 87, 9, 343, 9, 215, 9, 471, 9, 55, 9, 311, 9, 183, 9, 439, 9, 119, 9, 375, 9, 247, 9, 503, 9, 15, 9, 271, 9, 143, 9,
-    399, 9, 79, 9, 335, 9, 207, 9, 463, 9, 47, 9, 303, 9, 175, 9, 431, 9, 111, 9, 367, 9, 239, 9, 495, 9, 31, 9, 287, 9, 159, 9, 415, 9, 95, 9, 351, 9,
-    223, 9, 479, 9, 63, 9, 319, 9, 191, 9, 447, 9, 127, 9, 383, 9, 255, 9, 511, 9, 0, 7, 64, 7, 32, 7, 96, 7, 16, 7, 80, 7, 48, 7, 112, 7, 8, 7, 72, 7,
-    40, 7, 104, 7, 24, 7, 88, 7, 56, 7, 120, 7, 4, 7, 68, 7, 36, 7, 100, 7, 20, 7, 84, 7, 52, 7, 116, 7, 3, 8, 131, 8, 67, 8, 195, 8, 35, 8, 163, 8,
-    99, 8, 227, 8];
+  StaticTree.static_ltree = [
+    12, 8, 140, 8, 76, 8, 204, 8, 44, 8, 172, 8, 108, 8, 236, 8, 28, 8, 156, 8,
+    92, 8, 220, 8, 60, 8, 188, 8, 124, 8, 252, 8, 2, 8, 130, 8, 66, 8, 194, 8,
+    34, 8, 162, 8, 98, 8, 226, 8, 18, 8, 146, 8, 82, 8, 210, 8, 50, 8, 178, 8,
+    114, 8, 242, 8, 10, 8, 138, 8, 74, 8, 202, 8, 42, 8, 170, 8, 106, 8, 234, 8,
+    26, 8, 154, 8, 90, 8, 218, 8, 58, 8, 186, 8, 122, 8, 250, 8, 6, 8, 134, 8,
+    70, 8, 198, 8, 38, 8, 166, 8, 102, 8, 230, 8, 22, 8, 150, 8, 86, 8, 214, 8,
+    54, 8, 182, 8, 118, 8, 246, 8, 14, 8, 142, 8, 78, 8, 206, 8, 46, 8, 174, 8,
+    110, 8, 238, 8, 30, 8, 158, 8, 94, 8, 222, 8, 62, 8, 190, 8, 126, 8, 254, 8,
+    1, 8, 129, 8, 65, 8, 193, 8, 33, 8, 161, 8, 97, 8, 225, 8, 17, 8, 145, 8,
+    81, 8, 209, 8, 49, 8, 177, 8, 113, 8, 241, 8, 9, 8, 137, 8, 73, 8, 201, 8,
+    41, 8, 169, 8, 105, 8, 233, 8, 25, 8, 153, 8, 89, 8, 217, 8, 57, 8, 185, 8,
+    121, 8, 249, 8, 5, 8, 133, 8, 69, 8, 197, 8, 37, 8, 165, 8, 101, 8, 229, 8,
+    21, 8, 149, 8, 85, 8, 213, 8, 53, 8, 181, 8, 117, 8, 245, 8, 13, 8, 141, 8,
+    77, 8, 205, 8, 45, 8, 173, 8, 109, 8, 237, 8, 29, 8, 157, 8, 93, 8, 221, 8,
+    61, 8, 189, 8, 125, 8, 253, 8, 19, 9, 275, 9, 147, 9, 403, 9, 83, 9, 339, 9,
+    211, 9, 467, 9, 51, 9, 307, 9, 179, 9, 435, 9, 115, 9, 371, 9, 243, 9, 499,
+    9, 11, 9, 267, 9, 139, 9, 395, 9, 75, 9, 331, 9, 203, 9, 459, 9, 43, 9, 299,
+    9, 171, 9, 427, 9, 107, 9, 363, 9, 235, 9, 491, 9, 27, 9, 283, 9, 155, 9,
+    411, 9, 91, 9, 347, 9, 219, 9, 475, 9, 59, 9, 315, 9, 187, 9, 443, 9, 123,
+    9, 379, 9, 251, 9, 507, 9, 7, 9, 263, 9, 135, 9, 391, 9, 71, 9, 327, 9, 199,
+    9, 455, 9, 39, 9, 295, 9, 167, 9, 423, 9, 103, 9, 359, 9, 231, 9, 487, 9,
+    23, 9, 279, 9, 151, 9, 407, 9, 87, 9, 343, 9, 215, 9, 471, 9, 55, 9, 311, 9,
+    183, 9, 439, 9, 119, 9, 375, 9, 247, 9, 503, 9, 15, 9, 271, 9, 143, 9, 399,
+    9, 79, 9, 335, 9, 207, 9, 463, 9, 47, 9, 303, 9, 175, 9, 431, 9, 111, 9,
+    367, 9, 239, 9, 495, 9, 31, 9, 287, 9, 159, 9, 415, 9, 95, 9, 351, 9, 223,
+    9, 479, 9, 63, 9, 319, 9, 191, 9, 447, 9, 127, 9, 383, 9, 255, 9, 511, 9, 0,
+    7, 64, 7, 32, 7, 96, 7, 16, 7, 80, 7, 48, 7, 112, 7, 8, 7, 72, 7, 40, 7,
+    104, 7, 24, 7, 88, 7, 56, 7, 120, 7, 4, 7, 68, 7, 36, 7, 100, 7, 20, 7, 84,
+    7, 52, 7, 116, 7, 3, 8, 131, 8, 67, 8, 195, 8, 35, 8, 163, 8, 99, 8, 227, 8,
+  ];
 
-  StaticTree.static_dtree = [0, 5, 16, 5, 8, 5, 24, 5, 4, 5, 20, 5, 12, 5, 28, 5, 2, 5, 18, 5, 10, 5, 26, 5, 6, 5, 22, 5, 14, 5, 30, 5, 1, 5, 17, 5, 9, 5,
-    25, 5, 5, 5, 21, 5, 13, 5, 29, 5, 3, 5, 19, 5, 11, 5, 27, 5, 7, 5, 23, 5];
+  StaticTree.static_dtree = [
+    0, 5, 16, 5, 8, 5, 24, 5, 4, 5, 20, 5, 12, 5, 28, 5, 2, 5, 18, 5, 10, 5, 26,
+    5, 6, 5, 22, 5, 14, 5, 30, 5, 1, 5, 17, 5, 9, 5, 25, 5, 5, 5, 21, 5, 13, 5,
+    29, 5, 3, 5, 19, 5, 11, 5, 27, 5, 7, 5, 23, 5,
+  ];
 
-  StaticTree.static_l_desc = new StaticTree(StaticTree.static_ltree, Tree.extra_lbits, LITERALS + 1, L_CODES, MAX_BITS);
+  StaticTree.static_l_desc = new StaticTree(
+    StaticTree.static_ltree,
+    Tree.extra_lbits,
+    LITERALS + 1,
+    L_CODES,
+    MAX_BITS,
+  );
 
-  StaticTree.static_d_desc = new StaticTree(StaticTree.static_dtree, Tree.extra_dbits, 0, D_CODES, MAX_BITS);
+  StaticTree.static_d_desc = new StaticTree(
+    StaticTree.static_dtree,
+    Tree.extra_dbits,
+    0,
+    D_CODES,
+    MAX_BITS,
+  );
 
-  StaticTree.static_bl_desc = new StaticTree(null, Tree.extra_blbits, 0, BL_CODES, MAX_BL_BITS);
+  StaticTree.static_bl_desc = new StaticTree(
+    null,
+    Tree.extra_blbits,
+    0,
+    BL_CODES,
+    MAX_BL_BITS,
+  );
 
   // Deflate
 
@@ -413,11 +486,21 @@ const Deflater = (function (obj) {
   const STORED = 0;
   const FAST = 1;
   const SLOW = 2;
-  const config_table = [new Config(0, 0, 0, 0, STORED), new Config(4, 4, 8, 4, FAST), new Config(4, 5, 16, 8, FAST), new Config(4, 6, 32, 32, FAST),
-    new Config(4, 4, 16, 16, SLOW), new Config(8, 16, 32, 32, SLOW), new Config(8, 16, 128, 128, SLOW), new Config(8, 32, 128, 256, SLOW),
-    new Config(32, 128, 258, 1024, SLOW), new Config(32, 258, 258, 4096, SLOW)];
+  const config_table = [
+    new Config(0, 0, 0, 0, STORED),
+    new Config(4, 4, 8, 4, FAST),
+    new Config(4, 5, 16, 8, FAST),
+    new Config(4, 6, 32, 32, FAST),
+    new Config(4, 4, 16, 16, SLOW),
+    new Config(8, 16, 32, 32, SLOW),
+    new Config(8, 16, 128, 128, SLOW),
+    new Config(8, 32, 128, 256, SLOW),
+    new Config(32, 128, 258, 1024, SLOW),
+    new Config(32, 258, 258, 4096, SLOW),
+  ];
 
-  const z_errmsg = ['need dictionary', // Z_NEED_DICT
+  const z_errmsg = [
+    'need dictionary', // Z_NEED_DICT
     // 2
     'stream end', // Z_STREAM_END 1
     '', // Z_OK 0
@@ -427,7 +510,8 @@ const Deflater = (function (obj) {
     '', // Z_MEM_ERROR (-4)
     'buffer error', // Z_BUF_ERROR (-5)
     '', // Z_VERSION_ERROR (-6)
-    ''];
+    '',
+  ];
 
   // block not completed, need more input or more output
   const NeedMore = 0;
@@ -457,12 +541,12 @@ const Deflater = (function (obj) {
 
   const MIN_MATCH = 3;
   const MAX_MATCH = 258;
-  const MIN_LOOKAHEAD = (MAX_MATCH + MIN_MATCH + 1);
+  const MIN_LOOKAHEAD = MAX_MATCH + MIN_MATCH + 1;
 
   function smaller(tree, n, m, depth) {
     const tn2 = tree[n * 2];
     const tm2 = tree[m * 2];
-    return (tn2 < tm2 || (tn2 == tm2 && depth[n] <= depth[m]));
+    return tn2 < tm2 || (tn2 == tm2 && depth[n] <= depth[m]);
   }
 
   function Deflate() {
@@ -685,7 +769,10 @@ const Deflater = (function (obj) {
       let j = k << 1; // left son of k
       while (j <= that.heap_len) {
         // Set j to the smallest of the two sons:
-        if (j < that.heap_len && smaller(tree, heap[j + 1], heap[j], that.depth)) {
+        if (
+          j < that.heap_len &&
+          smaller(tree, heap[j + 1], heap[j], that.depth)
+        ) {
           j++;
         }
         // Exit if v is smaller than both sons
@@ -790,22 +877,22 @@ const Deflater = (function (obj) {
 
     function putShortMSB(b) {
       put_byte((b >> 8) & 0xff);
-      put_byte((b & 0xff) & 0xff);
+      put_byte(b & 0xff & 0xff);
     }
 
     function send_bits(value, length) {
-      let val; const
-        len = length;
+      let val;
+      const len = length;
       if (bi_valid > Buf_size - len) {
         val = value;
         // bi_buf |= (val << bi_valid);
-        bi_buf |= ((val << bi_valid) & 0xffff);
+        bi_buf |= (val << bi_valid) & 0xffff;
         put_short(bi_buf);
         bi_buf = val >>> (Buf_size - bi_valid);
         bi_valid += len - Buf_size;
       } else {
         // bi_buf |= (value) << bi_valid;
-        bi_buf |= (((value) << bi_valid) & 0xffff);
+        bi_buf |= (value << bi_valid) & 0xffff;
         bi_valid += len;
       }
     }
@@ -934,8 +1021,9 @@ const Deflater = (function (obj) {
       dist, // distance of matched string
       lc, // match length-MIN_MATCH or unmatched char (if dist==0)
     ) {
-      let out_length; let in_length; let
-        dcode;
+      let out_length;
+      let in_length;
+      let dcode;
       that.pending_buf[d_buf + last_lit * 2] = (dist >>> 8) & 0xff;
       that.pending_buf[d_buf + last_lit * 2 + 1] = dist & 0xff;
 
@@ -961,10 +1049,14 @@ const Deflater = (function (obj) {
           out_length += dyn_dtree[dcode * 2] * (5 + Tree.extra_dbits[dcode]);
         }
         out_length >>>= 3;
-        if ((matches < Math.floor(last_lit / 2)) && out_length < Math.floor(in_length / 2)) return true;
+        if (
+          matches < Math.floor(last_lit / 2) &&
+          out_length < Math.floor(in_length / 2)
+        )
+          return true;
       }
 
-      return (last_lit == lit_bufsize - 1);
+      return last_lit == lit_bufsize - 1;
       // We avoid equality with lit_bufsize because of wraparound at 64K
       // on 16 bit machines and because stored blocks are restricted to
       // 64K-1 bytes.
@@ -980,8 +1072,10 @@ const Deflater = (function (obj) {
 
       if (last_lit !== 0) {
         do {
-          dist = ((that.pending_buf[d_buf + lx * 2] << 8) & 0xff00) | (that.pending_buf[d_buf + lx * 2 + 1] & 0xff);
-          lc = (that.pending_buf[l_buf + lx]) & 0xff;
+          dist =
+            ((that.pending_buf[d_buf + lx * 2] << 8) & 0xff00) |
+            (that.pending_buf[d_buf + lx * 2 + 1] & 0xff);
+          lc = that.pending_buf[l_buf + lx] & 0xff;
           lx++;
 
           if (dist === 0) {
@@ -1064,8 +1158,8 @@ const Deflater = (function (obj) {
       stored_len, // length of input block
       eof, // true if this is the last block for a file
     ) {
-      let opt_lenb; let
-        static_lenb;// opt_len and static_len in bytes
+      let opt_lenb;
+      let static_lenb; // opt_len and static_len in bytes
       let max_blindex = 0; // index of last bit length code of non zero freq
 
       // Build the Huffman trees unless a stored block is forced
@@ -1094,7 +1188,7 @@ const Deflater = (function (obj) {
         opt_lenb = static_lenb = stored_len + 5; // force a stored block
       }
 
-      if ((stored_len + 4 <= opt_lenb) && buf != -1) {
+      if (stored_len + 4 <= opt_lenb && buf != -1) {
         // 4: two words for the lengths
         // The test buf != NULL is only necessary if LIT_BUFSIZE > WSIZE.
         // Otherwise we can't have processed more than WSIZE input bytes
@@ -1108,7 +1202,11 @@ const Deflater = (function (obj) {
         compress_block(StaticTree.static_ltree, StaticTree.static_dtree);
       } else {
         send_bits((DYN_TREES << 1) + (eof ? 1 : 0), 3);
-        send_all_trees(l_desc.max_code + 1, d_desc.max_code + 1, max_blindex + 1);
+        send_all_trees(
+          l_desc.max_code + 1,
+          d_desc.max_code + 1,
+          max_blindex + 1,
+        );
         compress_block(dyn_ltree, dyn_dtree);
       }
 
@@ -1123,7 +1221,11 @@ const Deflater = (function (obj) {
     }
 
     function flush_block_only(eof) {
-      _tr_flush_block(block_start >= 0 ? block_start : -1, strstart - block_start, eof);
+      _tr_flush_block(
+        block_start >= 0 ? block_start : -1,
+        strstart - block_start,
+        eof,
+      );
       block_start = strstart;
       strm.flush_pending();
     }
@@ -1137,13 +1239,13 @@ const Deflater = (function (obj) {
     // performed for at least two bytes (required for the zip translate_eol
     // option -- not supported here).
     function fill_window() {
-      let n; let
-        m;
+      let n;
+      let m;
       let p;
       let more; // Amount of free space at the end of the window.
 
       do {
-        more = (window_size - lookahead - strstart);
+        more = window_size - lookahead - strstart;
 
         // Deal with !@#$% 64K limit:
         if (more === 0 && strstart === 0 && lookahead === 0) {
@@ -1176,15 +1278,15 @@ const Deflater = (function (obj) {
           n = hash_size;
           p = n;
           do {
-            m = (head[--p] & 0xffff);
-            head[p] = (m >= w_size ? m - w_size : 0);
+            m = head[--p] & 0xffff;
+            head[p] = m >= w_size ? m - w_size : 0;
           } while (--n !== 0);
 
           n = w_size;
           p = n;
           do {
-            m = (prev[--p] & 0xffff);
-            prev[p] = (m >= w_size ? m - w_size : 0);
+            m = prev[--p] & 0xffff;
+            prev[p] = m >= w_size ? m - w_size : 0;
             // If n is not on any hash chain, prev[n] is garbage but
             // its value will never be used.
           } while (--n !== 0);
@@ -1210,7 +1312,8 @@ const Deflater = (function (obj) {
         // Initialize the hash value now that we have some input:
         if (lookahead >= MIN_MATCH) {
           ins_h = window[strstart] & 0xff;
-          ins_h = (((ins_h) << hash_shift) ^ (window[strstart + 1] & 0xff)) & hash_mask;
+          ins_h =
+            ((ins_h << hash_shift) ^ (window[strstart + 1] & 0xff)) & hash_mask;
         }
         // If the whole input has less than MIN_MATCH bytes, ins_h is
         // garbage,
@@ -1254,7 +1357,7 @@ const Deflater = (function (obj) {
         max_start = block_start + max_block_size;
         if (strstart === 0 || strstart >= max_start) {
           // strstart === 0 is possible when wraparound on 16-bit machine
-          lookahead = (strstart - max_start);
+          lookahead = strstart - max_start;
           strstart = max_start;
 
           flush_block_only(false);
@@ -1270,7 +1373,8 @@ const Deflater = (function (obj) {
       }
 
       flush_block_only(flush == Z_FINISH);
-      if (strm.avail_out === 0) return (flush == Z_FINISH) ? FinishStarted : NeedMore;
+      if (strm.avail_out === 0)
+        return flush == Z_FINISH ? FinishStarted : NeedMore;
 
       return flush == Z_FINISH ? FinishDone : BlockDone;
     }
@@ -1281,7 +1385,10 @@ const Deflater = (function (obj) {
       let match; // matched string
       let len; // length of current match
       let best_len = prev_length; // best match length so far
-      const limit = strstart > (w_size - MIN_LOOKAHEAD) ? strstart - (w_size - MIN_LOOKAHEAD) : 0;
+      const limit =
+        strstart > w_size - MIN_LOOKAHEAD
+          ? strstart - (w_size - MIN_LOOKAHEAD)
+          : 0;
       let _nice_match = nice_match;
 
       // Stop when cur_match becomes <= limit. To simplify the code,
@@ -1312,8 +1419,13 @@ const Deflater = (function (obj) {
 
         // Skip to next match if the match length cannot increase
         // or if the match length is less than 2:
-        if (window[match + best_len] != scan_end || window[match + best_len - 1] != scan_end1 || window[match] != window[scan]
-						|| window[++match] != window[scan + 1]) continue;
+        if (
+          window[match + best_len] != scan_end ||
+          window[match + best_len - 1] != scan_end1 ||
+          window[match] != window[scan] ||
+          window[++match] != window[scan + 1]
+        )
+          continue;
 
         // The check at best_len-1 can be removed because it will be made
         // again later. (This heuristic is not always a win.)
@@ -1325,10 +1437,17 @@ const Deflater = (function (obj) {
 
         // We check for insufficient lookahead only every 8th comparison;
         // the 256th check will be made at strstart+258.
-        do {
-        } while (window[++scan] == window[++match] && window[++scan] == window[++match] && window[++scan] == window[++match]
-						&& window[++scan] == window[++match] && window[++scan] == window[++match] && window[++scan] == window[++match]
-						&& window[++scan] == window[++match] && window[++scan] == window[++match] && scan < strend);
+        do {} while (
+          window[++scan] == window[++match] &&
+          window[++scan] == window[++match] &&
+          window[++scan] == window[++match] &&
+          window[++scan] == window[++match] &&
+          window[++scan] == window[++match] &&
+          window[++scan] == window[++match] &&
+          window[++scan] == window[++match] &&
+          window[++scan] == window[++match] &&
+          scan < strend
+        );
 
         len = MAX_MATCH - (strend - scan);
         scan = strend - MAX_MATCH;
@@ -1340,7 +1459,10 @@ const Deflater = (function (obj) {
           scan_end1 = window[scan + best_len - 1];
           scan_end = window[scan + best_len];
         }
-      } while ((cur_match = (prev[cur_match & wmask] & 0xffff)) > limit && --chain_length !== 0);
+      } while (
+        (cur_match = prev[cur_match & wmask] & 0xffff) > limit &&
+        --chain_length !== 0
+      );
 
       if (best_len <= lookahead) return best_len;
       return lookahead;
@@ -1372,10 +1494,13 @@ const Deflater = (function (obj) {
         // Insert the string window[strstart .. strstart+2] in the
         // dictionary, and set hash_head to the head of the hash chain:
         if (lookahead >= MIN_MATCH) {
-          ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+          ins_h =
+            ((ins_h << hash_shift) ^
+              (window[strstart + (MIN_MATCH - 1)] & 0xff)) &
+            hash_mask;
 
           // prev[strstart&w_mask]=hash_head=head[ins_h];
-          hash_head = (head[ins_h] & 0xffff);
+          hash_head = head[ins_h] & 0xffff;
           prev[strstart & w_mask] = head[ins_h];
           head[ins_h] = strstart;
         }
@@ -1383,7 +1508,10 @@ const Deflater = (function (obj) {
         // Find the longest match, discarding those <= prev_length.
         // At this point we have always match_length < MIN_MATCH
 
-        if (hash_head !== 0 && ((strstart - hash_head) & 0xffff) <= w_size - MIN_LOOKAHEAD) {
+        if (
+          hash_head !== 0 &&
+          ((strstart - hash_head) & 0xffff) <= w_size - MIN_LOOKAHEAD
+        ) {
           // To simplify the code, we prevent matches with the string
           // of window index 0 (in particular we have to avoid a match
           // of the string with itself at the start of the input file).
@@ -1406,9 +1534,12 @@ const Deflater = (function (obj) {
             do {
               strstart++;
 
-              ins_h = ((ins_h << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+              ins_h =
+                ((ins_h << hash_shift) ^
+                  (window[strstart + (MIN_MATCH - 1)] & 0xff)) &
+                hash_mask;
               // prev[strstart&w_mask]=hash_head=head[ins_h];
-              hash_head = (head[ins_h] & 0xffff);
+              hash_head = head[ins_h] & 0xffff;
               prev[strstart & w_mask] = head[ins_h];
               head[ins_h] = strstart;
 
@@ -1421,7 +1552,9 @@ const Deflater = (function (obj) {
             match_length = 0;
             ins_h = window[strstart] & 0xff;
 
-            ins_h = (((ins_h) << hash_shift) ^ (window[strstart + 1] & 0xff)) & hash_mask;
+            ins_h =
+              ((ins_h << hash_shift) ^ (window[strstart + 1] & 0xff)) &
+              hash_mask;
             // If lookahead < MIN_MATCH, ins_h is garbage, but it does
             // not
             // matter since it will be recomputed at next deflate call.
@@ -1475,9 +1608,12 @@ const Deflater = (function (obj) {
         // dictionary, and set hash_head to the head of the hash chain:
 
         if (lookahead >= MIN_MATCH) {
-          ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+          ins_h =
+            ((ins_h << hash_shift) ^
+              (window[strstart + (MIN_MATCH - 1)] & 0xff)) &
+            hash_mask;
           // prev[strstart&w_mask]=hash_head=head[ins_h];
-          hash_head = (head[ins_h] & 0xffff);
+          hash_head = head[ins_h] & 0xffff;
           prev[strstart & w_mask] = head[ins_h];
           head[ins_h] = strstart;
         }
@@ -1487,7 +1623,11 @@ const Deflater = (function (obj) {
         prev_match = match_start;
         match_length = MIN_MATCH - 1;
 
-        if (hash_head !== 0 && prev_length < max_lazy_match && ((strstart - hash_head) & 0xffff) <= w_size - MIN_LOOKAHEAD) {
+        if (
+          hash_head !== 0 &&
+          prev_length < max_lazy_match &&
+          ((strstart - hash_head) & 0xffff) <= w_size - MIN_LOOKAHEAD
+        ) {
           // To simplify the code, we prevent matches with the string
           // of window index 0 (in particular we have to avoid a match
           // of the string with itself at the start of the input file).
@@ -1497,7 +1637,11 @@ const Deflater = (function (obj) {
           }
           // longest_match() sets match_start
 
-          if (match_length <= 5 && (strategy == Z_FILTERED || (match_length == MIN_MATCH && strstart - match_start > 4096))) {
+          if (
+            match_length <= 5 &&
+            (strategy == Z_FILTERED ||
+              (match_length == MIN_MATCH && strstart - match_start > 4096))
+          ) {
             // If prev_match is also MIN_MATCH, match_start is garbage
             // but we will ignore the current match anyway.
             match_length = MIN_MATCH - 1;
@@ -1512,7 +1656,10 @@ const Deflater = (function (obj) {
 
           // check_match(strstart-1, prev_match, prev_length);
 
-          bflush = _tr_tally(strstart - 1 - prev_match, prev_length - MIN_MATCH);
+          bflush = _tr_tally(
+            strstart - 1 - prev_match,
+            prev_length - MIN_MATCH,
+          );
 
           // Insert in hash table all strings up to the end of the match.
           // strstart-1 and strstart are already inserted. If there is not
@@ -1522,9 +1669,12 @@ const Deflater = (function (obj) {
           prev_length -= 2;
           do {
             if (++strstart <= max_insert) {
-              ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+              ins_h =
+                ((ins_h << hash_shift) ^
+                  (window[strstart + (MIN_MATCH - 1)] & 0xff)) &
+                hash_mask;
               // prev[strstart&w_mask]=hash_head=head[ins_h];
-              hash_head = (head[ins_h] & 0xffff);
+              hash_head = head[ins_h] & 0xffff;
               prev[strstart & w_mask] = head[ins_h];
               head[ins_h] = strstart;
             }
@@ -1590,7 +1740,14 @@ const Deflater = (function (obj) {
       return Z_OK;
     }
 
-    that.deflateInit = function (strm, _level, bits, _method, memLevel, _strategy) {
+    that.deflateInit = function (
+      strm,
+      _level,
+      bits,
+      _method,
+      memLevel,
+      _strategy,
+    ) {
       if (!_method) _method = Z_DEFLATED;
       if (!memLevel) memLevel = DEF_MEM_LEVEL;
       if (!_strategy) _strategy = Z_DEFAULT_STRATEGY;
@@ -1607,8 +1764,17 @@ const Deflater = (function (obj) {
 
       if (_level == Z_DEFAULT_COMPRESSION) _level = 6;
 
-      if (memLevel < 1 || memLevel > MAX_MEM_LEVEL || _method != Z_DEFLATED || bits < 9 || bits > 15 || _level < 0 || _level > 9 || _strategy < 0
-					|| _strategy > Z_HUFFMAN_ONLY) {
+      if (
+        memLevel < 1 ||
+        memLevel > MAX_MEM_LEVEL ||
+        _method != Z_DEFLATED ||
+        bits < 9 ||
+        bits > 15 ||
+        _level < 0 ||
+        _level > 9 ||
+        _strategy < 0 ||
+        _strategy > Z_HUFFMAN_ONLY
+      ) {
         return Z_STREAM_ERROR;
       }
 
@@ -1646,7 +1812,11 @@ const Deflater = (function (obj) {
     };
 
     that.deflateEnd = function () {
-      if (status != INIT_STATE && status != BUSY_STATE && status != FINISH_STATE) {
+      if (
+        status != INIT_STATE &&
+        status != BUSY_STATE &&
+        status != FINISH_STATE
+      ) {
         return Z_STREAM_ERROR;
       }
       // Deallocate in reverse order of allocations:
@@ -1665,11 +1835,19 @@ const Deflater = (function (obj) {
       if (_level == Z_DEFAULT_COMPRESSION) {
         _level = 6;
       }
-      if (_level < 0 || _level > 9 || _strategy < 0 || _strategy > Z_HUFFMAN_ONLY) {
+      if (
+        _level < 0 ||
+        _level > 9 ||
+        _strategy < 0 ||
+        _strategy > Z_HUFFMAN_ONLY
+      ) {
         return Z_STREAM_ERROR;
       }
 
-      if (config_table[level].func != config_table[_level].func && strm.total_in !== 0) {
+      if (
+        config_table[level].func != config_table[_level].func &&
+        strm.total_in !== 0
+      ) {
         // Flush the last buffer:
         err = strm.deflate(Z_PARTIAL_FLUSH);
       }
@@ -1687,8 +1865,8 @@ const Deflater = (function (obj) {
 
     that.deflateSetDictionary = function (strm, dictionary, dictLength) {
       let length = dictLength;
-      let n; let
-        index = 0;
+      let n;
+      let index = 0;
 
       if (!dictionary || status != INIT_STATE) return Z_STREAM_ERROR;
 
@@ -1707,10 +1885,12 @@ const Deflater = (function (obj) {
       // call of fill_window.
 
       ins_h = window[0] & 0xff;
-      ins_h = (((ins_h) << hash_shift) ^ (window[1] & 0xff)) & hash_mask;
+      ins_h = ((ins_h << hash_shift) ^ (window[1] & 0xff)) & hash_mask;
 
       for (n = 0; n <= length - MIN_MATCH; n++) {
-        ins_h = (((ins_h) << hash_shift) ^ (window[(n) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+        ins_h =
+          ((ins_h << hash_shift) ^ (window[n + (MIN_MATCH - 1)] & 0xff)) &
+          hash_mask;
         prev[n & w_mask] = head[ins_h];
         head[ins_h] = n;
       }
@@ -1718,19 +1898,26 @@ const Deflater = (function (obj) {
     };
 
     that.deflate = function (_strm, flush) {
-      let i; let header; let level_flags; let old_flush; let
-        bstate;
+      let i;
+      let header;
+      let level_flags;
+      let old_flush;
+      let bstate;
 
       if (flush > Z_FINISH || flush < 0) {
         return Z_STREAM_ERROR;
       }
 
-      if (!_strm.next_out || (!_strm.next_in && _strm.avail_in !== 0) || (status == FINISH_STATE && flush != Z_FINISH)) {
-        _strm.msg = z_errmsg[Z_NEED_DICT - (Z_STREAM_ERROR)];
+      if (
+        !_strm.next_out ||
+        (!_strm.next_in && _strm.avail_in !== 0) ||
+        (status == FINISH_STATE && flush != Z_FINISH)
+      ) {
+        _strm.msg = z_errmsg[Z_NEED_DICT - Z_STREAM_ERROR];
         return Z_STREAM_ERROR;
       }
       if (_strm.avail_out === 0) {
-        _strm.msg = z_errmsg[Z_NEED_DICT - (Z_BUF_ERROR)];
+        _strm.msg = z_errmsg[Z_NEED_DICT - Z_BUF_ERROR];
         return Z_BUF_ERROR;
       }
 
@@ -1744,7 +1931,7 @@ const Deflater = (function (obj) {
         level_flags = ((level - 1) & 0xff) >> 1;
 
         if (level_flags > 3) level_flags = 3;
-        header |= (level_flags << 6);
+        header |= level_flags << 6;
         if (strstart !== 0) header |= PRESET_DICT;
         header += 31 - (header % 31);
 
@@ -1770,19 +1957,27 @@ const Deflater = (function (obj) {
         // consecutive
         // flushes. For repeated and useless calls with Z_FINISH, we keep
         // returning Z_STREAM_END instead of Z_BUFF_ERROR.
-      } else if (strm.avail_in === 0 && flush <= old_flush && flush != Z_FINISH) {
-        strm.msg = z_errmsg[Z_NEED_DICT - (Z_BUF_ERROR)];
+      } else if (
+        strm.avail_in === 0 &&
+        flush <= old_flush &&
+        flush != Z_FINISH
+      ) {
+        strm.msg = z_errmsg[Z_NEED_DICT - Z_BUF_ERROR];
         return Z_BUF_ERROR;
       }
 
       // User must not provide more input after the first FINISH:
       if (status == FINISH_STATE && strm.avail_in !== 0) {
-        _strm.msg = z_errmsg[Z_NEED_DICT - (Z_BUF_ERROR)];
+        _strm.msg = z_errmsg[Z_NEED_DICT - Z_BUF_ERROR];
         return Z_BUF_ERROR;
       }
 
       // Start a new block or continue the current one.
-      if (strm.avail_in !== 0 || lookahead !== 0 || (flush != Z_NO_FLUSH && status != FINISH_STATE)) {
+      if (
+        strm.avail_in !== 0 ||
+        lookahead !== 0 ||
+        (flush != Z_NO_FLUSH && status != FINISH_STATE)
+      ) {
         bstate = -1;
         switch (config_table[level].func) {
           case STORED:
@@ -1816,15 +2011,20 @@ const Deflater = (function (obj) {
         if (bstate == BlockDone) {
           if (flush == Z_PARTIAL_FLUSH) {
             _tr_align();
-          } else { // FULL_FLUSH or SYNC_FLUSH
+          } else {
+            // FULL_FLUSH or SYNC_FLUSH
             _tr_stored_block(0, 0, false);
             // For a full flush, this empty block will be recognized
             // as a special marker by inflate_sync().
             if (flush == Z_FULL_FLUSH) {
               // state.head[s.hash_size-1]=0;
-              for (i = 0; i < hash_size/* -1 */; i++)
-              // forget history
-              { head[i] = 0; }
+              for (
+                i = 0;
+                i < hash_size /* -1 */;
+                i++ // forget history
+              ) {
+                head[i] = 0;
+              }
             }
           }
           strm.flush_pending();
@@ -1903,7 +2103,10 @@ const Deflater = (function (obj) {
       if (len > size) len = size;
       if (len === 0) return 0;
       that.avail_in -= len;
-      buf.set(that.next_in.subarray(that.next_in_index, that.next_in_index + len), start);
+      buf.set(
+        that.next_in.subarray(that.next_in_index, that.next_in_index + len),
+        start,
+      );
       that.next_in_index += len;
       that.total_in += len;
       return len;
@@ -1928,7 +2131,13 @@ const Deflater = (function (obj) {
       // console.log("avail_out=" + that.avail_out);
       // }
 
-      that.next_out.set(that.dstate.pending_buf.subarray(that.dstate.pending_out, that.dstate.pending_out + len), that.next_out_index);
+      that.next_out.set(
+        that.dstate.pending_buf.subarray(
+          that.dstate.pending_out,
+          that.dstate.pending_out + len,
+        ),
+        that.next_out_index,
+      );
 
       that.next_out_index += len;
       that.dstate.pending_out += len;
@@ -1955,8 +2164,12 @@ const Deflater = (function (obj) {
     z.next_out = buf;
 
     that.append = function (data, onprogress) {
-      let err; const buffers = []; let lastIndex = 0; let bufferIndex = 0; let bufferSize = 0; let
-        array;
+      let err;
+      const buffers = [];
+      let lastIndex = 0;
+      let bufferIndex = 0;
+      let bufferSize = 0;
+      let array;
       if (!data.length) return;
       z.next_in_index = 0;
       z.next_in = data;
@@ -1984,14 +2197,18 @@ const Deflater = (function (obj) {
       return array;
     };
     that.flush = function () {
-      let err; const buffers = []; let bufferIndex = 0; let bufferSize = 0; let
-        array;
+      let err;
+      const buffers = [];
+      let bufferIndex = 0;
+      let bufferSize = 0;
+      let array;
       do {
         z.next_out_index = 0;
         z.avail_out = bufsize;
         err = z.deflate(Z_FINISH);
         if (err != Z_STREAM_END && err != Z_OK) throw `deflating: ${z.msg}`;
-        if (bufsize - z.avail_out > 0) buffers.push(new Uint8Array(buf.subarray(0, z.next_out_index)));
+        if (bufsize - z.avail_out > 0)
+          buffers.push(new Uint8Array(buf.subarray(0, z.next_out_index)));
         bufferSize += z.next_out_index;
       } while (z.avail_in > 0 || z.avail_out === 0);
       z.deflateEnd();
@@ -2003,4 +2220,4 @@ const Deflater = (function (obj) {
       return array;
     };
   };
-}(this));
+})(this);

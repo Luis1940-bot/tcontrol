@@ -50,10 +50,10 @@ Supports:
       const styletag = document.createElement('style');
       styletag.type = 'text/css';
       if (styletag.styleSheet) {
-        	// ie
+        // ie
         styletag.styleSheet.cssText = cssbody;
       } else {
-        	// others
+        // others
         styletag.appendChild(document.createTextNode(cssbody));
       }
       document.getElementsByTagName('head')[0].appendChild(styletag);
@@ -61,11 +61,11 @@ Supports:
 
     function createWorkerNode(document) {
       const frameID = 'childframe'; // Date.now().toString() + '_' + (Math.random() * 100).toString()
-		 const frame = document.createElement('iframe');
+      const frame = document.createElement('iframe');
 
       InjectCSS(
         '.jsPDF_sillysvg_iframe {display:none;position:absolute;}',
-			 document,
+        document,
       );
 
       frame.name = frameID;
@@ -96,26 +96,26 @@ Supports:
       // - style (stroke, fill, both)
 
       const x = parseFloat(path[1]);
-		 const y = parseFloat(path[2]);
-		 const vectors = [];
-		 let position = 3;
-		 const len = path.length;
+      const y = parseFloat(path[2]);
+      const vectors = [];
+      let position = 3;
+      const len = path.length;
 
       while (position < len) {
         if (path[position] === 'c') {
           vectors.push([
             parseFloat(path[position + 1]),
-					 parseFloat(path[position + 2]),
-					 parseFloat(path[position + 3]),
-					 parseFloat(path[position + 4]),
-					 parseFloat(path[position + 5]),
-					 parseFloat(path[position + 6]),
+            parseFloat(path[position + 2]),
+            parseFloat(path[position + 3]),
+            parseFloat(path[position + 4]),
+            parseFloat(path[position + 5]),
+            parseFloat(path[position + 6]),
           ]);
           position += 7;
         } else if (path[position] === 'l') {
           vectors.push([
             parseFloat(path[position + 1]),
-					 parseFloat(path[position + 2]),
+            parseFloat(path[position + 2]),
           ]);
           position += 3;
         } else {
@@ -126,10 +126,10 @@ Supports:
     }
 
     const workernode = createWorkerNode(document);
-	 const svgnode = attachSVGToWorkerNode(svgtext, workernode);
-	 let scale = [1, 1];
-	 const svgw = parseFloat(svgnode.getAttribute('width'));
-	 const svgh = parseFloat(svgnode.getAttribute('height'));
+    const svgnode = attachSVGToWorkerNode(svgtext, workernode);
+    let scale = [1, 1];
+    const svgw = parseFloat(svgnode.getAttribute('width'));
+    const svgh = parseFloat(svgnode.getAttribute('height'));
 
     if (svgw && svgh) {
       // setting both w and h makes image stretch to size.
@@ -146,7 +146,9 @@ Supports:
       }
     }
 
-    let i; let l; let tmp;
+    let i;
+    let l;
+    let tmp;
     let linesargs;
     const items = svgnode.childNodes;
     for (i = 0, l = items.length; i < l; i++) {
@@ -160,10 +162,10 @@ Supports:
         // the rest of lines are vectors. these will adjust with scale value auto.
         this.lines.call(
           this,
-				 linesargs[2], // lines
-				 linesargs[0], // starting x
-				 linesargs[1], // starting y
-				 scale,
+          linesargs[2], // lines
+          linesargs[0], // starting x
+          linesargs[1], // starting y
+          scale,
         );
       }
     }
@@ -173,4 +175,4 @@ Supports:
 
     return this;
   };
-}(jsPDF.API));
+})(jsPDF.API);

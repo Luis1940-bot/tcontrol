@@ -2,7 +2,7 @@
   <mj-column>
     <!-- Enlace al Sistema -->
     <mj-divider border-color="#0027FF"></mj-divider>
-    <mj-button 
+    <mj-button
       href="https://linkedin.com/in/luisergimenez/"
       background-color="#ffffff"
       color="#0027FF"
@@ -12,7 +12,8 @@
       border="none"
       border-radius="3px"
       text-decoration="none"
-      align="center">
+      align="center"
+    >
       Luis Gimenez
     </mj-button>
   </mj-column>

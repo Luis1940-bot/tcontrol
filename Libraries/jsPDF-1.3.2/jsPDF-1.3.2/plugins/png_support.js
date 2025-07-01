@@ -66,39 +66,46 @@
   const doesNotHavePngJS = function () {
     return typeof PNG !== 'function' || typeof FlateStream !== 'function';
   };
-	 const canCompress = function (value) {
+  const canCompress = function (value) {
     return value !== jsPDFAPI.image_compression.NONE && hasCompressionJS();
   };
-	 var hasCompressionJS = function () {
+  var hasCompressionJS = function () {
     const inst = typeof Deflater === 'function';
     if (!inst) throw new Error('requires deflate.js for compression');
     return inst;
   };
-	 const compressBytes = function (bytes, lineLength, colorsPerPixel, compression) {
+  const compressBytes = function (
+    bytes,
+    lineLength,
+    colorsPerPixel,
+    compression,
+  ) {
     let level = 5;
     let filter_method = filterUp;
 
     switch (compression) {
       case jsPDFAPI.image_compression.FAST:
-
         level = 3;
         filter_method = filterSub;
         break;
 
       case jsPDFAPI.image_compression.MEDIUM:
-
         level = 6;
         filter_method = filterAverage;
         break;
 
       case jsPDFAPI.image_compression.SLOW:
-
         level = 9;
-        filter_method = filterPaeth;// uses to sum to choose best filter for each line
+        filter_method = filterPaeth; // uses to sum to choose best filter for each line
         break;
     }
 
-    bytes = applyPngFilterMethod(bytes, lineLength, colorsPerPixel, filter_method);
+    bytes = applyPngFilterMethod(
+      bytes,
+      lineLength,
+      colorsPerPixel,
+      filter_method,
+    );
 
     const header = new Uint8Array(createZlibHeader(level));
     const checksum = adler32(bytes);
@@ -121,10 +128,10 @@
 
     return jsPDFAPI.arrayBufferToBinaryString(cmpd);
   };
-	 var createZlibHeader = function (bytes, level) {
+  var createZlibHeader = function (bytes, level) {
     /*
-		 * @see http://www.ietf.org/rfc/rfc1950.txt for zlib header
-		 */
+     * @see http://www.ietf.org/rfc/rfc1950.txt for zlib header
+     */
     const cm = 8;
     const cinfo = Math.LOG2E * Math.log(0x8000) - 8;
     const cmf = (cinfo << 4) | cm;
@@ -132,40 +139,47 @@
     let hdr = cmf << 8;
     const flevel = Math.min(3, ((level - 1) & 0xff) >> 1);
 
-    hdr |= (flevel << 6);
-    hdr |= 0;// FDICT
+    hdr |= flevel << 6;
+    hdr |= 0; // FDICT
     hdr += 31 - (hdr % 31);
 
-    return [cmf, (hdr & 0xff) & 0xff];
+    return [cmf, hdr & 0xff & 0xff];
   };
-	 var adler32 = function (array, param) {
+  var adler32 = function (array, param) {
     const adler = 1;
-	    let s1 = adler & 0xffff;
-	        let s2 = (adler >>> 16) & 0xffff;
-	    let len = array.length;
-	    let tlen;
-	    let i = 0;
+    let s1 = adler & 0xffff;
+    let s2 = (adler >>> 16) & 0xffff;
+    let len = array.length;
+    let tlen;
+    let i = 0;
 
-	    while (len > 0) {
-	      tlen = len > param ? param : len;
-	      len -= tlen;
-	      do {
-	        s1 += array[i++];
-	        s2 += s1;
-	      } while (--tlen);
+    while (len > 0) {
+      tlen = len > param ? param : len;
+      len -= tlen;
+      do {
+        s1 += array[i++];
+        s2 += s1;
+      } while (--tlen);
 
-	      s1 %= 65521;
-	      s2 %= 65521;
-	    }
+      s1 %= 65521;
+      s2 %= 65521;
+    }
 
-	    return ((s2 << 16) | s1) >>> 0;
+    return ((s2 << 16) | s1) >>> 0;
   };
-	 var applyPngFilterMethod = function (bytes, lineLength, colorsPerPixel, filter_method) {
+  var applyPngFilterMethod = function (
+    bytes,
+    lineLength,
+    colorsPerPixel,
+    filter_method,
+  ) {
     const lines = bytes.length / lineLength;
     const result = new Uint8Array(bytes.length + lines);
     const filter_methods = getFilterMethods();
-    let i = 0; let line; let prevLine; let
-      offset;
+    let i = 0;
+    let line;
+    let prevLine;
+    let offset;
 
     for (; i < lines; i++) {
       offset = i * lineLength;
@@ -178,7 +192,8 @@
         const len = filter_methods.length;
         const results = [];
 
-        for (; j < len; j++) results[j] = filter_methods[j](line, colorsPerPixel, prevLine);
+        for (; j < len; j++)
+          results[j] = filter_methods[j](line, colorsPerPixel, prevLine);
 
         const ind = getIndexOfSmallestSum(results.concat());
 
@@ -190,7 +205,7 @@
 
     return result;
   };
-	 const filterNone = function (line, colorsPerPixel, prevLine) {
+  const filterNone = function (line, colorsPerPixel, prevLine) {
     /* var result = new Uint8Array(line.length + 1);
 		result[0] = 0;
 		result.set(line, 1); */
@@ -200,7 +215,7 @@
 
     return result;
   };
-	 var filterSub = function (line, colorsPerPixel, prevLine) {
+  var filterSub = function (line, colorsPerPixel, prevLine) {
     const result = [];
     let i = 0;
     const len = line.length;
@@ -215,7 +230,7 @@
 
     return result;
   };
-	 var filterUp = function (line, colorsPerPixel, prevLine) {
+  var filterUp = function (line, colorsPerPixel, prevLine) {
     const result = [];
     let i = 0;
     const len = line.length;
@@ -224,13 +239,13 @@
     result[0] = 2;
 
     for (; i < len; i++) {
-      up = prevLine && prevLine[i] || 0;
+      up = (prevLine && prevLine[i]) || 0;
       result[i + 1] = (line[i] - up + 0x0100) & 0xff;
     }
 
     return result;
   };
-	 var filterAverage = function (line, colorsPerPixel, prevLine) {
+  var filterAverage = function (line, colorsPerPixel, prevLine) {
     const result = [];
     let i = 0;
     const len = line.length;
@@ -241,13 +256,13 @@
 
     for (; i < len; i++) {
       left = line[i - colorsPerPixel] || 0;
-      up = prevLine && prevLine[i] || 0;
+      up = (prevLine && prevLine[i]) || 0;
       result[i + 1] = (line[i] + 0x0100 - ((left + up) >>> 1)) & 0xff;
     }
 
     return result;
   };
-	 var filterPaeth = function (line, colorsPerPixel, prevLine) {
+  var filterPaeth = function (line, colorsPerPixel, prevLine) {
     const result = [];
     let i = 0;
     const len = line.length;
@@ -260,8 +275,8 @@
 
     for (; i < len; i++) {
       left = line[i - colorsPerPixel] || 0;
-      up = prevLine && prevLine[i] || 0;
-      upLeft = prevLine && prevLine[i - colorsPerPixel] || 0;
+      up = (prevLine && prevLine[i]) || 0;
+      upLeft = (prevLine && prevLine[i - colorsPerPixel]) || 0;
       paeth = paethPredictor(left, up, upLeft);
       result[i + 1] = (line[i] - paeth + 0x0100) & 0xff;
     }
@@ -270,20 +285,25 @@
   };
   var paethPredictor = function (left, up, upLeft) {
     const p = left + up - upLeft;
-	        const pLeft = Math.abs(p - left);
-	        const pUp = Math.abs(p - up);
-	        const pUpLeft = Math.abs(p - upLeft);
+    const pLeft = Math.abs(p - left);
+    const pUp = Math.abs(p - up);
+    const pUpLeft = Math.abs(p - upLeft);
 
-    return (pLeft <= pUp && pLeft <= pUpLeft) ? left : (pUp <= pUpLeft) ? up : upLeft;
+    return pLeft <= pUp && pLeft <= pUpLeft
+      ? left
+      : pUp <= pUpLeft
+        ? up
+        : upLeft;
   };
-	 var getFilterMethods = function () {
+  var getFilterMethods = function () {
     return [filterNone, filterSub, filterUp, filterAverage, filterPaeth];
   };
   var getIndexOfSmallestSum = function (arrays) {
     let i = 0;
     const len = arrays.length;
-    let sum; let min; let
-      ind;
+    let sum;
+    let min;
+    let ind;
 
     while (i < len) {
       sum = absSum(arrays[i].slice(1));
@@ -298,7 +318,7 @@
 
     return ind;
   };
-	 var absSum = function (array) {
+  var absSum = function (array) {
     let i = 0;
     const len = array.length;
     let sum = 0;
@@ -307,7 +327,7 @@
 
     return sum;
   };
-	 const getPredictorFromCompression = function (compression) {
+  const getPredictorFromCompression = function (compression) {
     let predictor;
     switch (compression) {
       case jsPDFAPI.image_compression.FAST:
@@ -324,7 +344,7 @@
     }
     return predictor;
   };
-	 const logImg = function (img) {
+  const logImg = function (img) {
     console.log(`width: ${img.width}`);
     console.log(`height: ${img.height}`);
     console.log(`bits: ${img.bits}`);
@@ -346,13 +366,22 @@
     console.log(`hasAlphaChannel: ${img.hasAlphaChannel}`);
   };
 
-  jsPDFAPI.processPNG = function (imageData, imageIndex, alias, compression, dataAsBinaryString) {
+  jsPDFAPI.processPNG = function (
+    imageData,
+    imageIndex,
+    alias,
+    compression,
+    dataAsBinaryString,
+  ) {
     let colorSpace = this.color_spaces.DEVICE_RGB;
     let decode = this.decode.FLATE_DECODE;
     let bpc = 8;
-    let img; let dp; let trns;
-    let colors; let pal; let
-      smask;
+    let img;
+    let dp;
+    let trns;
+    let colors;
+    let pal;
+    let smask;
 
     /*	if(this.isString(imageData)) {
 
@@ -361,7 +390,8 @@
     if (this.isArrayBuffer(imageData)) imageData = new Uint8Array(imageData);
 
     if (this.isArrayBufferView(imageData)) {
-      if (doesNotHavePngJS()) throw new Error('PNG support requires png.js and zlib.js');
+      if (doesNotHavePngJS())
+        throw new Error('PNG support requires png.js and zlib.js');
 
       img = new PNG(imageData);
       imageData = img.imgData;
@@ -372,24 +402,31 @@
       // logImg(img);
 
       /*
-			 * colorType 6 - Each pixel is an R,G,B triple, followed by an alpha sample.
-			 *
-			 * colorType 4 - Each pixel is a grayscale sample, followed by an alpha sample.
-			 *
-			 * Extract alpha to create two separate images, using the alpha as a sMask
-			 */
+       * colorType 6 - Each pixel is an R,G,B triple, followed by an alpha sample.
+       *
+       * colorType 4 - Each pixel is a grayscale sample, followed by an alpha sample.
+       *
+       * Extract alpha to create two separate images, using the alpha as a sMask
+       */
       if ([4, 6].indexOf(img.colorType) !== -1) {
         /*
-				 * processes 8 bit RGBA and grayscale + alpha images
-				 */
+         * processes 8 bit RGBA and grayscale + alpha images
+         */
         if (img.bits === 8) {
-  				        var pixels = img.pixelBitlength == 32 ? new Uint32Array(img.decodePixels().buffer) : img.pixelBitlength == 16 ? new Uint16Array(img.decodePixels().buffer) : new Uint8Array(img.decodePixels().buffer);
+          var pixels =
+            img.pixelBitlength == 32
+              ? new Uint32Array(img.decodePixels().buffer)
+              : img.pixelBitlength == 16
+                ? new Uint16Array(img.decodePixels().buffer)
+                : new Uint8Array(img.decodePixels().buffer);
           var len = pixels.length;
           var imgData = new Uint8Array(len * img.colors);
           var alphaData = new Uint8Array(len);
           const pDiff = img.pixelBitlength - img.bits;
-          var i = 0; var n = 0; var pixel; let
-            pbl;
+          var i = 0;
+          var n = 0;
+          var pixel;
+          let pbl;
 
           for (; i < len; i++) {
             pixel = pixels[i];
@@ -405,37 +442,46 @@
         }
 
         /*
-				 * processes 16 bit RGBA and grayscale + alpha images
-				 */
+         * processes 16 bit RGBA and grayscale + alpha images
+         */
         if (img.bits === 16) {
           var pixels = new Uint32Array(img.decodePixels().buffer);
           var len = pixels.length;
-          var imgData = new Uint8Array((len * (32 / img.pixelBitlength)) * img.colors);
+          var imgData = new Uint8Array(
+            len * (32 / img.pixelBitlength) * img.colors,
+          );
           var alphaData = new Uint8Array(len * (32 / img.pixelBitlength));
           const hasColors = img.colors > 1;
-          var i = 0; var n = 0; let a = 0; var
-            pixel;
+          var i = 0;
+          var n = 0;
+          let a = 0;
+          var pixel;
 
           while (i < len) {
             pixel = pixels[i++];
 
-            imgData[n++] = (pixel >>> 0) & 0xFF;
+            imgData[n++] = (pixel >>> 0) & 0xff;
 
             if (hasColors) {
-              imgData[n++] = (pixel >>> 16) & 0xFF;
+              imgData[n++] = (pixel >>> 16) & 0xff;
 
               pixel = pixels[i++];
-              imgData[n++] = (pixel >>> 0) & 0xFF;
+              imgData[n++] = (pixel >>> 0) & 0xff;
             }
 
-            alphaData[a++] = (pixel >>> 16) & 0xFF;
+            alphaData[a++] = (pixel >>> 16) & 0xff;
           }
 
           bpc = 8;
         }
 
         if (canCompress(compression)) {
-          imageData = compressBytes(imgData, img.width * img.colors, img.colors, compression);
+          imageData = compressBytes(
+            imgData,
+            img.width * img.colors,
+            img.colors,
+            compression,
+          );
           smask = compressBytes(alphaData, img.width, 1, compression);
         } else {
           imageData = imgData;
@@ -445,8 +491,8 @@
       }
 
       /*
-			 * Indexed png. Each pixel is a palette index.
-			 */
+       * Indexed png. Each pixel is a palette index.
+       */
       if (img.colorType === 3) {
         colorSpace = this.color_spaces.INDEXED;
         pal = img.palette;
@@ -463,16 +509,16 @@
           total /= 255;
 
           /*
-					 * a single color is specified as 100% transparent (0),
-					 * so we set trns to use a /Mask with that index
-					 */
+           * a single color is specified as 100% transparent (0),
+           * so we set trns to use a /Mask with that index
+           */
           if (total === len - 1 && trans.indexOf(0) !== -1) {
             trns = [trans.indexOf(0)];
 
             /*
-					 * there's more than one colour within the palette that specifies
-					 * a transparency value less than 255, so we unroll the pixels to create an image sMask
-					 */
+             * there's more than one colour within the palette that specifies
+             * a transparency value less than 255, so we unroll the pixels to create an image sMask
+             */
           } else if (total !== len) {
             var pixels = img.decodePixels();
             var alphaData = new Uint8Array(pixels.length);
@@ -488,14 +534,18 @@
 
       const predictor = getPredictorFromCompression(compression);
 
-      if (decode === this.decode.FLATE_DECODE) dp = `/Predictor ${predictor} /Colors ${colors} /BitsPerComponent ${bpc} /Columns ${img.width}`;
-      else
+      if (decode === this.decode.FLATE_DECODE)
+        dp = `/Predictor ${predictor} /Colors ${colors} /BitsPerComponent ${bpc} /Columns ${img.width}`;
       // remove 'Predictor' as it applies to the type of png filter applied to its IDAT - we only apply with compression
-      { dp = `/Colors ${colors} /BitsPerComponent ${bpc} /Columns ${img.width}`; }
+      else {
+        dp = `/Colors ${colors} /BitsPerComponent ${bpc} /Columns ${img.width}`;
+      }
 
-      if (this.isArrayBuffer(imageData) || this.isArrayBufferView(imageData)) imageData = this.arrayBufferToBinaryString(imageData);
+      if (this.isArrayBuffer(imageData) || this.isArrayBufferView(imageData))
+        imageData = this.arrayBufferToBinaryString(imageData);
 
-      if (smask && this.isArrayBuffer(smask) || this.isArrayBufferView(smask)) smask = this.arrayBufferToBinaryString(smask);
+      if ((smask && this.isArrayBuffer(smask)) || this.isArrayBufferView(smask))
+        smask = this.arrayBufferToBinaryString(smask);
 
       return this.createImageInfo(
         imageData,
@@ -516,4 +566,4 @@
 
     throw new Error('Unsupported PNG image data, try using JPEG instead.');
   };
-}(jsPDF.API));
+})(jsPDF.API);

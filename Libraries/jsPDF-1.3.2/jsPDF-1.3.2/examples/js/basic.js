@@ -76,7 +76,11 @@ function demoTextColors() {
 
 function demoMetadata() {
   const doc = new jsPDF();
-  doc.text(20, 20, 'This PDF has a title, subject, author, keywords and a creator.');
+  doc.text(
+    20,
+    20,
+    'This PDF has a title, subject, author, keywords and a creator.',
+  );
 
   // Optional - set properties on the document
   doc.setProperties({
@@ -102,7 +106,7 @@ function demoUserInput() {
   doc.text(20, 30, `This belongs to: ${name}`);
 
   for (var i = 1; i <= 12; i++) {
-    doc.text(20, 30 + (i * 10), `${i} x ${multiplier} = ___`);
+    doc.text(20, 30 + i * 10, `${i} x ${multiplier} = ___`);
   }
 
   doc.addPage();
@@ -111,7 +115,7 @@ function demoUserInput() {
   doc.setFontSize(16);
 
   for (i = 1; i <= 12; i++) {
-    doc.text(20, 30 + (i * 10), `${i} x ${multiplier} = ${i * multiplier}`);
+    doc.text(20, 30 + i * 10, `${i} x ${multiplier} = ${i * multiplier}`);
   }
   doc.save('Test.pdf');
 }
@@ -212,11 +216,12 @@ function demoImages() {
   // when running local files.  Run with: chromium --allow-file-access-from-files --allow-file-access
   // to temporarily get around this issue.
   const getImageFromUrl = function (url, callback) {
-    const img = new Image(); let data; const
-      ret = {
-        data: null,
-        pending: true,
-      };
+    const img = new Image();
+    let data;
+    const ret = {
+      data: null,
+      pending: true,
+    };
 
     img.onError = function () {
       throw new Error(`Cannot load image: "${url}"`);
@@ -230,7 +235,9 @@ function demoImages() {
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0);
       // Grab the image as a jpeg encoded in base64, but only the data
-      data = canvas.toDataURL('image/jpeg').slice('data:image/jpeg;base64,'.length);
+      data = canvas
+        .toDataURL('image/jpeg')
+        .slice('data:image/jpeg;base64,'.length);
       // Convert the data to binary form
       data = atob(data);
       document.body.removeChild(canvas);
@@ -264,17 +271,23 @@ function demoImages() {
 
 function demoStringSplitting() {
   const pdf = new jsPDF('p', 'in', 'letter');
-	 const sizes = [12, 16, 20];
-	 const fonts = [['Times', 'Roman'], ['Helvetica', ''], ['Times', 'Italic']];
-	 let font;
+  const sizes = [12, 16, 20];
+  const fonts = [
+    ['Times', 'Roman'],
+    ['Helvetica', ''],
+    ['Times', 'Italic'],
+  ];
+  let font;
   let size;
   let lines;
-	 const margin = 0.5; // inches on a 8.5 x 11 inch sheet.
-	 let verticalOffset = margin;
-	 const loremipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id eros turpis. Vivamus tempor urna vitae sapien mollis molestie. Vestibulum in lectus non enim bibendum laoreet at at libero. Etiam malesuada erat sed sem blandit in varius orci porttitor. Sed at sapien urna. Fusce augue ipsum, molestie et adipiscing at, varius quis enim. Morbi sed magna est, vel vestibulum urna. Sed tempor ipsum vel mi pretium at elementum urna tempor. Nulla faucibus consectetur felis, elementum venenatis mi mollis gravida. Aliquam mi ante, accumsan eu tempus vitae, viverra quis justo.\n\nProin feugiat augue in augue rhoncus eu cursus tellus laoreet. Pellentesque eu sapien at diam porttitor venenatis nec vitae velit. Donec ultrices volutpat lectus eget vehicula. Nam eu erat mi, in pulvinar eros. Mauris viverra porta orci, et vehicula lectus sagittis id. Nullam at magna vitae nunc fringilla posuere. Duis volutpat malesuada ornare. Nulla in eros metus. Vivamus a posuere libero.';
+  const margin = 0.5; // inches on a 8.5 x 11 inch sheet.
+  let verticalOffset = margin;
+  const loremipsum =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id eros turpis. Vivamus tempor urna vitae sapien mollis molestie. Vestibulum in lectus non enim bibendum laoreet at at libero. Etiam malesuada erat sed sem blandit in varius orci porttitor. Sed at sapien urna. Fusce augue ipsum, molestie et adipiscing at, varius quis enim. Morbi sed magna est, vel vestibulum urna. Sed tempor ipsum vel mi pretium at elementum urna tempor. Nulla faucibus consectetur felis, elementum venenatis mi mollis gravida. Aliquam mi ante, accumsan eu tempus vitae, viverra quis justo.\n\nProin feugiat augue in augue rhoncus eu cursus tellus laoreet. Pellentesque eu sapien at diam porttitor venenatis nec vitae velit. Donec ultrices volutpat lectus eget vehicula. Nam eu erat mi, in pulvinar eros. Mauris viverra porta orci, et vehicula lectus sagittis id. Nullam at magna vitae nunc fringilla posuere. Duis volutpat malesuada ornare. Nulla in eros metus. Vivamus a posuere libero.';
 
   // Margins:
-  pdf.setDrawColor(0, 255, 0)
+  pdf
+    .setDrawColor(0, 255, 0)
     .setLineWidth(1 / 72)
     .line(margin, margin, margin, 11 - margin)
     .line(8.5 - margin, margin, 8.5 - margin, 11 - margin);
@@ -285,7 +298,8 @@ function demoStringSplitting() {
       font = fonts[i];
       size = sizes[i];
 
-      lines = pdf.setFont(font[0], font[1])
+      lines = pdf
+        .setFont(font[0], font[1])
         .setFontSize(size)
         .splitTextToSize(loremipsum, 7.5);
       // Don't want to preset font, size to calculate the lines?
@@ -301,7 +315,7 @@ function demoStringSplitting() {
       console.log(lines);
       pdf.text(0.5, verticalOffset + size / 72, lines);
 
-      verticalOffset += (lines.length + 0.5) * size / 72;
+      verticalOffset += ((lines.length + 0.5) * size) / 72;
     }
   }
 
@@ -313,13 +327,13 @@ function demoFromHTML() {
 
   // source can be HTML-formatted string, or a reference
   // to an actual DOM element from which the text will be scraped.
-	 const source = $('#fromHTMLtestdiv')[0];
+  const source = $('#fromHTMLtestdiv')[0];
 
   // we support special element handlers. Register them with jQuery-style
   // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
   // There is no support for any other type of selectors
   // (class, of compound) at this time.
-	 const specialElementHandlers = {
+  const specialElementHandlers = {
     // element with id of "bypass" - jQuery style selector
     '#bypassme': function (element, renderer) {
       // true = "handled elsewhere, bypass text extraction"
@@ -336,19 +350,19 @@ function demoFromHTML() {
   // all coords and widths are in jsPDF instance's declared units
   // 'inches' in this case
   pdf.fromHTML(
-    	source, // HTML string or DOM elem ref.
-    	 margins.left, // x coord
-    	 margins.top, // y coord
-    	 {
-    		width: margins.width, // max width of content on PDF
-    		 elementHandlers: specialElementHandlers,
-    	},
-    	(dispose) => {
-    	  // dispose: object with X, Y of the last line add to the PDF
-    	  //          this allow the insertion of new lines after html
+    source, // HTML string or DOM elem ref.
+    margins.left, // x coord
+    margins.top, // y coord
+    {
+      width: margins.width, // max width of content on PDF
+      elementHandlers: specialElementHandlers,
+    },
+    (dispose) => {
+      // dispose: object with X, Y of the last line add to the PDF
+      //          this allow the insertion of new lines after html
       pdf.save('Test.pdf');
     },
-    	margins,
+    margins,
   );
 }
 
@@ -363,7 +377,13 @@ function demoTextAlign() {
   pdf.text('This text is centered\raround\rthis point.', 140, 120, 'center');
 
   pdf.circle(140, 300, 2, 'F');
-  pdf.text('This text is rotated\rand centered around\rthis point.', 140, 300, 45, 'center');
+  pdf.text(
+    'This text is rotated\rand centered around\rthis point.',
+    140,
+    300,
+    45,
+    'center',
+  );
 
   pdf.circle(140, 400, 2, 'F');
   pdf.text('This text is\raligned to the\rright.', 140, 400, 'right');

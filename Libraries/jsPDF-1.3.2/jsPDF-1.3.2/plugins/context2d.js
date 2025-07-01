@@ -21,7 +21,8 @@
 
 (function (jsPDFAPI) {
   jsPDFAPI.events.push([
-    'initialized', function () {
+    'initialized',
+    function () {
       this.context2d.pdf = this;
       this.context2d.internal.pdf = this;
       this.context2d.ctx = new context();
@@ -48,7 +49,10 @@
       y = this._wrapY(y);
 
       const xRect = this._matrix_map_rect(this.ctx._transform, {
-        x, y, w, h,
+        x,
+        y,
+        w,
+        h,
       });
       this.pdf.rect(xRect.x, xRect.y, xRect.w, xRect.h, 'f');
     },
@@ -61,21 +65,24 @@
       y = this._wrapY(y);
 
       const xRect = this._matrix_map_rect(this.ctx._transform, {
-        x, y, w, h,
+        x,
+        y,
+        w,
+        h,
       });
       this.pdf.rect(xRect.x, xRect.y, xRect.w, xRect.h, 's');
     },
 
     /**
-         * We cannot clear PDF commands that were already written to PDF, so we use white instead. <br />
-         * As a special case, read a special flag (ignoreClearRect) and do nothing if it is set.
-         * This results in all calls to clearRect() to do nothing, and keep the canvas transparent.
-         * This flag is stored in the save/restore context and is managed the same way as other drawing states.
-         * @param x
-         * @param y
-         * @param w
-         * @param h
-         */
+     * We cannot clear PDF commands that were already written to PDF, so we use white instead. <br />
+     * As a special case, read a special flag (ignoreClearRect) and do nothing if it is set.
+     * This results in all calls to clearRect() to do nothing, and keep the canvas transparent.
+     * This flag is stored in the save/restore context and is managed the same way as other drawing states.
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
     clearRect(x, y, w, h) {
       if (this.ctx.ignoreClearRect) {
         return;
@@ -85,7 +92,10 @@
       y = this._wrapY(y);
 
       const xRect = this._matrix_map_rect(this.ctx._transform, {
-        x, y, w, h,
+        x,
+        y,
+        w,
+        h,
       });
       this.save();
       this.setFillStyle('#ffffff');
@@ -189,8 +199,10 @@
 
     setFillStyle(style) {
       // get the decimal values of r, g, and b;
-      let r; let g; let b; let
-        a;
+      let r;
+      let g;
+      let b;
+      let a;
 
       if (this.internal.rxTransparent.test(style)) {
         r = 0;
@@ -241,7 +253,7 @@
       }
 
       this.ctx.fillStyle = style;
-      this.ctx._isFillTransparent = (a == 0);
+      this.ctx._isFillTransparent = a == 0;
       this.ctx._fillOpacity = a;
 
       this.pdf.setFillColor(r, g, b, {
@@ -256,7 +268,7 @@
       const rgba = this._getRgba(style);
 
       this.ctx.strokeStyle = rgba.style;
-      this.ctx._isStrokeTransparent = (rgba.a == 0);
+      this.ctx._isStrokeTransparent = rgba.a == 0;
       this.ctx._strokeOpacity = rgba.a;
 
       // TODO jsPDF to handle rgba
@@ -287,7 +299,10 @@
       if (this.ctx._clip_path.length > 0) {
         var lines;
         if (window.outIntercept) {
-          lines = window.outIntercept.type === 'group' ? window.outIntercept.stream : window.outIntercept;
+          lines =
+            window.outIntercept.type === 'group'
+              ? window.outIntercept.stream
+              : window.outIntercept;
         } else {
           lines = this.pdf.internal.pages[1];
         }
@@ -324,7 +339,10 @@
       if (this.ctx._clip_path.length > 0) {
         var lines;
         if (window.outIntercept) {
-          lines = window.outIntercept.type === 'group' ? window.outIntercept.stream : window.outIntercept;
+          lines =
+            window.outIntercept.type === 'group'
+              ? window.outIntercept.stream
+              : window.outIntercept;
         } else {
           lines = this.pdf.internal.pages[1];
         }
@@ -337,9 +355,15 @@
         this.path = origPath;
       }
 
-      this.pdf.text(text, x, this._getBaseline(y), {
-        stroke: true,
-      }, degs);
+      this.pdf.text(
+        text,
+        x,
+        this._getBaseline(y),
+        {
+          stroke: true,
+        },
+        degs,
+      );
 
       if (this.ctx._clip_path.length > 0) {
         lines.push('Q');
@@ -536,7 +560,9 @@
             }
             const spaceBetweenLastBreak = this.pageBreaks[i] - this.lastBreak;
             this.lastBreak = this.pageBreaks[i];
-            var pagesSinceLastBreak = Math.floor(spaceBetweenLastBreak / this.pageWrapY);
+            var pagesSinceLastBreak = Math.floor(
+              spaceBetweenLastBreak / this.pageWrapY,
+            );
             autoBreaks += pagesSinceLastBreak;
           }
         }
@@ -655,10 +681,16 @@
       y = this._wrapY(y);
 
       const xRect = this._matrix_map_rect(this.ctx._transform, {
-        x, y, w, h,
+        x,
+        y,
+        w,
+        h,
       });
       const xRect2 = this._matrix_map_rect(this.ctx._transform, {
-        x: x2, y: y2, w: w2, h: h2,
+        x: x2,
+        y: y2,
+        w: w2,
+        h: h2,
       });
 
       // TODO implement source clipping and image scaling
@@ -676,12 +708,12 @@
     },
 
     /**
-         * Multiply the first matrix by the second
-         * @param m1
-         * @param m2
-         * @returns {*[]}
-         * @private
-         */
+     * Multiply the first matrix by the second
+     * @param m1
+     * @param m2
+     * @returns {*[]}
+     * @private
+     */
     _matrix_multiply(m2, m1) {
       let sx = m1[0];
       let shy = m1[1];
@@ -766,7 +798,10 @@
       const p1 = this._matrix_map_point(m1, [rect.x, rect.y]);
       const p2 = this._matrix_map_point(m1, [rect.x + rect.w, rect.y + rect.h]);
       return {
-        x: p1[0], y: p1[1], w: p2[0] - p1[0], h: p2[1] - p1[1],
+        x: p1[0],
+        y: p1[1],
+        w: p2[0] - p1[0],
+        h: p2[1] - p1[1],
       };
     },
 
@@ -793,7 +828,14 @@
     },
 
     rotate(angle) {
-      const matrix = [Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), 0.0, 0.0];
+      const matrix = [
+        Math.cos(angle),
+        Math.sin(angle),
+        -Math.sin(angle),
+        Math.cos(angle),
+        0.0,
+        0.0,
+      ];
       this.ctx._transform = this._matrix_multiply(this.ctx._transform, matrix);
     },
 
@@ -811,7 +853,10 @@
       if (this.ctx._clip_path.length > 0) {
         let lines;
         if (window.outIntercept) {
-          lines = window.outIntercept.type === 'group' ? window.outIntercept.stream : window.outIntercept;
+          lines =
+            window.outIntercept.type === 'group'
+              ? window.outIntercept.stream
+              : window.outIntercept;
         } else {
           lines = this.pdf.internal.pages[1];
         }
@@ -851,32 +896,36 @@
             moves.push({ start: pt, deltas: [], abs: [] });
             break;
           case 'lt':
-            var delta = [
-              pt.x - xPath[i - 1].x, pt.y - xPath[i - 1].y,
-            ];
+            var delta = [pt.x - xPath[i - 1].x, pt.y - xPath[i - 1].y];
             moves[moves.length - 1].deltas.push(delta);
             moves[moves.length - 1].abs.push(pt);
             break;
           case 'bct':
             var delta = [
-              pt.x1 - xPath[i - 1].x, pt.y1 - xPath[i - 1].y,
-              pt.x2 - xPath[i - 1].x, pt.y2 - xPath[i - 1].y,
-              pt.x - xPath[i - 1].x, pt.y - xPath[i - 1].y,
+              pt.x1 - xPath[i - 1].x,
+              pt.y1 - xPath[i - 1].y,
+              pt.x2 - xPath[i - 1].x,
+              pt.y2 - xPath[i - 1].y,
+              pt.x - xPath[i - 1].x,
+              pt.y - xPath[i - 1].y,
             ];
             moves[moves.length - 1].deltas.push(delta);
             break;
           case 'qct':
             // convert to bezier
-            var x1 = xPath[i - 1].x + 2.0 / 3.0 * (pt.x1 - xPath[i - 1].x);
-            var y1 = xPath[i - 1].y + 2.0 / 3.0 * (pt.y1 - xPath[i - 1].y);
-            var x2 = pt.x + 2.0 / 3.0 * (pt.x1 - pt.x);
-            var y2 = pt.y + 2.0 / 3.0 * (pt.y1 - pt.y);
+            var x1 = xPath[i - 1].x + (2.0 / 3.0) * (pt.x1 - xPath[i - 1].x);
+            var y1 = xPath[i - 1].y + (2.0 / 3.0) * (pt.y1 - xPath[i - 1].y);
+            var x2 = pt.x + (2.0 / 3.0) * (pt.x1 - pt.x);
+            var y2 = pt.y + (2.0 / 3.0) * (pt.y1 - pt.y);
             var x3 = pt.x;
             var y3 = pt.y;
             var delta = [
-              x1 - xPath[i - 1].x, y1 - xPath[i - 1].y,
-              x2 - xPath[i - 1].x, y2 - xPath[i - 1].y,
-              x3 - xPath[i - 1].x, y3 - xPath[i - 1].y,
+              x1 - xPath[i - 1].x,
+              y1 - xPath[i - 1].y,
+              x2 - xPath[i - 1].x,
+              y2 - xPath[i - 1].y,
+              x3 - xPath[i - 1].x,
+              y3 - xPath[i - 1].y,
             ];
             moves[moves.length - 1].deltas.push(delta);
             break;
@@ -901,11 +950,21 @@
           const arcs = moves[i].abs;
           for (let ii = 0; ii < arcs.length; ii++) {
             const arc = arcs[ii];
-            const start = arc.startAngle * 360 / (2 * Math.PI);
-            const end = arc.endAngle * 360 / (2 * Math.PI);
+            const start = (arc.startAngle * 360) / (2 * Math.PI);
+            const end = (arc.endAngle * 360) / (2 * Math.PI);
             var { x } = arc;
             var { y } = arc;
-            this.internal.arc2(this, x, y, arc.radius, start, end, arc.anticlockwise, style, isClip);
+            this.internal.arc2(
+              this,
+              x,
+              y,
+              arc.radius,
+              start,
+              end,
+              arc.anticlockwise,
+              style,
+              isClip,
+            );
           }
         } else {
           var { x } = moves[i].start;
@@ -928,11 +987,15 @@
       return this.ctx._isStrokeTransparent || this.globalAlpha == 0;
     },
 
-    fill(fillRule) { // evenodd or nonzero (default)
+    fill(fillRule) {
+      // evenodd or nonzero (default)
       if (this.ctx._clip_path.length > 0) {
         let lines;
         if (window.outIntercept) {
-          lines = window.outIntercept.type === 'group' ? window.outIntercept.stream : window.outIntercept;
+          lines =
+            window.outIntercept.type === 'group'
+              ? window.outIntercept.stream
+              : window.outIntercept;
         } else {
           lines = this.pdf.internal.pages[1];
         }
@@ -961,7 +1024,10 @@
 
       let lines;
       if (window.outIntercept) {
-        lines = window.outIntercept.type === 'group' ? window.outIntercept.stream : window.outIntercept;
+        lines =
+          window.outIntercept.type === 'group'
+            ? window.outIntercept.stream
+            : window.outIntercept;
       } else {
         lines = this.pdf.internal.pages[1];
       }
@@ -1048,32 +1114,36 @@
             moves.push({ start: pt, deltas: [], abs: [] });
             break;
           case 'lt':
-            var delta = [
-              pt.x - xPath[i - 1].x, pt.y - xPath[i - 1].y,
-            ];
+            var delta = [pt.x - xPath[i - 1].x, pt.y - xPath[i - 1].y];
             moves[moves.length - 1].deltas.push(delta);
             moves[moves.length - 1].abs.push(pt);
             break;
           case 'bct':
             var delta = [
-              pt.x1 - xPath[i - 1].x, pt.y1 - xPath[i - 1].y,
-              pt.x2 - xPath[i - 1].x, pt.y2 - xPath[i - 1].y,
-              pt.x - xPath[i - 1].x, pt.y - xPath[i - 1].y,
+              pt.x1 - xPath[i - 1].x,
+              pt.y1 - xPath[i - 1].y,
+              pt.x2 - xPath[i - 1].x,
+              pt.y2 - xPath[i - 1].y,
+              pt.x - xPath[i - 1].x,
+              pt.y - xPath[i - 1].y,
             ];
             moves[moves.length - 1].deltas.push(delta);
             break;
           case 'qct':
             // convert to bezier
-            var x1 = xPath[i - 1].x + 2.0 / 3.0 * (pt.x1 - xPath[i - 1].x);
-            var y1 = xPath[i - 1].y + 2.0 / 3.0 * (pt.y1 - xPath[i - 1].y);
-            var x2 = pt.x + 2.0 / 3.0 * (pt.x1 - pt.x);
-            var y2 = pt.y + 2.0 / 3.0 * (pt.y1 - pt.y);
+            var x1 = xPath[i - 1].x + (2.0 / 3.0) * (pt.x1 - xPath[i - 1].x);
+            var y1 = xPath[i - 1].y + (2.0 / 3.0) * (pt.y1 - xPath[i - 1].y);
+            var x2 = pt.x + (2.0 / 3.0) * (pt.x1 - pt.x);
+            var y2 = pt.y + (2.0 / 3.0) * (pt.y1 - pt.y);
             var x3 = pt.x;
             var y3 = pt.y;
             var delta = [
-              x1 - xPath[i - 1].x, y1 - xPath[i - 1].y,
-              x2 - xPath[i - 1].x, y2 - xPath[i - 1].y,
-              x3 - xPath[i - 1].x, y3 - xPath[i - 1].y,
+              x1 - xPath[i - 1].x,
+              y1 - xPath[i - 1].y,
+              x2 - xPath[i - 1].x,
+              y2 - xPath[i - 1].y,
+              x3 - xPath[i - 1].x,
+              y3 - xPath[i - 1].y,
             ];
             moves[moves.length - 1].deltas.push(delta);
             break;
@@ -1108,8 +1178,8 @@
             const arc = arcs[ii];
             // TODO lines deltas were getting in here
             if (typeof arc.startAngle !== 'undefined') {
-              const start = arc.startAngle * 360 / (2 * Math.PI);
-              const end = arc.endAngle * 360 / (2 * Math.PI);
+              const start = (arc.startAngle * 360) / (2 * Math.PI);
+              const end = (arc.endAngle * 360) / (2 * Math.PI);
               // Add the current position (last move to)
               // var x = moves[i].start.x + arc.x;
               // var y = moves[i].start.y + arc.y;
@@ -1118,7 +1188,17 @@
               if (ii == 0) {
                 this.internal.move2(this, x, y);
               }
-              this.internal.arc2(this, x, y, arc.radius, start, end, arc.anticlockwise, null, isClip);
+              this.internal.arc2(
+                this,
+                x,
+                y,
+                arc.radius,
+                start,
+                end,
+                arc.anticlockwise,
+                null,
+                isClip,
+              );
             } else {
               this.internal.line2(c2d, arc.x, arc.y);
             }
@@ -1192,7 +1272,9 @@
       return {
         getWidth() {
           const fontSize = pdf.internal.getFontSize();
-          const txtWidth = pdf.getStringUnitWidth(text) * fontSize / pdf.internal.scaleFactor;
+          const txtWidth =
+            (pdf.getStringUnitWidth(text) * fontSize) /
+            pdf.internal.scaleFactor;
           return txtWidth;
         },
 
@@ -1328,8 +1410,10 @@
   c2d.internal = {};
 
   c2d.internal.rxRgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/;
-  c2d.internal.rxRgba = /rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d\.]+)\s*\)/;
-  c2d.internal.rxTransparent = /transparent|rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*0+\s*\)/;
+  c2d.internal.rxRgba =
+    /rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d\.]+)\s*\)/;
+  c2d.internal.rxTransparent =
+    /transparent|rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*0+\s*\)/;
 
   // http://hansmuller-flex.blogspot.com/2011/10/more-about-approximating-circular-arcs.html
   c2d.internal.arc = function (c2d, xc, yc, r, a1, a2, anticlockwise, style) {
@@ -1347,13 +1431,32 @@
     for (let i = 0; i < curves.length; i++) {
       const curve = curves[i];
       if (includeMove && i == 0) {
-        this.pdf.internal.out([
-          f2((curve.x1 + xc) * k), f2((pageHeight - (curve.y1 + yc)) * k), 'm', f2((curve.x2 + xc) * k), f2((pageHeight - (curve.y2 + yc)) * k), f2((curve.x3 + xc) * k), f2((pageHeight - (curve.y3 + yc)) * k), f2((curve.x4 + xc) * k), f2((pageHeight - (curve.y4 + yc)) * k), 'c',
-        ].join(' '));
+        this.pdf.internal.out(
+          [
+            f2((curve.x1 + xc) * k),
+            f2((pageHeight - (curve.y1 + yc)) * k),
+            'm',
+            f2((curve.x2 + xc) * k),
+            f2((pageHeight - (curve.y2 + yc)) * k),
+            f2((curve.x3 + xc) * k),
+            f2((pageHeight - (curve.y3 + yc)) * k),
+            f2((curve.x4 + xc) * k),
+            f2((pageHeight - (curve.y4 + yc)) * k),
+            'c',
+          ].join(' '),
+        );
       } else {
-        this.pdf.internal.out([
-          f2((curve.x2 + xc) * k), f2((pageHeight - (curve.y2 + yc)) * k), f2((curve.x3 + xc) * k), f2((pageHeight - (curve.y3 + yc)) * k), f2((curve.x4 + xc) * k), f2((pageHeight - (curve.y4 + yc)) * k), 'c',
-        ].join(' '));
+        this.pdf.internal.out(
+          [
+            f2((curve.x2 + xc) * k),
+            f2((pageHeight - (curve.y2 + yc)) * k),
+            f2((curve.x3 + xc) * k),
+            f2((pageHeight - (curve.y3 + yc)) * k),
+            f2((curve.x4 + xc) * k),
+            f2((pageHeight - (curve.y4 + yc)) * k),
+            'c',
+          ].join(' '),
+        );
       }
 
       // c2d._lastPoint = {x: curve.x1 + xc, y: curve.y1 + yc};
@@ -1367,23 +1470,33 @@
   };
 
   /**
-     *
-     * @param x Edge point X
-     * @param y Edge point Y
-     * @param r Radius
-     * @param a1 start angle
-     * @param a2 end angle
-     * @param anticlockwise
-     * @param style
-     * @param isClip
-     */
-  c2d.internal.arc2 = function (c2d, x, y, r, a1, a2, anticlockwise, style, isClip) {
+   *
+   * @param x Edge point X
+   * @param y Edge point Y
+   * @param r Radius
+   * @param a1 start angle
+   * @param a2 end angle
+   * @param anticlockwise
+   * @param style
+   * @param isClip
+   */
+  c2d.internal.arc2 = function (
+    c2d,
+    x,
+    y,
+    r,
+    a1,
+    a2,
+    anticlockwise,
+    style,
+    isClip,
+  ) {
     // we need to convert from cartesian to polar here methinks.
-    const centerX = x;// + r;
+    const centerX = x; // + r;
     const centerY = y;
 
     if (false) {
-      const phi = (a2 - a1);
+      const phi = a2 - a1;
       let start = {
         x: r,
         y: 0,
@@ -1391,12 +1504,12 @@
 
       let pt1 = {
         x: r,
-        y: r * 4 / 3 * Math.tan(phi / 4),
+        y: ((r * 4) / 3) * Math.tan(phi / 4),
       };
 
       let pt2 = {
-        x: r * (Math.cos(phi) + 4 / 3 * Math.tan(phi / 4) * Math.sin(phi)),
-        y: r * (Math.sin(phi) - 4 / 3 * Math.tan(phi / 4) * Math.cos(phi)),
+        x: r * (Math.cos(phi) + (4 / 3) * Math.tan(phi / 4) * Math.sin(phi)),
+        y: r * (Math.sin(phi) - (4 / 3) * Math.tan(phi / 4) * Math.cos(phi)),
       };
 
       let end = {
@@ -1404,7 +1517,14 @@
         y: r * Math.sin(phi),
       };
 
-      const matrix = [Math.cos(a1), Math.sin(a1), -Math.sin(a1), Math.cos(a1), x, y];
+      const matrix = [
+        Math.cos(a1),
+        Math.sin(a1),
+        -Math.sin(a1),
+        Math.cos(a1),
+        x,
+        y,
+      ];
       start = c2d._matrix_map_point_obj(matrix, start);
       pt1 = c2d._matrix_map_point_obj(matrix, pt1);
       pt2 = c2d._matrix_map_point_obj(matrix, pt2);
@@ -1413,9 +1533,20 @@
       const k = this.pdf.internal.scaleFactor;
       const pageHeight = this.pdf.internal.pageSize.height;
       const { f2 } = this.pdf.internal;
-      this.pdf.internal.out([
-        f2((start.x) * k), f2((pageHeight - (start.y)) * k), 'm', f2((pt1.x) * k), f2((pageHeight - (pt1.y)) * k), f2((pt2.x) * k), f2((pageHeight - (pt2.y)) * k), f2((end.x) * k), f2((pageHeight - (end.y)) * k), 'c',
-      ].join(' '));
+      this.pdf.internal.out(
+        [
+          f2(start.x * k),
+          f2((pageHeight - start.y) * k),
+          'm',
+          f2(pt1.x * k),
+          f2((pageHeight - pt1.y) * k),
+          f2(pt2.x * k),
+          f2((pageHeight - pt2.y) * k),
+          f2(end.x * k),
+          f2((pageHeight - end.y) * k),
+          'c',
+        ].join(' '),
+      );
       // this.pdf.internal.out('f');
       c2d._lastPoint = end;
       return;
@@ -1434,9 +1565,7 @@
     const pageHeight = this.pdf.internal.pageSize.height;
     const { f2 } = this.pdf.internal;
 
-    this.pdf.internal.out([
-      f2((x) * k), f2((pageHeight - (y)) * k), 'm',
-    ].join(' '));
+    this.pdf.internal.out([f2(x * k), f2((pageHeight - y) * k), 'm'].join(' '));
     c2d._lastPoint = { x, y };
   };
 
@@ -1448,20 +1577,25 @@
     // var pt = {x: c2d._lastPoint.x + dx, y: c2d._lastPoint.y + dy};
     const pt = { x: dx, y: dy };
 
-    this.pdf.internal.out([
-      f2((pt.x) * k), f2((pageHeight - (pt.y)) * k), 'l',
-    ].join(' '));
+    this.pdf.internal.out(
+      [f2(pt.x * k), f2((pageHeight - pt.y) * k), 'l'].join(' '),
+    );
     // this.pdf.internal.out('f');
     c2d._lastPoint = pt;
   };
 
   /**
-     * Return a array of objects that represent bezier curves which approximate the circular arc centered at the origin, from startAngle to endAngle (radians) with the specified radius.
-     *
-     * Each bezier curve is an object with four points, where x1,y1 and x4,y4 are the arc's end points and x2,y2 and x3,y3 are the cubic bezier's control points.
-     */
+   * Return a array of objects that represent bezier curves which approximate the circular arc centered at the origin, from startAngle to endAngle (radians) with the specified radius.
+   *
+   * Each bezier curve is an object with four points, where x1,y1 and x4,y4 are the arc's end points and x2,y2 and x3,y3 are the cubic bezier's control points.
+   */
 
-  c2d.internal.createArc = function (radius, startAngle, endAngle, anticlockwise) {
+  c2d.internal.createArc = function (
+    radius,
+    startAngle,
+    endAngle,
+    anticlockwise,
+  ) {
     const EPSILON = 0.00001; // Roughly 1/1000th of a degree, see below
 
     // normalize startAngle, endAngle to [-2PI, 2PI]
@@ -1483,7 +1617,11 @@
     const sgn = anticlockwise ? -1 : +1;
 
     let a1 = startAngle;
-    for (let totalAngle = Math.min(twoPI, Math.abs(endAngleN - startAngleN)); totalAngle > EPSILON;) {
+    for (
+      let totalAngle = Math.min(twoPI, Math.abs(endAngleN - startAngleN));
+      totalAngle > EPSILON;
+
+    ) {
       const a2 = a1 + sgn * Math.min(totalAngle, piOverTwo);
       curves.push(this.createSmallArc(radius, a1, a2));
       totalAngle -= Math.abs(a2 - a1);
@@ -1494,12 +1632,12 @@
   };
 
   /**
-     * Cubic bezier approximation of a circular arc centered at the origin, from (radians) a1 to a2, where a2-a1 < pi/2. The arc's radius is r.
-     *
-     * Returns an object with four points, where x1,y1 and x4,y4 are the arc's end points and x2,y2 and x3,y3 are the cubic bezier's control points.
-     *
-     * This algorithm is based on the approach described in: A. Riškus, "Approximation of a Cubic Bezier Curve by Circular Arcs and Vice Versa," Information Technology and Control, 35(4), 2006 pp. 371-378.
-     */
+   * Cubic bezier approximation of a circular arc centered at the origin, from (radians) a1 to a2, where a2-a1 < pi/2. The arc's radius is r.
+   *
+   * Returns an object with four points, where x1,y1 and x4,y4 are the arc's end points and x2,y2 and x3,y3 are the cubic bezier's control points.
+   *
+   * This algorithm is based on the approach described in: A. Riškus, "Approximation of a Cubic Bezier Curve by Circular Arcs and Vice Versa," Information Technology and Control, 35(4), 2006 pp. 371-378.
+   */
 
   c2d.internal.createSmallArc = function (r, a1, a2) {
     // Compute all four points for an arc that subtends the same total angle
@@ -1514,7 +1652,7 @@
 
     const q1 = x1 * x1 + y1 * y1;
     const q2 = q1 + x1 * x4 + y1 * y4;
-    const k2 = 4 / 3 * (Math.sqrt(2 * q1 * q2) - q2) / (x1 * y4 - y1 * x4);
+    const k2 = ((4 / 3) * (Math.sqrt(2 * q1 * q2) - q2)) / (x1 * y4 - y1 * x4);
 
     const x2 = x1 - k2 * y1;
     const y2 = y1 + k2 * x1;
@@ -1587,4 +1725,4 @@
   }
 
   return this;
-}(jsPDF.API));
+})(jsPDF.API);

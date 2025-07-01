@@ -406,7 +406,7 @@ async function cargaSelects(plant) {
       plant,
     );
     dataGlobal = reportes;
-  
+
     cargaAreas(reportes);
     cargaReportes(reportes);
     cargaUsuarios(plant);

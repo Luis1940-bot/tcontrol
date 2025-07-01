@@ -3,40 +3,49 @@ $(document).ready(() => {
 
   if (typeof atob === 'undefined') {
     atob = function (data) {
-    // Decodes string using MIME base64 algorithm
-    //
-    // version: 1109.2015
-    // discuss at: http://phpjs.org/functions/base64_decode
-    // +   original by: Tyler Akins (http://rumkin.com)
-    // +   improved by: Thunder.m
-    // +      input by: Aman Gupta
-    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-    // +   bugfixed by: Onno Marsman
-    // +   bugfixed by: Pellentesque Malesuada
-    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-    // +      input by: Brett Zamir (http://brett-zamir.me)
-    // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-    // -    depends on: utf8_decode
-    // *     example 1: base64_decode('S2V2aW4gdmFuIFpvbm5ldmVsZA==');
-    // *     returns 1: 'Kevin van Zonneveld'
+      // Decodes string using MIME base64 algorithm
+      //
+      // version: 1109.2015
+      // discuss at: http://phpjs.org/functions/base64_decode
+      // +   original by: Tyler Akins (http://rumkin.com)
+      // +   improved by: Thunder.m
+      // +      input by: Aman Gupta
+      // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      // +   bugfixed by: Onno Marsman
+      // +   bugfixed by: Pellentesque Malesuada
+      // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      // +      input by: Brett Zamir (http://brett-zamir.me)
+      // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+      // -    depends on: utf8_decode
+      // *     example 1: base64_decode('S2V2aW4gdmFuIFpvbm5ldmVsZA==');
+      // *     returns 1: 'Kevin van Zonneveld'
 
-      const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-      let o1; let o2; let o3; let h1; let h2; let h3; let h4; let bits;
+      const b64 =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+      let o1;
+      let o2;
+      let o3;
+      let h1;
+      let h2;
+      let h3;
+      let h4;
+      let bits;
       let ac = 0;
       let i = 0;
       const l = data.length;
       tmp_arr = [];
 
-      do { // unpack four hexets into three octets using index points in b64
+      do {
+        // unpack four hexets into three octets using index points in b64
         h1 = b64.indexOf(data.charAt(i++));
         h2 = b64.indexOf(data.charAt(i++));
         h3 = b64.indexOf(data.charAt(i++));
         h4 = b64.indexOf(data.charAt(i++));
 
-        bits = h1 << 18 | h2 << 12 | h3 << 6 | h4;
+        bits = (h1 << 18) | (h2 << 12) | (h3 << 6) | h4;
 
-        o1 = bits >> 16 & 0xff;
-        o2 = bits >> 8 & 0xff;
+        o1 = (bits >> 16) & 0xff;
+        o2 = (bits >> 8) & 0xff;
         o3 = bits & 0xff;
 
         if (h3 == 64) {
@@ -53,7 +62,9 @@ $(document).ready(() => {
   }
 
   const displayInTextArea = function (output, label) {
-    const $l = $(`<label for="${label}">${label}</label>`).appendTo(document.body);
+    const $l = $(`<label for="${label}">${label}</label>`).appendTo(
+      document.body,
+    );
     $(`<textarea id="${label}"></textarea>`).appendTo($l).text(btoa(output));
   };
 
@@ -72,7 +83,7 @@ $(document).ready(() => {
       const doc = new jsPDF();
       return doc.output();
     },
-	 '002_twopagedoc.pdf': function () {
+    '002_twopagedoc.pdf': function () {
       const doc = new jsPDF();
       doc.text('Hello world!', 20, 20);
       doc.text('This is client-side Javascript, pumping out a PDF.', 20, 30);
@@ -80,7 +91,7 @@ $(document).ready(() => {
       doc.text('Do you like that?', 20, 20);
       return doc.output();
     },
-	 '002_twopagedoc_oldapi.pdf': function () {
+    '002_twopagedoc_oldapi.pdf': function () {
       const doc = new jsPDF();
       doc.text(20, 20, 'Hello world!');
       doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
@@ -88,12 +99,12 @@ $(document).ready(() => {
       doc.text(20, 20, 'Do you like that?');
       return doc.output();
     },
-	 '003_demolandscape.pdf': function () {
+    '003_demolandscape.pdf': function () {
       const doc = new jsPDF('landscape');
       doc.text('Hello landscape world!', 20, 20);
       return doc.output();
     },
-	 '004_fontsizes.pdf': function () {
+    '004_fontsizes.pdf': function () {
       const doc = new jsPDF();
       doc.setFontSize(22);
       doc.text(20, 20, 'This is a title');
@@ -103,7 +114,7 @@ $(document).ready(() => {
 
       return doc.output();
     },
-	 '005_demofonttypes.pdf': function () {
+    '005_demofonttypes.pdf': function () {
       const doc = new jsPDF();
 
       doc.text(20, 20, 'This is the default font.');
@@ -126,7 +137,7 @@ $(document).ready(() => {
 
       return doc.output();
     },
-	 '006_demotestcolors.pdf': function () {
+    '006_demotestcolors.pdf': function () {
       const doc = new jsPDF();
 
       doc.setTextColor(100);
@@ -146,9 +157,13 @@ $(document).ready(() => {
 
       return doc.output();
     },
-	 '007_demometadata.pdf': function () {
+    '007_demometadata.pdf': function () {
       const doc = new jsPDF();
-      doc.text(20, 20, 'This PDF has a title, subject, author, keywords and a creator.');
+      doc.text(
+        20,
+        20,
+        'This PDF has a title, subject, author, keywords and a creator.',
+      );
 
       // Optional - set properties on the document
       doc.setProperties({
@@ -161,7 +176,7 @@ $(document).ready(() => {
 
       return doc.output();
     },
-	 '008_demorectangles.pdf': function () {
+    '008_demorectangles.pdf': function () {
       const doc = new jsPDF();
 
       doc.rect(20, 20, 10, 10); // empty square
@@ -184,7 +199,7 @@ $(document).ready(() => {
 
       return doc.output();
     },
-	 '009_demoliness.pdf': function () {
+    '009_demoliness.pdf': function () {
       const doc = new jsPDF();
 
       doc.line(20, 20, 60, 20); // horizontal line
@@ -214,7 +229,7 @@ $(document).ready(() => {
 
       return doc.output();
     },
-	 '010_democircles.pdf': function () {
+    '010_democircles.pdf': function () {
       const doc = new jsPDF();
 
       doc.ellipse(40, 20, 10, 5);
@@ -229,23 +244,23 @@ $(document).ready(() => {
 
       return doc.output();
     },
-	 '011_multilinetext.pdf': function () {
+    '011_multilinetext.pdf': function () {
       const doc = new jsPDF();
-		 const text = [
-		    'This is line one',
-		     'This is line two',
-		     'This is line three',
-		     'This is line four',
-		     'This is line five',
+      const text = [
+        'This is line one',
+        'This is line two',
+        'This is line three',
+        'This is line four',
+        'This is line five',
       ];
       doc.text(text, 20, 20);
       return doc.output();
     },
-	 '012_multiplelines.pdf': function () {
+    '012_multiplelines.pdf': function () {
       const doc = new jsPDF();
-		 const x1 = 40;
-		 const y1 = 40;
-		 const lines = [
+      const x1 = 40;
+      const y1 = 40;
+      const lines = [
         [10, 10],
         [-20, 10],
         [-15, 5, -20, 10, -30, 15],
@@ -261,24 +276,20 @@ $(document).ready(() => {
   const testrunner = function (reference_file_name, test_data_yielder) {
     asyncTest(reference_file_name, () => {
       // QUnit.stop()
-      require([`text!${reference_file_name}`])
-        .then((expectedtext) => {
-          QUnit.expect(1);
+      require([`text!${reference_file_name}`]).then((expectedtext) => {
+        QUnit.expect(1);
 
-          const output = test_data_yielder();
+        const output = test_data_yielder();
 
-          if (dump) {
-            displayInTextArea(output, reference_file_name);
-            QUnit.equal(true, true);
-          } else {
-            QUnit.equal(
-              removeMinorDiffs(output),
-					 removeMinorDiffs(expectedtext),
-            );
-          }
-          QUnit.start();
-          // stop()
-        });
+        if (dump) {
+          displayInTextArea(output, reference_file_name);
+          QUnit.equal(true, true);
+        } else {
+          QUnit.equal(removeMinorDiffs(output), removeMinorDiffs(expectedtext));
+        }
+        QUnit.start();
+        // stop()
+      });
     });
   };
 
@@ -287,47 +298,44 @@ $(document).ready(() => {
 
   for (const filename in testinventory) {
     if (testinventory.hasOwnProperty(filename)) {
-      testrunner(
-        filename,
-			 testinventory[filename],
-      );
+      testrunner(filename, testinventory[filename]);
     }
   }
 
   asyncTest('013_sillysvgrenderer', () => {
     // QUnit.stop()
-    require(['text!013_sillysvgrenderer.svg', 'text!013_sillysvgrenderer.pdf'])
-      .then((svgtext, expectedtext) => {
-        QUnit.expect(1);
+    require([
+      'text!013_sillysvgrenderer.svg',
+      'text!013_sillysvgrenderer.pdf',
+    ]).then((svgtext, expectedtext) => {
+      QUnit.expect(1);
 
-        const pdf = jsPDF(); // 'p','pt','letter')
+      const pdf = jsPDF(); // 'p','pt','letter')
 
-        pdf.addSVG(svgtext, 20, 20, pdf.internal.pageSize.width - 20 * 2);
+      pdf.addSVG(svgtext, 20, 20, pdf.internal.pageSize.width - 20 * 2);
 
-        // pdf.output('dataurl')
-        // window.mypdf = pdf.output('dataurlstring')
+      // pdf.output('dataurl')
+      // window.mypdf = pdf.output('dataurlstring')
 
-        const output = pdf.output();
-        if (dump) {
-          displayInTextArea(output, '013_sillysvgrenderer');
-          QUnit.equal(true, true);
-        } else {
-          QUnit.equal(
-            removeMinorDiffs(output),
-				 removeMinorDiffs(expectedtext),
-          );
-        }
-        QUnit.start();
-        // stop()
-      });
+      const output = pdf.output();
+      if (dump) {
+        displayInTextArea(output, '013_sillysvgrenderer');
+        QUnit.equal(true, true);
+      } else {
+        QUnit.equal(removeMinorDiffs(output), removeMinorDiffs(expectedtext));
+      }
+      QUnit.start();
+      // stop()
+    });
   });
 
   // handcrafted tests
   asyncTest('014_addImage', () => {
     // QUnit.stop()
-    require(
-      ['text!014_addImage.jpeg.base64.txt', 'text!014_addImage.pdf.base64.txt'],
-    ).then((base64encodedJpeg, base64encodedPDF) => {
+    require([
+      'text!014_addImage.jpeg.base64.txt',
+      'text!014_addImage.pdf.base64.txt',
+    ]).then((base64encodedJpeg, base64encodedPDF) => {
       QUnit.expect(2);
 
       let pdf = jsPDF();
@@ -337,7 +345,7 @@ $(document).ready(() => {
       QUnit.equal(
         // just testing if it does not blow up.
         pdf.output('datauristring') !== '',
-			 true,
+        true,
       );
 
       pdf = jsPDF();
@@ -355,7 +363,7 @@ $(document).ready(() => {
       } else {
         QUnit.equal(
           removeMinorDiffs(output),
-				 removeMinorDiffs(atob(base64encodedPDF)),
+          removeMinorDiffs(atob(base64encodedPDF)),
         );
       }
       QUnit.start();
@@ -366,25 +374,22 @@ $(document).ready(() => {
   // handcrafted tests
   asyncTest('015_splittext', () => {
     // QUnit.stop()
-    require(
-      ['015_splittext', 'text!015_splittext.pdf'],
-    ).then((runner, shouldbe) => {
-      QUnit.expect(1);
+    require(['015_splittext', 'text!015_splittext.pdf']).then(
+      (runner, shouldbe) => {
+        QUnit.expect(1);
 
-      const pdf = runner(jsPDF);
+        const pdf = runner(jsPDF);
 
-      const output = pdf.output();
-      if (dump) {
-        displayInTextArea(output, '015_splittext');
-        QUnit.equal(true, true);
-      } else {
-        QUnit.equal(
-          removeMinorDiffs(output),
-				 removeMinorDiffs(shouldbe),
-        );
-      }
-      QUnit.start();
-      // stop()
-    });
+        const output = pdf.output();
+        if (dump) {
+          displayInTextArea(output, '015_splittext');
+          QUnit.equal(true, true);
+        } else {
+          QUnit.equal(removeMinorDiffs(output), removeMinorDiffs(shouldbe));
+        }
+        QUnit.start();
+        // stop()
+      },
+    );
   });
 }); // end of document.ready(

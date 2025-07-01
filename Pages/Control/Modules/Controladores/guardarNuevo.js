@@ -7,12 +7,11 @@ import fechasGenerator from '../../../../controllers/fechas.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../../../controllers/cript.js';
 
-
 function convertirObjATextPlano(obj) {
   const data = { ...obj };
   // console.log(data);
   delete data.src;
-  
+
   // Simplemente retornar JSON válido directamente
   return JSON.stringify(data);
 }
@@ -206,14 +205,14 @@ function pushValoresObjetoControl(
     if (tipoDeDato === 'img' && valorCelda3) {
       if (valorCelda3) {
         // Crear un objeto sin la clave 'src' si valorCelda3 es un string JSON
-         valorSinSrc = valorCelda3;
+        valorSinSrc = valorCelda3;
         if (typeof valorCelda3 === 'string') {
           try {
             const parsedData = JSON.parse(valorCelda3);
             const { src, ...objetoSinSrc } = parsedData;
-            valorSinSrc = JSON.stringify(objetoSinSrc)
-              // .replace(/"/g, "'")  // Cambiar comillas dobles por simples
-              // .replace(/\\\//g, "/");  // Limpiar barras invertidas de escape
+            valorSinSrc = JSON.stringify(objetoSinSrc);
+            // .replace(/"/g, "'")  // Cambiar comillas dobles por simples
+            // .replace(/\\\//g, "/");  // Limpiar barras invertidas de escape
           } catch (error) {
             // Si no se puede parsear, mantener el valor original
             console.log('Error parsing valorCelda3:', error);
@@ -226,18 +225,18 @@ function pushValoresObjetoControl(
       } else {
         objetoControlClonado.imagenes.push('');
       }
-    }else{
+    } else {
       objetoControlClonado.imagenes.push('');
     }
     objetoControlClonado.displayRow.push(displayRow);
     const detalle = valorCelda3 || valorCelda33 || '';
-  
+
     if (tipoDeDato !== 'tablex') {
       if (tipoDeDato === 'img') {
         // Si es imagen, guarda el detalle solo si valorCelda3 existe
         if (valorCelda3) {
           objetoControlClonado.detalle.push(String(valorSinSrc));
-        } else{
+        } else {
           objetoControlClonado.detalle.push('');
         }
       } else {
@@ -246,7 +245,7 @@ function pushValoresObjetoControl(
     } else {
       objetoControlClonado.detalle.push(String(detalle));
     }
-    
+
     objetoControlClonado.tipoDatoDetalle.push(arrayControl[i][33] || 'x');
 
     // Actualizar el objetoControl original con los datos del clonado
@@ -425,23 +424,25 @@ function obtenerValoresPorTipos(
       case 's':
       case 'sd': {
         const select = celda.querySelector('select');
-        
+
         if (!select) {
-          return "";
+          return '';
         }
-        
+
         // Verificar si hay una opción seleccionada válida
-        if (select.selectedIndex >= 0 && 
-            select.options[select.selectedIndex] && 
-            select.value !== "" && 
-            select.options[select.selectedIndex].text.trim() !== "") {
+        if (
+          select.selectedIndex >= 0 &&
+          select.options[select.selectedIndex] &&
+          select.value !== '' &&
+          select.options[select.selectedIndex].text.trim() !== ''
+        ) {
           return {
             sel: select.options[select.selectedIndex].text,
             valor: select.value,
           };
         }
-        
-        return "";
+
+        return '';
       }
       case 'cn':
         return celda.querySelector('input[type="text"]')?.value || '';

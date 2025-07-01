@@ -17,9 +17,17 @@ exports.bind = function (callback, context) {
  */
 
 exports.decode64 = function (base64) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-  const len = base64.length; let i; let encoded1; let encoded2; let encoded3; let encoded4; let byte1; let byte2; let
-    byte3;
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  const len = base64.length;
+  let i;
+  let encoded1;
+  let encoded2;
+  let encoded3;
+  let encoded4;
+  let byte1;
+  let byte2;
+  let byte3;
 
   let output = '';
 
@@ -47,10 +55,11 @@ exports.decode64 = function (base64) {
 exports.getBounds = function (node) {
   if (node.getBoundingClientRect) {
     const clientRect = node.getBoundingClientRect();
-    const width = node.offsetWidth == null ? clientRect.width : node.offsetWidth;
+    const width =
+      node.offsetWidth == null ? clientRect.width : node.offsetWidth;
     return {
       top: clientRect.top,
-      bottom: clientRect.bottom || (clientRect.top + clientRect.height),
+      bottom: clientRect.bottom || clientRect.top + clientRect.height,
       right: clientRect.left + width,
       left: clientRect.left,
       width,
@@ -61,7 +70,9 @@ exports.getBounds = function (node) {
 };
 
 exports.offsetBounds = function (node) {
-  const parent = node.offsetParent ? exports.offsetBounds(node.offsetParent) : { top: 0, left: 0 };
+  const parent = node.offsetParent
+    ? exports.offsetBounds(node.offsetParent)
+    : { top: 0, left: 0 };
 
   return {
     top: node.offsetTop + parent.top,
@@ -75,9 +86,16 @@ exports.offsetBounds = function (node) {
 
 exports.parseBackgrounds = function (backgroundImage) {
   const whitespace = ' \r\n\t';
-  let method; let definition; let prefix; let prefix_i; let block; const results = [];
-  let mode = 0; let numParen = 0; let quote; let
-    args;
+  let method;
+  let definition;
+  let prefix;
+  let prefix_i;
+  let block;
+  const results = [];
+  let mode = 0;
+  let numParen = 0;
+  let quote;
+  let args;
   const appendResult = function () {
     if (method) {
       if (definition.substr(0, 1) === '"') {
@@ -86,7 +104,10 @@ exports.parseBackgrounds = function (backgroundImage) {
       if (definition) {
         args.push(definition);
       }
-      if (method.substr(0, 1) === '-' && (prefix_i = method.indexOf('-', 1) + 1) > 0) {
+      if (
+        method.substr(0, 1) === '-' &&
+        (prefix_i = method.indexOf('-', 1) + 1) > 0
+      ) {
         prefix = method.substr(0, prefix_i);
         method = method.substr(prefix_i);
       }

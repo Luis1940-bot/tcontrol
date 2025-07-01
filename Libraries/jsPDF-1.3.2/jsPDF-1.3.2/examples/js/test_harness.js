@@ -16,12 +16,18 @@ pdf_test_harness_init = function (pdf, message) {
   body.style.display = 'flex';
 
   const div = document.createElement('div');
-  div.setAttribute('style', 'position:fixed;height:20px;left:0;right:0;background:lightblue');
+  div.setAttribute(
+    'style',
+    'position:fixed;height:20px;left:0;right:0;background:lightblue',
+  );
   body.appendChild(div);
   harness.header = div;
 
   const div2 = document.createElement('div');
-  div2.setAttribute('style', 'position:fixed;display:flex;top:20px; bottom:0;left:0;right:0');
+  div2.setAttribute(
+    'style',
+    'position:fixed;display:flex;top:20px; bottom:0;left:0;right:0',
+  );
   body.appendChild(div2);
   harness.body = div2;
 
@@ -57,19 +63,29 @@ pdf_test_harness_init = function (pdf, message) {
   div.appendChild(lbl3);
 
   harness.source = document.createElement('pre');
-  harness.source.setAttribute('style', 'margin-top:0;width:100%;height:100%;position:absolute;top:0px;bottom:0px;overflow:auto');
+  harness.source.setAttribute(
+    'style',
+    'margin-top:0;width:100%;height:100%;position:absolute;top:0px;bottom:0px;overflow:auto',
+  );
   div2.appendChild(harness.source);
 
   harness.iframe = document.createElement('iframe');
-  harness.iframe.setAttribute('style', 'width:100%;height:100%;position:absolute;overflow:auto;top:0px;bottom:0px');
+  harness.iframe.setAttribute(
+    'style',
+    'width:100%;height:100%;position:absolute;overflow:auto;top:0px;bottom:0px',
+  );
   div2.appendChild(harness.iframe);
 
   // if (pdf_test_harness.onload) {
   // harness.pdf = pdf_test_harness.onload(harness);
   if (message) {
-    message += "<p style='text-align:center;font-style:italic;font-size:.8em'>click to close</p>";
+    message +=
+      "<p style='text-align:center;font-style:italic;font-size:.8em'>click to close</p>";
     const popup = document.createElement('div');
-    popup.setAttribute('style', 'z-index:100;margin:100px auto;cursor:pointer;font-size:1.3em;top:50px;background-color:rgb(243, 224, 141);padding:1em;border:1px solid black');
+    popup.setAttribute(
+      'style',
+      'z-index:100;margin:100px auto;cursor:pointer;font-size:1.3em;top:50px;background-color:rgb(243, 224, 141);padding:1em;border:1px solid black',
+    );
     popup.innerHTML = message;
     body.appendChild(popup);
     popup.onclick = function () {
@@ -114,9 +130,11 @@ pdf_test_harness = function (pdf) {
 
   this.getParameterByName = function (name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    const regex = new RegExp(`[\\?&]${name}=([^&#]*)`); const
-      results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    const regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
+    const results = regex.exec(location.search);
+    return results === null
+      ? ''
+      : decodeURIComponent(results[1].replace(/\+/g, ' '));
   };
 
   this.setPdf = function (pdf) {

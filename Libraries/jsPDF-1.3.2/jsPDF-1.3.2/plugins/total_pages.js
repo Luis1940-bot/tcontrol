@@ -27,8 +27,12 @@
   jsPDFAPI.putTotalPages = function (pageExpression) {
     const replaceExpression = new RegExp(pageExpression, 'g');
     for (let n = 1; n <= this.internal.getNumberOfPages(); n++) {
-      for (let i = 0; i < this.internal.pages[n].length; i++) this.internal.pages[n][i] = this.internal.pages[n][i].replace(replaceExpression, this.internal.getNumberOfPages());
+      for (let i = 0; i < this.internal.pages[n].length; i++)
+        this.internal.pages[n][i] = this.internal.pages[n][i].replace(
+          replaceExpression,
+          this.internal.getNumberOfPages(),
+        );
     }
     return this;
   };
-}(jsPDF.API));
+})(jsPDF.API);

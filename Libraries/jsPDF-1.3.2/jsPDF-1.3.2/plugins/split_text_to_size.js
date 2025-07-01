@@ -36,38 +36,47 @@ cell ocupied by the width of the char in that position.
 @param kerning {Object}
 @returns {Array}
 */
-  const getCharWidthsArray = API.getCharWidthsArray = function (text, options) {
+  const getCharWidthsArray = (API.getCharWidthsArray = function (
+    text,
+    options,
+  ) {
     if (!options) {
       options = {};
     }
 
-    const widths = options.widths ? options.widths : this.internal.getFont().metadata.Unicode.widths;
-	 const widthsFractionOf = widths.fof ? widths.fof : 1;
-	 const kerning = options.kerning ? options.kerning : this.internal.getFont().metadata.Unicode.kerning;
-	 const kerningFractionOf = kerning.fof ? kerning.fof : 1;
+    const widths = options.widths
+      ? options.widths
+      : this.internal.getFont().metadata.Unicode.widths;
+    const widthsFractionOf = widths.fof ? widths.fof : 1;
+    const kerning = options.kerning
+      ? options.kerning
+      : this.internal.getFont().metadata.Unicode.kerning;
+    const kerningFractionOf = kerning.fof ? kerning.fof : 1;
 
     // console.log("widths, kergnings", widths, kerning)
 
-    let i; let l;
+    let i;
+    let l;
     let char_code;
-    let prior_char_code = 0 // for kerning
-	; const default_char_width = widths[0] || widthsFractionOf;
+    let prior_char_code = 0; // for kerning
+    const default_char_width = widths[0] || widthsFractionOf;
     const output = [];
 
     for (i = 0, l = text.length; i < l; i++) {
       char_code = text.charCodeAt(i);
       output.push(
-        (widths[char_code] || default_char_width) / widthsFractionOf
-			+ (kerning[char_code] && kerning[char_code][prior_char_code] || 0) / kerningFractionOf,
+        (widths[char_code] || default_char_width) / widthsFractionOf +
+          ((kerning[char_code] && kerning[char_code][prior_char_code]) || 0) /
+            kerningFractionOf,
       );
       prior_char_code = char_code;
     }
 
     return output;
-  };
+  });
   const getArraySum = function (array) {
     let i = array.length;
-	 let output = 0;
+    let output = 0;
     while (i) {
       i--;
       output += array[i];
@@ -88,9 +97,12 @@ Then divide by 72 to get inches or divide by (72/25.6) to get 'mm' etc.
 @param
 @returns {Type}
 */
-  const getStringUnitWidth = API.getStringUnitWidth = function (text, options) {
+  const getStringUnitWidth = (API.getStringUnitWidth = function (
+    text,
+    options,
+  ) {
     return getArraySum(getCharWidthsArray.call(this, text, options));
-  };
+  });
 
   /**
 returns array of lines
@@ -100,8 +112,8 @@ returns array of lines
 
     // 1st, chop off the piece that can fit on the hanging line.
     let i = 0;
-	 const l = word.length;
-	 let workingLen = 0;
+    const l = word.length;
+    let workingLen = 0;
     while (i !== l && workingLen + widths_array[i] < firstLineMaxLen) {
       workingLen += widths_array[i];
       i++;
@@ -139,15 +151,15 @@ returns array of lines
     }
 
     let line = [];
-	 const lines = [line];
-	 let line_length = options.textIndent || 0;
-	 let separator_length = 0;
-	 let current_word_length = 0;
-	 let word;
-	 let widths_array;
-	 let words = text.split(' ');
-	 const spaceCharWidth = getCharWidthsArray(' ', options)[0];
-	 let i;
+    const lines = [line];
+    let line_length = options.textIndent || 0;
+    let separator_length = 0;
+    let current_word_length = 0;
+    let word;
+    let widths_array;
+    let words = text.split(' ');
+    const spaceCharWidth = getCharWidthsArray(' ', options)[0];
+    let i;
     let l;
     let tmp;
     let lineIndent;
@@ -158,12 +170,14 @@ returns array of lines
       lineIndent = options.lineIndent || 0;
     }
     if (lineIndent) {
-      var pad = Array(lineIndent).join(' '); let
-        wrds = [];
+      var pad = Array(lineIndent).join(' ');
+      let wrds = [];
       words.map((wrd) => {
         wrd = wrd.split(/\s*\n/);
         if (wrd.length > 1) {
-          wrds = wrds.concat(wrd.map((wrd, idx) => (idx && wrd.length ? '\n' : '') + wrd));
+          wrds = wrds.concat(
+            wrd.map((wrd, idx) => (idx && wrd.length ? '\n' : '') + wrd),
+          );
         } else {
           wrds.push(wrd[0]);
         }
@@ -183,11 +197,19 @@ returns array of lines
       widths_array = getCharWidthsArray(word, options);
       current_word_length = getArraySum(widths_array);
 
-      if (line_length + separator_length + current_word_length > maxlen || force) {
+      if (
+        line_length + separator_length + current_word_length > maxlen ||
+        force
+      ) {
         if (current_word_length > maxlen) {
           // this happens when you have space-less long URLs for example.
           // we just chop these to size. We do NOT insert hiphens
-          tmp = splitLongWord(word, widths_array, maxlen - (line_length + separator_length), maxlen);
+          tmp = splitLongWord(
+            word,
+            widths_array,
+            maxlen - (line_length + separator_length),
+            maxlen,
+          );
           // first line we add to existing line object
           line.push(tmp.shift()); // it's ok to have extra space indicator there
           // last line we make into new line object
@@ -196,7 +218,9 @@ returns array of lines
           while (tmp.length) {
             lines.push([tmp.shift()]); // single fragment occupies whole line
           }
-          current_word_length = getArraySum(widths_array.slice(word.length - line[0].length));
+          current_word_length = getArraySum(
+            widths_array.slice(word.length - line[0].length),
+          );
         } else {
           // just put it on a new line
           line = [word];
@@ -219,7 +243,9 @@ returns array of lines
         return (idx ? pad : '') + ln.join(' ');
       };
     } else {
-      var postProcess = function (ln) { return ln.join(' '); };
+      var postProcess = function (ln) {
+        return ln.join(' ');
+      };
     }
 
     return lines.map(postProcess);
@@ -247,13 +273,13 @@ table or other default width is not available.
     }
 
     const fsize = options.fontSize || this.internal.getFontSize();
-	 const newOptions = (function (options) {
+    const newOptions = function (options) {
       const widths = { 0: 1 };
-		 const kerning = {};
+      const kerning = {};
 
       if (!options.widths || !options.kerning) {
         const f = this.internal.getFont(options.fontName, options.fontStyle);
-			 const encoding = 'Unicode';
+        const encoding = 'Unicode';
         // NOT UTF8, NOT UTF16BE/LE, NOT UCS2BE/LE
         // Actual JavaScript-native String's 16bit char codes used.
         // no multi-byte logic here
@@ -261,22 +287,22 @@ table or other default width is not available.
         if (f.metadata[encoding]) {
           return {
             widths: f.metadata[encoding].widths || widths,
-					 kerning: f.metadata[encoding].kerning || kerning,
+            kerning: f.metadata[encoding].kerning || kerning,
           };
         }
       } else {
-        return 	{
+        return {
           widths: options.widths,
-				 kerning: options.kerning,
+          kerning: options.kerning,
         };
       }
 
       // then use default values
-      return 	{
+      return {
         widths,
-			 kerning,
+        kerning,
       };
-    }).call(this, options);
+    }.call(this, options);
 
     // first we split on end-of-line chars
     let paragraphs;
@@ -289,7 +315,7 @@ table or other default width is not available.
     // now we convert size (max length of line) into "font size units"
     // at present time, the "font size unit" is always 'point'
     // 'proportional' means, "in proportion to font size"
-    const fontUnit_maxLen = 1.0 * this.internal.scaleFactor * maxlen / fsize;
+    const fontUnit_maxLen = (1.0 * this.internal.scaleFactor * maxlen) / fsize;
     // at this time, fsize is always in "points" regardless of the default measurement unit of the doc.
     // this may change in the future?
     // until then, proportional_maxlen is likely to be in 'points'
@@ -299,22 +325,19 @@ table or other default width is not available.
     // here it's in font units too (which is likely 'points')
     // it can be negative (which makes the first line longer than maxLen)
     newOptions.textIndent = options.textIndent
-      ? options.textIndent * 1.0 * this.internal.scaleFactor / fsize
+      ? (options.textIndent * 1.0 * this.internal.scaleFactor) / fsize
       : 0;
     newOptions.lineIndent = options.lineIndent;
 
-    let i; let l;
+    let i;
+    let l;
     let output = [];
     for (i = 0, l = paragraphs.length; i < l; i++) {
       output = output.concat(
-        splitParagraphIntoLines(
-          paragraphs[i],
-				 fontUnit_maxLen,
-				 newOptions,
-        ),
+        splitParagraphIntoLines(paragraphs[i], fontUnit_maxLen, newOptions),
       );
     }
 
     return output;
   };
-}(jsPDF.API));
+})(jsPDF.API);

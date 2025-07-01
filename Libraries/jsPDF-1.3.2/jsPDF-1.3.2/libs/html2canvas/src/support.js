@@ -5,8 +5,11 @@ function Support(document) {
 }
 
 Support.prototype.testRangeBounds = function (document) {
-  let range; let testElement; let rangeBounds; let rangeHeight; let
-    support = false;
+  let range;
+  let testElement;
+  let rangeBounds;
+  let rangeHeight;
+  let support = false;
 
   if (document.createRange) {
     range = document.createRange();
@@ -31,7 +34,7 @@ Support.prototype.testRangeBounds = function (document) {
 };
 
 Support.prototype.testCORS = function () {
-  return typeof ((new Image()).crossOrigin) !== 'undefined';
+  return typeof new Image().crossOrigin !== 'undefined';
 };
 
 Support.prototype.testSVG = function () {

@@ -12,9 +12,11 @@ function ProxyImageContainer(src, proxy) {
     self.image.onload = resolve;
     self.image.onerror = reject;
 
-    new ProxyURL(src, proxy, document).then((url) => {
-      self.image.src = url;
-    }).catch(reject);
+    new ProxyURL(src, proxy, document)
+      .then((url) => {
+        self.image.src = url;
+      })
+      .catch(reject);
   });
 }
 

@@ -6,22 +6,30 @@ const createWindowClone = require('./clone');
 const { decode64 } = utils;
 
 function Proxy(src, proxyUrl, document) {
-  const supportsCORS = ('withCredentials' in new XMLHttpRequest());
+  const supportsCORS = 'withCredentials' in new XMLHttpRequest();
   if (!proxyUrl) {
     return Promise.reject('No proxy configured');
   }
   const callback = createCallback(supportsCORS);
   const url = createProxyUrl(proxyUrl, src, callback);
 
-  return supportsCORS ? XHR(url) : (jsonp(document, url, callback).then((response) => decode64(response.content)));
+  return supportsCORS
+    ? XHR(url)
+    : jsonp(document, url, callback).then((response) =>
+        decode64(response.content),
+      );
 }
 let proxyCount = 0;
 
 function ProxyURL(src, proxyUrl, document) {
-  const supportsCORSImage = ('crossOrigin' in new Image());
+  const supportsCORSImage = 'crossOrigin' in new Image();
   const callback = createCallback(supportsCORSImage);
   const url = createProxyUrl(proxyUrl, src, callback);
-  return (supportsCORSImage ? Promise.resolve(url) : jsonp(document, url, callback).then((response) => `data:${response.type};base64,${response.content}`));
+  return supportsCORSImage
+    ? Promise.resolve(url)
+    : jsonp(document, url, callback).then(
+        (response) => `data:${response.type};base64,${response.content}`,
+      );
 }
 
 function jsonp(document, url, callback) {
@@ -45,7 +53,9 @@ function jsonp(document, url, callback) {
 }
 
 function createCallback(useCORS) {
-  return !useCORS ? `html2canvas_${Date.now()}_${++proxyCount}_${Math.round(Math.random() * 100000)}` : '';
+  return !useCORS
+    ? `html2canvas_${Date.now()}_${++proxyCount}_${Math.round(Math.random() * 100000)}`
+    : '';
 }
 
 function createProxyUrl(proxyUrl, src, callback) {
@@ -54,8 +64,8 @@ function createProxyUrl(proxyUrl, src, callback) {
 
 function documentFromHTML(src) {
   return function (html) {
-    const parser = new DOMParser(); let
-      doc;
+    const parser = new DOMParser();
+    let doc;
     try {
       doc = parser.parseFromString(html, 'text/html');
     } catch (e) {
@@ -66,7 +76,9 @@ function documentFromHTML(src) {
         doc.write(html);
         doc.close();
       } catch (ee) {
-        log('createHTMLDocument write not supported, falling back to document.body.innerHTML');
+        log(
+          'createHTMLDocument write not supported, falling back to document.body.innerHTML',
+        );
         doc.body.innerHTML = html; // ie9 doesnt support writing to documentElement
       }
     }
@@ -83,7 +95,11 @@ function documentFromHTML(src) {
 }
 
 function loadUrlDocument(src, proxy, document, width, height, options) {
-  return new Proxy(src, proxy, window.document).then(documentFromHTML(src)).then((doc) => createWindowClone(doc, document, width, height, options, 0, 0));
+  return new Proxy(src, proxy, window.document)
+    .then(documentFromHTML(src))
+    .then((doc) =>
+      createWindowClone(doc, document, width, height, options, 0, 0),
+    );
 }
 
 exports.Proxy = Proxy;

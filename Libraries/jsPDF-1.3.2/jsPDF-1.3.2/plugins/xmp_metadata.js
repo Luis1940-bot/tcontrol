@@ -26,15 +26,15 @@
 /* global jsPDF */
 
 /**
-* Adds XMP formatted metadata to PDF
-*
-* @param {String} metadata The actual metadata to be added. The metadata shall be stored as XMP simple value. Note that if the metadata string contains XML markup characters "<", ">" or "&", those characters should be written using XML entities.
-* @param {String} namespaceuri Sets the namespace URI for the metadata. Last character should be slash or hash.
-* @function
-* @returns {jsPDF}
-* @methodOf jsPDF#
-* @name addMetadata
-*/
+ * Adds XMP formatted metadata to PDF
+ *
+ * @param {String} metadata The actual metadata to be added. The metadata shall be stored as XMP simple value. Note that if the metadata string contains XML markup characters "<", ">" or "&", those characters should be written using XML entities.
+ * @param {String} namespaceuri Sets the namespace URI for the metadata. Last character should be slash or hash.
+ * @function
+ * @returns {jsPDF}
+ * @methodOf jsPDF#
+ * @name addMetadata
+ */
 
 (function (jsPDFAPI) {
   let xmpmetadata = '';
@@ -44,41 +44,52 @@
   jsPDFAPI.addMetadata = function (metadata, namespaceuri) {
     xmpnamespaceuri = namespaceuri || 'http://jspdf.default.namespaceuri/'; // The namespace URI for an XMP name shall not be empty
     xmpmetadata = metadata;
-    this.internal.events.subscribe(
-      'postPutResources',
-      function () {
-        if (!xmpmetadata) {
-          metadata_object_number = '';
-        } else {
-          const xmpmeta_beginning = '<x:xmpmeta xmlns:x="adobe:ns:meta/">';
-          const rdf_beginning = `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="" xmlns:jspdf="${xmpnamespaceuri}"><jspdf:metadata>`;
-          const rdf_ending = '</jspdf:metadata></rdf:Description></rdf:RDF>';
-          const xmpmeta_ending = '</x:xmpmeta>';
-          const utf8_xmpmeta_beginning = unescape(encodeURIComponent(xmpmeta_beginning));
-          const utf8_rdf_beginning = unescape(encodeURIComponent(rdf_beginning));
-          const utf8_metadata = unescape(encodeURIComponent(xmpmetadata));
-          const utf8_rdf_ending = unescape(encodeURIComponent(rdf_ending));
-          const utf8_xmpmeta_ending = unescape(encodeURIComponent(xmpmeta_ending));
+    this.internal.events.subscribe('postPutResources', function () {
+      if (!xmpmetadata) {
+        metadata_object_number = '';
+      } else {
+        const xmpmeta_beginning = '<x:xmpmeta xmlns:x="adobe:ns:meta/">';
+        const rdf_beginning = `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="" xmlns:jspdf="${xmpnamespaceuri}"><jspdf:metadata>`;
+        const rdf_ending = '</jspdf:metadata></rdf:Description></rdf:RDF>';
+        const xmpmeta_ending = '</x:xmpmeta>';
+        const utf8_xmpmeta_beginning = unescape(
+          encodeURIComponent(xmpmeta_beginning),
+        );
+        const utf8_rdf_beginning = unescape(encodeURIComponent(rdf_beginning));
+        const utf8_metadata = unescape(encodeURIComponent(xmpmetadata));
+        const utf8_rdf_ending = unescape(encodeURIComponent(rdf_ending));
+        const utf8_xmpmeta_ending = unescape(
+          encodeURIComponent(xmpmeta_ending),
+        );
 
-          const total_len = utf8_rdf_beginning.length + utf8_metadata.length + utf8_rdf_ending.length + utf8_xmpmeta_beginning.length + utf8_xmpmeta_ending.length;
+        const total_len =
+          utf8_rdf_beginning.length +
+          utf8_metadata.length +
+          utf8_rdf_ending.length +
+          utf8_xmpmeta_beginning.length +
+          utf8_xmpmeta_ending.length;
 
-          metadata_object_number = this.internal.newObject();
-          this.internal.write(`<< /Type /Metadata /Subtype /XML /Length ${total_len} >>`);
-          this.internal.write('stream');
-          this.internal.write(utf8_xmpmeta_beginning + utf8_rdf_beginning + utf8_metadata + utf8_rdf_ending + utf8_xmpmeta_ending);
-          this.internal.write('endstream');
-          this.internal.write('endobj');
-        }
-      },
-    );
-    this.internal.events.subscribe(
-      'putCatalog',
-      function () {
-        if (metadata_object_number) {
-          this.internal.write(`/Metadata ${metadata_object_number} 0 R`);
-        }
-      },
-    );
+        metadata_object_number = this.internal.newObject();
+        this.internal.write(
+          `<< /Type /Metadata /Subtype /XML /Length ${total_len} >>`,
+        );
+        this.internal.write('stream');
+        this.internal.write(
+          utf8_xmpmeta_beginning +
+            utf8_rdf_beginning +
+            utf8_metadata +
+            utf8_rdf_ending +
+            utf8_xmpmeta_ending,
+        );
+        this.internal.write('endstream');
+        this.internal.write('endobj');
+      }
+    });
+    this.internal.events.subscribe('putCatalog', function () {
+      if (metadata_object_number) {
+        this.internal.write(`/Metadata ${metadata_object_number} 0 R`);
+      }
+    });
     return this;
   };
-}(jsPDF.API));
+})(jsPDF.API);

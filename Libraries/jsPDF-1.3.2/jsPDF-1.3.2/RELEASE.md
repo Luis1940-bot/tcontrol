@@ -1,5 +1,4 @@
-Release Instructions
-====================
+# Release Instructions
 
 - Add a new draft release in GitHub.
 - Describe the Release

@@ -157,7 +157,8 @@ CssColors._colorsTable = {
 
 CssColors.colorNameToHex = function (color) {
   color = color.toLowerCase();
-  if (typeof this._colorsTable[color] !== 'undefined') return this._colorsTable[color];
+  if (typeof this._colorsTable[color] !== 'undefined')
+    return this._colorsTable[color];
 
   return false;
 };

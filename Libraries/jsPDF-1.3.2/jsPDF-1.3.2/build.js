@@ -49,34 +49,46 @@ function rawjs(opts) {
 }
 
 function bundle(paths) {
-  rollup.rollup({
-    entry: './main.js',
-    plugins: [
-      monkeyPatch(),
-      rawjs({
-        'jspdf.js': 'jsPDF',
-        'filesaver.tmp.js': 'saveAs',
-        'deflate.js': 'Deflater',
-        'zlib.js': 'FlateStream',
-        'css_colors.js': 'CssColors',
-        'html2pdf.js': 'html2pdf',
-      }),
-      babel({
-        presets: ['es2015-rollup'],
-        exclude: ['node_modules/**', 'libs/**'],
-      }),
-    ],
-  }).then((bundle) => {
-    let { code } = bundle.generate({ format: 'umd', moduleName: 'jspdf' });
-    code = code.replace(/Permission\s+is\s+hereby\s+granted[\S\s]+?IN\s+THE\s+SOFTWARE\./, 'Licensed under the MIT License');
-    code = code.replace(/Permission\s+is\s+hereby\s+granted[\S\s]+?IN\s+THE\s+SOFTWARE\./g, '');
-    fs.writeFileSync(paths.debug, renew(code));
+  rollup
+    .rollup({
+      entry: './main.js',
+      plugins: [
+        monkeyPatch(),
+        rawjs({
+          'jspdf.js': 'jsPDF',
+          'filesaver.tmp.js': 'saveAs',
+          'deflate.js': 'Deflater',
+          'zlib.js': 'FlateStream',
+          'css_colors.js': 'CssColors',
+          'html2pdf.js': 'html2pdf',
+        }),
+        babel({
+          presets: ['es2015-rollup'],
+          exclude: ['node_modules/**', 'libs/**'],
+        }),
+      ],
+    })
+    .then((bundle) => {
+      let { code } = bundle.generate({ format: 'umd', moduleName: 'jspdf' });
+      code = code.replace(
+        /Permission\s+is\s+hereby\s+granted[\S\s]+?IN\s+THE\s+SOFTWARE\./,
+        'Licensed under the MIT License',
+      );
+      code = code.replace(
+        /Permission\s+is\s+hereby\s+granted[\S\s]+?IN\s+THE\s+SOFTWARE\./g,
+        '',
+      );
+      fs.writeFileSync(paths.debug, renew(code));
 
-    const minified = uglify.minify(code, { fromString: true, output: { comments: /@preserve|@license|copyright/i } });
-    fs.writeFileSync(paths.minified, renew(minified.code));
-  }).catch((err) => {
-    console.error(err);
-  });
+      const minified = uglify.minify(code, {
+        fromString: true,
+        output: { comments: /@preserve|@license|copyright/i },
+      });
+      fs.writeFileSync(paths.minified, renew(minified.code));
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 function renew(code) {

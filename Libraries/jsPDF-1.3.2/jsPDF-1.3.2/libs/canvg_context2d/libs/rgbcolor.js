@@ -10,7 +10,8 @@
     this.ok = false;
 
     // strip any leading #
-    if (color_string.charAt(0) == '#') { // remove # if any
+    if (color_string.charAt(0) == '#') {
+      // remove # if any
       color_string = color_string.substr(1, 6);
     }
 
@@ -177,11 +178,7 @@
         re: /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/,
         example: ['rgb(123, 234, 45)', 'rgb(255,234,245)'],
         process(bits) {
-          return [
-            parseInt(bits[1]),
-            parseInt(bits[2]),
-            parseInt(bits[3]),
-          ];
+          return [parseInt(bits[1]), parseInt(bits[2]), parseInt(bits[3])];
         },
       },
       {
@@ -223,9 +220,9 @@
     }
 
     // validate/cleanup values
-    this.r = (this.r < 0 || isNaN(this.r)) ? 0 : ((this.r > 255) ? 255 : this.r);
-    this.g = (this.g < 0 || isNaN(this.g)) ? 0 : ((this.g > 255) ? 255 : this.g);
-    this.b = (this.b < 0 || isNaN(this.b)) ? 0 : ((this.b > 255) ? 255 : this.b);
+    this.r = this.r < 0 || isNaN(this.r) ? 0 : this.r > 255 ? 255 : this.r;
+    this.g = this.g < 0 || isNaN(this.g) ? 0 : this.g > 255 ? 255 : this.g;
+    this.b = this.b < 0 || isNaN(this.b) ? 0 : this.b > 255 ? 255 : this.b;
 
     // some getters
     this.toRGB = function () {
@@ -263,10 +260,11 @@
           const list_item = document.createElement('li');
           const list_color = new RGBColor(examples[i]);
           const example_div = document.createElement('div');
-          example_div.style.cssText =							'margin: 3px; '
-							+ 'border: 1px solid black; '
-							+ `background:${list_color.toHex()}; `
-							+ `color:${list_color.toHex()}`;
+          example_div.style.cssText =
+            'margin: 3px; ' +
+            'border: 1px solid black; ' +
+            `background:${list_color.toHex()}; ` +
+            `color:${list_color.toHex()}`;
           example_div.appendChild(document.createTextNode('test'));
           const list_item_value = document.createTextNode(
             ` ${examples[i]} -> ${list_color.toRGB()} -> ${list_color.toHex()}`,
@@ -291,4 +289,4 @@
   }
 
   global.RGBColor = RGBColor;
-}(typeof window !== 'undefined' ? window : this));
+})(typeof window !== 'undefined' ? window : this);

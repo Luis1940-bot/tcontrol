@@ -21,28 +21,66 @@ function html2canvas(nodeList, options) {
     log.options.start = Date.now();
   }
 
-  options.async = typeof (options.async) === 'undefined' ? true : options.async;
-  options.allowTaint = typeof (options.allowTaint) === 'undefined' ? false : options.allowTaint;
-  options.removeContainer = typeof (options.removeContainer) === 'undefined' ? true : options.removeContainer;
-  options.javascriptEnabled = typeof (options.javascriptEnabled) === 'undefined' ? false : options.javascriptEnabled;
-  options.imageTimeout = typeof (options.imageTimeout) === 'undefined' ? 10000 : options.imageTimeout;
-  options.renderer = typeof (options.renderer) === 'function' ? options.renderer : CanvasRenderer;
+  options.async = typeof options.async === 'undefined' ? true : options.async;
+  options.allowTaint =
+    typeof options.allowTaint === 'undefined' ? false : options.allowTaint;
+  options.removeContainer =
+    typeof options.removeContainer === 'undefined'
+      ? true
+      : options.removeContainer;
+  options.javascriptEnabled =
+    typeof options.javascriptEnabled === 'undefined'
+      ? false
+      : options.javascriptEnabled;
+  options.imageTimeout =
+    typeof options.imageTimeout === 'undefined' ? 10000 : options.imageTimeout;
+  options.renderer =
+    typeof options.renderer === 'function' ? options.renderer : CanvasRenderer;
   options.strict = !!options.strict;
 
-  if (typeof (nodeList) === 'string') {
-    if (typeof (options.proxy) !== 'string') {
+  if (typeof nodeList === 'string') {
+    if (typeof options.proxy !== 'string') {
       return Promise.reject('Proxy must be used when rendering url');
     }
     const width = options.width != null ? options.width : window.innerWidth;
     const height = options.height != null ? options.height : window.innerHeight;
-    return loadUrlDocument(absoluteUrl(nodeList), options.proxy, document, width, height, options).then((container) => renderWindow(container.contentWindow.document.documentElement, container, options, width, height));
+    return loadUrlDocument(
+      absoluteUrl(nodeList),
+      options.proxy,
+      document,
+      width,
+      height,
+      options,
+    ).then((container) =>
+      renderWindow(
+        container.contentWindow.document.documentElement,
+        container,
+        options,
+        width,
+        height,
+      ),
+    );
   }
 
-  const node = ((nodeList === undefined) ? [document.documentElement] : ((nodeList.length) ? nodeList : [nodeList]))[0];
+  const node = (
+    nodeList === undefined
+      ? [document.documentElement]
+      : nodeList.length
+        ? nodeList
+        : [nodeList]
+  )[0];
   node.setAttribute(html2canvasNodeAttribute + index, index);
-  return renderDocument(node.ownerDocument, options, node.ownerDocument.defaultView.innerWidth, node.ownerDocument.defaultView.innerHeight, index).then((canvas) => {
-    if (typeof (options.onrendered) === 'function') {
-      log('options.onrendered is deprecated, html2canvas returns a Promise containing the canvas');
+  return renderDocument(
+    node.ownerDocument,
+    options,
+    node.ownerDocument.defaultView.innerWidth,
+    node.ownerDocument.defaultView.innerHeight,
+    index,
+  ).then((canvas) => {
+    if (typeof options.onrendered === 'function') {
+      log(
+        'options.onrendered is deprecated, html2canvas returns a Promise containing the canvas',
+      );
       options.onrendered(canvas);
     }
     return canvas;
@@ -54,26 +92,50 @@ html2canvas.NodeContainer = NodeContainer;
 html2canvas.log = log;
 html2canvas.utils = utils;
 
-const html2canvasExport = (typeof (document) === 'undefined' || typeof (Object.create) !== 'function' || typeof (document.createElement('canvas').getContext) !== 'function') ? function () {
-  return Promise.reject('No canvas support');
-} : html2canvas;
+const html2canvasExport =
+  typeof document === 'undefined' ||
+  typeof Object.create !== 'function' ||
+  typeof document.createElement('canvas').getContext !== 'function'
+    ? function () {
+        return Promise.reject('No canvas support');
+      }
+    : html2canvas;
 
 module.exports = html2canvasExport;
 
-if (typeof (define) === 'function' && define.amd) {
+if (typeof define === 'function' && define.amd) {
   define('html2canvas', [], () => html2canvasExport);
 }
 
-function renderDocument(document, options, windowWidth, windowHeight, html2canvasIndex) {
-  return createWindowClone(document, document, windowWidth, windowHeight, options, document.defaultView.pageXOffset, document.defaultView.pageYOffset).then((container) => {
+function renderDocument(
+  document,
+  options,
+  windowWidth,
+  windowHeight,
+  html2canvasIndex,
+) {
+  return createWindowClone(
+    document,
+    document,
+    windowWidth,
+    windowHeight,
+    options,
+    document.defaultView.pageXOffset,
+    document.defaultView.pageYOffset,
+  ).then((container) => {
     log('Document cloned');
     const attributeName = html2canvasNodeAttribute + html2canvasIndex;
     const selector = `[${attributeName}='${html2canvasIndex}']`;
     document.querySelector(selector).removeAttribute(attributeName);
     const clonedWindow = container.contentWindow;
     const node = clonedWindow.document.querySelector(selector);
-    const oncloneHandler = (typeof (options.onclone) === 'function') ? Promise.resolve(options.onclone(clonedWindow.document)) : Promise.resolve(true);
-    return oncloneHandler.then(() => renderWindow(node, container, options, windowWidth, windowHeight));
+    const oncloneHandler =
+      typeof options.onclone === 'function'
+        ? Promise.resolve(options.onclone(clonedWindow.document))
+        : Promise.resolve(true);
+    return oncloneHandler.then(() =>
+      renderWindow(node, container, options, windowWidth, windowHeight),
+    );
   });
 }
 
@@ -82,9 +144,21 @@ function renderWindow(node, container, options, windowWidth, windowHeight) {
   const support = new Support(clonedWindow.document);
   const imageLoader = new ImageLoader(options, support);
   const bounds = getBounds(node);
-  const width = options.type === 'view' ? windowWidth : documentWidth(clonedWindow.document);
-  const height = options.type === 'view' ? windowHeight : documentHeight(clonedWindow.document);
-  const renderer = new options.renderer(width, height, imageLoader, options, document);
+  const width =
+    options.type === 'view'
+      ? windowWidth
+      : documentWidth(clonedWindow.document);
+  const height =
+    options.type === 'view'
+      ? windowHeight
+      : documentHeight(clonedWindow.document);
+  const renderer = new options.renderer(
+    width,
+    height,
+    imageLoader,
+    options,
+    document,
+  );
   const parser = new NodeParser(node, renderer, support, imageLoader, options);
   return parser.ready.then(() => {
     log('Finished rendering');
@@ -92,13 +166,27 @@ function renderWindow(node, container, options, windowWidth, windowHeight) {
 
     if (options.type === 'view') {
       canvas = crop(renderer.canvas, {
-        width: renderer.canvas.width, height: renderer.canvas.height, top: 0, left: 0, x: 0, y: 0,
+        width: renderer.canvas.width,
+        height: renderer.canvas.height,
+        top: 0,
+        left: 0,
+        x: 0,
+        y: 0,
       });
-    } else if (node === clonedWindow.document.body || node === clonedWindow.document.documentElement || options.canvas != null) {
+    } else if (
+      node === clonedWindow.document.body ||
+      node === clonedWindow.document.documentElement ||
+      options.canvas != null
+    ) {
       canvas = renderer.canvas;
     } else {
       canvas = crop(renderer.canvas, {
-        width: options.width != null ? options.width : bounds.width, height: options.height != null ? options.height : bounds.height, top: bounds.top, left: bounds.left, x: 0, y: 0,
+        width: options.width != null ? options.width : bounds.width,
+        height: options.height != null ? options.height : bounds.height,
+        top: bounds.top,
+        left: bounds.left,
+        x: 0,
+        y: 0,
       });
     }
 
@@ -124,9 +212,40 @@ function crop(canvas, bounds) {
   croppedCanvas.height = bounds.height;
   const width = x2 - x1;
   const height = y2 - y1;
-  log('Cropping canvas at:', 'left:', bounds.left, 'top:', bounds.top, 'width:', width, 'height:', height);
-  log('Resulting crop with width', bounds.width, 'and height', bounds.height, 'with x', x1, 'and y', y1);
-  croppedCanvas.getContext('2d').drawImage(canvas, x1, y1, width, height, bounds.x, bounds.y, width, height);
+  log(
+    'Cropping canvas at:',
+    'left:',
+    bounds.left,
+    'top:',
+    bounds.top,
+    'width:',
+    width,
+    'height:',
+    height,
+  );
+  log(
+    'Resulting crop with width',
+    bounds.width,
+    'and height',
+    bounds.height,
+    'with x',
+    x1,
+    'and y',
+    y1,
+  );
+  croppedCanvas
+    .getContext('2d')
+    .drawImage(
+      canvas,
+      x1,
+      y1,
+      width,
+      height,
+      bounds.x,
+      bounds.y,
+      width,
+      height,
+    );
   return croppedCanvas;
 }
 

@@ -23,19 +23,15 @@ if (typeof require === 'object') {
     baseUrl: require_baseUrl_override,
     shim: {
       'plugins/standard_fonts_metrics': {
-        deps: [
-	            'jspdf',
-        ],
+        deps: ['jspdf'],
       },
 
       'plugins/split_text_to_size': {
-        deps: [
-	            'jspdf',
-        ],
+        deps: ['jspdf'],
       },
 
       'plugins/annotations': {
-        	deps: [
+        deps: [
           'jspdf',
           'plugins/standard_fonts_metrics',
           'plugins/split_text_to_size',
@@ -43,61 +39,44 @@ if (typeof require === 'object') {
       },
 
       'plugins/outline': {
-        deps: [
-	            'jspdf',
-        ],
+        deps: ['jspdf'],
       },
 
       'plugins/addimage': {
-        deps: [
-	            'jspdf',
-        ],
+        deps: ['jspdf'],
       },
 
       'plugins/png_support': {
-        deps: [
-	            'jspdf',
-	            'libs/png_support/png',
-	            'libs/png_support/zlib',
-        ],
+        deps: ['jspdf', 'libs/png_support/png', 'libs/png_support/zlib'],
       },
 
       'plugins/from_html': {
-        deps: [
-	            'jspdf',
-        ],
+        deps: ['jspdf'],
       },
 
       'plugins/context2d': {
         deps: [
-	            'jspdf',
-	            'plugins/png_support',
-	            'plugins/addimage',
-	            'libs/css_colors',
+          'jspdf',
+          'plugins/png_support',
+          'plugins/addimage',
+          'libs/css_colors',
         ],
       },
 
       'libs/html2canvas/dist/html2canvas': {
-        deps: [
-	            'jspdf',
-        ],
+        deps: ['jspdf'],
       },
 
       'plugins/canvas': {
-        deps: [
-	            'jspdf',
-        ],
+        deps: ['jspdf'],
       },
 
       'plugins/acroform': {
-        deps: [
-          'jspdf',
-          'plugins/annotations',
-        ],
+        deps: ['jspdf', 'plugins/annotations'],
       },
 
       html2pdf: {
-        	deps: [
+        deps: [
           'jspdf',
           'plugins/standard_fonts_metrics',
           'plugins/split_text_to_size',
@@ -112,14 +91,14 @@ if (typeof require === 'object') {
 
       'test/test_harness': {
         deps: [
-	            'jspdf',
-	            'jspdf.plugin.standard_fonts_metrics',
-	            'jspdf.plugin.split_text_to_size',
+          'jspdf',
+          'jspdf.plugin.standard_fonts_metrics',
+          'jspdf.plugin.split_text_to_size',
         ],
       },
     },
     paths: {
-    	 html2pdf: 'libs/html2pdf',
+      html2pdf: 'libs/html2pdf',
     },
   });
 } // Require.JS

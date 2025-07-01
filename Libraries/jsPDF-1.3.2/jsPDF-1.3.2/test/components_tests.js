@@ -103,15 +103,14 @@ $(document).ready(() => {
     doc.setLineWidth(1);
     doc.setDrawColor(0);
     doc.setFillColor(255, 0, 0);
-    doc.circle(120, 20, 5, 'FD')
-
-    , text = [
-      'This is line one',
-      'This is line two',
-      'This is line three',
-      'This is line four',
-      'This is line five',
-    ];
+    (doc.circle(120, 20, 5, 'FD'),
+      (text = [
+        'This is line one',
+        'This is line two',
+        'This is line three',
+        'This is line four',
+        'This is line five',
+      ]));
     doc.text(20, 20, text);
     return doc.output();
   };
@@ -119,9 +118,6 @@ $(document).ready(() => {
     const text = getDocument();
 
     QUnit.expect(1);
-    QUnit.equal(
-      base64_encode_with_native_fallback(text),
-      base64_encode(text),
-    );
+    QUnit.equal(base64_encode_with_native_fallback(text), base64_encode(text));
   });
 }); // end of document.ready(

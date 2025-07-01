@@ -40,14 +40,16 @@
             return transEndEventNames[name];
           }
         }
-      }());
+      })();
 
-      return transitionEnd && {
-        end: transitionEnd,
-      };
-    }());
+      return (
+        transitionEnd && {
+          end: transitionEnd,
+        }
+      );
+    })();
   });
-}(window.jQuery));/* ==========================================================
+})(window.jQuery); /* ==========================================================
  * bootstrap-alert.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#alerts
  * ==========================================================
@@ -70,7 +72,7 @@
   // jshint ;_;
 
   /* ALERT CLASS DEFINITION
-  * ====================== */
+   * ====================== */
 
   const dismiss = '[data-dismiss="alert"]';
   const Alert = function (el) {
@@ -91,18 +93,17 @@
 
     e && e.preventDefault();
 
-    $parent.length || ($parent = $this.hasClass('alert') ? $this : $this.parent());
+    $parent.length ||
+      ($parent = $this.hasClass('alert') ? $this : $this.parent());
 
-    $parent.trigger(e = $.Event('close'));
+    $parent.trigger((e = $.Event('close')));
 
     if (e.isDefaultPrevented()) return;
 
     $parent.removeClass('in');
 
     function removeElement() {
-      $parent
-        .trigger('closed')
-        .remove();
+      $parent.trigger('closed').remove();
     }
 
     $.support.transition && $parent.hasClass('fade')
@@ -111,7 +112,7 @@
   };
 
   /* ALERT PLUGIN DEFINITION
-  * ======================= */
+   * ======================= */
 
   const old = $.fn.alert;
 
@@ -127,7 +128,7 @@
   $.fn.alert.Constructor = Alert;
 
   /* ALERT NO CONFLICT
-  * ================= */
+   * ================= */
 
   $.fn.alert.noConflict = function () {
     $.fn.alert = old;
@@ -135,10 +136,12 @@
   };
 
   /* ALERT DATA-API
-  * ============== */
+   * ============== */
 
   $(document).on('click.alert.data-api', dismiss, Alert.prototype.close);
-}(window.jQuery));/* ============================================================
+})(
+  window.jQuery,
+); /* ============================================================
  * bootstrap-button.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#buttons
  * ============================================================
@@ -161,7 +164,7 @@
   // jshint ;_;
 
   /* BUTTON PUBLIC CLASS DEFINITION
-  * ============================== */
+   * ============================== */
 
   const Button = function (element, options) {
     this.$element = $(element);
@@ -190,15 +193,13 @@
   Button.prototype.toggle = function () {
     const $parent = this.$element.closest('[data-toggle="buttons-radio"]');
 
-    $parent && $parent
-      .find('.active')
-      .removeClass('active');
+    $parent && $parent.find('.active').removeClass('active');
 
     this.$element.toggleClass('active');
   };
 
   /* BUTTON PLUGIN DEFINITION
-  * ======================== */
+   * ======================== */
 
   const old = $.fn.button;
 
@@ -220,7 +221,7 @@
   $.fn.button.Constructor = Button;
 
   /* BUTTON NO CONFLICT
-  * ================== */
+   * ================== */
 
   $.fn.button.noConflict = function () {
     $.fn.button = old;
@@ -228,14 +229,14 @@
   };
 
   /* BUTTON DATA-API
-  * =============== */
+   * =============== */
 
   $(document).on('click.button.data-api', '[data-toggle^=button]', (e) => {
     let $btn = $(e.target);
     if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn');
     $btn.button('toggle');
   });
-}(window.jQuery));/* ==========================================================
+})(window.jQuery); /* ==========================================================
  * bootstrap-carousel.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#carousel
  * ==========================================================
@@ -258,23 +259,26 @@
   // jshint ;_;
 
   /* CAROUSEL CLASS DEFINITION
-  * ========================= */
+   * ========================= */
 
   const Carousel = function (element, options) {
     this.$element = $(element);
     this.options = options;
-    this.options.pause == 'hover' && this.$element
-      .on('mouseenter', $.proxy(this.pause, this))
-      .on('mouseleave', $.proxy(this.cycle, this));
+    this.options.pause == 'hover' &&
+      this.$element
+        .on('mouseenter', $.proxy(this.pause, this))
+        .on('mouseleave', $.proxy(this.cycle, this));
   };
 
   Carousel.prototype = {
-
     cycle(e) {
       if (!e) this.paused = false;
-      this.options.interval
-        && !this.paused
-        && (this.interval = setInterval($.proxy(this.next, this), this.options.interval));
+      this.options.interval &&
+        !this.paused &&
+        (this.interval = setInterval(
+          $.proxy(this.next, this),
+          this.options.interval,
+        ));
       return this;
     },
 
@@ -284,7 +288,7 @@
       const activePos = children.index($active);
       const that = this;
 
-      if (pos > (children.length - 1) || pos < 0) return;
+      if (pos > children.length - 1 || pos < 0) return;
 
       if (this.sliding) {
         return this.$element.one('slid', () => {
@@ -301,7 +305,10 @@
 
     pause(e) {
       if (!e) this.paused = true;
-      if (this.$element.find('.next, .prev').length && $.support.transition.end) {
+      if (
+        this.$element.find('.next, .prev').length &&
+        $.support.transition.end
+      ) {
         this.$element.trigger($.support.transition.end);
         this.cycle();
       }
@@ -352,7 +359,9 @@
           $next.removeClass([type, direction].join(' ')).addClass('active');
           $active.removeClass(['active', direction].join(' '));
           that.sliding = false;
-          setTimeout(() => { that.$element.trigger('slid'); }, 0);
+          setTimeout(() => {
+            that.$element.trigger('slid');
+          }, 0);
         });
       } else {
         this.$element.trigger(e);
@@ -367,11 +376,10 @@
 
       return this;
     },
-
   };
 
   /* CAROUSEL PLUGIN DEFINITION
-  * ========================== */
+   * ========================== */
 
   const old = $.fn.carousel;
 
@@ -379,7 +387,11 @@
     return this.each(function () {
       const $this = $(this);
       let data = $this.data('carousel');
-      const options = $.extend({}, $.fn.carousel.defaults, typeof option === 'object' && option);
+      const options = $.extend(
+        {},
+        $.fn.carousel.defaults,
+        typeof option === 'object' && option,
+      );
       const action = typeof option === 'string' ? option : options.slide;
       if (!data) $this.data('carousel', (data = new Carousel(this, options)));
       if (typeof option === 'number') data.to(option);
@@ -396,7 +408,7 @@
   $.fn.carousel.Constructor = Carousel;
 
   /* CAROUSEL NO CONFLICT
-  * ==================== */
+   * ==================== */
 
   $.fn.carousel.noConflict = function () {
     $.fn.carousel = old;
@@ -404,16 +416,22 @@
   };
 
   /* CAROUSEL DATA-API
-  * ================= */
+   * ================= */
 
   $(document).on('click.carousel.data-api', '[data-slide]', function (e) {
-    const $this = $(this); let href;
-    const $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
-      ; const options = $.extend({}, $target.data(), $this.data());
+    const $this = $(this);
+    let href;
+    const $target = $(
+      $this.attr('data-target') ||
+        ((href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')),
+    ); // strip for ie7
+    const options = $.extend({}, $target.data(), $this.data());
     $target.carousel(options);
     e.preventDefault();
   });
-}(window.jQuery));/* =============================================================
+})(
+  window.jQuery,
+); /* =============================================================
  * bootstrap-collapse.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#collapse
  * =============================================================
@@ -436,7 +454,7 @@
   // jshint ;_;
 
   /* COLLAPSE PUBLIC CLASS DEFINITION
-  * ================================ */
+   * ================================ */
 
   const Collapse = function (element, options) {
     this.$element = $(element);
@@ -450,7 +468,6 @@
   };
 
   Collapse.prototype = {
-
     constructor: Collapse,
 
     dimension() {
@@ -479,7 +496,8 @@
 
       this.$element[dimension](0);
       this.transition('addClass', $.Event('show'), 'shown');
-      $.support.transition && this.$element[dimension](this.$element[0][scroll]);
+      $.support.transition &&
+        this.$element[dimension](this.$element[0][scroll]);
     },
 
     hide() {
@@ -494,10 +512,8 @@
     reset(size) {
       const dimension = this.dimension();
 
-      this.$element
-        .removeClass('collapse')
-        [dimension](size || 'auto')
-        [0].offsetWidth;
+      this.$element.removeClass('collapse')[dimension](size || 'auto')[0]
+        .offsetWidth;
 
       this.$element[size !== null ? 'addClass' : 'removeClass']('collapse');
 
@@ -528,11 +544,10 @@
     toggle() {
       this[this.$element.hasClass('in') ? 'hide' : 'show']();
     },
-
   };
 
   /* COLLAPSE PLUGIN DEFINITION
-  * ========================== */
+   * ========================== */
 
   const old = $.fn.collapse;
 
@@ -553,7 +568,7 @@
   $.fn.collapse.Constructor = Collapse;
 
   /* COLLAPSE NO CONFLICT
-  * ==================== */
+   * ==================== */
 
   $.fn.collapse.noConflict = function () {
     $.fn.collapse = old;
@@ -561,18 +576,26 @@
   };
 
   /* COLLAPSE DATA-API
-  * ================= */
+   * ================= */
 
-  $(document).on('click.collapse.data-api', '[data-toggle=collapse]', function (e) {
-    const $this = $(this); let href;
-    const target = $this.attr('data-target')
-        || e.preventDefault()
-        || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
-      ; const option = $(target).data('collapse') ? 'toggle' : $this.data();
-    $this[$(target).hasClass('in') ? 'addClass' : 'removeClass']('collapsed');
-    $(target).collapse(option);
-  });
-}(window.jQuery));/* ============================================================
+  $(document).on(
+    'click.collapse.data-api',
+    '[data-toggle=collapse]',
+    function (e) {
+      const $this = $(this);
+      let href;
+      const target =
+        $this.attr('data-target') ||
+        e.preventDefault() ||
+        ((href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')); // strip for ie7
+      const option = $(target).data('collapse') ? 'toggle' : $this.data();
+      $this[$(target).hasClass('in') ? 'addClass' : 'removeClass']('collapsed');
+      $(target).collapse(option);
+    },
+  );
+})(
+  window.jQuery,
+); /* ============================================================
  * bootstrap-dropdown.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#dropdowns
  * ============================================================
@@ -595,7 +618,7 @@
   // jshint ;_;
 
   /* DROPDOWN CLASS DEFINITION
-  * ========================= */
+   * ========================= */
 
   const toggle = '[data-toggle=dropdown]';
   const Dropdown = function (element) {
@@ -606,7 +629,6 @@
   };
 
   Dropdown.prototype = {
-
     constructor: Dropdown,
 
     toggle(e) {
@@ -664,11 +686,8 @@
       if (e.keyCode == 40 && index < $items.length - 1) index++; // down
       if (!~index) index = 0;
 
-      $items
-        .eq(index)
-        .focus();
+      $items.eq(index).focus();
     },
-
   };
 
   function clearMenus() {
@@ -683,7 +702,10 @@
 
     if (!selector) {
       selector = $this.attr('href');
-      selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, ''); // strip for ie7
+      selector =
+        selector &&
+        /#/.test(selector) &&
+        selector.replace(/.*(?=#[^\s]*$)/, ''); // strip for ie7
     }
 
     $parent = $(selector);
@@ -709,7 +731,7 @@
   $.fn.dropdown.Constructor = Dropdown;
 
   /* DROPDOWN NO CONFLICT
-  * ==================== */
+   * ==================== */
 
   $.fn.dropdown.noConflict = function () {
     $.fn.dropdown = old;
@@ -721,11 +743,27 @@
 
   $(document)
     .on('click.dropdown.data-api touchstart.dropdown.data-api', clearMenus)
-    .on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', (e) => { e.stopPropagation(); })
-    .on('touchstart.dropdown.data-api', '.dropdown-menu', (e) => { e.stopPropagation(); })
-    .on('click.dropdown.data-api touchstart.dropdown.data-api', toggle, Dropdown.prototype.toggle)
-    .on('keydown.dropdown.data-api touchstart.dropdown.data-api', `${toggle}, [role=menu]`, Dropdown.prototype.keydown);
-}(window.jQuery));/* =========================================================
+    .on(
+      'click.dropdown touchstart.dropdown.data-api',
+      '.dropdown form',
+      (e) => {
+        e.stopPropagation();
+      },
+    )
+    .on('touchstart.dropdown.data-api', '.dropdown-menu', (e) => {
+      e.stopPropagation();
+    })
+    .on(
+      'click.dropdown.data-api touchstart.dropdown.data-api',
+      toggle,
+      Dropdown.prototype.toggle,
+    )
+    .on(
+      'keydown.dropdown.data-api touchstart.dropdown.data-api',
+      `${toggle}, [role=menu]`,
+      Dropdown.prototype.keydown,
+    );
+})(window.jQuery); /* =========================================================
  * bootstrap-modal.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#modals
  * =========================================================
@@ -748,17 +786,20 @@
   // jshint ;_;
 
   /* MODAL CLASS DEFINITION
-  * ====================== */
+   * ====================== */
 
   const Modal = function (element, options) {
     this.options = options;
-    this.$element = $(element)
-      .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this));
-    this.options.remote && this.$element.find('.modal-body').load(this.options.remote);
+    this.$element = $(element).delegate(
+      '[data-dismiss="modal"]',
+      'click.dismiss.modal',
+      $.proxy(this.hide, this),
+    );
+    this.options.remote &&
+      this.$element.find('.modal-body').load(this.options.remote);
   };
 
   Modal.prototype = {
-
     constructor: Modal,
 
     toggle() {
@@ -778,27 +819,27 @@
       this.escape();
 
       this.backdrop(() => {
-        const transition = $.support.transition && that.$element.hasClass('fade');
+        const transition =
+          $.support.transition && that.$element.hasClass('fade');
 
         if (!that.$element.parent().length) {
           that.$element.appendTo(document.body); // don't move modals dom position
         }
 
-        that.$element
-          .show();
+        that.$element.show();
 
         if (transition) {
           that.$element[0].offsetWidth; // force reflow
         }
 
-        that.$element
-          .addClass('in')
-          .attr('aria-hidden', false);
+        that.$element.addClass('in').attr('aria-hidden', false);
 
         that.enforceFocus();
 
         transition
-          ? that.$element.one($.support.transition.end, () => { that.$element.focus().trigger('shown'); })
+          ? that.$element.one($.support.transition.end, () => {
+              that.$element.focus().trigger('shown');
+            })
           : that.$element.focus().trigger('shown');
       });
     },
@@ -820,9 +861,7 @@
 
       $(document).off('focusin.modal');
 
-      this.$element
-        .removeClass('in')
-        .attr('aria-hidden', true);
+      this.$element.removeClass('in').attr('aria-hidden', true);
 
       $.support.transition && this.$element.hasClass('fade')
         ? this.hideWithTransition()
@@ -832,7 +871,10 @@
     enforceFocus() {
       const that = this;
       $(document).on('focusin.modal', (e) => {
-        if (that.$element[0] !== e.target && !that.$element.has(e.target).length) {
+        if (
+          that.$element[0] !== e.target &&
+          !that.$element.has(e.target).length
+        ) {
           that.$element.focus();
         }
       });
@@ -863,9 +905,7 @@
     },
 
     hideModal(that) {
-      this.$element
-        .hide()
-        .trigger('hidden');
+      this.$element.hide().trigger('hidden');
 
       this.backdrop();
     },
@@ -882,8 +922,9 @@
       if (this.isShown && this.options.backdrop) {
         const doAnimate = $.support.transition && animate;
 
-        this.$backdrop = $(`<div class="modal-backdrop ${animate}" />`)
-          .appendTo(document.body);
+        this.$backdrop = $(
+          `<div class="modal-backdrop ${animate}" />`,
+        ).appendTo(document.body);
 
         this.$backdrop.click(
           this.options.backdrop == 'static'
@@ -902,7 +943,10 @@
         this.$backdrop.removeClass('in');
 
         $.support.transition && this.$element.hasClass('fade')
-          ? this.$backdrop.one($.support.transition.end, $.proxy(this.removeBackdrop, this))
+          ? this.$backdrop.one(
+              $.support.transition.end,
+              $.proxy(this.removeBackdrop, this),
+            )
           : this.removeBackdrop();
       } else if (callback) {
         callback();
@@ -911,7 +955,7 @@
   };
 
   /* MODAL PLUGIN DEFINITION
-  * ======================= */
+   * ======================= */
 
   const old = $.fn.modal;
 
@@ -919,7 +963,12 @@
     return this.each(function () {
       const $this = $(this);
       let data = $this.data('modal');
-      const options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option === 'object' && option);
+      const options = $.extend(
+        {},
+        $.fn.modal.defaults,
+        $this.data(),
+        typeof option === 'object' && option,
+      );
       if (!data) $this.data('modal', (data = new Modal(this, options)));
       if (typeof option === 'string') data[option]();
       else if (options.show) data.show();
@@ -935,7 +984,7 @@
   $.fn.modal.Constructor = Modal;
 
   /* MODAL NO CONFLICT
-  * ================= */
+   * ================= */
 
   $.fn.modal.noConflict = function () {
     $.fn.modal = old;
@@ -943,23 +992,29 @@
   };
 
   /* MODAL DATA-API
-  * ============== */
+   * ============== */
 
   $(document).on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
     const $this = $(this);
     const href = $this.attr('href');
-    const $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))); // strip for ie7
-    const option = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data());
+    const $target = $(
+      $this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, '')),
+    ); // strip for ie7
+    const option = $target.data('modal')
+      ? 'toggle'
+      : $.extend(
+          { remote: !/#/.test(href) && href },
+          $target.data(),
+          $this.data(),
+        );
 
     e.preventDefault();
 
-    $target
-      .modal(option)
-      .one('hide', () => {
-        $this.focus();
-      });
+    $target.modal(option).one('hide', () => {
+      $this.focus();
+    });
   });
-}(window.jQuery));
+})(window.jQuery);
 /* ===========================================================
  * bootstrap-tooltip.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
@@ -984,14 +1039,13 @@
   // jshint ;_;
 
   /* TOOLTIP PUBLIC CLASS DEFINITION
-  * =============================== */
+   * =============================== */
 
   const Tooltip = function (element, options) {
     this.init('tooltip', element, options);
   };
 
   Tooltip.prototype = {
-
     constructor: Tooltip,
 
     init(type, element, options) {
@@ -1004,21 +1058,41 @@
       this.enabled = true;
 
       if (this.options.trigger == 'click') {
-        this.$element.on(`click.${this.type}`, this.options.selector, $.proxy(this.toggle, this));
+        this.$element.on(
+          `click.${this.type}`,
+          this.options.selector,
+          $.proxy(this.toggle, this),
+        );
       } else if (this.options.trigger != 'manual') {
         eventIn = this.options.trigger == 'hover' ? 'mouseenter' : 'focus';
         eventOut = this.options.trigger == 'hover' ? 'mouseleave' : 'blur';
-        this.$element.on(`${eventIn}.${this.type}`, this.options.selector, $.proxy(this.enter, this));
-        this.$element.on(`${eventOut}.${this.type}`, this.options.selector, $.proxy(this.leave, this));
+        this.$element.on(
+          `${eventIn}.${this.type}`,
+          this.options.selector,
+          $.proxy(this.enter, this),
+        );
+        this.$element.on(
+          `${eventOut}.${this.type}`,
+          this.options.selector,
+          $.proxy(this.leave, this),
+        );
       }
 
       this.options.selector
-        ? (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' }))
+        ? (this._options = $.extend({}, this.options, {
+            trigger: 'manual',
+            selector: '',
+          }))
         : this.fixTitle();
     },
 
     getOptions(options) {
-      options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data());
+      options = $.extend(
+        {},
+        $.fn[this.type].defaults,
+        options,
+        this.$element.data(),
+      );
 
       if (options.delay && typeof options.delay === 'number') {
         options.delay = {
@@ -1071,9 +1145,10 @@
           $tip.addClass('fade');
         }
 
-        placement = typeof this.options.placement === 'function'
-          ? this.options.placement.call(this, $tip[0], this.$element[0])
-          : this.options.placement;
+        placement =
+          typeof this.options.placement === 'function'
+            ? this.options.placement.call(this, $tip[0], this.$element[0])
+            : this.options.placement;
 
         inside = /in/.test(placement);
 
@@ -1089,23 +1164,32 @@
 
         switch (inside ? placement.split(' ')[1] : placement) {
           case 'bottom':
-            tp = { top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2 };
+            tp = {
+              top: pos.top + pos.height,
+              left: pos.left + pos.width / 2 - actualWidth / 2,
+            };
             break;
           case 'top':
-            tp = { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 };
+            tp = {
+              top: pos.top - actualHeight,
+              left: pos.left + pos.width / 2 - actualWidth / 2,
+            };
             break;
           case 'left':
-            tp = { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth };
+            tp = {
+              top: pos.top + pos.height / 2 - actualHeight / 2,
+              left: pos.left - actualWidth,
+            };
             break;
           case 'right':
-            tp = { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width };
+            tp = {
+              top: pos.top + pos.height / 2 - actualHeight / 2,
+              left: pos.left + pos.width,
+            };
             break;
         }
 
-        $tip
-          .offset(tp)
-          .addClass(placement)
-          .addClass('in');
+        $tip.offset(tp).addClass(placement).addClass('in');
       }
     },
 
@@ -1143,8 +1227,13 @@
 
     fixTitle() {
       const $e = this.$element;
-      if ($e.attr('title') || typeof ($e.attr('data-original-title')) !== 'string') {
-        $e.attr('data-original-title', $e.attr('title') || '').removeAttr('title');
+      if (
+        $e.attr('title') ||
+        typeof $e.attr('data-original-title') !== 'string'
+      ) {
+        $e.attr('data-original-title', $e.attr('title') || '').removeAttr(
+          'title',
+        );
       }
     },
 
@@ -1153,10 +1242,14 @@
     },
 
     getPosition(inside) {
-      return $.extend({}, (inside ? { top: 0, left: 0 } : this.$element.offset()), {
-        width: this.$element[0].offsetWidth,
-        height: this.$element[0].offsetHeight,
-      });
+      return $.extend(
+        {},
+        inside ? { top: 0, left: 0 } : this.$element.offset(),
+        {
+          width: this.$element[0].offsetWidth,
+          height: this.$element[0].offsetHeight,
+        },
+      );
     },
 
     getTitle() {
@@ -1164,14 +1257,15 @@
       const $e = this.$element;
       const o = this.options;
 
-      title = $e.attr('data-original-title')
-        || (typeof o.title === 'function' ? o.title.call($e[0]) : o.title);
+      title =
+        $e.attr('data-original-title') ||
+        (typeof o.title === 'function' ? o.title.call($e[0]) : o.title);
 
       return title;
     },
 
     tip() {
-      return this.$tip = this.$tip || $(this.options.template);
+      return (this.$tip = this.$tip || $(this.options.template));
     },
 
     validate() {
@@ -1202,11 +1296,10 @@
     destroy() {
       this.hide().$element.off(`.${this.type}`).removeData(this.type);
     },
-
   };
 
   /* TOOLTIP PLUGIN DEFINITION
-  * ========================= */
+   * ========================= */
 
   const old = $.fn.tooltip;
 
@@ -1226,7 +1319,8 @@
     animation: true,
     placement: 'top',
     selector: false,
-    template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+    template:
+      '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
     trigger: 'hover',
     title: '',
     delay: 0,
@@ -1234,13 +1328,15 @@
   };
 
   /* TOOLTIP NO CONFLICT
-  * =================== */
+   * =================== */
 
   $.fn.tooltip.noConflict = function () {
     $.fn.tooltip = old;
     return this;
   };
-}(window.jQuery));/* ===========================================================
+})(
+  window.jQuery,
+); /* ===========================================================
  * bootstrap-popover.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#popovers
  * ===========================================================
@@ -1263,7 +1359,7 @@
   // jshint ;_;
 
   /* POPOVER PUBLIC CLASS DEFINITION
-  * =============================== */
+   * =============================== */
 
   const Popover = function (element, options) {
     this.init('popover', element, options);
@@ -1273,7 +1369,6 @@
      ========================================== */
 
   Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype, {
-
     constructor: Popover,
 
     setContent() {
@@ -1282,7 +1377,9 @@
       const content = this.getContent();
 
       $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title);
-      $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content);
+      $tip
+        .find('.popover-content')
+        [this.options.html ? 'html' : 'text'](content);
 
       $tip.removeClass('fade top bottom left right in');
     },
@@ -1296,8 +1393,9 @@
       const $e = this.$element;
       const o = this.options;
 
-      content = $e.attr('data-content')
-        || (typeof o.content === 'function' ? o.content.call($e[0]) : o.content);
+      content =
+        $e.attr('data-content') ||
+        (typeof o.content === 'function' ? o.content.call($e[0]) : o.content);
 
       return content;
     },
@@ -1312,11 +1410,10 @@
     destroy() {
       this.hide().$element.off(`.${this.type}`).removeData(this.type);
     },
-
   });
 
   /* POPOVER PLUGIN DEFINITION
-  * ======================= */
+   * ======================= */
 
   const old = $.fn.popover;
 
@@ -1336,17 +1433,20 @@
     placement: 'right',
     trigger: 'click',
     content: '',
-    template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"></div></div></div>',
+    template:
+      '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"></div></div></div>',
   });
 
   /* POPOVER NO CONFLICT
-  * =================== */
+   * =================== */
 
   $.fn.popover.noConflict = function () {
     $.fn.popover = old;
     return this;
   };
-}(window.jQuery));/* =============================================================
+})(
+  window.jQuery,
+); /* =============================================================
  * bootstrap-scrollspy.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#scrollspy
  * =============================================================
@@ -1369,7 +1469,7 @@
   // jshint ;_;
 
   /* SCROLLSPY CLASS DEFINITION
-  * ========================== */
+   * ========================== */
 
   function ScrollSpy(element, options) {
     const process = $.proxy(this.process, this);
@@ -1377,16 +1477,18 @@
     let href;
     this.options = $.extend({}, $.fn.scrollspy.defaults, options);
     this.$scrollElement = $element.on('scroll.scroll-spy.data-api', process);
-    this.selector = `${this.options.target
-      || ((href = $(element).attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
-      || ''} .nav li > a`;
+    this.selector = `${
+      this.options.target ||
+      ((href = $(element).attr('href')) &&
+        href.replace(/.*(?=#[^\s]+$)/, '')) || // strip for ie7
+      ''
+    } .nav li > a`;
     this.$body = $('body');
     this.refresh();
     this.process();
   }
 
   ScrollSpy.prototype = {
-
     constructor: ScrollSpy,
 
     refresh() {
@@ -1402,9 +1504,13 @@
           const $el = $(this);
           const href = $el.data('target') || $el.attr('href');
           const $href = /^#\w/.test(href) && $(href);
-          return ($href
-              && $href.length
-              && [[$href.position().top + self.$scrollElement.scrollTop(), href]]) || null;
+          return (
+            ($href &&
+              $href.length && [
+                [$href.position().top + self.$scrollElement.scrollTop(), href],
+              ]) ||
+            null
+          );
         })
         .sort((a, b) => a[0] - b[0])
         .each(function () {
@@ -1415,7 +1521,8 @@
 
     process() {
       const scrollTop = this.$scrollElement.scrollTop() + this.options.offset;
-      const scrollHeight = this.$scrollElement[0].scrollHeight || this.$body[0].scrollHeight;
+      const scrollHeight =
+        this.$scrollElement[0].scrollHeight || this.$body[0].scrollHeight;
       const maxScroll = scrollHeight - this.$scrollElement.height();
       const { offsets } = this;
       const { targets } = this;
@@ -1423,15 +1530,14 @@
       let i;
 
       if (scrollTop >= maxScroll) {
-        return activeTarget != (i = targets.last()[0])
-            && this.activate(i);
+        return activeTarget != (i = targets.last()[0]) && this.activate(i);
       }
 
-      for (i = offsets.length; i--;) {
-        activeTarget != targets[i]
-            && scrollTop >= offsets[i]
-            && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
-            && this.activate(targets[i]);
+      for (i = offsets.length; i--; ) {
+        activeTarget != targets[i] &&
+          scrollTop >= offsets[i] &&
+          (!offsets[i + 1] || scrollTop <= offsets[i + 1]) &&
+          this.activate(targets[i]);
       }
     },
 
@@ -1441,17 +1547,13 @@
 
       this.activeTarget = target;
 
-      $(this.selector)
-        .parent('.active')
-        .removeClass('active');
+      $(this.selector).parent('.active').removeClass('active');
 
-      selector = `${this.selector
-      }[data-target="${target}"],${
-        this.selector}[href="${target}"]`;
+      selector = `${this.selector}[data-target="${target}"],${
+        this.selector
+      }[href="${target}"]`;
 
-      active = $(selector)
-        .parent('li')
-        .addClass('active');
+      active = $(selector).parent('li').addClass('active');
 
       if (active.parent('.dropdown-menu').length) {
         active = active.closest('li.dropdown').addClass('active');
@@ -1459,11 +1561,10 @@
 
       active.trigger('activate');
     },
-
   };
 
   /* SCROLLSPY PLUGIN DEFINITION
-  * =========================== */
+   * =========================== */
 
   const old = $.fn.scrollspy;
 
@@ -1484,7 +1585,7 @@
   };
 
   /* SCROLLSPY NO CONFLICT
-  * ===================== */
+   * ===================== */
 
   $.fn.scrollspy.noConflict = function () {
     $.fn.scrollspy = old;
@@ -1492,7 +1593,7 @@
   };
 
   /* SCROLLSPY DATA-API
-  * ================== */
+   * ================== */
 
   $(window).on('load', () => {
     $('[data-spy="scroll"]').each(function () {
@@ -1500,7 +1601,7 @@
       $spy.scrollspy($spy.data());
     });
   });
-}(window.jQuery));/* ========================================================
+})(window.jQuery); /* ========================================================
  * bootstrap-tab.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#tabs
  * ========================================================
@@ -1523,14 +1624,13 @@
   // jshint ;_;
 
   /* TAB CLASS DEFINITION
-  * ==================== */
+   * ==================== */
 
   const Tab = function (element) {
     this.element = $(element);
   };
 
   Tab.prototype = {
-
     constructor: Tab,
 
     show() {
@@ -1571,9 +1671,8 @@
 
     activate(element, container, callback) {
       const $active = container.find('> .active');
-      const transition = callback
-            && $.support.transition
-            && $active.hasClass('fade');
+      const transition =
+        callback && $.support.transition && $active.hasClass('fade');
 
       function next() {
         $active
@@ -1597,16 +1696,14 @@
         callback && callback();
       }
 
-      transition
-        ? $active.one($.support.transition.end, next)
-        : next();
+      transition ? $active.one($.support.transition.end, next) : next();
 
       $active.removeClass('in');
     },
   };
 
   /* TAB PLUGIN DEFINITION
-  * ===================== */
+   * ===================== */
 
   const old = $.fn.tab;
 
@@ -1622,7 +1719,7 @@
   $.fn.tab.Constructor = Tab;
 
   /* TAB NO CONFLICT
-  * =============== */
+   * =============== */
 
   $.fn.tab.noConflict = function () {
     $.fn.tab = old;
@@ -1630,13 +1727,19 @@
   };
 
   /* TAB DATA-API
-  * ============ */
+   * ============ */
 
-  $(document).on('click.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  });
-}(window.jQuery));/* =============================================================
+  $(document).on(
+    'click.tab.data-api',
+    '[data-toggle="tab"], [data-toggle="pill"]',
+    function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    },
+  );
+})(
+  window.jQuery,
+); /* =============================================================
  * bootstrap-typeahead.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
  * =============================================================
@@ -1659,7 +1762,7 @@
   // jshint ;_;
 
   /* TYPEAHEAD PUBLIC CLASS DEFINITION
-  * ================================= */
+   * ================================= */
 
   const Typeahead = function (element, options) {
     this.$element = $(element);
@@ -1675,14 +1778,11 @@
   };
 
   Typeahead.prototype = {
-
     constructor: Typeahead,
 
     select() {
       const val = this.$menu.find('.active').attr('data-value');
-      this.$element
-        .val(this.updater(val))
-        .change();
+      this.$element.val(this.updater(val)).change();
       return this.hide();
     },
 
@@ -1722,7 +1822,9 @@
         return this.shown ? this.hide() : this;
       }
 
-      items = $.isFunction(this.source) ? this.source(this.query, $.proxy(this.process, this)) : this.source;
+      items = $.isFunction(this.source)
+        ? this.source(this.query, $.proxy(this.process, this))
+        : this.source;
 
       return items ? this.process(items) : this;
     },
@@ -1751,8 +1853,9 @@
       const caseInsensitive = [];
       let item;
 
-      while (item = items.shift()) {
-        if (!item.toLowerCase().indexOf(this.query.toLowerCase())) beginswith.push(item);
+      while ((item = items.shift())) {
+        if (!item.toLowerCase().indexOf(this.query.toLowerCase()))
+          beginswith.push(item);
         else if (~item.indexOf(this.query)) caseSensitive.push(item);
         else caseInsensitive.push(item);
       }
@@ -1762,7 +1865,10 @@
 
     highlighter(item) {
       const query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
-      return item.replace(new RegExp(`(${query})`, 'ig'), ($1, match) => `<strong>${match}</strong>`);
+      return item.replace(
+        new RegExp(`(${query})`, 'ig'),
+        ($1, match) => `<strong>${match}</strong>`,
+      );
     },
 
     render(items) {
@@ -1889,7 +1995,9 @@
 
     blur(e) {
       const that = this;
-      setTimeout(() => { that.hide(); }, 150);
+      setTimeout(() => {
+        that.hide();
+      }, 150);
     },
 
     click(e) {
@@ -1902,7 +2010,6 @@
       this.$menu.find('.active').removeClass('active');
       $(e.currentTarget).addClass('active');
     },
-
   };
 
   /* TYPEAHEAD PLUGIN DEFINITION
@@ -1931,7 +2038,7 @@
   $.fn.typeahead.Constructor = Typeahead;
 
   /* TYPEAHEAD NO CONFLICT
-  * =================== */
+   * =================== */
 
   $.fn.typeahead.noConflict = function () {
     $.fn.typeahead = old;
@@ -1939,15 +2046,19 @@
   };
 
   /* TYPEAHEAD DATA-API
-  * ================== */
+   * ================== */
 
-  $(document).on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
-    const $this = $(this);
-    if ($this.data('typeahead')) return;
-    e.preventDefault();
-    $this.typeahead($this.data());
-  });
-}(window.jQuery));
+  $(document).on(
+    'focus.typeahead.data-api',
+    '[data-provide="typeahead"]',
+    function (e) {
+      const $this = $(this);
+      if ($this.data('typeahead')) return;
+      e.preventDefault();
+      $this.typeahead($this.data());
+    },
+  );
+})(window.jQuery);
 /* ==========================================================
  * bootstrap-affix.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#affix
@@ -1971,13 +2082,18 @@
   // jshint ;_;
 
   /* AFFIX CLASS DEFINITION
-  * ====================== */
+   * ====================== */
 
   const Affix = function (element, options) {
     this.options = $.extend({}, $.fn.affix.defaults, options);
     this.$window = $(window)
       .on('scroll.affix.data-api', $.proxy(this.checkPosition, this))
-      .on('click.affix.data-api', $.proxy(function () { setTimeout($.proxy(this.checkPosition, this), 1); }, this));
+      .on(
+        'click.affix.data-api',
+        $.proxy(function () {
+          setTimeout($.proxy(this.checkPosition, this), 1);
+        }, this),
+      );
     this.$element = $(element);
     this.checkPosition();
   };
@@ -1998,21 +2114,28 @@
     if (typeof offsetTop === 'function') offsetTop = offset.top();
     if (typeof offsetBottom === 'function') offsetBottom = offset.bottom();
 
-    affix = this.unpin != null && (scrollTop + this.unpin <= position.top)
-      ? false : offsetBottom != null && (position.top + this.$element.height() >= scrollHeight - offsetBottom)
-        ? 'bottom' : offsetTop != null && scrollTop <= offsetTop
-          ? 'top' : false;
+    affix =
+      this.unpin != null && scrollTop + this.unpin <= position.top
+        ? false
+        : offsetBottom != null &&
+            position.top + this.$element.height() >= scrollHeight - offsetBottom
+          ? 'bottom'
+          : offsetTop != null && scrollTop <= offsetTop
+            ? 'top'
+            : false;
 
     if (this.affixed === affix) return;
 
     this.affixed = affix;
     this.unpin = affix == 'bottom' ? position.top - scrollTop : null;
 
-    this.$element.removeClass(reset).addClass(`affix${affix ? `-${affix}` : ''}`);
+    this.$element
+      .removeClass(reset)
+      .addClass(`affix${affix ? `-${affix}` : ''}`);
   };
 
   /* AFFIX PLUGIN DEFINITION
-  * ======================= */
+   * ======================= */
 
   const old = $.fn.affix;
 
@@ -2033,7 +2156,7 @@
   };
 
   /* AFFIX NO CONFLICT
-  * ================= */
+   * ================= */
 
   $.fn.affix.noConflict = function () {
     $.fn.affix = old;
@@ -2041,7 +2164,7 @@
   };
 
   /* AFFIX DATA-API
-  * ============== */
+   * ============== */
 
   $(window).on('load', () => {
     $('[data-spy="affix"]').each(function () {
@@ -2056,4 +2179,4 @@
       $spy.affix(data);
     });
   });
-}(window.jQuery));
+})(window.jQuery);

@@ -20,4 +20,4 @@
     // the calls chainable.
     return this;
   };
-}(jsPDF.API));
+})(jsPDF.API);

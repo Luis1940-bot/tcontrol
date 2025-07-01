@@ -8,7 +8,7 @@ doc.setFontSize(16);
 doc.text(20, 30, `This belongs to: ${name}`);
 
 for (var i = 1; i <= 12; i++) {
-  doc.text(20, 30 + (i * 10), `${i} x ${multiplier} = ___`);
+  doc.text(20, 30 + i * 10, `${i} x ${multiplier} = ___`);
 }
 
 doc.addPage();
@@ -17,7 +17,7 @@ doc.text(20, 20, 'Answers');
 doc.setFontSize(16);
 
 for (var i = 1; i <= 12; i++) {
-  doc.text(20, 30 + (i * 10), `${i} x ${multiplier} = ${i * multiplier}`);
+  doc.text(20, 30 + i * 10, `${i} x ${multiplier} = ${i * multiplier}`);
 }
 
 // You wouldn't normally call this - this is just to make the

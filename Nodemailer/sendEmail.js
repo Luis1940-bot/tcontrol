@@ -83,8 +83,6 @@ async function send(nuevoObjeto, encabezados) {
   }
 }
 
-
-
 function enviaMail(datos, encabezados, plant) {
   try {
     // console.log(datos, encabezados, plant)

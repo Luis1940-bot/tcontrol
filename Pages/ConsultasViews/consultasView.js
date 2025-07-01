@@ -205,7 +205,11 @@ function scrollToTop() {
 function checkScrollPosition() {
   const button = document.getElementById('scrollToTopBtn');
   if (button) {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
 
     if (scrollTop > 200) {
       button.classList.add('show');
@@ -216,7 +220,7 @@ function checkScrollPosition() {
 }
 
 // Inicializar botón flotante cuando la página esté completamente cargada
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   const button = document.getElementById('scrollToTopBtn');
 
   if (button) {

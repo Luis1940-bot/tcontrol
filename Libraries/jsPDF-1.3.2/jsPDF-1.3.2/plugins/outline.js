@@ -12,7 +12,8 @@
 
 (function (jsPDFAPI) {
   jsPDFAPI.events.push([
-    'postPutResources', function () {
+    'postPutResources',
+    function () {
       const pdf = this;
       const rx = /^(\d+) 0 obj$/;
 
@@ -55,7 +56,9 @@
           const id = pdf.internal.newObject();
           dests.push(id);
           const info = pdf.internal.getPageInfo(i + 1);
-          pdf.internal.write(`<< /D[${info.objId} 0 R /XYZ null null null]>> endobj`);
+          pdf.internal.write(
+            `<< /D[${info.objId} 0 R /XYZ null null null]>> endobj`,
+          );
         }
 
         // assign a name for each destination
@@ -78,10 +81,14 @@
   ]);
 
   jsPDFAPI.events.push([
-    'putCatalog', function () {
+    'putCatalog',
+    function () {
       const pdf = this;
       if (pdf.outline.root.children.length > 0) {
-        pdf.internal.write('/Outlines', this.outline.makeRef(this.outline.root));
+        pdf.internal.write(
+          '/Outlines',
+          this.outline.makeRef(this.outline.root),
+        );
         if (this.outline.createNamedDestinations) {
           pdf.internal.write(`/Names ${namesOid} 0 R`);
         }
@@ -92,7 +99,8 @@
   ]);
 
   jsPDFAPI.events.push([
-    'initialized', function () {
+    'initialized',
+    function () {
       const pdf = this;
 
       pdf.outline = {
@@ -106,8 +114,8 @@
       const destsGoto = [];
 
       /**
-				 * Options: pageNumber
-				 */
+       * Options: pageNumber
+       */
       pdf.outline.add = function (parent, title, options) {
         const item = {
           title,
@@ -145,11 +153,18 @@
         this.line('/Type /Outlines');
         if (node.children.length > 0) {
           this.line(`/First ${this.makeRef(node.children[0])}`);
-          this.line(`/Last ${this.makeRef(node.children[node.children.length - 1])}`);
+          this.line(
+            `/Last ${this.makeRef(node.children[node.children.length - 1])}`,
+          );
         }
-        this.line(`/Count ${this.count_r({
-          count: 0,
-        }, node)}`);
+        this.line(
+          `/Count ${this.count_r(
+            {
+              count: 0,
+            },
+            node,
+          )}`,
+        );
         this.objEnd();
       };
 
@@ -169,12 +184,17 @@
           }
           if (item.children.length > 0) {
             this.line(`/First ${this.makeRef(item.children[0])}`);
-            this.line(`/Last ${this.makeRef(item.children[item.children.length - 1])}`);
+            this.line(
+              `/Last ${this.makeRef(item.children[item.children.length - 1])}`,
+            );
           }
 
-          const count = this.count = this.count_r({
-            count: 0,
-          }, item);
+          const count = (this.count = this.count_r(
+            {
+              count: 0,
+            },
+            item,
+          ));
           if (count > 0) {
             this.line(`/Count ${count}`);
           }
@@ -184,7 +204,10 @@
               // Explicit Destination
               // WARNING this assumes page ids are 3,5,7, etc.
               const info = pdf.internal.getPageInfo(item.options.pageNumber);
-              this.line('/Dest ' + `[${info.objId} 0 R /XYZ 0 ${this.ctx.pdf.internal.pageSize.height} 0]`);
+              this.line(
+                '/Dest ' +
+                  `[${info.objId} 0 R /XYZ 0 ${this.ctx.pdf.internal.pageSize.height} 0]`,
+              );
               // this line does not work on all clients (pageNumber instead of page ref)
               // this.line('/Dest ' + '[' + (item.options.pageNumber - 1) + ' /XYZ 0 ' + this.ctx.pdf.internal.pageSize.height + ' 0]');
 
@@ -236,4 +259,4 @@
   ]);
 
   return this;
-}(jsPDF.API));
+})(jsPDF.API);

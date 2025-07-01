@@ -3,40 +3,72 @@
 
   // logging Shim from HTML5 Boilerplate
   window.log = function () {
-	    log.history = log.history || []; // store logs to an array for reference
-	    log.history.push(arguments);
-	    if (this.console) {
-	        arguments.callee = arguments.callee.caller;
-	        const newarr = [].slice.call(arguments);
-	        (typeof console.log === 'object' ? log.apply.call(console.log, console, newarr) : console.log.apply(console, newarr));
-	    }
+    log.history = log.history || []; // store logs to an array for reference
+    log.history.push(arguments);
+    if (this.console) {
+      arguments.callee = arguments.callee.caller;
+      const newarr = [].slice.call(arguments);
+      typeof console.log === 'object'
+        ? log.apply.call(console.log, console, newarr)
+        : console.log.apply(console, newarr);
+    }
   };
   // make it safe to use console.log always
-  (function (b) { function c() { } for (var d = 'assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,timeStamp,profile,profileEnd,time,timeEnd,trace,warn'.split(','), a; a = d.pop();) { b[a] = b[a] || c; } }((function () { try { console.log(); return window.console; } catch (err) { return window.console = {}; } })()));
+  (function (b) {
+    function c() {}
+    for (
+      var d =
+          'assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,timeStamp,profile,profileEnd,time,timeEnd,trace,warn'.split(
+            ',',
+          ),
+        a;
+      (a = d.pop());
+
+    ) {
+      b[a] = b[a] || c;
+    }
+  })(
+    (function () {
+      try {
+        console.log();
+        return window.console;
+      } catch (err) {
+        return (window.console = {});
+      }
+    })(),
+  );
 
   // curl.js text! plugin
   define('text', () => {
-    const progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'];
+    const progIds = [
+      'Msxml2.XMLHTTP',
+      'Microsoft.XMLHTTP',
+      'Msxml2.XMLHTTP.4.0',
+    ];
     // collection of modules that have been written to the built file
     const built = {};
 
     function xhr() {
       if (typeof XMLHttpRequest !== 'undefined') {
         // rewrite the getXhr method to always return the native implementation
-        xhr = function () { return new XMLHttpRequest(); };
+        xhr = function () {
+          return new XMLHttpRequest();
+        };
       } else {
         // keep trying progIds until we find the correct one, then rewrite the getXhr method
         // to always return that one.
-        const noXhr = xhr = function () {
+        const noXhr = (xhr = function () {
           throw new Error('getXhr(): XMLHttpRequest not available');
-        };
+        });
         while (progIds.length > 0 && xhr === noXhr) {
           (function (id) {
             try {
               new ActiveXObject(id);
-              xhr = function () { return new ActiveXObject(id); };
+              xhr = function () {
+                return new ActiveXObject(id);
+              };
             } catch (ex) {}
-          }(progIds.shift()));
+          })(progIds.shift());
         }
       }
       return xhr();
@@ -59,7 +91,8 @@
 
     function nameWithExt(name, defaultExt) {
       return name.lastIndexOf('.') <= name.lastIndexOf('/')
-        ? `${name}.${defaultExt}` : name;
+        ? `${name}.${defaultExt}`
+        : name;
     }
 
     function error(ex) {
@@ -70,12 +103,16 @@
     function jsEncode(text) {
       // TODO: hoist the map and regex to the enclosing scope for better performance
       const map = {
-        34: '\\"', 13: '\\r', 12: '\\f', 10: '\\n', 9: '\\t', 8: '\\b',
+        34: '\\"',
+        13: '\\r',
+        12: '\\f',
+        10: '\\n',
+        9: '\\t',
+        8: '\\b',
       };
       return text.replace(/(["\n\f\t\r\b])/g, (c) => map[c.charCodeAt(0)]);
     }
     return {
-
       load(resourceName, req, callback, config) {
         // remove suffixes (future)
         // hook up callbacks
@@ -92,8 +129,10 @@
         // returns a function that the build tool can use to tell this
         // plugin to write-out a resource
         return function write(pluginId, resource, resolver) {
-          let url; let absId; let text; let
-            output;
+          let url;
+          let absId;
+          let text;
+          let output;
           url = resolver.toUrl(nameWithExt(resource, 'html'));
           absId = resolver.toAbsMid(resource);
           if (!(absId in built)) {
@@ -101,9 +140,10 @@
             // fetch text
             text = jsEncode(fetcher(url));
             // write out a define
-            output = `define("${pluginId}!${absId}", function () {\n`
-							+ `\treturn "${text}";\n`
-						+ '});\n';
+            output =
+              `define("${pluginId}!${absId}", function () {\n` +
+              `\treturn "${text}";\n` +
+              '});\n';
             writer(output);
           }
         };

@@ -19,11 +19,20 @@ function CanvasRenderer(width, height) {
 CanvasRenderer.prototype = Object.create(Renderer.prototype);
 
 CanvasRenderer.prototype.setFillStyle = function (fillStyle) {
-  this.ctx.fillStyle = typeof (fillStyle) === 'object' && !!fillStyle.isColor ? fillStyle.toString() : fillStyle;
+  this.ctx.fillStyle =
+    typeof fillStyle === 'object' && !!fillStyle.isColor
+      ? fillStyle.toString()
+      : fillStyle;
   return this.ctx;
 };
 
-CanvasRenderer.prototype.rectangle = function (left, top, width, height, color) {
+CanvasRenderer.prototype.rectangle = function (
+  left,
+  top,
+  width,
+  height,
+  color,
+) {
   this.setFillStyle(color).fillRect(left, top, width, height);
 };
 
@@ -35,7 +44,14 @@ CanvasRenderer.prototype.circle = function (left, top, size, color) {
   this.ctx.fill();
 };
 
-CanvasRenderer.prototype.circleStroke = function (left, top, size, color, stroke, strokeColor) {
+CanvasRenderer.prototype.circleStroke = function (
+  left,
+  top,
+  size,
+  color,
+  stroke,
+  strokeColor,
+) {
   this.circle(left, top, size, color);
   this.ctx.strokeStyle = strokeColor.toString();
   this.ctx.stroke();
@@ -61,7 +77,17 @@ CanvasRenderer.prototype.taints = function (imageContainer) {
   return imageContainer.tainted;
 };
 
-CanvasRenderer.prototype.drawImage = function (imageContainer, sx, sy, sw, sh, dx, dy, dw, dh) {
+CanvasRenderer.prototype.drawImage = function (
+  imageContainer,
+  sx,
+  sy,
+  sw,
+  sh,
+  dx,
+  dy,
+  dw,
+  dh,
+) {
   if (!this.taints(imageContainer) || this.options.allowTaint) {
     this.ctx.drawImage(imageContainer.image, sx, sy, sw, sh, dx, dy, dw, dh);
   }
@@ -82,15 +108,27 @@ CanvasRenderer.prototype.shape = function (shape) {
     if (point[0] === 'rect') {
       this.ctx.rect.apply(this.ctx, point.slice(1));
     } else {
-      this.ctx[(index === 0) ? 'moveTo' : `${point[0]}To`].apply(this.ctx, point.slice(1));
+      this.ctx[index === 0 ? 'moveTo' : `${point[0]}To`].apply(
+        this.ctx,
+        point.slice(1),
+      );
     }
   }, this);
   this.ctx.closePath();
   return this.ctx;
 };
 
-CanvasRenderer.prototype.font = function (color, style, variant, weight, size, family) {
-  this.setFillStyle(color).font = [style, variant, weight, size, family].join(' ').split(',')[0];
+CanvasRenderer.prototype.font = function (
+  color,
+  style,
+  variant,
+  weight,
+  size,
+  family,
+) {
+  this.setFillStyle(color).font = [style, variant, weight, size, family]
+    .join(' ')
+    .split(',')[0];
 };
 
 CanvasRenderer.prototype.fontShadow = function (color, offsetX, offsetY, blur) {
@@ -126,28 +164,63 @@ CanvasRenderer.prototype.text = function (text, left, bottom) {
   this.ctx.fillText(text, left, bottom);
 };
 
-CanvasRenderer.prototype.backgroundRepeatShape = function (imageContainer, backgroundPosition, size, bounds, left, top, width, height, borderData) {
+CanvasRenderer.prototype.backgroundRepeatShape = function (
+  imageContainer,
+  backgroundPosition,
+  size,
+  bounds,
+  left,
+  top,
+  width,
+  height,
+  borderData,
+) {
   const shape = [
     ['line', Math.round(left), Math.round(top)],
     ['line', Math.round(left + width), Math.round(top)],
     ['line', Math.round(left + width), Math.round(height + top)],
     ['line', Math.round(left), Math.round(height + top)],
   ];
-  this.clip([shape], function () {
-    this.renderBackgroundRepeat(imageContainer, backgroundPosition, size, bounds, borderData[3], borderData[0]);
-  }, this);
+  this.clip(
+    [shape],
+    function () {
+      this.renderBackgroundRepeat(
+        imageContainer,
+        backgroundPosition,
+        size,
+        bounds,
+        borderData[3],
+        borderData[0],
+      );
+    },
+    this,
+  );
 };
 
-CanvasRenderer.prototype.renderBackgroundRepeat = function (imageContainer, backgroundPosition, size, bounds, borderLeft, borderTop) {
-  const offsetX = Math.round(bounds.left + backgroundPosition.left + borderLeft); const
-    offsetY = Math.round(bounds.top + backgroundPosition.top + borderTop);
-  this.setFillStyle(this.ctx.createPattern(this.resizeImage(imageContainer, size), 'repeat'));
+CanvasRenderer.prototype.renderBackgroundRepeat = function (
+  imageContainer,
+  backgroundPosition,
+  size,
+  bounds,
+  borderLeft,
+  borderTop,
+) {
+  const offsetX = Math.round(
+    bounds.left + backgroundPosition.left + borderLeft,
+  );
+  const offsetY = Math.round(bounds.top + backgroundPosition.top + borderTop);
+  this.setFillStyle(
+    this.ctx.createPattern(this.resizeImage(imageContainer, size), 'repeat'),
+  );
   this.ctx.translate(offsetX, offsetY);
   this.ctx.fill();
   this.ctx.translate(-offsetX, -offsetY);
 };
 
-CanvasRenderer.prototype.renderBackgroundGradient = function (gradientImage, bounds) {
+CanvasRenderer.prototype.renderBackgroundGradient = function (
+  gradientImage,
+  bounds,
+) {
   if (gradientImage instanceof LinearGradientContainer) {
     const gradient = this.ctx.createLinearGradient(
       bounds.left + bounds.width * gradientImage.x0,
@@ -158,7 +231,13 @@ CanvasRenderer.prototype.renderBackgroundGradient = function (gradientImage, bou
     gradientImage.colorStops.forEach((colorStop) => {
       gradient.addColorStop(colorStop.stop, colorStop.color.toString());
     });
-    this.rectangle(bounds.left, bounds.top, bounds.width, bounds.height, gradient);
+    this.rectangle(
+      bounds.left,
+      bounds.top,
+      bounds.width,
+      bounds.height,
+      gradient,
+    );
   }
 };
 
@@ -168,12 +247,22 @@ CanvasRenderer.prototype.resizeImage = function (imageContainer, size) {
     return image;
   }
 
-  let ctx; const
-    canvas = document.createElement('canvas');
+  let ctx;
+  const canvas = document.createElement('canvas');
   canvas.width = size.width;
   canvas.height = size.height;
   ctx = canvas.getContext('2d');
-  ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, size.width, size.height);
+  ctx.drawImage(
+    image,
+    0,
+    0,
+    image.width,
+    image.height,
+    0,
+    0,
+    size.width,
+    size.height,
+  );
   return canvas;
 };
 

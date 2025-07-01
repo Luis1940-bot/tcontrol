@@ -389,45 +389,49 @@ async function leeApp(json) {
     const data = await readJSON(json);
     Object.assign(appJSON, data);
     configPHP(data, SERVER);
-    
+
     // No esperar por el select aquí, eso se hará después de que se cree el DOM
     return data;
-    
   } catch (error) {
     console.error('Error detallado al cargar archivo JSON:', error);
-    
+
     // Si es un error de JSON, mostrar mensaje más específico
-    if (error.message.includes('JSON') || error.message.includes('Unexpected token')) {
+    if (
+      error.message.includes('JSON') ||
+      error.message.includes('Unexpected token')
+    ) {
       console.error('Error de formato JSON. Verificar archivo:', json);
     }
-    
+
     // Datos fallback en caso de error
     const fallbackData = {
-      "plantas": [
+      plantas: [
         {
-          "name": "Tenki",
-          "num": 27
-        }
+          name: 'Tenki',
+          num: 27,
+        },
       ],
-      "company": "Luis Gimenez",
-      "developer": "Tenki",
-      "by": "by Luis Gimenez",
-      "logo": "tcontrol"
+      company: 'Luis Gimenez',
+      developer: 'Tenki',
+      by: 'by Luis Gimenez',
+      logo: 'tcontrol',
     };
-    
+
     // Usar datos fallback
     Object.assign(appJSON, fallbackData);
     configPHP(fallbackData, SERVER);
-    
+
     const miAlerta = new Alerta();
     const obj = arrayGlobal.avisoRojo;
     const texto =
-      trO('Error al cargar configuración. Usando configuración por defecto.', objTranslate) ||
-      'Error al cargar configuración. Usando configuración por defecto.';
+      trO(
+        'Error al cargar configuración. Usando configuración por defecto.',
+        objTranslate,
+      ) || 'Error al cargar configuración. Usando configuración por defecto.';
     miAlerta.createVerde(obj, texto, objTranslate);
     const modal = document.getElementById('modalAlertVerde');
     modal.style.display = 'block';
-    
+
     return fallbackData;
     // No re-lanzar el error para permitir que continúe la carga
   }
@@ -478,7 +482,7 @@ function creador(element) {
         trO(element.config.text, objTranslate) || element.config.text;
       elemento = createSpan(element.config);
     }
-    
+
     return elemento;
   } catch (error) {
     console.error('Error en creador:', error, 'Elemento:', element);
@@ -493,9 +497,9 @@ function armadoDeHTML(json) {
       console.error('ERROR: div-login-buttons no encontrado');
       return;
     }
-    
+
     const elementos = json.elements;
-    
+
     elementos.forEach((element) => {
       const elementoCreado = creador(element);
       if (element.children) {
@@ -507,7 +511,6 @@ function armadoDeHTML(json) {
       }
       elementoCreado ? div.appendChild(elementoCreado) : null;
     });
-    
   } catch (error) {
     console.error('Error en armadoDeHTML:', error);
   }
@@ -517,7 +520,7 @@ function leeModelo(ruta) {
   readJSON(ruta)
     .then((data) => {
       armadoDeHTML(data);
-      
+
       // Después de crear HTML elementos, cargar datos en select
       // Esperar un poco para que el DOM se actualice
       setTimeout(() => {
@@ -734,11 +737,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         versionElement.innerText = version;
       }
     } catch (versionError) {
-      // Si el error contiene información sobre JSON parsing de "V1.0", 
+      // Si el error contiene información sobre JSON parsing de "V1.0",
       // significa que algo está tratando de parsear el contenido HTML
       if (versionError.message && versionError.message.includes('V1.0')) {
-        console.error('PROBLEMA DETECTADO: Algo está tratando de parsear el contenido HTML como JSON');
-        console.error('Esto puede deberse a un problema de CSP o de configuración del servidor');
+        console.error(
+          'PROBLEMA DETECTADO: Algo está tratando de parsear el contenido HTML como JSON',
+        );
+        console.error(
+          'Esto puede deberse a un problema de CSP o de configuración del servidor',
+        );
       }
       // Mantener la versión por defecto que ya está en el HTML
     }
@@ -785,18 +792,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     finPerformance();
   } catch (error) {
     console.error('Error crítico en la carga de la página:', error);
-    
+
     // Ocultar spinner incluso si hay error
     const spinner = document.querySelector('.spinner');
     if (spinner) {
       spinner.style.visibility = 'hidden';
     }
-    
+
     // Mostrar mensaje de error al usuario
     try {
       const miAlerta = new Alerta();
       const obj = arrayGlobal.avisoRojo;
-      const texto = 'Error al cargar la página. Por favor, recargue e intente de nuevo.';
+      const texto =
+        'Error al cargar la página. Por favor, recargue e intente de nuevo.';
       miAlerta.createVerde(obj, texto, objTranslate);
       const modal = document.getElementById('modalAlertVerde');
       if (modal) {
@@ -804,7 +812,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     } catch (alertError) {
       // Si no se puede mostrar alerta, mostrar alert nativo
-      alert('Error al cargar la página. Por favor, recargue e intente de nuevo.');
+      alert(
+        'Error al cargar la página. Por favor, recargue e intente de nuevo.',
+      );
     }
   }
 });

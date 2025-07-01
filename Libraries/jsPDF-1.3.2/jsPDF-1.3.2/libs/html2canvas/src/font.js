@@ -32,7 +32,7 @@ function Font(family, size) {
   span.appendChild(document.createTextNode(sampleText));
   container.appendChild(span);
   container.appendChild(img);
-  baseline = (img.offsetTop - span.offsetTop) + 1;
+  baseline = img.offsetTop - span.offsetTop + 1;
 
   container.removeChild(span);
   container.appendChild(document.createTextNode(sampleText));
@@ -40,7 +40,7 @@ function Font(family, size) {
   container.style.lineHeight = 'normal';
   img.style.verticalAlign = 'super';
 
-  middle = (img.offsetTop - container.offsetTop) + 1;
+  middle = img.offsetTop - container.offsetTop + 1;
 
   document.body.removeChild(container);
 

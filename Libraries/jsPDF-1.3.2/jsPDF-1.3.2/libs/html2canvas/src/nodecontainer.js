@@ -38,7 +38,9 @@ NodeContainer.prototype.cloneTo = function (stack) {
 };
 
 NodeContainer.prototype.getOpacity = function () {
-  return this.opacity === null ? (this.opacity = this.cssFloat('opacity')) : this.opacity;
+  return this.opacity === null
+    ? (this.opacity = this.cssFloat('opacity'))
+    : this.opacity;
 };
 
 NodeContainer.prototype.assignStack = function (stack) {
@@ -47,20 +49,26 @@ NodeContainer.prototype.assignStack = function (stack) {
 };
 
 NodeContainer.prototype.isElementVisible = function () {
-  return this.node.nodeType === Node.TEXT_NODE ? this.parent.visible : (
-    this.css('display') !== 'none'
-        && this.css('visibility') !== 'hidden'
-        && !this.node.hasAttribute('data-html2canvas-ignore')
-        && (this.node.nodeName !== 'INPUT' || this.node.getAttribute('type') !== 'hidden')
-  );
+  return this.node.nodeType === Node.TEXT_NODE
+    ? this.parent.visible
+    : this.css('display') !== 'none' &&
+        this.css('visibility') !== 'hidden' &&
+        !this.node.hasAttribute('data-html2canvas-ignore') &&
+        (this.node.nodeName !== 'INPUT' ||
+          this.node.getAttribute('type') !== 'hidden');
 };
 
 NodeContainer.prototype.css = function (attribute) {
   if (!this.computedStyles) {
-    this.computedStyles = this.isPseudoElement ? this.parent.computedStyle(this.before ? ':before' : ':after') : this.computedStyle(null);
+    this.computedStyles = this.isPseudoElement
+      ? this.parent.computedStyle(this.before ? ':before' : ':after')
+      : this.computedStyle(null);
   }
 
-  return this.styles[attribute] || (this.styles[attribute] = this.computedStyles[attribute]);
+  return (
+    this.styles[attribute] ||
+    (this.styles[attribute] = this.computedStyles[attribute])
+  );
 };
 
 NodeContainer.prototype.prefixedCss = function (attribute) {
@@ -68,7 +76,9 @@ NodeContainer.prototype.prefixedCss = function (attribute) {
   let value = this.css(attribute);
   if (value === undefined) {
     prefixes.some(function (prefix) {
-      value = this.css(prefix + attribute.substr(0, 1).toUpperCase() + attribute.substr(1));
+      value = this.css(
+        prefix + attribute.substr(0, 1).toUpperCase() + attribute.substr(1),
+      );
       return value !== undefined;
     }, this);
   }
@@ -81,16 +91,19 @@ NodeContainer.prototype.computedStyle = function (type) {
 
 NodeContainer.prototype.cssInt = function (attribute) {
   const value = parseInt(this.css(attribute), 10);
-  return (isNaN(value)) ? 0 : value; // borders in old IE are throwing 'medium' for demo.html
+  return isNaN(value) ? 0 : value; // borders in old IE are throwing 'medium' for demo.html
 };
 
 NodeContainer.prototype.color = function (attribute) {
-  return this.colors[attribute] || (this.colors[attribute] = new Color(this.css(attribute)));
+  return (
+    this.colors[attribute] ||
+    (this.colors[attribute] = new Color(this.css(attribute)))
+  );
 };
 
 NodeContainer.prototype.cssFloat = function (attribute) {
   const value = parseFloat(this.css(attribute));
-  return (isNaN(value)) ? 0 : value;
+  return isNaN(value) ? 0 : value;
 };
 
 NodeContainer.prototype.fontWeight = function () {
@@ -120,7 +133,10 @@ NodeContainer.prototype.parseClip = function () {
 };
 
 NodeContainer.prototype.parseBackgroundImages = function () {
-  return this.backgroundImages || (this.backgroundImages = parseBackgrounds(this.css('backgroundImage')));
+  return (
+    this.backgroundImages ||
+    (this.backgroundImages = parseBackgrounds(this.css('backgroundImage')))
+  );
 };
 
 NodeContainer.prototype.cssList = function (property, index) {
@@ -135,15 +151,17 @@ NodeContainer.prototype.cssList = function (property, index) {
 
 NodeContainer.prototype.parseBackgroundSize = function (bounds, image, index) {
   const size = this.cssList('backgroundSize', index);
-  let width; let
-    height;
+  let width;
+  let height;
 
   if (isPercentage(size[0])) {
-    width = bounds.width * parseFloat(size[0]) / 100;
+    width = (bounds.width * parseFloat(size[0])) / 100;
   } else if (/contain|cover/.test(size[0])) {
-    const targetRatio = bounds.width / bounds.height; const
-      currentRatio = image.width / image.height;
-    return (targetRatio < currentRatio ^ size[0] === 'contain') ? { width: bounds.height * currentRatio, height: bounds.height } : { width: bounds.width, height: bounds.width / currentRatio };
+    const targetRatio = bounds.width / bounds.height;
+    const currentRatio = image.width / image.height;
+    return (targetRatio < currentRatio) ^ (size[0] === 'contain')
+      ? { width: bounds.height * currentRatio, height: bounds.height }
+      : { width: bounds.width, height: bounds.width / currentRatio };
   } else {
     width = parseInt(size[0], 10);
   }
@@ -151,41 +169,51 @@ NodeContainer.prototype.parseBackgroundSize = function (bounds, image, index) {
   if (size[0] === 'auto' && size[1] === 'auto') {
     height = image.height;
   } else if (size[1] === 'auto') {
-    height = width / image.width * image.height;
+    height = (width / image.width) * image.height;
   } else if (isPercentage(size[1])) {
-    height = bounds.height * parseFloat(size[1]) / 100;
+    height = (bounds.height * parseFloat(size[1])) / 100;
   } else {
     height = parseInt(size[1], 10);
   }
 
   if (size[0] === 'auto') {
-    width = height / image.height * image.width;
+    width = (height / image.height) * image.width;
   }
 
   return { width, height };
 };
 
-NodeContainer.prototype.parseBackgroundPosition = function (bounds, image, index, backgroundSize) {
+NodeContainer.prototype.parseBackgroundPosition = function (
+  bounds,
+  image,
+  index,
+  backgroundSize,
+) {
   const position = this.cssList('backgroundPosition', index);
-  let left; let
-    top;
+  let left;
+  let top;
 
   if (isPercentage(position[0])) {
-    left = (bounds.width - (backgroundSize || image).width) * (parseFloat(position[0]) / 100);
+    left =
+      (bounds.width - (backgroundSize || image).width) *
+      (parseFloat(position[0]) / 100);
   } else {
     left = parseInt(position[0], 10);
   }
 
   if (position[1] === 'auto') {
-    top = left / image.width * image.height;
+    top = (left / image.width) * image.height;
   } else if (isPercentage(position[1])) {
-    top = (bounds.height - (backgroundSize || image).height) * parseFloat(position[1]) / 100;
+    top =
+      ((bounds.height - (backgroundSize || image).height) *
+        parseFloat(position[1])) /
+      100;
   } else {
     top = parseInt(position[1], 10);
   }
 
   if (position[0] === 'auto') {
-    left = top / image.height * image.width;
+    left = (top / image.height) * image.width;
   }
 
   return { left, top };
@@ -201,7 +229,7 @@ NodeContainer.prototype.parseTextShadows = function () {
 
   if (textShadow && textShadow !== 'none') {
     const shadows = textShadow.match(this.TEXT_SHADOW_PROPERTY);
-    for (let i = 0; shadows && (i < shadows.length); i++) {
+    for (let i = 0; shadows && i < shadows.length; i++) {
       const s = shadows[i].match(this.TEXT_SHADOW_VALUES);
       results.push({
         color: new Color(s[0]),
@@ -218,7 +246,10 @@ NodeContainer.prototype.parseTransform = function () {
   if (!this.transformData) {
     if (this.hasTransform()) {
       const offset = this.parseBounds();
-      const origin = this.prefixedCss('transformOrigin').split(' ').map(removePx).map(asFloat);
+      const origin = this.prefixedCss('transformOrigin')
+        .split(' ')
+        .map(removePx)
+        .map(asFloat);
       origin[0] += offset.left;
       origin[1] += offset.top;
       this.transformData = {
@@ -238,18 +269,28 @@ NodeContainer.prototype.parseTransform = function () {
 NodeContainer.prototype.parseTransformMatrix = function () {
   if (!this.transformMatrix) {
     const transform = this.prefixedCss('transform');
-    const matrix = transform ? parseMatrix(transform.match(this.MATRIX_PROPERTY)) : null;
+    const matrix = transform
+      ? parseMatrix(transform.match(this.MATRIX_PROPERTY))
+      : null;
     this.transformMatrix = matrix || [1, 0, 0, 1, 0, 0];
   }
   return this.transformMatrix;
 };
 
 NodeContainer.prototype.parseBounds = function () {
-  return this.bounds || (this.bounds = this.hasTransform() ? offsetBounds(this.node) : getBounds(this.node));
+  return (
+    this.bounds ||
+    (this.bounds = this.hasTransform()
+      ? offsetBounds(this.node)
+      : getBounds(this.node))
+  );
 };
 
 NodeContainer.prototype.hasTransform = function () {
-  return this.parseTransformMatrix().join(',') !== '1,0,0,1,0,0' || (this.parent && this.parent.hasTransform());
+  return (
+    this.parseTransformMatrix().join(',') !== '1,0,0,1,0,0' ||
+    (this.parent && this.parent.hasTransform())
+  );
 };
 
 NodeContainer.prototype.getValue = function () {
@@ -259,25 +300,36 @@ NodeContainer.prototype.getValue = function () {
   } else if (this.node.type === 'password') {
     value = Array(value.length + 1).join('\u2022'); // jshint ignore:line
   }
-  return value.length === 0 ? (this.node.placeholder || '') : value;
+  return value.length === 0 ? this.node.placeholder || '' : value;
 };
 
 NodeContainer.prototype.MATRIX_PROPERTY = /(matrix|matrix3d)\((.+)\)/;
-NodeContainer.prototype.TEXT_SHADOW_PROPERTY = /((rgba|rgb)\([^\)]+\)(\s-?\d+px){0,})/g;
-NodeContainer.prototype.TEXT_SHADOW_VALUES = /(-?\d+px)|(#.+)|(rgb\(.+\))|(rgba\(.+\))/g;
-NodeContainer.prototype.CLIP = /^rect\((\d+)px,? (\d+)px,? (\d+)px,? (\d+)px\)$/;
+NodeContainer.prototype.TEXT_SHADOW_PROPERTY =
+  /((rgba|rgb)\([^\)]+\)(\s-?\d+px){0,})/g;
+NodeContainer.prototype.TEXT_SHADOW_VALUES =
+  /(-?\d+px)|(#.+)|(rgb\(.+\))|(rgba\(.+\))/g;
+NodeContainer.prototype.CLIP =
+  /^rect\((\d+)px,? (\d+)px,? (\d+)px,? (\d+)px\)$/;
 
 function selectionValue(node) {
   const option = node.options[node.selectedIndex || 0];
-  return option ? (option.text || '') : '';
+  return option ? option.text || '' : '';
 }
 
 function parseMatrix(match) {
   if (match && match[1] === 'matrix') {
     return match[2].split(',').map((s) => parseFloat(s.trim()));
-  } if (match && match[1] === 'matrix3d') {
+  }
+  if (match && match[1] === 'matrix3d') {
     const matrix3d = match[2].split(',').map((s) => parseFloat(s.trim()));
-    return [matrix3d[0], matrix3d[1], matrix3d[4], matrix3d[5], matrix3d[12], matrix3d[13]];
+    return [
+      matrix3d[0],
+      matrix3d[1],
+      matrix3d[4],
+      matrix3d[5],
+      matrix3d[12],
+      matrix3d[13],
+    ];
   }
 }
 

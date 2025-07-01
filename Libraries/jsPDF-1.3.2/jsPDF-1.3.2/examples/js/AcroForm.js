@@ -1,4 +1,4 @@
-const doc = new jsPDF();// {unit: 'px'}
+const doc = new jsPDF(); // {unit: 'px'}
 
 doc.setFontSize(12);
 doc.text(10, 105, 'ComboBox:');
@@ -40,7 +40,8 @@ doc.text(10, 145, 'TextField:');
 const textField = new TextField();
 textField.Rect = [50, 140, 30, 10];
 textField.multiline = true;
-textField.V = 'The quick brown fox ate the lazy mouse The quick brown fox ate the lazy mouse The quick brown fox ate the lazy mouse';//
+textField.V =
+  'The quick brown fox ate the lazy mouse The quick brown fox ate the lazy mouse The quick brown fox ate the lazy mouse'; //
 textField.T = 'TestTextBox';
 // textField.Q = 2; // Text-Alignment
 doc.addField(textField);

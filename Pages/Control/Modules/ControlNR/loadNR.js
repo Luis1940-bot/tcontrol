@@ -110,16 +110,19 @@ function columna2(
   if (tagName === 'INPUT' && type === 'checkbox') {
     td[columnaTd].childNodes[0].checked = valorVal === 1;
   }
-// console.log('BUTTON>>>>> ','   DATOS IMAGENES: ',datos.imagenes,'  INDEX: ',index,' ----',datos.imagenes[index])
+  // console.log('BUTTON>>>>> ','   DATOS IMAGENES: ',datos.imagenes,'  INDEX: ',index,' ----',datos.imagenes[index])
   if (
     tagName === 'BUTTON' &&
     type === 'submit' &&
     datos.imagenes[index] !== ''
   ) {
     const { plant } = desencriptar(sessionStorage.getItem('user'));
-    const jsonString = datos.imagenes[index] && datos.imagenes[index] !== null && datos.imagenes[index] !== undefined
-      ? datos.imagenes[index].replace(/'/g, '"')
-      : '';
+    const jsonString =
+      datos.imagenes[index] &&
+      datos.imagenes[index] !== null &&
+      datos.imagenes[index] !== undefined
+        ? datos.imagenes[index].replace(/'/g, '"')
+        : '';
     const objeto = JSON.parse(jsonString);
     const rutaBase = `${SERVER}/assets/Imagenes/${plant}/`;
     const ul = td[3].childNodes[0];
@@ -127,9 +130,10 @@ function columna2(
     objeto.fileName.forEach((nombreArchivo, n) => {
       const img = new Image();
       const extension = objeto.extension[n];
-      const fileNameWithoutExtension = nombreArchivo && nombreArchivo !== null && nombreArchivo !== undefined
-        ? nombreArchivo.replace(/\.[^.]+$/, '')
-        : '';
+      const fileNameWithoutExtension =
+        nombreArchivo && nombreArchivo !== null && nombreArchivo !== undefined
+          ? nombreArchivo.replace(/\.[^.]+$/, '')
+          : '';
       const rutaCompleta = `${rutaBase}${nombreArchivo}`;
       const li = document.createElement('li');
 
@@ -251,9 +255,12 @@ function columna2(
   }
 
   if (tipoDatoDetalle === 'checkhour' && columnaTd === 2) {
-    const checkhour = datos.detalle[index] && datos.detalle[index] !== null && datos.detalle[index] !== undefined 
-      ? datos.detalle[index].replace('.', ':') 
-      : '';
+    const checkhour =
+      datos.detalle[index] &&
+      datos.detalle[index] !== null &&
+      datos.detalle[index] !== undefined
+        ? datos.detalle[index].replace('.', ':')
+        : '';
     const td3 = tds[3];
     const td2 = tds[2];
 
