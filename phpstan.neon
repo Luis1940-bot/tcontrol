@@ -1,0 +1,78 @@
+parameters:
+    # Nivel estricto para asegurar calidad máxima
+    level: max
+    
+    # Configuración de paths
+    paths:
+        - .
+    
+    excludePaths:
+        - vendor/
+        - node_modules/
+        - Libraries/
+        - Nodemailer/PHPMailer*/
+        - backups/
+        - logs/
+        - assets/
+        - '*/tmp/*'
+        - '*/cache/*'
+        - '*/tests/*'
+    
+    # Bootstrap files para cargar configuraciones necesarias
+    bootstrapFiles:
+        - vendor/autoload.php
+        - config.php
+    
+    # Configuraciones estrictas para mejor análisis
+    treatPhpDocTypesAsCertain: true
+    checkExplicitMixedMissingReturn: true
+    checkFunctionNameCase: true
+    checkInternalClassCaseSensitivity: true
+    reportUnmatchedIgnoredErrors: false
+    polluteScopeWithLoopInitialAssignments: false
+    polluteScopeWithAlwaysIterableForeach: false
+    checkTooWideReturnTypesInProtectedAndPublicMethods: true
+    checkUninitializedProperties: true
+    checkMissingCallableSignature: true
+    checkMissingVarTagTypehint: false
+    
+    # Ignorar errores específicos conocidos del proyecto
+    ignoreErrors:
+        # Constantes globales comunes
+        - '#Constant BASE_URL not found#'
+        - '#Constant DB_HOST not found#'
+        - '#Constant DB_NAME not found#'
+        - '#Constant DB_USER not found#'
+        - '#Constant DB_PASS not found#'
+        - '#Constant ROOT_PATH not found#'
+        - '#Constant API_KEY not found#'
+        
+        # ErrorLogger personalizado
+        - '#Instantiated class ErrorLogger not found#'
+        - '#Call to static method \w+ on an unknown class ErrorLogger#'
+        - '#Call to static method initialize\(\) on an unknown class ErrorLogger#'
+        - '#Call to static method customExceptionHandler on an unknown class ErrorLogger#'
+        
+        # Variables globales $_SESSION, $_POST, $_GET comunes
+        - '#Undefined variable: \$_SESSION#'
+        - '#Undefined variable: \$_POST#'
+        - '#Undefined variable: \$_GET#'
+        - '#Undefined variable: \$_REQUEST#'
+        - '#Undefined variable: \$_COOKIE#'
+        - '#Undefined variable: \$_SERVER#'
+        
+        # Patrones comunes de PHP web legacy
+        - '#Function \w+ not found#i'
+        - '#Variable \$\w+ might not be defined#'
+        - '#Variable \$\w+ in empty\(\) always exists and is always falsy#'
+        - '#Empty array passed to foreach#'
+        - '#Unreachable statement - code above always terminates#'
+        
+        # MySQL/PDO conexiones legacy
+        - '#Function mysql_\w+ not found#'
+        - '#Function mysqli_\w+ not found#'
+        
+        # Funciones personalizadas del proyecto (ajustar según necesidad)
+        - '#Function debug\w* not found#'
+        - '#Function log\w* not found#'
+        - '#Function validate\w* not found#'

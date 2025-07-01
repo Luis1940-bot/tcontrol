@@ -11,6 +11,6 @@
     "phpmailer/phpmailer": "^6.9"
   },
   "scripts": {
-    "phpstan": "phpstan analyse --configuration=phpstan.neon"
+    "phpstan": "phpstan analyse --configuration=phpstan.neon --memory-limit=512M"
   }
 }
