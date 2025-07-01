@@ -63,11 +63,11 @@ if (isset($_GET['ruta'])) {
       header("Location: $url", true, 302);
       break;
 
-      // case 'rove':
-      //   $rove = $_GET['rove'];
-      //   $url = $url_base . '/Pages/Rove/index.php?rove=' . $rove . 't=' . $time;
-      //   header("Location: $url", true, 302);
-      //   break;
+    // case 'rove':
+    //   $rove = $_GET['rove'];
+    //   $url = $url_base . '/Pages/Rove/index.php?rove=' . $rove . 't=' . $time;
+    //   header("Location: $url", true, 302);
+    //   break;
 
     case 'menu':
       // $rove = $_GET['menu'];

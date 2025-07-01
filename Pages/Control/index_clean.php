@@ -3,16 +3,11 @@
 // ini_set('display_startup_errors', '1');
 // error_reporting(E_ALL);
 
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-};
+require_once dirname(dirname(__DIR__)) . '/config.php';
+startSecureSession();
+$nonce = setSecurityHeaders();
 
 ob_start();
-header('Content-Type: text/html;charset=utf-8');
-$nonce = base64_encode(random_bytes(16));
-header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: tenkiweb.com; script-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; style-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
-
-header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
 header("X-Content-Type-Options: nosniff");
 header("X-Frame-Options: DENY");
 header("X-XSS-Protection: 1; mode=block");

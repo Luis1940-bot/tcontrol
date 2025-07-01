@@ -1,29 +1,11 @@
 <?php
-// session_start();
-session_start([
-  'cookie_secure' => true, // Asegura que la cookie solo se envía sobre HTTPS 
-  'cookie_httponly' => true, // Evita el acceso de JavaScript a la cookie 
-  'cookie_samesite' => 'Strict' // Previene ataques CSRF
-]);
-header('Content-Type: text/html;charset=utf-8');
-$nonce = base64_encode(random_bytes(16));
-header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: tenkiweb.com; script-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; style-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; connect-src 'self' test.tenkiweb.com tenkiweb.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
-
-
-header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
-header("X-Content-Type-Options: nosniff");
-header("X-Frame-Options: DENY");
-header("X-XSS-Protection: 1; mode=block");
-
-header("Access-Control-Allow-Origin: https://test.tenkiweb.com");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Credentials: true");
-
-
+require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
-require_once dirname(dirname(__DIR__)) . '/config.php';
+
+// Configurar headers de seguridad y sesión
+$nonce = setSecurityHeaders();
+startSecureSession();
 
 
 ?>

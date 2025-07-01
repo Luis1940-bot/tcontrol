@@ -3,9 +3,10 @@
 // ini_set('display_startup_errors', '1');
 // error_reporting(E_ALL);
 header('Content-Type: text/html;charset=utf-8');
+$isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
 session_start([
   // 'cookie_samesite' => 'None',
-  'cookie_secure' => true  // Asegura que la cookie solo se envía sobre HTTPS
+  'cookie_secure' => $isSecure  // Solo requiere HTTPS en producción
 ]);
 require_once dirname(dirname(dirname(__DIR__))) . '/config.php';
 /** @var string $baseUrl */

@@ -6,7 +6,7 @@ const getBaseUrl = () => {
   const { hostname } = window.location;
 
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:3000';
+    return 'http://localhost:8000';
   }
 
   if (hostname === 'test.tenkiweb.com') {

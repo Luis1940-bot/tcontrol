@@ -37,7 +37,7 @@ module.exports = {
     'no-console': ['warn', { allow: ['time', 'timeEnd', 'error'] }],
     'comma-dangle': ['error', 'only-multiline'],
     'import/no-unresolved': 'off',
-    'import/prefer-default-export': 'off',
+    "import/prefer-default-export": "off"
   },
-  ignorePatterns: ['node_modules/', 'dist/', 'build/', 'Libraries/'],
-};
+  "ignorePatterns": ["node_modules/", "dist/", "build/", "Libraries/"]
+}
