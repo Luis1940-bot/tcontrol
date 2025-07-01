@@ -5,41 +5,46 @@
 # Prettier y PHPStan para JavaScript/PHP.
 
 # Configuración de colores
-$OriginalForegroundColor = $Host.UI.RawUI.ForegroundColor
-
-function Write-ColorOutput($ForegroundColor) {
+function Write-ColorOutput {
     param(
-        [Parameter(Mandatory=$True, Position=1, ValueFromPipeline=$True)]
-        [Object] $Object,
-        [Parameter(Mandatory=$False, Position=2)]
-        [ConsoleColor] $ForegroundColor = $Host.UI.RawUI.ForegroundColor
+        [string]$Message,
+        [string]$Color = "White"
     )
     
-    $Host.UI.RawUI.ForegroundColor = $ForegroundColor
-    Write-Output $Object
-    $Host.UI.RawUI.ForegroundColor = $OriginalForegroundColor
+    switch ($Color) {
+        "Red" { Write-Host $Message -ForegroundColor Red }
+        "Green" { Write-Host $Message -ForegroundColor Green }
+        "Yellow" { Write-Host $Message -ForegroundColor Yellow }
+        "Blue" { Write-Host $Message -ForegroundColor Blue }
+        "Cyan" { Write-Host $Message -ForegroundColor Cyan }
+        default { Write-Host $Message }
+    }
 }
 
-function Print-Step($message) {
-    Write-ColorOutput "[PASO] $message" -ForegroundColor Blue
+function Print-Step {
+    param([string]$message)
+    Write-ColorOutput "[PASO] $message" "Blue"
 }
 
-function Print-Success($message) {
-    Write-ColorOutput "[✓] $message" -ForegroundColor Green
+function Print-Success {
+    param([string]$message)
+    Write-ColorOutput "[✓] $message" "Green"
 }
 
-function Print-Warning($message) {
-    Write-ColorOutput "[⚠] $message" -ForegroundColor Yellow
+function Print-Warning {
+    param([string]$message)
+    Write-ColorOutput "[⚠] $message" "Yellow"
 }
 
-function Print-Error($message) {
-    Write-ColorOutput "[✗] $message" -ForegroundColor Red
+function Print-Error {
+    param([string]$message)
+    Write-ColorOutput "[✗] $message" "Red"
 }
 
 function Show-Header {
     Write-Host ""
-    Write-ColorOutput "🔧 HERRAMIENTAS DE CALIDAD DE CÓDIGO - TENKIWEB TCONTROL" -ForegroundColor Cyan
-    Write-ColorOutput "=======================================================" -ForegroundColor Cyan
+    Write-ColorOutput "🔧 HERRAMIENTAS DE CALIDAD DE CÓDIGO - TENKIWEB TCONTROL" "Cyan"
+    Write-ColorOutput "=======================================================" "Cyan"
     Write-Host ""
 }
 
@@ -68,12 +73,17 @@ function Run-Prettier {
     Print-Step "Ejecutando Prettier para formatear código..."
     
     try {
-        npm run format
-        Print-Success "Prettier completado exitosamente"
-        return $true
+        $result = & npm run format 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Print-Success "Prettier completado exitosamente"
+            return $true
+        } else {
+            Print-Error "Error ejecutando Prettier: $result"
+            return $false
+        }
     }
     catch {
-        Print-Error "Error ejecutando Prettier"
+        Print-Error "Error ejecutando Prettier: $($_.Exception.Message)"
         return $false
     }
 }
@@ -82,12 +92,18 @@ function Run-ESLint {
     Print-Step "Ejecutando ESLint para verificar estilo..."
     
     try {
-        npm run lint
-        Print-Success "ESLint completado sin errores"
-        return $true
+        $result = & npm run lint 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Print-Success "ESLint completado sin errores"
+            return $true
+        } else {
+            Print-Warning "ESLint encontró problemas. Ejecuta la opción 3 para corregir automáticamente"
+            Write-Host $result
+            return $false
+        }
     }
     catch {
-        Print-Warning "ESLint encontró problemas. Ejecuta la opción 3 para corregir automáticamente"
+        Print-Warning "ESLint encontró problemas: $($_.Exception.Message)"
         return $false
     }
 }
@@ -96,12 +112,17 @@ function Run-ESLintFix {
     Print-Step "Ejecutando ESLint con corrección automática..."
     
     try {
-        npm run lint:fix
-        Print-Success "ESLint --fix completado exitosamente"
+        $result = & npm run lint:fix 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Print-Success "ESLint --fix completado exitosamente"
+        } else {
+            Print-Warning "ESLint --fix completado con algunos errores restantes"
+            Write-Host $result
+        }
         return $true
     }
     catch {
-        Print-Warning "ESLint --fix completado con algunos errores restantes"
+        Print-Warning "ESLint --fix completado con errores: $($_.Exception.Message)"
         return $false
     }
 }
@@ -110,12 +131,18 @@ function Run-PHPStan {
     Print-Step "Ejecutando PHPStan para análisis estático de PHP..."
     
     try {
-        composer run phpstan
-        Print-Success "PHPStan completado sin errores"
-        return $true
+        $result = & composer run phpstan 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Print-Success "PHPStan completado sin errores"
+            return $true
+        } else {
+            Print-Warning "PHPStan encontró problemas de calidad de código"
+            Write-Host $result
+            return $false
+        }
     }
     catch {
-        Print-Warning "PHPStan encontró problemas de calidad de código"
+        Print-Warning "PHPStan encontró problemas: $($_.Exception.Message)"
         return $false
     }
 }
@@ -130,7 +157,7 @@ function Run-All {
     Run-ESLintFix | Out-Null
     
     Print-Step "3/3 - Analizando código PHP con PHPStan..."
-    Run-PHPStan | Out-Null  # No fallar si PHPStan encuentra errores
+    Run-PHPStan | Out-Null
     
     Print-Success "Proceso completo finalizado"
 }
@@ -139,8 +166,8 @@ function Show-Stats {
     Print-Step "Recopilando estadísticas del proyecto..."
     
     Write-Host ""
-    Write-ColorOutput "📊 ESTADÍSTICAS DEL PROYECTO" -ForegroundColor Cyan
-    Write-ColorOutput "=============================" -ForegroundColor Cyan
+    Write-ColorOutput "📊 ESTADÍSTICAS DEL PROYECTO" "Cyan"
+    Write-ColorOutput "=============================" "Cyan"
     
     # Contar archivos
     $jsFiles = (Get-ChildItem -Path . -Include "*.js" -Recurse | Where-Object { $_.FullName -notmatch "node_modules|vendor" }).Count
@@ -151,12 +178,16 @@ function Show-Stats {
     
     # Verificar estado de ESLint
     Write-Host ""
-    Write-ColorOutput "🔍 ESTADO DE ESLINT" -ForegroundColor Cyan
-    Write-ColorOutput "===================" -ForegroundColor Cyan
+    Write-ColorOutput "🔍 ESTADO DE ESLINT" "Cyan"
+    Write-ColorOutput "===================" "Cyan"
     
     try {
-        npm run lint *> $null
-        Print-Success "Sin errores de ESLint"
+        $null = & npm run lint 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Print-Success "Sin errores de ESLint"
+        } else {
+            Print-Warning "Hay errores de ESLint pendientes"
+        }
     }
     catch {
         Print-Warning "Hay errores de ESLint pendientes"
@@ -164,12 +195,16 @@ function Show-Stats {
     
     # Verificar estado de PHPStan
     Write-Host ""
-    Write-ColorOutput "🧪 ESTADO DE PHPSTAN" -ForegroundColor Cyan
-    Write-ColorOutput "====================" -ForegroundColor Cyan
+    Write-ColorOutput "🧪 ESTADO DE PHPSTAN" "Cyan"
+    Write-ColorOutput "====================" "Cyan"
     
     try {
-        composer run phpstan *> $null
-        Print-Success "Sin errores de PHPStan"
+        $null = & composer run phpstan 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Print-Success "Sin errores de PHPStan"
+        } else {
+            Print-Warning "Hay errores de PHPStan pendientes"
+        }
     }
     catch {
         Print-Warning "Hay errores de PHPStan pendientes"
@@ -180,10 +215,10 @@ function Update-Dependencies {
     Print-Step "Actualizando dependencias..."
     
     Print-Step "Actualizando dependencias npm..."
-    npm update
+    & npm update
     
     Print-Step "Actualizando dependencias composer..."
-    composer update
+    & composer update
     
     Print-Success "Dependencias actualizadas"
 }
