@@ -398,7 +398,7 @@ function checkScrollPosition() {
 }
 
 // Inicializar botón flotante cuando la página esté completamente cargada
-window.addEventListener('load', function () {
+window.addEventListener('load', () => {
   const button = document.getElementById('scrollToTopBtn');
 
   if (button) {

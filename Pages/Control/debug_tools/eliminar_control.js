@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     arrayGlobal.habilitadoGuardar = true;
   });
 
-  setTimeout(function () {
+  setTimeout(() => {
     alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
 
     LogOut();
