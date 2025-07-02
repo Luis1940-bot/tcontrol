@@ -125,7 +125,7 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
             🎧 Soporte Técnico
           </a>
           <span class="separador">|</span>
-          <a href="#" class="link-soporte" onclick="verMisTickets(); return false;">
+          <a href="<?= BASE_URL ?>/Pages/Soporte/historial.php" class="link-soporte">
             📋 Seguimiento de Tickets
           </a>
         </div>

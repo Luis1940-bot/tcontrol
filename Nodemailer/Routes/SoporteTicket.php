@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Clase para manejar tickets de soporte técnico
+ * Clase para soporte técnico
  * Sistema profesional de tickets con SLA y notificaciones
  */
 class SoporteTicket
@@ -10,7 +10,7 @@ class SoporteTicket
 
   public function __construct()
   {
-    require_once dirname(__DIR__) . '/Routes/datos_base.php';
+    require_once dirname(dirname(__DIR__)) . '/Routes/datos_base.php';
 
     // Configurar conexión usando las variables globales
     $this->conexion = new mysqli($host, $user, $password, $dbname, $port);
@@ -20,6 +20,46 @@ class SoporteTicket
     }
 
     $this->conexion->set_charset("utf8mb4");
+  }
+
+  /**
+   * Obtener tickets de un usuario
+   */
+  public function obtenerTicketsUsuario($user_id, $limite = 10)
+  {
+    $sql = "SELECT ticket_id, empresa, asunto, tipo_solicitud, prioridad, estado, 
+                       fecha_creacion, fecha_actualizacion
+                FROM soporte_tickets 
+                WHERE usuario_id = ? 
+                ORDER BY fecha_creacion DESC 
+                LIMIT ?";
+
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bind_param("ii", $user_id, $limite);
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_all(MYSQLI_ASSOC);
+  }
+
+  /**
+   * Obtener tickets de un usuario por email
+   */
+  public function obtenerTicketsPorEmail($email, $limite = 10)
+  {
+    $sql = "SELECT ticket_id, empresa, asunto, tipo_solicitud, prioridad, estado, 
+                       fecha_creacion, fecha_actualizacion
+                FROM soporte_tickets 
+                WHERE email_contacto = ? 
+                ORDER BY fecha_creacion DESC 
+                LIMIT ?";
+
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bind_param("si", $email, $limite);
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_all(MYSQLI_ASSOC);
   }
 
   /**
@@ -435,37 +475,17 @@ class SoporteTicket
   }
 
   /**
-   * Obtener tickets de un usuario
-   */
-  public function obtenerTicketsUsuario($usuario_id, $limite = 10)
-  {
-    $sql = "SELECT ticket_id, empresa, asunto, tipo_solicitud, prioridad, estado, 
-                       fecha_creacion, fecha_actualizacion
-                FROM soporte_tickets 
-                WHERE usuario_id = ? 
-                ORDER BY fecha_creacion DESC 
-                LIMIT ?";
-
-    $stmt = $this->conexion->prepare($sql);
-    $stmt->bind_param("ii", $usuario_id, $limite);
-    $stmt->execute();
-
-    $resultado = $stmt->get_result();
-    return $resultado->fetch_all(MYSQLI_ASSOC);
-  }
-
-  /**
    * Obtener detalles de un ticket
    */
-  public function obtenerTicket($ticket_id, $usuario_id = null)
+  public function obtenerTicket($ticket_id, $user_id = null)
   {
     $sql = "SELECT * FROM soporte_tickets WHERE ticket_id = ?";
     $params = [$ticket_id];
     $types = "s";
 
-    if ($usuario_id) {
+    if ($user_id) {
       $sql .= " AND usuario_id = ?";
-      $params[] = $usuario_id;
+      $params[] = $user_id;
       $types .= "i";
     }
 

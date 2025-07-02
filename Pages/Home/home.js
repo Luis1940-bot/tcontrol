@@ -454,23 +454,10 @@ document.addEventListener('keydown', (event) => {
 // Función para ver mis tickets (solo para usuarios logueados)
 function verMisTickets() {
   try {
-    const user = desencriptar(sessionStorage.getItem('user'));
-    if (user && user.email) {
-      const url = `${SERVER}/Pages/Soporte/index.php?action=mis_tickets&email=${encodeURIComponent(user.email)}`;
-      // window.open(url, '_blank');
-      window.location.href = url;
-    } else {
-      const miAlerta = new Alerta();
-      const obj = arrayGlobal.avisoRojo;
-      const texto =
-        trO(
-          'Error: No se pudo obtener la información del usuario.',
-          objTranslate,
-        ) || 'Error: No se pudo obtener la información del usuario.';
-      miAlerta.createVerde(obj, texto, objTranslate);
-      const modal = document.getElementById('modalAlertVerde');
-      modal.style.display = 'block';
-    }
+    // Como ya estamos en el Home, significa que el usuario está autenticado
+    // Simplemente ir al historial de tickets
+    const url = `${SERVER}/Pages/Soporte/historial.php`;
+    window.location.href = url;
   } catch (error) {
     console.error('Error al abrir mis tickets:', error);
     const miAlerta = new Alerta();

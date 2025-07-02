@@ -7,22 +7,59 @@ require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
 
 // Verificar si el usuario está logueado
-if (!isset($_SESSION['user_id'])) {
+$user_id = null;
+$user_email = null;
+
+// Verificar diferentes formas de autenticación del sistema
+if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
+} elseif (isset($_SESSION['login_sso']['email']) && !empty($_SESSION['login_sso']['email'])) {
+  $user_email = $_SESSION['login_sso']['email'];
+  // Si tenemos el email pero no el user_id, podríamos obtenerlo de la base de datos
+  // Por ahora usaremos un ID temporal para pruebas
+  $user_id = 1; // TODO: Obtener el user_id real desde la base de datos usando el email
+} else {
   header("Location: " . BASE_URL . "/Pages/Login/index.php");
   exit();
 }
 
 $baseUrl = BASE_URL;
-$user_id = $_SESSION['user_id'];
+
+// Debug: Log información de la sesión
+error_log("=== HISTORIAL SOPORTE DEBUG ===");
+error_log("User ID de sesión: " . ($user_id ?? 'NULL'));
+error_log("Todas las variables de sesión: " . print_r($_SESSION, true));
 
 // Obtener tickets del usuario
 $tickets = [];
+$error_message = '';
+$user_email = $_SESSION['login_sso']['email'] ?? null;
+
 try {
-  require_once dirname(dirname(__DIR__)) . '/models/SoporteTicket.php';
+  require_once dirname(dirname(__DIR__)) . '/Nodemailer/Routes/SoporteTicket.php';
+  error_log("Clase SoporteTicket cargada exitosamente");
+
   $soporteTicket = new SoporteTicket();
-  $tickets = $soporteTicket->obtenerTicketsUsuario($user_id, 20);
+  error_log("Instancia de SoporteTicket creada");
+
+  if ($user_email) {
+    // Buscar tickets por email del contacto
+    $tickets = $soporteTicket->obtenerTicketsPorEmail($user_email, 20);
+    error_log("Buscando tickets por email: {$user_email}");
+  } else {
+    // Buscar por usuario_id como respaldo
+    $tickets = $soporteTicket->obtenerTicketsUsuario($user_id, 20);
+    error_log("Buscando tickets por usuario_id: {$user_id}");
+  }
+
+  error_log("Tickets encontrados: " . count($tickets));
+
+  if (!empty($tickets)) {
+    error_log("Primer ticket de ejemplo: " . print_r($tickets[0], true));
+  }
 } catch (Exception $e) {
-  error_log("Error obteniendo tickets: " . $e->getMessage());
+  $error_message = $e->getMessage();
+  error_log("ERROR obteniendo tickets: " . $error_message);
 }
 
 // Función para formatear el estado
@@ -95,6 +132,13 @@ function formatearTipo($tipo)
     if (isset($_GET['success'])) {
       echo "<div class='mensaje-exito'>";
       echo "<strong>✅ " . htmlspecialchars($_GET['success']) . "</strong>";
+      echo "</div>";
+    }
+
+    // Mostrar error si existe
+    if (!empty($error_message)) {
+      echo "<div class='mensaje-error'>";
+      echo "<strong>❌ Error:</strong> " . htmlspecialchars($error_message);
       echo "</div>";
     }
     ?>
