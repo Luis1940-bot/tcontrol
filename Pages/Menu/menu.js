@@ -19,6 +19,7 @@ import { trO } from '../../controllers/trOA.js';
 import Alerta from '../../includes/atoms/alerta.js';
 import arrayGlobal from '../../controllers/variables.js';
 import LogOut from '../../controllers/logout.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 let objTranslate = [];
@@ -37,7 +38,7 @@ function leeVersion(json) {
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
-      // console.error('Error al cargar el archivo:', error)
+      console.error('Error al cargar el archivo:', error);
       const miAlerta = new Alerta();
       const obj = arrayGlobal.avisoRojo;
       const texto =
@@ -127,6 +128,14 @@ function dondeEstaEn() {
   document.getElementById('volver').style.display = 'block';
 }
 
+async function iniciarAplicacion(plant) {
+  objTranslate = await arraysLoadTranslate();
+  dondeEstaEn();
+  leeApp(`App/${plant}/app`);
+  spinner.style.visibility = 'hidden';
+  finPerformance();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const user = desencriptar(sessionStorage.getItem('user'));
   const { plant } = user;
@@ -145,15 +154,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       persona.lng.toUpperCase();
     await leeVersion('version');
 
-    async function iniciarAplicacion() {
-      objTranslate = await arraysLoadTranslate();
-      dondeEstaEn();
-      leeApp(`App/${plant}/app`);
-      spinner.style.visibility = 'hidden';
-      finPerformance();
-    }
+    // async function iniciarAplicacion() {
+    //   objTranslate = await arraysLoadTranslate();
+    //   dondeEstaEn();
+    //   leeApp(`App/${plant}/app`);
+    //   spinner.style.visibility = 'hidden';
+    //   finPerformance();
+    // }
 
-    requestAnimationFrame(iniciarAplicacion);
+    requestAnimationFrame(iniciarAplicacion(plant));
   } else {
     spinner.style.visibility = 'hidden';
     finPerformance();
@@ -177,9 +186,14 @@ document.addEventListener('DOMContentLoaded', () => {
     personModal(user, objTranslate);
   });
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+      'warning',
+    );
+    // alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
     LogOut();
   }, 43200000 - 300000);
+  // eslint-disable-next-line no-console
   console.clear();
 });
 

@@ -35,7 +35,18 @@ startSecureSession();
     ?>
   </header>
   <main>
-    <div class="div-login-buttons"></div>
+    <?php
+    // Mostrar mensaje de éxito si viene desde soporte
+    if (isset($_GET['ticket_created']) && isset($_GET['mensaje'])) {
+      echo "<div class='mensaje-exito-ticket'>";
+      echo "<strong>✅ " . htmlspecialchars($_GET['mensaje']) . "</strong><br>";
+      echo "<small>ID del ticket: " . htmlspecialchars($_GET['ticket_created']) . "</small>";
+      echo "</div>";
+    }
+    ?>
+    <div class="div-login-buttons">
+      <a href="<?= BASE_URL ?>/Pages/Soporte/">🎧 Soporte</a>
+    </div>
   </main>
   <footer>
     <?php

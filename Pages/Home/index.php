@@ -113,6 +113,25 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
     <div class='div-home-buttons'>
 
     </div>
+    <main>
+      <div class='div-home-buttons'>
+
+      </div>
+
+      <!-- Sección de soporte sutil -->
+      <div class="home-soporte">
+        <div class="soporte-links">
+          <a href="<?= BASE_URL ?>/Pages/Soporte/" class="link-soporte">
+            🎧 Soporte Técnico
+          </a>
+          <span class="separador">|</span>
+          <a href="#" class="link-soporte" onclick="verMisTickets(); return false;">
+            📋 Seguimiento de Tickets
+          </a>
+        </div>
+      </div>
+
+    </main>
   </main>
   <footer>
     <?php

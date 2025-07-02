@@ -25,6 +25,7 @@ import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import Alerta from '../../includes/atoms/alerta.js';
 import arrayGlobal from '../../controllers/variables.js';
 import traerAuth from './Controllers/traerAuth.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 // const spinner = document.querySelector('.spinner')
 const appJSON = {};
@@ -114,7 +115,8 @@ function RegisterUser(a, email) {
   window.location.href = `${SERVER}/Pages/Router/rutas.php?ruta=${data}`;
 }
 
-function session(session) {
+function inicioSession(session) {
+  // console.log(session, ' --- session --- ');
   const idiomaPreferido = navigator.language || navigator.languages[0];
   const partesIdioma = idiomaPreferido.split('-');
   const idioma = partesIdioma[0];
@@ -128,6 +130,7 @@ function session(session) {
     const div = document.querySelector('.div-login-buttons');
     let span = document.createElement('span');
     const texto = espanolOperativo.error[idioma];
+    // eslint-disable-next-line no-use-before-define
     const params = objParams(
       null,
       'span-login',
@@ -201,7 +204,7 @@ async function enviar() {
       showAlert(espanolOperativo.alertas.planta[idioma]);
       return;
     }
-    objeto.planta = parseInt(select.value);
+    objeto.planta = parseInt(select.value, 10);
 
     if (!email.value) {
       showAlert(espanolOperativo.alertas.mail[idioma]);
@@ -222,12 +225,12 @@ async function enviar() {
     }
     const login = await enviarLogin(objeto);
     setTimeout(() => {
-      session(login);
+      inicioSession(login);
     }, 200);
     email.value = '';
     password.value = '';
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
   }
 }
 
@@ -343,7 +346,7 @@ function cargarSelectCompania(json) {
         selectPlanta.classList.add('class', 'select-rojo');
       } else {
         const auth = await traerAuth(
-          parseInt(plant.value),
+          parseInt(plant.value, 10),
           idInput0.value,
           '/auth',
         );
@@ -380,7 +383,8 @@ function cargarSelectCompania(json) {
       }
     });
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
+    // console.log(error);
   }
 }
 
@@ -441,6 +445,7 @@ function creador(element) {
   try {
     let elemento = null;
     if (element.tag === 'label') {
+      // eslint-disable-next-line no-param-reassign
       element.config.innerHTML =
         trO(element.config.innerHTML, objTranslate) || element.config.innerHTML;
       elemento = createLabel(element.config);
@@ -455,6 +460,7 @@ function creador(element) {
       }
     }
     if (element.tag === 'a') {
+      // eslint-disable-next-line no-param-reassign
       element.config.textContent =
         trO(element.config.textContent, objTranslate) ||
         element.config.textContent;
@@ -462,6 +468,7 @@ function creador(element) {
     }
     if (element.tag === 'select') {
       let array = [];
+      // eslint-disable-next-line no-prototype-builtins
       if (element.hasOwnProperty('options')) {
         if (element.options.length > 0) {
           array = [...element.options];
@@ -470,6 +477,7 @@ function creador(element) {
       elemento = createSelect(array, element.config);
     }
     if (element.tag === 'button') {
+      // eslint-disable-next-line no-param-reassign
       element.config.text =
         trO(element.config.text, objTranslate) || element.config.text;
       elemento = createButton(element.config);
@@ -478,6 +486,7 @@ function creador(element) {
       elemento = createDiv(element.config);
     }
     if (element.tag === 'span') {
+      // eslint-disable-next-line no-param-reassign
       element.config.text =
         trO(element.config.text, objTranslate) || element.config.text;
       elemento = createSpan(element.config);
@@ -652,7 +661,8 @@ function generaOverlay() {
     div.appendChild(divBox);
     body.appendChild(div);
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error, 'error');
+    // console.log(error);
   }
 }
 
@@ -687,9 +697,9 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     // Si el select aún no existe, esperar a que se cree dinámicamente
     const observer = new MutationObserver(() => {
-      const select = document.getElementById('idSelectLogin');
-      if (select) {
-        select.addEventListener('change', toggleLoginFields);
+      const selector = document.getElementById('idSelectLogin');
+      if (selector) {
+        selector.addEventListener('change', toggleLoginFields);
         toggleLoginFields();
         observer.disconnect();
       }
@@ -755,6 +765,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     sessionStorage.setItem('plant', encriptar(plant));
 
     // Espera 200ms antes de continuar
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise((resolve) => setTimeout(resolve, 200));
 
     // Ejecuta las funciones restantes en orden
@@ -768,20 +779,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       objTranslate = await arraysLoadTranslate(); // Carga la traducción
     } catch (translateError) {
-      console.warn('Error al cargar traducciones:', translateError);
+      // console.warn('Error al cargar traducciones:', translateError);
+      mostrarMensaje(
+        `Error al cargar traducciones ${translateError}. Usando traducción por defecto.`,
+        'error',
+      );
       objTranslate = []; // Usar array vacío como fallback
     }
 
     try {
       leeModelo('Login/login'); // Carga el modelo
     } catch (modelError) {
-      console.warn('Error al cargar modelo de login:', modelError);
+      mostrarMensaje(`Error al cargar modelo de login ${modelError}.`, 'error');
+      // console.warn('Error al cargar modelo de login:', modelError);
     }
 
     try {
       generaOverlay(); // Genera el overlay
     } catch (overlayError) {
-      console.warn('Error al generar overlay:', overlayError);
+      mostrarMensaje(`Error al generar overlay ${overlayError}.`, 'error');
+      // console.warn('Error al generar overlay:', overlayError);
     }
 
     // Oculta el spinner y finaliza la medición del rendimiento
@@ -812,9 +829,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     } catch (alertError) {
       // Si no se puede mostrar alerta, mostrar alert nativo
-      alert(
-        'Error al cargar la página. Por favor, recargue e intente de nuevo.',
+      mostrarMensaje(
+        `Error al mostrar alerta: ${alertError}. Error original: ${error}`,
+        'error',
       );
+      // alert(
+      //   'Error al cargar la página. Por favor, recargue e intente de nuevo.',
+      // );
     }
   }
 });

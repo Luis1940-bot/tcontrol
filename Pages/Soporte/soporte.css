@@ -1,0 +1,353 @@
+/* ====================================
+   SOPORTE TÉCNICO - TENKIWEB CSS
+   Usa las clases del login para consistencia
+   ==================================== */
+
+/* === LAYOUT PRINCIPAL === */
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+header {
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Cambiar a flex-start para que aparezca más arriba */
+  overflow-y: auto;
+  min-height: 80vh;
+  padding-top: 20px; /* Agregar un poco de padding superior */
+}
+
+/* === HEADER EXTERNO DEL SOPORTE === */
+.soporte-header-externo {
+  text-align: center;
+  margin: 10px auto 20px; /* Reducir márgenes para que esté más arriba */
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.soporte-header-externo h1 {
+  color: #15395c;
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 0 2px 4px rgba(21, 57, 92, 0.1);
+}
+
+.soporte-header-externo p {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* === EL CONTENEDOR USA EXACTAMENTE LAS CLASES DEL LOGIN === */
+/* div-login-buttons ya está definido en login.css */
+
+/* === AJUSTES ESPECÍFICOS PARA SOPORTE === */
+textarea.input-login {
+  min-height: 100px;
+  resize: vertical;
+  padding: 12px;
+  line-height: 1.5;
+}
+
+input[type='file'].input-login {
+  padding: 8px 12px;
+  height: auto;
+  background: #f7fafd;
+}
+
+/* === INFORMACIÓN DE USUARIO === */
+.usuario-info {
+  background: #e7f3ff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid #b8daff;
+  border-left: 4px solid #15395c;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.usuario-info.publico {
+  background: #fff3cd;
+  border-color: #ffeaa7;
+  border-left-color: #f39c12;
+  color: #856404;
+}
+
+.usuario-info h4 {
+  margin: 0 0 15px 0;
+  color: #15395c;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.usuario-info.publico h4 {
+  color: #856404;
+}
+
+.usuario-info p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+.usuario-info a {
+  color: #15395c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.usuario-info a:hover {
+  text-decoration: underline;
+}
+
+/* === TOGGLE LOGIN === */
+.toggle-login {
+  text-align: center;
+  margin: 25px 0;
+  padding: 20px;
+  background: #f7fafd;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+/* Los botones ahora usan button-login, no necesitamos estilos separados */
+.btn-login.button-login {
+  margin: 0 8px 8px 0;
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* === MENSAJES === */
+.mensaje-exito {
+  background: #d4edda;
+  color: #155724;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid #c3e6cb;
+  border-left: 4px solid #28a745;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mensaje-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid #f5c6cb;
+  border-left: 4px solid #dc3545;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* === INFO SEGUIMIENTO === */
+.info-seguimiento {
+  background: #e7f3ff;
+  border: 1px solid #b3d9ff;
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.info-seguimiento p {
+  margin: 0;
+  color: #0066cc;
+}
+
+.info-seguimiento a {
+  color: #0052a3;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.info-seguimiento a:hover {
+  color: #003d7a;
+  text-decoration: none;
+}
+
+/* === FORMULARIO === */
+.campos-publicos {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid #dee2e6;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.campos-publicos h4 {
+  margin: 0 0 20px 0;
+  color: #15395c;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 2px solid #15395c;
+  padding-bottom: 10px;
+}
+
+/* === ELIMINAR LAYOUT HORIZONTAL - HACER COMO LOGIN === */
+.form-row {
+  /* QUITAR display: flex para que sea vertical como login */
+  margin-bottom: 0;
+}
+
+.form-group {
+  /* Cada campo ocupa todo el ancho como en login */
+  width: 100%;
+  margin-bottom: 0; /* El margin lo controlan las clases del login */
+  box-sizing: border-box;
+}
+
+/* Información de archivo */
+.archivo-info {
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* === INFORMACIÓN DE PRIORIDADES === */
+.prioridad-info {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 25px 0;
+  border: 1px solid #dee2e6;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.prioridad-info h4 {
+  margin: 0 0 15px 0;
+  color: #15395c;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.prioridad-item {
+  margin: 8px 0;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #dee2e6;
+  font-size: 0.9rem;
+}
+
+/* === ÁREA DE BOTONES === */
+.form-buttons {
+  text-align: center;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* === CLASES PARA ELEMENTOS ESPECÍFICOS === */
+
+/* Botón historial con estilos específicos */
+.btn-historial {
+  background: var(--secondary-color) !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  text-align: center !important;
+}
+
+/* ================================
+   RESPONSIVO - MOBILE FIRST
+   ================================ */
+
+/* === MÓVILES PEQUEÑOS (hasta 480px) === */
+@media (max-width: 480px) {
+  .soporte-header-externo {
+    margin: 10px auto 15px;
+    padding: 0 15px;
+  }
+
+  .soporte-header-externo h1 {
+    font-size: 1.8rem;
+  }
+
+  .soporte-header-externo p {
+    font-size: 1rem;
+  }
+
+  .div-login-buttons {
+    margin: 10px;
+    padding: 20px 16px;
+    border-radius: 8px;
+    max-width: 95%;
+    min-width: auto;
+  }
+
+  .usuario-info,
+  .campos-publicos,
+  .prioridad-info {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .toggle-login {
+    padding: 15px;
+    margin: 20px 0;
+  }
+
+  .btn-login.button-login {
+    display: block;
+    margin: 8px 0;
+    width: 100%;
+  }
+
+  .form-buttons {
+    gap: 10px;
+    margin-top: 25px;
+    padding-top: 20px;
+  }
+}
+
+/* === TABLETS (481px - 768px) === */
+@media (min-width: 481px) and (max-width: 768px) {
+  .div-login-buttons {
+    margin: 20px;
+    padding: 30px 24px;
+    max-width: 90%;
+  }
+
+  .soporte-header-externo h1 {
+    font-size: 2.1rem;
+  }
+
+  .usuario-info,
+  .campos-publicos,
+  .prioridad-info {
+    padding: 20px;
+  }
+}
+
+/* === DESKTOP PEQUEÑO (769px - 1024px) === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .div-login-buttons {
+    max-width: 700px;
+  }
+}
+
+/* === DESKTOP GRANDE (más de 1024px) === */
+@media (min-width: 1025px) {
+  .div-login-buttons {
+    max-width: 800px;
+  }
+}

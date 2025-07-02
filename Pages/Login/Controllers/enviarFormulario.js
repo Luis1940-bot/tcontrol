@@ -1,4 +1,5 @@
 import baseUrl from '../../../config.js';
+import { mostrarMensaje } from '../../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 
@@ -8,7 +9,7 @@ export default function enviarLogin(objeto) {
     const rax = `&new=${new Date()}`;
     obj.rax = rax;
     const datos = JSON.stringify(obj);
-    // console.log(datos)
+    // console.log(datos);
 
     const ruta = `${SERVER}/Routes/index.php`;
     fetch(ruta, {
@@ -37,13 +38,16 @@ export default function enviarLogin(objeto) {
 
           resolve(data);
         } catch (error) {
-          reject(`Error al parsear JSON: ${error.message}`);
+          reject(new Error(`Error al parsear JSON: ${error.message}`));
         }
       })
       .catch((error) => {
         console.error('Error en la solicitud:', error);
         reject(error);
-        alert('No se pudo establecer conexión con el servidor');
+        mostrarMensaje(
+          'No se pudo establecer conexión con el servidor',
+          'error',
+        );
       });
   });
 }
