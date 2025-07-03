@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM completamente cargado');
+  // console.log('DOM completamente cargado');
   document.getElementById('searchInput').value = '';
 });
 
@@ -16,7 +16,7 @@ function cargarUsuario(
   idtipousuario,
   idLTYcliente,
 ) {
-  console.log('Cargando usuario: ', id);
+  // console.log('Cargando usuario: ', id);
 
   const modal = document.getElementById('editModal');
   modal.style.display = 'block';

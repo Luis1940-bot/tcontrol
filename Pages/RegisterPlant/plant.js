@@ -10,7 +10,7 @@ import leeVersion from '../../controllers/leeVersion.js';
 import { trO } from '../../controllers/trOA.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { configPHP } from '../../controllers/configPHP.js';
-import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
+// import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
 // import traerRegistros from './Controllers/traerRegistros.js'
 import createA from '../../includes/atoms/createA.js';
 import createButton from '../../includes/atoms/createButton.js';
@@ -28,6 +28,8 @@ import arrayGlobal from '../../controllers/variables.js';
 import Alerta from '../../includes/atoms/alerta.js';
 import createImg from '../../includes/atoms/createImg.js';
 import personModal from '../../controllers/person.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
+import LogOut from '../../controllers/logout.js';
 
 const spinner = document.querySelector('.spinner');
 const appJSON = {};
@@ -168,6 +170,7 @@ async function nuevaCompania() {
         const modal = document.getElementById('modalAlertVerde');
         modal.style.display = 'block';
 
+        // eslint-disable-next-line no-unused-vars
         const mailEnviado = await enviaMailNuevoCliente(
           objetoEmail,
           '/sendNuevoCliente',
@@ -180,7 +183,7 @@ async function nuevaCompania() {
         const id = document.getElementById('id');
         id.value = response.id;
         if (!modal) {
-          console.warn('Error de carga en el modal');
+          // console.warn('Error de carga en el modal');
         }
         modal.style.display = 'none';
 
@@ -203,7 +206,7 @@ async function nuevaCompania() {
       }
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -211,7 +214,7 @@ function cargaImagen(file) {
   if (file) {
     // Leer y mostrar la miniatura
     const reader = new FileReader();
-    reader.onload = function (e) {
+    reader.onload = function readerLoad(e) {
       const thumbnail = document.getElementById('idImgLogo');
       thumbnail.src = e.target.result;
       thumbnail.style.display = 'block';
@@ -240,16 +243,17 @@ function setearElementos() {
       nuevaCompania();
     }
     if (clase === 'button-plant-update') {
+      // console.log('object');
     }
   });
 
   const idLogo = document.getElementById('idLogo');
-  idLogo.addEventListener('click', (e) => {
+  idLogo.addEventListener('click', () => {
     document.getElementById('logo').click();
   });
 
   const inputLogo = document.getElementById('logo');
-  inputLogo.addEventListener('change', function () {
+  inputLogo.addEventListener('change', function logoInput() {
     const fileName = this.files[0] ? this.files[0].name : 'Sin logo.';
     document.getElementById('idSpanLogo').textContent = fileName;
     cargaImagen(this.files[0]);
@@ -283,7 +287,8 @@ function setearElementos() {
 function creador(element) {
   let elemento = null;
   if (element.tag === 'label') {
-    element.config.innerHTML =
+    const elem = element;
+    elem.config.innerHTML =
       trO(element.config.innerHTML, objTranslate) || element.config.innerHTML;
     elemento = createLabel(element.config);
   }
@@ -291,13 +296,15 @@ function creador(element) {
     elemento = createInput(element.config);
   }
   if (element.tag === 'a') {
-    element.config.textContent =
+    const elem = element;
+    elem.config.textContent =
       trO(element.config.textContent, objTranslate) ||
       element.config.textContent;
     elemento = createA(element.config, element.config.textContent);
   }
   if (element.tag === 'select') {
     let array = [];
+    // eslint-disable-next-line no-prototype-builtins
     if (element.hasOwnProperty('options')) {
       if (element.options.length > 0) {
         array = [...element.options];
@@ -306,7 +313,8 @@ function creador(element) {
     elemento = createSelect(array, element.config);
   }
   if (element.tag === 'button') {
-    element.config.text =
+    const elem = element;
+    elem.config.text =
       trO(element.config.text, objTranslate) || element.config.text;
     elemento = createButton(element.config);
   }
@@ -317,7 +325,8 @@ function creador(element) {
     elemento = createTextArea(element.config);
   }
   if (element.tag === 'span') {
-    element.config.text =
+    const elem = element;
+    elem.config.text =
       trO(element.config.text, objTranslate) || element.config.text;
     elemento = createSpan(element.config);
   }
@@ -343,8 +352,19 @@ function armadoDeHTML(json) {
       elementoCreado ? div.appendChild(elementoCreado) : null;
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
+}
+
+function traduccionDeLabel(objTraduce) {
+  const div = document.querySelector('.div-plant');
+  const labels = div.querySelectorAll('.label-plant');
+  labels.forEach((element) => {
+    const texto =
+      trO(element.textContent.trim(), objTraduce) || element.textContent.trim();
+    const elem = element;
+    elem.innerText = texto;
+  });
 }
 
 function leeModelo(ruta) {
@@ -357,17 +377,6 @@ function leeModelo(ruta) {
     .catch((error) => {
       console.error('Error al cargar el archivo:', error);
     });
-}
-
-function traduccionDeLabel(objTranslate) {
-  const div = document.querySelector('.div-plant');
-  const labels = div.querySelectorAll('.label-plant');
-  labels.forEach((element) => {
-    const texto =
-      trO(element.textContent.trim(), objTranslate) ||
-      element.textContent.trim();
-    element.innerText = texto;
-  });
 }
 
 function leeApp(json) {
@@ -412,7 +421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeApp('log');
     leeModelo('Register/registerPlant');
 
-    const nuevaCadena = dondeEstaEn(objTranslate, 'Nueva compañía.');
+    // const nuevaCadena = dondeEstaEn(objTranslate, 'Nueva compañía.');
     const divUbicacion = document.querySelector('.div-ubicacion');
     if (divUbicacion) {
       divUbicacion.style.display = 'none';
@@ -457,7 +466,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+      'warning',
+    );
+    // alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
     LogOut();
   }, 43200000 - 300000);
 });
@@ -471,7 +484,7 @@ function goBack() {
     const url = `${SERVER}/Pages/${back}`;
     window.location.href = url;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 

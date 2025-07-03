@@ -12,7 +12,7 @@ import { trO } from '../../controllers/trOA.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { configPHP } from '../../controllers/configPHP.js';
 
-import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
+// import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
 
 const spinner = document.querySelector('.spinner');
 const appJSON = {};
@@ -20,18 +20,18 @@ let objTranslate = [];
 
 const SERVER = baseUrl;
 
-function traduccionDeLabel(objTranslate) {
+function traduccionDeLabel(objTrad) {
   const div = document.querySelector('.div-verify');
   const labels = div.querySelectorAll('.label-verify');
   labels.forEach((element) => {
+    const elemento = element;
     const texto =
-      trO(element.textContent.trim(), objTranslate) ||
-      element.textContent.trim();
-    element.innerText = texto;
+      trO(element.textContent.trim(), objTrad) || element.textContent.trim();
+    elemento.innerText = texto;
   });
   const button = document.querySelector('.button-verify');
   const texto =
-    trO(button.textContent.trim(), objTranslate) || button.textContent.trim();
+    trO(button.textContent.trim(), objTrad) || button.textContent.trim();
   button.innerText = texto;
 }
 
@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTimeout(async () => {
     objTranslate = await arraysLoadTranslate();
     leeApp('log');
-    const nuevaCadena = dondeEstaEn(objTranslate, 'Verificación.');
-    const spanUbicacion = document.getElementById('spanUbicacion');
+    // const nuevaCadena = dondeEstaEn(objTranslate, 'Verificación.');
+    // const spanUbicacion = document.getElementById('spanUbicacion');
     traduccionDeLabel(objTranslate);
   }, 200);
 

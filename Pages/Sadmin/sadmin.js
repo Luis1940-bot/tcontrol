@@ -17,6 +17,7 @@ import { configPHP } from '../../controllers/configPHP.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { trO } from '../../controllers/trOA.js';
 import LogOut from '../../controllers/logout.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 let objTranslate = [];
@@ -196,7 +197,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function verificarElementos() {
     const customButton = document.querySelector('.custom-button');
     const versionElement = document.querySelector('.version');
-    const hamburguesa = document.querySelector('#hamburguesa');
+    // const hamburguesa = document.querySelector('#hamburguesa');
     const headerMcCain = document.querySelector('.header-McCain');
 
     if (customButton && versionElement && hamburguesa && headerMcCain) {
@@ -225,7 +226,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+      'warning',
+    );
+    // alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
     LogOut();
   }, 43200000 - 300000);
 });

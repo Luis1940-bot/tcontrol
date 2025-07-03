@@ -1,5 +1,5 @@
 import { desencriptar } from './cript.js';
-import translate from './translate.js';
+import { translate } from './translate.js';
 
 function obtenerIdiomaPreferido() {
   // Obtener el idioma desde navigator.languages si está disponible
@@ -31,7 +31,9 @@ async function arraysLoadTranslate() {
   const data = await translate(idiomaPreferido);
   const translateOperativo = data.arrayTranslateOperativo;
   const espanolOperativo = data.arrayEspanolOperativo;
+  // eslint-disable-next-line no-unused-vars
   const translateArchivo = data.arrayTranslateArchivo;
+  // eslint-disable-next-line no-unused-vars
   const espanolArchivo = data.arrayEspanolArchivo;
   const objTranslate = {
     operativoES: [],

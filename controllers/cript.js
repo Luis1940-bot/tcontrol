@@ -1,3 +1,4 @@
+// eslint-disable-next-line camelcase
 function utf8_to_b64(str) {
   return btoa(
     encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) =>
@@ -6,6 +7,7 @@ function utf8_to_b64(str) {
   );
 }
 
+// eslint-disable-next-line camelcase
 function b64_to_utf8(str) {
   if (typeof str === 'object') {
     return null;

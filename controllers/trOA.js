@@ -1,7 +1,7 @@
 function trO(palabra, objTranslate) {
   try {
     if (!palabra || !objTranslate) {
-      return;
+      return palabra || '';
     }
     const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
     const index = objTranslate.operativoES.findIndex(
@@ -22,7 +22,7 @@ function trO(palabra, objTranslate) {
 function trA(palabra, objTranslate) {
   try {
     if (!palabra || !objTranslate) {
-      return;
+      return palabra || '';
     }
     const palabraNormalizada = palabra.replace(/\s/g, '').toLowerCase();
     const index = objTranslate.archivosES.findIndex(
@@ -37,7 +37,6 @@ function trA(palabra, objTranslate) {
     console.log(error);
     return palabra;
   }
-  // return palabra;
 }
 
 export { trO, trA };

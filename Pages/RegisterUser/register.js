@@ -11,7 +11,7 @@ import leeVersion from '../../controllers/leeVersion.js';
 import { trO } from '../../controllers/trOA.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { configPHP } from '../../controllers/configPHP.js';
-import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
+// import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
 import traerRegistros from './Controllers/traerRegistros.js';
 import createA from '../../includes/atoms/createA.js';
 import createButton from '../../includes/atoms/createButton.js';
@@ -64,7 +64,7 @@ function checaRequeridos() {
     repetirPass.classList.add('input-register-requerido');
     return false;
   }
-
+  const email = document.getElementById('email');
   if (!validarEmail(email.value)) {
     email.classList.remove('input-register');
     email.classList.add('input-register-requerido');
@@ -97,10 +97,10 @@ function checaRequeridos() {
   const objeto = {
     nombre: nombre.value,
     pass: pass.value,
-    valueArea: parseInt(selectedValue),
+    valueArea: parseInt(selectedValue, 10),
     area: selectedText,
     puesto: puesto.value,
-    idtipousuario: parseInt(selectedTipoValue),
+    idtipousuario: parseInt(selectedTipoValue, 10),
     textTipoDeUsuario: selectedTipoText,
     valueSituacion: selectedSituacionValue,
     textSituacion: selectedSituacionText,
@@ -119,7 +119,7 @@ async function nuevoUser() {
     const response = await traerRegistros(
       envia.objeto,
       '/addUsuario',
-      parseInt(plant.value),
+      parseInt(plant.value, 10),
     );
 
     if (response.success) {
@@ -153,7 +153,7 @@ async function nuevoUser() {
         const id = document.getElementById('id');
         id.value = response.id;
         if (!modal) {
-          console.warn('Error de carga en el modal');
+          // console.warn('Error de carga en el modal');
         }
         modal.style.display = 'none';
 
@@ -222,6 +222,7 @@ function setearSelects() {
       nuevoUser();
     }
     if (clase === 'button-user-update') {
+      // console.log('Actualizar usuario');
     }
   });
 }
@@ -229,7 +230,8 @@ function setearSelects() {
 function creador(element) {
   let elemento = null;
   if (element.tag === 'label') {
-    element.config.innerHTML =
+    const elem = element;
+    elem.config.innerHTML =
       trO(element.config.innerHTML, objTranslate) || element.config.innerHTML;
     elemento = createLabel(element.config);
   }
@@ -237,13 +239,15 @@ function creador(element) {
     elemento = createInput(element.config);
   }
   if (element.tag === 'a') {
-    element.config.textContent =
+    const elem = element;
+    elem.config.textContent =
       trO(element.config.textContent, objTranslate) ||
       element.config.textContent;
     elemento = createA(element.config, element.config.textContent);
   }
   if (element.tag === 'select') {
     let array = [];
+    // eslint-disable-next-line no-prototype-builtins
     if (element.hasOwnProperty('options')) {
       if (element.options.length > 0) {
         array = [...element.options];
@@ -252,7 +256,8 @@ function creador(element) {
     elemento = createSelect(array, element.config);
   }
   if (element.tag === 'button') {
-    element.config.text =
+    const elem = element;
+    elem.config.text =
       trO(element.config.text, objTranslate) || element.config.text;
     elemento = createButton(element.config);
   }
@@ -260,7 +265,8 @@ function creador(element) {
     elemento = createDiv(element.config);
   }
   if (element.tag === 'span') {
-    element.config.text =
+    const elem = element;
+    elem.config.text =
       trO(element.config.text, objTranslate) || element.config.text;
     elemento = createSpan(element.config);
   }
@@ -286,7 +292,71 @@ function armadoDeHTML(json) {
     const email = document.getElementById('email');
     email.value = mailInvitado;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+  }
+}
+
+function traduccionDeLabel(objTraduce) {
+  const div = document.querySelector('.div-register');
+  const labels = div.querySelectorAll('.label-login');
+  labels.forEach((element) => {
+    const texto =
+      trO(element.textContent.trim(), objTraduce) || element.textContent.trim();
+    const elem = element;
+    elem.innerText = texto;
+  });
+}
+
+async function cargaSelectArea(objTraduce) {
+  const plant = desencriptar(sessionStorage.getItem('plant'));
+  const areas = await traerRegistros(
+    'traerLTYarea',
+    '/traerAreasParaRegistroUser',
+    plant.value,
+  );
+
+  if (areas.length === 0) {
+    const select = document.getElementById('area');
+    const option = document.createElement('option');
+    option.value = 0;
+    const texto = trO('Área', objTraduce) || 'Área';
+    option.text = texto;
+    select.appendChild(option);
+  } else if (areas.length > 0) {
+    const select = document.getElementById('area');
+    const emptyOption = document.createElement('option');
+    emptyOption.value = '';
+    emptyOption.text = '';
+    select.appendChild(emptyOption);
+    areas.forEach(([value, text]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.text = trO(text, objTraduce) || text;
+      select.appendChild(option);
+    });
+  }
+}
+
+async function cargaTipoDeUsuario(objTraduce) {
+  const tipoDeUsuario = await traerRegistros(
+    'traerTipoDeUsuario',
+    '/traerTipoDeUsuarioParaRegistroUser',
+    null,
+  );
+  if (tipoDeUsuario.length > 0) {
+    const select = document.getElementById('tipo_usuario');
+    const emptyOption = document.createElement('option');
+    emptyOption.value = '';
+    emptyOption.text = '';
+    select.appendChild(emptyOption);
+    tipoDeUsuario.forEach(([value, text]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.text = trO(text, objTraduce) || text;
+      select.appendChild(option);
+    });
+    select.selectedIndex = 1;
+    select.disabled = true;
   }
 }
 
@@ -302,69 +372,6 @@ function leeModelo(ruta) {
     .catch((error) => {
       console.error('Error al cargar el archivo:', error);
     });
-}
-
-async function cargaSelectArea(objTranslate) {
-  const plant = desencriptar(sessionStorage.getItem('plant'));
-  const areas = await traerRegistros(
-    'traerLTYarea',
-    '/traerAreasParaRegistroUser',
-    plant.value,
-  );
-
-  if (areas.length === 0) {
-    const select = document.getElementById('area');
-    const option = document.createElement('option');
-    option.value = 0;
-    const texto = trO('Área', objTranslate) || 'Área';
-    option.text = texto;
-    select.appendChild(option);
-  } else if (areas.length > 0) {
-    const select = document.getElementById('area');
-    const emptyOption = document.createElement('option');
-    emptyOption.value = '';
-    emptyOption.text = '';
-    select.appendChild(emptyOption);
-    areas.forEach(([value, text]) => {
-      const option = document.createElement('option');
-      option.value = value;
-      option.text = trO(text, objTranslate) || text;
-      select.appendChild(option);
-    });
-  }
-}
-async function cargaTipoDeUsuario(objTranslate) {
-  const tipoDeUsuario = await traerRegistros(
-    'traerTipoDeUsuario',
-    '/traerTipoDeUsuarioParaRegistroUser',
-    null,
-  );
-  if (tipoDeUsuario.length > 0) {
-    const select = document.getElementById('tipo_usuario');
-    const emptyOption = document.createElement('option');
-    emptyOption.value = '';
-    emptyOption.text = '';
-    select.appendChild(emptyOption);
-    tipoDeUsuario.forEach(([value, text]) => {
-      const option = document.createElement('option');
-      option.value = value;
-      option.text = trO(text, objTranslate) || text;
-      select.appendChild(option);
-    });
-    select.selectedIndex = 1;
-    select.disabled = true;
-  }
-}
-
-function traduccionDeLabel(objTranslate) {
-  const div = document.querySelector('.div-register');
-  const labels = div.querySelectorAll('.label-login');
-  labels.forEach((element) => {
-    const texto =
-      trO(element.textContent.trim(), objTranslate) ||
-      element.textContent.trim();
-    element.innerText = texto;
-  });
 }
 
 function leeApp(json) {
@@ -413,7 +420,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     leeApp('log');
     leeModelo('Register/registerUser');
 
-    const nuevaCadena = dondeEstaEn(objTranslate, 'Regístrese.');
+    // const nuevaCadena = dondeEstaEn(objTranslate, 'Regístrese.');
     const spanUbicacion = document.getElementById('spanUbicacion');
     const plant = desencriptar(sessionStorage.getItem('plant'));
     spanUbicacion.innerText = plant.texto;
@@ -448,7 +455,7 @@ function goBack() {
     const url = `${SERVER}/Pages/${back}`;
     window.location.href = url;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 

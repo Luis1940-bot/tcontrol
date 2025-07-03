@@ -1,4 +1,5 @@
 import baseUrl from '../../../config.js';
+import { mostrarMensaje } from '../../../controllers/ui/alertasLuis.js';
 // const SERVER = '/iControl-Vanilla/icontrol';
 const SERVER = baseUrl;
 
@@ -36,7 +37,8 @@ export default function traerRegistros(q, ruta, sqlI) {
         console.timeEnd('traerRegistros');
         console.error('Error en la solicitud:', error);
         reject(error);
-        alert('No se pudo establecer conexión con el servidor');
+        mostrarMensaje('Error al traer los registros', 'error');
+        // alert('No se pudo establecer conexión con el servidor');
       });
   });
 }

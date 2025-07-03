@@ -1,4 +1,5 @@
 import baseUrl from '../../../config.js';
+import { mostrarMensaje } from '../../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 
@@ -42,7 +43,11 @@ export default function addCompania(objeto, ruta) {
         console.timeEnd('addCompania');
         console.error('Error en la solicitud:', error);
         reject(error);
-        alert('No se pudo establecer conexión con el servidor');
+        mostrarMensaje(
+          'No se pudo establecer conexión con el servidor',
+          'error',
+        );
+        // alert('No se pudo establecer conexión con el servidor');
       });
   });
 }

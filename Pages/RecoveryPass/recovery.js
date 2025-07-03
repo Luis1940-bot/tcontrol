@@ -11,7 +11,7 @@ import leeVersion from '../../controllers/leeVersion.js';
 import { trO } from '../../controllers/trOA.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { configPHP } from '../../controllers/configPHP.js';
-import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
+// import { dondeEstaEn } from '../../controllers/dondeEstaEn.js';
 import createA from '../../includes/atoms/createA.js';
 import createButton from '../../includes/atoms/createButton.js';
 import createDiv from '../../includes/atoms/createDiv.js';
@@ -40,7 +40,8 @@ function validarEmail(email) {
 function creador(element) {
   let elemento = null;
   if (element.tag === 'label') {
-    element.config.innerHTML =
+    const elem = element;
+    elem.config.innerHTML =
       trO(element.config.innerHTML, objTranslate) || element.config.innerHTML;
     elemento = createLabel(element.config);
   }
@@ -48,13 +49,15 @@ function creador(element) {
     elemento = createInput(element.config);
   }
   if (element.tag === 'a') {
-    element.config.textContent =
+    const elem = element;
+    elem.config.textContent =
       trO(element.config.textContent, objTranslate) ||
       element.config.textContent;
     elemento = createA(element.config, element.config.textContent);
   }
   if (element.tag === 'select') {
     let array = [];
+    // eslint-disable-next-line no-prototype-builtins
     if (element.hasOwnProperty('options')) {
       if (element.options.length > 0) {
         array = [...element.options];
@@ -63,7 +66,8 @@ function creador(element) {
     elemento = createSelect(array, element.config);
   }
   if (element.tag === 'button') {
-    element.config.text =
+    const elem = element;
+    elem.config.text =
       trO(element.config.text, objTranslate) || element.config.text;
     elemento = createButton(element.config);
   }
@@ -71,7 +75,8 @@ function creador(element) {
     elemento = createDiv(element.config);
   }
   if (element.tag === 'span') {
-    element.config.text =
+    const elem = element;
+    elem.config.text =
       trO(element.config.text, objTranslate) || element.config.text;
     elemento = createSpan(element.config);
   }
@@ -161,7 +166,7 @@ async function envioEmailPlanta() {
       const response = await traerRegistros(
         envia.objeto,
         '/confirmaEmail',
-        parseInt(plant.value),
+        parseInt(plant.value, 10),
       );
 
       if (response.success) {
@@ -190,7 +195,7 @@ async function envioEmailPlanta() {
         );
         if (mailEnviado.success) {
           if (!modal) {
-            console.warn('Error de carga en el modal');
+            // console.warn('Error de carga en el modal');
           }
           modal.style.display = 'none';
           modal.remove();
@@ -267,25 +272,26 @@ function armadoDeHTML(json) {
         envioEmailPlanta();
       }
       if (clase === 'button-recovery-update') {
+        // console.log('object');
       }
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
-function traduccionDeLabel(objTranslate) {
+function traduccionDeLabel(objTraduce) {
   const div = document.querySelector('.div-recovery');
   const labels = div.querySelectorAll('.label-recovery');
   labels.forEach((element) => {
     const texto =
-      trO(element.textContent.trim(), objTranslate) ||
-      element.textContent.trim();
-    element.innerText = texto;
+      trO(element.textContent.trim(), objTraduce) || element.textContent.trim();
+    const elem = element;
+    elem.innerText = texto;
   });
   const button = document.querySelector('.button-recovery');
   const texto =
-    trO(button.textContent.trim(), objTranslate) || button.textContent.trim();
+    trO(button.textContent.trim(), objTraduce) || button.textContent.trim();
   button.innerText = texto;
 }
 
@@ -345,7 +351,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     objTranslate = await arraysLoadTranslate();
     leeApp('log');
     leeModelo('Recovery/recoveryPass');
-    const nuevaCadena = dondeEstaEn(objTranslate, 'Blanqueo de contraseña.');
+    // const nuevaCadena = dondeEstaEn(objTranslate, 'Blanqueo de contraseña.');
     const spanUbicacion = document.getElementById('spanUbicacion');
     const plant = desencriptar(sessionStorage.getItem('plant'));
     spanUbicacion.innerText = plant.texto;
@@ -365,7 +371,7 @@ function goBack() {
     const url = `${SERVER}/Pages/${back}`;
     window.location.href = url;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
