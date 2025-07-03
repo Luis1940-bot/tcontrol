@@ -324,6 +324,7 @@ async function cargarNR(res, plant, data) {
     // console.log(res, plant);
     const objString = res[0][14];
     const datos = JSON.parse(objString);
+    // console.log(datos);
 
     const idSupervisor = datos.supervisor[0];
     const table = document.getElementById('tableControl');

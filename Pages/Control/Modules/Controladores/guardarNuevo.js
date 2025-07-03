@@ -7,14 +7,14 @@ import fechasGenerator from '../../../../controllers/fechas.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
 import { encriptar, desencriptar } from '../../../../controllers/cript.js';
 
-function convertirObjATextPlano(obj) {
-  const data = { ...obj };
-  // console.log(data);
-  delete data.src;
+// function convertirObjATextPlano(obj) {
+//   const data = { ...obj };
+//   // console.log(data);
+//   delete data.src;
 
-  // Simplemente retornar JSON válido directamente
-  return JSON.stringify(data);
-}
+//   // Simplemente retornar JSON válido directamente
+//   return JSON.stringify(data);
+// }
 
 function tuFuncion(
   objetoControl,
@@ -70,6 +70,7 @@ function pushValoresObjetoControl(
   displayRow,
 ) {
   try {
+    // console.log(valores);
     // Clonar profundamente el objetoControl
     const objetoControlClonado = JSON.parse(JSON.stringify(objetoControl));
     const person = desencriptar(sessionStorage.getItem('user'));
@@ -215,7 +216,7 @@ function pushValoresObjetoControl(
             // .replace(/\\\//g, "/");  // Limpiar barras invertidas de escape
           } catch (error) {
             // Si no se puede parsear, mantener el valor original
-            console.log('Error parsing valorCelda3:', error);
+            // console.log('Error parsing valorCelda3:', error);
             valorSinSrc = valorCelda3;
           }
         }
@@ -281,6 +282,7 @@ function obtenerValoresPorTipos(
   plant,
   carpeta,
 ) {
+  // console.log(fila, tipo1, tipo2, arrayControl, filaIndex, plant, carpeta);
   const celdas = fila.querySelectorAll('td');
   const faltanRequeridos = arrayControl[filaIndex][1];
 
@@ -374,7 +376,7 @@ function obtenerValoresPorTipos(
           celda.textContent
         );
       case 'n': {
-        const inputNumber = celda.querySelector('input[type="number"]');
+        const inputNumber = celda.querySelector('input[type="text"]');
         if (
           inputNumber &&
           inputNumber.value !== undefined &&
