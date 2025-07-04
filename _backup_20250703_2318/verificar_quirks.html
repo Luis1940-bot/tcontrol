@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico de Modo Quirks - Sistema de Tickets</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #00ff41;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .status-ok {
+      color: #00ff41;
+      background: #1a3a1a;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 5px 0;
+      border-left: 4px solid #00ff41;
+    }
+
+    .status-error {
+      color: #ff4444;
+      background: #3a1a1a;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 5px 0;
+      border-left: 4px solid #ff4444;
+    }
+
+    .page-test {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+    }
+
+    .test-btn {
+      background: #2a2a2a;
+      color: #00ff41;
+      border: 1px solid #00ff41;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .test-btn:hover {
+      background: #00ff41;
+      color: #0a0a0a;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    }
+
+    h1,
+    h2 {
+      border-bottom: 2px solid #00ff41;
+      padding-bottom: 10px;
+      color: #00ff41;
+    }
+
+    .current-mode {
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🔧 Diagnóstico de Modo Quirks - Sistema de Tickets</h1>
+
+  <div class="current-mode" id="current-mode">
+    Verificando modo actual...
+  </div>
+
+  <h2>📋 Páginas a Verificar</h2>
+
+  <div class="page-test">
+    <h3>📋 Panel Principal</h3>
+    <a href="index.php" class="test-btn" target="_blank">Abrir index.php</a>
+    <div id="status-index" class="status">Pendiente de verificación...</div>
+  </div>
+
+  <div class="page-test">
+    <h3>📝 Lista de Tickets</h3>
+    <a href="lista.php" class="test-btn" target="_blank">Abrir lista.php</a>
+    <div id="status-lista" class="status">Pendiente de verificación...</div>
+  </div>
+
+  <div class="page-test">
+    <h3>🎫 Detalle de Ticket</h3>
+    <a href="detalle.php?ticket=TK-001" class="test-btn" target="_blank">Abrir detalle.php</a>
+    <div id="status-detalle" class="status">Pendiente de verificación...</div>
+  </div>
+
+  <div class="page-test">
+    <h3>📊 Estadísticas</h3>
+    <a href="estadisticas.php" class="test-btn" target="_blank">Abrir estadisticas.php</a>
+    <div id="status-estadisticas" class="status">Pendiente de verificación...</div>
+  </div>
+
+  <div class="page-test">
+    <h3>⚙️ Configuración</h3>
+    <a href="configuracion.php" class="test-btn" target="_blank">Abrir configuracion.php</a>
+    <div id="status-configuracion" class="status">Pendiente de verificación...</div>
+  </div>
+
+  <div class="page-test">
+    <h3>📈 Reportes</h3>
+    <a href="reportes.php" class="test-btn" target="_blank">Abrir reportes.php</a>
+    <div id="status-reportes" class="status">Pendiente de verificación...</div>
+  </div>
+
+  <h2>🧪 Instrucciones de Verificación</h2>
+  <div style="background: #1a1a1a; padding: 15px; border-radius: 8px; border-left: 4px solid #00aaff;">
+    <p><strong>Para verificar cada página:</strong></p>
+    <ol>
+      <li>Abre cada enlace en una nueva pestaña</li>
+      <li>Abre las herramientas de desarrollador (F12)</li>
+      <li>Ve a la consola</li>
+      <li>Ejecuta: <code style="background: #000; padding: 2px 5px; border-radius: 3px;">document.compatMode</code></li>
+      <li>Debe devolver <strong style="color: #00ff41;">"CSS1Compat"</strong> (modo estándar)</li>
+      <li>Si devuelve <strong style="color: #ff4444;">"BackCompat"</strong> = modo Quirks (problema)</li>
+    </ol>
+    <p><strong>También verifica:</strong></p>
+    <ul>
+      <li>✅ Tema hacker aplicado (fondo negro, texto verde)</li>
+      <li>✅ Sin errores 404 de favicon</li>
+      <li>✅ Datos reales de la base de datos</li>
+      <li>✅ Navegación y botones funcionando</li>
+    </ul>
+  </div>
+
+  <script>
+    // Verificar el modo actual de esta página
+    window.addEventListener('DOMContentLoaded', function () {
+      const mode = document.compatMode;
+      const modeElement = document.getElementById('current-mode');
+
+      if (mode === 'CSS1Compat') {
+        modeElement.textContent = '✅ Esta página está en MODO ESTÁNDAR (correcto)';
+        modeElement.style.background = '#1a3a1a';
+        modeElement.style.color = '#00ff41';
+        modeElement.style.border = '2px solid #00ff41';
+      } else {
+        modeElement.textContent = '❌ Esta página está en MODO QUIRKS (problema)';
+        modeElement.style.background = '#3a1a1a';
+        modeElement.style.color = '#ff4444';
+        modeElement.style.border = '2px solid #ff4444';
+      }
+
+      // Agregar información adicional
+      const infoDiv = document.createElement('div');
+      infoDiv.style.marginTop = '20px';
+      infoDiv.style.padding = '10px';
+      infoDiv.style.background = '#2a2a2a';
+      infoDiv.style.borderRadius = '5px';
+      infoDiv.innerHTML = `
+                <p><strong>Información técnica:</strong></p>
+                <ul>
+                    <li>document.compatMode: <code style="color: #00aaff;">${mode}</code></li>
+                    <li>User Agent: <code style="color: #00aaff;">${navigator.userAgent}</code></li>
+                    <li>Viewport: <code style="color: #00aaff;">${window.innerWidth}x${window.innerHeight}</code></li>
+                </ul>
+            `;
+      modeElement.parentNode.insertBefore(infoDiv, modeElement.nextSibling);
+    });
+
+    // Función para verificar páginas automáticamente (opcional)
+    function verificarPaginas() {
+      const paginas = ['index.php', 'lista.php', 'detalle.php?ticket=TK-001', 'estadisticas.php', 'configuracion.php', 'reportes.php'];
+
+      paginas.forEach(pagina => {
+        // Este código se ejecutaría si tuviéramos permisos CORS, 
+        // pero por seguridad del navegador no podemos acceder a iframes de otras páginas
+        console.log(`Para verificar ${pagina}, abre la página manualmente y ejecuta: document.compatMode`);
+      });
+    }
+  </script>
+</body>
+
+</html>
