@@ -1,0 +1,22 @@
+# Asegurar tipos MIME correctos
+
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+    AddType image/png .png
+    AddType image/jpeg .jpg .jpeg
+    AddType image/gif .gif
+    AddType image/webp .webp
+    AddType image/x-icon .ico
+    AddType application/pdf .pdf
+</IfModule>
+
+# Headers para JavaScript y CSS
+
+<FilesMatch "\.(js|css)$">
+Header set Content-Type "application/javascript"
+</FilesMatch>
+
+<FilesMatch "\.css$">
+Header set Content-Type "text/css"
+</FilesMatch>

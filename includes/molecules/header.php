@@ -5,8 +5,7 @@
 require_once dirname(dirname(__DIR__)) . '/config.php';
 /** @var string $baseUrl */
 $baseUrl = BASE_URL;
-?>
-<?php
+
 include_once('../../includes/molecules/modales/modalPerson.php');
 include_once('../../includes/molecules/modales/modalMenu.php');
 ?>

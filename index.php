@@ -1,21 +1,14 @@
 <?php
 
-header('Content-Type: text/html;charset=utf-8');
-$nonce = base64_encode(random_bytes(16));
-header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https: tenkiweb.com; script-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; style-src 'self' 'nonce-$nonce' cdn.tenkiweb.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;");
+// Incluir configuración primero
+require_once './config.php';
+require_once __DIR__ . '/ErrorLogger.php';
 
-header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
-header("X-Content-Type-Options: nosniff");
-header("X-Frame-Options: DENY");
-header("X-XSS-Protection: 1; mode=block");
+// Inicializar sesión segura
+startSecureSession();
 
-header("Access-Control-Allow-Origin: https://test.tenkiweb.com");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Credentials: true");
-
-$url = "https://test.tenkiweb.com/tcontrol/index.php";
-
+// Configurar headers de seguridad
+$nonce = setSecurityHeaders();
 
 if (isset($_SESSION['login_sso']) && is_array($_SESSION['login_sso'])) {
   /** @var array{email: string, sso: string} $login_sso */
@@ -30,13 +23,11 @@ if (isset($_SESSION['login_sso']) && is_array($_SESSION['login_sso'])) {
 }
 
 if (!is_array($login_sso) || (SSO === null || SSO === 's_sso')) {
-  $url = "https://test.tenkiweb.com/tcontrol/Pages/Login/index.php";
-  // header("Location: ". $url ."");
+  $loginUrl = BASE_URL . "/Pages/Login/index.php";
+  header("Location: " . $loginUrl);
+  exit();
 }
 
-
-require_once './config.php';
-require_once __DIR__ . '/ErrorLogger.php';
 ErrorLogger::initialize(__DIR__ . '/logs/error.log');
 
 /** @var string $baseUrl */
@@ -60,10 +51,7 @@ $emailUrl = EMAIL;
   <link rel='stylesheet' type='text/css' href='<?php echo $baseUrl ?>/assets/css/style.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo $baseUrl ?>/assets/css/spinner.css?v=<?php echo (time()); ?>' media='screen'>
   <title></title>
-  <script src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
-
-
-
+  <script nonce="<?= $nonce ?>" src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
 
   <script nonce="<?= $nonce ?>">
     // Código JavaScript seguro 
@@ -83,7 +71,7 @@ $emailUrl = EMAIL;
       </a>
     </div>
   </div>
-  <script type='module' src='<?php echo $baseUrl ?>/controllers/index.js?v=<?php echo (time()); ?>'></script>
+  <script nonce="<?= $nonce ?>" type='module' src='<?php echo $baseUrl ?>/controllers/index.js?v=<?php echo (time()); ?>'></script>
 
 </body>
 

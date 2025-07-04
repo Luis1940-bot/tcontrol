@@ -57,7 +57,12 @@ const fila = 0;
 document.addEventListener('DOMContentLoaded', async () => {
   const persona = desencriptar(sessionStorage.getItem('user'));
   if (persona) {
-    objTraductor = await arraysLoadTranslate();
+    try {
+      objTraductor = await arraysLoadTranslate();
+    } catch (error) {
+      console.error('Error al cargar traducciones en alerta:', error);
+      objTraductor = []; // Usar array vacío como fallback
+    }
 
     return objTraductor;
   }
@@ -86,7 +91,13 @@ const funcionGuardar = async () => {
   const { habilitadoGuardar } = arrayGlobal;
 
   if (habilitadoGuardar) {
-    const objTraductorFG = await arraysLoadTranslate();
+    let objTraductorFG;
+    try {
+      objTraductorFG = await arraysLoadTranslate();
+    } catch (error) {
+      console.error('Error al cargar traducciones en funcionGuardar:', error);
+      objTraductorFG = []; // Usar array vacío como fallback
+    }
     // eslint-disable-next-line no-use-before-define
     const miAlerta = new Alerta();
     const obj = arrayGlobal.objAlertaAceptarCancelar;
@@ -112,7 +123,16 @@ const funcionGuardar = async () => {
   }
 };
 const funcionGuardarCambio = async () => {
-  const objTraductorFGC = await arraysLoadTranslate();
+  let objTraductorFGC;
+  try {
+    objTraductorFGC = await arraysLoadTranslate();
+  } catch (error) {
+    console.error(
+      'Error al cargar traducciones en funcionGuardarCambio:',
+      error,
+    );
+    objTraductorFGC = []; // Usar array vacío como fallback
+  }
   arrayGlobal.habilitadoGuardar = true;
   const { habilitadoGuardar } = arrayGlobal;
   if (habilitadoGuardar) {
@@ -141,7 +161,16 @@ const funcionGuardarCambio = async () => {
   }
 };
 const funcionGuardarComoNuevo = async () => {
-  const objTraductorFGCN = await arraysLoadTranslate();
+  let objTraductorFGCN;
+  try {
+    objTraductorFGCN = await arraysLoadTranslate();
+  } catch (error) {
+    console.error(
+      'Error al cargar traducciones en funcionGuardarComoNuevo:',
+      error,
+    );
+    objTraductorFGCN = []; // Usar array vacío como fallback
+  }
   arrayGlobal.habilitadoGuardar = true;
   sessionStorage.setItem('doc', null);
   const { habilitadoGuardar } = arrayGlobal;
@@ -177,7 +206,13 @@ const funcionRefrescar = () => {
 };
 const funcionHacerFirmar = async () => {
   // eslint-disable-next-line no-use-before-define
-  const objTraductorFHF = await arraysLoadTranslate();
+  let objTraductorFHF;
+  try {
+    objTraductorFHF = await arraysLoadTranslate();
+  } catch (error) {
+    console.error('Error al cargar traducciones en funcionHacerFirmar:', error);
+    objTraductorFHF = []; // Usar array vacío como fallback
+  }
   // eslint-disable-next-line no-use-before-define
   const miAlertaFirmar = new Alerta();
   const obj = arrayGlobal.objAlertaAceptarCancelar;

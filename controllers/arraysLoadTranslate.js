@@ -28,22 +28,40 @@ async function arraysLoadTranslate() {
     const persona = desencriptar(sessionStorage.getItem('user'));
     idiomaPreferido = persona.lng;
   }
-  const data = await translate(idiomaPreferido);
-  const translateOperativo = data.arrayTranslateOperativo;
-  const espanolOperativo = data.arrayEspanolOperativo;
-  // eslint-disable-next-line no-unused-vars
-  const translateArchivo = data.arrayTranslateArchivo;
-  // eslint-disable-next-line no-unused-vars
-  const espanolArchivo = data.arrayEspanolArchivo;
-  const objTranslate = {
-    operativoES: [],
-    operativoTR: [],
-    archivosES: [],
-    archivosTR: [],
-  };
-  objTranslate.operativoES = [...espanolOperativo];
-  objTranslate.operativoTR = [...translateOperativo];
-  return objTranslate;
+
+  try {
+    const data = await translate(idiomaPreferido);
+    const translateOperativo = data.arrayTranslateOperativo || [];
+    const espanolOperativo = data.arrayEspanolOperativo || [];
+    // eslint-disable-next-line no-unused-vars
+    const translateArchivo = data.arrayTranslateArchivo || [];
+    // eslint-disable-next-line no-unused-vars
+    const espanolArchivo = data.arrayEspanolArchivo || [];
+
+    const objTranslate = {
+      operativoES: [],
+      operativoTR: [],
+      archivosES: [],
+      archivosTR: [],
+    };
+
+    objTranslate.operativoES = [...espanolOperativo];
+    objTranslate.operativoTR = [...translateOperativo];
+    objTranslate.archivosES = [...(espanolArchivo || [])];
+    objTranslate.archivosTR = [...(translateArchivo || [])];
+
+    return objTranslate;
+  } catch (error) {
+    console.error('Error en arraysLoadTranslate:', error);
+
+    // Devolver objeto con arrays vacíos como fallback
+    return {
+      operativoES: [],
+      operativoTR: [],
+      archivosES: [],
+      archivosTR: [],
+    };
+  }
 }
 
 export { arraysLoadTranslate };

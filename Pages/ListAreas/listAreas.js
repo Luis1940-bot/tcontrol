@@ -9,7 +9,7 @@ import {
   finPerformance,
 } from '../../includes/Conection/conection.js';
 // eslint-disable-next-line import/extensions, import/no-useless-path-segments
-import { desencriptar, encriptar } from '../../controllers/cript.js';
+import { desencriptar } from '../../controllers/cript.js';
 // eslint-disable-next-line import/extensions
 import cargaTabla from './areasViews.js';
 // eslint-disable-next-line import/extensions
@@ -23,17 +23,20 @@ import { configPHP } from '../../controllers/configPHP.js';
 import { arraysLoadTranslate } from '../../controllers/arraysLoadTranslate.js';
 import { trO } from '../../controllers/trOA.js';
 import LogOut from '../../controllers/logout.js';
+import { mostrarMensaje } from '../../controllers/ui/alertasLuis.js';
 
 const SERVER = baseUrl;
 let objTranslate = [];
 
 const spinner = document.querySelector('.spinner');
 const objButtons = {};
+// eslint-disable-next-line no-unused-vars
 const navegador = {
   estadoAnteriorButton: '',
   estadoAnteriorWhereUs: [],
 };
 
+// eslint-disable-next-line no-unused-vars
 const encabezados = {
   title: ['áreas'],
   width: ['1'],
@@ -104,7 +107,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     leeVersion('version');
     setTimeout(async () => {
-      objTranslate = await arraysLoadTranslate();
+      try {
+        objTranslate = await arraysLoadTranslate();
+      } catch (error) {
+        console.error('Error al cargar traducciones en listAreas:', error);
+        objTranslate = []; // Usar array vacío como fallback
+      }
       dondeEstaEn();
       leeApp(`App/${plant}/app`, plant);
     }, 200);
@@ -141,7 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.style.display = 'block';
   });
   setTimeout(() => {
-    alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    // alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
+    mostrarMensaje(
+      trO(
+        'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
+        objTranslate,
+      ),
+      'info',
+    );
     LogOut();
   }, 43200000 - 300000);
 });

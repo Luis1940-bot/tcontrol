@@ -374,7 +374,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.querySelector('.custom-button').innerText = user.lng.toUpperCase();
 
-    objTranslate = await arraysLoadTranslate();
+    try {
+      objTranslate = await arraysLoadTranslate();
+    } catch (error) {
+      console.error('Error al cargar traducciones en home:', error);
+      objTranslate = []; // Usar array vacío como fallback
+    }
     await leeVersion('version');
 
     requestAnimationFrame(iniciarAplicacion); // Inicia la verificación de los elementos

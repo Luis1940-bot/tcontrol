@@ -416,7 +416,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('.version').innerText = version;
 
   async function inicializar() {
-    objTranslate = await arraysLoadTranslate();
+    try {
+      objTranslate = await arraysLoadTranslate();
+    } catch (error) {
+      console.error('Error al cargar traducciones en register:', error);
+      objTranslate = []; // Usar array vacío como fallback
+    }
     leeApp('log');
     leeModelo('Register/registerUser');
 

@@ -17,17 +17,28 @@ async function leerArchivo(url) {
     const response = await fetch(url);
     if (response.ok) {
       const text = await response.text();
+      // Verificar que el texto no esté vacío
+      if (!text || text.trim().length === 0) {
+        console.warn(`Archivo vacío o sin contenido: ${url}`);
+        return [];
+      }
       // Limpia las líneas eliminando caracteres \r y recortando espacios innecesarios
-      return text
+      const lines = text
         .trim()
         .split('\n')
-        .map((line) => line.replace(/\r/g, '').trim());
+        .map((line) => line.replace(/\r/g, '').trim())
+        .filter((line) => line.length > 0); // Filtrar líneas vacías
+
+      return lines;
     }
-    return null;
+    console.warn(
+      `No se pudo cargar el archivo: ${url}, status: ${response.status}`,
+    );
+    return [];
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error:', error);
-    throw error;
+    console.error(`Error al cargar archivo ${url}:`, error);
+    return [];
   }
 }
 
@@ -43,6 +54,7 @@ const translate = async (leng) => {
         leerArchivo(`${FileURL}${leng}.txt`),
       ]);
 
+    // Ahora leerArchivo siempre devuelve arrays, no null
     return {
       arrayEspanolOperativo: [...operatiEspanol],
       arrayTranslateOperativo: [...operativoOther],
@@ -52,7 +64,14 @@ const translate = async (leng) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error al cargar palabras:', error);
-    throw error;
+
+    // Devolver estructura vacía en caso de error para evitar que falle el sistema
+    return {
+      arrayEspanolOperativo: [],
+      arrayTranslateOperativo: [],
+      arrayEspanolArchivo: [],
+      arrayTranslateArchivo: [],
+    };
   }
 };
 // };

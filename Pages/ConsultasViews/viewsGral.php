@@ -1,26 +1,25 @@
-﻿<?php
+<?php
 require_once dirname(dirname(__DIR__)) . '/config.php';
 startSecureSession();
 $nonce = setSecurityHeaders();
 
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
-/** @var string $baseUrl */
-$baseUrl = BASE_URL;
+
 // Tiempo de inactividad en segundos (12 horas)
 $inactive = 43200;
 $lastActivity = $_SESSION['last_activity'] ?? 0;
 if (is_int($lastActivity) && (time() - $lastActivity) > $inactive) {
   session_unset();
   session_destroy();
-  header("Location: https://test.tenkiweb.com/tcontrol/index.php");
+  header("Location: " . BASE_URL . "/index.php");
   exit();
 }
 
 // Actualiza la última actividad
 $_SESSION['last_activity'] = time();
 
-$url = $baseUrl . "/index.php"; //*"https://test.tenkiweb.com/tcontrol/index.php";
+// Validar si 'login_sso' está definido y es un array
 if (isset($_SESSION['login_sso']) && is_array($_SESSION['login_sso'])) {
   $sso = $_SESSION['login_sso']['sso'] ?? null;
   $email = $_SESSION['login_sso']['email'] ?? null;
@@ -29,29 +28,23 @@ if (isset($_SESSION['login_sso']) && is_array($_SESSION['login_sso'])) {
   if ($email !== null) {
     define('EMAIL', $email);
   } else {
-    if (SSO === null || SSO === 's_sso') {
-      $url = BASE_URL . "/Pages/Login/index.php";
-    }
-    //! ESTO ES NECESARIO CUANDO SE TRABAJA CON SSO
-    header("Location: " . $url);
-    exit; // Agregar exit para evitar continuar después de la redirección
+    header("Location: " . BASE_URL . "/Pages/Login/index.php");
+    exit;
   }
 } else {
-  http_response_code(400);
-  echo json_encode(['success' => false, 'message' => 'SSO no está configurado correctamente.']);
+  header("Location: " . BASE_URL . "/Pages/Login/index.php");
   exit;
 }
 
+// Validar y establecer la zona horaria
 if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
   date_default_timezone_set($_SESSION['timezone']);
 } else {
   date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
-// echo "Zona horaria actual: " . date_default_timezone_get() . "<br>";
-// echo "Fecha y hora actual: " . date('Y-m-d H:i:s') . "<br>";
 ?>
 <!DOCTYPE html>
-<!-- <html lang='en'> -->
+<html>
 
 <head>
   <meta charset='UTF-8'>
@@ -59,13 +52,16 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
   <meta name='author' content='Luis1940-bot'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-  <link rel='shortcut icon' type='image / x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
+  <link rel='shortcut icon' type='image/x-icon' href='<?php echo BASE_URL ?>/assets/img/favicon.ico'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/Pages/ConsultasViews/vistas.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/common-components.css' media='screen'>
-
-  <title></title>
-  <script src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
+  <title>Vistas Generales - Tenki Web</title>
+  <script nonce="<?= $nonce ?>" src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
+  <script nonce="<?= $nonce ?>">
+    // Establecer idioma dinámicamente
+    document.documentElement.lang = 'es';
+  </script>
 </head>
 
 <body>
@@ -93,11 +89,11 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
   <div id="scrollToTopBtn" class="scroll-to-top-btn" title="Volver al inicio">
     ↑
   </div>
-  <script type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo (time()); ?>'></script>
-  <script type='module' src='<?php echo BASE_URL ?>/Pages/ConsultasViews/consultasView.js?v=<?php echo (time()); ?>'></script>
-  <script src='<?php echo BASE_URL ?>/includes/atoms/cdnjs/xlsx.full.min.js'></script>
-  <script src='<?php echo BASE_URL ?>/includes/atoms/html2canvas/html2canvas.min.js'></script>
-  <script src='<?php echo BASE_URL ?>/includes/atoms/jspdf/jspdf.min.js'></script>
+  <script nonce="<?= $nonce ?>" type='module' src='<?php echo BASE_URL ?>/config.js?v=<?php echo (time()); ?>'></script>
+  <script nonce="<?= $nonce ?>" type='module' src='<?php echo BASE_URL ?>/Pages/ConsultasViews/consultasView.js?v=<?php echo (time()); ?>'></script>
+  <script nonce="<?= $nonce ?>" src='<?php echo BASE_URL ?>/includes/atoms/cdnjs/xlsx.full.min.js'></script>
+  <script nonce="<?= $nonce ?>" src='<?php echo BASE_URL ?>/includes/atoms/html2canvas/html2canvas.min.js'></script>
+  <script nonce="<?= $nonce ?>" src='<?php echo BASE_URL ?>/includes/atoms/jspdf/jspdf.min.js'></script>
 </body>
 
 </html>

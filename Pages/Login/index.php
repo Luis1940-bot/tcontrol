@@ -23,7 +23,7 @@ startSecureSession();
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/spinner.css?v=<?php echo (time()); ?>' media='screen'>
   <link rel='stylesheet' type='text/css' href='<?php echo BASE_URL ?>/assets/css/common-components.css' media='screen'>
   <title>Tenki</title>
-  <script src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
+  <script nonce="<?= $nonce ?>" src="<?= BASE_URL ?>/assets/js/disableConsole.js"></script>
 </head>
 
 <body>

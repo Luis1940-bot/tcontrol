@@ -779,9 +779,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       objTranslate = await arraysLoadTranslate(); // Carga la traducción
     } catch (translateError) {
-      // console.warn('Error al cargar traducciones:', translateError);
+      console.error('Error específico al cargar traducciones:', translateError);
       mostrarMensaje(
-        `Error al cargar traducciones ${translateError}. Usando traducción por defecto.`,
+        `Error al cargar traducciones: ${translateError.message || translateError}. Usando traducción por defecto.`,
         'error',
       );
       objTranslate = []; // Usar array vacío como fallback

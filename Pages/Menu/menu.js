@@ -129,7 +129,12 @@ function dondeEstaEn() {
 }
 
 async function iniciarAplicacion(plant) {
-  objTranslate = await arraysLoadTranslate();
+  try {
+    objTranslate = await arraysLoadTranslate();
+  } catch (error) {
+    console.error('Error al cargar traducciones en menu:', error);
+    objTranslate = []; // Usar array vacío como fallback
+  }
   dondeEstaEn();
   leeApp(`App/${plant}/app`);
   spinner.style.visibility = 'hidden';
@@ -162,29 +167,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     //   finPerformance();
     // }
 
-    requestAnimationFrame(iniciarAplicacion(plant));
+    requestAnimationFrame(() => iniciarAplicacion(plant));
   } else {
     spinner.style.visibility = 'hidden';
     finPerformance();
   }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+  // Configurar el event listener del botón person
   const person = document.getElementById('person');
   person.addEventListener('click', () => {
     person.style.border = '3px solid #212121';
     person.style.background = '#212121';
     person.style.borderRadius = '10px 10px 0px 0px';
-    const persona = desencriptar(sessionStorage.getItem('user'));
+    const personaData = desencriptar(sessionStorage.getItem('user'));
     const quienEs = document.getElementById('spanPerson');
-    quienEs.innerText = persona.person;
-    const user = {
-      person: persona.person,
+    quienEs.innerText = personaData.person;
+    const userData = {
+      person: personaData.person,
       home: 'Inicio',
       salir: trO('Cerrar sesión', objTranslate),
     };
-    personModal(user, objTranslate);
+    personModal(userData, objTranslate);
   });
+
+  // Configurar timeout para expiración de sesión
   setTimeout(() => {
     mostrarMensaje(
       'Tu sesión está por expirar. Haz clic en Aceptar para continuar.',
@@ -193,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // alert('Tu sesión está por expirar. Haz clic en Aceptar para continuar.');
     LogOut();
   }, 43200000 - 300000);
+
   // eslint-disable-next-line no-console
   console.clear();
 });

@@ -3,10 +3,12 @@
  * @returns {string} URL base
  */
 const getBaseUrl = () => {
-  const { hostname } = window.location;
+  const { hostname, port } = window.location;
 
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:8000';
+    // Para localhost usar ruta directa sin subdirectorios
+    const currentPort = port ? `:${port}` : '';
+    return `${window.location.protocol}//${hostname}${currentPort}`;
   }
 
   if (hostname === 'test.tenkiweb.com') {

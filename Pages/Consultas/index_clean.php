@@ -43,7 +43,8 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 } else {
   date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
 
 <head>

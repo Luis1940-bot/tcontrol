@@ -1,11 +1,15 @@
-<?php
+﻿<?php
+// Iniciar buffer de salida para evitar problemas con headers
+ob_start();
+
 require_once dirname(dirname(__DIR__)) . '/config.php';
 startSecureSession();
 $nonce = setSecurityHeaders();
 
 require_once dirname(dirname(__DIR__)) . '/ErrorLogger.php';
 ErrorLogger::initialize(dirname(dirname(__DIR__)) . '/logs/error.log');
-
+/** @var string $baseUrl */
+$baseUrl = BASE_URL;
 // Tiempo de inactividad en segundos (12 horas)
 $inactive = 43200;
 $lastActivity = $_SESSION['last_activity'] ?? 0;
@@ -20,6 +24,16 @@ if (is_int($lastActivity) && (time() - $lastActivity) > $inactive) {
 // Actualiza la última actividad
 $_SESSION['last_activity'] = time();
 
+/** 
+ * @var array{
+ *     login_sso?: array{
+ *         sso?: string|null,
+ *         email?: string|null
+ *     }
+ * } $_SESSION 
+ */
+
+$url = $baseUrl . "/index.php"; //*"https://test.tenkiweb.com/tcontrol/index.php";
 // Validar si 'login_sso' está definido y es un array
 if (isset($_SESSION['login_sso']) && is_array($_SESSION['login_sso'])) {
   $sso = $_SESSION['login_sso']['sso'] ?? null;
@@ -29,11 +43,16 @@ if (isset($_SESSION['login_sso']) && is_array($_SESSION['login_sso'])) {
   if ($email !== null) {
     define('EMAIL', $email);
   } else {
-    header("Location: " . BASE_URL . "/Pages/Login/index.php");
-    exit;
+    if (SSO === null || SSO === 's_sso') {
+      $url = BASE_URL . "/Pages/Login/index.php";
+    }
+    //! ESTO ES NECESARIO CUANDO SE TRABAJA CON SSO
+    header("Location: " . $url);
+    exit; // Agregar exit para evitar continuar después de la redirección
   }
 } else {
-  header("Location: " . BASE_URL . "/Pages/Login/index.php");
+  http_response_code(400);
+  echo json_encode(['success' => false, 'message' => 'SSO no está configurado correctamente.']);
   exit;
 }
 
@@ -43,7 +62,13 @@ if (isset($_SESSION['timezone']) && is_string($_SESSION['timezone'])) {
 } else {
   date_default_timezone_set('America/Argentina/Buenos_Aires');
 }
-?><!DOCTYPE html>
+
+// Limpiar cualquier output buffer antes del DOCTYPE
+ob_end_clean();
+ob_start();
+
+?>
+<!DOCTYPE html>
 <html>
 
 <head>

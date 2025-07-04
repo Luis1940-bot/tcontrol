@@ -386,7 +386,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.custom-button').innerText =
       persona.lng.toUpperCase();
     leeVersion('version');
-    objTranslate = await arraysLoadTranslate();
+    try {
+      objTranslate = await arraysLoadTranslate();
+    } catch (error) {
+      console.error('Error al cargar traducciones en reporte:', error);
+      objTranslate = []; // Usar array vacío como fallback
+    }
     setTimeout(async () => {
       leeApp(`App/${plant}/app`);
       traduccionDeLabels(objTranslate);
@@ -436,7 +441,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.querySelector('.custom-button').innerText =
         persona.lng.toUpperCase();
       setTimeout(async () => {
-        objTranslate = await arraysLoadTranslate();
+        try {
+          objTranslate = await arraysLoadTranslate();
+        } catch (error) {
+          console.error(
+            'Error al cargar traducciones en reporte (simulate):',
+            error,
+          );
+          objTranslate = []; // Usar array vacío como fallback
+        }
       }, 200);
     }
   }

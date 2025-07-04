@@ -348,7 +348,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('.version').innerText = version;
 
   setTimeout(async () => {
-    objTranslate = await arraysLoadTranslate();
+    try {
+      objTranslate = await arraysLoadTranslate();
+    } catch (error) {
+      console.error('Error al cargar traducciones en recovery:', error);
+      objTranslate = []; // Usar array vacío como fallback
+    }
     leeApp('log');
     leeModelo('Recovery/recoveryPass');
     // const nuevaCadena = dondeEstaEn(objTranslate, 'Blanqueo de contraseña.');

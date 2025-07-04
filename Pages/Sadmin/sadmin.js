@@ -186,7 +186,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const version = await leeVersion('version');
     document.querySelector('.version').innerText = version;
 
-    objTranslate = await arraysLoadTranslate();
+    try {
+      objTranslate = await arraysLoadTranslate();
+    } catch (error) {
+      console.error('Error al cargar traducciones en sadmin:', error);
+      objTranslate = []; // Usar array vacío como fallback
+    }
     dondeEstaEn();
     leeApp(`App/${plant}/app`);
 
